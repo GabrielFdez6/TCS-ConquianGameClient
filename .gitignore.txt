@@ -1,0 +1,18 @@
+# Archivos específicos del usuario de Visual Studio
+*.suo
+*.user
+
+# Carpeta del IDE de Visual Studio
+.vs/
+
+# Carpetas de compilación y salida
+[Bb]in/
+[Oo]bj/
+
+# Archivos de compilación y temporales
+*.log
+*.tlog
+*.pdb
+*.exe
+*.dll
+*.cache
