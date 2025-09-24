@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\users\\braya\\documentos\\1uv\\5 semestre\\construcion\\conqui\u00E1ncliente\\conqui\u00E1ncliente\\view\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\users\\braya\\documentos\\1uv\\5 semestre\\construcion\\conqui\u00E1ncliente\\conqui\u00E1ncliente\\styles\\globalstyles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\styles\\globalstyles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\users\\braya\\documentos\\1uv\\5 semestre\\construcion\\conqui\u00E1ncliente\\conqui\u00E1ncliente\\view\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\users\\braya\\documentos\\1uv\\5 semestre\\construcion\\conqui\u00E1ncliente\\conqui\u00E1ncliente\\view\\mainwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\mainwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\users\\braya\\documentos\\1uv\\5 semestre\\construcion\\conqui\u00E1ncliente\\conqui\u00E1ncliente\\properties\\langs\\lang.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\properties\\langs\\lang.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\users\\braya\\documentos\\1uv\\5 semestre\\construcion\\conqui\u00E1ncliente\\conqui\u00E1ncliente\\view\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,8 +26,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Lang.resx",
+              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
+              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2025-09-24T00:30:48.421Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
@@ -38,25 +55,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GlobalStyles.xaml",
-              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\Styles\\GlobalStyles.xaml",
-              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\Styles\\GlobalStyles.xaml",
-              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\Styles\\GlobalStyles.xaml",
-              "RelativeToolTip": "Conqui\u00E1nCliente\\Styles\\GlobalStyles.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-09-23T21:03:21.231Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\View\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\View\\MainWindow.xaml.cs",
               "RelativeToolTip": "Conqui\u00E1nCliente\\View\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAIAwwB0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAIwCEAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-23T20:21:48.297Z",
               "EditorCaption": ""
@@ -79,29 +84,42 @@
       "Orientation": 0,
       "VerticalTabListWidth": 256,
       "FloatingWindowState": {
-        "Id": "fc154406-1b38-49bb-bd8a-c0ec119e665d",
+        "Id": "b49cd730-30d0-4180-89ca-963568701fb2",
         "Display": 0,
-        "X": 166,
-        "Y": 5,
-        "Width": 1292,
-        "Height": 803,
+        "X": 182,
+        "Y": 199,
+        "Width": 688,
+        "Height": 538,
         "WindowState": 2
       },
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\View\\MainWindow.xaml",
               "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\View\\MainWindow.xaml*",
-              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\MainWindow.xaml*",
+              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\View\\MainWindow.xaml",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-09-23T21:07:00.506Z",
+              "WhenOpened": "2025-09-24T00:09:05.109Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\View\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\View\\MainWindow.xaml",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\MainWindow.xaml",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAmwGsAAABuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-24T00:09:28.823Z",
               "EditorCaption": ""
             }
           ]

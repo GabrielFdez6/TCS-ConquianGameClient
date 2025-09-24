@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConquiánCliente"
+        xmlns:language="clr-namespace:ConquiánCliente.Properties.Langs"
         mc:Ignorable="d"
         Title="Log in" Height="1080" Width="1920"
         WindowState="Maximized"
@@ -95,17 +96,18 @@
             </StackPanel>
         </Border>
 
-        <ComboBox VerticalAlignment="Bottom"
+        <ComboBox Name="CmbLanguageChanged"
+                  SelectionChanged="CmbSelectionChanged" 
+                  VerticalAlignment="Bottom"
                   HorizontalAlignment="Right"
                   Margin="0,0,15,10"
-                  SelectedIndex="0"
                   Padding="8,4"
                   Foreground="{StaticResource PrimaryTextBrush}"
                   Background="{StaticResource PrimaryBackgroundBrush}"
                   BorderBrush="{StaticResource BorderBrush}">
-            <ComboBoxItem Content="Español"/>
-            <ComboBoxItem Content="Inglés"/>
+            <ComboBoxItem Content="{x:Static language:Lang.LogInLanguage}" IsEnabled="False" IsSelected="True"/>
+            <ComboBoxItem Content="{x:Static language:Lang.es}"/>
+            <ComboBoxItem Content="{x:Static language:Lang.en}"/>
         </ComboBox>
-
     </Grid>
 </Window>

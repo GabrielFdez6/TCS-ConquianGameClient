@@ -25,5 +25,17 @@ namespace ConquiánCliente
             InitializeComponent();
         }
 
+        private void CmbSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CmbLanguageChanged.SelectedIndex == 1)
+            {
+                Properties.Settings.Default.languageCode = "es-MX";
+            }
+            else if (CmbLanguageChanged.SelectedIndex == 2)
+            {
+                Properties.Settings.Default.languageCode = "en-US";
+            }
+            Properties.Settings.Default.Save();
+        }
     }
 }
