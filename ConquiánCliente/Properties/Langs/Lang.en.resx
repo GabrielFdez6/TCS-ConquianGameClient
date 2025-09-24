@@ -123,7 +123,127 @@
   <data name="es" xml:space="preserve">
     <value>Spanish</value>
   </data>
-  <data name="LogInLanguage" xml:space="preserve">
+  <data name="GlobalAccept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="GlobalBack" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="GlobalLogIn" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="GlobalSignUp" xml:space="preserve">
+    <value>Sign up</value>
+  </data>
+  <data name="GlobalLanguage" xml:space="preserve">
     <value>Languaje</value>
+  </data>
+  <data name="GlobalGuess" xml:space="preserve">
+    <value>Guess</value>
+  </data>
+  <data name="GlobalViewProfile" xml:space="preserve">
+    <value>View profile</value>
+  </data>
+  <data name="GlobalInvite" xml:space="preserve">
+    <value>Invite</value>
+  </data>
+  <data name="GlobalPasswordRecovery" xml:space="preserve">
+    <value>Password recovery</value>
+  </data>
+  <data name="GlobalEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="GlobalPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="GlobalVerificationCode" xml:space="preserve">
+    <value>Verification code</value>
+  </data>
+  <data name="GlobalConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="PasswordRecoverySend" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="PasswordRecoveryNewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="PasswordRecoveryResetPassword" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="GlobalNickname" xml:space="preserve">
+    <value>Nickname</value>
+  </data>
+  <data name="MainMenuPlay" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="MainMenu" xml:space="preserve">
+    <value>Friends</value>
+  </data>
+  <data name="LobbyStartGame" xml:space="preserve">
+    <value>Start game</value>
+  </data>
+  <data name="GlobalLevel" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="GlobalName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="GlobalLastName" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="GlobalSocial" xml:space="preserve">
+    <value>Social</value>
+  </data>
+  <data name="ProfileChange" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="FriendListSearch" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="FriendListAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="FriendListRequests" xml:space="preserve">
+    <value>Requests</value>
+  </data>
+  <data name="FriendOptionsViewProfile" xml:space="preserve">
+    <value>View profile</value>
+  </data>
+  <data name="FriendOptionsInviteMatch" xml:space="preserve">
+    <value>Invite to match</value>
+  </data>
+  <data name="FriendsOptionsDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="HistoryVictory" xml:space="preserve">
+    <value>Victory</value>
+  </data>
+  <data name="HistoryDefeat" xml:space="preserve">
+    <value>Defeat</value>
+  </data>
+  <data name="LobbyReady" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="LobbyGameMode" xml:space="preserve">
+    <value>Game mode</value>
+  </data>
+  <data name="LobbyQuickGame" xml:space="preserve">
+    <value>Quick game</value>
+  </data>
+  <data name="LobbyClassicGame" xml:space="preserve">
+    <value>Classic game</value>
+  </data>
+  <data name="LobbyKick" xml:space="preserve">
+    <value>Kick</value>
+  </data>
+  <data name="LogInAsGuess" xml:space="preserve">
+    <value>Play as guess</value>
+  </data>
+  <data name="LogInForgotPassword" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+  <data name="RecoveryInfo" xml:space="preserve">
+    <value>Enter the code verification sent to your email.</value>
   </data>
 </root>

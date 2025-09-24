@@ -1,7 +1,9 @@
-﻿using System;
+﻿using ConquiánCliente.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 
 namespace ConquiánCliente
 {
@@ -36,6 +39,13 @@ namespace ConquiánCliente
                 Properties.Settings.Default.languageCode = "en-US";
             }
             Properties.Settings.Default.Save();
+        }
+
+        private void BtnSignUp (object sender, RoutedEventArgs e)
+        {
+            SignUp signUpWindow = new SignUp();
+            signUpWindow.Show();
+            this.Close();
         }
     }
 }
