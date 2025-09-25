@@ -255,4 +255,7 @@
   <data name="ProfileEditPicture" xml:space="preserve">
     <value>Editar imagen de perfil </value>
   </data>
+  <data name="EditInfo" xml:space="preserve">
+    <value>Editar información</value>
+  </data>
 </root>

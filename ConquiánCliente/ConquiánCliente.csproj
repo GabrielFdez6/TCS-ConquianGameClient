@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\EditInfo.xaml.cs">
+      <DependentUpon>EditInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EditProfilePicture.xaml.cs">
       <DependentUpon>EditProfilePicture.xaml</DependentUpon>
     </Compile>
@@ -68,6 +71,10 @@
       <DependentUpon>VerificationCode.xaml</DependentUpon>
     </Compile>
     <Page Include="Styles\GlobalStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

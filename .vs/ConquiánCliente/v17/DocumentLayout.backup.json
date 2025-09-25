@@ -3,15 +3,19 @@
   "WorkspaceRootPath": "C:\\Conquian\\TCS-ConquianGameClient\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\conquian\\tcs-conquiangameclient\\conqui\u00E1ncliente\\view\\editprofilepicture.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\editprofilepicture.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\conquian\\tcs-conquiangameclient\\conqui\u00E1ncliente\\view\\editinfo.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\editinfo.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|C:\\Conquian\\TCS-ConquianGameClient\\conqui\u00E1ncliente\\properties\\langs\\lang.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
       "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\properties\\langs\\lang.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\conquian\\tcs-conquiangameclient\\conqui\u00E1ncliente\\view\\userprofile.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\conquian\\tcs-conquiangameclient\\conqui\u00E1ncliente\\view\\editprofilepicture.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\editprofilepicture.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|C:\\Conquian\\TCS-ConquianGameClient\\conqui\u00E1ncliente\\view\\userprofile.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\userprofile.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
@@ -60,13 +64,13 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "EditProfilePicture.xaml",
-              "DocumentMoniker": "C:\\Conquian\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\EditProfilePicture.xaml",
-              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\EditProfilePicture.xaml",
-              "ToolTip": "C:\\Conquian\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\EditProfilePicture.xaml*",
-              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\EditProfilePicture.xaml*",
+              "Title": "EditInfo.xaml",
+              "DocumentMoniker": "C:\\Conquian\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\EditInfo.xaml",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\EditInfo.xaml",
+              "ToolTip": "C:\\Conquian\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\EditInfo.xaml",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\EditInfo.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-09-25T03:35:53.404Z",
+              "WhenOpened": "2025-09-25T03:55:04.204Z",
               "EditorCaption": ""
             },
             {
@@ -84,18 +88,29 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "EditProfilePicture.xaml",
+              "DocumentMoniker": "C:\\Conquian\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\EditProfilePicture.xaml",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\EditProfilePicture.xaml",
+              "ToolTip": "C:\\Conquian\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\EditProfilePicture.xaml",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\EditProfilePicture.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-25T03:35:53.404Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "UserProfile.xaml",
               "DocumentMoniker": "C:\\Conquian\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\UserProfile.xaml",
               "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\UserProfile.xaml",
               "ToolTip": "C:\\Conquian\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\UserProfile.xaml",
               "RelativeToolTip": "Conqui\u00E1nCliente\\View\\UserProfile.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-09-25T02:22:17.429Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-25T02:22:17.429Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "VerificationCode.xaml",
               "DocumentMoniker": "C:\\Conquian\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\VerificationCode.xaml",
               "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\VerificationCode.xaml",
@@ -106,7 +121,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "SignUp.xaml",
               "DocumentMoniker": "C:\\Conquian\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\SignUp.xaml",
               "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\SignUp.xaml",
@@ -117,7 +132,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "App.xaml.cs",
               "DocumentMoniker": "C:\\Conquian\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\App.xaml.cs",
               "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\App.xaml.cs",
@@ -129,7 +144,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Conquian\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\MainWindow.xaml",
               "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\MainWindow.xaml",
@@ -140,7 +155,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Conquian\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\MainWindow.xaml.cs",

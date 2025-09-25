@@ -70,6 +70,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Editar información.
+        /// </summary>
+        public static string EditInfo {
+            get {
+                return ResourceManager.GetString("EditInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Inglés.
         /// </summary>
         public static string en {

@@ -54,3 +54,5 @@ C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\EditProfilePi
 C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\UserProfile.g.cs
 C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\UserProfile.baml
 C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\EditProfilePicture.baml
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\EditInfo.g.cs
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\EditInfo.baml
