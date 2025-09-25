@@ -24,3 +24,28 @@ C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánC
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.exe
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.pdb
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.exe.config
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.csproj.AssemblyReference.cache
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\Styles\GlobalStyles.baml
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\MainWindow.g.cs
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\SignUp.g.cs
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\VerificationCode.g.cs
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\App.g.cs
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente_MarkupCompile.cache
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente_MarkupCompile.lref
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\ConquiánCliente.exe.config
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\ConquiánCliente.exe
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\ConquiánCliente.pdb
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\en\ConquiánCliente.resources.dll
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\App.baml
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\MainWindow.baml
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\SignUp.baml
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\VerificationCode.baml
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.g.resources
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.Properties.Langs.Lang.resources
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.Properties.Resources.resources
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.Properties.Langs.Lang.en.resources
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.csproj.GenerateResource.cache
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.csproj.CoreCompileInputs.cache
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\en\ConquiánCliente.resources.dll
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.exe
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.pdb

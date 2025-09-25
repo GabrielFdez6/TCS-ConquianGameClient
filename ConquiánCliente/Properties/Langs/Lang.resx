@@ -246,4 +246,10 @@
   <data name="RecoveryInfo" xml:space="preserve">
     <value>Escribe el código de verificación enviado a tu correo.</value>
   </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Perfil</value>
+  </data>
+  <data name="EditDataEdit" xml:space="preserve">
+    <value>Editar</value>
+  </data>
 </root>
