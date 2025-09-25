@@ -252,4 +252,7 @@
   <data name="EditDataEdit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="ProfileEditPicture" xml:space="preserve">
+    <value>Edit profile picture</value>
+  </data>
 </root>

@@ -457,6 +457,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Editar imagen de perfil .
+        /// </summary>
+        public static string ProfileEditPicture {
+            get {
+                return ResourceManager.GetString("ProfileEditPicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Escribe el código de verificación enviado a tu correo..
         /// </summary>
         public static string RecoveryInfo {

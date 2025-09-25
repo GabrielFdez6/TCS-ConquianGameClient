@@ -49,3 +49,8 @@ C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.c
 C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\en\ConquiánCliente.resources.dll
 C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.exe
 C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.pdb
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.exe.config
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\EditProfilePicture.g.cs
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\UserProfile.g.cs
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\UserProfile.baml
+C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\EditProfilePicture.baml

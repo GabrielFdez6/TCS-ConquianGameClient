@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\App.xaml
-41018728497
+6-595386306
 
-81765201334
+101027774681
 13-1310406943
-Styles\GlobalStyles.xaml;View\MainWindow.xaml;View\SignUp.xaml;View\VerificationCode.xaml;
+Styles\GlobalStyles.xaml;View\EditProfilePicture.xaml;View\MainWindow.xaml;View\SignUp.xaml;View\UserProfile.xaml;View\VerificationCode.xaml;
 
 False
 
