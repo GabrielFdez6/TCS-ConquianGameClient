@@ -177,7 +177,7 @@
   <data name="MainMenuPlay" xml:space="preserve">
     <value>Play</value>
   </data>
-  <data name="MainMenu" xml:space="preserve">
+  <data name="MainMenuFriends" xml:space="preserve">
     <value>Friends</value>
   </data>
   <data name="LobbyStartGame" xml:space="preserve">
@@ -244,7 +244,7 @@
     <value>Forgot your password?</value>
   </data>
   <data name="RecoveryInfo" xml:space="preserve">
-    <value>Enter the code verification sent to your email.</value>
+    <value>Enter your email address so we can send you a verification code.</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Profile </value>
@@ -257,5 +257,11 @@
   </data>
   <data name="EditInfo" xml:space="preserve">
     <value>Edit info</value>
+  </data>
+  <data name="RecoveryCodeInfo" xml:space="preserve">
+    <value>Enter the verification code sent to your email.</value>
+  </data>
+  <data name="MainMenu" xml:space="preserve">
+    <value>Main menu</value>
   </data>
 </root>

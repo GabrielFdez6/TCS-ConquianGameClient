@@ -55,34 +55,65 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="View\EditInfo.xaml.cs">
+    <Compile Include="View\Authentication\PasswordRecovery\CodeValidation.xaml.cs">
+      <DependentUpon>CodeValidation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Authentication\PasswordRecovery\RequestRecovery.xaml.cs">
+      <DependentUpon>RequestRecovery.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Authentication\PasswordRecovery\ResetPassword.xaml.cs">
+      <DependentUpon>ResetPassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainMenu\MainMenu.xaml.cs">
+      <DependentUpon>MainMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Profile\EditInfo.xaml.cs">
       <DependentUpon>EditInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditProfilePicture.xaml.cs">
+    <Compile Include="View\Profile\EditProfilePicture.xaml.cs">
       <DependentUpon>EditProfilePicture.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SignUp.xaml.cs">
+    <Compile Include="View\Authentication\SignUp.xaml.cs">
       <DependentUpon>SignUp.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserProfile.xaml.cs">
+    <Compile Include="View\Authentication\SignUpData.xaml.cs">
+      <DependentUpon>SignUpData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Profile\UserProfile.xaml.cs">
       <DependentUpon>UserProfile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\VerificationCode.xaml.cs">
+    <Compile Include="View\Authentication\VerificationCode.xaml.cs">
       <DependentUpon>VerificationCode.xaml</DependentUpon>
     </Compile>
     <Page Include="Styles\GlobalStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditInfo.xaml">
+    <Page Include="View\Authentication\PasswordRecovery\CodeValidation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditProfilePicture.xaml">
+    <Page Include="View\Authentication\PasswordRecovery\RequestRecovery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainWindow.xaml">
+    <Page Include="View\Authentication\PasswordRecovery\ResetPassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainMenu\MainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Profile\EditInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Profile\EditProfilePicture.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Authentication\LogIn.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -95,19 +126,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Lang.resx</DependentUpon>
     </Compile>
-    <Compile Include="View\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="View\Authentication\LogIn.xaml.cs">
+      <DependentUpon>LogIn.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\SignUp.xaml">
+    <Page Include="View\Authentication\SignUp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserProfile.xaml">
+    <Page Include="View\Authentication\SignUpData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\VerificationCode.xaml">
+    <Page Include="View\Profile\UserProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Authentication\VerificationCode.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,6 +181,7 @@
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="ViewModel\" />
+    <Folder Include="View\Lobby\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\backgroundLogin.jpg" />
@@ -153,6 +189,9 @@
   <ItemGroup>
     <Resource Include="Resources\facebook.png" />
     <Resource Include="Resources\instagram.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\backgroundMainMenu.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\
 ConquiánCliente
 none
 false
 DEBUG;TRACE
-C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\App.xaml
-71397462067
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\App.xaml
+12-1544190685
 
-111071385828
+1624799976
 13-1310406943
-Styles\GlobalStyles.xaml;View\EditInfo.xaml;View\EditProfilePicture.xaml;View\MainWindow.xaml;View\SignUp.xaml;View\UserProfile.xaml;View\VerificationCode.xaml;
+Styles\GlobalStyles.xaml;View\Authentication\PasswordRecovery\CodeValidation.xaml;View\Authentication\PasswordRecovery\RequestRecovery.xaml;View\Authentication\PasswordRecovery\ResetPassword.xaml;View\MainMenu\MainMenu.xaml;View\Profile\EditInfo.xaml;View\Profile\EditProfilePicture.xaml;View\Authentication\LogIn.xaml;View\Authentication\SignUp.xaml;View\Authentication\SignUpData.xaml;View\Profile\UserProfile.xaml;View\Authentication\VerificationCode.xaml;
 
 False
 

@@ -1,9 +1,14 @@
 ﻿
-FC:\Conquian\TCS-ConquianGameClient\ConquiánCliente\App.xaml;;
-FC:\Conquian\TCS-ConquianGameClient\ConquiánCliente\View\MainWindow.xaml;;
-FC:\Conquian\TCS-ConquianGameClient\ConquiánCliente\View\SignUp.xaml;;
-FC:\Conquian\TCS-ConquianGameClient\ConquiánCliente\View\VerificationCode.xaml;;
-FC:\Conquian\TCS-ConquianGameClient\ConquiánCliente\View\UserProfile.xaml;;
-FC:\Conquian\TCS-ConquianGameClient\ConquiánCliente\View\EditProfilePicture.xaml;;
-FC:\Conquian\TCS-ConquianGameClient\ConquiánCliente\View\EditInfo.xaml;;
+FC:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\App.xaml;;
+FC:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\View\Authentication\PasswordRecovery\CodeValidation.xaml;;
+FC:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\View\Authentication\PasswordRecovery\RequestRecovery.xaml;;
+FC:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\View\Authentication\PasswordRecovery\ResetPassword.xaml;;
+FC:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\View\MainMenu\MainMenu.xaml;;
+FC:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\View\Profile\EditInfo.xaml;;
+FC:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\View\Profile\EditProfilePicture.xaml;;
+FC:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\View\Authentication\LogIn.xaml;;
+FC:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\View\Authentication\SignUp.xaml;;
+FC:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\View\Authentication\SignUpData.xaml;;
+FC:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\View\Profile\UserProfile.xaml;;
+FC:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\View\Authentication\VerificationCode.xaml;;
 

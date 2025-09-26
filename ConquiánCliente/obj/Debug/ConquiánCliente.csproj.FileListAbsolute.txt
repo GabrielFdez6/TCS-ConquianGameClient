@@ -1,29 +1,3 @@
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\bin\Debug\ConquiánCliente.exe.config
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\bin\Debug\ConquiánCliente.exe
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\bin\Debug\ConquiánCliente.pdb
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\bin\Debug\en\ConquiánCliente.resources.dll
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.csproj.AssemblyReference.cache
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\Styles\GlobalStyles.baml
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\MainWindow.g.cs
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\SignUp.g.cs
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\VerificationCode.g.cs
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\App.g.cs
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente_MarkupCompile.cache
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente_MarkupCompile.lref
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\App.baml
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\MainWindow.baml
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\SignUp.baml
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\VerificationCode.baml
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.g.resources
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.Properties.Langs.Lang.resources
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.Properties.Resources.resources
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.Properties.Langs.Lang.en.resources
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.csproj.GenerateResource.cache
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.csproj.CoreCompileInputs.cache
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\en\ConquiánCliente.resources.dll
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.exe
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.pdb
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.exe.config
 C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.csproj.AssemblyReference.cache
 C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\Styles\GlobalStyles.baml
 C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\MainWindow.g.cs
@@ -56,3 +30,45 @@ C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\UserProfile.b
 C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\EditProfilePicture.baml
 C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\EditInfo.g.cs
 C:\Conquian\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\EditInfo.baml
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\bin\Debug\ConquiánCliente.exe.config
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\bin\Debug\ConquiánCliente.exe
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\bin\Debug\ConquiánCliente.pdb
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\bin\Debug\en\ConquiánCliente.resources.dll
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.csproj.AssemblyReference.cache
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\Styles\GlobalStyles.baml
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Authentication\PasswordRecovery\CodeValidation.g.cs
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Authentication\PasswordRecovery\RequestRecovery.g.cs
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Authentication\PasswordRecovery\ResetPassword.g.cs
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\MainMenu\MainMenu.g.cs
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Profile\EditInfo.g.cs
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Profile\EditProfilePicture.g.cs
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Authentication\LogIn.g.cs
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Authentication\SignUp.g.cs
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Authentication\SignUpData.g.cs
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Profile\UserProfile.g.cs
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Authentication\VerificationCode.g.cs
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\App.g.cs
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente_MarkupCompile.cache
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente_MarkupCompile.lref
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\App.baml
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Authentication\PasswordRecovery\CodeValidation.baml
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Authentication\PasswordRecovery\RequestRecovery.baml
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Authentication\PasswordRecovery\ResetPassword.baml
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\MainMenu\MainMenu.baml
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Profile\EditInfo.baml
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Profile\EditProfilePicture.baml
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Authentication\LogIn.baml
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Authentication\SignUp.baml
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Authentication\SignUpData.baml
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Profile\UserProfile.baml
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\Authentication\VerificationCode.baml
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.g.resources
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.Properties.Langs.Lang.resources
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.Properties.Resources.resources
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.Properties.Langs.Lang.en.resources
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.csproj.GenerateResource.cache
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.csproj.CoreCompileInputs.cache
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\en\ConquiánCliente.resources.dll
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.exe
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.pdb
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.exe.config
