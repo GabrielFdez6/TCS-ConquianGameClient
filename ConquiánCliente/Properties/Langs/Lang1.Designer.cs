@@ -97,6 +97,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Lista de amigos.
+        /// </summary>
+        public static string FriendList {
+            get {
+                return ResourceManager.GetString("FriendList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Agregar.
         /// </summary>
         public static string FriendListAdd {

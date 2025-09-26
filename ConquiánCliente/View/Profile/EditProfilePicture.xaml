@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ConquiánCliente.View"
         xmlns:language="clr-namespace:ConquiánCliente.Properties.Langs"
         mc:Ignorable="d"
-        Title="{x:Static language:Lang.ProfileEditPicture}" Height="1080" Width="1920"
+        Title="{x:Static language:Lang.ProfileChange}" Height="1080" Width="1920"
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
         Background="Transparent">
@@ -27,38 +27,38 @@
             </Border.Effect>
 
             <StackPanel Orientation="Vertical">
+                <TextBlock Text="{x:Static language:Lang.ProfileChange}" 
+                           Style="{StaticResource TitleTextBlock}" 
+                           Margin="0,0,0,30"/>
 
                 <WrapPanel HorizontalAlignment="Center" MaxWidth="400">
                     <Border Width="100" Height="100" BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1" Margin="10">
-                        <Image/>
+                        <Image x:Name="ProfileImage1" />
                     </Border>
                     <Border Width="100" Height="100" BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1" Margin="10">
-                        <Image/>
+                        <Image x:Name="ProfileImage2" />
                     </Border>
                     <Border Width="100" Height="100" BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1" Margin="10">
-                        <Image/>
-                    </Border>
-
-                    <Border Width="100" Height="100" BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1" Margin="10">
-                        <Image/>
+                        <Image x:Name="ProfileImage3" />
                     </Border>
                     <Border Width="100" Height="100" BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1" Margin="10">
-                        <Image/>
+                        <Image x:Name="ProfileImage4" />
                     </Border>
                     <Border Width="100" Height="100" BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1" Margin="10">
-                        <Image/>
+                        <Image x:Name="ProfileImage5" />
+                    </Border>
+                    <Border Width="100" Height="100" BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1" Margin="10">
+                        <Image x:Name="ProfileImage6" />
                     </Border>
                 </WrapPanel>
 
-                <Button Margin="0,30,0,10">
-                    <Border Background="{StaticResource PrimaryButtonBrush}" CornerRadius="5" Padding="12,8" Width="165">
-                        <TextBlock Text="{x:Static language:Lang.ProfileChange}" 
-                                   FontSize="16" 
-                                   FontWeight="Bold" 
-                                   VerticalAlignment="Center" 
-                                   HorizontalAlignment="Center" 
-                                   Foreground="{StaticResource PrimaryTextBrush}"/>
-                    </Border>
+                <Button Style="{StaticResource PrimaryButtonStyle}" Margin="0,30,0,10" Width="165" Height="40">
+                    <TextBlock Text="{x:Static language:Lang.ProfileChange}" 
+                               FontSize="16" 
+                               FontWeight="Bold" 
+                               VerticalAlignment="Center" 
+                               HorizontalAlignment="Center" 
+                               Foreground="{StaticResource PrimaryTextBrush}"/>
                 </Button>
 
                 <Button Content="{x:Static language:Lang.GlobalBack}"

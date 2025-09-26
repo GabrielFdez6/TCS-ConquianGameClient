@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ConquiánCliente.View"
         xmlns:language="clr-namespace:ConquiánCliente.Properties.Langs"
         mc:Ignorable="d"
-        Title="{x:Static language:Lang.EditInfo}" Height="1080" Width="1920"
+        Title="{x:Static language:Lang.EditDataEdit}" Height="1080" Width="1920"
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
         Background="Transparent">
@@ -27,6 +27,9 @@
             </Border.Effect>
 
             <StackPanel Orientation="Vertical">
+                <TextBlock Text="{x:Static language:Lang.EditDataEdit}" 
+                           Style="{StaticResource TitleTextBlock}" 
+                           Margin="0,0,0,20"/>
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -44,36 +47,34 @@
 
                     <Label Grid.Row="0" Grid.Column="0" Content="{x:Static language:Lang.GlobalNickname}" FontWeight="Bold" Margin="0,5,20,5" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}"/>
                     <Border Grid.Row="0" Grid.Column="1" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource TextBoxBorderBrush}" Margin="0,5">
-                        <TextBox x:Name="txtNickname" Padding="8" FontSize="16" BorderThickness="0" Background="{StaticResource TextBoxBackgroundBrush}"/>
+                        <TextBox x:Name="txtBxNickname" Padding="8" FontSize="16" BorderThickness="0" Background="{StaticResource TextBoxBackgroundBrush}"/>
                     </Border>
 
                     <Label Grid.Row="1" Grid.Column="0" Content="{x:Static language:Lang.GlobalEmail}" FontWeight="Bold" Margin="0,5,20,5" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}"/>
                     <Border Grid.Row="1" Grid.Column="1" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource TextBoxBorderBrush}" Margin="0,5">
-                        <TextBox x:Name="txtEmail" Padding="8" FontSize="16" BorderThickness="0" Background="{StaticResource TextBoxBackgroundBrush}"/>
+                        <TextBox x:Name="txtBxEmail" Padding="8" FontSize="16" BorderThickness="0" Background="{StaticResource TextBoxBackgroundBrush}"/>
                     </Border>
 
                     <Label Grid.Row="2" Grid.Column="0" Content="{x:Static language:Lang.GlobalPassword}" FontWeight="Bold" Margin="0,5,20,5" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}"/>
                     <Border Grid.Row="2" Grid.Column="1" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource TextBoxBorderBrush}" Margin="0,5">
-                        <PasswordBox x:Name="txtPassword" Padding="8" FontSize="16" BorderThickness="0" Background="{StaticResource TextBoxBackgroundBrush}"/>
+                        <PasswordBox x:Name="txtBxPassword" Padding="8" FontSize="16" BorderThickness="0" Background="{StaticResource TextBoxBackgroundBrush}"/>
                     </Border>
 
                     <Label Grid.Row="3" Grid.Column="0" Content="{x:Static language:Lang.GlobalSocial}" FontWeight="Bold" Margin="0,15,20,5" VerticalAlignment="Top" Foreground="{StaticResource PrimaryTextBrush}"/>
 
                     <Image Grid.Row="4" Grid.Column="0" Source="/Resources/facebook.png" Width="24" Height="24" Margin="0,5,20,5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     <Border Grid.Row="4" Grid.Column="1" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource TextBoxBorderBrush}" Margin="0,5">
-                        <TextBox x:Name="txtFacebook" Padding="8" FontSize="16" BorderThickness="0" Background="{StaticResource TextBoxBackgroundBrush}"/>
+                        <TextBox x:Name="txtBxFacebook" Padding="8" FontSize="16" BorderThickness="0" Background="{StaticResource TextBoxBackgroundBrush}"/>
                     </Border>
 
                     <Image Grid.Row="5" Grid.Column="0" Source="/Resources/instagram.png" Width="24" Height="24" Margin="0,5,20,5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     <Border Grid.Row="5" Grid.Column="1" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource TextBoxBorderBrush}" Margin="0,5">
-                        <TextBox x:Name="txtInstagram" Padding="8" FontSize="16" BorderThickness="0" Background="{StaticResource TextBoxBackgroundBrush}"/>
+                        <TextBox x:Name="txtBxInstagram" Padding="8" FontSize="16" BorderThickness="0" Background="{StaticResource TextBoxBackgroundBrush}"/>
                     </Border>
                 </Grid>
 
-                <Button Margin="0,30,0,10">
-                    <Border Background="{StaticResource PrimaryButtonBrush}" CornerRadius="5" Padding="12,8" Width="165">
-                        <TextBlock Text="{x:Static language:Lang.EditDataEdit}" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}"/>
-                    </Border>
+                <Button Margin="0,30,0,10" Style="{StaticResource PrimaryButtonStyle}" Width="165" Height="40">
+                    <TextBlock Text="{x:Static language:Lang.EditDataEdit}" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}"/>
                 </Button>
 
                 <Button Content="{x:Static language:Lang.GlobalBack}"

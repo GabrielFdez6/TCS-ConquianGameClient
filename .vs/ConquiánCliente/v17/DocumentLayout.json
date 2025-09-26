@@ -1,9 +1,25 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\",
+  "WorkspaceRootPath": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\conqui\u00E1ncliente\\properties\\langs\\lang.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\tecnologias para el desarrollo de software\\conqui\u00E1n\\tcs-conquiangameclient\\conqui\u00E1ncliente\\view\\friendlist\\friendlist.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\friendlist\\friendlist.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\tecnologias para el desarrollo de software\\conqui\u00E1n\\tcs-conquiangameclient\\conqui\u00E1ncliente\\view\\profile\\userprofile.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\profile\\userprofile.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\tecnologias para el desarrollo de software\\conqui\u00E1n\\tcs-conquiangameclient\\conqui\u00E1ncliente\\view\\profile\\editprofilepicture.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\profile\\editprofilepicture.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\tecnologias para el desarrollo de software\\conqui\u00E1n\\tcs-conquiangameclient\\conqui\u00E1ncliente\\view\\profile\\editinfo.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\profile\\editinfo.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\tecnologias para el desarrollo de software\\conqui\u00E1n\\tcs-conquiangameclient\\conqui\u00E1ncliente\\properties\\langs\\lang.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
       "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\properties\\langs\\lang.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
     }
   ],
@@ -14,15 +30,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Lang.resx",
-              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
+              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
               "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
-              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
+              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
               "RelativeToolTip": "Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
               "WhenOpened": "2025-09-24T02:42:49.362Z",
@@ -30,12 +46,56 @@
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserProfile.xaml",
+              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Profile\\UserProfile.xaml",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\Profile\\UserProfile.xaml",
+              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Profile\\UserProfile.xaml",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\Profile\\UserProfile.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-26T05:40:52.049Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EditProfilePicture.xaml",
+              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Profile\\EditProfilePicture.xaml",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\Profile\\EditProfilePicture.xaml",
+              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Profile\\EditProfilePicture.xaml",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\Profile\\EditProfilePicture.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-26T05:37:18.606Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EditInfo.xaml",
+              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Profile\\EditInfo.xaml",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\Profile\\EditInfo.xaml",
+              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Profile\\EditInfo.xaml",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\Profile\\EditInfo.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-26T05:36:26.368Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FriendList.xaml",
+              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\FriendList\\FriendList.xaml",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\FriendList\\FriendList.xaml",
+              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\FriendList\\FriendList.xaml",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\FriendList\\FriendList.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-26T05:15:09.749Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
               "$type": "Bookmark",

@@ -264,4 +264,7 @@
   <data name="MainMenu" xml:space="preserve">
     <value>Menú principal</value>
   </data>
+  <data name="FriendList" xml:space="preserve">
+    <value>Lista de amigos</value>
+  </data>
 </root>
