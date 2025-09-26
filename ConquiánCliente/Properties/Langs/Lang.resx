@@ -273,4 +273,7 @@
   <data name="FriendRequestsDecline" xml:space="preserve">
     <value>Rechazar</value>
   </data>
+  <data name="Lobby" xml:space="preserve">
+    <value>Sala de espera</value>
+  </data>
 </root>

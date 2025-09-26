@@ -358,6 +358,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Sala de espera.
+        /// </summary>
+        public static string Lobby {
+            get {
+                return ResourceManager.GetString("Lobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Juego clásico.
         /// </summary>
         public static string LobbyClassicGame {

@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/backgroundmainmenu.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/mexicoflag.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/usaflag.png")]
 
 

@@ -1,0 +1,156 @@
+﻿<Window x:Class="ConquiánCliente.View.Lobby.LobbyGame"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+     xmlns:language="clr-namespace:ConquiánCliente.Properties.Langs"
+     mc:Ignorable="d"
+     Title="{x:Static language:Lang.Lobby}"
+     Height="1080" Width="1920"
+     WindowState="Maximized"
+     WindowStartupLocation="CenterScreen"
+     Background="Transparent">
+
+    <Grid>
+        <Image Source="/Resources/backgroundMainMenu.png" 
+           Stretch="UniformToFill"
+           HorizontalAlignment="Stretch"
+           VerticalAlignment="Stretch"/>
+        <Grid>
+            <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="20,100,0,0">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                    <Border Width="70" Height="70" 
+                        BorderBrush="Gray" BorderThickness="1"
+                        Background="Transparent">
+                        <Image/>
+                    </Border>
+                    <TextBlock Text="{x:Static language:Lang.GlobalNickname}"
+                           VerticalAlignment="Center"
+                           Margin="10,0,0,0"
+                           FontSize="22"
+                           Foreground="White"
+                           FontWeight="Bold"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                    <Border Width="70" Height="70" 
+                        BorderBrush="Gray" BorderThickness="1"
+                        Background="Transparent">
+                        <Image/>
+                    </Border>
+                    <TextBlock Text="{x:Static language:Lang.GlobalNickname}"
+                           VerticalAlignment="Center"
+                           Margin="10,0,0,0"
+                           FontSize="22"
+                           Foreground="White"
+                           FontWeight="Bold"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    Margin="0,60,0,0">
+                <TextBlock Text="{x:Static language:Lang.Lobby}"
+                       FontSize="70"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource PrimaryTextBrush}"
+                       HorizontalAlignment="Center"/>
+                <TextBlock Text="2/2"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       HorizontalAlignment="Center"
+                       Margin="0,10,0,0"/>
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Width="400"
+                    Background="Transparent">
+                <Button Width="388" Height="62" Margin="0,20,0,0" Style="{StaticResource PrimaryButtonStyle}">
+                    <Button.Effect>
+                        <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
+                    </Button.Effect>
+                    <TextBlock Text="{x:Static language:Lang.LobbyStartGame}"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="{StaticResource PrimaryTextBrush}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+                </Button>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,0">
+                    <Button Width="60" Height="50" Style="{StaticResource PrimaryButtonStyle}" Click="ClickLeftChangeGame">
+                        <Button.Effect>
+                            <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
+                        </Button.Effect>
+                        <TextBlock Text="&lt;"
+                               FontSize="26"
+                               FontWeight="Bold"
+                               Foreground="{StaticResource PrimaryTextBrush}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                    </Button>
+
+                    <Label Width="200" Height="50" Margin="10,0,10,0"
+                           Background="#F2A85F"
+                           HorizontalContentAlignment="Center"
+                           VerticalContentAlignment="Center">
+                        <TextBlock x:Name="txtBxTypeGame" Text="{x:Static language:Lang.LobbyQuickGame}"
+                                   FontSize="26"
+                                   FontWeight="Bold"
+                                   Foreground="{StaticResource PrimaryTextBrush}"/>
+                    </Label>
+
+                    <Button Width="60" Height="50" Style="{StaticResource PrimaryButtonStyle}" Click="ClickRighChangeGame">
+                        <Button.Effect>
+                            <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
+                        </Button.Effect>
+                        <TextBlock Text=">"
+                               FontSize="26"
+                               FontWeight="Bold"
+                               Foreground="{StaticResource PrimaryTextBrush}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                    </Button>
+                </StackPanel>
+
+                <Button Width="388" Height="62" Margin="0,30,0,0" Style="{StaticResource PrimaryButtonStyle}">
+                    <Button.Effect>
+                        <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
+                    </Button.Effect>
+                    <TextBlock Text="{x:Static language:Lang.GlobalInvite}"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="{StaticResource PrimaryTextBrush}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+                </Button>
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Margin="20,0,0,48"
+                    Width="500"
+                    Height="110"
+                    Background="#66000000">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Text="usuario: hola" Foreground="White" FontSize="16" Margin="5"/>
+                        <TextBlock Text="invitado1: hola" Foreground="White" FontSize="16" Margin="5"/>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <TextBox Height="40"
+                     Margin="0,5,0,0"
+                     FontSize="16"
+                     VerticalContentAlignment="Center"
+                     Text=">"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+
+</Window>

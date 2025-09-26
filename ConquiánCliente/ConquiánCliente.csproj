@@ -73,6 +73,12 @@
     <Compile Include="View\FriendList\FriendRequests.xaml.cs">
       <DependentUpon>FriendRequests.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Lobby\LobbyGame.xaml.cs">
+      <DependentUpon>LobbyGame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainMenu\ChangeLanguage.xaml.cs">
+      <DependentUpon>ChangeLanguage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainMenu\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
@@ -119,6 +125,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FriendList\FriendRequests.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Lobby\LobbyGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainMenu\ChangeLanguage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -186,7 +200,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Lang1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Langs\Lang.en.resx" />
+    <EmbeddedResource Include="Properties\Langs\Lang.en.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -202,7 +218,6 @@
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="ViewModel\" />
-    <Folder Include="View\Lobby\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\backgroundLogin.jpg" />
@@ -213,6 +228,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\backgroundMainMenu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\MexicoFlag.png" />
+    <Resource Include="Resources\USAFlag.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

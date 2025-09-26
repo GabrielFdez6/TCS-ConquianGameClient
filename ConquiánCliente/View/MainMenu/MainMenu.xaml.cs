@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ConquiánCliente.View.Lobby;
 
 namespace ConquiánCliente.View.MainMenu
 {
@@ -22,6 +23,20 @@ namespace ConquiánCliente.View.MainMenu
         public MainMenu()
         {
             InitializeComponent();
+        }
+
+        private void ClickPlay(object sender, RoutedEventArgs e)
+        {
+            LobbyGame lobby = new LobbyGame();
+            lobby.Show();
+            this.Close();
+        }
+
+        private void ClickChangeLanguage(object sender, RoutedEventArgs e)
+        {
+            var selector = new ChangeLanguage();
+            selector.Owner = this;
+            selector.ShowDialog();
         }
     }
 }
