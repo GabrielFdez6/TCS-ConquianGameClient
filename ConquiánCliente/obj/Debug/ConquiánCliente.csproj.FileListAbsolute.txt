@@ -116,3 +116,5 @@ C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\C
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\en\ConquiánCliente.resources.dll
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.exe
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.pdb
+C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\FriendList\FriendProfile.g.cs
+C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\FriendList\FriendProfile.baml

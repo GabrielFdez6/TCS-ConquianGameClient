@@ -151,6 +151,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Perfil de amigo.
+        /// </summary>
+        public static string FriendProfile {
+            get {
+                return ResourceManager.GetString("FriendProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Eliminar.
         /// </summary>
         public static string FriendsOptionsDelete {

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\App.xaml
-13-1992448474
+14-1665049826
 
-17915340573
+18528283029
 13-1310406943
-Styles\GlobalStyles.xaml;View\Authentication\PasswordRecovery\CodeValidation.xaml;View\Authentication\PasswordRecovery\RequestRecovery.xaml;View\Authentication\PasswordRecovery\ResetPassword.xaml;View\FriendList\FriendList.xaml;View\MainMenu\MainMenu.xaml;View\Profile\EditInfo.xaml;View\Profile\EditProfilePicture.xaml;View\Authentication\LogIn.xaml;View\Authentication\SignUp.xaml;View\Authentication\SignUpData.xaml;View\Profile\UserProfile.xaml;View\Authentication\VerificationCode.xaml;
+Styles\GlobalStyles.xaml;View\Authentication\PasswordRecovery\CodeValidation.xaml;View\Authentication\PasswordRecovery\RequestRecovery.xaml;View\Authentication\PasswordRecovery\ResetPassword.xaml;View\FriendList\FriendList.xaml;View\FriendList\FriendProfile.xaml;View\MainMenu\MainMenu.xaml;View\Profile\EditInfo.xaml;View\Profile\EditProfilePicture.xaml;View\Authentication\LogIn.xaml;View\Authentication\SignUp.xaml;View\Authentication\SignUpData.xaml;View\Profile\UserProfile.xaml;View\Authentication\VerificationCode.xaml;
 
 False
 

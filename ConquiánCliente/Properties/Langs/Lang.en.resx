@@ -267,4 +267,7 @@
   <data name="FriendList" xml:space="preserve">
     <value>Friend list</value>
   </data>
+  <data name="FriendProfile" xml:space="preserve">
+    <value>Friend profile</value>
+  </data>
 </root>
