@@ -270,4 +270,7 @@
   <data name="FriendProfile" xml:space="preserve">
     <value>Perfil de amigo</value>
   </data>
+  <data name="FriendRequestsDecline" xml:space="preserve">
+    <value>Rechazar</value>
+  </data>
 </root>

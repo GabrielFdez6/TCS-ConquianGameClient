@@ -1,0 +1,76 @@
+﻿<Window x:Class="ConquiánCliente.View.FriendList.FriendRequests"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ConquiánCliente.View.FriendList"
+        xmlns:language="clr-namespace:ConquiánCliente.Properties.Langs"
+        mc:Ignorable="d"
+        Title="{x:Static language:Lang.FriendListRequests}" Height="1080" Width="1920"
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent">
+    <Grid>
+        <Image Source="/Resources/backgroundLogin.jpg" Stretch="UniformToFill" />
+
+        <Border BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="2"
+                Background="{StaticResource PrimaryBackgroundBrush}"
+                CornerRadius="10"
+                Padding="35"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                MaxWidth="800" MinWidth="700" Height="600">
+
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="6" Color="Black" Opacity="0.25" BlurRadius="20"/>
+            </Border.Effect>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="{x:Static language:Lang.FriendListRequests}" 
+                           Style="{StaticResource TitleTextBlock}" 
+                           Margin="0,0,0,20"/>
+
+                <DataGrid x:Name="RequestsDataGrid" Grid.Row="1" Margin="0,0,0,20" AutoGenerateColumns="False" CanUserAddRows="False"
+                          Background="{StaticResource PrimaryBackgroundBrush}"
+                          BorderBrush="{StaticResource BorderBrush}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="{x:Static language:Lang.GlobalNickname}" Binding="{Binding Nickname}" Width="*" />
+
+                        <DataGridTemplateColumn Header="{x:Static language:Lang.GlobalAccept}" Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource PrimaryButtonStyle}" Height="30">
+                                        <TextBlock Text="{x:Static language:Lang.GlobalAccept}" Foreground="{StaticResource PrimaryTextBrush}" FontWeight="Bold"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="{x:Static language:Lang.FriendRequestsDecline}" Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource SecondaryButtonStyle}" Height="30">
+                                        <TextBlock Text="{x:Static language:Lang.FriendRequestsDecline}" Foreground="{StaticResource PrimaryTextBrush}" FontWeight="Bold"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button Grid.Row="2" Content="{x:Static language:Lang.GlobalBack}"
+                        Foreground="{StaticResource ForgotPasswordTextBrush}" 
+                        FontSize="14"
+                        HorizontalAlignment="Right"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

@@ -160,6 +160,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Rechazar.
+        /// </summary>
+        public static string FriendRequestsDecline {
+            get {
+                return ResourceManager.GetString("FriendRequestsDecline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Eliminar.
         /// </summary>
         public static string FriendsOptionsDelete {

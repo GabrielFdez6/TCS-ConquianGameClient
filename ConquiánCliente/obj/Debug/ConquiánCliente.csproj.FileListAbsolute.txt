@@ -77,12 +77,13 @@ C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\C
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\ConquiánCliente.pdb
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\en\ConquiánCliente.resources.dll
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.csproj.AssemblyReference.cache
-C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.exe.config
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\Styles\GlobalStyles.baml
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\PasswordRecovery\CodeValidation.g.cs
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\PasswordRecovery\RequestRecovery.g.cs
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\PasswordRecovery\ResetPassword.g.cs
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\FriendList\FriendList.g.cs
+C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\FriendList\FriendProfile.g.cs
+C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\FriendList\FriendRequests.g.cs
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\MainMenu\MainMenu.g.cs
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\EditInfo.g.cs
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\EditProfilePicture.g.cs
@@ -98,6 +99,9 @@ C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\C
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\PasswordRecovery\CodeValidation.baml
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\PasswordRecovery\RequestRecovery.baml
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\PasswordRecovery\ResetPassword.baml
+C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\FriendList\FriendList.baml
+C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\FriendList\FriendProfile.baml
+C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\FriendList\FriendRequests.baml
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\MainMenu\MainMenu.baml
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\EditInfo.baml
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\EditProfilePicture.baml
@@ -106,7 +110,6 @@ C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\C
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\SignUpData.baml
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\UserProfile.baml
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\VerificationCode.baml
-C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\FriendList\FriendList.baml
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.g.resources
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.Properties.Langs.Lang.resources
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.Properties.Resources.resources
@@ -116,5 +119,4 @@ C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\C
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\en\ConquiánCliente.resources.dll
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.exe
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.pdb
-C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\FriendList\FriendProfile.g.cs
-C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\FriendList\FriendProfile.baml
+C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.exe.config

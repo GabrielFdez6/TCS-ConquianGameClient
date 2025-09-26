@@ -70,6 +70,9 @@
     <Compile Include="View\FriendList\FriendProfile.xaml.cs">
       <DependentUpon>FriendProfile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\FriendList\FriendRequests.xaml.cs">
+      <DependentUpon>FriendRequests.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainMenu\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
@@ -112,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FriendList\FriendProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FriendList\FriendRequests.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
