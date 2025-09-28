@@ -19,7 +19,7 @@
                 </Button.Effect>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Image Source="/Resources/MexicoFlag.png" Width="150" Height="70" Margin="0,0,0,0"/>
-                    <TextBlock Text="Español" FontSize="26" FontWeight="Bold" Foreground="{StaticResource PrimaryTextBrush}" VerticalAlignment="Center"/>
+                    <TextBlock Text="{x:Static language:Lang.es}" FontSize="26" FontWeight="Bold" Foreground="{StaticResource PrimaryTextBrush}" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
 
@@ -29,7 +29,7 @@
                 </Button.Effect>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Image Source="/Resources/USAFlag.png" Width="150" Height="70" Margin="0,0,0,0"/>
-                    <TextBlock Text="English" FontSize="26" FontWeight="Bold" Foreground="{StaticResource PrimaryTextBrush}" VerticalAlignment="Center"/>
+                    <TextBlock Text="{x:Static language:Lang.en}" FontSize="26" FontWeight="Bold" Foreground="{StaticResource PrimaryTextBrush}" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
         </StackPanel>
