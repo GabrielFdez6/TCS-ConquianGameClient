@@ -18,7 +18,7 @@ namespace ConquiánCliente
         {
             var langCode = ConquiánCliente.Properties.Settings.Default.languageCode;
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(langCode);
-            base.OnStartup(e);
+            base.OnStartup(e);            
         }
     }
 }
