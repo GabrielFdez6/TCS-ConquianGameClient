@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/mexicoflag.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/usaflag.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("conqui%c3%a1nmodel.context.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("conqui%c3%a1nmodel.tt")]
 
 

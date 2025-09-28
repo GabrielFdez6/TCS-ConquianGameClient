@@ -1,29 +1,41 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\",
+  "WorkspaceRootPath": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\users\\braya\\documentos\\1uv\\5 semestre\\construcion\\conqui\u00E1ncliente\\conqui\u00E1ncliente\\view\\authentication\\login.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\authentication\\login.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\tecnologias para el desarrollo de software\\conqui\u00E1n\\tcs-conquiangameclient\\conqui\u00E1ncliente\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\users\\braya\\documentos\\1uv\\5 semestre\\construcion\\conqui\u00E1ncliente\\conqui\u00E1ncliente\\view\\mainmenu\\changelanguage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\mainmenu\\changelanguage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\tecnologias para el desarrollo de software\\conqui\u00E1n\\tcs-conquiangameclient\\conqui\u00E1ncliente\\databasetester.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\databasetester.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\users\\braya\\documentos\\1uv\\5 semestre\\construcion\\conqui\u00E1ncliente\\conqui\u00E1ncliente\\view\\authentication\\login.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\tecnologias para el desarrollo de software\\conqui\u00E1n\\tcs-conquiangameclient\\conqui\u00E1ncliente\\credentials.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\credentials.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\conqui\u00E1ncliente\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\conqui\u00E1ncliente\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\conqui\u00E1ncliente\\view\\authentication\\login.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\authentication\\login.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\users\\braya\\documentos\\1uv\\5 semestre\\construcion\\conqui\u00E1ncliente\\conqui\u00E1ncliente\\styles\\globalstyles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\conqui\u00E1ncliente\\styles\\globalstyles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\styles\\globalstyles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\users\\braya\\documentos\\1uv\\5 semestre\\construcion\\conqui\u00E1ncliente\\conqui\u00E1ncliente\\view\\mainmenu\\changelanguage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\mainmenu\\changelanguage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\conqui\u00E1ncliente\\view\\authentication\\login.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\authentication\\login.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\users\\braya\\documentos\\1uv\\5 semestre\\construcion\\conqui\u00E1ncliente\\conqui\u00E1ncliente\\properties\\langs\\lang.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\conqui\u00E1ncliente\\properties\\langs\\lang.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
       "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\properties\\langs\\lang.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
     }
   ],
@@ -34,19 +46,44 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "Lang.resx",
-              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
+              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
               "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
-              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
+              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
               "RelativeToolTip": "Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
               "WhenOpened": "2025-09-24T02:42:49.362Z",
-              "IsPinned": true,
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\App.xaml.cs",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\App.xaml.cs",
+              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\App.xaml.cs",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\App.xaml.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABUAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T03:44:36.675Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DatabaseTester.cs",
+              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\DatabaseTester.cs",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\DatabaseTester.cs",
+              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\DatabaseTester.cs",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\DatabaseTester.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAIwDcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T03:44:01.517Z",
               "EditorCaption": ""
             },
             {
@@ -55,48 +92,77 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LogIn.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\View\\Authentication\\LogIn.xaml.cs",
-              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\Authentication\\LogIn.xaml.cs",
-              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\View\\Authentication\\LogIn.xaml.cs",
-              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\Authentication\\LogIn.xaml.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-26T22:33:48.541Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "LogIn.xaml",
-              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\View\\Authentication\\LogIn.xaml",
-              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\Authentication\\LogIn.xaml",
-              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\View\\Authentication\\LogIn.xaml",
-              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\Authentication\\LogIn.xaml",
+              "DocumentIndex": 4,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\App.xaml",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\App.xaml",
+              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\App.xaml",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\App.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-09-26T22:33:41.821Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-28T03:30:23.568Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "App.config",
+              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\App.config",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\App.config",
+              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\App.config",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-09-28T03:08:44.207Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "credentials.config",
+              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\credentials.config",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\credentials.config",
+              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\credentials.config",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\credentials.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-09-28T03:12:30.473Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "LogIn.xaml.cs",
+              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Authentication\\LogIn.xaml.cs",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\Authentication\\LogIn.xaml.cs",
+              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Authentication\\LogIn.xaml.cs",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\Authentication\\LogIn.xaml.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACcAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-26T22:33:48.541Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "LogIn.xaml",
+              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Authentication\\LogIn.xaml",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\Authentication\\LogIn.xaml",
+              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Authentication\\LogIn.xaml",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\Authentication\\LogIn.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-26T22:33:41.821Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "GlobalStyles.xaml",
-              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\Styles\\GlobalStyles.xaml",
+              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\Styles\\GlobalStyles.xaml",
               "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\Styles\\GlobalStyles.xaml",
-              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\Styles\\GlobalStyles.xaml",
+              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Conqui\u00E1n\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\Styles\\GlobalStyles.xaml",
               "RelativeToolTip": "Conqui\u00E1nCliente\\Styles\\GlobalStyles.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-09-26T20:51:00.751Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-26T20:51:00.751Z"
             }
           ]
         },
@@ -107,52 +173,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "b5e2cac4-aedf-41f8-8d9a-4bce087c20d0",
-        "Display": 0,
-        "X": 289,
-        "Y": 133,
-        "Width": 855,
-        "Height": 551,
-        "WindowState": 2
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 1,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ChangeLanguage.xaml",
-              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\View\\MainMenu\\ChangeLanguage.xaml",
-              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\MainMenu\\ChangeLanguage.xaml",
-              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\View\\MainMenu\\ChangeLanguage.xaml",
-              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\MainMenu\\ChangeLanguage.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-09-26T22:10:44.578Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ChangeLanguage.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\View\\MainMenu\\ChangeLanguage.xaml.cs",
-              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\MainMenu\\ChangeLanguage.xaml.cs",
-              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\Conqui\u00E1nCliente\\Conqui\u00E1nCliente\\View\\MainMenu\\ChangeLanguage.xaml.cs",
-              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\MainMenu\\ChangeLanguage.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-26T22:28:30.913Z",
-              "EditorCaption": ""
             }
           ]
         }

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ConquiánDBModelStoreContainer" CdmEntityContainer="ConquiánDBEntities">
+    <EntitySetMapping Name="Friendship">
+      <EntityTypeMapping TypeName="ConquiánDBModel.Friendship">
+        <MappingFragment StoreEntitySet="Friendship">
+          <ScalarProperty Name="idFriendship" ColumnName="idFriendship" />
+          <ScalarProperty Name="idOrigen" ColumnName="idOrigen" />
+          <ScalarProperty Name="idDestino" ColumnName="idDestino" />
+          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Game">
+      <EntityTypeMapping TypeName="ConquiánDBModel.Game">
+        <MappingFragment StoreEntitySet="Game">
+          <ScalarProperty Name="idGame" ColumnName="idGame" />
+          <ScalarProperty Name="rival" ColumnName="rival" />
+          <ScalarProperty Name="gameTime" ColumnName="gameTime" />
+          <ScalarProperty Name="result" ColumnName="result" />
+          <ScalarProperty Name="score" ColumnName="score" />
+          <ScalarProperty Name="idPlayer" ColumnName="idPlayer" />
+          <ScalarProperty Name="idGamemode" ColumnName="idGamemode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Gamemode">
+      <EntityTypeMapping TypeName="ConquiánDBModel.Gamemode">
+        <MappingFragment StoreEntitySet="Gamemode">
+          <ScalarProperty Name="idGamemode" ColumnName="idGamemode" />
+          <ScalarProperty Name="gamemode1" ColumnName="gamemode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Player">
+      <EntityTypeMapping TypeName="ConquiánDBModel.Player">
+        <MappingFragment StoreEntitySet="Player">
+          <ScalarProperty Name="idPlayer" ColumnName="idPlayer" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="nickname" ColumnName="nickname" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="level" ColumnName="level" />
+          <ScalarProperty Name="currentPoints" ColumnName="currentPoints" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Social">
+      <EntityTypeMapping TypeName="ConquiánDBModel.Social">
+        <MappingFragment StoreEntitySet="Social">
+          <ScalarProperty Name="idSocial" ColumnName="idSocial" />
+          <ScalarProperty Name="userLink" ColumnName="userLink" />
+          <ScalarProperty Name="idPlayer" ColumnName="idPlayer" />
+          <ScalarProperty Name="idSocialType" ColumnName="idSocialType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SocialType">
+      <EntityTypeMapping TypeName="ConquiánDBModel.SocialType">
+        <MappingFragment StoreEntitySet="SocialType">
+          <ScalarProperty Name="idSocialType" ColumnName="idSocialType" />
+          <ScalarProperty Name="type" ColumnName="type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status">
+      <EntityTypeMapping TypeName="ConquiánDBModel.Status">
+        <MappingFragment StoreEntitySet="Status">
+          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+          <ScalarProperty Name="Status1" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
