@@ -197,3 +197,4 @@ C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\C
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\Conqui_n.3CD5E178.Up2Date
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.exe
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.pdb
+C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.exe.config
