@@ -67,42 +67,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ConquiánModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ConquiánModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ConquiánModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ConquiánModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ConquiánModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ConquiánModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Friendship.cs">
-      <DependentUpon>ConquiánModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Game.cs">
-      <DependentUpon>ConquiánModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Gamemode.cs">
-      <DependentUpon>ConquiánModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Player.cs">
-      <DependentUpon>ConquiánModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Social.cs">
-      <DependentUpon>ConquiánModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SocialType.cs">
-      <DependentUpon>ConquiánModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Status.cs">
-      <DependentUpon>ConquiánModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="View\Authentication\PasswordRecovery\CodeValidation.xaml.cs">
       <DependentUpon>CodeValidation.xaml</DependentUpon>
     </Compile>
@@ -255,16 +219,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="ConquiánModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ConquiánModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="ConquiánModel.edmx.diagram">
-      <DependentUpon>ConquiánModel.edmx</DependentUpon>
-    </None>
-    <None Include="credentials.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -291,18 +245,6 @@
   <ItemGroup>
     <Resource Include="Resources\MexicoFlag.png" />
     <Resource Include="Resources\USAFlag.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ConquiánModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ConquiánModel.edmx</DependentUpon>
-      <LastGenOutput>ConquiánModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ConquiánModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ConquiánModel.edmx</DependentUpon>
-      <LastGenOutput>ConquiánModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
