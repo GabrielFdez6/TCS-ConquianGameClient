@@ -21,7 +21,7 @@ namespace ConquiánCliente.View
     {
         public VerificationCode()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         private void ClickAcceptCode(object sender, RoutedEventArgs e)

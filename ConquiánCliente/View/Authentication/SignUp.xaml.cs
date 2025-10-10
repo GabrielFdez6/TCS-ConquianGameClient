@@ -34,41 +34,10 @@ namespace ConquiánCliente.View
 
         private void ClickSignUp(object sender, RoutedEventArgs e)
         {
-            Service1Client client = new Service1Client();
+            VerificationCode verificationCode = new VerificationCode();
+            verificationCode.Show();
+            this.Close();
 
-            ConquianService.Player testPlayer = new ConquianService.Player
-            {
-                name = "Jugador",
-                lastName = "DePrueba",
-                nickname = "JugadorDePrueba",
-                email = "test@email.com",
-                password = "password123",
-                level = "1",
-                currentPoints = "0",
-                idPlayer = 8
-            };
-
-            try
-            {
-                bool result = client.RegisterPlayer(testPlayer);
-
-                if (result)
-                {
-                    MessageBox.Show("¡Jugador de prueba registrado con éxito!");
-                }
-                else
-                {
-                    MessageBox.Show("Error: No se pudo registrar al jugador.");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ha ocurrido un error al conectar con el servidor: {ex.Message}");
-            }
-            finally
-            {
-                client.Close();
-            }
         }
     }
 }

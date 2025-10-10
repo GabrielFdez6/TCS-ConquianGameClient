@@ -82,7 +82,6 @@ C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánC
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\ConquiánCliente.exe.config
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\MainMenu\ChangeLanguage.g.cs
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\ConquiánCliente\ConquiánCliente\obj\Debug\View\MainMenu\ChangeLanguage.baml
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\credentials.config
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\ConquiánCliente.exe.config
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\ConquiánCliente.exe
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\ConquiánCliente.pdb
@@ -111,7 +110,6 @@ C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\Conq
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\UserProfile.g.cs
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\VerificationCode.g.cs
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\App.g.cs
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente_Content.g.cs
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente_MarkupCompile.cache
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente_MarkupCompile.lref
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\App.baml
