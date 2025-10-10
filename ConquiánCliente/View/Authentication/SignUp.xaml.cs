@@ -51,7 +51,10 @@ namespace ConquiánCliente.View
                 if (!string.IsNullOrEmpty(verificationCode))
                 {
                     string password = pbConfirmPassowrd.Password;
-                    VerificationCode verificationCodeWindow = new VerificationCode(email, verificationCode, password);
+                    ConquianService.Player newPlayer = new ConquianService.Player();
+                    newPlayer.email = email;
+                    newPlayer.password = password;
+                    VerificationCode verificationCodeWindow = new VerificationCode(verificationCode, newPlayer);
                     verificationCodeWindow.Show();
                     this.Close();
                 }

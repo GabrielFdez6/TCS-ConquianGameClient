@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConquiánCliente.ConquianService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
@@ -20,15 +21,13 @@ namespace ConquiánCliente.View
     /// </summary>
     public partial class VerificationCode : Window
     {
-        private string password;
-        private string userEmail;
         private string originalCode;
-        public VerificationCode(string email, string code, string password)
+        private Player newPlayer;
+        public VerificationCode(string code, Player newPlayer)
         {
             InitializeComponent();
-            userEmail = email;
             originalCode = code;
-            this.password = password;
+            this.newPlayer = newPlayer;
         }
 
         private void ClickAcceptCode(object sender, RoutedEventArgs e)
@@ -37,7 +36,7 @@ namespace ConquiánCliente.View
 
             if (enteredCode == originalCode)
             {
-                SignUpData signUpData = new SignUpData(userEmail, password);
+                SignUpData signUpData = new SignUpData(newPlayer);
                 signUpData.Show();
                 this.Close();
             }

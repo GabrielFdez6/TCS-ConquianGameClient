@@ -21,30 +21,21 @@ namespace ConquiánCliente.View
     /// </summary>
     public partial class SignUpData : Window
     {
-        private string userEmail;
-        private string password;
-        public SignUpData(string email, string password)
+        private Player newPlayer;
+        public SignUpData(Player newPlayer)
         {
             InitializeComponent();
-            userEmail = email;
-            this.password = password;
+            this.newPlayer = newPlayer;
         }
 
         private void ClickAcceptNewAccount(object sender, RoutedEventArgs e)
         {
             try
             {
-                var newPlayer = new Player
-                {
-                    email = userEmail,
-                    nickname = txtBxNickname.Text,
-                    lastName = txtBxLastname.Text,
-                    name = txtBxName.Text,
-                    level = "1",
-                    currentPoints = "0",
-                    idPlayer = 52,
-                    password = password
-                };
+
+                newPlayer.level = "1";
+                newPlayer.currentPoints = "0";
+                newPlayer.idPlayer = 55;
 
                 var client = new SignUpClient();
                 bool registered = client.RegisterPlayer(newPlayer);
