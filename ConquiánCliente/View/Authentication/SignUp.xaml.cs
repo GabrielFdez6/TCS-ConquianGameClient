@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,6 +21,7 @@ namespace ConquiánCliente.View
     /// </summary>
     public partial class SignUp : Window
     {
+        private string verificationCode;
         public SignUp()
         {
             InitializeComponent();
@@ -34,10 +36,35 @@ namespace ConquiánCliente.View
 
         private void ClickSignUp(object sender, RoutedEventArgs e)
         {
-            VerificationCode verificationCode = new VerificationCode();
-            verificationCode.Show();
-            this.Close();
+            string email = tbEmail.Text;
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                MessageBox.Show("Por favor, ingresa un correo electrónico.", "Campo vacío");
+                return;
+            }
 
+            try
+            {
+                ConquianService.SignUpClient client = new ConquianService.SignUpClient();
+                verificationCode = client.SendVerificationCode(email);
+
+                if (!string.IsNullOrEmpty(verificationCode))
+                {
+                    string password = pbConfirmPassowrd.Password;
+                    VerificationCode verificationCodeWindow = new VerificationCode(email, verificationCode, password);
+                    verificationCodeWindow.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo enviar el correo de verificación. Inténtalo de nuevo.", "Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al conectar con el servidor: " + ex.Message, "Error de conexión");
+            }
         }
     }
 }
+

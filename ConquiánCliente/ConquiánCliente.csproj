@@ -228,12 +228,6 @@
     <None Include="Connected Services\ConquianService\Conqui%25C3%25A1nServidor.Conqui%25C3%25A1nDB.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ConquianService\Conqui%25C3%25A1nServidor.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ConquianService\ConquiánCliente.ConquianService.CompositeType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Connected Services\ConquianService\service.wsdl" />
     <None Include="Connected Services\ConquianService\service.xsd">
       <SubType>Designer</SubType>

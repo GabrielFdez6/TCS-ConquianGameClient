@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,16 +20,31 @@ namespace ConquiánCliente.View
     /// </summary>
     public partial class VerificationCode : Window
     {
-        public VerificationCode()
+        private string password;
+        private string userEmail;
+        private string originalCode;
+        public VerificationCode(string email, string code, string password)
         {
-            InitializeComponent();            
+            InitializeComponent();
+            userEmail = email;
+            originalCode = code;
+            this.password = password;
         }
 
         private void ClickAcceptCode(object sender, RoutedEventArgs e)
         {
-            SignUpData signUpData = new SignUpData();
-            signUpData.Show();
-            this.Close();
+            string enteredCode = tbVerificationCode.Text;
+
+            if (enteredCode == originalCode)
+            {
+                SignUpData signUpData = new SignUpData(userEmail, password);
+                signUpData.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("El código de verificación es incorrecto.", "Error de verificación");
+            }
         }
 
         private void ClickBackSignUp(object sender, RoutedEventArgs e)

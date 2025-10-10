@@ -15,67 +15,6 @@ namespace ConquiánCliente.ConquianService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CompositeType", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor")]
-    [System.SerializableAttribute()]
-    public partial class CompositeType : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool BoolValueField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StringValueField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool BoolValue {
-            get {
-                return this.BoolValueField;
-            }
-            set {
-                if ((this.BoolValueField.Equals(value) != true)) {
-                    this.BoolValueField = value;
-                    this.RaisePropertyChanged("BoolValue");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StringValue {
-            get {
-                return this.StringValueField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StringValueField, value) != true)) {
-                    this.StringValueField = value;
-                    this.RaisePropertyChanged("StringValue");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Player", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Conqui%C3%A1nDB")]
     [System.SerializableAttribute()]
     public partial class Player : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -966,69 +905,47 @@ namespace ConquiánCliente.ConquianService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConquianService.IService1")]
-    public interface IService1 {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConquianService.ISignUp")]
+    public interface ISignUp {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetData", ReplyAction="http://tempuri.org/IService1/GetDataResponse")]
-        string GetData(int value);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetData", ReplyAction="http://tempuri.org/IService1/GetDataResponse")]
-        System.Threading.Tasks.Task<string> GetDataAsync(int value);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
-        ConquiánCliente.ConquianService.CompositeType GetDataUsingDataContract(ConquiánCliente.ConquianService.CompositeType composite);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
-        System.Threading.Tasks.Task<ConquiánCliente.ConquianService.CompositeType> GetDataUsingDataContractAsync(ConquiánCliente.ConquianService.CompositeType composite);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/RegisterPlayer", ReplyAction="http://tempuri.org/IService1/RegisterPlayerResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/RegisterPlayer", ReplyAction="http://tempuri.org/ISignUp/RegisterPlayerResponse")]
         bool RegisterPlayer(ConquiánCliente.ConquianService.Player newPlayer);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/RegisterPlayer", ReplyAction="http://tempuri.org/IService1/RegisterPlayerResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/RegisterPlayer", ReplyAction="http://tempuri.org/ISignUp/RegisterPlayerResponse")]
         System.Threading.Tasks.Task<bool> RegisterPlayerAsync(ConquiánCliente.ConquianService.Player newPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/SendVerificationCode", ReplyAction="http://tempuri.org/ISignUp/SendVerificationCodeResponse")]
+        string SendVerificationCode(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/SendVerificationCode", ReplyAction="http://tempuri.org/ISignUp/SendVerificationCodeResponse")]
+        System.Threading.Tasks.Task<string> SendVerificationCodeAsync(string email);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IService1Channel : ConquiánCliente.ConquianService.IService1, System.ServiceModel.IClientChannel {
+    public interface ISignUpChannel : ConquiánCliente.ConquianService.ISignUp, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class Service1Client : System.ServiceModel.ClientBase<ConquiánCliente.ConquianService.IService1>, ConquiánCliente.ConquianService.IService1 {
+    public partial class SignUpClient : System.ServiceModel.ClientBase<ConquiánCliente.ConquianService.ISignUp>, ConquiánCliente.ConquianService.ISignUp {
         
-        public Service1Client() {
+        public SignUpClient() {
         }
         
-        public Service1Client(string endpointConfigurationName) : 
+        public SignUpClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public Service1Client(string endpointConfigurationName, string remoteAddress) : 
+        public SignUpClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public Service1Client(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public SignUpClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public Service1Client(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public SignUpClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
-        }
-        
-        public string GetData(int value) {
-            return base.Channel.GetData(value);
-        }
-        
-        public System.Threading.Tasks.Task<string> GetDataAsync(int value) {
-            return base.Channel.GetDataAsync(value);
-        }
-        
-        public ConquiánCliente.ConquianService.CompositeType GetDataUsingDataContract(ConquiánCliente.ConquianService.CompositeType composite) {
-            return base.Channel.GetDataUsingDataContract(composite);
-        }
-        
-        public System.Threading.Tasks.Task<ConquiánCliente.ConquianService.CompositeType> GetDataUsingDataContractAsync(ConquiánCliente.ConquianService.CompositeType composite) {
-            return base.Channel.GetDataUsingDataContractAsync(composite);
         }
         
         public bool RegisterPlayer(ConquiánCliente.ConquianService.Player newPlayer) {
@@ -1037,6 +954,14 @@ namespace ConquiánCliente.ConquianService {
         
         public System.Threading.Tasks.Task<bool> RegisterPlayerAsync(ConquiánCliente.ConquianService.Player newPlayer) {
             return base.Channel.RegisterPlayerAsync(newPlayer);
+        }
+        
+        public string SendVerificationCode(string email) {
+            return base.Channel.SendVerificationCode(email);
+        }
+        
+        public System.Threading.Tasks.Task<string> SendVerificationCodeAsync(string email) {
+            return base.Channel.SendVerificationCodeAsync(email);
         }
     }
 }
