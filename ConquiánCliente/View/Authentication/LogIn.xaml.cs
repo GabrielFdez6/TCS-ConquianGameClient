@@ -4,6 +4,7 @@ using ConquiánCliente.View.MainMenu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -58,9 +59,31 @@ namespace ConquiánCliente
 
         private void ClickLogIn(object sender, RoutedEventArgs e)
         {
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.Show();
-            this.Close();
+            string email = txtBoxEmail.Text;
+            string password = pbPassword.Password;
+
+            try
+            {
+                ServiceLogin.LoginClient client = new ServiceLogin.LoginClient();
+                if (client.SignIn(email, password))
+                {
+                    MainMenu mainMenu = new MainMenu();
+                    mainMenu.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Credenciales invalidas");
+                }
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show("Servidor no disponible");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error");
+            }
         }
     }
 }

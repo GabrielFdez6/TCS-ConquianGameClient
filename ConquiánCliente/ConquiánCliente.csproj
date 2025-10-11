@@ -68,7 +68,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Connected Services\ConquianService\Reference.cs">
+    <Compile Include="Connected Services\ServiceSignUp\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ServiceLogin\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -225,14 +230,21 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\ConquianService\Conqui%25C3%25A1nServidor.Conqui%25C3%25A1nDB.xsd">
+    <None Include="Connected Services\ServiceSignUp\Conqui%25C3%25A1nServidor.Conqui%25C3%25A1nDB.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ConquianService\service.wsdl" />
-    <None Include="Connected Services\ConquianService\service.xsd">
+    <None Include="Connected Services\ServiceSignUp\service.wsdl" />
+    <None Include="Connected Services\ServiceSignUp\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ConquianService\service1.xsd">
+    <None Include="Connected Services\ServiceSignUp\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceLogin\service.wsdl" />
+    <None Include="Connected Services\ServiceLogin\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceLogin\service1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -269,16 +281,29 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ConquianService\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceSignUp\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceLogin\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ConquianService\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceSignUp\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ConquianService\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceSignUp\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ConquianService\Reference.svcmap">
+    <None Include="Connected Services\ServiceSignUp\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceLogin\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceLogin\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceLogin\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

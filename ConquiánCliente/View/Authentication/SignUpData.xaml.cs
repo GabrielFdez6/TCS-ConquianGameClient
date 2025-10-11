@@ -1,4 +1,4 @@
-﻿using ConquiánCliente.ConquianService;
+﻿using ConquiánCliente.ServiceSignUp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,9 +35,9 @@ namespace ConquiánCliente.View
 
                 newPlayer.level = "1";
                 newPlayer.currentPoints = "0";
-                newPlayer.idPlayer = 55;
+                newPlayer.idPlayer = 56;
 
-                var client = new SignUpClient();
+                var client = new ServiceSignUp.SignUpClient();
                 bool registered = client.RegisterPlayer(newPlayer);
 
                 if (registered)

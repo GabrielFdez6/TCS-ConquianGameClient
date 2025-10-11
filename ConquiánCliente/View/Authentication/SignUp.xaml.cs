@@ -1,5 +1,4 @@
-﻿using ConquiánCliente.ConquianService;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
@@ -45,13 +44,13 @@ namespace ConquiánCliente.View
 
             try
             {
-                ConquianService.SignUpClient client = new ConquianService.SignUpClient();
+                ServiceSignUp.SignUpClient client = new ServiceSignUp.SignUpClient();
                 verificationCode = client.SendVerificationCode(email);
 
                 if (!string.IsNullOrEmpty(verificationCode))
                 {
                     string password = pbConfirmPassowrd.Password;
-                    ConquianService.Player newPlayer = new ConquianService.Player();
+                    ServiceSignUp.Player newPlayer = new ServiceSignUp.Player();
                     newPlayer.email = email;
                     newPlayer.password = password;
                     VerificationCode verificationCodeWindow = new VerificationCode(verificationCode, newPlayer);

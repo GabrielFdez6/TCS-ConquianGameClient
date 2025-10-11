@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ConquiánCliente.ConquianService {
+namespace ConquiánCliente.ServiceSignUp {
     using System.Runtime.Serialization;
     using System;
     
@@ -23,16 +23,16 @@ namespace ConquiánCliente.ConquianService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ConquiánCliente.ConquianService.Friendship[] FriendshipField;
+        private ConquiánCliente.ServiceSignUp.Friendship[] FriendshipField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ConquiánCliente.ConquianService.Friendship[] Friendship1Field;
+        private ConquiánCliente.ServiceSignUp.Friendship[] Friendship1Field;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ConquiánCliente.ConquianService.Game[] GameField;
+        private ConquiánCliente.ServiceSignUp.Game[] GameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ConquiánCliente.ConquianService.Social[] SocialField;
+        private ConquiánCliente.ServiceSignUp.Social[] SocialField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string currentPointsField;
@@ -69,7 +69,7 @@ namespace ConquiánCliente.ConquianService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ConquiánCliente.ConquianService.Friendship[] Friendship {
+        public ConquiánCliente.ServiceSignUp.Friendship[] Friendship {
             get {
                 return this.FriendshipField;
             }
@@ -82,7 +82,7 @@ namespace ConquiánCliente.ConquianService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ConquiánCliente.ConquianService.Friendship[] Friendship1 {
+        public ConquiánCliente.ServiceSignUp.Friendship[] Friendship1 {
             get {
                 return this.Friendship1Field;
             }
@@ -95,7 +95,7 @@ namespace ConquiánCliente.ConquianService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ConquiánCliente.ConquianService.Game[] Game {
+        public ConquiánCliente.ServiceSignUp.Game[] Game {
             get {
                 return this.GameField;
             }
@@ -108,7 +108,7 @@ namespace ConquiánCliente.ConquianService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ConquiánCliente.ConquianService.Social[] Social {
+        public ConquiánCliente.ServiceSignUp.Social[] Social {
             get {
                 return this.SocialField;
             }
@@ -244,13 +244,13 @@ namespace ConquiánCliente.ConquianService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ConquiánCliente.ConquianService.Player PlayerField;
+        private ConquiánCliente.ServiceSignUp.Player PlayerField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ConquiánCliente.ConquianService.Player Player1Field;
+        private ConquiánCliente.ServiceSignUp.Player Player1Field;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ConquiánCliente.ConquianService.Status StatusField;
+        private ConquiánCliente.ServiceSignUp.Status StatusField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> idDestinoField;
@@ -275,7 +275,7 @@ namespace ConquiánCliente.ConquianService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ConquiánCliente.ConquianService.Player Player {
+        public ConquiánCliente.ServiceSignUp.Player Player {
             get {
                 return this.PlayerField;
             }
@@ -288,7 +288,7 @@ namespace ConquiánCliente.ConquianService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ConquiánCliente.ConquianService.Player Player1 {
+        public ConquiánCliente.ServiceSignUp.Player Player1 {
             get {
                 return this.Player1Field;
             }
@@ -301,7 +301,7 @@ namespace ConquiánCliente.ConquianService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ConquiánCliente.ConquianService.Status Status {
+        public ConquiánCliente.ServiceSignUp.Status Status {
             get {
                 return this.StatusField;
             }
@@ -385,10 +385,10 @@ namespace ConquiánCliente.ConquianService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ConquiánCliente.ConquianService.Gamemode GamemodeField;
+        private ConquiánCliente.ServiceSignUp.Gamemode GamemodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ConquiánCliente.ConquianService.Player PlayerField;
+        private ConquiánCliente.ServiceSignUp.Player PlayerField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string gameTimeField;
@@ -422,7 +422,7 @@ namespace ConquiánCliente.ConquianService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ConquiánCliente.ConquianService.Gamemode Gamemode {
+        public ConquiánCliente.ServiceSignUp.Gamemode Gamemode {
             get {
                 return this.GamemodeField;
             }
@@ -435,7 +435,7 @@ namespace ConquiánCliente.ConquianService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ConquiánCliente.ConquianService.Player Player {
+        public ConquiánCliente.ServiceSignUp.Player Player {
             get {
                 return this.PlayerField;
             }
@@ -558,10 +558,10 @@ namespace ConquiánCliente.ConquianService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ConquiánCliente.ConquianService.Player PlayerField;
+        private ConquiánCliente.ServiceSignUp.Player PlayerField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ConquiánCliente.ConquianService.SocialType SocialTypeField;
+        private ConquiánCliente.ServiceSignUp.SocialType SocialTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> idPlayerField;
@@ -586,7 +586,7 @@ namespace ConquiánCliente.ConquianService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ConquiánCliente.ConquianService.Player Player {
+        public ConquiánCliente.ServiceSignUp.Player Player {
             get {
                 return this.PlayerField;
             }
@@ -599,7 +599,7 @@ namespace ConquiánCliente.ConquianService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ConquiánCliente.ConquianService.SocialType SocialType {
+        public ConquiánCliente.ServiceSignUp.SocialType SocialType {
             get {
                 return this.SocialTypeField;
             }
@@ -683,7 +683,7 @@ namespace ConquiánCliente.ConquianService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ConquiánCliente.ConquianService.Friendship[] FriendshipField;
+        private ConquiánCliente.ServiceSignUp.Friendship[] FriendshipField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string Status1Field;
@@ -702,7 +702,7 @@ namespace ConquiánCliente.ConquianService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ConquiánCliente.ConquianService.Friendship[] Friendship {
+        public ConquiánCliente.ServiceSignUp.Friendship[] Friendship {
             get {
                 return this.FriendshipField;
             }
@@ -760,7 +760,7 @@ namespace ConquiánCliente.ConquianService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ConquiánCliente.ConquianService.Game[] GameField;
+        private ConquiánCliente.ServiceSignUp.Game[] GameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string gamemode1Field;
@@ -779,7 +779,7 @@ namespace ConquiánCliente.ConquianService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ConquiánCliente.ConquianService.Game[] Game {
+        public ConquiánCliente.ServiceSignUp.Game[] Game {
             get {
                 return this.GameField;
             }
@@ -837,7 +837,7 @@ namespace ConquiánCliente.ConquianService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ConquiánCliente.ConquianService.Social[] SocialField;
+        private ConquiánCliente.ServiceSignUp.Social[] SocialField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int idSocialTypeField;
@@ -856,7 +856,7 @@ namespace ConquiánCliente.ConquianService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ConquiánCliente.ConquianService.Social[] Social {
+        public ConquiánCliente.ServiceSignUp.Social[] Social {
             get {
                 return this.SocialField;
             }
@@ -905,14 +905,14 @@ namespace ConquiánCliente.ConquianService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConquianService.ISignUp")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceSignUp.ISignUp")]
     public interface ISignUp {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/RegisterPlayer", ReplyAction="http://tempuri.org/ISignUp/RegisterPlayerResponse")]
-        bool RegisterPlayer(ConquiánCliente.ConquianService.Player newPlayer);
+        bool RegisterPlayer(ConquiánCliente.ServiceSignUp.Player newPlayer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/RegisterPlayer", ReplyAction="http://tempuri.org/ISignUp/RegisterPlayerResponse")]
-        System.Threading.Tasks.Task<bool> RegisterPlayerAsync(ConquiánCliente.ConquianService.Player newPlayer);
+        System.Threading.Tasks.Task<bool> RegisterPlayerAsync(ConquiánCliente.ServiceSignUp.Player newPlayer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/SendVerificationCode", ReplyAction="http://tempuri.org/ISignUp/SendVerificationCodeResponse")]
         string SendVerificationCode(string email);
@@ -922,12 +922,12 @@ namespace ConquiánCliente.ConquianService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ISignUpChannel : ConquiánCliente.ConquianService.ISignUp, System.ServiceModel.IClientChannel {
+    public interface ISignUpChannel : ConquiánCliente.ServiceSignUp.ISignUp, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class SignUpClient : System.ServiceModel.ClientBase<ConquiánCliente.ConquianService.ISignUp>, ConquiánCliente.ConquianService.ISignUp {
+    public partial class SignUpClient : System.ServiceModel.ClientBase<ConquiánCliente.ServiceSignUp.ISignUp>, ConquiánCliente.ServiceSignUp.ISignUp {
         
         public SignUpClient() {
         }
@@ -948,11 +948,11 @@ namespace ConquiánCliente.ConquianService {
                 base(binding, remoteAddress) {
         }
         
-        public bool RegisterPlayer(ConquiánCliente.ConquianService.Player newPlayer) {
+        public bool RegisterPlayer(ConquiánCliente.ServiceSignUp.Player newPlayer) {
             return base.Channel.RegisterPlayer(newPlayer);
         }
         
-        public System.Threading.Tasks.Task<bool> RegisterPlayerAsync(ConquiánCliente.ConquianService.Player newPlayer) {
+        public System.Threading.Tasks.Task<bool> RegisterPlayerAsync(ConquiánCliente.ServiceSignUp.Player newPlayer) {
             return base.Channel.RegisterPlayerAsync(newPlayer);
         }
         
