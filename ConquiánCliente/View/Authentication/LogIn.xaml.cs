@@ -1,6 +1,7 @@
 ﻿using ConquiánCliente.View;
 using ConquiánCliente.View.Authentication.PasswordRecovery;
 using ConquiánCliente.View.MainMenu;
+using ConquiánCliente.ViewModel.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,62 +29,7 @@ namespace ConquiánCliente
         public LogIn()
         {
             InitializeComponent();
-        }
-
-        private void CbxSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (cbxLanguageChanged.SelectedIndex == 1)
-            {
-                Properties.Settings.Default.languageCode = "es-MX";
-            }
-            else if (cbxLanguageChanged.SelectedIndex == 2)
-            {
-                Properties.Settings.Default.languageCode = "en-US";
-            }
-            Properties.Settings.Default.Save();
-        }
-
-        private void ClickSignUp (object sender, RoutedEventArgs e)
-        {
-            SignUp signUpWindow = new SignUp();
-            signUpWindow.Show();
-            this.Close();
-        }
-
-        private void ClickForgotPassword(object sender, RoutedEventArgs e)
-        {
-            RequestRecovery requestRecovery = new RequestRecovery();
-            requestRecovery.Show();
-            this.Close();
-        }
-
-        private void ClickLogIn(object sender, RoutedEventArgs e)
-        {
-            string email = txtBoxEmail.Text;
-            string password = pbPassword.Password;
-
-            try
-            {
-                ServiceLogin.LoginClient client = new ServiceLogin.LoginClient();
-                if (client.SignIn(email, password))
-                {
-                    MainMenu mainMenu = new MainMenu();
-                    mainMenu.Show();
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Credenciales invalidas");
-                }
-            }
-            catch (EndpointNotFoundException)
-            {
-                MessageBox.Show("Servidor no disponible");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error");
-            }
-        }
+            DataContext = new LogInViewModel();
+        } 
     }
 }

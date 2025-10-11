@@ -47,7 +47,9 @@
                              Padding="8" 
                              FontSize="16"
                              BorderThickness="0"
-                             Background="{StaticResource TextBoxBackgroundBrush}"/>
+                             Background="{StaticResource TextBoxBackgroundBrush}"
+                             Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
+
                 </Border>
 
                 <TextBlock Text="{x:Static language:Lang.GlobalPassword}" 
@@ -63,7 +65,10 @@
                                  Background="{StaticResource TextBoxBackgroundBrush}"/>
                 </Border>
 
-                <Button Margin="0,30,0,10" Height="43" Width="168" Click="ClickLogIn" Style="{StaticResource PrimaryButtonStyle}">
+                <Button Margin="0,30,0,10" Height="43" Width="168" 
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding LoginCommand}"
+                        CommandParameter="{Binding ElementName=pbPassword}">
                         <TextBlock Text="{x:Static language:Lang.GlobalLogIn}" 
                                    FontSize="16" 
                                    FontWeight="Bold"
@@ -80,27 +85,30 @@
                                    Foreground="{StaticResource PrimaryTextBrush}"/>
                 </Button>
 
-                <Button Style="{StaticResource NoFocusButtonStyle}" Click="ClickSignUp" Margin="0,25,0,0">
+                <Button Style="{StaticResource NoFocusButtonStyle}" Margin="0,25,0,0"
+                        Command="{Binding NavigateToSignUpCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                     <TextBlock Text="{x:Static language:Lang.GlobalSignUp}" 
                                Foreground="{StaticResource PrimaryColorBrush}" 
                                FontSize="14"/>
                 </Button>
 
-                <Button Style="{StaticResource NoFocusButtonStyle}" Click="ClickForgotPassword" Margin="0,15,0,0">
+                <Button Style="{StaticResource NoFocusButtonStyle}" Margin="0,15,0,0"
+                        Command="{Binding NavigateToForgotPasswordCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                     <TextBlock Text="{x:Static language:Lang.LogInForgotPassword}" 
                                Foreground="{StaticResource ForgotPasswordTextBrush}" 
                                FontSize="14"/>
                 </Button>
-
             </StackPanel>
         </Border>
 
         <ComboBox Name="cbxLanguageChanged"
-                  SelectionChanged="CbxSelectionChanged" 
                   VerticalAlignment="Bottom"
                   HorizontalAlignment="Right"
                   Margin="0,0,15,10"
                   Padding="8,4"
+                  SelectedIndex="{Binding SelectedLanguageIndex}"
                   Foreground="{StaticResource PrimaryTextBrush}"
                   Background="{StaticResource PrimaryBackgroundBrush}"
                   BorderBrush="{StaticResource BorderBrush}">

@@ -78,6 +78,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\Authentication\LogInViewModel.cs" />
+    <Compile Include="ViewModel\Authentication\SignUpViewModel.cs" />
+    <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\Authentication\PasswordRecovery\CodeValidation.xaml.cs">
       <DependentUpon>CodeValidation.xaml</DependentUpon>
     </Compile>
@@ -258,7 +262,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
-    <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\backgroundLogin.jpg" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConquiánCliente.ViewModel.Authentication;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
@@ -24,6 +25,7 @@ namespace ConquiánCliente.View
         public SignUp()
         {
             InitializeComponent();
+            DataContext = new SignUpViewModel();
         }
 
         private void ClickLogIn(object sender, RoutedEventArgs e)
@@ -33,40 +35,6 @@ namespace ConquiánCliente.View
             this.Close();
         }
 
-        private void ClickSignUp(object sender, RoutedEventArgs e)
-        {
-            string email = tbEmail.Text;
-            if (string.IsNullOrWhiteSpace(email))
-            {
-                MessageBox.Show("Por favor, ingresa un correo electrónico.", "Campo vacío");
-                return;
-            }
-
-            try
-            {
-                ServiceSignUp.SignUpClient client = new ServiceSignUp.SignUpClient();
-                verificationCode = client.SendVerificationCode(email);
-
-                if (!string.IsNullOrEmpty(verificationCode))
-                {
-                    string password = pbConfirmPassowrd.Password;
-                    ServiceSignUp.Player newPlayer = new ServiceSignUp.Player();
-                    newPlayer.email = email;
-                    newPlayer.password = password;
-                    VerificationCode verificationCodeWindow = new VerificationCode(verificationCode, newPlayer);
-                    verificationCodeWindow.Show();
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("No se pudo enviar el correo de verificación. Inténtalo de nuevo.", "Error");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al conectar con el servidor: " + ex.Message, "Error de conexión");
-            }
-        }
     }
 }
 

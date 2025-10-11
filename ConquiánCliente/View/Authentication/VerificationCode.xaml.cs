@@ -21,36 +21,9 @@ namespace ConquiánCliente.View
     /// </summary>
     public partial class VerificationCode : Window
     {
-        private string originalCode;
-        private Player newPlayer;
-        public VerificationCode(string code, Player newPlayer)
+        public VerificationCode()
         {
             InitializeComponent();
-            originalCode = code;
-            this.newPlayer = newPlayer;
-        }
-
-        private void ClickAcceptCode(object sender, RoutedEventArgs e)
-        {
-            string enteredCode = tbVerificationCode.Text;
-
-            if (enteredCode == originalCode)
-            {
-                SignUpData signUpData = new SignUpData(newPlayer);
-                signUpData.Show();
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("El código de verificación es incorrecto.", "Error de verificación");
-            }
-        }
-
-        private void ClickBackSignUp(object sender, RoutedEventArgs e)
-        {
-            SignUp signUp = new SignUp();
-            signUp.Show();
-            this.Close();
         }
     }
 }

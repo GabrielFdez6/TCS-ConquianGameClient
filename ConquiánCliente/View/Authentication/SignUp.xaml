@@ -46,7 +46,8 @@
                              Padding="8" 
                              FontSize="16"
                              BorderThickness="0"
-                             Background="{StaticResource TextBoxBackgroundBrush}"/>
+                             Background="{StaticResource TextBoxBackgroundBrush}"
+                             Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
                 </Border>
 
                 <TextBlock Text="{x:Static language:Lang.GlobalPassword}" 
@@ -73,16 +74,21 @@
                                  Background="{StaticResource TextBoxBackgroundBrush}"/>
                 </Border>
 
-                <Button Margin="0,30,0,10" Height="43" Width="168" Click="ClickSignUp" Style="{StaticResource PrimaryButtonStyle}">
-                        <TextBlock Text="{x:Static language:Lang.GlobalSignUp}" 
-                                   FontSize="16" 
-                                   FontWeight="Bold"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"
-                                   Foreground="{StaticResource PrimaryTextBrush}"/>
+                <Button Margin="0,30,0,10" Height="43" Width="168" 
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding SendVerificationCodeCommand}"
+                        CommandParameter="{Binding ElementName=pbPassword}">
+                    <TextBlock Text="{x:Static language:Lang.GlobalSignUp}" 
+                               FontSize="16" 
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Foreground="{StaticResource PrimaryTextBrush}"/>
                 </Button>
 
-                <Button Style="{StaticResource NoFocusButtonStyle}" Click="ClickLogIn" Margin="0,25,0,0">
+                <Button Style="{StaticResource NoFocusButtonStyle}" Margin="0,25,0,0"
+                        Command="{Binding NavigateToLoginCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                     <TextBlock Text="{x:Static language:Lang.GlobalLogIn}"
                                Foreground="{StaticResource ForgotPasswordTextBrush}"
                                FontSize="14"/>

@@ -48,16 +48,22 @@
                            TextWrapping="Wrap"
                            Foreground="{StaticResource PrimaryTextBrush}"/>
 
-                <Border CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource TextBoxBorderBrush}">
+                <Border CornerRadius="5"
+                        BorderThickness="1" 
+                        BorderBrush="{StaticResource TextBoxBorderBrush}">
                     <TextBox x:Name="tbVerificationCode" 
                              Padding="8" 
                              FontSize="16"
                              BorderThickness="0"
-                             Background="{StaticResource TextBoxBackgroundBrush}"/>
+                             Background="{StaticResource TextBoxBackgroundBrush}"
+                             Text="{Binding EnteredVerificationCode, UpdateSourceTrigger=PropertyChanged}"/>
                 </Border>
 
-                <Button Margin="0,30,0,10" Height="43" Width="168" Click="ClickAcceptCode" Style="{StaticResource PrimaryButtonStyle}">
-                        <TextBlock Text="{x:Static language:Lang.GlobalAccept}" 
+                <Button Margin="0,30,0,10" Height="43" Width="168"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding VerifyCodeCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                    <TextBlock Text="{x:Static language:Lang.GlobalAccept}" 
                                    FontSize="16" 
                                    FontWeight="Bold"
                                    VerticalAlignment="Center"
@@ -65,7 +71,9 @@
                                    Foreground="{StaticResource PrimaryTextBrush}"/>
                 </Button>
 
-                <Button Style="{StaticResource NoFocusButtonStyle}" Click="ClickBackSignUp" Margin="0,15,0,0">
+                <Button Style="{StaticResource NoFocusButtonStyle}" Margin="0,15,0,0"
+                        Command="{Binding NavigateToSignUpCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                     <TextBlock Text="{x:Static language:Lang.GlobalBack}"
                                Foreground="{StaticResource ForgotPasswordTextBrush}"
                                FontSize="14"/>
