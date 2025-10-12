@@ -166,10 +166,8 @@ C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\Conq
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\en\ConquiánCliente.resources.dll
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\EntityFramework.dll
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\FluentValidation.dll
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\EntityFramework.xml
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\FluentValidation.xml
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\App.baml
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\PasswordRecovery\CodeValidation.baml
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\PasswordRecovery\RequestRecovery.baml
