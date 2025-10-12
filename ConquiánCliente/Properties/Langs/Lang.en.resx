@@ -372,4 +372,7 @@
   <data name="ErrorPasswordMismatch" xml:space="preserve">
     <value>The passwords do not match.</value>
   </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Log out</value>
+  </data>
 </root>

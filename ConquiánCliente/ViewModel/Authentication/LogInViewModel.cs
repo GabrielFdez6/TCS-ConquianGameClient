@@ -74,7 +74,7 @@ namespace ConquiánCliente.ViewModel.Authentication
                 var client = new LoginClient();
                 if (client.SignIn(Email, password))
                 {
-                    var mainMenu = new MainMenu();
+                    var mainMenu = new View.MainMenu.MainMenu();
                     mainMenu.Show();
                     Window.GetWindow(passwordBox)?.Close();
                 }

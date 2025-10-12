@@ -372,4 +372,7 @@
   <data name="ErrorPasswordMismatch" xml:space="preserve">
     <value>Las contraseñas no coinciden.</value>
   </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Cerrar sesión</value>
+  </data>
 </root>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ConquiánCliente.View.Lobby;
+using ConquiánCliente.ViewModel.MainMenu;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +13,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ConquiánCliente.View.Lobby;
 
 namespace ConquiánCliente.View.MainMenu
 {
@@ -23,6 +24,7 @@ namespace ConquiánCliente.View.MainMenu
         public MainMenu()
         {
             InitializeComponent();
+            DataContext = new MainMenuViewModel();
         }
 
         private void ClickPlay(object sender, RoutedEventArgs e)
@@ -39,4 +41,5 @@ namespace ConquiánCliente.View.MainMenu
             selector.ShowDialog();
         }
     }
+
 }

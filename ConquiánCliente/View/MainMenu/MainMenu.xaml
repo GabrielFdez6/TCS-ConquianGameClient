@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConquiánCliente.View.MainMenu"
         xmlns:language="clr-namespace:ConquiánCliente.Properties.Langs"
+        xmlns:viewModel="clr-namespace:ConquiánCliente.ViewModel"
+        xmlns:mainMenu="clr-namespace:ConquiánCliente.ViewModel.MainMenu"
         mc:Ignorable="d"
         Title="{x:Static language:Lang.MainMenu}"
         Height="1080" Width="1920"
@@ -12,84 +14,111 @@
         WindowStartupLocation="CenterScreen"
         Background="Transparent">
 
+    <Window.DataContext>
+        <mainMenu:MainMenuViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <Style x:Key="ProfileToggleButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <ContentPresenter />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                            <ContentPresenter Margin="{TemplateBinding Padding}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFE0E0E0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        <Image Source="/Resources/backgroundMainMenu.png" 
-               Stretch="UniformToFill" 
-               HorizontalAlignment="Stretch" 
-               VerticalAlignment="Stretch"/>
+        <Image Source="/Resources/backgroundMainMenu.png" Stretch="UniformToFill" />
+
         <Grid>
-            <StackPanel Orientation="Horizontal" 
-                        HorizontalAlignment="Left" 
-                        VerticalAlignment="Top"
-                        Margin="20">
-                <Border Width="50" Height="50" 
-                        BorderBrush="Gray" BorderThickness="1"
-                        Background="Transparent">
-                    <Image/>
-                </Border>
-                <TextBlock Text="{x:Static language:Lang.GlobalNickname}"
-                           VerticalAlignment="Center"
-                           Margin="10,0,0,0"
-                           FontSize="20"
-                           Foreground="White"
-                           FontWeight="Bold"/>
-            </StackPanel>
+            <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25">
 
-            <StackPanel VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Width="500"
-                        Margin="0,-500,0,0"
-                        >
-                <TextBlock Text="Conquián"
-                           FontSize="100"
-                           FontWeight="Bold"
-                           Foreground="{StaticResource PrimaryTextBrush}"
-                           HorizontalAlignment="Center"
-                           Margin="0,0,0,60"/>
-            </StackPanel>
+                <ToggleButton x:Name="ProfileMenuToggle" Style="{StaticResource ProfileToggleButtonStyle}">
+                    <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="2" Background="{StaticResource PrimaryBackgroundBrush}" CornerRadius="10" Padding="15" Cursor="Hand">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="5" Color="Black" Opacity="0.3" BlurRadius="15"/>
+                        </Border.Effect>
+                        <StackPanel Orientation="Horizontal">
+                            <Border Width="50" Height="50" CornerRadius="25">
+                                <Border.Background>
+                                    <ImageBrush/>
+                                </Border.Background>
+                            </Border>
+                            <TextBlock Text="{x:Static language:Lang.GlobalNickname}" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="20" Foreground="{StaticResource PrimaryTextBrush}" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Border>
+                </ToggleButton>
 
-            <StackPanel VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Height="290"
-                        Width="400"
-                        Margin="0,200,0,0"
-                        Background="Transparent">
-                
-                <Button Width="388" Height="62" Margin="0,15,0,0" Style="{StaticResource PrimaryButtonStyle}" Click="ClickPlay">
-                    <Button.Effect>
-                        <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
-                    </Button.Effect>
-                    <TextBlock Text="{x:Static language:Lang.MainMenuPlay}"
-                                   FontSize="28"
-                                   FontWeight="Bold"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Foreground="{StaticResource PrimaryTextBrush}"/>
-                </Button>
+                <Popup IsOpen="{Binding IsChecked, ElementName=ProfileMenuToggle}" PlacementTarget="{Binding ElementName=ProfileMenuToggle}" Placement="Bottom" AllowsTransparency="True" StaysOpen="False" PopupAnimation="Fade" Margin="0,10,0,0">
+                    <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Background="{StaticResource PrimaryBackgroundBrush}" CornerRadius="10" MinWidth="200">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="4" Color="Black" Opacity="0.2" BlurRadius="10"/>
+                        </Border.Effect>
+                        <StackPanel Margin="5">
+                            <Button Content="{x:Static language:Lang.GlobalViewProfile}" Style="{StaticResource MenuButtonStyle}" Command="{Binding ViewProfileCommand}"/>
+                            <Separator Margin="5,2"/>
+                            <Button Content="{x:Static language:Lang.LogOut}" Style="{StaticResource MenuButtonStyle}" Command="{Binding LogOutCommand}"/>
+                        </StackPanel>
+                    </Border>
+                </Popup>
+            </Grid>
 
-                <Button Width="388" Height="62" Margin="0,30,0,0" Style="{StaticResource PrimaryButtonStyle}">
-                    <Button.Effect>
-                        <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
-                    </Button.Effect>
-                    <TextBlock Text="{x:Static language:Lang.MainMenuFriends}"
-                                   FontSize="28"
-                                   FontWeight="Bold"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Foreground="{StaticResource PrimaryTextBrush}"/>
-                </Button>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-100,0,0">
+                <TextBlock Text="Conquián" FontSize="100" FontWeight="Bold" Foreground="{StaticResource PrimaryTextBrush}" HorizontalAlignment="Center">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="Black" ShadowDepth="4" BlurRadius="10" Opacity="0.5"/>
+                    </TextBlock.Effect>
+                </TextBlock>
 
-                <Button Width="388" Height="62" Margin="0,30,0,0" Style="{StaticResource PrimaryButtonStyle}" Click="ClickChangeLanguage">
-                    <Button.Effect>
-                        <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
-                    </Button.Effect>
-                    <TextBlock Text="{x:Static language:Lang.GlobalLanguage}"
-                                   FontSize="28"
-                                   FontWeight="Bold"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Foreground="{StaticResource PrimaryTextBrush}"/>
-                </Button>
+                <StackPanel Margin="0,80,0,0">
+                    <Button Width="388" Height="62" Style="{StaticResource PrimaryButtonStyle}" Click="ClickPlay">
+                        <Button.Effect>
+                            <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
+                        </Button.Effect>
+                        <TextBlock Text="{x:Static language:Lang.MainMenuPlay}" FontSize="28" FontWeight="Bold" Foreground="{StaticResource PrimaryTextBrush}"/>
+                    </Button>
+                    <Button Width="388" Height="62" Margin="0,30,0,0" Style="{StaticResource PrimaryButtonStyle}">
+                        <Button.Effect>
+                            <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
+                        </Button.Effect>
+                        <TextBlock Text="{x:Static language:Lang.MainMenuFriends}" FontSize="28" FontWeight="Bold" Foreground="{StaticResource PrimaryTextBrush}"/>
+                    </Button>
+                    <Button Width="388" Height="62" Margin="0,30,0,0" Style="{StaticResource PrimaryButtonStyle}" Click="ClickChangeLanguage">
+                        <Button.Effect>
+                            <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
+                        </Button.Effect>
+                        <TextBlock Text="{x:Static language:Lang.GlobalLanguage}" FontSize="28" FontWeight="Bold" Foreground="{StaticResource PrimaryTextBrush}"/>
+                    </Button>
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Grid>

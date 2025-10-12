@@ -79,6 +79,10 @@ namespace ConquiánCliente.ViewModel.Authentication
             var passwordBox = parameter as PasswordBox;
             string password = passwordBox?.Password;
 
+            var window = Window.GetWindow(passwordBox);
+            var confirmPasswordBox = window?.FindName("pbConfirmPassowrd") as PasswordBox;
+            string confirmPassword = confirmPasswordBox?.Password;
+
             string emailError = SignUpValidator.ValidateEmail(Email);
             if (!string.IsNullOrEmpty(emailError))
             {
@@ -90,6 +94,13 @@ namespace ConquiánCliente.ViewModel.Authentication
             if (!string.IsNullOrEmpty(passwordError))
             {
                 MessageBox.Show(passwordError, Lang.TitleValidation);
+                return;
+            }
+
+            string confirmPasswordError = SignUpValidator.ValidateConfirmPassword(password, confirmPassword);
+            if (!string.IsNullOrEmpty(confirmPasswordError))
+            {
+                MessageBox.Show(confirmPasswordError, Lang.TitleValidation);
                 return;
             }
 
@@ -201,6 +212,11 @@ namespace ConquiánCliente.ViewModel.Authentication
 
         private void ExecuteNavigateToSignUp(object parameter)
         {
+            EnteredVerificationCode = string.Empty;
+            Name = string.Empty;
+            LastName = string.Empty;
+            Nickname = string.Empty;
+            verificationCodeFromServer = string.Empty;
             var signUpWindow = new SignUp();
             signUpWindow.DataContext = this;
             signUpWindow.Show();
