@@ -88,6 +88,231 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Error al conectar con el servidor: {0}.
+        /// </summary>
+        public static string ErrorConnectingToServer {
+            get {
+                return ResourceManager.GetString("ErrorConnectingToServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El correo electrónico no puede estar vacío..
+        /// </summary>
+        public static string ErrorEmailEmpty {
+            get {
+                return ResourceManager.GetString("ErrorEmailEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El formato del correo electrónico no es válido..
+        /// </summary>
+        public static string ErrorEmailInvalidFormat {
+            get {
+                return ResourceManager.GetString("ErrorEmailInvalidFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El correo no debe exceder los {0} caracteres..
+        /// </summary>
+        public static string ErrorEmailLenght {
+            get {
+                return ResourceManager.GetString("ErrorEmailLenght", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ocurrió un error: {0}.
+        /// </summary>
+        public static string ErrorGeneric {
+            get {
+                return ResourceManager.GetString("ErrorGeneric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Credenciales inválidas. Por favor, verifique su correo y contraseña..
+        /// </summary>
+        public static string ErrorInvalidCredentials {
+            get {
+                return ResourceManager.GetString("ErrorInvalidCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El apellido no puede estar vacío..
+        /// </summary>
+        public static string ErrorLastNameEmpty {
+            get {
+                return ResourceManager.GetString("ErrorLastNameEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El apellido solo puede contener letras y espacios..
+        /// </summary>
+        public static string ErrorLastNameInvalidChars {
+            get {
+                return ResourceManager.GetString("ErrorLastNameInvalidChars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El apellido no puede tener más de {0} caracteres..
+        /// </summary>
+        public static string ErrorLastNameLength {
+            get {
+                return ResourceManager.GetString("ErrorLastNameLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El nombre no puede estar vacío..
+        /// </summary>
+        public static string ErrorNameEmpty {
+            get {
+                return ResourceManager.GetString("ErrorNameEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El nombre no puede tener más de {0} caracteres..
+        /// </summary>
+        public static string ErrorNameLength {
+            get {
+                return ResourceManager.GetString("ErrorNameLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El nombre de usuario no puede estar vacío..
+        /// </summary>
+        public static string ErrorNicknameEmpty {
+            get {
+                return ResourceManager.GetString("ErrorNicknameEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El nombre de usuario solo puede contener letras y números..
+        /// </summary>
+        public static string ErrorNicknameInvalidChars {
+            get {
+                return ResourceManager.GetString("ErrorNicknameInvalidChars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El nombre de usuario no puede tener más de {0} caracteres..
+        /// </summary>
+        public static string ErrorNicknameLength {
+            get {
+                return ResourceManager.GetString("ErrorNicknameLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La contraseña no puede estar vacía..
+        /// </summary>
+        public static string ErrorPasswordEmpty {
+            get {
+                return ResourceManager.GetString("ErrorPasswordEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La contraseña debe tener entre {0} y {1} caracteres..
+        /// </summary>
+        public static string ErrorPasswordLength {
+            get {
+                return ResourceManager.GetString("ErrorPasswordLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Las contraseñas no coinciden..
+        /// </summary>
+        public static string ErrorPasswordMismatch {
+            get {
+                return ResourceManager.GetString("ErrorPasswordMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La contraseña debe contener al menos un carácter especial..
+        /// </summary>
+        public static string ErrorPasswordNoSpecialChar {
+            get {
+                return ResourceManager.GetString("ErrorPasswordNoSpecialChar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La contraseña debe contener al menos una mayúscula..
+        /// </summary>
+        public static string ErrorPasswordNoUppercase {
+            get {
+                return ResourceManager.GetString("ErrorPasswordNoUppercase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo registrar. El correo o nombre de usuario ya podrían estar en uso..
+        /// </summary>
+        public static string ErrorRegistrationFailed {
+            get {
+                return ResourceManager.GetString("ErrorRegistrationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Servidor no disponible..
+        /// </summary>
+        public static string ErrorServerUnavailable {
+            get {
+                return ResourceManager.GetString("ErrorServerUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ocurrió un error inesperado: {0}.
+        /// </summary>
+        public static string ErrorUnexpected {
+            get {
+                return ResourceManager.GetString("ErrorUnexpected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El nombre solo puede contener letras y espacios..
+        /// </summary>
+        public static string ErrorValidName {
+            get {
+                return ResourceManager.GetString("ErrorValidName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El código de verificación es incorrecto..
+        /// </summary>
+        public static string ErrorVerificationCodeIncorrect {
+            get {
+                return ResourceManager.GetString("ErrorVerificationCodeIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo enviar el correo de verificación..
+        /// </summary>
+        public static string ErrorVerificationEmail {
+            get {
+                return ResourceManager.GetString("ErrorVerificationEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Español.
         /// </summary>
         public static string es {
@@ -534,6 +759,69 @@ namespace ConquiánCliente.Properties.Langs {
         public static string RecoveryInfo {
             get {
                 return ResourceManager.GetString("RecoveryInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ¡Cuenta creada exitosamente! Por favor, inicie sesión..
+        /// </summary>
+        public static string SuccessAccountCreated {
+            get {
+                return ResourceManager.GetString("SuccessAccountCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error de Autenticación.
+        /// </summary>
+        public static string TitleAuthenticationError {
+            get {
+                return ResourceManager.GetString("TitleAuthenticationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error de Conexión.
+        /// </summary>
+        public static string TitleConnectionError {
+            get {
+                return ResourceManager.GetString("TitleConnectionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error.
+        /// </summary>
+        public static string TitleError {
+            get {
+                return ResourceManager.GetString("TitleError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Registro Completo.
+        /// </summary>
+        public static string TitleRegistrationComplete {
+            get {
+                return ResourceManager.GetString("TitleRegistrationComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error de Registro.
+        /// </summary>
+        public static string TitleRegistrationError {
+            get {
+                return ResourceManager.GetString("TitleRegistrationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error de Validación.
+        /// </summary>
+        public static string TitleValidation {
+            get {
+                return ResourceManager.GetString("TitleValidation", resourceCulture);
             }
         }
     }

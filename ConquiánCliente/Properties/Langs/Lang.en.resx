@@ -276,4 +276,100 @@
   <data name="Lobby" xml:space="preserve">
     <value>Lobby</value>
   </data>
+  <data name="ErrorValidName" xml:space="preserve">
+    <value>The name can only contain letters and spaces.</value>
+  </data>
+  <data name="ErrorNameLength" xml:space="preserve">
+    <value>The name cannot have more than {0} characters.</value>
+  </data>
+  <data name="ErrorNameEmpty" xml:space="preserve">
+    <value>The name cannot be empty.</value>
+  </data>
+  <data name="ErrorLastNameEmpty" xml:space="preserve">
+    <value>The last name cannot be empty.</value>
+  </data>
+  <data name="ErrorLastNameLength" xml:space="preserve">
+    <value>The last name cannot have more than {0} characters.</value>
+  </data>
+  <data name="ErrorLastNameInvalidChars" xml:space="preserve">
+    <value>The last name can only contain letters and spaces.</value>
+  </data>
+  <data name="ErrorNicknameEmpty" xml:space="preserve">
+    <value>The nickname cannot be empty.</value>
+  </data>
+  <data name="ErrorNicknameLength" xml:space="preserve">
+    <value>The nickname cannot have more than {0} characters.</value>
+  </data>
+  <data name="ErrorNicknameInvalidChars" xml:space="preserve">
+    <value>The nickname can only contain letters and numbers.</value>
+  </data>
+  <data name="ErrorEmailEmpty" xml:space="preserve">
+    <value>The email cannot be empty.</value>
+  </data>
+  <data name="ErrorEmailInvalidFormat" xml:space="preserve">
+    <value>The email format is not valid.</value>
+  </data>
+  <data name="ErrorEmailLenght" xml:space="preserve">
+    <value>The email must not exceed {0} characters.</value>
+  </data>
+  <data name="ErrorPasswordEmpty" xml:space="preserve">
+    <value>The password cannot be empty.</value>
+  </data>
+  <data name="ErrorPasswordLength" xml:space="preserve">
+    <value>The password must be between {0} and {1} characters.</value>
+  </data>
+  <data name="ErrorPasswordNoUppercase" xml:space="preserve">
+    <value>The password must contain at least one uppercase letter.</value>
+  </data>
+  <data name="ErrorPasswordNoSpecialChar" xml:space="preserve">
+    <value>The password must contain at least one special character.</value>
+  </data>
+  <data name="ErrorConnectingToServer" xml:space="preserve">
+    <value>Error connecting to server: {0}</value>
+  </data>
+  <data name="ErrorGeneric" xml:space="preserve">
+    <value>An error occurred: {0}</value>
+  </data>
+  <data name="ErrorRegistrationFailed" xml:space="preserve">
+    <value>Registration failed. The email or nickname may already be in use.</value>
+  </data>
+  <data name="ErrorServerUnavailable" xml:space="preserve">
+    <value>Server unavailable.</value>
+  </data>
+  <data name="ErrorVerificationCodeIncorrect" xml:space="preserve">
+    <value>The verification code is incorrect.</value>
+  </data>
+  <data name="ErrorVerificationEmail" xml:space="preserve">
+    <value>Could not send the verification email.</value>
+  </data>
+  <data name="SuccessAccountCreated" xml:space="preserve">
+    <value>Account created successfully! Please log in.</value>
+  </data>
+  <data name="TitleConnectionError" xml:space="preserve">
+    <value>Connection Error</value>
+  </data>
+  <data name="TitleError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="TitleRegistrationComplete" xml:space="preserve">
+    <value>Registration Complete</value>
+  </data>
+  <data name="TitleRegistrationError" xml:space="preserve">
+    <value>Registration Error</value>
+  </data>
+  <data name="TitleValidation" xml:space="preserve">
+    <value>Validation Error</value>
+  </data>
+  <data name="ErrorInvalidCredentials" xml:space="preserve">
+    <value>Invalid credentials. Please check your email and password.</value>
+  </data>
+  <data name="ErrorUnexpected" xml:space="preserve">
+    <value>An unexpected error occurred: {0}</value>
+  </data>
+  <data name="TitleAuthenticationError" xml:space="preserve">
+    <value>Authentication Error</value>
+  </data>
+  <data name="ErrorPasswordMismatch" xml:space="preserve">
+    <value>The passwords do not match.</value>
+  </data>
 </root>

@@ -81,6 +81,8 @@
     <Compile Include="ViewModel\Authentication\LogInViewModel.cs" />
     <Compile Include="ViewModel\Authentication\SignUpViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\Validation\LogInValidator.cs" />
+    <Compile Include="ViewModel\Validation\SignUpValidator.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\Authentication\PasswordRecovery\CodeValidation.xaml.cs">
       <DependentUpon>CodeValidation.xaml</DependentUpon>

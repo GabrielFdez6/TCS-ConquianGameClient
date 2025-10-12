@@ -1,13 +1,10 @@
-﻿using ConquiánCliente.ServiceLogin;
+﻿using ConquiánCliente.Properties.Langs;
+using ConquiánCliente.ServiceLogin;
 using ConquiánCliente.View;
 using ConquiánCliente.View.Authentication.PasswordRecovery;
 using ConquiánCliente.View.MainMenu;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using ConquiánCliente.ViewModel.Validation;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -42,14 +39,14 @@ namespace ConquiánCliente.ViewModel.Authentication
 
         public LogInViewModel()
         {
-            LoginCommand = new RelayCommand(ExecuteLogin, CanExecuteLogin);
+            LoginCommand = new RelayCommand(ExecuteLogin, CanExecuteCommand);
             NavigateToSignUpCommand = new RelayCommand(ExecuteNavigateToSignUp);
             NavigateToForgotPasswordCommand = new RelayCommand(ExecuteNavigateToForgotPassword);
         }
 
-        private bool CanExecuteLogin(object parameter)
+        private bool CanExecuteCommand(object parameter)
         {
-            return !string.IsNullOrEmpty(Email);
+            return true;
         }
 
         private void ExecuteLogin(object parameter)
@@ -57,6 +54,20 @@ namespace ConquiánCliente.ViewModel.Authentication
             var passwordBox = parameter as PasswordBox;
             if (passwordBox == null) return;
             string password = passwordBox.Password;
+
+            string emailError = LogInValidator.ValidateEmail(Email);
+            if (!string.IsNullOrEmpty(emailError))
+            {
+                MessageBox.Show(emailError, Lang.TitleValidation);
+                return;
+            }
+
+            string passwordError = LogInValidator.ValidatePassword(password);
+            if (!string.IsNullOrEmpty(passwordError))
+            {
+                MessageBox.Show(passwordError, Lang.TitleValidation);
+                return;
+            }
 
             try
             {
@@ -69,16 +80,16 @@ namespace ConquiánCliente.ViewModel.Authentication
                 }
                 else
                 {
-                    MessageBox.Show("Credenciales inválidas.", "Error de Autenticación");
+                    MessageBox.Show(Lang.ErrorInvalidCredentials, Lang.TitleAuthenticationError);
                 }
             }
             catch (EndpointNotFoundException)
             {
-                MessageBox.Show("Servidor no disponible.", "Error de Conexión");
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message, "Error");
+                MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
             }
         }
 
@@ -98,7 +109,7 @@ namespace ConquiánCliente.ViewModel.Authentication
 
         private void ChangeLanguage()
         {
-            if (SelectedLanguageIndex == 1) 
+            if (SelectedLanguageIndex == 1)
             {
                 Properties.Settings.Default.languageCode = "es-MX";
             }

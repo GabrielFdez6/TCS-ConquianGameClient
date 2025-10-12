@@ -21,7 +21,6 @@ namespace ConquiánCliente.View
     /// </summary>
     public partial class SignUp : Window
     {
-        private string verificationCode;
         public SignUp()
         {
             InitializeComponent();

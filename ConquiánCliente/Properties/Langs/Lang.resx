@@ -276,4 +276,100 @@
   <data name="Lobby" xml:space="preserve">
     <value>Sala de espera</value>
   </data>
+  <data name="ErrorValidName" xml:space="preserve">
+    <value>El nombre solo puede contener letras y espacios.</value>
+  </data>
+  <data name="ErrorNameLength" xml:space="preserve">
+    <value>El nombre no puede tener más de {0} caracteres.</value>
+  </data>
+  <data name="ErrorNameEmpty" xml:space="preserve">
+    <value>El nombre no puede estar vacío.</value>
+  </data>
+  <data name="ErrorLastNameEmpty" xml:space="preserve">
+    <value>El apellido no puede estar vacío.</value>
+  </data>
+  <data name="ErrorLastNameLength" xml:space="preserve">
+    <value>El apellido no puede tener más de {0} caracteres.</value>
+  </data>
+  <data name="ErrorLastNameInvalidChars" xml:space="preserve">
+    <value>El apellido solo puede contener letras y espacios.</value>
+  </data>
+  <data name="ErrorNicknameEmpty" xml:space="preserve">
+    <value>El nombre de usuario no puede estar vacío.</value>
+  </data>
+  <data name="ErrorNicknameLength" xml:space="preserve">
+    <value>El nombre de usuario no puede tener más de {0} caracteres.</value>
+  </data>
+  <data name="ErrorNicknameInvalidChars" xml:space="preserve">
+    <value>El nombre de usuario solo puede contener letras y números.</value>
+  </data>
+  <data name="ErrorEmailEmpty" xml:space="preserve">
+    <value>El correo electrónico no puede estar vacío.</value>
+  </data>
+  <data name="ErrorEmailInvalidFormat" xml:space="preserve">
+    <value>El formato del correo electrónico no es válido.</value>
+  </data>
+  <data name="ErrorEmailLenght" xml:space="preserve">
+    <value>El correo no debe exceder los {0} caracteres.</value>
+  </data>
+  <data name="ErrorPasswordEmpty" xml:space="preserve">
+    <value>La contraseña no puede estar vacía.</value>
+  </data>
+  <data name="ErrorPasswordLength" xml:space="preserve">
+    <value>La contraseña debe tener entre {0} y {1} caracteres.</value>
+  </data>
+  <data name="ErrorPasswordNoUppercase" xml:space="preserve">
+    <value>La contraseña debe contener al menos una mayúscula.</value>
+  </data>
+  <data name="ErrorPasswordNoSpecialChar" xml:space="preserve">
+    <value>La contraseña debe contener al menos un carácter especial.</value>
+  </data>
+  <data name="ErrorConnectingToServer" xml:space="preserve">
+    <value>Error al conectar con el servidor: {0}</value>
+  </data>
+  <data name="ErrorGeneric" xml:space="preserve">
+    <value>Ocurrió un error: {0}</value>
+  </data>
+  <data name="ErrorRegistrationFailed" xml:space="preserve">
+    <value>No se pudo registrar. El correo o nombre de usuario ya podrían estar en uso.</value>
+  </data>
+  <data name="ErrorServerUnavailable" xml:space="preserve">
+    <value>Servidor no disponible.</value>
+  </data>
+  <data name="ErrorVerificationCodeIncorrect" xml:space="preserve">
+    <value>El código de verificación es incorrecto.</value>
+  </data>
+  <data name="ErrorVerificationEmail" xml:space="preserve">
+    <value>No se pudo enviar el correo de verificación.</value>
+  </data>
+  <data name="SuccessAccountCreated" xml:space="preserve">
+    <value>¡Cuenta creada exitosamente! Por favor, inicie sesión.</value>
+  </data>
+  <data name="TitleConnectionError" xml:space="preserve">
+    <value>Error de Conexión</value>
+  </data>
+  <data name="TitleError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="TitleRegistrationComplete" xml:space="preserve">
+    <value>Registro Completo</value>
+  </data>
+  <data name="TitleRegistrationError" xml:space="preserve">
+    <value>Error de Registro</value>
+  </data>
+  <data name="TitleValidation" xml:space="preserve">
+    <value>Error de Validación</value>
+  </data>
+  <data name="ErrorInvalidCredentials" xml:space="preserve">
+    <value>Credenciales inválidas. Por favor, verifique su correo y contraseña.</value>
+  </data>
+  <data name="ErrorUnexpected" xml:space="preserve">
+    <value>Ocurrió un error inesperado: {0}</value>
+  </data>
+  <data name="TitleAuthenticationError" xml:space="preserve">
+    <value>Error de Autenticación</value>
+  </data>
+  <data name="ErrorPasswordMismatch" xml:space="preserve">
+    <value>Las contraseñas no coinciden.</value>
+  </data>
 </root>

@@ -1,6 +1,8 @@
-﻿using ConquiánCliente.ServiceSignUp;
+﻿using ConquiánCliente.Properties.Langs;
+using ConquiánCliente.ServiceSignUp;
 using ConquiánCliente.View;
 using ConquiánCliente.View.Authentication;
+using ConquiánCliente.ViewModel.Validation;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -58,22 +60,38 @@ namespace ConquiánCliente.ViewModel.Authentication
         {
             playerInProgress = new Player();
 
-            SendVerificationCodeCommand = new RelayCommand(ExecuteSendVerificationCode, CanExecuteSendVerificationCode);
+            SendVerificationCodeCommand = new RelayCommand(ExecuteSendVerificationCode, CanExecuteCommand);
             NavigateToLoginCommand = new RelayCommand(ExecuteNavigateToLogin);
 
-            VerifyCodeCommand = new RelayCommand(ExecuteVerifyCode, CanExecuteVerifyCode);
+            VerifyCodeCommand = new RelayCommand(ExecuteVerifyCode, CanExecuteCommand);
             NavigateToSignUpCommand = new RelayCommand(ExecuteNavigateToSignUp);
 
-            RegisterPlayerCommand = new RelayCommand(ExecuteRegisterPlayer, CanExecuteRegisterPlayer);
+            RegisterPlayerCommand = new RelayCommand(ExecuteRegisterPlayer, CanExecuteCommand);
         }
 
-        private bool CanExecuteSendVerificationCode(object parameter) => !string.IsNullOrEmpty(Email);
+        private bool CanExecuteCommand(object parameter)
+        {
+            return true;
+        }
 
         private void ExecuteSendVerificationCode(object parameter)
         {
             var passwordBox = parameter as PasswordBox;
             string password = passwordBox?.Password;
-            if (string.IsNullOrEmpty(password)) return;
+
+            string emailError = SignUpValidator.ValidateEmail(Email);
+            if (!string.IsNullOrEmpty(emailError))
+            {
+                MessageBox.Show(emailError, Lang.TitleValidation);
+                return;
+            }
+
+            string passwordError = SignUpValidator.ValidatePassword(password);
+            if (!string.IsNullOrEmpty(passwordError))
+            {
+                MessageBox.Show(passwordError, Lang.TitleValidation);
+                return;
+            }
 
             try
             {
@@ -92,23 +110,26 @@ namespace ConquiánCliente.ViewModel.Authentication
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo enviar el correo de verificación.", "Error");
+                    MessageBox.Show(Lang.ErrorVerificationEmail, Lang.TitleError);
                 }
             }
             catch (EndpointNotFoundException)
             {
-                MessageBox.Show("Servidor no disponible.", "Error de Conexión");
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show("Ocurrió un error: " + ex.Message, "Error");
+                MessageBox.Show(string.Format(Lang.ErrorGeneric, ex.Message), Lang.TitleError);
             }
         }
 
-        private bool CanExecuteVerifyCode(object parameter) => !string.IsNullOrEmpty(EnteredVerificationCode);
-
         private void ExecuteVerifyCode(object parameter)
         {
+            if (string.IsNullOrEmpty(EnteredVerificationCode))
+            {
+                return;
+            }
+
             if (EnteredVerificationCode == verificationCodeFromServer)
             {
                 var signUpDataWindow = new SignUpData();
@@ -118,36 +139,56 @@ namespace ConquiánCliente.ViewModel.Authentication
             }
             else
             {
-                MessageBox.Show("El código de verificación es incorrecto.", "Error");
+                MessageBox.Show(Lang.ErrorVerificationCodeIncorrect, Lang.TitleError);
             }
         }
 
-        private bool CanExecuteRegisterPlayer(object parameter) => !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(LastName) && !string.IsNullOrEmpty(Nickname);
-
         private void ExecuteRegisterPlayer(object parameter)
         {
+            string nameError = SignUpValidator.ValidateName(Name);
+            if (!string.IsNullOrEmpty(nameError))
+            {
+                MessageBox.Show(nameError, Lang.TitleValidation);
+                return;
+            }
+
+            string lastNameError = SignUpValidator.ValidateLastName(LastName);
+            if (!string.IsNullOrEmpty(lastNameError))
+            {
+                MessageBox.Show(lastNameError, Lang.TitleValidation);
+                return;
+            }
+
+            string nicknameError = SignUpValidator.ValidateNickname(Nickname);
+            if (!string.IsNullOrEmpty(nicknameError))
+            {
+                MessageBox.Show(nicknameError, Lang.TitleValidation);
+                return;
+            }
+
             playerInProgress.name = Name;
             playerInProgress.lastName = LastName;
             playerInProgress.nickname = Nickname;
             playerInProgress.level = "1";
             playerInProgress.currentPoints = "0";
+            playerInProgress.pathPhoto = "inserte Path";
 
             try
             {
                 var client = new SignUpClient();
                 if (client.RegisterPlayer(playerInProgress))
                 {
-                    MessageBox.Show("¡Cuenta creada exitosamente! Por favor, inicie sesión.", "Registro Completo");
+                    MessageBox.Show(Lang.SuccessAccountCreated, Lang.TitleRegistrationComplete);
                     ExecuteNavigateToLogin(parameter);
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo registrar. El correo o nickname ya podrían estar en uso.", "Error de Registro");
+                    MessageBox.Show(Lang.ErrorRegistrationFailed, Lang.TitleRegistrationError);
                 }
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show("Error al conectar con el servidor: " + ex.Message, "Error de Conexión");
+                MessageBox.Show(string.Format(Lang.ErrorConnectingToServer, ex.Message), Lang.TitleConnectionError);
             }
         }
 

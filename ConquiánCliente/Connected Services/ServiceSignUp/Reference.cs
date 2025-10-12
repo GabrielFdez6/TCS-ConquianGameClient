@@ -58,6 +58,9 @@ namespace ConquiánCliente.ServiceSignUp {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string passwordField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string pathPhotoField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -220,6 +223,19 @@ namespace ConquiánCliente.ServiceSignUp {
                 if ((object.ReferenceEquals(this.passwordField, value) != true)) {
                     this.passwordField = value;
                     this.RaisePropertyChanged("password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string pathPhoto {
+            get {
+                return this.pathPhotoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.pathPhotoField, value) != true)) {
+                    this.pathPhotoField = value;
+                    this.RaisePropertyChanged("pathPhoto");
                 }
             }
         }
