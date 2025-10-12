@@ -241,6 +241,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a La contraseña no puede tener espacios.
+        /// </summary>
+        public static string ErrorPasswordNoSpaces {
+            get {
+                return ResourceManager.GetString("ErrorPasswordNoSpaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a La contraseña debe contener al menos un carácter especial..
         /// </summary>
         public static string ErrorPasswordNoSpecialChar {
@@ -291,6 +300,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string ErrorValidName {
             get {
                 return ResourceManager.GetString("ErrorValidName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El código de verificación no puede estar vacio.
+        /// </summary>
+        public static string ErrorVerificationCodeEmpty {
+            get {
+                return ResourceManager.GetString("ErrorVerificationCodeEmpty", resourceCulture);
             }
         }
         

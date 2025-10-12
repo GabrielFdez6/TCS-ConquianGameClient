@@ -375,4 +375,10 @@
   <data name="LogOut" xml:space="preserve">
     <value>Cerrar sesión</value>
   </data>
+  <data name="ErrorVerificationCodeEmpty" xml:space="preserve">
+    <value>El código de verificación no puede estar vacio</value>
+  </data>
+  <data name="ErrorPasswordNoSpaces" xml:space="preserve">
+    <value>La contraseña no puede tener espacios</value>
+  </data>
 </root>

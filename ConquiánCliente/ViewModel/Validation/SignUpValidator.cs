@@ -26,7 +26,7 @@ namespace ConquiánCliente.ViewModel.Validation
 
             if (name.Length > MAX_NAME_LENGTH)
             {
-                return string.Format(Lang.ErrorNameLength, MAX_EMAIL_LENGTH);
+                return string.Format(Lang.ErrorNameLength, MAX_NAME_LENGTH);
             }
 
             if (!Regex.IsMatch(name, @"^[a-zA-Z\s]+$"))
@@ -43,6 +43,7 @@ namespace ConquiánCliente.ViewModel.Validation
             {
                 return Lang.ErrorLastNameEmpty;
             }
+            lastName = lastName.Trim();
 
             if (lastName.Length > MAX_LAST_NAME_LENGTH)
             {
@@ -63,6 +64,7 @@ namespace ConquiánCliente.ViewModel.Validation
             {
                 return Lang.ErrorNicknameEmpty;
             }
+            nickname = nickname.Trim();
 
             if (nickname.Length > MAX_NICKNAME_LENGTH)
             {
@@ -115,6 +117,11 @@ namespace ConquiánCliente.ViewModel.Validation
             if (password.Length < MIN_PASSWORD_LENGTH || password.Length > MAX_PASSWORD_LENGTH)
             {
                 return string.Format(Lang.ErrorPasswordLength, MIN_PASSWORD_LENGTH, MAX_PASSWORD_LENGTH);
+            }
+
+            if (password.Contains(" "))
+            {
+                return Lang.ErrorPasswordNoSpaces;
             }
 
             if (!Regex.IsMatch(password, @"[A-Z]"))

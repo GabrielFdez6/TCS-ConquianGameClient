@@ -375,4 +375,10 @@
   <data name="LogOut" xml:space="preserve">
     <value>Log out</value>
   </data>
+  <data name="ErrorVerificationCodeEmpty" xml:space="preserve">
+    <value>The verification code cannot be empty.</value>
+  </data>
+  <data name="ErrorPasswordNoSpaces" xml:space="preserve">
+    <value>The password cannot contain spaces.</value>
+  </data>
 </root>

@@ -69,10 +69,9 @@ namespace ConquiánCliente.ViewModel.Authentication
             RegisterPlayerCommand = new RelayCommand(ExecuteRegisterPlayer, CanExecuteRegisterPlayer);
         }
 
-        // --- MÉTODOS CANEXECUTE MEJORADOS ---
-        private bool CanExecuteSendVerificationCode(object parameter) => !string.IsNullOrEmpty(Email);
-        private bool CanExecuteVerifyCode(object parameter) => !string.IsNullOrEmpty(EnteredVerificationCode);
-        private bool CanExecuteRegisterPlayer(object parameter) => !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(LastName) && !string.IsNullOrEmpty(Nickname);
+        private bool CanExecuteSendVerificationCode(object parameter) => true;
+        private bool CanExecuteVerifyCode(object parameter) => true;
+        private bool CanExecuteRegisterPlayer(object parameter) => true;
 
         private void ExecuteSendVerificationCode(object parameter)
         {
@@ -83,7 +82,7 @@ namespace ConquiánCliente.ViewModel.Authentication
             var confirmPasswordBox = window?.FindName("pbConfirmPassowrd") as PasswordBox;
             string confirmPassword = confirmPasswordBox?.Password;
 
-            // --- VALIDACIONES DEL PRIMER CÓDIGO ---
+            Email = Email.Trim();
             string emailError = SignUpValidator.ValidateEmail(Email);
             if (!string.IsNullOrEmpty(emailError))
             {
@@ -91,6 +90,7 @@ namespace ConquiánCliente.ViewModel.Authentication
                 return;
             }
 
+            
             string passwordError = SignUpValidator.ValidatePassword(password);
             if (!string.IsNullOrEmpty(passwordError))
             {
@@ -110,13 +110,6 @@ namespace ConquiánCliente.ViewModel.Authentication
                 var client = new SignUpClient();
                 verificationCodeFromServer = client.SendVerificationCode(Email);
 
-                // --- LÓGICA DE RESPUESTA MEJORADA ---
-                if (verificationCodeFromServer == "ERROR_EMAIL_EXISTS")
-                {
-                    MessageBox.Show("Este correo electrónico ya está registrado.", "Error");
-                    return;
-                }
-
                 if (!string.IsNullOrEmpty(verificationCodeFromServer))
                 {
                     playerInProgress.email = Email;
@@ -129,24 +122,24 @@ namespace ConquiánCliente.ViewModel.Authentication
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo enviar el correo de verificación.", "Error");
+                    MessageBox.Show(Lang.ErrorVerificationEmail, Lang.TitleError);
                 }
             }
             catch (EndpointNotFoundException)
             {
-                MessageBox.Show("Servidor no disponible.", "Error de Conexión");
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show("Ocurrió un error: " + ex.Message, "Error");
+                MessageBox.Show(string.Format(Lang.ErrorGeneric, ex.Message), Lang.TitleError);
             }
         }
 
         private void ExecuteVerifyCode(object parameter)
         {
-            // --- LÓGICA DE VERIFICACIÓN ORIGINAL ---
             if (string.IsNullOrEmpty(EnteredVerificationCode))
             {
+                MessageBox.Show(string.Format(Lang.ErrorVerificationCodeEmpty));
                 return;
             }
 
@@ -159,13 +152,13 @@ namespace ConquiánCliente.ViewModel.Authentication
             }
             else
             {
-                MessageBox.Show("El código de verificación es incorrecto.", "Error de Verificación");
+                MessageBox.Show(Lang.ErrorVerificationCodeIncorrect, Lang.TitleError);
             }
         }
 
         private void ExecuteRegisterPlayer(object parameter)
         {
-            // --- VALIDACIONES DEL PRIMER CÓDIGO ---
+            Name = Name.Trim();
             string nameError = SignUpValidator.ValidateName(Name);
             if (!string.IsNullOrEmpty(nameError))
             {
@@ -173,6 +166,7 @@ namespace ConquiánCliente.ViewModel.Authentication
                 return;
             }
 
+            LastName = LastName.Trim();
             string lastNameError = SignUpValidator.ValidateLastName(LastName);
             if (!string.IsNullOrEmpty(lastNameError))
             {
@@ -180,6 +174,7 @@ namespace ConquiánCliente.ViewModel.Authentication
                 return;
             }
 
+            Nickname = Nickname.Trim();
             string nicknameError = SignUpValidator.ValidateNickname(Nickname);
             if (!string.IsNullOrEmpty(nicknameError))
             {
@@ -192,24 +187,24 @@ namespace ConquiánCliente.ViewModel.Authentication
             playerInProgress.nickname = Nickname;
             playerInProgress.level = "1";
             playerInProgress.currentPoints = "0";
-            playerInProgress.pathPhoto = "inserte Path"; // O "nada" como en el segundo código
+            playerInProgress.pathPhoto = "inserte Path";
 
             try
             {
                 var client = new SignUpClient();
                 if (client.RegisterPlayer(playerInProgress))
                 {
-                    MessageBox.Show("¡Cuenta creada exitosamente! Por favor, inicie sesión.", "Registro Completo");
+                    MessageBox.Show(Lang.SuccessAccountCreated, Lang.TitleRegistrationComplete);
                     ExecuteNavigateToLogin(parameter);
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo registrar. El correo o nickname ya podrían estar en uso.", "Error de Registro");
+                    MessageBox.Show(Lang.ErrorRegistrationFailed, Lang.TitleRegistrationError);
                 }
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show("Error al conectar con el servidor: " + ex.Message, "Error de Conexión");
+                MessageBox.Show(string.Format(Lang.ErrorConnectingToServer, ex.Message), Lang.TitleConnectionError);
             }
         }
 
