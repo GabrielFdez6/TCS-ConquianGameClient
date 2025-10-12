@@ -6,6 +6,7 @@
       <xs:element minOccurs="0" name="Friendship1" nillable="true" type="tns:ArrayOfFriendship" />
       <xs:element minOccurs="0" name="Game" nillable="true" type="tns:ArrayOfGame" />
       <xs:element minOccurs="0" name="Social" nillable="true" type="tns:ArrayOfSocial" />
+      <xs:element minOccurs="0" name="codeExpiryDate" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="currentPoints" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="idPlayer" type="xs:int" />
@@ -15,6 +16,7 @@
       <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="pathPhoto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="verificationCode" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Player" nillable="true" type="tns:Player" />

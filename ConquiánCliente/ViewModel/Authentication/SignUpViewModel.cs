@@ -2,7 +2,6 @@
 using ConquiánCliente.ServiceSignUp;
 using ConquiánCliente.View;
 using ConquiánCliente.View.Authentication;
-using ConquiánCliente.ViewModel.Validation;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,7 +16,6 @@ namespace ConquiánCliente.ViewModel.Authentication
         private string lastName;
         private string nickname;
         private string enteredVerificationCode;
-        private string verificationCodeFromServer;
         private readonly Player playerInProgress;
 
         public string Email
@@ -60,56 +58,36 @@ namespace ConquiánCliente.ViewModel.Authentication
         {
             playerInProgress = new Player();
 
-            SendVerificationCodeCommand = new RelayCommand(ExecuteSendVerificationCode, CanExecuteCommand);
+            SendVerificationCodeCommand = new RelayCommand(ExecuteSendVerificationCode, CanExecuteSendVerificationCode);
             NavigateToLoginCommand = new RelayCommand(ExecuteNavigateToLogin);
 
-            VerifyCodeCommand = new RelayCommand(ExecuteVerifyCode, CanExecuteCommand);
+            VerifyCodeCommand = new RelayCommand(ExecuteVerifyCode, CanExecuteVerifyCode);
             NavigateToSignUpCommand = new RelayCommand(ExecuteNavigateToSignUp);
 
-            RegisterPlayerCommand = new RelayCommand(ExecuteRegisterPlayer, CanExecuteCommand);
+            RegisterPlayerCommand = new RelayCommand(ExecuteRegisterPlayer, CanExecuteRegisterPlayer);
         }
 
-        private bool CanExecuteCommand(object parameter)
-        {
-            return true;
-        }
+        private bool CanExecuteSendVerificationCode(object parameter) => !string.IsNullOrEmpty(Email);
 
         private void ExecuteSendVerificationCode(object parameter)
         {
             var passwordBox = parameter as PasswordBox;
             string password = passwordBox?.Password;
-
-            var window = Window.GetWindow(passwordBox);
-            var confirmPasswordBox = window?.FindName("pbConfirmPassowrd") as PasswordBox;
-            string confirmPassword = confirmPasswordBox?.Password;
-
-            string emailError = SignUpValidator.ValidateEmail(Email);
-            if (!string.IsNullOrEmpty(emailError))
-            {
-                MessageBox.Show(emailError, Lang.TitleValidation);
-                return;
-            }
-
-            string passwordError = SignUpValidator.ValidatePassword(password);
-            if (!string.IsNullOrEmpty(passwordError))
-            {
-                MessageBox.Show(passwordError, Lang.TitleValidation);
-                return;
-            }
-
-            string confirmPasswordError = SignUpValidator.ValidateConfirmPassword(password, confirmPassword);
-            if (!string.IsNullOrEmpty(confirmPasswordError))
-            {
-                MessageBox.Show(confirmPasswordError, Lang.TitleValidation);
-                return;
-            }
+            if (string.IsNullOrEmpty(password)) return;
 
             try
             {
                 var client = new SignUpClient();
-                verificationCodeFromServer = client.SendVerificationCode(Email);
+                // NOTA: Asumimos que el servicio ahora puede devolver un código de error específico.
+                string serverResponse = client.SendVerificationCode(Email);
 
-                if (!string.IsNullOrEmpty(verificationCodeFromServer))
+                if (serverResponse == "ERROR_EMAIL_EXISTS")
+                {
+                    MessageBox.Show("Este correo electrónico ya está registrado.", "Error");
+                    return;
+                }
+
+                if (!string.IsNullOrEmpty(serverResponse))
                 {
                     playerInProgress.email = Email;
                     playerInProgress.password = password;
@@ -121,85 +99,78 @@ namespace ConquiánCliente.ViewModel.Authentication
                 }
                 else
                 {
-                    MessageBox.Show(Lang.ErrorVerificationEmail, Lang.TitleError);
+                    MessageBox.Show("No se pudo enviar el correo de verificación.", "Error");
                 }
             }
             catch (EndpointNotFoundException)
             {
-                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
+                MessageBox.Show("Servidor no disponible.", "Error de Conexión");
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show(string.Format(Lang.ErrorGeneric, ex.Message), Lang.TitleError);
+                MessageBox.Show("Ocurrió un error: " + ex.Message, "Error");
             }
         }
+
+        private bool CanExecuteVerifyCode(object parameter) => !string.IsNullOrEmpty(EnteredVerificationCode);
 
         private void ExecuteVerifyCode(object parameter)
         {
-            if (string.IsNullOrEmpty(EnteredVerificationCode))
+            try
             {
-                return;
-            }
+                var client = new SignUpClient();
+                // NOTA: Se asume un nuevo método en el servicio para verificar el código.
+                bool isCodeValid = client.VerifyCode(this.Email, this.EnteredVerificationCode);
 
-            if (EnteredVerificationCode == verificationCodeFromServer)
-            {
-                var signUpDataWindow = new SignUpData();
-                signUpDataWindow.DataContext = this;
-                signUpDataWindow.Show();
-                (parameter as Window)?.Close();
+                if (isCodeValid)
+                {
+                    var signUpDataWindow = new SignUpData();
+                    signUpDataWindow.DataContext = this;
+                    signUpDataWindow.Show();
+                    (parameter as Window)?.Close();
+                }
+                else
+                {
+                    MessageBox.Show("El código de verificación es incorrecto o ha expirado.", "Error de Verificación");
+                }
             }
-            else
+            catch (EndpointNotFoundException)
             {
-                MessageBox.Show(Lang.ErrorVerificationCodeIncorrect, Lang.TitleError);
+                MessageBox.Show("Servidor no disponible.", "Error de Conexión");
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error: " + ex.Message, "Error");
             }
         }
 
+        private bool CanExecuteRegisterPlayer(object parameter) => !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(LastName) && !string.IsNullOrEmpty(Nickname);
+
         private void ExecuteRegisterPlayer(object parameter)
         {
-            string nameError = SignUpValidator.ValidateName(Name);
-            if (!string.IsNullOrEmpty(nameError))
-            {
-                MessageBox.Show(nameError, Lang.TitleValidation);
-                return;
-            }
-
-            string lastNameError = SignUpValidator.ValidateLastName(LastName);
-            if (!string.IsNullOrEmpty(lastNameError))
-            {
-                MessageBox.Show(lastNameError, Lang.TitleValidation);
-                return;
-            }
-
-            string nicknameError = SignUpValidator.ValidateNickname(Nickname);
-            if (!string.IsNullOrEmpty(nicknameError))
-            {
-                MessageBox.Show(nicknameError, Lang.TitleValidation);
-                return;
-            }
-
             playerInProgress.name = Name;
             playerInProgress.lastName = LastName;
             playerInProgress.nickname = Nickname;
             playerInProgress.level = "1";
             playerInProgress.currentPoints = "0";
-            playerInProgress.pathPhoto = "inserte Path";
+            playerInProgress.pathPhoto = "nada";
 
             try
             {
                 var client = new SignUpClient();
                 if (client.RegisterPlayer(playerInProgress))
                 {
-                    MessageBox.Show(Lang.SuccessAccountCreated, Lang.TitleRegistrationComplete);
+                    MessageBox.Show("¡Cuenta creada exitosamente! Por favor, inicie sesión.", "Registro Completo");
                     ExecuteNavigateToLogin(parameter);
                 }
                 else
                 {
-                    MessageBox.Show(Lang.ErrorRegistrationFailed, Lang.TitleRegistrationError);
+                    MessageBox.Show("No se pudo registrar. El correo o nickname ya podrían estar en uso.", "Error de Registro");
                 }
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show(string.Format(Lang.ErrorConnectingToServer, ex.Message), Lang.TitleConnectionError);
+                MessageBox.Show("Error al conectar con el servidor: " + ex.Message, "Error de Conexión");
             }
         }
 
@@ -212,11 +183,6 @@ namespace ConquiánCliente.ViewModel.Authentication
 
         private void ExecuteNavigateToSignUp(object parameter)
         {
-            EnteredVerificationCode = string.Empty;
-            Name = string.Empty;
-            LastName = string.Empty;
-            Nickname = string.Empty;
-            verificationCodeFromServer = string.Empty;
             var signUpWindow = new SignUp();
             signUpWindow.DataContext = this;
             signUpWindow.Show();

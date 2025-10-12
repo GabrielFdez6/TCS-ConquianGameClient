@@ -35,6 +35,9 @@ namespace ConquiánCliente.ServiceSignUp {
         private ConquiánCliente.ServiceSignUp.Social[] SocialField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> codeExpiryDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string currentPointsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -60,6 +63,9 @@ namespace ConquiánCliente.ServiceSignUp {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string pathPhotoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string verificationCodeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -119,6 +125,19 @@ namespace ConquiánCliente.ServiceSignUp {
                 if ((object.ReferenceEquals(this.SocialField, value) != true)) {
                     this.SocialField = value;
                     this.RaisePropertyChanged("Social");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> codeExpiryDate {
+            get {
+                return this.codeExpiryDateField;
+            }
+            set {
+                if ((this.codeExpiryDateField.Equals(value) != true)) {
+                    this.codeExpiryDateField = value;
+                    this.RaisePropertyChanged("codeExpiryDate");
                 }
             }
         }
@@ -236,6 +255,19 @@ namespace ConquiánCliente.ServiceSignUp {
                 if ((object.ReferenceEquals(this.pathPhotoField, value) != true)) {
                     this.pathPhotoField = value;
                     this.RaisePropertyChanged("pathPhoto");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string verificationCode {
+            get {
+                return this.verificationCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.verificationCodeField, value) != true)) {
+                    this.verificationCodeField = value;
+                    this.RaisePropertyChanged("verificationCode");
                 }
             }
         }
@@ -935,6 +967,12 @@ namespace ConquiánCliente.ServiceSignUp {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/SendVerificationCode", ReplyAction="http://tempuri.org/ISignUp/SendVerificationCodeResponse")]
         System.Threading.Tasks.Task<string> SendVerificationCodeAsync(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/VerifyCode", ReplyAction="http://tempuri.org/ISignUp/VerifyCodeResponse")]
+        bool VerifyCode(string email, string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/VerifyCode", ReplyAction="http://tempuri.org/ISignUp/VerifyCodeResponse")]
+        System.Threading.Tasks.Task<bool> VerifyCodeAsync(string email, string code);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -978,6 +1016,14 @@ namespace ConquiánCliente.ServiceSignUp {
         
         public System.Threading.Tasks.Task<string> SendVerificationCodeAsync(string email) {
             return base.Channel.SendVerificationCodeAsync(email);
+        }
+        
+        public bool VerifyCode(string email, string code) {
+            return base.Channel.VerifyCode(email, code);
+        }
+        
+        public System.Threading.Tasks.Task<bool> VerifyCodeAsync(string email, string code) {
+            return base.Channel.VerifyCodeAsync(email, code);
         }
     }
 }
