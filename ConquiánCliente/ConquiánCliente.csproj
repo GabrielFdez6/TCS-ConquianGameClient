@@ -252,13 +252,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\ServiceLogin\Conqui%25C3%25A1nServidor.Conqui%25C3%25A1nDB.xsd">
+    <None Include="Connected Services\ServiceLogin\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceLogin\ConquiánCliente.ServiceLogin.Player.datasource">
+    <None Include="Connected Services\ServiceLogin\ConquiánCliente.ServiceLogin.PlayerDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ServiceSignUp\Conqui%25C3%25A1nServidor.Conqui%25C3%25A1nDB.xsd">
+    <None Include="Connected Services\ServiceSignUp\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceSignUp\service.wsdl" />
@@ -275,10 +275,13 @@
     <None Include="Connected Services\ServiceLogin\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceUserProfile\Conqui%25C3%25A1nServidor.Conqui%25C3%25A1nDB.xsd">
+    <None Include="Connected Services\ServiceUserProfile\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceUserProfile\ConquiánCliente.ServiceUserProfile.Player.datasource">
+    <None Include="Connected Services\ServiceUserProfile\ConquiánCliente.ServiceUserProfile.PlayerDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceUserProfile\ConquiánCliente.ServiceUserProfile.SocialDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceUserProfile\service.wsdl" />

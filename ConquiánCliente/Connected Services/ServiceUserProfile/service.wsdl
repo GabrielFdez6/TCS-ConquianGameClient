@@ -4,35 +4,55 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Conqui%C3%A1nDB" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IUserProfile_GetPlayerProfile_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetPlayerProfile" />
+  <wsdl:message name="IUserProfile_GetPlayerById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerById" />
   </wsdl:message>
-  <wsdl:message name="IUserProfile_GetPlayerProfile_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetPlayerProfileResponse" />
+  <wsdl:message name="IUserProfile_GetPlayerById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerByIdResponse" />
   </wsdl:message>
-  <wsdl:message name="IUserProfile_UpdatePlayerProfile_InputMessage">
-    <wsdl:part name="parameters" element="tns:UpdatePlayerProfile" />
+  <wsdl:message name="IUserProfile_UpdatePlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePlayer" />
   </wsdl:message>
-  <wsdl:message name="IUserProfile_UpdatePlayerProfile_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UpdatePlayerProfileResponse" />
+  <wsdl:message name="IUserProfile_UpdatePlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserProfile_GetPlayerSocials_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerSocials" />
+  </wsdl:message>
+  <wsdl:message name="IUserProfile_GetPlayerSocials_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerSocialsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserProfile_UpdatePlayerSocials_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePlayerSocials" />
+  </wsdl:message>
+  <wsdl:message name="IUserProfile_UpdatePlayerSocials_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePlayerSocialsResponse" />
   </wsdl:message>
   <wsdl:portType name="IUserProfile">
-    <wsdl:operation name="GetPlayerProfile">
-      <wsdl:input wsaw:Action="http://tempuri.org/IUserProfile/GetPlayerProfile" message="tns:IUserProfile_GetPlayerProfile_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IUserProfile/GetPlayerProfileResponse" message="tns:IUserProfile_GetPlayerProfile_OutputMessage" />
+    <wsdl:operation name="GetPlayerById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserProfile/GetPlayerById" message="tns:IUserProfile_GetPlayerById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserProfile/GetPlayerByIdResponse" message="tns:IUserProfile_GetPlayerById_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="UpdatePlayerProfile">
-      <wsdl:input wsaw:Action="http://tempuri.org/IUserProfile/UpdatePlayerProfile" message="tns:IUserProfile_UpdatePlayerProfile_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IUserProfile/UpdatePlayerProfileResponse" message="tns:IUserProfile_UpdatePlayerProfile_OutputMessage" />
+    <wsdl:operation name="UpdatePlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserProfile/UpdatePlayer" message="tns:IUserProfile_UpdatePlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserProfile/UpdatePlayerResponse" message="tns:IUserProfile_UpdatePlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayerSocials">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserProfile/GetPlayerSocials" message="tns:IUserProfile_GetPlayerSocials_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserProfile/GetPlayerSocialsResponse" message="tns:IUserProfile_GetPlayerSocials_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePlayerSocials">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserProfile/UpdatePlayerSocials" message="tns:IUserProfile_UpdatePlayerSocials_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserProfile/UpdatePlayerSocialsResponse" message="tns:IUserProfile_UpdatePlayerSocials_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IUserProfile" type="tns:IUserProfile">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetPlayerProfile">
-      <soap:operation soapAction="http://tempuri.org/IUserProfile/GetPlayerProfile" style="document" />
+    <wsdl:operation name="GetPlayerById">
+      <soap:operation soapAction="http://tempuri.org/IUserProfile/GetPlayerById" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -40,8 +60,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="UpdatePlayerProfile">
-      <soap:operation soapAction="http://tempuri.org/IUserProfile/UpdatePlayerProfile" style="document" />
+    <wsdl:operation name="UpdatePlayer">
+      <soap:operation soapAction="http://tempuri.org/IUserProfile/UpdatePlayer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayerSocials">
+      <soap:operation soapAction="http://tempuri.org/IUserProfile/GetPlayerSocials" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePlayerSocials">
+      <soap:operation soapAction="http://tempuri.org/IUserProfile/UpdatePlayerSocials" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

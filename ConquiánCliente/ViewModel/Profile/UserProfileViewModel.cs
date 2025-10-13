@@ -14,6 +14,8 @@ namespace ConquiánCliente.ViewModel.Profile
     {
         // Propiedades para enlazar con la Vista (XAML)
         private string _profileImagePath;
+        private PlayerDto _fullPlayerProfile;
+
         public string ProfileImagePath
         {
             get => _profileImagePath;
@@ -78,19 +80,19 @@ namespace ConquiánCliente.ViewModel.Profile
                 try
                 {
                     var userProfileClient = new UserProfileClient();
-                    Player fullPlayerProfile = await userProfileClient.GetPlayerProfileAsync(sessionPlayer.nickname);
+                    _fullPlayerProfile = await userProfileClient.GetPlayerByIdAsync(sessionPlayer.idPlayer);
 
-                    if (fullPlayerProfile != null)
+                    if (_fullPlayerProfile != null)
                     {
-                        Email = fullPlayerProfile.email;
-                        Name = fullPlayerProfile.name;
-                        LastName = fullPlayerProfile.lastName;
-                        Level = fullPlayerProfile.level?.ToString() ?? "1";
+                        Email = _fullPlayerProfile.email;
+                        Name = _fullPlayerProfile.name;
+                        LastName = _fullPlayerProfile.lastName;
+                        Level = _fullPlayerProfile.level?.ToString() ?? "1";
 
-                        string serverImageName = System.IO.Path.GetFileName(fullPlayerProfile.pathPhoto);
+                        string serverImageName = System.IO.Path.GetFileName(_fullPlayerProfile.pathPhoto);
                         SetProfileImage(serverImageName);
 
-                        PlayerSession.UpdateSession(fullPlayerProfile);
+                        PlayerSession.UpdateSession(_fullPlayerProfile);
                     }
                 }
                 catch (EndpointNotFoundException)
@@ -126,7 +128,16 @@ namespace ConquiánCliente.ViewModel.Profile
         }
         private void ExecuteNavigateToEdit(object parameter)
         {
-            ProfileMainFrame.MainFrame.Navigate(new EditInfoPage());
+            var currentPlayerDto = PlayerSession.CurrentPlayer;
+
+            var editInfoViewModel = new EditInfoViewModel(_fullPlayerProfile);
+
+            var editInfoPage = new EditInfoPage
+            {
+                DataContext = editInfoViewModel
+            };
+
+            ProfileMainFrame.MainFrame.Navigate(editInfoPage);
         }
     }
 }

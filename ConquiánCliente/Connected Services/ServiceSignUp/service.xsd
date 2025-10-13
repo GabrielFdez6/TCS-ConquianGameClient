@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Conqui%C3%A1nDB" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" />
   <xs:element name="RegisterPlayer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Conqui%C3%A1nDB" minOccurs="0" name="newPlayer" nillable="true" type="q1:Player" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" minOccurs="0" name="newPlayer" nillable="true" type="q1:PlayerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

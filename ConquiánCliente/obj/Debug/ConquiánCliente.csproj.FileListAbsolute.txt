@@ -155,12 +155,10 @@ C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\Con
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Lobby\LobbyGame.g.cs
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\MainMenu\ChangeLanguage.g.cs
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\MainMenu\MainMenu.g.cs
-C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\EditInfo.g.cs
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\EditProfilePicture.g.cs
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\LogIn.g.cs
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\SignUp.g.cs
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\SignUpData.g.cs
-C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\UserProfile.g.cs
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\VerificationCode.g.cs
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\App.g.cs
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\GeneratedInternalTypeHelper.g.cs
@@ -176,12 +174,10 @@ C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\Con
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Lobby\LobbyGame.baml
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\MainMenu\ChangeLanguage.baml
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\MainMenu\MainMenu.baml
-C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\EditInfo.baml
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\EditProfilePicture.baml
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\LogIn.baml
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\SignUp.baml
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\SignUpData.baml
-C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\UserProfile.baml
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\VerificationCode.baml
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.g.resources
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.Properties.Langs.Lang.resources
@@ -259,3 +255,9 @@ C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\C
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\EditInfoPage.baml
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\ProfileMainFrame.baml
 C:\Tecnologias para el desarrollo de software\Conquián\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\UserProfilePage.baml
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\EditInfoPage.g.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\ProfileMainFrame.g.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\UserProfilePage.g.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\EditInfoPage.baml
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\ProfileMainFrame.baml
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\UserProfilePage.baml

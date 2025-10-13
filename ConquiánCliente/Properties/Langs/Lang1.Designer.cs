@@ -601,6 +601,24 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Error al actualizar la información .
+        /// </summary>
+        public static string InfoUpdateFailed {
+            get {
+                return ResourceManager.GetString("InfoUpdateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Información actualizada correctamente.
+        /// </summary>
+        public static string InfoUpdateSuccess {
+            get {
+                return ResourceManager.GetString("InfoUpdateSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Sala de espera.
         /// </summary>
         public static string Lobby {
@@ -840,6 +858,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string TitleRegistrationError {
             get {
                 return ResourceManager.GetString("TitleRegistrationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Éxito .
+        /// </summary>
+        public static string TitleSuccess {
+            get {
+                return ResourceManager.GetString("TitleSuccess", resourceCulture);
             }
         }
         

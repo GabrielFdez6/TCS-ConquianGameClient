@@ -381,4 +381,13 @@
   <data name="ErrorPasswordNoSpaces" xml:space="preserve">
     <value>The password cannot contain spaces.</value>
   </data>
+  <data name="InfoUpdateSuccess" xml:space="preserve">
+    <value>Info update success</value>
+  </data>
+  <data name="TitleSuccess" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="InfoUpdateFailed" xml:space="preserve">
+    <value>Info update  failed</value>
+  </data>
 </root>

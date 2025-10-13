@@ -17,7 +17,7 @@ namespace ConquiánCliente.ViewModel.Authentication
         private string lastName;
         private string nickname;
         private string enteredVerificationCode;
-        private readonly Player playerInProgress;
+        private readonly PlayerDto playerInProgress;
 
         public string Email
         {
@@ -53,7 +53,7 @@ namespace ConquiánCliente.ViewModel.Authentication
 
         public SignUpViewModel()
         {
-            playerInProgress = new Player();
+            playerInProgress = new PlayerDto();
 
             SendVerificationCodeCommand = new RelayCommand(ExecuteSendVerificationCode, CanExecuteSendVerificationCode);
             NavigateToLoginCommand = new RelayCommand(ExecuteNavigateToLogin);

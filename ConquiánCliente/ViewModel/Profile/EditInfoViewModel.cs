@@ -1,56 +1,123 @@
-﻿using ConquiánCliente.View;
+﻿using ConquiánCliente.Properties.Langs;
+using ConquiánCliente.ServiceUserProfile;
+using ConquiánCliente.View;
 using ConquiánCliente.View.Profile;
+using ConquiánCliente.ViewModel.Validation;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ConquiánCliente.ViewModel.Profile
 {
     public class EditInfoViewModel : ViewModelBase
     {
-        public string Nickname { get; set; }
-        public string Name { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string Facebook { get; set; }
-        public string Instagram { get; set; }
+        private PlayerDto _player;
+        public PlayerDto Player
+        {
+            get => _player;
+            set { _player = value; OnPropertyChanged(); }
+        }
 
+        private string _instagramLink;
+        public string InstagramLink
+        {
+            get => _instagramLink;
+            set { _instagramLink = value; OnPropertyChanged(); }
+        }
+
+        private string _facebookLink;
+        public string FacebookLink
+        {
+            get => _facebookLink;
+            set { _facebookLink = value; OnPropertyChanged(); }
+        }
 
         public ICommand SaveChangesCommand { get; }
         public ICommand CancelCommand { get; }
-
-        public EditInfoViewModel()
+        public EditInfoViewModel(PlayerDto playerDto)
         {
-            LoadEditablePlayerData();
-
-            SaveChangesCommand = new RelayCommand(p => ExecuteSaveChanges());
-            CancelCommand = new RelayCommand(p => ProfileMainFrame.MainFrame.Navigate(new UserProfilePage()));
+            Player = playerDto;
+            SaveChangesCommand = new RelayCommand(ExecuteSaveChanges, CanExecuteSaveChanges);
+            CancelCommand = new RelayCommand(ExecuteCancel);
+            LoadPlayerSocials();
         }
 
-        private void LoadEditablePlayerData()
+        private void LoadPlayerSocials()
         {
-            if (PlayerSession.IsLoggedIn)
+            try
             {
-                var currentPlayer = PlayerSession.CurrentPlayer;
-                Nickname = currentPlayer.nickname;
-                Email = currentPlayer.email;
-                Name = currentPlayer.name;
-                LastName = currentPlayer.lastName;
+                var client = new UserProfileClient();
+                SocialDto[] socialsArray = client.GetPlayerSocials(Player.idPlayer);
+                List<SocialDto> socials = socialsArray?.ToList() ?? new List<SocialDto>();
+
+                InstagramLink = socials.FirstOrDefault(s => s.IdSocialType == 1)?.UserLink ?? "";
+                FacebookLink = socials.FirstOrDefault(s => s.IdSocialType == 2)?.UserLink ?? "";
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
+            }
+            catch (FaultException ex)
+            {
+                MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
             }
         }
 
-        private void ExecuteSaveChanges()
+        private bool CanExecuteSaveChanges(object parameter) => true;
+
+        private void ExecuteSaveChanges(object parameter)
         {
-            // --- Lógica para guardar cambios (pendiente) ---
-            // Aquí llamarías a un nuevo servicio para actualizar Name, LastName, etc.
-            // Por ejemplo: client.UpdatePlayerInfo(Email, Name, LastName);
+            string nameError = SignUpValidator.ValidateName(Player.name);
+            if (!string.IsNullOrEmpty(nameError)) { MessageBox.Show(nameError, Lang.TitleValidation); return; }
 
-            // Una vez guardado, actualizamos la sesión local y navegamos de vuelta
-            if (PlayerSession.IsLoggedIn)
+            string lastNameError = SignUpValidator.ValidateLastName(Player.lastName);
+            if (!string.IsNullOrEmpty(lastNameError)) { MessageBox.Show(lastNameError, Lang.TitleValidation); return; }
+
+            string nicknameError = SignUpValidator.ValidateNickname(Player.nickname);
+            if (!string.IsNullOrEmpty(nicknameError)) { MessageBox.Show(nicknameError, Lang.TitleValidation); return; }
+
+            try
             {
-                PlayerSession.CurrentPlayer.name = this.Name;
-                PlayerSession.CurrentPlayer.lastName = this.LastName;
-                PlayerSession.CurrentPlayer.nickname = this.Nickname;
-            }
+                var client = new UserProfileClient();
+                bool profileUpdated = client.UpdatePlayer(this.Player);
 
+                var socialsToUpdate = new List<SocialDto>();
+                if (!string.IsNullOrWhiteSpace(InstagramLink))
+                {
+                    socialsToUpdate.Add(new SocialDto { IdSocialType = 1, UserLink = this.InstagramLink });
+                }
+                if (!string.IsNullOrWhiteSpace(FacebookLink))
+                {
+                    socialsToUpdate.Add(new SocialDto { IdSocialType = 2, UserLink = this.FacebookLink });
+                }
+
+                bool socialsUpdated = client.UpdatePlayerSocials(Player.idPlayer, socialsToUpdate.ToArray());
+
+                if (profileUpdated)
+                {
+                    MessageBox.Show(Lang.InfoUpdateSuccess, Lang.TitleSuccess);
+                    PlayerSession.CurrentPlayer.nickname = this.Player.nickname;
+                    ExecuteCancel(null);
+                }
+                else
+                {
+                    MessageBox.Show(Lang.InfoUpdateFailed, Lang.TitleError);
+                }
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
+            }
+            catch (FaultException ex)
+            {
+                MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
+            }
+        }
+
+        private void ExecuteCancel(object parameter)
+        {
             ProfileMainFrame.MainFrame.Navigate(new UserProfilePage());
         }
     }

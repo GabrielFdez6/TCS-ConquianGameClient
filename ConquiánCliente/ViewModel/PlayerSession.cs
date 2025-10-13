@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ConquiánCliente.ServiceLogin;
-using PlayerLogin = ConquiánCliente.ServiceLogin.Player;
+using PlayerLogin = ConquiánCliente.ServiceLogin.PlayerDto;
 
 namespace ConquiánCliente.ViewModel
 {
@@ -14,12 +14,12 @@ namespace ConquiánCliente.ViewModel
 
         public static bool IsLoggedIn => CurrentPlayer != null;
 
-        public static void StartSession(Player player)
+        public static void StartSession(PlayerDto player)
         {
             CurrentPlayer = player;
         }
 
-        public static void UpdateSession(ServiceUserProfile.Player fullPlayerProfile)
+        public static void UpdateSession(ServiceUserProfile.PlayerDto fullPlayerProfile)
         {
             if (IsLoggedIn && CurrentPlayer.nickname == fullPlayerProfile.nickname)
             {
@@ -29,6 +29,7 @@ namespace ConquiánCliente.ViewModel
                 CurrentPlayer.level = fullPlayerProfile.level;
                 CurrentPlayer.pathPhoto = fullPlayerProfile.pathPhoto;
                 CurrentPlayer.currentPoints = fullPlayerProfile.currentPoints;
+                CurrentPlayer.nickname = fullPlayerProfile.nickname;
             }
         }
 

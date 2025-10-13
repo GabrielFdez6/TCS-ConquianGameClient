@@ -73,7 +73,7 @@ namespace ConquiánCliente.ViewModel.Authentication
             {
                 var client = new LoginClient();
 
-                Player authenticatedPlayer = await client.AuthenticatePlayerAsync(Email, password);
+                PlayerDto authenticatedPlayer = await client.AuthenticatePlayerAsync(Email, password);
 
                 if (authenticatedPlayer != null)
                 {
