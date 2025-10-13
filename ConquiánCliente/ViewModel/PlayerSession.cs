@@ -32,6 +32,13 @@ namespace ConquiánCliente.ViewModel
                 CurrentPlayer.nickname = fullPlayerProfile.nickname;
             }
         }
+        public static void UpdateProfilePicture(string newPhotoPath)
+        {
+            if (IsLoggedIn)
+            {
+                CurrentPlayer.pathPhoto = newPhotoPath;
+            }
+        }
 
 
         public static void EndSession()

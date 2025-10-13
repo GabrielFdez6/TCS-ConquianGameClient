@@ -292,6 +292,12 @@ namespace ConquiánCliente.ServiceUserProfile {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserProfile/UpdatePlayerSocials", ReplyAction="http://tempuri.org/IUserProfile/UpdatePlayerSocialsResponse")]
         System.Threading.Tasks.Task<bool> UpdatePlayerSocialsAsync(int idPlayer, ConquiánCliente.ServiceUserProfile.SocialDto[] socials);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserProfile/UpdateProfilePicture", ReplyAction="http://tempuri.org/IUserProfile/UpdateProfilePictureResponse")]
+        bool UpdateProfilePicture(int idPlayer, string newPath);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserProfile/UpdateProfilePicture", ReplyAction="http://tempuri.org/IUserProfile/UpdateProfilePictureResponse")]
+        System.Threading.Tasks.Task<bool> UpdateProfilePictureAsync(int idPlayer, string newPath);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -351,6 +357,14 @@ namespace ConquiánCliente.ServiceUserProfile {
         
         public System.Threading.Tasks.Task<bool> UpdatePlayerSocialsAsync(int idPlayer, ConquiánCliente.ServiceUserProfile.SocialDto[] socials) {
             return base.Channel.UpdatePlayerSocialsAsync(idPlayer, socials);
+        }
+        
+        public bool UpdateProfilePicture(int idPlayer, string newPath) {
+            return base.Channel.UpdateProfilePicture(idPlayer, newPath);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateProfilePictureAsync(int idPlayer, string newPath) {
+            return base.Channel.UpdateProfilePictureAsync(idPlayer, newPath);
         }
     }
 }

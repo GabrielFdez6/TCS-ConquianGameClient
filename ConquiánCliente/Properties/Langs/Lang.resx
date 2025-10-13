@@ -390,4 +390,7 @@
   <data name="InfoUpdateFailed" xml:space="preserve">
     <value>Error al actualizar la información </value>
   </data>
+  <data name="ErrorUpdatePhoto" xml:space="preserve">
+    <value>Error al actualizar la imagen de perfil.</value>
+  </data>
 </root>

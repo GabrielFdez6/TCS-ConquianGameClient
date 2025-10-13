@@ -295,6 +295,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Error al actualizar la imagen de perfil..
+        /// </summary>
+        public static string ErrorUpdatePhoto {
+            get {
+                return ResourceManager.GetString("ErrorUpdatePhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El nombre solo puede contener letras y espacios..
         /// </summary>
         public static string ErrorValidName {

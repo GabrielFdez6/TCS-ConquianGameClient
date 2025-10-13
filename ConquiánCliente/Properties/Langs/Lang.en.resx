@@ -390,4 +390,7 @@
   <data name="InfoUpdateFailed" xml:space="preserve">
     <value>Info update  failed</value>
   </data>
+  <data name="ErrorUpdatePhoto" xml:space="preserve">
+    <value>Error update image profile</value>
+  </data>
 </root>

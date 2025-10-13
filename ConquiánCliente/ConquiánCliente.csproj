@@ -88,6 +88,7 @@
     <Compile Include="ViewModel\MainMenu\MainMenuViewModel.cs" />
     <Compile Include="ViewModel\PlayerSession.cs" />
     <Compile Include="ViewModel\Profile\EditInfoViewModel.cs" />
+    <Compile Include="ViewModel\Profile\EditProfilePictureViewModel.cs" />
     <Compile Include="ViewModel\Profile\UserProfileViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\Validation\LogInValidator.cs" />

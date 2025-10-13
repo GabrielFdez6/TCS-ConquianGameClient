@@ -48,9 +48,15 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="6" Width="100" Height="100" BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1" Margin="0,0,20,0" VerticalAlignment="Top">
-                        <Image Source="{Binding ProfileImagePath}" Stretch="UniformToFill" />
-                    </Border>
+                    <Button Grid.Row="0" Grid.Column="0" Grid.RowSpan="6" 
+                        VerticalAlignment="Top"
+                        Margin="0,0,20,0"
+                        Command="{Binding NavigateToEditProfilePictureCommand}"
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                        <Border Width="100" Height="100" BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1">
+                            <Image Source="{Binding ProfileImagePath}" Stretch="UniformToFill" />
+                        </Border>
+                    </Button>
 
                     <Label Grid.Row="0" Grid.Column="1" Content="{x:Static language:Lang.GlobalLevel}" FontWeight="Bold" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}"/>
                     <Label Grid.Row="1" Grid.Column="1" Content="{x:Static language:Lang.GlobalNickname}" FontWeight="Bold" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}"/>

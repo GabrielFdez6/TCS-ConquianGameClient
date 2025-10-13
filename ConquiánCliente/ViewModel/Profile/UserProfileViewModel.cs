@@ -76,11 +76,14 @@ namespace ConquiánCliente.ViewModel.Profile
 
         public ICommand NavigateToEditCommand { get; }
         public ICommand NavigateBackCommand { get; }
+        public ICommand NavigateToEditProfilePictureCommand { get; }
 
         public UserProfileViewModel()
         {
             NavigateBackCommand = new RelayCommand(ExecuteNavigateBack);
             NavigateToEditCommand = new RelayCommand(ExecuteNavigateToEdit);
+            NavigateToEditProfilePictureCommand = new RelayCommand(ExecuteNavigateToEditProfilePicture);
+
             LoadPlayerData();
         }
 
@@ -164,6 +167,17 @@ namespace ConquiánCliente.ViewModel.Profile
             };
 
             ProfileMainFrame.MainFrame.Navigate(editInfoPage);
+        }
+        private void ExecuteNavigateToEditProfilePicture(object obj)
+        {
+            EditProfilePicture editProfilePicture = new EditProfilePicture();
+            editProfilePicture.ShowDialog(); 
+
+            if (PlayerSession.IsLoggedIn)
+            {
+                string serverImageName = System.IO.Path.GetFileName(PlayerSession.CurrentPlayer.pathPhoto);
+                SetProfileImage(serverImageName);
+            }
         }
     }
 }
