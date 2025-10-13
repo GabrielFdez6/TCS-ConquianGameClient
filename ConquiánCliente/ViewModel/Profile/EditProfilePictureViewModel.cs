@@ -21,12 +21,15 @@ namespace ConquiánCliente.ViewModel.Profile
             }
         }
 
+        public string CurrentProfilePicturePath { get; }
+
         public ICommand SelectImageCommand { get; }
         public ICommand ChangeProfilePictureCommand { get; }
         public ICommand CloseWindowCommand { get; }
 
         public EditProfilePictureViewModel()
         {
+            CurrentProfilePicturePath = PlayerSession.CurrentPlayer.pathPhoto;
             SelectImageCommand = new RelayCommand(ExecuteSelectImage);
 
             ChangeProfilePictureCommand = new RelayCommand(ExecuteChangeProfilePicture, CanExecuteChangeProfilePicture);

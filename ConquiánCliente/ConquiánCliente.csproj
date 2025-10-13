@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="ViewModel\Authentication\LogInViewModel.cs" />
     <Compile Include="ViewModel\Authentication\SignUpViewModel.cs" />
+    <Compile Include="ViewModel\ImagePathToBooleanConverter.cs" />
     <Compile Include="ViewModel\MainMenu\MainMenuViewModel.cs" />
     <Compile Include="ViewModel\PlayerSession.cs" />
     <Compile Include="ViewModel\Profile\EditInfoViewModel.cs" />

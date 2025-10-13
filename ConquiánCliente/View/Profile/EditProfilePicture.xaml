@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConquiánCliente.View.Profile"
         xmlns:viewModel="clr-namespace:ConquiánCliente.ViewModel.Profile"
+        xmlns:converter="clr-namespace:ConquiánCliente.ViewModel"
         xmlns:language="clr-namespace:ConquiánCliente.Properties.Langs"
         mc:Ignorable="d"
         Title="{x:Static language:Lang.ProfileChange}" Height="1080" Width="1920"
@@ -15,6 +16,10 @@
     <Window.DataContext>
         <viewModel:EditProfilePictureViewModel/>
     </Window.DataContext>
+
+    <Window.Resources>
+        <converter:ImagePathToBooleanConverter x:Key="ImagePathToBooleanConverter"/>
+    </Window.Resources>
 
     <Grid>
         <Image Source="/Resources/backgroundLogin.jpg" Stretch="UniformToFill" />
@@ -40,31 +45,67 @@
                 <WrapPanel HorizontalAlignment="Center" MaxWidth="400">
 
                     <Button Command="{Binding SelectImageCommand}" CommandParameter="/Resources/imageProfile/avatar01.JPG" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                        <Button.IsEnabled>
+                            <MultiBinding Converter="{StaticResource ImagePathToBooleanConverter}">
+                                <Binding RelativeSource="{RelativeSource Self}" Path="CommandParameter"/>
+                                <Binding Path="CurrentProfilePicturePath"/>
+                            </MultiBinding>
+                        </Button.IsEnabled>
                         <Border Width="100" Height="100" BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1" Margin="10">
                             <Image Source="/Resources/imageProfile/avatar01.JPG" Stretch="UniformToFill"/>
                         </Border>
                     </Button>
                     <Button Command="{Binding SelectImageCommand}" CommandParameter="/Resources/imageProfile/avatar02.JPG" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                        <Button.IsEnabled>
+                            <MultiBinding Converter="{StaticResource ImagePathToBooleanConverter}">
+                                <Binding RelativeSource="{RelativeSource Self}" Path="CommandParameter"/>
+                                <Binding Path="CurrentProfilePicturePath"/>
+                            </MultiBinding>
+                        </Button.IsEnabled>
                         <Border Width="100" Height="100" BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1" Margin="10">
                             <Image Source="/Resources/imageProfile/avatar02.JPG" Stretch="UniformToFill"/>
                         </Border>
                     </Button>
                     <Button Command="{Binding SelectImageCommand}" CommandParameter="/Resources/imageProfile/avatar03.JPG" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                        <Button.IsEnabled>
+                            <MultiBinding Converter="{StaticResource ImagePathToBooleanConverter}">
+                                <Binding RelativeSource="{RelativeSource Self}" Path="CommandParameter"/>
+                                <Binding Path="CurrentProfilePicturePath"/>
+                            </MultiBinding>
+                        </Button.IsEnabled>
                         <Border Width="100" Height="100" BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1" Margin="10">
                             <Image Source="/Resources/imageProfile/avatar03.JPG" Stretch="UniformToFill"/>
                         </Border>
                     </Button>
                     <Button Command="{Binding SelectImageCommand}" CommandParameter="/Resources/imageProfile/avatar04.JPG" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                        <Button.IsEnabled>
+                            <MultiBinding Converter="{StaticResource ImagePathToBooleanConverter}">
+                                <Binding RelativeSource="{RelativeSource Self}" Path="CommandParameter"/>
+                                <Binding Path="CurrentProfilePicturePath"/>
+                            </MultiBinding>
+                        </Button.IsEnabled>
                         <Border Width="100" Height="100" BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1" Margin="10">
                             <Image Source="/Resources/imageProfile/avatar04.JPG" Stretch="UniformToFill"/>
                         </Border>
                     </Button>
                     <Button Command="{Binding SelectImageCommand}" CommandParameter="/Resources/imageProfile/avatar05.JPG" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                        <Button.IsEnabled>
+                            <MultiBinding Converter="{StaticResource ImagePathToBooleanConverter}">
+                                <Binding RelativeSource="{RelativeSource Self}" Path="CommandParameter"/>
+                                <Binding Path="CurrentProfilePicturePath"/>
+                            </MultiBinding>
+                        </Button.IsEnabled>
                         <Border Width="100" Height="100" BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1" Margin="10">
                             <Image Source="/Resources/imageProfile/avatar05.JPG" Stretch="UniformToFill"/>
                         </Border>
                     </Button>
                     <Button Command="{Binding SelectImageCommand}" CommandParameter="/Resources/imageProfile/avatar06.JPG" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                        <Button.IsEnabled>
+                            <MultiBinding Converter="{StaticResource ImagePathToBooleanConverter}">
+                                <Binding RelativeSource="{RelativeSource Self}" Path="CommandParameter"/>
+                                <Binding Path="CurrentProfilePicturePath"/>
+                            </MultiBinding>
+                        </Button.IsEnabled>
                         <Border Width="100" Height="100" BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1" Margin="10">
                             <Image Source="/Resources/imageProfile/avatar06.JPG" Stretch="UniformToFill"/>
                         </Border>
