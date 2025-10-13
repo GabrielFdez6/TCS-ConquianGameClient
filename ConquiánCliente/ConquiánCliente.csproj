@@ -81,6 +81,9 @@
     <Compile Include="ViewModel\Authentication\LogInViewModel.cs" />
     <Compile Include="ViewModel\Authentication\SignUpViewModel.cs" />
     <Compile Include="ViewModel\MainMenu\MainMenuViewModel.cs" />
+    <Compile Include="ViewModel\PlayerSession.cs" />
+    <Compile Include="ViewModel\Profile\EditInfoViewModel.cs" />
+    <Compile Include="ViewModel\Profile\UserProfileViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\Validation\LogInValidator.cs" />
     <Compile Include="ViewModel\Validation\SignUpValidator.cs" />
@@ -112,8 +115,8 @@
     <Compile Include="View\MainMenu\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Profile\EditInfo.xaml.cs">
-      <DependentUpon>EditInfo.xaml</DependentUpon>
+    <Compile Include="View\Profile\EditInfoPage.xaml.cs">
+      <DependentUpon>EditInfoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Profile\EditProfilePicture.xaml.cs">
       <DependentUpon>EditProfilePicture.xaml</DependentUpon>
@@ -124,11 +127,14 @@
     <Compile Include="View\Authentication\SignUpData.xaml.cs">
       <DependentUpon>SignUpData.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Profile\UserProfile.xaml.cs">
-      <DependentUpon>UserProfile.xaml</DependentUpon>
+    <Compile Include="View\Profile\ProfileMainFrame.xaml.cs">
+      <DependentUpon>ProfileMainFrame.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Authentication\VerificationCode.xaml.cs">
       <DependentUpon>VerificationCode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Profile\UserProfilePage.xaml.cs">
+      <DependentUpon>UserProfilePage.xaml</DependentUpon>
     </Compile>
     <Page Include="Styles\GlobalStyles.xaml">
       <SubType>Designer</SubType>
@@ -170,7 +176,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Profile\EditInfo.xaml">
+    <Page Include="View\Profile\EditInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -203,11 +209,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Profile\UserProfile.xaml">
+    <Page Include="View\Profile\ProfileMainFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Authentication\VerificationCode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Profile\UserProfilePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -237,6 +247,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\ServiceLogin\Conqui%25C3%25A1nServidor.Conqui%25C3%25A1nDB.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceLogin\ConquiánCliente.ServiceLogin.Player.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ServiceSignUp\Conqui%25C3%25A1nServidor.Conqui%25C3%25A1nDB.xsd">
       <SubType>Designer</SubType>
     </None>

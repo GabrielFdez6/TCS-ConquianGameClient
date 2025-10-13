@@ -17,7 +17,6 @@ namespace ConquiánCliente.ViewModel.Authentication
         private string lastName;
         private string nickname;
         private string enteredVerificationCode;
-        private string verificationCodeFromServer;
         private readonly Player playerInProgress;
 
         public string Email
@@ -25,25 +24,21 @@ namespace ConquiánCliente.ViewModel.Authentication
             get { return email; }
             set { email = value; OnPropertyChanged(); }
         }
-
         public string Name
         {
             get { return name; }
             set { name = value; OnPropertyChanged(); }
         }
-
         public string LastName
         {
             get { return lastName; }
             set { lastName = value; OnPropertyChanged(); }
         }
-
         public string Nickname
         {
             get { return nickname; }
             set { nickname = value; OnPropertyChanged(); }
         }
-
         public string EnteredVerificationCode
         {
             get { return enteredVerificationCode; }
@@ -73,7 +68,7 @@ namespace ConquiánCliente.ViewModel.Authentication
         private bool CanExecuteVerifyCode(object parameter) => true;
         private bool CanExecuteRegisterPlayer(object parameter) => true;
 
-        private void ExecuteSendVerificationCode(object parameter)
+        private async void ExecuteSendVerificationCode(object parameter)
         {
             var passwordBox = parameter as PasswordBox;
             string password = passwordBox?.Password;
@@ -89,15 +84,12 @@ namespace ConquiánCliente.ViewModel.Authentication
                 MessageBox.Show(emailError, Lang.TitleValidation);
                 return;
             }
-
-            
             string passwordError = SignUpValidator.ValidatePassword(password);
             if (!string.IsNullOrEmpty(passwordError))
             {
                 MessageBox.Show(passwordError, Lang.TitleValidation);
                 return;
             }
-
             string confirmPasswordError = SignUpValidator.ValidateConfirmPassword(password, confirmPassword);
             if (!string.IsNullOrEmpty(confirmPasswordError))
             {
@@ -108,9 +100,13 @@ namespace ConquiánCliente.ViewModel.Authentication
             try
             {
                 var client = new SignUpClient();
-                verificationCodeFromServer = client.SendVerificationCode(Email);
+                string serverResponse = await client.SendVerificationCodeAsync(Email);
 
-                if (!string.IsNullOrEmpty(verificationCodeFromServer))
+                if (serverResponse == "ERROR_EMAIL_EXISTS")
+                {
+                    MessageBox.Show(Lang.ErrorVerificationEmail, Lang.TitleError);
+                }
+                else if (!string.IsNullOrEmpty(serverResponse))
                 {
                     playerInProgress.email = Email;
                     playerInProgress.password = password;
@@ -135,7 +131,7 @@ namespace ConquiánCliente.ViewModel.Authentication
             }
         }
 
-        private void ExecuteVerifyCode(object parameter)
+        private async void ExecuteVerifyCode(object parameter)
         {
             if (string.IsNullOrEmpty(EnteredVerificationCode))
             {
@@ -143,20 +139,30 @@ namespace ConquiánCliente.ViewModel.Authentication
                 return;
             }
 
-            if (EnteredVerificationCode == verificationCodeFromServer)
+            try
             {
-                var signUpDataWindow = new SignUpData();
-                signUpDataWindow.DataContext = this;
-                signUpDataWindow.Show();
-                (parameter as Window)?.Close();
+                var client = new SignUpClient();
+                bool isCodeValid = await client.VerifyCodeAsync(playerInProgress.email, EnteredVerificationCode);
+
+                if (isCodeValid)
+                {
+                    var signUpDataWindow = new SignUpData();
+                    signUpDataWindow.DataContext = this;
+                    signUpDataWindow.Show();
+                    (parameter as Window)?.Close();
+                }
+                else
+                {
+                    MessageBox.Show(Lang.ErrorVerificationCodeIncorrect, Lang.TitleError);
+                }
             }
-            else
+            catch (System.Exception ex)
             {
-                MessageBox.Show(Lang.ErrorVerificationCodeIncorrect, Lang.TitleError);
+                MessageBox.Show(string.Format(Lang.ErrorGeneric, ex.Message), Lang.TitleError);
             }
         }
 
-        private void ExecuteRegisterPlayer(object parameter)
+        private async void ExecuteRegisterPlayer(object parameter)
         {
             Name = Name.Trim();
             string nameError = SignUpValidator.ValidateName(Name);
@@ -165,7 +171,6 @@ namespace ConquiánCliente.ViewModel.Authentication
                 MessageBox.Show(nameError, Lang.TitleValidation);
                 return;
             }
-
             LastName = LastName.Trim();
             string lastNameError = SignUpValidator.ValidateLastName(LastName);
             if (!string.IsNullOrEmpty(lastNameError))
@@ -173,7 +178,6 @@ namespace ConquiánCliente.ViewModel.Authentication
                 MessageBox.Show(lastNameError, Lang.TitleValidation);
                 return;
             }
-
             Nickname = Nickname.Trim();
             string nicknameError = SignUpValidator.ValidateNickname(Nickname);
             if (!string.IsNullOrEmpty(nicknameError))
@@ -185,14 +189,12 @@ namespace ConquiánCliente.ViewModel.Authentication
             playerInProgress.name = Name;
             playerInProgress.lastName = LastName;
             playerInProgress.nickname = Nickname;
-            playerInProgress.level = "1";
-            playerInProgress.currentPoints = "0";
-            playerInProgress.pathPhoto = "inserte Path";
+            playerInProgress.pathPhoto = "path/to/default/photo.png";
 
             try
             {
                 var client = new SignUpClient();
-                if (client.RegisterPlayer(playerInProgress))
+                if (await client.RegisterPlayerAsync(playerInProgress))
                 {
                     MessageBox.Show(Lang.SuccessAccountCreated, Lang.TitleRegistrationComplete);
                     ExecuteNavigateToLogin(parameter);
@@ -221,7 +223,6 @@ namespace ConquiánCliente.ViewModel.Authentication
             Name = string.Empty;
             LastName = string.Empty;
             Nickname = string.Empty;
-            verificationCodeFromServer = string.Empty;
             var signUpWindow = new SignUp();
             signUpWindow.DataContext = this;
             signUpWindow.Show();

@@ -9,17 +9,958 @@
 //------------------------------------------------------------------------------
 
 namespace ConquiánCliente.ServiceLogin {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Player", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Conqui%C3%A1nDB")]
+    [System.SerializableAttribute()]
+    public partial class Player : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceLogin.Friendship[] FriendshipField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceLogin.Friendship[] Friendship1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceLogin.Game[] GameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceLogin.Social[] SocialField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> codeExpiryDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string currentPointsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string emailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idPlayerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string lastNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string levelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string nameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string nicknameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string passwordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string pathPhotoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string verificationCodeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceLogin.Friendship[] Friendship {
+            get {
+                return this.FriendshipField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FriendshipField, value) != true)) {
+                    this.FriendshipField = value;
+                    this.RaisePropertyChanged("Friendship");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceLogin.Friendship[] Friendship1 {
+            get {
+                return this.Friendship1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Friendship1Field, value) != true)) {
+                    this.Friendship1Field = value;
+                    this.RaisePropertyChanged("Friendship1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceLogin.Game[] Game {
+            get {
+                return this.GameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GameField, value) != true)) {
+                    this.GameField = value;
+                    this.RaisePropertyChanged("Game");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceLogin.Social[] Social {
+            get {
+                return this.SocialField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SocialField, value) != true)) {
+                    this.SocialField = value;
+                    this.RaisePropertyChanged("Social");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> codeExpiryDate {
+            get {
+                return this.codeExpiryDateField;
+            }
+            set {
+                if ((this.codeExpiryDateField.Equals(value) != true)) {
+                    this.codeExpiryDateField = value;
+                    this.RaisePropertyChanged("codeExpiryDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string currentPoints {
+            get {
+                return this.currentPointsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.currentPointsField, value) != true)) {
+                    this.currentPointsField = value;
+                    this.RaisePropertyChanged("currentPoints");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string email {
+            get {
+                return this.emailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.emailField, value) != true)) {
+                    this.emailField = value;
+                    this.RaisePropertyChanged("email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idPlayer {
+            get {
+                return this.idPlayerField;
+            }
+            set {
+                if ((this.idPlayerField.Equals(value) != true)) {
+                    this.idPlayerField = value;
+                    this.RaisePropertyChanged("idPlayer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string lastName {
+            get {
+                return this.lastNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.lastNameField, value) != true)) {
+                    this.lastNameField = value;
+                    this.RaisePropertyChanged("lastName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string level {
+            get {
+                return this.levelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.levelField, value) != true)) {
+                    this.levelField = value;
+                    this.RaisePropertyChanged("level");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string nickname {
+            get {
+                return this.nicknameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nicknameField, value) != true)) {
+                    this.nicknameField = value;
+                    this.RaisePropertyChanged("nickname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.passwordField, value) != true)) {
+                    this.passwordField = value;
+                    this.RaisePropertyChanged("password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string pathPhoto {
+            get {
+                return this.pathPhotoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.pathPhotoField, value) != true)) {
+                    this.pathPhotoField = value;
+                    this.RaisePropertyChanged("pathPhoto");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string verificationCode {
+            get {
+                return this.verificationCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.verificationCodeField, value) != true)) {
+                    this.verificationCodeField = value;
+                    this.RaisePropertyChanged("verificationCode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Friendship", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Conqui%C3%A1nDB")]
+    [System.SerializableAttribute()]
+    public partial class Friendship : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceLogin.Player PlayerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceLogin.Player Player1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceLogin.Status StatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> idDestinoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idFriendshipField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> idOrigenField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> idStatusField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceLogin.Player Player {
+            get {
+                return this.PlayerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PlayerField, value) != true)) {
+                    this.PlayerField = value;
+                    this.RaisePropertyChanged("Player");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceLogin.Player Player1 {
+            get {
+                return this.Player1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Player1Field, value) != true)) {
+                    this.Player1Field = value;
+                    this.RaisePropertyChanged("Player1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceLogin.Status Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> idDestino {
+            get {
+                return this.idDestinoField;
+            }
+            set {
+                if ((this.idDestinoField.Equals(value) != true)) {
+                    this.idDestinoField = value;
+                    this.RaisePropertyChanged("idDestino");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idFriendship {
+            get {
+                return this.idFriendshipField;
+            }
+            set {
+                if ((this.idFriendshipField.Equals(value) != true)) {
+                    this.idFriendshipField = value;
+                    this.RaisePropertyChanged("idFriendship");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> idOrigen {
+            get {
+                return this.idOrigenField;
+            }
+            set {
+                if ((this.idOrigenField.Equals(value) != true)) {
+                    this.idOrigenField = value;
+                    this.RaisePropertyChanged("idOrigen");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> idStatus {
+            get {
+                return this.idStatusField;
+            }
+            set {
+                if ((this.idStatusField.Equals(value) != true)) {
+                    this.idStatusField = value;
+                    this.RaisePropertyChanged("idStatus");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Game", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Conqui%C3%A1nDB")]
+    [System.SerializableAttribute()]
+    public partial class Game : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceLogin.Gamemode GamemodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceLogin.Player PlayerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string gameTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idGameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> idGamemodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> idPlayerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string resultField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string rivalField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string scoreField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceLogin.Gamemode Gamemode {
+            get {
+                return this.GamemodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GamemodeField, value) != true)) {
+                    this.GamemodeField = value;
+                    this.RaisePropertyChanged("Gamemode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceLogin.Player Player {
+            get {
+                return this.PlayerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PlayerField, value) != true)) {
+                    this.PlayerField = value;
+                    this.RaisePropertyChanged("Player");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string gameTime {
+            get {
+                return this.gameTimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.gameTimeField, value) != true)) {
+                    this.gameTimeField = value;
+                    this.RaisePropertyChanged("gameTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idGame {
+            get {
+                return this.idGameField;
+            }
+            set {
+                if ((this.idGameField.Equals(value) != true)) {
+                    this.idGameField = value;
+                    this.RaisePropertyChanged("idGame");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> idGamemode {
+            get {
+                return this.idGamemodeField;
+            }
+            set {
+                if ((this.idGamemodeField.Equals(value) != true)) {
+                    this.idGamemodeField = value;
+                    this.RaisePropertyChanged("idGamemode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> idPlayer {
+            get {
+                return this.idPlayerField;
+            }
+            set {
+                if ((this.idPlayerField.Equals(value) != true)) {
+                    this.idPlayerField = value;
+                    this.RaisePropertyChanged("idPlayer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string result {
+            get {
+                return this.resultField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.resultField, value) != true)) {
+                    this.resultField = value;
+                    this.RaisePropertyChanged("result");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string rival {
+            get {
+                return this.rivalField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.rivalField, value) != true)) {
+                    this.rivalField = value;
+                    this.RaisePropertyChanged("rival");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string score {
+            get {
+                return this.scoreField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.scoreField, value) != true)) {
+                    this.scoreField = value;
+                    this.RaisePropertyChanged("score");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Social", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Conqui%C3%A1nDB")]
+    [System.SerializableAttribute()]
+    public partial class Social : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceLogin.Player PlayerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceLogin.SocialType SocialTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> idPlayerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idSocialField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> idSocialTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string userLinkField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceLogin.Player Player {
+            get {
+                return this.PlayerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PlayerField, value) != true)) {
+                    this.PlayerField = value;
+                    this.RaisePropertyChanged("Player");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceLogin.SocialType SocialType {
+            get {
+                return this.SocialTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SocialTypeField, value) != true)) {
+                    this.SocialTypeField = value;
+                    this.RaisePropertyChanged("SocialType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> idPlayer {
+            get {
+                return this.idPlayerField;
+            }
+            set {
+                if ((this.idPlayerField.Equals(value) != true)) {
+                    this.idPlayerField = value;
+                    this.RaisePropertyChanged("idPlayer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idSocial {
+            get {
+                return this.idSocialField;
+            }
+            set {
+                if ((this.idSocialField.Equals(value) != true)) {
+                    this.idSocialField = value;
+                    this.RaisePropertyChanged("idSocial");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> idSocialType {
+            get {
+                return this.idSocialTypeField;
+            }
+            set {
+                if ((this.idSocialTypeField.Equals(value) != true)) {
+                    this.idSocialTypeField = value;
+                    this.RaisePropertyChanged("idSocialType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string userLink {
+            get {
+                return this.userLinkField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.userLinkField, value) != true)) {
+                    this.userLinkField = value;
+                    this.RaisePropertyChanged("userLink");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Status", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Conqui%C3%A1nDB")]
+    [System.SerializableAttribute()]
+    public partial class Status : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceLogin.Friendship[] FriendshipField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Status1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idStatusField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceLogin.Friendship[] Friendship {
+            get {
+                return this.FriendshipField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FriendshipField, value) != true)) {
+                    this.FriendshipField = value;
+                    this.RaisePropertyChanged("Friendship");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Status1 {
+            get {
+                return this.Status1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Status1Field, value) != true)) {
+                    this.Status1Field = value;
+                    this.RaisePropertyChanged("Status1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idStatus {
+            get {
+                return this.idStatusField;
+            }
+            set {
+                if ((this.idStatusField.Equals(value) != true)) {
+                    this.idStatusField = value;
+                    this.RaisePropertyChanged("idStatus");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Gamemode", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Conqui%C3%A1nDB")]
+    [System.SerializableAttribute()]
+    public partial class Gamemode : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceLogin.Game[] GameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string gamemode1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idGamemodeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceLogin.Game[] Game {
+            get {
+                return this.GameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GameField, value) != true)) {
+                    this.GameField = value;
+                    this.RaisePropertyChanged("Game");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string gamemode1 {
+            get {
+                return this.gamemode1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.gamemode1Field, value) != true)) {
+                    this.gamemode1Field = value;
+                    this.RaisePropertyChanged("gamemode1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idGamemode {
+            get {
+                return this.idGamemodeField;
+            }
+            set {
+                if ((this.idGamemodeField.Equals(value) != true)) {
+                    this.idGamemodeField = value;
+                    this.RaisePropertyChanged("idGamemode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SocialType", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Conqui%C3%A1nDB")]
+    [System.SerializableAttribute()]
+    public partial class SocialType : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceLogin.Social[] SocialField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idSocialTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string typeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceLogin.Social[] Social {
+            get {
+                return this.SocialField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SocialField, value) != true)) {
+                    this.SocialField = value;
+                    this.RaisePropertyChanged("Social");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idSocialType {
+            get {
+                return this.idSocialTypeField;
+            }
+            set {
+                if ((this.idSocialTypeField.Equals(value) != true)) {
+                    this.idSocialTypeField = value;
+                    this.RaisePropertyChanged("idSocialType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string type {
+            get {
+                return this.typeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.typeField, value) != true)) {
+                    this.typeField = value;
+                    this.RaisePropertyChanged("type");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceLogin.ILogin")]
     public interface ILogin {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogin/SignIn", ReplyAction="http://tempuri.org/ILogin/SignInResponse")]
-        bool SignIn(string mail, string password);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogin/AuthenticatePlayer", ReplyAction="http://tempuri.org/ILogin/AuthenticatePlayerResponse")]
+        ConquiánCliente.ServiceLogin.Player AuthenticatePlayer(string email, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogin/SignIn", ReplyAction="http://tempuri.org/ILogin/SignInResponse")]
-        System.Threading.Tasks.Task<bool> SignInAsync(string mail, string password);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogin/AuthenticatePlayer", ReplyAction="http://tempuri.org/ILogin/AuthenticatePlayerResponse")]
+        System.Threading.Tasks.Task<ConquiánCliente.ServiceLogin.Player> AuthenticatePlayerAsync(string email, string password);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -49,12 +990,12 @@ namespace ConquiánCliente.ServiceLogin {
                 base(binding, remoteAddress) {
         }
         
-        public bool SignIn(string mail, string password) {
-            return base.Channel.SignIn(mail, password);
+        public ConquiánCliente.ServiceLogin.Player AuthenticatePlayer(string email, string password) {
+            return base.Channel.AuthenticatePlayer(email, password);
         }
         
-        public System.Threading.Tasks.Task<bool> SignInAsync(string mail, string password) {
-            return base.Channel.SignInAsync(mail, password);
+        public System.Threading.Tasks.Task<ConquiánCliente.ServiceLogin.Player> AuthenticatePlayerAsync(string email, string password) {
+            return base.Channel.AuthenticatePlayerAsync(email, password);
         }
     }
 }

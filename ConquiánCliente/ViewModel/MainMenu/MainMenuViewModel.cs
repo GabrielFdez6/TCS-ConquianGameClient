@@ -1,9 +1,5 @@
-﻿using ConquiánCliente.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ConquiánCliente.ServiceLogin;
+using ConquiánCliente.View;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,39 +7,41 @@ namespace ConquiánCliente.ViewModel.MainMenu
 {
     public class MainMenuViewModel : ViewModelBase
     {
+        public string Nickname { get; set; }
+        public string ProfileImagePath { get; set; }
+
         public ICommand ViewProfileCommand { get; }
-        public ICommand LogOutCommand { get; }
+        public ICommand LogoutCommand { get; }
 
         public MainMenuViewModel()
         {
-            ViewProfileCommand = new RelayCommand(ExecuteViewProfile);
-            LogOutCommand = new RelayCommand(ExecuteLogOut);
+            LoadPlayerData();
+            ViewProfileCommand = new RelayCommand(p => ExecuteViewProfileCommand(p));
+            LogoutCommand = new RelayCommand(p => ExecuteLogoutCommand(p));
         }
 
-        private void ExecuteViewProfile(object obj)
+        private void LoadPlayerData()
         {
-            UserProfile userProfile = new UserProfile();
-            userProfile.Show();
-            CloseCurrentWindow();
-        }
-
-        private void ExecuteLogOut(object obj)
-        {
-            LogIn logIn = new LogIn();
-            logIn.Show();
-            CloseCurrentWindow();
-        }
-
-        private void CloseCurrentWindow()
-        {
-            foreach (Window window in Application.Current.Windows)
+            if (PlayerSession.IsLoggedIn)
             {
-                if (window.DataContext == this)
-                {
-                    window.Close();
-                    break;
-                }
+                Nickname = PlayerSession.CurrentPlayer.nickname;
+                ProfileImagePath = PlayerSession.CurrentPlayer.pathPhoto;
             }
+        }
+
+        private void ExecuteViewProfileCommand(object parameter)
+        {
+            ProfileMainFrame userProfileView = new ProfileMainFrame();
+            userProfileView.Show();
+            (parameter as Window)?.Close();
+        }
+
+        private void ExecuteLogoutCommand(object parameter)
+        {
+            PlayerSession.EndSession();
+            var loginWindow = new LogIn();
+            loginWindow.Show();
+            (parameter as Window)?.Close();
         }
     }
 }

@@ -25,6 +25,7 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="5d2b2dcf-68e6-4fe7-a07b-0e674cefb332" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Conqui%C3%A1nServidor/Login/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="eac27fc7-45e5-4e18-bdac-60c804d83986" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Conqui%C3%A1nServidor/Login/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="0b1120e7-656e-49a2-bf09-f56bac2a3d4a" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Conqui%C3%A1nServidor/Login/mex" />
+    <MetadataFile FileName="Conqui%C3%A1nServidor.Conqui%C3%A1nDB.xsd" MetadataType="Schema" ID="10f81cc9-9126-4e01-bc29-63b0c6033e60" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Conqui%C3%A1nServidor/Login/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

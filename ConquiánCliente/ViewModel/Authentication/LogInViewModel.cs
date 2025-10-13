@@ -1,5 +1,6 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceLogin;
+using ConquiánCliente.ServiceSignUp;
 using ConquiánCliente.View;
 using ConquiánCliente.View.Authentication.PasswordRecovery;
 using ConquiánCliente.View.MainMenu;
@@ -49,7 +50,7 @@ namespace ConquiánCliente.ViewModel.Authentication
             return true;
         }
 
-        private void ExecuteLogin(object parameter)
+        private async void ExecuteLogin(object parameter)
         {
             var passwordBox = parameter as PasswordBox;
             if (passwordBox == null) return;
@@ -72,8 +73,13 @@ namespace ConquiánCliente.ViewModel.Authentication
             try
             {
                 var client = new LoginClient();
-                if (client.SignIn(Email, password))
+
+                ConquiánCliente.ServiceLogin.Player authenticatedPlayer = await client.AuthenticatePlayerAsync(Email, password);
+
+                if (authenticatedPlayer != null)
                 {
+                    PlayerSession.StartSession(authenticatedPlayer);
+
                     var mainMenu = new View.MainMenu.MainMenu();
                     mainMenu.Show();
                     Window.GetWindow(passwordBox)?.Close();

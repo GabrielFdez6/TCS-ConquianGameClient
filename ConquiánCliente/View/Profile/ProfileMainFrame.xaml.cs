@@ -15,13 +15,16 @@ using System.Windows.Shapes;
 namespace ConquiánCliente.View
 {
     /// <summary>
-    /// Interaction logic for EditInfo.xaml
+    /// Interaction logic for ProfileMainFrame.xaml
     /// </summary>
-    public partial class EditInfo : Window
+    public partial class ProfileMainFrame : Window
     {
-        public EditInfo()
+        public static Frame MainFrame;
+        public ProfileMainFrame()
         {
             InitializeComponent();
+            MainFrame = ProfileFrame;
+            MainFrame.Navigate(new Profile.UserProfilePage());
         }
     }
 }

@@ -4,24 +4,25 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Conqui%C3%A1nDB" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="ILogin_SignIn_InputMessage">
-    <wsdl:part name="parameters" element="tns:SignIn" />
+  <wsdl:message name="ILogin_AuthenticatePlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuthenticatePlayer" />
   </wsdl:message>
-  <wsdl:message name="ILogin_SignIn_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SignInResponse" />
+  <wsdl:message name="ILogin_AuthenticatePlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthenticatePlayerResponse" />
   </wsdl:message>
   <wsdl:portType name="ILogin">
-    <wsdl:operation name="SignIn">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILogin/SignIn" message="tns:ILogin_SignIn_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ILogin/SignInResponse" message="tns:ILogin_SignIn_OutputMessage" />
+    <wsdl:operation name="AuthenticatePlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILogin/AuthenticatePlayer" message="tns:ILogin_AuthenticatePlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILogin/AuthenticatePlayerResponse" message="tns:ILogin_AuthenticatePlayer_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ILogin" type="tns:ILogin">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="SignIn">
-      <soap:operation soapAction="http://tempuri.org/ILogin/SignIn" style="document" />
+    <wsdl:operation name="AuthenticatePlayer">
+      <soap:operation soapAction="http://tempuri.org/ILogin/AuthenticatePlayer" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
