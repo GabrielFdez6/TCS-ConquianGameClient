@@ -42,6 +42,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Grid.Column="0" Content="{x:Static language:Lang.GlobalNickname}" FontWeight="Bold" Margin="0,5,20,5" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}"/>
@@ -65,19 +66,25 @@
                                  Background="{StaticResource TextBoxBackgroundBrush}" IsReadOnly="True" Foreground="{StaticResource PrimaryTextBrush}"/>
                     </Border>
 
-                    <Image Grid.Row="4" Grid.Column="0" Source="/Resources/facebook.png" Width="24" Height="24" Margin="0,5,20,5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Label Grid.Row="4" Grid.Column="0" Content="{x:Static language:Lang.GlobalPassword}" FontWeight="Bold" Margin="0,5,20,5" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}"/>
                     <Border Grid.Row="4" Grid.Column="1" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource TextBoxBorderBrush}" Margin="0,5">
+                        <PasswordBox x:Name="pbPassword" Padding="8" FontSize="16" BorderThickness="0" Background="{StaticResource TextBoxBackgroundBrush}"/>
+                    </Border>
+
+                    <Image Grid.Row="5" Grid.Column="0" Source="/Resources/facebook.png" Width="24" Height="24" Margin="0,5,20,5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Border Grid.Row="5" Grid.Column="1" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource TextBoxBorderBrush}" Margin="0,5">
                         <TextBox Text="{Binding FacebookLink}" Padding="8" FontSize="16" BorderThickness="0" Background="{StaticResource TextBoxBackgroundBrush}"/>
                     </Border>
 
-                    <Image Grid.Row="5" Grid.Column="0" Source="/Resources/instagram.png" Width="24" Height="24" Margin="0,5,20,5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <Border Grid.Row="5" Grid.Column="1" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource TextBoxBorderBrush}" Margin="0,5">
+                    <Image Grid.Row="6" Grid.Column="0" Source="/Resources/instagram.png" Width="24" Height="24" Margin="0,5,20,5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Border Grid.Row="6" Grid.Column="1" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource TextBoxBorderBrush}" Margin="0,5">
                         <TextBox Text="{Binding InstagramLink}" Padding="8" FontSize="16" BorderThickness="0" Background="{StaticResource TextBoxBackgroundBrush}"/>
                     </Border>
                 </Grid>
 
                 <Button Margin="0,30,0,10" Style="{StaticResource PrimaryButtonStyle}" Width="165" Height="40"
-                        Command="{Binding SaveChangesCommand}">
+                        Command="{Binding SaveChangesCommand}"
+                        CommandParameter="{Binding ElementName=pbPassword}">
                     <TextBlock Text="{x:Static language:Lang.EditDataEdit}" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}"/>
                 </Button>
 

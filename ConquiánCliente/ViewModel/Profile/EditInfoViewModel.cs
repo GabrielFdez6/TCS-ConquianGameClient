@@ -78,6 +78,20 @@ namespace ConquiánCliente.ViewModel.Profile
             string nicknameError = SignUpValidator.ValidateNickname(Player.nickname);
             if (!string.IsNullOrEmpty(nicknameError)) { MessageBox.Show(nicknameError, Lang.TitleValidation); return; }
 
+            var passwordBox = parameter as System.Windows.Controls.PasswordBox;
+            string password = passwordBox?.Password;
+
+            if (!string.IsNullOrEmpty(password))
+            {
+                string passwordError = SignUpValidator.ValidatePassword(password);
+                if (!string.IsNullOrEmpty(passwordError))
+                {
+                    MessageBox.Show(passwordError, Lang.TitleValidation);
+                    return;
+                }
+                this.Player.password = password;
+            }
+
             try
             {
                 var client = new UserProfileClient();
