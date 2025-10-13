@@ -71,9 +71,9 @@
                     <TextBlock Text="********" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}" Margin="5,0"/>
 
                     <Image Source="/Resources/facebook.png" x:Name="FacebookIcon" Grid.Row="9" Grid.Column="1" Width="24" Height="24" Margin="10,5"/>
-                    <TextBlock x:Name="txtBxFacebook" Grid.Row="9" Grid.Column="2" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}" Margin="5,0"/>
+                    <TextBlock x:Name="txtBxFacebook" Text="{Binding Facebook}" Grid.Row="9" Grid.Column="2" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}" Margin="5,0"/>
                     <Image Source="/Resources/instagram.png" x:Name="InstagramIcon" Grid.Row="10" Grid.Column="1" Width="24" Height="24" Margin="10,5"/>
-                    <TextBlock x:Name="txtBxInstagram" Grid.Row="10" Grid.Column="2" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}" Margin="5,0"/>
+                    <TextBlock x:Name="txtBxInstagram" Text="{Binding Instagram}" Grid.Row="10" Grid.Column="2" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}" Margin="5,0"/>
                 </Grid>
 
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,20,0,0">

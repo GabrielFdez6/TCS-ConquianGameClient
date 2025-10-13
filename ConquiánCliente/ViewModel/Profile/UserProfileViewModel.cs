@@ -7,6 +7,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ConquiánCliente.Properties.Langs;
+using System;
+using System.Linq; 
 
 namespace ConquiánCliente.ViewModel.Profile
 {
@@ -57,6 +59,21 @@ namespace ConquiánCliente.ViewModel.Profile
             set { _level = value; OnPropertyChanged(); }
         }
 
+        private string _facebook;
+        public string Facebook
+        {
+            get => _facebook;
+            set { _facebook = value; OnPropertyChanged(); }
+        }
+
+        private string _instagram;
+        public string Instagram
+        {
+            get => _instagram;
+            set { _instagram = value; OnPropertyChanged(); }
+        }
+
+
         public ICommand NavigateToEditCommand { get; }
         public ICommand NavigateBackCommand { get; }
 
@@ -80,6 +97,7 @@ namespace ConquiánCliente.ViewModel.Profile
                 try
                 {
                     var userProfileClient = new UserProfileClient();
+
                     _fullPlayerProfile = await userProfileClient.GetPlayerByIdAsync(sessionPlayer.idPlayer);
 
                     if (_fullPlayerProfile != null)
@@ -94,6 +112,14 @@ namespace ConquiánCliente.ViewModel.Profile
 
                         PlayerSession.UpdateSession(_fullPlayerProfile);
                     }
+
+                    var socials = await userProfileClient.GetPlayerSocialsAsync(sessionPlayer.idPlayer);
+                    if (socials != null)
+                    {
+                        Facebook = socials.FirstOrDefault(s => s.IdSocialType == 2)?.UserLink;
+                        Instagram = socials.FirstOrDefault(s => s.IdSocialType == 1)?.UserLink;
+                    }
+
                 }
                 catch (EndpointNotFoundException)
                 {
