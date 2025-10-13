@@ -1,6 +1,5 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceLogin;
-using ConquiánCliente.ServiceSignUp;
 using ConquiánCliente.View;
 using ConquiánCliente.View.Authentication.PasswordRecovery;
 using ConquiánCliente.View.MainMenu;
@@ -74,7 +73,7 @@ namespace ConquiánCliente.ViewModel.Authentication
             {
                 var client = new LoginClient();
 
-                ConquiánCliente.ServiceLogin.Player authenticatedPlayer = await client.AuthenticatePlayerAsync(Email, password);
+                Player authenticatedPlayer = await client.AuthenticatePlayerAsync(Email, password);
 
                 if (authenticatedPlayer != null)
                 {

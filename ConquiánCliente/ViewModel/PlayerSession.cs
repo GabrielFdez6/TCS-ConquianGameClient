@@ -19,6 +19,20 @@ namespace ConquiánCliente.ViewModel
             CurrentPlayer = player;
         }
 
+        public static void UpdateSession(ServiceUserProfile.Player fullPlayerProfile)
+        {
+            if (IsLoggedIn && CurrentPlayer.nickname == fullPlayerProfile.nickname)
+            {
+                CurrentPlayer.name = fullPlayerProfile.name;
+                CurrentPlayer.lastName = fullPlayerProfile.lastName;
+                CurrentPlayer.email = fullPlayerProfile.email;
+                CurrentPlayer.level = fullPlayerProfile.level;
+                CurrentPlayer.pathPhoto = fullPlayerProfile.pathPhoto;
+                CurrentPlayer.currentPoints = fullPlayerProfile.currentPoints;
+            }
+        }
+
+
         public static void EndSession()
         {
             CurrentPlayer = null;

@@ -78,6 +78,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ServiceUserProfile\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\Authentication\LogInViewModel.cs" />
     <Compile Include="ViewModel\Authentication\SignUpViewModel.cs" />
     <Compile Include="ViewModel\MainMenu\MainMenuViewModel.cs" />
@@ -270,6 +275,19 @@
     <None Include="Connected Services\ServiceLogin\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceUserProfile\Conqui%25C3%25A1nServidor.Conqui%25C3%25A1nDB.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceUserProfile\ConquiánCliente.ServiceUserProfile.Player.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceUserProfile\service.wsdl" />
+    <None Include="Connected Services\ServiceUserProfile\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceUserProfile\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -305,6 +323,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServiceSignUp\" />
     <WCFMetadataStorage Include="Connected Services\ServiceLogin\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceUserProfile\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ServiceSignUp\configuration91.svcinfo" />
@@ -329,6 +348,27 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceUserProfile\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceUserProfile\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceUserProfile\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\imageProfile\avatar01.JPG" />
+    <Resource Include="Resources\imageProfile\avatar02.JPG" />
+    <Resource Include="Resources\imageProfile\avatar03.JPG" />
+    <Resource Include="Resources\imageProfile\avatar04.JPG" />
+    <Resource Include="Resources\imageProfile\avatar05.JPG" />
+    <Resource Include="Resources\imageProfile\avatar06.JPG" />
+    <Resource Include="Resources\imageProfile\default.JPG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

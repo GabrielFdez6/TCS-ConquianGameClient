@@ -189,7 +189,7 @@ namespace ConquiánCliente.ViewModel.Authentication
             playerInProgress.name = Name;
             playerInProgress.lastName = LastName;
             playerInProgress.nickname = Nickname;
-            playerInProgress.pathPhoto = "path/to/default/photo.png";
+            playerInProgress.pathPhoto = "Resources/imageProfile/default.JPG";
 
             try
             {
