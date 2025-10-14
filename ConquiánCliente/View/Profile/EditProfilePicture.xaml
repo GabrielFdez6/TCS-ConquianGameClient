@@ -107,7 +107,7 @@
                             </MultiBinding>
                         </Button.IsEnabled>
                         <Border Width="100" Height="100" BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1" Margin="10">
-                            <Image Source="/Resources/imageProfile/avatar06.JPG" Stretch="UniformToFill"/>
+                            <Image Source="/Resources/imageProfile/default.JPG" Stretch="UniformToFill"/>
                         </Border>
                     </Button>
                 </WrapPanel>
