@@ -45,4 +45,33 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetFriendRequests">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idPlayer" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFriendRequestsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" minOccurs="0" name="GetFriendRequestsResult" nillable="true" type="q3:ArrayOfFriendRequestDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateFriendRequestStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idFriendship" type="xs:int" />
+        <xs:element minOccurs="0" name="idStatus" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateFriendRequestStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateFriendRequestStatusResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

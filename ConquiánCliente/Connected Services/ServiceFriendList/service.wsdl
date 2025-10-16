@@ -25,6 +25,18 @@
   <wsdl:message name="IFriendList_SendFriendRequest_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendFriendRequestResponse" />
   </wsdl:message>
+  <wsdl:message name="IFriendList_GetFriendRequests_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriendRequests" />
+  </wsdl:message>
+  <wsdl:message name="IFriendList_GetFriendRequests_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriendRequestsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFriendList_UpdateFriendRequestStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateFriendRequestStatus" />
+  </wsdl:message>
+  <wsdl:message name="IFriendList_UpdateFriendRequestStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateFriendRequestStatusResponse" />
+  </wsdl:message>
   <wsdl:portType name="IFriendList">
     <wsdl:operation name="GetPlayerByNickname">
       <wsdl:input wsaw:Action="http://tempuri.org/IFriendList/GetPlayerByNickname" message="tns:IFriendList_GetPlayerByNickname_InputMessage" />
@@ -37,6 +49,14 @@
     <wsdl:operation name="SendFriendRequest">
       <wsdl:input wsaw:Action="http://tempuri.org/IFriendList/SendFriendRequest" message="tns:IFriendList_SendFriendRequest_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFriendList/SendFriendRequestResponse" message="tns:IFriendList_SendFriendRequest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFriendRequests">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFriendList/GetFriendRequests" message="tns:IFriendList_GetFriendRequests_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFriendList/GetFriendRequestsResponse" message="tns:IFriendList_GetFriendRequests_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFriendRequestStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFriendList/UpdateFriendRequestStatus" message="tns:IFriendList_UpdateFriendRequestStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFriendList/UpdateFriendRequestStatusResponse" message="tns:IFriendList_UpdateFriendRequestStatus_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IFriendList" type="tns:IFriendList">
@@ -61,6 +81,24 @@
     </wsdl:operation>
     <wsdl:operation name="SendFriendRequest">
       <soap:operation soapAction="http://tempuri.org/IFriendList/SendFriendRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFriendRequests">
+      <soap:operation soapAction="http://tempuri.org/IFriendList/GetFriendRequests" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFriendRequestStatus">
+      <soap:operation soapAction="http://tempuri.org/IFriendList/UpdateFriendRequestStatus" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

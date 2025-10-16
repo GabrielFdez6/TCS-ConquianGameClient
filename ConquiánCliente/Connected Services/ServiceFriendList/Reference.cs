@@ -187,6 +187,68 @@ namespace ConquiánCliente.ServiceFriendList {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FriendRequestDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+        "acts")]
+    [System.SerializableAttribute()]
+    public partial class FriendRequestDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdFriendshipField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NicknameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdFriendship {
+            get {
+                return this.IdFriendshipField;
+            }
+            set {
+                if ((this.IdFriendshipField.Equals(value) != true)) {
+                    this.IdFriendshipField = value;
+                    this.RaisePropertyChanged("IdFriendship");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nickname {
+            get {
+                return this.NicknameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NicknameField, value) != true)) {
+                    this.NicknameField = value;
+                    this.RaisePropertyChanged("Nickname");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceFriendList.IFriendList")]
     public interface IFriendList {
@@ -208,6 +270,18 @@ namespace ConquiánCliente.ServiceFriendList {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/SendFriendRequest", ReplyAction="http://tempuri.org/IFriendList/SendFriendRequestResponse")]
         System.Threading.Tasks.Task<bool> SendFriendRequestAsync(int idSender, int idReceiver);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/GetFriendRequests", ReplyAction="http://tempuri.org/IFriendList/GetFriendRequestsResponse")]
+        ConquiánCliente.ServiceFriendList.FriendRequestDto[] GetFriendRequests(int idPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/GetFriendRequests", ReplyAction="http://tempuri.org/IFriendList/GetFriendRequestsResponse")]
+        System.Threading.Tasks.Task<ConquiánCliente.ServiceFriendList.FriendRequestDto[]> GetFriendRequestsAsync(int idPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/UpdateFriendRequestStatus", ReplyAction="http://tempuri.org/IFriendList/UpdateFriendRequestStatusResponse")]
+        bool UpdateFriendRequestStatus(int idFriendship, int idStatus);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/UpdateFriendRequestStatus", ReplyAction="http://tempuri.org/IFriendList/UpdateFriendRequestStatusResponse")]
+        System.Threading.Tasks.Task<bool> UpdateFriendRequestStatusAsync(int idFriendship, int idStatus);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -259,6 +333,22 @@ namespace ConquiánCliente.ServiceFriendList {
         
         public System.Threading.Tasks.Task<bool> SendFriendRequestAsync(int idSender, int idReceiver) {
             return base.Channel.SendFriendRequestAsync(idSender, idReceiver);
+        }
+        
+        public ConquiánCliente.ServiceFriendList.FriendRequestDto[] GetFriendRequests(int idPlayer) {
+            return base.Channel.GetFriendRequests(idPlayer);
+        }
+        
+        public System.Threading.Tasks.Task<ConquiánCliente.ServiceFriendList.FriendRequestDto[]> GetFriendRequestsAsync(int idPlayer) {
+            return base.Channel.GetFriendRequestsAsync(idPlayer);
+        }
+        
+        public bool UpdateFriendRequestStatus(int idFriendship, int idStatus) {
+            return base.Channel.UpdateFriendRequestStatus(idFriendship, idStatus);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateFriendRequestStatusAsync(int idFriendship, int idStatus) {
+            return base.Channel.UpdateFriendRequestStatusAsync(idFriendship, idStatus);
         }
     }
 }

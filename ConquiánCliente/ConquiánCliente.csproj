@@ -88,10 +88,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Models\FriendRequest.cs" />
     <Compile Include="ViewModel\Authentication\LogInViewModel.cs" />
     <Compile Include="ViewModel\Authentication\SignUpViewModel.cs" />
     <Compile Include="ViewModel\FriendList\FriendListViewModel.cs" />
     <Compile Include="ViewModel\FriendList\FriendProfileViewModel.cs" />
+    <Compile Include="ViewModel\FriendList\FriendRequestViewModel.cs" />
     <Compile Include="ViewModel\ImagePathToBooleanConverter.cs" />
     <Compile Include="ViewModel\MainMenu\MainMenuViewModel.cs" />
     <Compile Include="ViewModel\PlayerSession.cs" />
@@ -264,6 +266,9 @@
     <None Include="Connected Services\ServiceFriendList\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceFriendList\ConquiánCliente.ServiceFriendList.FriendRequestDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ServiceFriendList\ConquiánCliente.ServiceFriendList.PlayerDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -322,9 +327,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\backgroundLogin.jpg" />
   </ItemGroup>

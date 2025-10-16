@@ -4,12 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConquiánCliente.View.FriendList"
+        xmlns:viewModel="clr-namespace:ConquiánCliente.ViewModel.FriendList"
         xmlns:language="clr-namespace:ConquiánCliente.Properties.Langs"
         mc:Ignorable="d"
         Title="{x:Static language:Lang.FriendListRequests}" Height="1080" Width="1920"
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
         Background="Transparent">
+
+    <Window.DataContext>
+        <viewModel:FriendRequestsViewModel/>
+    </Window.DataContext>
+
     <Grid>
         <Image Source="/Resources/backgroundLogin.jpg" Stretch="UniformToFill" />
 
@@ -37,7 +43,7 @@
                            Style="{StaticResource TitleTextBlock}" 
                            Margin="0,0,0,20"/>
 
-                <DataGrid x:Name="RequestsDataGrid" Grid.Row="1" Margin="0,0,0,20" AutoGenerateColumns="False" CanUserAddRows="False"
+                <DataGrid x:Name="RequestsDataGrid" ItemsSource="{Binding Requests}" Grid.Row="1" Margin="0,0,0,20" AutoGenerateColumns="False" CanUserAddRows="False"
                           Background="{StaticResource PrimaryBackgroundBrush}"
                           BorderBrush="{StaticResource BorderBrush}">
                     <DataGrid.Columns>
@@ -46,7 +52,9 @@
                         <DataGridTemplateColumn Header="{x:Static language:Lang.GlobalAccept}" Width="120">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Style="{StaticResource PrimaryButtonStyle}" Height="30">
+                                    <Button Style="{StaticResource PrimaryButtonStyle}" Height="30"
+                                            Command="{Binding DataContext.AcceptRequestCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding}">
                                         <TextBlock Text="{x:Static language:Lang.GlobalAccept}" Foreground="{StaticResource PrimaryTextBrush}" FontWeight="Bold"/>
                                     </Button>
                                 </DataTemplate>
@@ -56,17 +64,20 @@
                         <DataGridTemplateColumn Header="{x:Static language:Lang.FriendRequestsDecline}" Width="120">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Style="{StaticResource SecondaryButtonStyle}" Height="30">
+                                    <Button Style="{StaticResource SecondaryButtonStyle}" Height="30"
+                                            Command="{Binding DataContext.DeclineRequestCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding}">
                                         <TextBlock Text="{x:Static language:Lang.FriendRequestsDecline}" Foreground="{StaticResource PrimaryTextBrush}" FontWeight="Bold"/>
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-
                     </DataGrid.Columns>
                 </DataGrid>
 
                 <Button Grid.Row="2" Content="{x:Static language:Lang.GlobalBack}"
+                        Command="{Binding BackCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                         Foreground="{StaticResource ForgotPasswordTextBrush}" 
                         FontSize="14"
                         HorizontalAlignment="Right"/>
