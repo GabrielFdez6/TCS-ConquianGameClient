@@ -358,6 +358,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Acciones .
+        /// </summary>
+        public static string FriendListAccions {
+            get {
+                return ResourceManager.GetString("FriendListAccions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Agregar.
         /// </summary>
         public static string FriendListAdd {
@@ -381,6 +390,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string FriendListSearch {
             get {
                 return ResourceManager.GetString("FriendListSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ver perfil .
+        /// </summary>
+        public static string FriendListViewProfile {
+            get {
+                return ResourceManager.GetString("FriendListViewProfile", resourceCulture);
             }
         }
         
@@ -417,6 +435,24 @@ namespace ConquiánCliente.Properties.Langs {
         public static string FriendRequestsDecline {
             get {
                 return ResourceManager.GetString("FriendRequestsDecline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error al enviar solicitud de amistad.
+        /// </summary>
+        public static string FriendRequestSentError {
+            get {
+                return ResourceManager.GetString("FriendRequestSentError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Solicitud de amistad enviada correctamente .
+        /// </summary>
+        public static string FriendRequestSentSuccess {
+            get {
+                return ResourceManager.GetString("FriendRequestSentSuccess", resourceCulture);
             }
         }
         

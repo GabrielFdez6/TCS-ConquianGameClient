@@ -1,5 +1,6 @@
 ﻿using ConquiánCliente.ServiceLogin;
 using ConquiánCliente.View;
+using ConquiánCliente.View.FriendList;
 using System.Windows;
 using System.Windows.Input;
 
@@ -13,11 +14,14 @@ namespace ConquiánCliente.ViewModel.MainMenu
         public ICommand ViewProfileCommand { get; }
         public ICommand LogoutCommand { get; }
 
+        public ICommand FriendsCommand { get; }
+
         public MainMenuViewModel()
         {
             LoadPlayerData();
             ViewProfileCommand = new RelayCommand(p => ExecuteViewProfileCommand(p));
             LogoutCommand = new RelayCommand(p => ExecuteLogoutCommand(p));
+            FriendsCommand = new RelayCommand(ExecuteFriendsCommand);
         }
 
         private void LoadPlayerData()
@@ -42,6 +46,16 @@ namespace ConquiánCliente.ViewModel.MainMenu
             var loginWindow = new LogIn();
             loginWindow.Show();
             (parameter as Window)?.Close();
+        }
+
+        private void ExecuteFriendsCommand(object obj)
+        {
+            if (obj is Window mainMenuWindow)
+            {
+                FriendList friendListWindow = new FriendList();
+                friendListWindow.Show();
+                mainMenuWindow.Close();
+            }
         }
     }
 }

@@ -68,6 +68,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\ServiceFriendList\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ServiceSignUp\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -85,6 +90,7 @@
     </Compile>
     <Compile Include="ViewModel\Authentication\LogInViewModel.cs" />
     <Compile Include="ViewModel\Authentication\SignUpViewModel.cs" />
+    <Compile Include="ViewModel\FriendList\FriendListViewModel.cs" />
     <Compile Include="ViewModel\ImagePathToBooleanConverter.cs" />
     <Compile Include="ViewModel\MainMenu\MainMenuViewModel.cs" />
     <Compile Include="ViewModel\PlayerSession.cs" />
@@ -254,6 +260,19 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\ServiceFriendList\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceFriendList\ConquiánCliente.ServiceFriendList.PlayerDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceFriendList\service.wsdl" />
+    <None Include="Connected Services\ServiceFriendList\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceFriendList\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceLogin\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -326,6 +345,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServiceFriendList\" />
     <WCFMetadataStorage Include="Connected Services\ServiceSignUp\" />
     <WCFMetadataStorage Include="Connected Services\ServiceLogin\" />
     <WCFMetadataStorage Include="Connected Services\ServiceUserProfile\" />
@@ -374,6 +394,18 @@
     <Resource Include="Resources\imageProfile\avatar05.JPG" />
     <Resource Include="Resources\imageProfile\avatar06.JPG" />
     <Resource Include="Resources\imageProfile\default.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceFriendList\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceFriendList\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceFriendList\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

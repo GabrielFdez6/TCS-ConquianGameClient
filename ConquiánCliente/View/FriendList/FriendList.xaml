@@ -48,8 +48,8 @@
                         <TextBox x:Name="txtBXSearchFriend" Padding="8" FontSize="16" BorderThickness="0" Background="{StaticResource TextBoxBackgroundBrush}"/>
                     </Border>
 
-                    <Button Grid.Column="1" Margin="5,0" Style="{StaticResource SecondaryButtonStyle}" Width="120" Height="40">
-                        <TextBlock Text="{x:Static language:Lang.FriendListSearch}" 
+                    <Button Grid.Column="1" Margin="5,0" Style="{StaticResource SecondaryButtonStyle}" Width="120" Height="40" Click="SearchButtonClick" x:Name="SearchButton" >
+                        <TextBlock Text= "{x:Static language:Lang.FriendListSearch}" 
                                    FontSize="14" 
                                    FontWeight="Bold" 
                                    VerticalAlignment="Center" 
@@ -58,14 +58,45 @@
                     </Button>
                 </Grid>
 
-                <DataGrid Grid.Row="2" Margin="0,20,0,0" AutoGenerateColumns="False" CanUserAddRows="False"
-                          Background="{StaticResource PrimaryBackgroundBrush}"
-                          BorderBrush="{StaticResource BorderBrush}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="{x:Static language:Lang.GlobalNickname}" Binding="{Binding Nickname}" Width="*" />
-                        <DataGridTextColumn Header="{x:Static language:Lang.GlobalLevel}" Binding="{Binding Level}" Width="150"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <Grid Grid.Row="2">
+                    <DataGrid x:Name="FriendsDataGrid" ItemsSource="{Binding Friends}" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,20,0,0"
+                              Background="{StaticResource PrimaryBackgroundBrush}" BorderBrush="{StaticResource BorderBrush}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="{x:Static language:Lang.GlobalNickname}" Binding="{Binding nickname}" Width="*"/>
+                            <DataGridTextColumn Header="{x:Static language:Lang.GlobalLevel}" Binding="{Binding level}" Width="150"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <DataGrid x:Name="SearchDataGrid" ItemsSource="{Binding SearchResult}" AutoGenerateColumns="False" IsReadOnly="True" Visibility="Collapsed" Margin="0,20,0,0"
+                          Background="{StaticResource PrimaryBackgroundBrush}" BorderBrush="{StaticResource BorderBrush}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="{x:Static language:Lang.GlobalNickname}" Binding="{Binding nickname}" Width="*"/>
+                            <DataGridTemplateColumn Header="{x:Static language:Lang.GlobalNickname}" Width="200">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                                            <Button Content="{x:Static language:Lang.FriendListViewProfile}" 
+                                                Command="{Binding DataContext.ViewProfileCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                                CommandParameter="{Binding}" 
+                                                Margin="5"
+                                                Style="{StaticResource PrimaryButtonStyle}" 
+                                                Width="90"/>
+
+                                            <Button Content="{x:Static language:Lang.FriendListAdd}" 
+                                                Command="{Binding DataContext.AddFriendCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                                CommandParameter="{Binding}" 
+                                                Margin="5"
+                                                Style="{StaticResource SecondaryButtonStyle}" 
+                                                Width="90"/>
+
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
 
                 <Grid Grid.Row="3" Margin="0,15,0,0">
                     <Grid.ColumnDefinitions>
@@ -74,7 +105,9 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" Style="{StaticResource PrimaryButtonStyle}" Width="140" Height="40">
+                    <Button Grid.Column="0" Style="{StaticResource PrimaryButtonStyle}" Width="140" Height="40"
+                        Command="{Binding RequestsCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                         <TextBlock Text="{x:Static language:Lang.FriendListRequests}" 
                                    FontSize="14" 
                                    VerticalAlignment="Center" 
@@ -93,7 +126,9 @@
                     <Button Grid.Column="2" Content="{x:Static language:Lang.GlobalBack}"
                             Foreground="{StaticResource ForgotPasswordTextBrush}" 
                             FontSize="14"
-                            HorizontalAlignment="Right"/>
+                            HorizontalAlignment="Right"
+                            Command="{Binding BackCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
                 </Grid>
             </Grid>
         </Border>

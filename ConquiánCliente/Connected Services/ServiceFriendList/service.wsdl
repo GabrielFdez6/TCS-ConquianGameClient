@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="FriendList" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IFriendList_GetPlayerByNickname_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerByNickname" />
+  </wsdl:message>
+  <wsdl:message name="IFriendList_GetPlayerByNickname_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerByNicknameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFriendList_GetFriends_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriends" />
+  </wsdl:message>
+  <wsdl:message name="IFriendList_GetFriends_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriendsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFriendList_SendFriendRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendFriendRequest" />
+  </wsdl:message>
+  <wsdl:message name="IFriendList_SendFriendRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendFriendRequestResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IFriendList">
+    <wsdl:operation name="GetPlayerByNickname">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFriendList/GetPlayerByNickname" message="tns:IFriendList_GetPlayerByNickname_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFriendList/GetPlayerByNicknameResponse" message="tns:IFriendList_GetPlayerByNickname_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFriends">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFriendList/GetFriends" message="tns:IFriendList_GetFriends_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFriendList/GetFriendsResponse" message="tns:IFriendList_GetFriends_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendFriendRequest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFriendList/SendFriendRequest" message="tns:IFriendList_SendFriendRequest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFriendList/SendFriendRequestResponse" message="tns:IFriendList_SendFriendRequest_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IFriendList" type="tns:IFriendList">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPlayerByNickname">
+      <soap:operation soapAction="http://tempuri.org/IFriendList/GetPlayerByNickname" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFriends">
+      <soap:operation soapAction="http://tempuri.org/IFriendList/GetFriends" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFriendRequest">
+      <soap:operation soapAction="http://tempuri.org/IFriendList/SendFriendRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FriendList">
+    <wsdl:port name="BasicHttpBinding_IFriendList" binding="tns:BasicHttpBinding_IFriendList">
+      <soap:address location="http://localhost:8733/Design_Time_Addresses/Conqui%C3%A1nServidor/FriendList/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

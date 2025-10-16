@@ -1,27 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ConquiánCliente.ViewModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ConquiánCliente.View.FriendList
 {
-    /// <summary>
-    /// Lógica de interacción para FriendList.xaml
-    /// </summary>
     public partial class FriendList : Window
     {
+        private FriendListViewModel ViewModel;
+
         public FriendList()
         {
             InitializeComponent();
+            ViewModel = new FriendListViewModel();
+            DataContext = ViewModel;
+        }
+
+        private void SearchButtonClick(object sender, RoutedEventArgs e)
+        {
+            ViewModel.SearchPlayer(txtBXSearchFriend.Text);
+            FriendsDataGrid.Visibility = Visibility.Collapsed;
+            SearchDataGrid.Visibility = Visibility.Visible;
         }
     }
 }

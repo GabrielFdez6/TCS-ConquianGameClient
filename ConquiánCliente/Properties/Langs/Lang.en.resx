@@ -393,4 +393,16 @@
   <data name="ErrorUpdatePhoto" xml:space="preserve">
     <value>Error update image profile</value>
   </data>
+  <data name="FriendListViewProfile" xml:space="preserve">
+    <value>View profile </value>
+  </data>
+  <data name="FriendListAccions" xml:space="preserve">
+    <value>Accions</value>
+  </data>
+  <data name="FriendRequestSentSuccess" xml:space="preserve">
+    <value>Friend request sent success</value>
+  </data>
+  <data name="FriendRequestSentError" xml:space="preserve">
+    <value>Friend request sent error</value>
+  </data>
 </root>
