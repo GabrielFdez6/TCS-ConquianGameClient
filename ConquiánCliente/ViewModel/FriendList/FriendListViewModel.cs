@@ -23,6 +23,7 @@ namespace ConquiánCliente.ViewModel
         public ICommand AddFriendCommand { get; }
         public ICommand RequestsCommand { get; }
         public ICommand BackCommand { get; }
+        public ICommand DeleteFriendCommand { get; }
 
 
         public ObservableCollection<ServiceFriendList.PlayerDto> Friends
@@ -48,7 +49,8 @@ namespace ConquiánCliente.ViewModel
             SearchResult = new ObservableCollection<ServiceFriendList.PlayerDto>();
             ViewProfileCommand = new RelayCommand(ExecuteViewProfileCommand);
             AddFriendCommand = new RelayCommand(AddFriend);
-            RequestsCommand = new RelayCommand(ExecuteRequestsCommand); 
+            RequestsCommand = new RelayCommand(ExecuteRequestsCommand);
+            DeleteFriendCommand = new RelayCommand(DeleteFriend);
             BackCommand = new RelayCommand(ExecuteBackCommand);
             LoadFriends();
         }
@@ -127,6 +129,27 @@ namespace ConquiánCliente.ViewModel
                 catch (System.Exception ex)
                 {
                     MessageBox.Show("Ocurrió un error al contactar el servicio.", "Error de conexión", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private async void DeleteFriend(object parameter)
+        {
+            if (parameter is ServiceFriendList.PlayerDto player)
+            {
+                MessageBoxResult result = MessageBox.Show(string.Format(Lang.FriendListDeleteConfirmation, player.nickname), Lang.TitleConfirmation, MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    var success = await FriendListService.DeleteFriendAsync(PlayerSession.CurrentPlayer.idPlayer, player.idPlayer);
+                    if (success)
+                    {
+                        Friends.Remove(player);
+                        MessageBox.Show(Lang.FriendListDeletedSuccess, Lang.TitleSuccess);
+                    }
+                    else
+                    {
+                        MessageBox.Show(Lang.FriendListDeletedError, Lang.TitleError);
+                    }
                 }
             }
         }

@@ -282,6 +282,12 @@ namespace ConquiánCliente.ServiceFriendList {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/UpdateFriendRequestStatus", ReplyAction="http://tempuri.org/IFriendList/UpdateFriendRequestStatusResponse")]
         System.Threading.Tasks.Task<bool> UpdateFriendRequestStatusAsync(int idFriendship, int idStatus);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/DeleteFriend", ReplyAction="http://tempuri.org/IFriendList/DeleteFriendResponse")]
+        bool DeleteFriend(int idPlayer, int idFriend);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/DeleteFriend", ReplyAction="http://tempuri.org/IFriendList/DeleteFriendResponse")]
+        System.Threading.Tasks.Task<bool> DeleteFriendAsync(int idPlayer, int idFriend);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -349,6 +355,14 @@ namespace ConquiánCliente.ServiceFriendList {
         
         public System.Threading.Tasks.Task<bool> UpdateFriendRequestStatusAsync(int idFriendship, int idStatus) {
             return base.Channel.UpdateFriendRequestStatusAsync(idFriendship, idStatus);
+        }
+        
+        public bool DeleteFriend(int idPlayer, int idFriend) {
+            return base.Channel.DeleteFriend(idPlayer, idFriend);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteFriendAsync(int idPlayer, int idFriend) {
+            return base.Channel.DeleteFriendAsync(idPlayer, idFriend);
         }
     }
 }

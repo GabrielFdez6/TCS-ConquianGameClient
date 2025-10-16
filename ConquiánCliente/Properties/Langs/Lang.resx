@@ -405,4 +405,16 @@
   <data name="FriendRequestSentError" xml:space="preserve">
     <value>Error al enviar solicitud de amistad</value>
   </data>
+  <data name="FriendListDeleteConfirmation" xml:space="preserve">
+    <value>¿Esta seguro que desea eliminarlo de su lista de amigos?</value>
+  </data>
+  <data name="TitleConfirmation" xml:space="preserve">
+    <value>Confirmación </value>
+  </data>
+  <data name="FriendListDeletedSuccess" xml:space="preserve">
+    <value>Amigo eliminado correctamente</value>
+  </data>
+  <data name="FriendListDeletedError" xml:space="preserve">
+    <value>Error al eliminar amigo</value>
+  </data>
 </root>

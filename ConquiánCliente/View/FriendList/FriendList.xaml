@@ -11,6 +11,7 @@
         WindowStartupLocation="CenterScreen"
         Background="Transparent">
     <Grid>
+
         <Image Source="/Resources/backgroundLogin.jpg" Stretch="UniformToFill" />
 
         <Border BorderBrush="{StaticResource BorderBrush}"
@@ -34,8 +35,8 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="{x:Static language:Lang.MainMenuFriends}" 
-                           Style="{StaticResource TitleTextBlock}" 
+                <TextBlock Grid.Row="0" Text="{x:Static language:Lang.MainMenuFriends}"
+                           Style="{StaticResource TitleTextBlock}"
                            Margin="0,0,0,20"/>
 
                 <Grid Grid.Row="1">
@@ -49,11 +50,11 @@
                     </Border>
 
                     <Button Grid.Column="1" Margin="5,0" Style="{StaticResource SecondaryButtonStyle}" Width="120" Height="40" Click="SearchButtonClick" x:Name="SearchButton" >
-                        <TextBlock Text= "{x:Static language:Lang.FriendListSearch}" 
-                                   FontSize="14" 
-                                   FontWeight="Bold" 
-                                   VerticalAlignment="Center" 
-                                   HorizontalAlignment="Center" 
+                        <TextBlock Text= "{x:Static language:Lang.FriendListSearch}"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
                                    Foreground="{StaticResource PrimaryTextBrush}"/>
                     </Button>
                 </Grid>
@@ -64,6 +65,17 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="{x:Static language:Lang.GlobalNickname}" Binding="{Binding nickname}" Width="*"/>
                             <DataGridTextColumn Header="{x:Static language:Lang.GlobalLevel}" Binding="{Binding level}" Width="150"/>
+                            <DataGridTemplateColumn Header="{x:Static language:Lang.FriendListAccions}" Width="120">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="{x:Static language:Lang.FriendsOptionsDelete}"
+                                                Command="{Binding DataContext.DeleteFriendCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                CommandParameter="{Binding}"
+                                                Style="{StaticResource SecondaryButtonStyle}"
+                                                Width="90"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -76,20 +88,19 @@
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
-                                            <Button Content="{x:Static language:Lang.FriendListViewProfile}" 
-                                                Command="{Binding DataContext.ViewProfileCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
-                                                CommandParameter="{Binding}" 
+                                            <Button Content="{x:Static language:Lang.FriendListViewProfile}"
+                                                Command="{Binding DataContext.ViewProfileCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                CommandParameter="{Binding}"
                                                 Margin="5"
-                                                Style="{StaticResource PrimaryButtonStyle}" 
+                                             Style="{StaticResource PrimaryButtonStyle}"
                                                 Width="90"/>
 
-                                            <Button Content="{x:Static language:Lang.FriendListAdd}" 
-                                                Command="{Binding DataContext.AddFriendCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
-                                                CommandParameter="{Binding}" 
+                                            <Button Content="{x:Static language:Lang.FriendListAdd}"
+                                                Command="{Binding DataContext.AddFriendCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                CommandParameter="{Binding}"
                                                 Margin="5"
-                                                Style="{StaticResource SecondaryButtonStyle}" 
+                                                Style="{StaticResource SecondaryButtonStyle}"
                                                 Width="90"/>
-
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -108,23 +119,23 @@
                     <Button Grid.Column="0" Style="{StaticResource PrimaryButtonStyle}" Width="140" Height="40"
                         Command="{Binding RequestsCommand}"
                         CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-                        <TextBlock Text="{x:Static language:Lang.FriendListRequests}" 
-                                   FontSize="14" 
-                                   VerticalAlignment="Center" 
-                                   HorizontalAlignment="Center" 
+                        <TextBlock Text="{x:Static language:Lang.FriendListRequests}"
+                                   FontSize="14"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
                                    Foreground="{StaticResource PrimaryTextBrush}"/>
                     </Button>
 
                     <Button Grid.Column="1" Margin="10,0,0,0" Style="{StaticResource PrimaryButtonStyle}" Width="140" Height="40">
-                        <TextBlock Text="{x:Static language:Lang.GlobalInvite}" 
-                                   FontSize="14" 
-                                   VerticalAlignment="Center" 
-                                   HorizontalAlignment="Center" 
+                        <TextBlock Text="{x:Static language:Lang.GlobalInvite}"
+                                   FontSize="14"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
                                    Foreground="{StaticResource PrimaryTextBrush}"/>
                     </Button>
 
                     <Button Grid.Column="2" Content="{x:Static language:Lang.GlobalBack}"
-                            Foreground="{StaticResource ForgotPasswordTextBrush}" 
+                            Foreground="{StaticResource ForgotPasswordTextBrush}"
                             FontSize="14"
                             HorizontalAlignment="Right"
                             Command="{Binding BackCommand}"

@@ -376,6 +376,33 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a ¿Esta seguro que desea eliminarlo de su lista de amigos?.
+        /// </summary>
+        public static string FriendListDeleteConfirmation {
+            get {
+                return ResourceManager.GetString("FriendListDeleteConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error al eliminar amigo.
+        /// </summary>
+        public static string FriendListDeletedError {
+            get {
+                return ResourceManager.GetString("FriendListDeletedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Amigo eliminado correctamente.
+        /// </summary>
+        public static string FriendListDeletedSuccess {
+            get {
+                return ResourceManager.GetString("FriendListDeletedSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Solicitudes.
         /// </summary>
         public static string FriendListRequests {
@@ -867,6 +894,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string TitleAuthenticationError {
             get {
                 return ResourceManager.GetString("TitleAuthenticationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Confirmación .
+        /// </summary>
+        public static string TitleConfirmation {
+            get {
+                return ResourceManager.GetString("TitleConfirmation", resourceCulture);
             }
         }
         

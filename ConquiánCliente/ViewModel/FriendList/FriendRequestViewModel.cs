@@ -12,11 +12,11 @@ namespace ConquiánCliente.ViewModel.FriendList
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private ObservableCollection<FriendRequest> _requests;
+        private ObservableCollection<FriendRequest> requests;
         public ObservableCollection<FriendRequest> Requests
         {
-            get { return _requests; }
-            set { _requests = value; OnPropertyChanged(nameof(Requests)); }
+            get { return requests; }
+            set { requests = value; OnPropertyChanged(nameof(Requests)); }
         }
 
         public ICommand AcceptRequestCommand { get; }
