@@ -52,7 +52,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
         {
             if (obj is Window mainMenuWindow)
             {
-                FriendList friendListWindow = new FriendList();
+                var friendListWindow = new View.FriendList.FriendList();
                 friendListWindow.Show();
                 mainMenuWindow.Close();
             }

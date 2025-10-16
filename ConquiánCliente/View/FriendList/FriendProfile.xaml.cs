@@ -1,27 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ConquiánCliente.ViewModel.FriendList;
+using ConquiánCliente.ServiceUserProfile;
+using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ConquiánCliente.View.FriendList
 {
-    /// <summary>
-    /// Lógica de interacción para FriendProfile.xaml
-    /// </summary>
     public partial class FriendProfile : Window
     {
-        public FriendProfile()
+        public FriendProfile(PlayerDto player, ObservableCollection<SocialDto> socials)
         {
             InitializeComponent();
+            DataContext = new FriendProfileViewModel(player, socials);
         }
     }
 }

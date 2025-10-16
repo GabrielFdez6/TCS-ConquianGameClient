@@ -1,5 +1,7 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceFriendList;
+using ConquiánCliente.ServiceUserProfile; 
+using ConquiánCliente.View.FriendList;
 using ConquiánCliente.View.MainMenu; 
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -12,35 +14,39 @@ namespace ConquiánCliente.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private ObservableCollection<PlayerDto> Friends;
+        private ObservableCollection<ServiceFriendList.PlayerDto> _friends;
 
-        private ObservableCollection<PlayerDto> _searchResult;
+        private ObservableCollection<ServiceFriendList.PlayerDto> _searchResult;
 
 
         public ICommand ViewProfileCommand { get; }
         public ICommand AddFriendCommand { get; }
         public ICommand RequestsCommand { get; }
         public ICommand BackCommand { get; }
-        public ObservableCollection<PlayerDto> friends
+
+
+        public ObservableCollection<ServiceFriendList.PlayerDto> Friends
         {
-            get { return Friends; }
-            set { Friends = value; OnPropertyChanged(nameof(friends)); }
+            get { return _friends; }
+            set { _friends = value; OnPropertyChanged(nameof(Friends)); }
         }
 
-        public ObservableCollection<PlayerDto> SearchResult
+        public ObservableCollection<ServiceFriendList.PlayerDto> SearchResult
         {
             get { return _searchResult; }
             set { _searchResult = value; OnPropertyChanged(nameof(SearchResult)); }
         }
 
         private readonly FriendListClient FriendListService;
+        private readonly UserProfileClient UserProfileService;
 
         public FriendListViewModel()
         {
             FriendListService = new FriendListClient();
-            friends = new ObservableCollection<PlayerDto>();
-            SearchResult = new ObservableCollection<PlayerDto>();
-            ViewProfileCommand = new RelayCommand(p => { /* Lógica para ver perfil */ });
+            UserProfileService = new UserProfileClient(); 
+            Friends = new ObservableCollection<ServiceFriendList.PlayerDto>();
+            SearchResult = new ObservableCollection<ServiceFriendList.PlayerDto>();
+            ViewProfileCommand = new RelayCommand(ExecuteViewProfileCommand);
             AddFriendCommand = new RelayCommand(AddFriend);
             RequestsCommand = new RelayCommand(ExecuteRequestsCommand); 
             BackCommand = new RelayCommand(ExecuteBackCommand);
@@ -50,7 +56,7 @@ namespace ConquiánCliente.ViewModel
         private async void LoadFriends()
         {
             var friendsList = await FriendListService.GetFriendsAsync(PlayerSession.CurrentPlayer.idPlayer);
-            friends = new ObservableCollection<PlayerDto>(friendsList);
+            Friends = new ObservableCollection<ServiceFriendList.PlayerDto>(friendsList);
         }
 
         public async void SearchPlayer(string nickname)
@@ -65,7 +71,7 @@ namespace ConquiánCliente.ViewModel
 
         private async void AddFriend(object parameter)
         {
-            if (parameter is PlayerDto player)
+            if (parameter is ServiceFriendList.PlayerDto player)
             {
                 var success = await FriendListService.SendFriendRequestAsync(PlayerSession.CurrentPlayer.idPlayer, player.idPlayer);
                 if (success)
@@ -95,6 +101,33 @@ namespace ConquiánCliente.ViewModel
                 var mainMenu = new View.MainMenu.MainMenu();
                 mainMenu.Show();
                 currentWindow.Close();
+            }
+        }
+
+        private async void ExecuteViewProfileCommand(object parameter)
+        {
+            if (parameter is ServiceFriendList.PlayerDto playerSummary)
+            {
+                try
+                {
+                    var fullPlayerProfile = await UserProfileService.GetPlayerByIdAsync(playerSummary.idPlayer);
+
+                    var socials = await UserProfileService.GetPlayerSocialsAsync(playerSummary.idPlayer);
+
+                    if (fullPlayerProfile != null)
+                    {
+                        var profileWindow = new FriendProfile(fullPlayerProfile, new ObservableCollection<ServiceUserProfile.SocialDto>(socials));
+                        profileWindow.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo cargar el perfil del jugador.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show("Ocurrió un error al contactar el servicio.", "Error de conexión", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
