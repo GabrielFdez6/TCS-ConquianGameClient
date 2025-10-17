@@ -108,7 +108,9 @@
                 </TextBlock>
 
                 <StackPanel Margin="0,80,0,0">
-                    <Button Width="388" Height="62" Style="{StaticResource PrimaryButtonStyle}" Click="ClickPlay">
+                    <Button Width="388" Height="62" Style="{StaticResource PrimaryButtonStyle}"
+                            Command="{Binding PlayCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                         <Button.Effect>
                             <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
                         </Button.Effect>
@@ -124,7 +126,9 @@
                         <TextBlock Text="{x:Static language:Lang.MainMenuFriends}" FontSize="28" FontWeight="Bold" Foreground="{StaticResource PrimaryTextBrush}"/>
                     </Button>
 
-                    <Button Width="388" Height="62" Margin="0,30,0,0" Style="{StaticResource PrimaryButtonStyle}" Click="ClickChangeLanguage">
+                    <Button Width="388" Height="62" Margin="0,30,0,0" Style="{StaticResource PrimaryButtonStyle}"
+                            Command="{Binding ChangeLanguageCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                         <Button.Effect>
                             <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
                         </Button.Effect>

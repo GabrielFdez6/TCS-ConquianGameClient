@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="fc52a893-c534-472f-8215-51cc6c76ac32" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="55a5764c-fb04-49eb-b4fc-0bf1340e6d75" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,13 +19,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/Conqui%C3%A1nServidor/FriendList/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="net.tcp://localhost:9001/Conqui%C3%A1nServidor/FriendList/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="2f663118-274a-44ea-b0fe-233c82f7a0fc" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Conqui%C3%A1nServidor/FriendList/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="04d4faea-ae3d-4fcc-bb74-47574e046fbb" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Conqui%C3%A1nServidor/FriendList/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="7ebdfaf0-6ac7-4943-bbf5-b4047df1963c" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Conqui%C3%A1nServidor/FriendList/mex" />
-    <MetadataFile FileName="Conqui%C3%A1nServidor.Contracts.DataContracts.xsd" MetadataType="Schema" ID="acb303d6-f005-4b75-834d-931cad52616b" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Conqui%C3%A1nServidor/FriendList/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="2cf725a3-0951-4e84-88a1-9f946ff8b50c" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/FriendList/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="13ee15fd-0de8-4441-a1f4-561af8cc9ed8" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/FriendList/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="058173de-d072-44bc-ad9b-6ead237ea908" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/FriendList/mex" />
+    <MetadataFile FileName="Conqui%C3%A1nServidor.Contracts.DataContracts.xsd" MetadataType="Schema" ID="ba9e744e-520f-460c-af6f-acfb5e4b14e6" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/FriendList/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

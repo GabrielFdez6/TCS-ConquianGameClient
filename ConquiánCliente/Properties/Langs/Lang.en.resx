@@ -417,4 +417,34 @@
   <data name="FriendListDeletedError" xml:space="preserve">
     <value>Error deleting friend</value>
   </data>
+  <data name="LobbyRoomCode" xml:space="preserve">
+    <value>Room code</value>
+  </data>
+  <data name="LobbyCreateRoom" xml:space="preserve">
+    <value>Create room</value>
+  </data>
+  <data name="GlobalOr" xml:space="preserve">
+    <value>or</value>
+  </data>
+  <data name="LobbyJoinWithCode" xml:space="preserve">
+    <value>Join with code</value>
+  </data>
+  <data name="LobbyJoinRoom" xml:space="preserve">
+    <value>Join game</value>
+  </data>
+  <data name="CreateOrJoin" xml:space="preserve">
+    <value>Create or join</value>
+  </data>
+  <data name="ErrorLobbyCreation" xml:space="preserve">
+    <value>Failed to create the room</value>
+  </data>
+  <data name="ErrorEmptyRoomCode" xml:space="preserve">
+    <value>The room code cannot be empty.</value>
+  </data>
+  <data name="ErrorJoinLobby" xml:space="preserve">
+    <value>Error accessing the room</value>
+  </data>
+  <data name="InfoHostLeft" xml:space="preserve">
+    <value>The host has left the room.</value>
+  </data>
 </root>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="c259960d-e170-42e4-b526-cec695089118" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="ab8b9bf9-320e-4125-8dee-71be72621da7" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,13 +19,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/Conqui%C3%A1nServidor/UserProfile/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="net.tcp://localhost:9001/Conqui%C3%A1nServidor/UserProfile/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="852d15ee-0bf2-497e-8bf0-5f131596c3e5" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Conqui%C3%A1nServidor/UserProfile/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="3022de3f-871d-49b0-8f15-f968ee65f133" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Conqui%C3%A1nServidor/UserProfile/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="70bbdeea-4369-4ea2-b2de-4e125e9311b9" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Conqui%C3%A1nServidor/UserProfile/mex" />
-    <MetadataFile FileName="Conqui%C3%A1nServidor.Contracts.DataContracts.xsd" MetadataType="Schema" ID="74630dc3-560c-422f-ba96-9065df88046c" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Conqui%C3%A1nServidor/UserProfile/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="70b0c2d6-2f0d-458b-9758-7a1f3a18419d" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/UserProfile/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="4d8288a8-455f-43a4-b703-baa1d950c4a9" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/UserProfile/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="51dce2e5-5411-4e78-8bd1-fcc33d39e9e2" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/UserProfile/mex" />
+    <MetadataFile FileName="Conqui%C3%A1nServidor.Contracts.DataContracts.xsd" MetadataType="Schema" ID="75f25744-d688-4946-94c6-c7a3cd1759cd" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/UserProfile/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

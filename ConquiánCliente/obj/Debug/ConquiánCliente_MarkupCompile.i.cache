@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\
 ConquiánCliente
 none
 false
 DEBUG;TRACE
-C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\App.xaml
-18-545791148
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\App.xaml
+19-1617427188
 
-43-1604221176
-19754841516
-Styles\GlobalStyles.xaml;View\Authentication\PasswordRecovery\CodeValidation.xaml;View\Authentication\PasswordRecovery\RequestRecovery.xaml;View\Authentication\PasswordRecovery\ResetPassword.xaml;View\FriendList\FriendList.xaml;View\FriendList\FriendProfile.xaml;View\FriendList\FriendRequests.xaml;View\Lobby\LobbyGame.xaml;View\MainMenu\ChangeLanguage.xaml;View\MainMenu\MainMenu.xaml;View\Profile\EditInfoPage.xaml;View\Profile\EditProfilePicture.xaml;View\Authentication\LogIn.xaml;View\Authentication\SignUp.xaml;View\Authentication\SignUpData.xaml;View\Profile\ProfileMainFrame.xaml;View\Authentication\VerificationCode.xaml;View\Profile\UserProfilePage.xaml;
+481686489310
+19589871162
+Styles\GlobalStyles.xaml;View\Authentication\PasswordRecovery\CodeValidation.xaml;View\Authentication\PasswordRecovery\RequestRecovery.xaml;View\Authentication\PasswordRecovery\ResetPassword.xaml;View\FriendList\FriendList.xaml;View\FriendList\FriendProfile.xaml;View\FriendList\FriendRequests.xaml;View\Lobby\LobbyGame.xaml;View\MainMenu\ChangeLanguage.xaml;View\MainMenu\CreateOrJoin.xaml;View\MainMenu\MainMenu.xaml;View\Profile\EditInfoPage.xaml;View\Profile\EditProfilePicture.xaml;View\Authentication\LogIn.xaml;View\Authentication\SignUp.xaml;View\Authentication\SignUpData.xaml;View\Profile\ProfileMainFrame.xaml;View\Authentication\VerificationCode.xaml;View\Profile\UserProfilePage.xaml;
 
 False
 

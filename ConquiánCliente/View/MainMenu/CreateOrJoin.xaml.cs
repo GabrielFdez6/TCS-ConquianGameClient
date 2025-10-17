@@ -1,6 +1,4 @@
-﻿using ConquiánCliente.View.Lobby;
-using ConquiánCliente.ViewModel.MainMenu;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,18 +11,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ConquiánCliente.ViewModel.MainMenu;
 
 namespace ConquiánCliente.View.MainMenu
 {
     /// <summary>
-    /// Lógica de interacción para MainMenu.xaml
+    /// Lógica de interacción para CreateOrJoin.xaml
     /// </summary>
-    public partial class MainMenu : Window
+    public partial class CreateOrJoin : Window
     {
-        public MainMenu()
+        public CreateOrJoin()
         {
             InitializeComponent();
-            DataContext = new MainMenuViewModel();
+            DataContext = new CreateOrJoinViewModel();
         }
     }
 }

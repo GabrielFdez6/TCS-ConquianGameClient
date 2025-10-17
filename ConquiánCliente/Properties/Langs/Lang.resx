@@ -417,4 +417,34 @@
   <data name="FriendListDeletedError" xml:space="preserve">
     <value>Error al eliminar amigo</value>
   </data>
+  <data name="LobbyRoomCode" xml:space="preserve">
+    <value>Código de sala</value>
+  </data>
+  <data name="LobbyCreateRoom" xml:space="preserve">
+    <value>Crear sala</value>
+  </data>
+  <data name="GlobalOr" xml:space="preserve">
+    <value>o</value>
+  </data>
+  <data name="LobbyJoinWithCode" xml:space="preserve">
+    <value>Unirse por código</value>
+  </data>
+  <data name="LobbyJoinRoom" xml:space="preserve">
+    <value>Unirse a la sala</value>
+  </data>
+  <data name="CreateOrJoin" xml:space="preserve">
+    <value>Crear o unirse</value>
+  </data>
+  <data name="ErrorLobbyCreation" xml:space="preserve">
+    <value>Falló al crear la sala</value>
+  </data>
+  <data name="ErrorEmptyRoomCode" xml:space="preserve">
+    <value>El código de sala no puede estar vacío</value>
+  </data>
+  <data name="ErrorJoinLobby" xml:space="preserve">
+    <value>Error al entrar a la sala</value>
+  </data>
+  <data name="InfoHostLeft" xml:space="preserve">
+    <value>El host ha salido de la sala</value>
+  </data>
 </root>

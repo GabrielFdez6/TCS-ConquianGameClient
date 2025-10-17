@@ -61,6 +61,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Crear o unirse.
+        /// </summary>
+        public static string CreateOrJoin {
+            get {
+                return ResourceManager.GetString("CreateOrJoin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Editar.
         /// </summary>
         public static string EditDataEdit {
@@ -124,6 +133,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El código de sala no puede estar vacío.
+        /// </summary>
+        public static string ErrorEmptyRoomCode {
+            get {
+                return ResourceManager.GetString("ErrorEmptyRoomCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Ocurrió un error: {0}.
         /// </summary>
         public static string ErrorGeneric {
@@ -138,6 +156,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string ErrorInvalidCredentials {
             get {
                 return ResourceManager.GetString("ErrorInvalidCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error al entrar a la sala.
+        /// </summary>
+        public static string ErrorJoinLobby {
+            get {
+                return ResourceManager.GetString("ErrorJoinLobby", resourceCulture);
             }
         }
         
@@ -165,6 +192,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string ErrorLastNameLength {
             get {
                 return ResourceManager.GetString("ErrorLastNameLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Falló al crear la sala.
+        /// </summary>
+        public static string ErrorLobbyCreation {
+            get {
+                return ResourceManager.GetString("ErrorLobbyCreation", resourceCulture);
             }
         }
         
@@ -601,6 +637,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a o.
+        /// </summary>
+        public static string GlobalOr {
+            get {
+                return ResourceManager.GetString("GlobalOr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Contraseña.
         /// </summary>
         public static string GlobalPassword {
@@ -673,6 +718,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El host ha salido de la sala.
+        /// </summary>
+        public static string InfoHostLeft {
+            get {
+                return ResourceManager.GetString("InfoHostLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error al actualizar la información .
         /// </summary>
         public static string InfoUpdateFailed {
@@ -709,11 +763,38 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Crear sala.
+        /// </summary>
+        public static string LobbyCreateRoom {
+            get {
+                return ResourceManager.GetString("LobbyCreateRoom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Modo de juego.
         /// </summary>
         public static string LobbyGameMode {
             get {
                 return ResourceManager.GetString("LobbyGameMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Unirse a la sala.
+        /// </summary>
+        public static string LobbyJoinRoom {
+            get {
+                return ResourceManager.GetString("LobbyJoinRoom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Unirse por código.
+        /// </summary>
+        public static string LobbyJoinWithCode {
+            get {
+                return ResourceManager.GetString("LobbyJoinWithCode", resourceCulture);
             }
         }
         
@@ -741,6 +822,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string LobbyReady {
             get {
                 return ResourceManager.GetString("LobbyReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Código de sala.
+        /// </summary>
+        public static string LobbyRoomCode {
+            get {
+                return ResourceManager.GetString("LobbyRoomCode", resourceCulture);
             }
         }
         

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ConquiánCliente.Properties.Langs;
+using ConquiánCliente.ViewModel.Lobby;
 
 namespace ConquiánCliente.View.Lobby
 {
@@ -20,33 +21,20 @@ namespace ConquiánCliente.View.Lobby
     /// </summary>
     public partial class LobbyGame : Window
     {
-        private readonly string[] gameTypes = { Lang.LobbyQuickGame, Lang.LobbyClassicGame };
-        private int currentGameIndex = 0;
-        public LobbyGame()
+        public LobbyGame(string roomCode)
         {
             InitializeComponent();
-            UpdateGameLabel();
+            DataContext = new LobbyGameViewModel(roomCode);
+            this.Closing += LobbyGame_Closing;
         }
 
-        private void UpdateGameLabel()
+        private void LobbyGame_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            txtBxTypeGame.Text = gameTypes[currentGameIndex];
-        }
-
-        private void ClickLeftChangeGame(object sender, RoutedEventArgs e)
-        {
-            currentGameIndex--;
-            if (currentGameIndex < 0)
-                currentGameIndex = gameTypes.Length - 1;
-            UpdateGameLabel();
-        }
-
-        private void ClickRighChangeGame(object sender, RoutedEventArgs e)
-        {
-            currentGameIndex++;
-            if (currentGameIndex >= gameTypes.Length)
-                currentGameIndex = 0;
-            UpdateGameLabel();
+            if (DataContext is LobbyGameViewModel vm)
+            {
+                if (vm.isNavigatingAway) return;
+                vm.GoBackCommand.Execute(this);
+            }
         }
     }
 }

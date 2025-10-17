@@ -73,12 +73,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\ServiceSignUp\Reference.cs">
+    <Compile Include="Connected Services\ServiceLobby\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\ServiceLogin\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ServiceSignUp\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -95,6 +100,9 @@
     <Compile Include="ViewModel\FriendList\FriendProfileViewModel.cs" />
     <Compile Include="ViewModel\FriendList\FriendRequestViewModel.cs" />
     <Compile Include="ViewModel\ImagePathToBooleanConverter.cs" />
+    <Compile Include="ViewModel\Lobby\LobbyGameViewModel.cs" />
+    <Compile Include="ViewModel\Lobby\PlayerLobbyItemViewModel.cs" />
+    <Compile Include="ViewModel\MainMenu\CreateOrJoinViewModel.cs" />
     <Compile Include="ViewModel\MainMenu\MainMenuViewModel.cs" />
     <Compile Include="ViewModel\PlayerSession.cs" />
     <Compile Include="ViewModel\Profile\EditInfoViewModel.cs" />
@@ -127,6 +135,9 @@
     </Compile>
     <Compile Include="View\MainMenu\ChangeLanguage.xaml.cs">
       <DependentUpon>ChangeLanguage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainMenu\CreateOrJoin.xaml.cs">
+      <DependentUpon>CreateOrJoin.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainMenu\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
@@ -185,6 +196,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainMenu\ChangeLanguage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainMenu\CreateOrJoin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -279,11 +294,34 @@
     <None Include="Connected Services\ServiceFriendList\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceLobby\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceLobby\ConquiánCliente.ServiceLobby.LobbyDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceLobby\ConquiánCliente.ServiceLobby.MessageDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceLobby\service.wsdl" />
+    <None Include="Connected Services\ServiceLobby\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceLobby\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceLogin\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceLogin\ConquiánCliente.ServiceLogin.PlayerDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceLogin\service.wsdl" />
+    <None Include="Connected Services\ServiceLogin\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceLogin\service1.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceSignUp\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
       <SubType>Designer</SubType>
@@ -293,13 +331,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceSignUp\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServiceLogin\service.wsdl" />
-    <None Include="Connected Services\ServiceLogin\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServiceLogin\service1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceUserProfile\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
@@ -327,7 +358,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\backgroundLogin.jpg" />
   </ItemGroup>
@@ -349,19 +379,41 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\imageProfile\avatar01.JPG" />
+    <Resource Include="Resources\imageProfile\avatar02.JPG" />
+    <Resource Include="Resources\imageProfile\avatar03.JPG" />
+    <Resource Include="Resources\imageProfile\avatar04.JPG" />
+    <Resource Include="Resources\imageProfile\avatar05.JPG" />
+    <Resource Include="Resources\imageProfile\avatar06.JPG" />
+    <Resource Include="Resources\imageProfile\default.JPG" />
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServiceFriendList\" />
-    <WCFMetadataStorage Include="Connected Services\ServiceSignUp\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceLobby\" />
     <WCFMetadataStorage Include="Connected Services\ServiceLogin\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceSignUp\" />
     <WCFMetadataStorage Include="Connected Services\ServiceUserProfile\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ServiceSignUp\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceLobby\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ServiceSignUp\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceLobby\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ServiceSignUp\Reference.svcmap">
+    <None Include="Connected Services\ServiceLobby\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceFriendList\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceFriendList\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceFriendList\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -379,6 +431,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\ServiceSignUp\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceSignUp\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceSignUp\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Connected Services\ServiceUserProfile\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -386,27 +450,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ServiceUserProfile\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\imageProfile\avatar01.JPG" />
-    <Resource Include="Resources\imageProfile\avatar02.JPG" />
-    <Resource Include="Resources\imageProfile\avatar03.JPG" />
-    <Resource Include="Resources\imageProfile\avatar04.JPG" />
-    <Resource Include="Resources\imageProfile\avatar05.JPG" />
-    <Resource Include="Resources\imageProfile\avatar06.JPG" />
-    <Resource Include="Resources\imageProfile\default.JPG" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServiceFriendList\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServiceFriendList\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServiceFriendList\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

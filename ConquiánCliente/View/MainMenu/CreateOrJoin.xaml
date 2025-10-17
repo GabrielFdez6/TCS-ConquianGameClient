@@ -1,0 +1,80 @@
+﻿<Window x:Class="ConquiánCliente.View.MainMenu.CreateOrJoin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ConquiánCliente.View.MainMenu"
+        xmlns:language="clr-namespace:ConquiánCliente.Properties.Langs"
+        mc:Ignorable="d"
+        Title="CreateOrJoin" Height="400" Width="600"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        AllowsTransparency="True"
+        Background="Transparent">
+
+    <Grid>
+        <Border Background="#F9D379" CornerRadius="15">
+            <Grid>
+                <Button Style="{StaticResource PrimaryButtonStyle}"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Margin="0,10,10,0"
+                        Content="X"
+                        Width="30"
+                        Height="30"
+                        Command="{Binding CloseCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                    <Button.Effect>
+                        <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
+                    </Button.Effect>
+                </Button>
+
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Content="{x:Static language:Lang.LobbyCreateRoom}"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Width="300"
+                            Height="60"
+                            FontSize="24"
+                            Command="{Binding CreateRoomCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                        <Button.Effect>
+                            <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
+                        </Button.Effect>
+                    </Button>
+
+                    <TextBlock Text="{x:Static language:Lang.GlobalOr}"
+                               Foreground="White"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               Margin="0,20,0,20"/>
+
+                    <StackPanel>
+                        <TextBlock Text="{x:Static language:Lang.LobbyJoinWithCode}"
+                                   Foreground="White"
+                                   FontSize="18"
+                                   HorizontalAlignment="Center"/>
+                        <TextBox Width="250"
+                                 Height="40"
+                                 FontSize="20"
+                                 TextAlignment="Center"
+                                 Margin="0,10,0,10"
+                                 Text="{Binding RoomCode, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Content="{x:Static language:Lang.LobbyJoinRoom}"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Width="250"
+                                Height="50"
+                                FontSize="20"
+                                Command="{Binding JoinRoomCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                            <Button.Effect>
+                                <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
+                            </Button.Effect>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
