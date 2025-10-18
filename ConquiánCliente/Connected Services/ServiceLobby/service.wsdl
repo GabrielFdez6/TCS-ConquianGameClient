@@ -70,12 +70,6 @@
   <wsdl:message name="ILobby_SendMessage_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendMessageResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobby_GetChatMessages_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetChatMessages" />
-  </wsdl:message>
-  <wsdl:message name="ILobby_GetChatMessages_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetChatMessagesResponse" />
-  </wsdl:message>
   <wsdl:portType name="ILobby">
     <wsdl:operation name="GetLobbyState">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobby/GetLobbyState" message="tns:ILobby_GetLobbyState_InputMessage" />
@@ -96,10 +90,6 @@
     <wsdl:operation name="SendMessage">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobby/SendMessage" message="tns:ILobby_SendMessage_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/SendMessageResponse" message="tns:ILobby_SendMessage_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetChatMessages">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobby/GetChatMessages" message="tns:ILobby_GetChatMessages_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobby/GetChatMessagesResponse" message="tns:ILobby_GetChatMessages_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_ILobby" type="tns:ILobby">
@@ -144,15 +134,6 @@
     </wsdl:operation>
     <wsdl:operation name="SendMessage">
       <soap12:operation soapAction="http://tempuri.org/ILobby/SendMessage" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetChatMessages">
-      <soap12:operation soapAction="http://tempuri.org/ILobby/GetChatMessages" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

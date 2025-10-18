@@ -70,7 +70,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         private void InitializePolling()
         {
             pollingTimer = new DispatcherTimer();
-            pollingTimer.Interval = TimeSpan.FromSeconds(2); // Reducido para un chat más fluido
+            pollingTimer.Interval = TimeSpan.FromSeconds(3);
             pollingTimer.Tick += async (sender, e) => await PollLobbyState();
             pollingTimer.Start();
             Task.Run(async () => await PollLobbyState());
@@ -83,13 +83,7 @@ namespace ConquiánCliente.ViewModel.Lobby
             var client = new LobbyClient();
             try
             {
-                var lobbyStateTask = client.GetLobbyStateAsync(this.RoomCode);
-                var chatMessagesTask = client.GetChatMessagesAsync(this.RoomCode);
-
-                await Task.WhenAll(lobbyStateTask, chatMessagesTask);
-
-                var lobbyState = await lobbyStateTask;
-                var chatMessages = await chatMessagesTask;
+                var lobbyState = await client.GetLobbyStateAsync(this.RoomCode);
 
                 if (lobbyState == null || lobbyState.StatusLobby == "Finalizada")
                 {
@@ -104,7 +98,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                         var mainMenu = new View.MainMenu.MainMenu();
                         mainMenu.Show();
 
-                        foreach (Window window in Application.Current.Windows)
+                        foreach (Window window in Application.Current.Windows.OfType<Window>().ToList())
                         {
                             if (window.DataContext == this)
                             {
@@ -129,30 +123,35 @@ namespace ConquiánCliente.ViewModel.Lobby
                             ProfileImagePath = playerDto.pathPhoto,
                             DisplayName = playerDto.nickname
                         };
+
                         if (playerDto.idPlayer == lobbyState.idHostPlayer)
                         {
-                            playerItem.DisplayName = $"Host: {playerDto.nickname}";
+                            playerItem.DisplayName = $"{Lang.LobbyHostPrefix} {playerDto.nickname}";
                         }
                         Players.Add(playerItem);
                     }
 
-                    if (chatMessages != null)
+                    if (lobbyState.ChatMessages != null)
                     {
                         ChatMessages.Clear();
-                        foreach (var message in chatMessages)
+                        foreach (var message in lobbyState.ChatMessages)
                         {
                             ChatMessages.Add($"{message.Nickname}: {message.Message}");
                         }
                     }
                 });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 pollingTimer.Stop();
+                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
-                if (client.State == System.ServiceModel.CommunicationState.Opened) client.Close();
+                if (client.State == System.ServiceModel.CommunicationState.Opened)
+                {
+                    client.Close();
+                }
             }
         }
 
@@ -177,13 +176,16 @@ namespace ConquiánCliente.ViewModel.Lobby
                 {
                     await client.SendMessageAsync(this.RoomCode, messageDto);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    // Manejar error de envío
+                    MessageBox.Show(Lang.ErrorSendMessageFailed, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 finally
                 {
-                    if (client.State == System.ServiceModel.CommunicationState.Opened) client.Close();
+                    if (client.State == System.ServiceModel.CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
                 }
             });
 
@@ -206,10 +208,14 @@ namespace ConquiánCliente.ViewModel.Lobby
                 }
                 catch
                 {
+                    // Se ignora el error intencionalmente, ya que el usuario está saliendo de la pantalla de todas formas.
                 }
                 finally
                 {
-                    if (client.State == System.ServiceModel.CommunicationState.Opened) client.Close();
+                    if (client.State == System.ServiceModel.CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
                 }
             });
 
@@ -224,15 +230,13 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private void ExecuteNextGameType(object obj)
         {
-            currentGameIndex++;
-            if (currentGameIndex >= gameTypes.Length) { currentGameIndex = 0; }
+            currentGameIndex = (currentGameIndex + 1) % gameTypes.Length;
             SelectedGameType = gameTypes[currentGameIndex];
         }
 
         private void ExecutePreviousGameType(object obj)
         {
-            currentGameIndex--;
-            if (currentGameIndex < 0) { currentGameIndex = gameTypes.Length - 1; }
+            currentGameIndex = (currentGameIndex - 1 + gameTypes.Length) % gameTypes.Length;
             SelectedGameType = gameTypes[currentGameIndex];
         }
     }

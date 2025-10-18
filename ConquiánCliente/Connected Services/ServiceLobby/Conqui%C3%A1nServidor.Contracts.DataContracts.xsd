@@ -2,6 +2,7 @@
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:complexType name="LobbyDto">
     <xs:sequence>
+      <xs:element minOccurs="0" name="ChatMessages" nillable="true" type="tns:ArrayOfMessageDto" />
       <xs:element minOccurs="0" name="GameMode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Players" nillable="true" type="tns:ArrayOfPlayerDto" />
       <xs:element minOccurs="0" name="RoomCode" nillable="true" type="xs:string" />
@@ -10,6 +11,20 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="LobbyDto" nillable="true" type="tns:LobbyDto" />
+  <xs:complexType name="ArrayOfMessageDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MessageDto" nillable="true" type="tns:MessageDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMessageDto" nillable="true" type="tns:ArrayOfMessageDto" />
+  <xs:complexType name="MessageDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nickname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Timestamp" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MessageDto" nillable="true" type="tns:MessageDto" />
   <xs:complexType name="ArrayOfPlayerDto">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="PlayerDto" nillable="true" type="tns:PlayerDto" />
@@ -30,18 +45,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PlayerDto" nillable="true" type="tns:PlayerDto" />
-  <xs:complexType name="MessageDto">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Nickname" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Timestamp" type="xs:dateTime" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="MessageDto" nillable="true" type="tns:MessageDto" />
-  <xs:complexType name="ArrayOfMessageDto">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MessageDto" nillable="true" type="tns:MessageDto" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMessageDto" nillable="true" type="tns:ArrayOfMessageDto" />
 </xs:schema>

@@ -300,9 +300,6 @@
     <None Include="Connected Services\ServiceLobby\ConquiánCliente.ServiceLobby.LobbyDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ServiceLobby\ConquiánCliente.ServiceLobby.MessageDto.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Connected Services\ServiceLobby\service.wsdl" />
     <None Include="Connected Services\ServiceLobby\service.xsd">
       <SubType>Designer</SubType>

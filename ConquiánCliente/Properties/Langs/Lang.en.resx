@@ -447,4 +447,10 @@
   <data name="InfoHostLeft" xml:space="preserve">
     <value>The host has left the room.</value>
   </data>
+  <data name="ErrorSendMessageFailed" xml:space="preserve">
+    <value>The message could not be sent.</value>
+  </data>
+  <data name="LobbyHostPrefix" xml:space="preserve">
+    <value>Host</value>
+  </data>
 </root>

@@ -24,6 +24,9 @@ namespace ConquiánCliente.ServiceLobby {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceLobby.MessageDto[] ChatMessagesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string GameModeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -45,6 +48,19 @@ namespace ConquiánCliente.ServiceLobby {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceLobby.MessageDto[] ChatMessages {
+            get {
+                return this.ChatMessagesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ChatMessagesField, value) != true)) {
+                    this.ChatMessagesField = value;
+                    this.RaisePropertyChanged("ChatMessages");
+                }
             }
         }
         
@@ -109,6 +125,84 @@ namespace ConquiánCliente.ServiceLobby {
                 if ((this.idHostPlayerField.Equals(value) != true)) {
                     this.idHostPlayerField = value;
                     this.RaisePropertyChanged("idHostPlayer");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MessageDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+        "acts")]
+    [System.SerializableAttribute()]
+    public partial class MessageDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NicknameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime TimestampField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nickname {
+            get {
+                return this.NicknameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NicknameField, value) != true)) {
+                    this.NicknameField = value;
+                    this.RaisePropertyChanged("Nickname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Timestamp {
+            get {
+                return this.TimestampField;
+            }
+            set {
+                if ((this.TimestampField.Equals(value) != true)) {
+                    this.TimestampField = value;
+                    this.RaisePropertyChanged("Timestamp");
                 }
             }
         }
@@ -297,84 +391,6 @@ namespace ConquiánCliente.ServiceLobby {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MessageDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
-        "acts")]
-    [System.SerializableAttribute()]
-    public partial class MessageDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MessageField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NicknameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime TimestampField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message {
-            get {
-                return this.MessageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
-                    this.MessageField = value;
-                    this.RaisePropertyChanged("Message");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Nickname {
-            get {
-                return this.NicknameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NicknameField, value) != true)) {
-                    this.NicknameField = value;
-                    this.RaisePropertyChanged("Nickname");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime Timestamp {
-            get {
-                return this.TimestampField;
-            }
-            set {
-                if ((this.TimestampField.Equals(value) != true)) {
-                    this.TimestampField = value;
-                    this.RaisePropertyChanged("Timestamp");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceLobby.ILobby")]
     public interface ILobby {
@@ -408,12 +424,6 @@ namespace ConquiánCliente.ServiceLobby {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/SendMessage", ReplyAction="http://tempuri.org/ILobby/SendMessageResponse")]
         System.Threading.Tasks.Task SendMessageAsync(string roomCode, ConquiánCliente.ServiceLobby.MessageDto message);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/GetChatMessages", ReplyAction="http://tempuri.org/ILobby/GetChatMessagesResponse")]
-        ConquiánCliente.ServiceLobby.MessageDto[] GetChatMessages(string roomCode);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/GetChatMessages", ReplyAction="http://tempuri.org/ILobby/GetChatMessagesResponse")]
-        System.Threading.Tasks.Task<ConquiánCliente.ServiceLobby.MessageDto[]> GetChatMessagesAsync(string roomCode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -481,14 +491,6 @@ namespace ConquiánCliente.ServiceLobby {
         
         public System.Threading.Tasks.Task SendMessageAsync(string roomCode, ConquiánCliente.ServiceLobby.MessageDto message) {
             return base.Channel.SendMessageAsync(roomCode, message);
-        }
-        
-        public ConquiánCliente.ServiceLobby.MessageDto[] GetChatMessages(string roomCode) {
-            return base.Channel.GetChatMessages(roomCode);
-        }
-        
-        public System.Threading.Tasks.Task<ConquiánCliente.ServiceLobby.MessageDto[]> GetChatMessagesAsync(string roomCode) {
-            return base.Channel.GetChatMessagesAsync(roomCode);
         }
     }
 }

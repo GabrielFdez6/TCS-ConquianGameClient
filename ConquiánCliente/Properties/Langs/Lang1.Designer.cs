@@ -313,6 +313,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El mensaje no se pudo enviar.
+        /// </summary>
+        public static string ErrorSendMessageFailed {
+            get {
+                return ResourceManager.GetString("ErrorSendMessageFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Servidor no disponible..
         /// </summary>
         public static string ErrorServerUnavailable {
@@ -777,6 +786,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string LobbyGameMode {
             get {
                 return ResourceManager.GetString("LobbyGameMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Anfitrión.
+        /// </summary>
+        public static string LobbyHostPrefix {
+            get {
+                return ResourceManager.GetString("LobbyHostPrefix", resourceCulture);
             }
         }
         
