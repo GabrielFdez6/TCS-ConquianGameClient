@@ -208,7 +208,6 @@ namespace ConquiánCliente.ViewModel.Lobby
                 }
                 catch
                 {
-                    // Se ignora el error intencionalmente, ya que el usuario está saliendo de la pantalla de todas formas.
                 }
                 finally
                 {
@@ -224,7 +223,13 @@ namespace ConquiánCliente.ViewModel.Lobby
 
             if (parameter is Window window)
             {
-                window.Close();
+                try
+                {
+                    window.Close();
+                }
+                catch (InvalidOperationException)
+                {
+                }
             }
         }
 
