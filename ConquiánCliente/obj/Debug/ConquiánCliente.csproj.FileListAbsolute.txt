@@ -264,3 +264,5 @@ C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\Conq
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.exe
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.pdb
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.exe.config
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\MainMenu\CreateOrJoin.g.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\MainMenu\CreateOrJoin.baml
