@@ -46,10 +46,20 @@
   <wsdl:message name="ILogin_AuthenticatePlayer_OutputMessage">
     <wsdl:part name="parameters" element="tns:AuthenticatePlayerResponse" />
   </wsdl:message>
+  <wsdl:message name="ILogin_SignOutPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:SignOutPlayer" />
+  </wsdl:message>
+  <wsdl:message name="ILogin_SignOutPlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SignOutPlayerResponse" />
+  </wsdl:message>
   <wsdl:portType name="ILogin">
     <wsdl:operation name="AuthenticatePlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/ILogin/AuthenticatePlayer" message="tns:ILogin_AuthenticatePlayer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILogin/AuthenticatePlayerResponse" message="tns:ILogin_AuthenticatePlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SignOutPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILogin/SignOutPlayer" message="tns:ILogin_SignOutPlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILogin/SignOutPlayerResponse" message="tns:ILogin_SignOutPlayer_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_ILogin" type="tns:ILogin">
@@ -58,6 +68,15 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="AuthenticatePlayer">
       <soap12:operation soapAction="http://tempuri.org/ILogin/AuthenticatePlayer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SignOutPlayer">
+      <soap12:operation soapAction="http://tempuri.org/ILogin/SignOutPlayer" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

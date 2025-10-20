@@ -453,4 +453,7 @@
   <data name="LobbyHostPrefix" xml:space="preserve">
     <value>Host</value>
   </data>
+  <data name="FrienListStatus" xml:space="preserve">
+    <value>Status </value>
+  </data>
 </root>

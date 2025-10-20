@@ -5,11 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConquiánCliente.View"
         xmlns:language="clr-namespace:ConquiánCliente.Properties.Langs"
+        xmlns:friendListVM="clr-namespace:ConquiánCliente.ViewModel.FriendList" 
         mc:Ignorable="d"
         Title="{x:Static language:Lang.FriendList}" Height="1080" Width="1920"
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
         Background="Transparent">
+
+    <Window.Resources>
+        <friendListVM:StatusConverter x:Key="StatusConverter"/>
+    </Window.Resources>
+
     <Grid>
 
         <Image Source="/Resources/backgroundLogin.jpg" Stretch="UniformToFill" />
@@ -65,6 +71,11 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="{x:Static language:Lang.GlobalNickname}" Binding="{Binding nickname}" Width="*"/>
                             <DataGridTextColumn Header="{x:Static language:Lang.GlobalLevel}" Binding="{Binding level}" Width="150"/>
+
+                            <DataGridTextColumn Header="{x:Static language:Lang.FrienListStatus}" 
+                                                Binding="{Binding idStatus, Converter={StaticResource StatusConverter}}" 
+                                                Width="120"/>
+
                             <DataGridTemplateColumn Header="{x:Static language:Lang.FriendListAccions}" Width="120">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -80,9 +91,10 @@
                     </DataGrid>
 
                     <DataGrid x:Name="SearchDataGrid" ItemsSource="{Binding SearchResult}" AutoGenerateColumns="False" IsReadOnly="True" Visibility="Collapsed" Margin="0,20,0,0"
-                          Background="{StaticResource PrimaryBackgroundBrush}" BorderBrush="{StaticResource BorderBrush}">
+                              Background="{StaticResource PrimaryBackgroundBrush}" BorderBrush="{StaticResource BorderBrush}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="{x:Static language:Lang.GlobalNickname}" Binding="{Binding nickname}" Width="*"/>
+
                             <DataGridTemplateColumn Header="{x:Static language:Lang.GlobalNickname}" Width="200">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -92,7 +104,7 @@
                                                 Command="{Binding DataContext.ViewProfileCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                                 CommandParameter="{Binding}"
                                                 Margin="5"
-                                             Style="{StaticResource PrimaryButtonStyle}"
+                                                Style="{StaticResource PrimaryButtonStyle}"
                                                 Width="90"/>
 
                                             <Button Content="{x:Static language:Lang.FriendListAdd}"
@@ -117,8 +129,8 @@
                     </Grid.ColumnDefinitions>
 
                     <Button Grid.Column="0" Style="{StaticResource PrimaryButtonStyle}" Width="140" Height="40"
-                        Command="{Binding RequestsCommand}"
-                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                            Command="{Binding RequestsCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                         <TextBlock Text="{x:Static language:Lang.FriendListRequests}"
                                    FontSize="14"
                                    VerticalAlignment="Center"

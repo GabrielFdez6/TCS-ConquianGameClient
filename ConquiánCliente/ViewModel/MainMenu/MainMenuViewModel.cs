@@ -45,8 +45,10 @@ namespace ConquiánCliente.ViewModel.MainMenu
             (parameter as Window)?.Close();
         }
 
-        private void ExecuteLogoutCommand(object parameter)
+        private async void ExecuteLogoutCommand(object parameter)
         {
+            var loginClient = new LoginClient();
+            await loginClient.SignOutPlayerAsync(PlayerSession.CurrentPlayer.idPlayer);
             PlayerSession.EndSession();
             var loginWindow = new LogIn();
             loginWindow.Show();

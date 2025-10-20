@@ -33,6 +33,9 @@ namespace ConquiánCliente.ServiceLogin {
         private int idPlayerField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> idStatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string lastNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -95,6 +98,19 @@ namespace ConquiánCliente.ServiceLogin {
                 if ((this.idPlayerField.Equals(value) != true)) {
                     this.idPlayerField = value;
                     this.RaisePropertyChanged("idPlayer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> idStatus {
+            get {
+                return this.idStatusField;
+            }
+            set {
+                if ((this.idStatusField.Equals(value) != true)) {
+                    this.idStatusField = value;
+                    this.RaisePropertyChanged("idStatus");
                 }
             }
         }
@@ -196,6 +212,12 @@ namespace ConquiánCliente.ServiceLogin {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogin/AuthenticatePlayer", ReplyAction="http://tempuri.org/ILogin/AuthenticatePlayerResponse")]
         System.Threading.Tasks.Task<ConquiánCliente.ServiceLogin.PlayerDto> AuthenticatePlayerAsync(string email, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogin/SignOutPlayer", ReplyAction="http://tempuri.org/ILogin/SignOutPlayerResponse")]
+        void SignOutPlayer(int idPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogin/SignOutPlayer", ReplyAction="http://tempuri.org/ILogin/SignOutPlayerResponse")]
+        System.Threading.Tasks.Task SignOutPlayerAsync(int idPlayer);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -231,6 +253,14 @@ namespace ConquiánCliente.ServiceLogin {
         
         public System.Threading.Tasks.Task<ConquiánCliente.ServiceLogin.PlayerDto> AuthenticatePlayerAsync(string email, string password) {
             return base.Channel.AuthenticatePlayerAsync(email, password);
+        }
+        
+        public void SignOutPlayer(int idPlayer) {
+            base.Channel.SignOutPlayer(idPlayer);
+        }
+        
+        public System.Threading.Tasks.Task SignOutPlayerAsync(int idPlayer) {
+            return base.Channel.SignOutPlayerAsync(idPlayer);
         }
     }
 }

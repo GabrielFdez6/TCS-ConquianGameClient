@@ -237,6 +237,9 @@ namespace ConquiánCliente.ServiceLobby {
         private int idPlayerField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> idStatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string lastNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -299,6 +302,19 @@ namespace ConquiánCliente.ServiceLobby {
                 if ((this.idPlayerField.Equals(value) != true)) {
                     this.idPlayerField = value;
                     this.RaisePropertyChanged("idPlayer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> idStatus {
+            get {
+                return this.idStatusField;
+            }
+            set {
+                if ((this.idStatusField.Equals(value) != true)) {
+                    this.idStatusField = value;
+                    this.RaisePropertyChanged("idStatus");
                 }
             }
         }

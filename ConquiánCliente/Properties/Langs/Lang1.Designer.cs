@@ -538,6 +538,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Estado.
+        /// </summary>
+        public static string FrienListStatus {
+            get {
+                return ResourceManager.GetString("FrienListStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Aceptar.
         /// </summary>
         public static string GlobalAccept {
