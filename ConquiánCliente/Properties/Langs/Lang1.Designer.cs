@@ -736,7 +736,7 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a El host ha salido de la sala.
+        ///   Busca una cadena traducida similar a El anfitrión ha salido de la sala.
         /// </summary>
         public static string InfoHostLeft {
             get {

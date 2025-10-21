@@ -1,6 +1,7 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceLobby;
 using ConquiánCliente.View.Lobby;
+using ConquiánCliente.ViewModel.Lobby;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,7 +42,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
         {
             if (parameter is Window window)
             {
-                var client = new LobbyClient();
+                var client = new LobbyClient(new InstanceContext(new LobbyCallbackHandler()));
                 try
                 {
                     CreatedRoomCode = await client.CreateLobbyAsync(PlayerSession.CurrentPlayer.idPlayer);
@@ -62,7 +63,8 @@ namespace ConquiánCliente.ViewModel.MainMenu
                 }
                 finally
                 {
-                    client.Close();
+                    if (client.State == CommunicationState.Opened) client.Close();
+                    else client.Abort();
                 }
             }
         }
@@ -77,10 +79,11 @@ namespace ConquiánCliente.ViewModel.MainMenu
 
             if (parameter is Window window)
             {
-                var client = new LobbyClient();
+                var context = new InstanceContext(new LobbyCallbackHandler());
+                var client = new LobbyClient(context);
                 try
                 {
-                    bool joinedSuccessfully = await client.JoinLobbyAsync(RoomCode.ToUpper(), PlayerSession.CurrentPlayer.idPlayer);
+                    bool joinedSuccessfully = await client.JoinAndSubscribeAsync(RoomCode.ToUpper(), PlayerSession.CurrentPlayer.idPlayer);
 
                     if (joinedSuccessfully)
                     {
@@ -99,7 +102,8 @@ namespace ConquiánCliente.ViewModel.MainMenu
                 }
                 finally
                 {
-                    client.Close();
+                    if (client.State == CommunicationState.Opened) client.Close();
+                    else client.Abort();
                 }
             }
         }

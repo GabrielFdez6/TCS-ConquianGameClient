@@ -445,7 +445,7 @@
     <value>Error al entrar a la sala</value>
   </data>
   <data name="InfoHostLeft" xml:space="preserve">
-    <value>El host ha salido de la sala</value>
+    <value>El anfitrión ha salido de la sala</value>
   </data>
   <data name="ErrorSendMessageFailed" xml:space="preserve">
     <value>El mensaje no se pudo enviar</value>

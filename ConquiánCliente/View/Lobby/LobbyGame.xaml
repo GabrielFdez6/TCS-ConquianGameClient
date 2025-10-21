@@ -11,6 +11,22 @@
     WindowStartupLocation="CenterScreen"
     Background="Transparent">
 
+    <Window.Resources>
+        <Style x:Key="LobbyHostButtonStyle" TargetType="Button" BasedOn="{StaticResource PrimaryButtonStyle}">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Effect" Value="{x:Null}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Image Source="/Resources/backgroundMainMenu.png" Stretch="UniformToFill"/>
         <Grid>
@@ -79,10 +95,10 @@
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="400">
-                <Button Width="388" Height="62" Margin="0,20,0,0" Style="{StaticResource PrimaryButtonStyle}">
-                    <Button.Effect>
-                        <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
-                    </Button.Effect>
+
+                <Button Width="388" Height="62" Margin="0,20,0,0" 
+                        Style="{StaticResource LobbyHostButtonStyle}"
+                        IsEnabled="{Binding IsHost}">
                     <TextBlock Text="{x:Static language:Lang.LobbyStartGame}"
                                FontSize="26"
                                FontWeight="Bold"
@@ -92,10 +108,11 @@
                 </Button>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,0">
-                    <Button Width="60" Height="50" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding PreviousGameTypeCommand}">
-                        <Button.Effect>
-                            <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
-                        </Button.Effect>
+
+                    <Button Width="60" Height="50" 
+                            Style="{StaticResource LobbyHostButtonStyle}" 
+                            Command="{Binding PreviousGameTypeCommand}"
+                            IsEnabled="{Binding IsHost}">
                         <TextBlock Text="&lt;" FontSize="26" FontWeight="Bold" Foreground="{StaticResource PrimaryTextBrush}"/>
                     </Button>
 
@@ -105,18 +122,17 @@
                                    FontSize="26" FontWeight="Bold" Foreground="{StaticResource PrimaryTextBrush}"/>
                     </Label>
 
-                    <Button Width="60" Height="50" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NextGameTypeCommand}">
-                        <Button.Effect>
-                            <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
-                        </Button.Effect>
+                    <Button Width="60" Height="50" 
+                            Style="{StaticResource LobbyHostButtonStyle}" 
+                            Command="{Binding NextGameTypeCommand}"
+                            IsEnabled="{Binding IsHost}">
                         <TextBlock Text=">" FontSize="26" FontWeight="Bold" Foreground="{StaticResource PrimaryTextBrush}"/>
                     </Button>
                 </StackPanel>
 
-                <Button Width="388" Height="62" Margin="0,30,0,0" Style="{StaticResource PrimaryButtonStyle}">
-                    <Button.Effect>
-                        <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
-                    </Button.Effect>
+                <Button Width="388" Height="62" Margin="0,30,0,0" 
+                        Style="{StaticResource LobbyHostButtonStyle}"
+                        IsEnabled="{Binding IsHost}">
                     <TextBlock Text="{x:Static language:Lang.GlobalInvite}"
                                FontSize="26"
                                FontWeight="Bold"

@@ -52,23 +52,32 @@
   <wsdl:message name="ILobby_CreateLobby_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateLobbyResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobby_JoinLobby_InputMessage">
-    <wsdl:part name="parameters" element="tns:JoinLobby" />
+  <wsdl:message name="ILobby_JoinAndSubscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:JoinAndSubscribe" />
   </wsdl:message>
-  <wsdl:message name="ILobby_JoinLobby_OutputMessage">
-    <wsdl:part name="parameters" element="tns:JoinLobbyResponse" />
+  <wsdl:message name="ILobby_JoinAndSubscribe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:JoinAndSubscribeResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobby_LeaveLobby_InputMessage">
-    <wsdl:part name="parameters" element="tns:LeaveLobby" />
-  </wsdl:message>
-  <wsdl:message name="ILobby_LeaveLobby_OutputMessage">
-    <wsdl:part name="parameters" element="tns:LeaveLobbyResponse" />
+  <wsdl:message name="ILobby_LeaveAndUnsubscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveAndUnsubscribe" />
   </wsdl:message>
   <wsdl:message name="ILobby_SendMessage_InputMessage">
     <wsdl:part name="parameters" element="tns:SendMessage" />
   </wsdl:message>
   <wsdl:message name="ILobby_SendMessage_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILobby_PlayerJoined_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerJoined" />
+  </wsdl:message>
+  <wsdl:message name="ILobby_PlayerLeft_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerLeft" />
+  </wsdl:message>
+  <wsdl:message name="ILobby_HostLeft_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:HostLeft" />
+  </wsdl:message>
+  <wsdl:message name="ILobby_MessageReceived_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:MessageReceived" />
   </wsdl:message>
   <wsdl:portType name="ILobby">
     <wsdl:operation name="GetLobbyState">
@@ -79,17 +88,28 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ILobby/CreateLobby" message="tns:ILobby_CreateLobby_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/CreateLobbyResponse" message="tns:ILobby_CreateLobby_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="JoinLobby">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobby/JoinLobby" message="tns:ILobby_JoinLobby_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobby/JoinLobbyResponse" message="tns:ILobby_JoinLobby_OutputMessage" />
+    <wsdl:operation name="JoinAndSubscribe">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobby/JoinAndSubscribe" message="tns:ILobby_JoinAndSubscribe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobby/JoinAndSubscribeResponse" message="tns:ILobby_JoinAndSubscribe_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="LeaveLobby">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobby/LeaveLobby" message="tns:ILobby_LeaveLobby_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobby/LeaveLobbyResponse" message="tns:ILobby_LeaveLobby_OutputMessage" />
+    <wsdl:operation name="LeaveAndUnsubscribe">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobby/LeaveAndUnsubscribe" message="tns:ILobby_LeaveAndUnsubscribe_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendMessage">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobby/SendMessage" message="tns:ILobby_SendMessage_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/SendMessageResponse" message="tns:ILobby_SendMessage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PlayerJoined">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobby/PlayerJoined" message="tns:ILobby_PlayerJoined_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PlayerLeft">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobby/PlayerLeft" message="tns:ILobby_PlayerLeft_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HostLeft">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobby/HostLeft" message="tns:ILobby_HostLeft_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MessageReceived">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobby/MessageReceived" message="tns:ILobby_MessageReceived_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_ILobby" type="tns:ILobby">
@@ -114,8 +134,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="JoinLobby">
-      <soap12:operation soapAction="http://tempuri.org/ILobby/JoinLobby" style="document" />
+    <wsdl:operation name="JoinAndSubscribe">
+      <soap12:operation soapAction="http://tempuri.org/ILobby/JoinAndSubscribe" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -123,20 +143,41 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="LeaveLobby">
-      <soap12:operation soapAction="http://tempuri.org/ILobby/LeaveLobby" style="document" />
+    <wsdl:operation name="LeaveAndUnsubscribe">
+      <soap12:operation soapAction="http://tempuri.org/ILobby/LeaveAndUnsubscribe" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SendMessage">
       <soap12:operation soapAction="http://tempuri.org/ILobby/SendMessage" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayerJoined">
+      <soap12:operation soapAction="http://tempuri.org/ILobby/PlayerJoined" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayerLeft">
+      <soap12:operation soapAction="http://tempuri.org/ILobby/PlayerLeft" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HostLeft">
+      <soap12:operation soapAction="http://tempuri.org/ILobby/HostLeft" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MessageReceived">
+      <soap12:operation soapAction="http://tempuri.org/ILobby/MessageReceived" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

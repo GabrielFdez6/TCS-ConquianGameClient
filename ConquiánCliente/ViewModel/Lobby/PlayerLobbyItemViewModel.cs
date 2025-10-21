@@ -10,7 +10,7 @@ namespace ConquiánCliente.ViewModel.Lobby
     {
         private string displayName;
         private string profileImagePath;
-
+        public int Id { get; set; }
         public string DisplayName
         {
             get { return displayName; }

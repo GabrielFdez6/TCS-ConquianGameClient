@@ -1,21 +1,45 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\",
+  "WorkspaceRootPath": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\tecnologias para el desarrollo de software\\cliente\\tcs-conquiangameclient\\conqui\u00E1ncliente\\view\\friendlist\\friendlist.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\friendlist\\friendlist.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\users\\braya\\documentos\\1uv\\5 semestre\\construcion\\tcs-conquiangameclient\\conqui\u00E1ncliente\\view\\lobby\\lobbygame.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\lobby\\lobbygame.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\tecnologias para el desarrollo de software\\cliente\\tcs-conquiangameclient\\conqui\u00E1ncliente\\viewmodel\\mainmenu\\createorjoinviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\viewmodel\\mainmenu\\createorjoinviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\users\\braya\\documentos\\1uv\\5 semestre\\construcion\\tcs-conquiangameclient\\conqui\u00E1ncliente\\viewmodel\\lobby\\lobbygameviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\viewmodel\\lobby\\lobbygameviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\tecnologias para el desarrollo de software\\cliente\\tcs-conquiangameclient\\conqui\u00E1ncliente\\properties\\langs\\lang.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\conqui\u00E1ncliente\\viewmodel\\lobby\\playerlobbyitemviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\viewmodel\\lobby\\playerlobbyitemviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\conqui\u00E1ncliente\\properties\\langs\\lang.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
       "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\properties\\langs\\lang.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\tecnologias para el desarrollo de software\\cliente\\tcs-conquiangameclient\\conqui\u00E1ncliente\\viewmodel\\friendlist\\statusconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\conqui\u00E1ncliente\\viewmodel\\mainmenu\\createorjoinviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\viewmodel\\mainmenu\\createorjoinviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\conqui\u00E1ncliente\\viewmodel\\lobby\\lobbycallbackhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\viewmodel\\lobby\\lobbycallbackhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\conqui\u00E1ncliente\\viewmodel\\authentication\\signupviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\viewmodel\\authentication\\signupviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\conqui\u00E1ncliente\\viewmodel\\mainmenu\\mainmenuviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\viewmodel\\mainmenu\\mainmenuviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\conqui\u00E1ncliente\\view\\friendlist\\friendlist.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\friendlist\\friendlist.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\conqui\u00E1ncliente\\viewmodel\\friendlist\\statusconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\viewmodel\\friendlist\\statusconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -26,11 +50,27 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 5,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Lang.resx",
+              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
+              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2025-10-20T22:17:51.392Z",
+              "IsPinned": true
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
             },
             {
               "$type": "Bookmark",
@@ -42,53 +82,111 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CreateOrJoinViewModel.cs",
-              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\MainMenu\\CreateOrJoinViewModel.cs",
-              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\ViewModel\\MainMenu\\CreateOrJoinViewModel.cs",
-              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\MainMenu\\CreateOrJoinViewModel.cs",
-              "RelativeToolTip": "Conqui\u00E1nCliente\\ViewModel\\MainMenu\\CreateOrJoinViewModel.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAhwDoAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-20T22:18:21.631Z",
+              "DocumentIndex": 0,
+              "Title": "LobbyGame.xaml",
+              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Lobby\\LobbyGame.xaml",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\Lobby\\LobbyGame.xaml",
+              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Lobby\\LobbyGame.xaml",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\Lobby\\LobbyGame.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-21T21:32:16.416Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "LobbyCallbackHandler.cs",
+              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\Lobby\\LobbyCallbackHandler.cs",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\ViewModel\\Lobby\\LobbyCallbackHandler.cs",
+              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\Lobby\\LobbyCallbackHandler.cs",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\ViewModel\\Lobby\\LobbyCallbackHandler.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T16:45:29.06Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Lang.resx",
-              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
-              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
-              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
-              "RelativeToolTip": "Conqui\u00E1nCliente\\Properties\\Langs\\Lang.resx",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-10-20T22:17:51.392Z",
+              "Title": "PlayerLobbyItemViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\Lobby\\PlayerLobbyItemViewModel.cs",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\ViewModel\\Lobby\\PlayerLobbyItemViewModel.cs",
+              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\Lobby\\PlayerLobbyItemViewModel.cs",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\ViewModel\\Lobby\\PlayerLobbyItemViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T16:42:46.86Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LobbyGameViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\Lobby\\LobbyGameViewModel.cs",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\ViewModel\\Lobby\\LobbyGameViewModel.cs",
+              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\Lobby\\LobbyGameViewModel.cs",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\ViewModel\\Lobby\\LobbyGameViewModel.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAcwGkAAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T16:13:48.363Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
+              "Title": "MainMenuViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\MainMenu\\MainMenuViewModel.cs",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\ViewModel\\MainMenu\\MainMenuViewModel.cs",
+              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\MainMenu\\MainMenuViewModel.cs",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\ViewModel\\MainMenu\\MainMenuViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T15:41:40.839Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SignUpViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\Authentication\\SignUpViewModel.cs",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\ViewModel\\Authentication\\SignUpViewModel.cs",
+              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\Authentication\\SignUpViewModel.cs",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\ViewModel\\Authentication\\SignUpViewModel.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T15:40:25.902Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CreateOrJoinViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\MainMenu\\CreateOrJoinViewModel.cs",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\ViewModel\\MainMenu\\CreateOrJoinViewModel.cs",
+              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\MainMenu\\CreateOrJoinViewModel.cs",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\ViewModel\\MainMenu\\CreateOrJoinViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-20T22:18:21.631Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "StatusConverter.cs",
-              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\FriendList\\StatusConverter.cs",
+              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\FriendList\\StatusConverter.cs",
               "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\ViewModel\\FriendList\\StatusConverter.cs",
-              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\FriendList\\StatusConverter.cs",
+              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\FriendList\\StatusConverter.cs",
               "RelativeToolTip": "Conqui\u00E1nCliente\\ViewModel\\FriendList\\StatusConverter.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-20T22:09:49.333Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-20T22:09:49.333Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 8,
               "Title": "FriendList.xaml",
-              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\FriendList\\FriendList.xaml",
+              "DocumentMoniker": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\FriendList\\FriendList.xaml",
               "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\FriendList\\FriendList.xaml",
-              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\FriendList\\FriendList.xaml",
+              "ToolTip": "C:\\Users\\braya\\Documentos\\1uv\\5 semestre\\Construcion\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\FriendList\\FriendList.xaml",
               "RelativeToolTip": "Conqui\u00E1nCliente\\View\\FriendList\\FriendList.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-10-20T22:02:19.541Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-20T22:02:19.541Z"
             }
           ]
         },

@@ -101,6 +101,7 @@
     <Compile Include="ViewModel\FriendList\FriendRequestViewModel.cs" />
     <Compile Include="ViewModel\FriendList\StatusConverter.cs" />
     <Compile Include="ViewModel\ImagePathToBooleanConverter.cs" />
+    <Compile Include="ViewModel\Lobby\LobbyCallbackHandler.cs" />
     <Compile Include="ViewModel\Lobby\LobbyGameViewModel.cs" />
     <Compile Include="ViewModel\Lobby\PlayerLobbyItemViewModel.cs" />
     <Compile Include="ViewModel\MainMenu\CreateOrJoinViewModel.cs" />

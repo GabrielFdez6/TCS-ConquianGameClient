@@ -408,7 +408,7 @@ namespace ConquiánCliente.ServiceLobby {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceLobby.ILobby")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceLobby.ILobby", CallbackContract=typeof(ConquiánCliente.ServiceLobby.ILobbyCallback))]
     public interface ILobby {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/GetLobbyState", ReplyAction="http://tempuri.org/ILobby/GetLobbyStateResponse")]
@@ -423,17 +423,17 @@ namespace ConquiánCliente.ServiceLobby {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/CreateLobby", ReplyAction="http://tempuri.org/ILobby/CreateLobbyResponse")]
         System.Threading.Tasks.Task<string> CreateLobbyAsync(int idHostPlayer);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/JoinLobby", ReplyAction="http://tempuri.org/ILobby/JoinLobbyResponse")]
-        bool JoinLobby(string roomCode, int idPlayer);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/JoinAndSubscribe", ReplyAction="http://tempuri.org/ILobby/JoinAndSubscribeResponse")]
+        bool JoinAndSubscribe(string roomCode, int idPlayer);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/JoinLobby", ReplyAction="http://tempuri.org/ILobby/JoinLobbyResponse")]
-        System.Threading.Tasks.Task<bool> JoinLobbyAsync(string roomCode, int idPlayer);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/JoinAndSubscribe", ReplyAction="http://tempuri.org/ILobby/JoinAndSubscribeResponse")]
+        System.Threading.Tasks.Task<bool> JoinAndSubscribeAsync(string roomCode, int idPlayer);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/LeaveLobby", ReplyAction="http://tempuri.org/ILobby/LeaveLobbyResponse")]
-        void LeaveLobby(string roomCode, int idPlayer);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/LeaveAndUnsubscribe")]
+        void LeaveAndUnsubscribe(string roomCode, int idPlayer);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/LeaveLobby", ReplyAction="http://tempuri.org/ILobby/LeaveLobbyResponse")]
-        System.Threading.Tasks.Task LeaveLobbyAsync(string roomCode, int idPlayer);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/LeaveAndUnsubscribe")]
+        System.Threading.Tasks.Task LeaveAndUnsubscribeAsync(string roomCode, int idPlayer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/SendMessage", ReplyAction="http://tempuri.org/ILobby/SendMessageResponse")]
         void SendMessage(string roomCode, ConquiánCliente.ServiceLobby.MessageDto message);
@@ -443,30 +443,47 @@ namespace ConquiánCliente.ServiceLobby {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ILobbyCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/PlayerJoined")]
+        void PlayerJoined(ConquiánCliente.ServiceLobby.PlayerDto newPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/PlayerLeft")]
+        void PlayerLeft(int idPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/HostLeft")]
+        void HostLeft();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/MessageReceived")]
+        void MessageReceived(ConquiánCliente.ServiceLobby.MessageDto message);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ILobbyChannel : ConquiánCliente.ServiceLobby.ILobby, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class LobbyClient : System.ServiceModel.ClientBase<ConquiánCliente.ServiceLobby.ILobby>, ConquiánCliente.ServiceLobby.ILobby {
+    public partial class LobbyClient : System.ServiceModel.DuplexClientBase<ConquiánCliente.ServiceLobby.ILobby>, ConquiánCliente.ServiceLobby.ILobby {
         
-        public LobbyClient() {
+        public LobbyClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
         }
         
-        public LobbyClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
+        public LobbyClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
         }
         
-        public LobbyClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public LobbyClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public LobbyClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public LobbyClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public LobbyClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
+        public LobbyClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
         }
         
         public ConquiánCliente.ServiceLobby.LobbyDto GetLobbyState(string roomCode) {
@@ -485,20 +502,20 @@ namespace ConquiánCliente.ServiceLobby {
             return base.Channel.CreateLobbyAsync(idHostPlayer);
         }
         
-        public bool JoinLobby(string roomCode, int idPlayer) {
-            return base.Channel.JoinLobby(roomCode, idPlayer);
+        public bool JoinAndSubscribe(string roomCode, int idPlayer) {
+            return base.Channel.JoinAndSubscribe(roomCode, idPlayer);
         }
         
-        public System.Threading.Tasks.Task<bool> JoinLobbyAsync(string roomCode, int idPlayer) {
-            return base.Channel.JoinLobbyAsync(roomCode, idPlayer);
+        public System.Threading.Tasks.Task<bool> JoinAndSubscribeAsync(string roomCode, int idPlayer) {
+            return base.Channel.JoinAndSubscribeAsync(roomCode, idPlayer);
         }
         
-        public void LeaveLobby(string roomCode, int idPlayer) {
-            base.Channel.LeaveLobby(roomCode, idPlayer);
+        public void LeaveAndUnsubscribe(string roomCode, int idPlayer) {
+            base.Channel.LeaveAndUnsubscribe(roomCode, idPlayer);
         }
         
-        public System.Threading.Tasks.Task LeaveLobbyAsync(string roomCode, int idPlayer) {
-            return base.Channel.LeaveLobbyAsync(roomCode, idPlayer);
+        public System.Threading.Tasks.Task LeaveAndUnsubscribeAsync(string roomCode, int idPlayer) {
+            return base.Channel.LeaveAndUnsubscribeAsync(roomCode, idPlayer);
         }
         
         public void SendMessage(string roomCode, ConquiánCliente.ServiceLobby.MessageDto message) {
