@@ -95,7 +95,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="{x:Static language:Lang.GlobalNickname}" Binding="{Binding nickname}" Width="*"/>
 
-                            <DataGridTemplateColumn Header="{x:Static language:Lang.GlobalNickname}" Width="200">
+                            <DataGridTemplateColumn Header="{x:Static language:Lang.FriendListAccions}" Width="200">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

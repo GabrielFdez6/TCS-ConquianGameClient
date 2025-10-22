@@ -14,9 +14,9 @@ namespace ConquiánCliente.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private ObservableCollection<ServiceFriendList.PlayerDto> _friends;
+        private ObservableCollection<ServiceFriendList.PlayerDto> friends;
 
-        private ObservableCollection<ServiceFriendList.PlayerDto> _searchResult;
+        private ObservableCollection<ServiceFriendList.PlayerDto> searchResult;
 
 
         public ICommand ViewProfileCommand { get; }
@@ -28,14 +28,14 @@ namespace ConquiánCliente.ViewModel
 
         public ObservableCollection<ServiceFriendList.PlayerDto> Friends
         {
-            get { return _friends; }
-            set { _friends = value; OnPropertyChanged(nameof(Friends)); }
+            get { return friends; }
+            set { friends = value; OnPropertyChanged(nameof(Friends)); }
         }
 
         public ObservableCollection<ServiceFriendList.PlayerDto> SearchResult
         {
-            get { return _searchResult; }
-            set { _searchResult = value; OnPropertyChanged(nameof(SearchResult)); }
+            get { return searchResult; }
+            set { searchResult = value; OnPropertyChanged(nameof(SearchResult)); }
         }
 
         private readonly FriendListClient FriendListService;
