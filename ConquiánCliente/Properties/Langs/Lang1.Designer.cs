@@ -790,6 +790,33 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Error al invitar .
+        /// </summary>
+        public static string LobbyErrorInvitationFailed {
+            get {
+                return ResourceManager.GetString("LobbyErrorInvitationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error al cargar la lista de amigos.
+        /// </summary>
+        public static string LobbyErrorLoadingFriends {
+            get {
+                return ResourceManager.GetString("LobbyErrorLoadingFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sala llena.
+        /// </summary>
+        public static string LobbyFull {
+            get {
+                return ResourceManager.GetString("LobbyFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Modo de juego.
         /// </summary>
         public static string LobbyGameMode {
@@ -804,6 +831,33 @@ namespace ConquiánCliente.Properties.Langs {
         public static string LobbyHostPrefix {
             get {
                 return ResourceManager.GetString("LobbyHostPrefix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invitación.
+        /// </summary>
+        public static string LobbyInvitation {
+            get {
+                return ResourceManager.GetString("LobbyInvitation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invitación enviada .
+        /// </summary>
+        public static string LobbyInvitationSent {
+            get {
+                return ResourceManager.GetString("LobbyInvitationSent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a te ha invitado a una partida.
+        /// </summary>
+        public static string LobbyInvitedYou {
+            get {
+                return ResourceManager.GetString("LobbyInvitedYou", resourceCulture);
             }
         }
         
@@ -849,6 +903,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string LobbyReady {
             get {
                 return ResourceManager.GetString("LobbyReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Rechazar .
+        /// </summary>
+        public static string LobbyReject {
+            get {
+                return ResourceManager.GetString("LobbyReject", resourceCulture);
             }
         }
         
@@ -993,6 +1056,24 @@ namespace ConquiánCliente.Properties.Langs {
         public static string RecoveryInfo {
             get {
                 return ResourceManager.GetString("RecoveryInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Desconectado.
+        /// </summary>
+        public static string StatusOffline {
+            get {
+                return ResourceManager.GetString("StatusOffline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a En linea .
+        /// </summary>
+        public static string StatusOnline {
+            get {
+                return ResourceManager.GetString("StatusOnline", resourceCulture);
             }
         }
         

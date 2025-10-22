@@ -2,6 +2,7 @@
 using ConquiánCliente.ViewModel.MainMenu;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,14 @@ namespace ConquiánCliente.View.MainMenu
         {
             InitializeComponent();
             DataContext = new MainMenuViewModel();
+        }
+
+        private void MainMenuWindow_Closing(object sender, CancelEventArgs e)
+        {
+            if (this.DataContext is MainMenuViewModel vm)
+            {
+                vm.OnWindowClosing();
+            }
         }
     }
 }

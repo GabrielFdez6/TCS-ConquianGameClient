@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
-
+using ConquiánCliente.View.Lobby;
+using System.Linq;
 namespace ConquiánCliente.ViewModel.Lobby
 {
     public class LobbyGameViewModel : ViewModelBase
@@ -66,6 +67,8 @@ namespace ConquiánCliente.ViewModel.Lobby
         public ICommand GoBackCommand { get; }
         public ICommand SendMessageCommand { get; }
 
+        public ICommand ShowInviteFriendsCommand { get; }
+
         public LobbyGameViewModel(string receivedRoomCode)
         {
             Players = new ObservableCollection<PlayerLobbyItemViewModel>();
@@ -77,6 +80,7 @@ namespace ConquiánCliente.ViewModel.Lobby
             PreviousGameTypeCommand = new RelayCommand(ExecutePreviousGameType);
             GoBackCommand = new RelayCommand(ExecuteGoBack);
             SendMessageCommand = new RelayCommand(ExecuteSendMessage, CanExecuteSendMessage);
+            ShowInviteFriendsCommand = new RelayCommand(ExecuteShowInviteFriends, CanExecuteShowInviteFriends);
 
             InitializeConnectionAsync();
         }
@@ -300,6 +304,22 @@ namespace ConquiánCliente.ViewModel.Lobby
                 }
                 catch (InvalidOperationException) { }
             }
+        }
+
+        private bool CanExecuteShowInviteFriends(object obj)
+        {
+            return IsHost;
+        }
+
+        private void ExecuteShowInviteFriends(object obj)
+        {
+            var vm = new InviteFriendsViewModel(this.RoomCode);
+            var window = new InviteFriendsWindow
+            {
+                DataContext = vm,
+                Owner = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.DataContext == this)
+            };
+            window.ShowDialog(); 
         }
 
         private void ExecuteNextGameType(object obj)

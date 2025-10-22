@@ -12,6 +12,7 @@
         Height="1080" Width="1920"
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
+        Closing="MainMenuWindow_Closing"
         Background="Transparent">
 
     <Window.DataContext>

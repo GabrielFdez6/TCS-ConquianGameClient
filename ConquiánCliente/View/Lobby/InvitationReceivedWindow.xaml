@@ -1,0 +1,26 @@
+﻿<Window x:Class="ConquiánCliente.View.Lobby.InvitationReceivedWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lang="clr-namespace:ConquiánCliente.Properties.Langs"
+        mc:Ignorable="d"
+        Title="{x:Static lang:Lang.LobbyInvitation}" Height="200" Width="400"
+        WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" Topmost="True"
+        Background="#2E2E2E">
+    <Grid VerticalAlignment="Center">
+        <StackPanel HorizontalAlignment="Center">
+            <TextBlock Text="{Binding InvitationText}" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                <Button Content="{x:Static lang:Lang.GlobalAccept}" 
+                        Command="{Binding AcceptCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                        Style="{StaticResource PrimaryButtonStyle}" Width="120" Margin="10"/>
+                <Button Content="{x:Static lang:Lang.LobbyReject}" 
+                        Command="{Binding RejectCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                        Style="{StaticResource SecondaryButtonStyle}" Width="120" Margin="10"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

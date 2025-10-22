@@ -73,6 +73,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ServiceInvitation\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ServiceLobby\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -101,6 +106,10 @@
     <Compile Include="ViewModel\FriendList\FriendRequestViewModel.cs" />
     <Compile Include="ViewModel\FriendList\StatusConverter.cs" />
     <Compile Include="ViewModel\ImagePathToBooleanConverter.cs" />
+    <Compile Include="ViewModel\InvitationCallbackHandler.cs" />
+    <Compile Include="ViewModel\InvitationClientManager.cs" />
+    <Compile Include="ViewModel\Lobby\InvitationReceivedViewModel.cs" />
+    <Compile Include="ViewModel\Lobby\InviteFriendsViewModel.cs" />
     <Compile Include="ViewModel\Lobby\LobbyCallbackHandler.cs" />
     <Compile Include="ViewModel\Lobby\LobbyGameViewModel.cs" />
     <Compile Include="ViewModel\Lobby\PlayerLobbyItemViewModel.cs" />
@@ -131,6 +140,12 @@
     </Compile>
     <Compile Include="View\FriendList\FriendRequests.xaml.cs">
       <DependentUpon>FriendRequests.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Lobby\InvitationReceivedWindow.xaml.cs">
+      <DependentUpon>InvitationReceivedWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Lobby\InviteFriendsWindow.xaml.cs">
+      <DependentUpon>InviteFriendsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Lobby\LobbyGame.xaml.cs">
       <DependentUpon>LobbyGame.xaml</DependentUpon>
@@ -190,6 +205,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FriendList\FriendRequests.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Lobby\InvitationReceivedWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Lobby\InviteFriendsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -296,6 +319,13 @@
     <None Include="Connected Services\ServiceFriendList\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceInvitation\service.wsdl" />
+    <None Include="Connected Services\ServiceInvitation\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceInvitation\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceLobby\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -388,6 +418,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServiceFriendList\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceInvitation\" />
     <WCFMetadataStorage Include="Connected Services\ServiceLobby\" />
     <WCFMetadataStorage Include="Connected Services\ServiceLogin\" />
     <WCFMetadataStorage Include="Connected Services\ServiceSignUp\" />
@@ -449,6 +480,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ServiceUserProfile\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceInvitation\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceInvitation\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceInvitation\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

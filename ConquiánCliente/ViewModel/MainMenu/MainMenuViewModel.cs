@@ -3,6 +3,7 @@ using ConquiánCliente.View;
 using ConquiánCliente.View.FriendList;
 using ConquiánCliente.View.Lobby;
 using ConquiánCliente.View.MainMenu;
+using ConquiánCliente.ViewModel.Lobby;
 using System.Windows;
 using System.Windows.Input;
 
@@ -27,6 +28,23 @@ namespace ConquiánCliente.ViewModel.MainMenu
             FriendsCommand = new RelayCommand(ExecuteFriendsCommand);
             PlayCommand = new RelayCommand(ExecutePlay);
             ChangeLanguageCommand = new RelayCommand(ExecuteChangeLanguage);
+            InvitationClientManager.Connect(PlayerSession.CurrentPlayer.idPlayer);
+            InvitationCallbackHandler.OnGlobalInvitationReceived += HandleInvitation;
+        }
+
+        private void HandleInvitation(string senderNickname, string roomCode)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                var vm = new InvitationReceivedViewModel(senderNickname, roomCode);
+                var window = new View.Lobby.InvitationReceivedWindow { DataContext = vm };
+                window.Show();
+            });
+        }
+
+        public void OnWindowClosing()
+        {
+            InvitationCallbackHandler.OnGlobalInvitationReceived -= HandleInvitation;
         }
 
         private void LoadPlayerData()

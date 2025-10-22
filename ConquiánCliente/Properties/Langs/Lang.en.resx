@@ -456,4 +456,31 @@
   <data name="FrienListStatus" xml:space="preserve">
     <value>Status </value>
   </data>
+  <data name="LobbyErrorLoadingFriends" xml:space="preserve">
+    <value>Error loading friends</value>
+  </data>
+  <data name="LobbyInvitationSent" xml:space="preserve">
+    <value>Invitation sent</value>
+  </data>
+  <data name="LobbyErrorInvitationFailed" xml:space="preserve">
+    <value>Invitation failed</value>
+  </data>
+  <data name="StatusOnline" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="StatusOffline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="LobbyInvitation" xml:space="preserve">
+    <value>Invitation</value>
+  </data>
+  <data name="LobbyReject" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="LobbyInvitedYou" xml:space="preserve">
+    <value>Invited you</value>
+  </data>
+  <data name="LobbyFull" xml:space="preserve">
+    <value>Lobby full</value>
+  </data>
 </root>
