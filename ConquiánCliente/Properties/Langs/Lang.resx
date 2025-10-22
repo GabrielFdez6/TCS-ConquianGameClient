@@ -483,4 +483,10 @@
   <data name="LobbyFull" xml:space="preserve">
     <value>Sala llena</value>
   </data>
+  <data name="ErrorEmailExists" xml:space="preserve">
+    <value>El correo electrónico ya existe</value>
+  </data>
+  <data name="ErrorNicknameExists" xml:space="preserve">
+    <value>El nombre de usuario ya existe</value>
+  </data>
 </root>

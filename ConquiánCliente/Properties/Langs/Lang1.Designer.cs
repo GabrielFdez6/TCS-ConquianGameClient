@@ -115,6 +115,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El correo electrónico ya existe.
+        /// </summary>
+        public static string ErrorEmailExists {
+            get {
+                return ResourceManager.GetString("ErrorEmailExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El formato del correo electrónico no es válido..
         /// </summary>
         public static string ErrorEmailInvalidFormat {
@@ -228,6 +237,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string ErrorNicknameEmpty {
             get {
                 return ResourceManager.GetString("ErrorNicknameEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El nombre de usuario ya existe.
+        /// </summary>
+        public static string ErrorNicknameExists {
+            get {
+                return ResourceManager.GetString("ErrorNicknameExists", resourceCulture);
             }
         }
         

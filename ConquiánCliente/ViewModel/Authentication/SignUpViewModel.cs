@@ -1,7 +1,6 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceSignUp;
 using ConquiánCliente.View;
-using ConquiánCliente.View.Authentication;
 using ConquiánCliente.ViewModel.Validation;
 using System.ServiceModel;
 using System.Windows;
@@ -77,13 +76,15 @@ namespace ConquiánCliente.ViewModel.Authentication
             var confirmPasswordBox = window?.FindName("pbConfirmPassowrd") as PasswordBox;
             string confirmPassword = confirmPasswordBox?.Password;
 
-            Email = Email.Trim();
             string emailError = SignUpValidator.ValidateEmail(Email);
             if (!string.IsNullOrEmpty(emailError))
             {
                 MessageBox.Show(emailError, Lang.TitleValidation);
                 return;
             }
+
+            Email = Email.Trim();
+
             string passwordError = SignUpValidator.ValidatePassword(password);
             if (!string.IsNullOrEmpty(passwordError))
             {
@@ -104,7 +105,7 @@ namespace ConquiánCliente.ViewModel.Authentication
 
                 if (serverResponse == "ERROR_EMAIL_EXISTS")
                 {
-                    MessageBox.Show(Lang.ErrorVerificationEmail, Lang.TitleError);
+                    MessageBox.Show(Lang.ErrorEmailExists, Lang.TitleError);
                 }
                 else if (!string.IsNullOrEmpty(serverResponse))
                 {
@@ -164,21 +165,18 @@ namespace ConquiánCliente.ViewModel.Authentication
 
         private async void ExecuteRegisterPlayer(object parameter)
         {
-            Name = Name.Trim();
             string nameError = SignUpValidator.ValidateName(Name);
             if (!string.IsNullOrEmpty(nameError))
             {
                 MessageBox.Show(nameError, Lang.TitleValidation);
                 return;
             }
-            LastName = LastName.Trim();
             string lastNameError = SignUpValidator.ValidateLastName(LastName);
             if (!string.IsNullOrEmpty(lastNameError))
             {
                 MessageBox.Show(lastNameError, Lang.TitleValidation);
                 return;
             }
-            Nickname = Nickname.Trim();
             string nicknameError = SignUpValidator.ValidateNickname(Nickname);
             if (!string.IsNullOrEmpty(nicknameError))
             {
@@ -186,23 +184,30 @@ namespace ConquiánCliente.ViewModel.Authentication
                 return;
             }
 
-            playerInProgress.name = Name;
-            playerInProgress.lastName = LastName;
-            playerInProgress.nickname = Nickname;
+            playerInProgress.name = Name.Trim();
+            playerInProgress.lastName = LastName.Trim();
+            playerInProgress.nickname = Nickname.Trim();
             playerInProgress.pathPhoto = "/Resources/imageProfile/default.JPG";
 
             try
             {
                 var client = new SignUpClient();
-                if (await client.RegisterPlayerAsync(playerInProgress))
+
+                bool isRegistrationSuccessful = await client.RegisterPlayerAsync(playerInProgress);
+
+                if (isRegistrationSuccessful)
                 {
                     MessageBox.Show(Lang.SuccessAccountCreated, Lang.TitleRegistrationComplete);
                     ExecuteNavigateToLogin(parameter);
                 }
                 else
                 {
-                    MessageBox.Show(Lang.ErrorRegistrationFailed, Lang.TitleRegistrationError);
+                    MessageBox.Show(Lang.ErrorNicknameExists, Lang.TitleRegistrationError);
                 }
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
             }
             catch (System.Exception ex)
             {

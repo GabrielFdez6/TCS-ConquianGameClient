@@ -269,3 +269,8 @@ C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\Con
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.exe
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.pdb
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.exe.config
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.exe.config
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Lobby\InvitationReceivedWindow.g.cs
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Lobby\InviteFriendsWindow.g.cs
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Lobby\InvitationReceivedWindow.baml
+C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Lobby\InviteFriendsWindow.baml
