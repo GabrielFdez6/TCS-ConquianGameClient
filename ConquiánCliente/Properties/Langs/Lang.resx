@@ -489,4 +489,19 @@
   <data name="ErrorNicknameExists" xml:space="preserve">
     <value>El nombre de usuario ya existe</value>
   </data>
+  <data name="ErrorRecoveryRequestFailed" xml:space="preserve">
+    <value>No se pudo procesar la solicitud. Verifique que el correo esté registrado y verificado.</value>
+  </data>
+  <data name="ErrorTimeout" xml:space="preserve">
+    <value>Error: La operación tardó demasiado tiempo.</value>
+  </data>
+  <data name="ErrorPasswordResetFailed" xml:space="preserve">
+    <value>No se pudo reiniciar la contraseña. Es posible que el código haya expirado. Intente de nuevo.</value>
+  </data>
+  <data name="SuccessPasswordReset" xml:space="preserve">
+    <value>Contraseña actualizada con éxito. Ya puedes iniciar sesión.</value>
+  </data>
+  <data name="TitleResetPasswordSuccess" xml:space="preserve">
+    <value>Contraseña restablecida</value>
+  </data>
 </root>

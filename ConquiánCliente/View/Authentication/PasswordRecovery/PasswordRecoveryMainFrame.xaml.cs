@@ -1,5 +1,4 @@
-﻿using ConquiánCliente.ViewModel.Authentication.PasswordRecovery;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,14 +15,14 @@ using System.Windows.Shapes;
 namespace ConquiánCliente.View.Authentication.PasswordRecovery
 {
     /// <summary>
-    /// Lógica de interacción para CodeValidation.xaml
+    /// Lógica de interacción para PasswordRecoveryMainFrame.xaml
     /// </summary>
-    public partial class CodeValidation : Page
+    public partial class PasswordRecoveryMainFrame : Window
     {
-        public CodeValidation(PasswordRecoveryViewModel viewModel)
+        public PasswordRecoveryMainFrame()
         {
             InitializeComponent();
-            this.DataContext = viewModel;
+            RecoveryFrame.Navigate(new RequestRecovery());
         }
     }
 }

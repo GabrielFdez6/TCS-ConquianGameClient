@@ -1,17 +1,13 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceLobby;
-using ConquiánCliente.View.MainMenu;
 using System;
 using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.Linq;
-using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Threading;
 using ConquiánCliente.View.Lobby;
-using System.Linq;
 namespace ConquiánCliente.ViewModel.Lobby
 {
     public class LobbyGameViewModel : ViewModelBase

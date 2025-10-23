@@ -81,30 +81,26 @@ namespace ConquiánCliente.ViewModel.Validation
 
         public static string ValidateEmail(string email)
         {
-            if (string.IsNullOrEmpty(email))
+            if (string.IsNullOrWhiteSpace(email))
             {
                 return Lang.ErrorEmailEmpty;
             }
+
+            email = email.Trim();
 
             if (email.Length > MAX_EMAIL_LENGTH)
             {
                 return string.Format(Lang.ErrorEmailLenght, MAX_EMAIL_LENGTH);
             }
 
-            try
+            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]{2,}$";
+
+            if (!Regex.IsMatch(email, emailPattern))
             {
-                var addr = new System.Net.Mail.MailAddress(email);
-                if (addr.Address == email)
-                {
-                    return string.Empty;
-                }
-            }
-            catch
-            {
-                return string.Format(Lang.ErrorEmailInvalidFormat);
+                return Lang.ErrorEmailInvalidFormat;
             }
 
-            return string.Format(Lang.ErrorEmailInvalidFormat);
+            return string.Empty;
         }
 
         public static string ValidatePassword(string password)

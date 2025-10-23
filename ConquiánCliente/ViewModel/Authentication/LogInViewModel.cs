@@ -107,7 +107,7 @@ namespace ConquiánCliente.ViewModel.Authentication
 
         private void ExecuteNavigateToForgotPassword(object parameter)
         {
-            var requestRecoveryWindow = new RequestRecovery();
+            var requestRecoveryWindow = new PasswordRecoveryMainFrame();
             requestRecoveryWindow.Show();
             (parameter as Window)?.Close();
         }

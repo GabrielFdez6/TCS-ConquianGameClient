@@ -88,6 +88,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ServicePasswordRecovery\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ServiceSignUp\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -100,6 +105,7 @@
     </Compile>
     <Compile Include="Models\FriendRequest.cs" />
     <Compile Include="ViewModel\Authentication\LogInViewModel.cs" />
+    <Compile Include="ViewModel\Authentication\PasswordRecovery\PasswordRecoveryViewModel.cs" />
     <Compile Include="ViewModel\Authentication\SignUpViewModel.cs" />
     <Compile Include="ViewModel\FriendList\FriendListViewModel.cs" />
     <Compile Include="ViewModel\FriendList\FriendProfileViewModel.cs" />
@@ -121,10 +127,14 @@
     <Compile Include="ViewModel\Profile\UserProfileViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\Validation\LogInValidator.cs" />
+    <Compile Include="ViewModel\Validation\PasswordRecoveryValidator.cs" />
     <Compile Include="ViewModel\Validation\SignUpValidator.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\Authentication\PasswordRecovery\CodeValidation.xaml.cs">
       <DependentUpon>CodeValidation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Authentication\PasswordRecovery\PasswordRecoveryMainFrame.xaml.cs">
+      <DependentUpon>PasswordRecoveryMainFrame.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Authentication\PasswordRecovery\RequestRecovery.xaml.cs">
       <DependentUpon>RequestRecovery.xaml</DependentUpon>
@@ -185,6 +195,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Authentication\PasswordRecovery\CodeValidation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Authentication\PasswordRecovery\PasswordRecoveryMainFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -352,6 +366,13 @@
     <None Include="Connected Services\ServiceLogin\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServicePasswordRecovery\service.wsdl" />
+    <None Include="Connected Services\ServicePasswordRecovery\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicePasswordRecovery\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceSignUp\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -421,6 +442,7 @@
     <WCFMetadataStorage Include="Connected Services\ServiceInvitation\" />
     <WCFMetadataStorage Include="Connected Services\ServiceLobby\" />
     <WCFMetadataStorage Include="Connected Services\ServiceLogin\" />
+    <WCFMetadataStorage Include="Connected Services\ServicePasswordRecovery\" />
     <WCFMetadataStorage Include="Connected Services\ServiceSignUp\" />
     <WCFMetadataStorage Include="Connected Services\ServiceUserProfile\" />
   </ItemGroup>
@@ -496,6 +518,19 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicePasswordRecovery\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicePasswordRecovery\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicePasswordRecovery\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -11,31 +11,32 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ConquiánCliente.Properties.Langs;
+using ConquiánCliente.ViewModel.Authentication.PasswordRecovery;
 
 namespace ConquiánCliente.View.Authentication.PasswordRecovery
 {
     /// <summary>
     /// Lógica de interacción para ResetPassword.xaml
     /// </summary>
-    public partial class ResetPassword : Window
+    public partial class ResetPassword : Page
     {
-        public ResetPassword()
+        private PasswordRecoveryViewModel viewModel;
+
+        public ResetPassword(PasswordRecoveryViewModel viewModel)
         {
             InitializeComponent();
+            this.viewModel = viewModel;
+            this.DataContext = this.viewModel;
         }
 
         private void ClickAcceptNewPassword(object sender, RoutedEventArgs e)
         {
-            LogIn logIn = new LogIn();
-            logIn.Show();
-            this.Close();
-        }
-
-        private void ClickBackRequestRecovery(object sender, RoutedEventArgs e)
-        {
-            RequestRecovery requestRecovery = new RequestRecovery();
-            requestRecovery.Show();
-            this.Close();
+            if (viewModel != null)
+            {
+                viewModel.NewPassword = pbNewPassword.Password;
+                viewModel.ConfirmPassword = pbConfirmPassword.Password;
+            }
         }
     }
 }

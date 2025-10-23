@@ -322,6 +322,24 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo reiniciar la contraseña. Es posible que el código haya expirado. Intente de nuevo..
+        /// </summary>
+        public static string ErrorPasswordResetFailed {
+            get {
+                return ResourceManager.GetString("ErrorPasswordResetFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo procesar la solicitud. Verifique que el correo esté registrado y verificado..
+        /// </summary>
+        public static string ErrorRecoveryRequestFailed {
+            get {
+                return ResourceManager.GetString("ErrorRecoveryRequestFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No se pudo registrar. El correo o nombre de usuario ya podrían estar en uso..
         /// </summary>
         public static string ErrorRegistrationFailed {
@@ -345,6 +363,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string ErrorServerUnavailable {
             get {
                 return ResourceManager.GetString("ErrorServerUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error: La operación tardó demasiado tiempo..
+        /// </summary>
+        public static string ErrorTimeout {
+            get {
+                return ResourceManager.GetString("ErrorTimeout", resourceCulture);
             }
         }
         
@@ -1105,6 +1132,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Contraseña actualizada con éxito. Ya puedes iniciar sesión..
+        /// </summary>
+        public static string SuccessPasswordReset {
+            get {
+                return ResourceManager.GetString("SuccessPasswordReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error de Autenticación.
         /// </summary>
         public static string TitleAuthenticationError {
@@ -1155,6 +1191,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string TitleRegistrationError {
             get {
                 return ResourceManager.GetString("TitleRegistrationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Contraseña restablecida.
+        /// </summary>
+        public static string TitleResetPasswordSuccess {
+            get {
+                return ResourceManager.GetString("TitleResetPasswordSuccess", resourceCulture);
             }
         }
         

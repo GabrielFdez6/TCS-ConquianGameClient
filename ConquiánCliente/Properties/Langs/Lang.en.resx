@@ -489,4 +489,19 @@
   <data name="ErrorNicknameExists" xml:space="preserve">
     <value>The nickname already exists.</value>
   </data>
+  <data name="ErrorRecoveryRequestFailed" xml:space="preserve">
+    <value>The request could not be processed. Please verify that the email address is registered and verified.</value>
+  </data>
+  <data name="ErrorTimeout" xml:space="preserve">
+    <value>Error: The operation took too long.</value>
+  </data>
+  <data name="ErrorPasswordResetFailed" xml:space="preserve">
+    <value>The password could not be reset. The code may have expired. Please try again.</value>
+  </data>
+  <data name="SuccessPasswordReset" xml:space="preserve">
+    <value>Password successfully updated. You can now log in.</value>
+  </data>
+  <data name="TitleResetPasswordSuccess" xml:space="preserve">
+    <value>Password reset</value>
+  </data>
 </root>
