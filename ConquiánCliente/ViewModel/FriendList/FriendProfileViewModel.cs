@@ -9,11 +9,11 @@ namespace ConquiánCliente.ViewModel.FriendList
 {
     public class FriendProfileViewModel : ViewModelBase
     {
-        private PlayerDto _player;
+        private PlayerDto player;
         public PlayerDto Player
         {
-            get => _player;
-            set { _player = value; OnPropertyChanged(nameof(Player)); }
+            get => player;
+            set { player = value; OnPropertyChanged(nameof(Player)); }
         }
 
         public string FacebookLink { get; set; }

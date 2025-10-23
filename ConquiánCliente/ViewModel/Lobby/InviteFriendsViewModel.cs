@@ -31,7 +31,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 {
                     var friends = await client.GetFriendsAsync(PlayerSession.CurrentPlayer.idPlayer);
                     FriendsList.Clear();
-                    foreach (var friend in friends.OrderByDescending(f => f.idStatus)) // Online primero
+                    foreach (var friend in friends.OrderByDescending(f => f.idStatus)) 
                     {
                         FriendsList.Add(new FriendInviteItemViewModel(friend));
                     }

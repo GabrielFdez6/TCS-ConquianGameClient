@@ -5,18 +5,18 @@ namespace ConquiánCliente.View.FriendList
 {
     public partial class FriendList : Window
     {
-        private FriendListViewModel ViewModel;
+        private FriendListViewModel viewModel;
 
         public FriendList()
         {
             InitializeComponent();
-            ViewModel = new FriendListViewModel();
-            DataContext = ViewModel;
+            viewModel = new FriendListViewModel();
+            DataContext = viewModel;
         }
 
         private void SearchButtonClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.SearchPlayer(txtBXSearchFriend.Text);
+            viewModel.SearchPlayer(txtBXSearchFriend.Text);
             FriendsDataGrid.Visibility = Visibility.Collapsed;
             SearchDataGrid.Visibility = Visibility.Visible;
         }

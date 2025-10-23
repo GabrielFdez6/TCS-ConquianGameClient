@@ -14,21 +14,20 @@ namespace ConquiánCliente.ViewModel.Profile
 {
     public class UserProfileViewModel : ViewModelBase
     {
-        // Propiedades para enlazar con la Vista (XAML)
-        private string _profileImagePath;
+        private string profileImagePath;
         private PlayerDto _fullPlayerProfile;
 
         public string ProfileImagePath
         {
-            get => _profileImagePath;
-            set { _profileImagePath = value; OnPropertyChanged(); }
+            get => profileImagePath;
+            set { profileImagePath = value; OnPropertyChanged(); }
         }
 
-        private string _nickname;
+        private string nickname;
         public string Nickname
         {
-            get => _nickname;
-            set { _nickname = value; OnPropertyChanged(); }
+            get => nickname;
+            set { nickname = value; OnPropertyChanged(); }
         }
 
         private string _email;
@@ -38,39 +37,39 @@ namespace ConquiánCliente.ViewModel.Profile
             set { _email = value; OnPropertyChanged(); }
         }
 
-        private string _name;
+        private string name;
         public string Name
         {
-            get => _name;
-            set { _name = value; OnPropertyChanged(); }
+            get => name;
+            set { name = value; OnPropertyChanged(); }
         }
 
-        private string _lastName;
+        private string lastName;
         public string LastName
         {
-            get => _lastName;
-            set { _lastName = value; OnPropertyChanged(); }
+            get => lastName;
+            set { lastName = value; OnPropertyChanged(); }
         }
 
-        private string _level;
+        private string level;
         public string Level
         {
-            get => _level;
-            set { _level = value; OnPropertyChanged(); }
+            get => level;
+            set { level = value; OnPropertyChanged(); }
         }
 
-        private string _facebook;
+        private string facebook;
         public string Facebook
         {
-            get => _facebook;
-            set { _facebook = value; OnPropertyChanged(); }
+            get => facebook;
+            set { facebook = value; OnPropertyChanged(); }
         }
 
-        private string _instagram;
+        private string instagram;
         public string Instagram
         {
-            get => _instagram;
-            set { _instagram = value; OnPropertyChanged(); }
+            get => instagram;
+            set { instagram = value; OnPropertyChanged(); }
         }
 
 

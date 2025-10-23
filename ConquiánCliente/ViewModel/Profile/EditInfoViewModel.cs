@@ -13,25 +13,25 @@ namespace ConquiánCliente.ViewModel.Profile
 {
     public class EditInfoViewModel : ViewModelBase
     {
-        private PlayerDto _player;
+        private PlayerDto player;
         public PlayerDto Player
         {
-            get => _player;
-            set { _player = value; OnPropertyChanged(); }
+            get => player;
+            set { player = value; OnPropertyChanged(); }
         }
 
-        private string _instagramLink;
+        private string instagramLink;
         public string InstagramLink
         {
-            get => _instagramLink;
-            set { _instagramLink = value; OnPropertyChanged(); }
+            get => instagramLink;
+            set { instagramLink = value; OnPropertyChanged(); }
         }
 
-        private string _facebookLink;
+        private string facebookLink;
         public string FacebookLink
         {
-            get => _facebookLink;
-            set { _facebookLink = value; OnPropertyChanged(); }
+            get => facebookLink;
+            set { facebookLink = value; OnPropertyChanged(); }
         }
 
         public ICommand SaveChangesCommand { get; }

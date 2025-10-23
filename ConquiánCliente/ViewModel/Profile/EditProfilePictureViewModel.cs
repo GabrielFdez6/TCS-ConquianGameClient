@@ -10,13 +10,13 @@ namespace ConquiánCliente.ViewModel.Profile
 {
     public class EditProfilePictureViewModel : ViewModelBase
     {
-        private string _selectedImagePath;
+        private string selectedImagePath;
         public string SelectedImagePath
         {
-            get { return _selectedImagePath; }
+            get { return selectedImagePath; }
             set
             {
-                _selectedImagePath = value;
+                selectedImagePath = value;
                 OnPropertyChanged(nameof(SelectedImagePath));
             }
         }
