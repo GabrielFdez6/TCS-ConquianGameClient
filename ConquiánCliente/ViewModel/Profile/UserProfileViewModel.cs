@@ -15,7 +15,7 @@ namespace ConquiánCliente.ViewModel.Profile
     public class UserProfileViewModel : ViewModelBase
     {
         private string profileImagePath;
-        private PlayerDto _fullPlayerProfile;
+        private PlayerDto fullPlayerProfile;
 
         public string ProfileImagePath
         {
@@ -30,11 +30,11 @@ namespace ConquiánCliente.ViewModel.Profile
             set { nickname = value; OnPropertyChanged(); }
         }
 
-        private string _email;
+        private string email;
         public string Email
         {
-            get => _email;
-            set { _email = value; OnPropertyChanged(); }
+            get => email;
+            set { email = value; OnPropertyChanged(); }
         }
 
         private string name;
@@ -100,23 +100,23 @@ namespace ConquiánCliente.ViewModel.Profile
                 {
                     var userProfileClient = new UserProfileClient();
 
-                    _fullPlayerProfile = await userProfileClient.GetPlayerByIdAsync(sessionPlayer.idPlayer);
+                    fullPlayerProfile = await userProfileClient.GetPlayerByIdAsync(sessionPlayer.idPlayer);
 
-                    if (_fullPlayerProfile != null)
+                    if (fullPlayerProfile.idPlayer > 0)
                     {
-                        Email = _fullPlayerProfile.email;
-                        Name = _fullPlayerProfile.name;
-                        LastName = _fullPlayerProfile.lastName;
-                        Level = _fullPlayerProfile.level?.ToString() ?? "1";
+                        Email = fullPlayerProfile.email;
+                        Name = fullPlayerProfile.name;
+                        LastName = fullPlayerProfile.lastName;
+                        Level = fullPlayerProfile.level?.ToString() ?? "1";
 
-                        string serverImageName = System.IO.Path.GetFileName(_fullPlayerProfile.pathPhoto);
+                        string serverImageName = System.IO.Path.GetFileName(fullPlayerProfile.pathPhoto);
                         SetProfileImage(serverImageName);
 
-                        PlayerSession.UpdateSession(_fullPlayerProfile);
+                        PlayerSession.UpdateSession(fullPlayerProfile);
                     }
 
                     var socials = await userProfileClient.GetPlayerSocialsAsync(sessionPlayer.idPlayer);
-                    if (socials != null)
+                    if (socials.Count() > 0)
                     {
                         Facebook = socials.FirstOrDefault(s => s.IdSocialType == 2)?.UserLink;
                         Instagram = socials.FirstOrDefault(s => s.IdSocialType == 1)?.UserLink;
@@ -158,7 +158,7 @@ namespace ConquiánCliente.ViewModel.Profile
         {
             var currentPlayerDto = PlayerSession.CurrentPlayer;
 
-            var editInfoViewModel = new EditInfoViewModel(_fullPlayerProfile);
+            var editInfoViewModel = new EditInfoViewModel(fullPlayerProfile);
 
             var editInfoPage = new EditInfoPage
             {

@@ -75,7 +75,7 @@ namespace ConquiánCliente.ViewModel.Authentication
 
                 PlayerDto authenticatedPlayer = await client.AuthenticatePlayerAsync(Email, password);
 
-                if (authenticatedPlayer != null)
+                if (authenticatedPlayer.idPlayer > 0)
                 {
                     PlayerSession.StartSession(authenticatedPlayer);
 

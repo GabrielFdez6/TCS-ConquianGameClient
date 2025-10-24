@@ -65,7 +65,7 @@ namespace ConquiánCliente.ViewModel
         {
             var player = await FriendListService.GetPlayerByNicknameAsync(nickname, PlayerSession.CurrentPlayer.idPlayer);
             SearchResult.Clear();
-            if (player != null)
+            if (player.idPlayer > 0)
             {
                 SearchResult.Add(player);
             }

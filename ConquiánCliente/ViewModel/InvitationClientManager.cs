@@ -1,4 +1,5 @@
-﻿using ConquiánCliente.ServiceInvitation;
+﻿using ConquiánCliente.Properties.Langs;
+using ConquiánCliente.ServiceInvitation;
 using System;
 using System.ServiceModel;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace ConquiánCliente.ViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al conectar al servicio de invitaciones: {ex.Message}");
+                MessageBox.Show(ex.Message, Lang.ErrorUnexpected );
             }
         }
 

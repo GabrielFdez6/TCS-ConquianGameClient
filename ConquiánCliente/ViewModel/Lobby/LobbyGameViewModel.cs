@@ -96,7 +96,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 client = new LobbyClient(context);
 
                 var lobbyState = await client.GetLobbyStateAsync(this.RoomCode);
-                if (lobbyState == null)
+                if (string.IsNullOrEmpty(lobbyState.RoomCode))
                 {
                     HandleHostLeft();
                     return;
