@@ -1,12 +1,14 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceFriendList;
-using ConquiánCliente.ServiceUserProfile; 
+using ConquiánCliente.ServiceUserProfile;
 using ConquiánCliente.View.FriendList;
-using ConquiánCliente.View.MainMenu; 
+using ConquiánCliente.View.MainMenu;
+using ConquiánCliente.ViewModel.Lobby; 
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using System.Linq; 
 
 namespace ConquiánCliente.ViewModel
 {
@@ -14,10 +16,8 @@ namespace ConquiánCliente.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private ObservableCollection<ServiceFriendList.PlayerDto> friends;
-
-        private ObservableCollection<ServiceFriendList.PlayerDto> searchResult;
-
+        private ObservableCollection<FriendInviteItemViewModel> friends;
+        private ObservableCollection<FriendInviteItemViewModel> searchResult;
 
         public ICommand ViewProfileCommand { get; }
         public ICommand AddFriendCommand { get; }
@@ -25,14 +25,13 @@ namespace ConquiánCliente.ViewModel
         public ICommand BackCommand { get; }
         public ICommand DeleteFriendCommand { get; }
 
-
-        public ObservableCollection<ServiceFriendList.PlayerDto> Friends
+        public ObservableCollection<FriendInviteItemViewModel> Friends
         {
             get { return friends; }
             set { friends = value; OnPropertyChanged(nameof(Friends)); }
         }
 
-        public ObservableCollection<ServiceFriendList.PlayerDto> SearchResult
+        public ObservableCollection<FriendInviteItemViewModel> SearchResult
         {
             get { return searchResult; }
             set { searchResult = value; OnPropertyChanged(nameof(SearchResult)); }
@@ -44,21 +43,55 @@ namespace ConquiánCliente.ViewModel
         public FriendListViewModel()
         {
             FriendListService = new FriendListClient();
-            UserProfileService = new UserProfileClient(); 
-            Friends = new ObservableCollection<ServiceFriendList.PlayerDto>();
-            SearchResult = new ObservableCollection<ServiceFriendList.PlayerDto>();
+            UserProfileService = new UserProfileClient();
+            Friends = new ObservableCollection<FriendInviteItemViewModel>();
+            SearchResult = new ObservableCollection<FriendInviteItemViewModel>();
             ViewProfileCommand = new RelayCommand(ExecuteViewProfileCommand);
             AddFriendCommand = new RelayCommand(AddFriend);
             RequestsCommand = new RelayCommand(ExecuteRequestsCommand);
             DeleteFriendCommand = new RelayCommand(DeleteFriend);
             BackCommand = new RelayCommand(ExecuteBackCommand);
             LoadFriends();
+
+            PresenceCallbackHandler.FriendStatusChanged += OnFriendStatusChanged;
+        }
+
+        private void OnFriendStatusChanged(int friendId, int newStatusId)
+        {
+            var friendVM = Friends.FirstOrDefault(f => f.IdPlayer == friendId);
+            if (friendVM != null)
+            {
+                bool isOnline = (newStatusId == 1);
+                friendVM.IsOnline = isOnline;
+                friendVM.StatusText = isOnline ? Lang.StatusOnline : Lang.StatusOffline;
+            }
+
+            var searchVM = SearchResult.FirstOrDefault(f => f.IdPlayer == friendId);
+            if (searchVM != null)
+            {
+                bool isOnline = (newStatusId == 1);
+                searchVM.IsOnline = isOnline;
+                searchVM.StatusText = isOnline ? Lang.StatusOnline : Lang.StatusOffline;
+            }
+        }
+
+        public void Cleanup()
+        {
+            PresenceCallbackHandler.FriendStatusChanged -= OnFriendStatusChanged;
         }
 
         private async void LoadFriends()
         {
             var friendsList = await FriendListService.GetFriendsAsync(PlayerSession.CurrentPlayer.idPlayer);
-            Friends = new ObservableCollection<ServiceFriendList.PlayerDto>(friendsList);
+
+            Friends.Clear();
+            if (friendsList != null)
+            {
+                foreach (var friendDto in friendsList.OrderByDescending(f => f.idStatus))
+                {
+                    Friends.Add(new FriendInviteItemViewModel(friendDto));
+                }
+            }
         }
 
         public async void SearchPlayer(string nickname)
@@ -67,19 +100,20 @@ namespace ConquiánCliente.ViewModel
             SearchResult.Clear();
             if (player.idPlayer > 0)
             {
-                SearchResult.Add(player);
+                SearchResult.Add(new FriendInviteItemViewModel(player));
             }
         }
 
         private async void AddFriend(object parameter)
         {
-            if (parameter is ServiceFriendList.PlayerDto player)
+            if (parameter is FriendInviteItemViewModel friendVM)
             {
-                var success = await FriendListService.SendFriendRequestAsync(PlayerSession.CurrentPlayer.idPlayer, player.idPlayer);
+                var success = await FriendListService.SendFriendRequestAsync(PlayerSession.CurrentPlayer.idPlayer, friendVM.IdPlayer);
                 if (success)
                 {
                     MessageBox.Show(Lang.FriendRequestSentSuccess, Lang.TitleSuccess);
-                } else
+                }
+                else
                 {
                     MessageBox.Show(Lang.FriendRequestSentError, Lang.TitleError);
                 }
@@ -106,15 +140,16 @@ namespace ConquiánCliente.ViewModel
             }
         }
 
+
+
         private async void ExecuteViewProfileCommand(object parameter)
         {
-            if (parameter is ServiceFriendList.PlayerDto playerSummary)
+            if (parameter is FriendInviteItemViewModel friendVM)
             {
                 try
                 {
-                    var fullPlayerProfile = await UserProfileService.GetPlayerByIdAsync(playerSummary.idPlayer);
-
-                    var socials = await UserProfileService.GetPlayerSocialsAsync(playerSummary.idPlayer);
+                    var fullPlayerProfile = await UserProfileService.GetPlayerByIdAsync(friendVM.IdPlayer);
+                    var socials = await UserProfileService.GetPlayerSocialsAsync(friendVM.IdPlayer);
 
                     if (fullPlayerProfile != null)
                     {
@@ -135,15 +170,15 @@ namespace ConquiánCliente.ViewModel
 
         private async void DeleteFriend(object parameter)
         {
-            if (parameter is ServiceFriendList.PlayerDto player)
+            if (parameter is FriendInviteItemViewModel friendVM)
             {
-                MessageBoxResult result = MessageBox.Show(string.Format(Lang.FriendListDeleteConfirmation, player.nickname), Lang.TitleConfirmation, MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show(string.Format(Lang.FriendListDeleteConfirmation, friendVM.Nickname), Lang.TitleConfirmation, MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    var success = await FriendListService.DeleteFriendAsync(PlayerSession.CurrentPlayer.idPlayer, player.idPlayer);
+                    var success = await FriendListService.DeleteFriendAsync(PlayerSession.CurrentPlayer.idPlayer, friendVM.IdPlayer);
                     if (success)
                     {
-                        Friends.Remove(player);
+                        Friends.Remove(friendVM);
                         MessageBox.Show(Lang.FriendListDeletedSuccess, Lang.TitleSuccess);
                     }
                     else

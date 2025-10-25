@@ -93,6 +93,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ServicePresence\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ServiceSignUp\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -122,6 +127,8 @@
     <Compile Include="ViewModel\MainMenu\CreateOrJoinViewModel.cs" />
     <Compile Include="ViewModel\MainMenu\MainMenuViewModel.cs" />
     <Compile Include="ViewModel\PlayerSession.cs" />
+    <Compile Include="ViewModel\PresenceCallbackHandler.cs" />
+    <Compile Include="ViewModel\PresenceClientManager.cs" />
     <Compile Include="ViewModel\Profile\EditInfoViewModel.cs" />
     <Compile Include="ViewModel\Profile\EditProfilePictureViewModel.cs" />
     <Compile Include="ViewModel\Profile\UserProfileViewModel.cs" />
@@ -373,6 +380,13 @@
     <None Include="Connected Services\ServicePasswordRecovery\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServicePresence\service.wsdl" />
+    <None Include="Connected Services\ServicePresence\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicePresence\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceSignUp\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -443,6 +457,7 @@
     <WCFMetadataStorage Include="Connected Services\ServiceLobby\" />
     <WCFMetadataStorage Include="Connected Services\ServiceLogin\" />
     <WCFMetadataStorage Include="Connected Services\ServicePasswordRecovery\" />
+    <WCFMetadataStorage Include="Connected Services\ServicePresence\" />
     <WCFMetadataStorage Include="Connected Services\ServiceSignUp\" />
     <WCFMetadataStorage Include="Connected Services\ServiceUserProfile\" />
   </ItemGroup>
@@ -530,7 +545,18 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Connected Services\ServicePresence\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicePresence\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicePresence\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

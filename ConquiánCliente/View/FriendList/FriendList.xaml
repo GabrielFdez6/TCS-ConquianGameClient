@@ -69,12 +69,12 @@
                     <DataGrid x:Name="FriendsDataGrid" ItemsSource="{Binding Friends}" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,20,0,0"
                               Background="{StaticResource PrimaryBackgroundBrush}" BorderBrush="{StaticResource BorderBrush}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="{x:Static language:Lang.GlobalNickname}" Binding="{Binding nickname}" Width="*"/>
-                            <DataGridTextColumn Header="{x:Static language:Lang.GlobalLevel}" Binding="{Binding level}" Width="150"/>
+                            <DataGridTextColumn Header="{x:Static language:Lang.GlobalNickname}" Binding="{Binding Nickname}" Width="*"/>
+                            <DataGridTextColumn Header="{x:Static language:Lang.GlobalLevel}" Binding="{Binding Level}" Width="150"/>
 
                             <DataGridTextColumn Header="{x:Static language:Lang.FrienListStatus}" 
-                                                Binding="{Binding idStatus, Converter={StaticResource StatusConverter}}" 
-                                                Width="120"/>
+                            Binding="{Binding StatusText}" 
+                            Width="120"/>
 
                             <DataGridTemplateColumn Header="{x:Static language:Lang.FriendListAccions}" Width="120">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -93,7 +93,7 @@
                     <DataGrid x:Name="SearchDataGrid" ItemsSource="{Binding SearchResult}" AutoGenerateColumns="False" IsReadOnly="True" Visibility="Collapsed" Margin="0,20,0,0"
                               Background="{StaticResource PrimaryBackgroundBrush}" BorderBrush="{StaticResource BorderBrush}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="{x:Static language:Lang.GlobalNickname}" Binding="{Binding nickname}" Width="*"/>
+                            <DataGridTextColumn Header="{x:Static language:Lang.GlobalNickname}" Binding="{Binding Nickname}" Width="*"/>
 
                             <DataGridTemplateColumn Header="{x:Static language:Lang.FriendListAccions}" Width="200">
                                 <DataGridTemplateColumn.CellTemplate>

@@ -30,6 +30,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
             ChangeLanguageCommand = new RelayCommand(ExecuteChangeLanguage);
             InvitationClientManager.Connect(PlayerSession.CurrentPlayer.idPlayer);
             InvitationCallbackHandler.OnGlobalInvitationReceived += HandleInvitation;
+            PresenceClientManager.Instance.Client.Subscribe(PlayerSession.CurrentPlayer.idPlayer);
         }
 
         private void HandleInvitation(string senderNickname, string roomCode)

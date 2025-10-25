@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;
+using ConquiánCliente.ViewModel;
 
 namespace ConquiánCliente.ViewModel.Lobby
 {
@@ -20,9 +21,20 @@ namespace ConquiánCliente.ViewModel.Lobby
             this.roomCode = roomCode;
             FriendsList = new ObservableCollection<FriendInviteItemViewModel>();
             InviteFriendCommand = new RelayCommand(async (param) => await ExecuteInviteFriend(param));
+            PresenceCallbackHandler.FriendStatusChanged += OnFriendStatusChanged;
             LoadFriends();
         }
 
+        private void OnFriendStatusChanged(int friendId, int newStatusId)
+        {
+            var friendVM = FriendsList.FirstOrDefault(f => f.IdPlayer == friendId);
+            if (friendVM != null)
+            {
+                bool isOnline = (newStatusId == 1);
+                friendVM.IsOnline = isOnline;
+                friendVM.StatusText = isOnline ? Lang.StatusOnline : Lang.StatusOffline;
+            }
+        }
         private async void LoadFriends()
         {
             try
@@ -72,6 +84,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         private PlayerDto friend;
         private string statusText;
         private bool isOnline;
+        public string Level => friend.level;
         public FriendInviteItemViewModel(PlayerDto friend)
         {
             this.friend = friend;
