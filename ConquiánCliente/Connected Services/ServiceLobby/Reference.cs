@@ -228,9 +228,6 @@ namespace ConquiánCliente.ServiceLobby {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsOnlineField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string currentPointsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -267,19 +264,6 @@ namespace ConquiánCliente.ServiceLobby {
             }
             set {
                 this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsOnline {
-            get {
-                return this.IsOnlineField;
-            }
-            set {
-                if ((this.IsOnlineField.Equals(value) != true)) {
-                    this.IsOnlineField = value;
-                    this.RaisePropertyChanged("IsOnline");
-                }
             }
         }
         

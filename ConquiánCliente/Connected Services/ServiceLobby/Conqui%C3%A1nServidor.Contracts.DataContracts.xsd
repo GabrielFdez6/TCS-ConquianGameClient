@@ -33,7 +33,6 @@
   <xs:element name="ArrayOfPlayerDto" nillable="true" type="tns:ArrayOfPlayerDto" />
   <xs:complexType name="PlayerDto">
     <xs:sequence>
-      <xs:element minOccurs="0" name="IsOnline" type="xs:boolean" />
       <xs:element minOccurs="0" name="currentPoints" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="idPlayer" type="xs:int" />
