@@ -1,16 +1,23 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServicePasswordRecovery;
+using ConquiánCliente.View.Authentication.PasswordRecovery;
+using ConquiánCliente.View.Profile; 
 using ConquiánCliente.ViewModel.Validation;
+using System.Linq;
 using System;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ConquiánCliente.View.Authentication.PasswordRecovery;
 
 namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
 {
+    public enum PasswordUpdateMode
+    {
+        Recovery = 0, 
+        Change = 1    
+    }
     public class PasswordRecoveryViewModel : ViewModelBase
     {
         private string email;
@@ -20,6 +27,28 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
         private bool isLoading;
         private readonly IPasswordRecovery recoveryClient;
 
+        private PasswordUpdateMode _mode;
+        public PasswordUpdateMode Mode
+        {
+            get => _mode;
+            set
+            {
+                _mode = value;
+                OnPropertyChanged(nameof(Mode));
+                OnPropertyChanged(nameof(PageTitle)); 
+            }
+        }
+
+        public bool IsEditProfileFlow { get; set; } = false;
+        public string PageTitle
+        {
+            get
+            {
+                return Mode == PasswordUpdateMode.Change
+                    ? Lang.EditDataEdit
+                    : Lang.GlobalPasswordRecovery;
+            }
+        }
         public string Email
         {
             get => email;
@@ -59,6 +88,7 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
 
         public PasswordRecoveryViewModel()
         {
+            Mode = PasswordUpdateMode.Recovery; 
             RequestRecoveryCommand = new RelayCommand(ExecuteRequestRecovery, CanExecuteCommand);
             ValidateTokenCommand = new RelayCommand(ExecuteValidateToken, CanExecuteCommand);
             ResetPasswordCommand = new RelayCommand(ExecuteResetPassword, CanExecuteCommand);
@@ -83,6 +113,8 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
 
         private async void ExecuteRequestRecovery(object parameter)
         {
+            this.Mode = PasswordUpdateMode.Recovery; 
+
             string validationError = PasswordRecoveryValidator.ValidateEmail(Email);
             if (!string.IsNullOrEmpty(validationError))
             {
@@ -91,17 +123,27 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
             }
 
             bool success = await TryExecuteServiceCall(
-                () => recoveryClient.RequestPasswordRecoveryAsync(Email),
+                () => recoveryClient.RequestPasswordRecoveryAsync(Email, (int)this.Mode),
                 Lang.ErrorRecoveryRequestFailed
             );
 
             if (success)
             {
                 var page = parameter as Page;
-                page?.NavigationService?.Navigate(new CodeValidation(this));
+                page?.NavigationService?.Navigate(new CodeValidation(this)); 
             }
         }
 
+        public async Task<bool> RequestChangePasswordTokenAsync()
+        {
+            this.Mode = PasswordUpdateMode.Change;
+            bool success = await TryExecuteServiceCall(
+                () => recoveryClient.RequestPasswordRecoveryAsync(Email, (int)this.Mode),
+                Lang.ErrorRecoveryRequestFailed
+            );
+
+            return success; 
+        }
         private async void ExecuteValidateToken(object parameter)
         {
             string validationError = PasswordRecoveryValidator.ValidateToken(Token);
@@ -125,22 +167,56 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
 
         private async void ExecuteResetPassword(object parameter)
         {
+            var page = parameter as Page;
+
             string validationError = PasswordRecoveryValidator.ValidatePasswords(NewPassword, ConfirmPassword);
+
             if (!string.IsNullOrEmpty(validationError))
             {
                 MessageBox.Show(validationError, Lang.TitleValidation);
                 return;
             }
 
-            bool success = await TryExecuteServiceCall(
-                () => recoveryClient.ResetPasswordAsync(Email, Token, NewPassword),
-                Lang.ErrorPasswordResetFailed
-            );
-
-            if (success)
+            try
             {
-                MessageBox.Show(Lang.SuccessPasswordReset, Lang.TitleRegistrationComplete);
-                ExecuteNavigateToLogin(parameter);
+                IsLoading = true; 
+                var client = new ServicePasswordRecovery.PasswordRecoveryClient();
+                bool success = await client.ResetPasswordAsync(Email, Token, newPassword);
+
+                if (success)
+                {
+                    if (IsEditProfileFlow)
+                    {
+                        page?.NavigationService?.Navigate(new UserProfilePage());
+                    }
+                    else
+                    {
+                        var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
+                        if (currentWindow is PasswordRecoveryMainFrame)
+                        {
+                            currentWindow.Close();
+                        }
+
+                        var loginWindow = new LogIn();
+                        loginWindow.Show();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(Lang.ErrorRecoveryRequestFailed, Lang.TitleError);
+                }
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
+            }
+            catch (FaultException ex)
+            {
+                MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
+            }
+            finally
+            {
+                IsLoading = false;
             }
         }
 

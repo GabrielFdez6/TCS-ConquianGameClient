@@ -27,7 +27,7 @@
             </Border.Effect>
 
             <StackPanel Orientation="Vertical">
-                <TextBlock Text="{x:Static language:Lang.GlobalPasswordRecovery}" 
+                <TextBlock Text="{Binding PageTitle}" 
                            Style="{StaticResource TitleTextBlock}"
                            Margin="0,0,0,30"/>
 

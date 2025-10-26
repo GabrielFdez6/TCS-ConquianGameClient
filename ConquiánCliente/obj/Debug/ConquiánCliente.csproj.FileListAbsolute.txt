@@ -210,14 +210,6 @@ C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\Conq
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.exe
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.pdb
 C:\Users\braya\Documentos\1uv\5 semestre\Construcion\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.exe.config
-C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\ConquiánCliente.exe.config
-C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\ConquiánCliente.exe
-C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\ConquiánCliente.pdb
-C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\en\ConquiánCliente.resources.dll
-C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\EntityFramework.dll
-C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\EntityFramework.SqlServer.dll
-C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\EntityFramework.xml
-C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\EntityFramework.SqlServer.xml
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.csproj.AssemblyReference.cache
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\Styles\GlobalStyles.baml
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\PasswordRecovery\CodeValidation.g.cs
@@ -234,6 +226,7 @@ C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\Con
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\MainMenu\CreateOrJoin.g.cs
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\MainMenu\MainMenu.g.cs
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\EditInfoPage.g.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\EditPassword.g.cs
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\EditProfilePicture.g.cs
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\LogIn.g.cs
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\SignUp.g.cs
@@ -245,6 +238,14 @@ C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\Con
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente_MarkupCompile.cache
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente_MarkupCompile.lref
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\ConquiánCliente.exe.config
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\ConquiánCliente.exe
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\ConquiánCliente.pdb
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\en\ConquiánCliente.resources.dll
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\EntityFramework.dll
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\EntityFramework.SqlServer.dll
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\EntityFramework.xml
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\bin\Debug\EntityFramework.SqlServer.xml
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\App.baml
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\PasswordRecovery\CodeValidation.baml
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\PasswordRecovery\PasswordRecoveryMainFrame.baml
@@ -260,6 +261,7 @@ C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\Con
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\MainMenu\CreateOrJoin.baml
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\MainMenu\MainMenu.baml
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\EditInfoPage.baml
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\EditPassword.baml
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Profile\EditProfilePicture.baml
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\LogIn.baml
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Authentication\SignUp.baml

@@ -1195,6 +1195,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cambiar contraseña.
+        /// </summary>
+        public static string TitleResetPassword {
+            get {
+                return ResourceManager.GetString("TitleResetPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Contraseña restablecida.
         /// </summary>
         public static string TitleResetPasswordSuccess {
@@ -1218,6 +1227,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string TitleValidation {
             get {
                 return ResourceManager.GetString("TitleValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cambiar contraseña .
+        /// </summary>
+        public static string UserProfileChangePassword {
+            get {
+                return ResourceManager.GetString("UserProfileChangePassword", resourceCulture);
             }
         }
     }

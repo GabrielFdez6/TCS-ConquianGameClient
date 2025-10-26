@@ -16,10 +16,10 @@ namespace ConquiánCliente.ServicePasswordRecovery {
     public interface IPasswordRecovery {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPasswordRecovery/RequestPasswordRecovery", ReplyAction="http://tempuri.org/IPasswordRecovery/RequestPasswordRecoveryResponse")]
-        bool RequestPasswordRecovery(string email);
+        bool RequestPasswordRecovery(string email, int mode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPasswordRecovery/RequestPasswordRecovery", ReplyAction="http://tempuri.org/IPasswordRecovery/RequestPasswordRecoveryResponse")]
-        System.Threading.Tasks.Task<bool> RequestPasswordRecoveryAsync(string email);
+        System.Threading.Tasks.Task<bool> RequestPasswordRecoveryAsync(string email, int mode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPasswordRecovery/ValidateRecoveryToken", ReplyAction="http://tempuri.org/IPasswordRecovery/ValidateRecoveryTokenResponse")]
         bool ValidateRecoveryToken(string email, string token);
@@ -61,12 +61,12 @@ namespace ConquiánCliente.ServicePasswordRecovery {
                 base(binding, remoteAddress) {
         }
         
-        public bool RequestPasswordRecovery(string email) {
-            return base.Channel.RequestPasswordRecovery(email);
+        public bool RequestPasswordRecovery(string email, int mode) {
+            return base.Channel.RequestPasswordRecovery(email, mode);
         }
         
-        public System.Threading.Tasks.Task<bool> RequestPasswordRecoveryAsync(string email) {
-            return base.Channel.RequestPasswordRecoveryAsync(email);
+        public System.Threading.Tasks.Task<bool> RequestPasswordRecoveryAsync(string email, int mode) {
+            return base.Channel.RequestPasswordRecoveryAsync(email, mode);
         }
         
         public bool ValidateRecoveryToken(string email, string token) {

@@ -504,4 +504,10 @@
   <data name="TitleResetPasswordSuccess" xml:space="preserve">
     <value>Password reset</value>
   </data>
+  <data name="UserProfileChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="TitleResetPassword" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
 </root>

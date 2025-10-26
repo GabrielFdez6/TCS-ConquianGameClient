@@ -66,11 +66,6 @@
                                  Background="{StaticResource TextBoxBackgroundBrush}" IsReadOnly="True" Foreground="{StaticResource PrimaryTextBrush}"/>
                     </Border>
 
-                    <Label Grid.Row="4" Grid.Column="0" Content="{x:Static language:Lang.GlobalPassword}" FontWeight="Bold" Margin="0,5,20,5" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}"/>
-                    <Border Grid.Row="4" Grid.Column="1" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource TextBoxBorderBrush}" Margin="0,5">
-                        <PasswordBox x:Name="pbPassword" Padding="8" FontSize="16" BorderThickness="0" Background="{StaticResource TextBoxBackgroundBrush}"/>
-                    </Border>
-
                     <Image Grid.Row="5" Grid.Column="0" Source="/Resources/facebook.png" Width="24" Height="24" Margin="0,5,20,5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     <Border Grid.Row="5" Grid.Column="1" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource TextBoxBorderBrush}" Margin="0,5">
                         <TextBox Text="{Binding FacebookLink}" Padding="8" FontSize="16" BorderThickness="0" Background="{StaticResource TextBoxBackgroundBrush}"/>
@@ -82,12 +77,16 @@
                     </Border>
                 </Grid>
 
-                <Button Margin="0,30,0,10" Style="{StaticResource PrimaryButtonStyle}" Width="165" Height="40"
-                        Command="{Binding SaveChangesCommand}"
-                        CommandParameter="{Binding ElementName=pbPassword}">
+                <Button Margin="0,30,0,0" Style="{StaticResource PrimaryButtonStyle}" Width="165" Height="40"
+                        Command="{Binding SaveChangesCommand}">
                     <TextBlock Text="{x:Static language:Lang.EditDataEdit}" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}"/>
                 </Button>
 
+                <Button Margin="0,15,0,0" Style="{StaticResource PrimaryButtonStyle}" Width="165" Height="40"
+                        Command="{Binding NavigateToChangePasswordCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Page}}">
+                    <TextBlock Text="{x:Static language:Lang.UserProfileChangePassword}" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}"/>
+                </Button>
                 <Button Content="{x:Static language:Lang.GlobalBack}"
                         Foreground="{StaticResource ForgotPasswordTextBrush}" 
                         FontSize="14"

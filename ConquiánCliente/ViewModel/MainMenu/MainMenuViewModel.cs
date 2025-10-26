@@ -68,6 +68,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
         {
             var loginClient = new LoginClient();
             await loginClient.SignOutPlayerAsync(PlayerSession.CurrentPlayer.idPlayer);
+            PresenceClientManager.Instance.Client.Unsubscribe(PlayerSession.CurrentPlayer.idPlayer);
             PlayerSession.EndSession();
             var loginWindow = new LogIn();
             loginWindow.Show();

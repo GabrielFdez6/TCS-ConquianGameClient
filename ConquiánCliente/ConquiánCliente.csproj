@@ -179,6 +179,9 @@
     <Compile Include="View\Profile\EditInfoPage.xaml.cs">
       <DependentUpon>EditInfoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Profile\EditPassword.xaml.cs">
+      <DependentUpon>EditPassword.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Profile\EditProfilePicture.xaml.cs">
       <DependentUpon>EditProfilePicture.xaml</DependentUpon>
     </Compile>
@@ -254,6 +257,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Profile\EditInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Profile\EditPassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

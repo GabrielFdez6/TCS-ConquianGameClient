@@ -1,18 +1,34 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceUserProfile;
 using ConquiánCliente.View;
+using ConquiánCliente.View.Authentication.PasswordRecovery; 
 using ConquiánCliente.View.Profile;
+using ConquiánCliente.ViewModel.Authentication.PasswordRecovery; 
 using ConquiánCliente.ViewModel.Validation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Windows;
+using System.Windows.Controls; 
 using System.Windows.Input;
 
 namespace ConquiánCliente.ViewModel.Profile
 {
     public class EditInfoViewModel : ViewModelBase
     {
+
+        private bool isLoading;
+        public bool IsLoading
+        {
+            get => isLoading;
+            set
+            {
+                isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+                CommandManager.InvalidateRequerySuggested();
+            }
+        }
         private PlayerDto player;
         public PlayerDto Player
         {
@@ -36,12 +52,46 @@ namespace ConquiánCliente.ViewModel.Profile
 
         public ICommand SaveChangesCommand { get; }
         public ICommand CancelCommand { get; }
+        public ICommand NavigateToChangePasswordCommand { get; }
         public EditInfoViewModel(PlayerDto playerDto)
         {
             Player = playerDto;
             SaveChangesCommand = new RelayCommand(ExecuteSaveChanges, CanExecuteSaveChanges);
+            NavigateToChangePasswordCommand = new RelayCommand(ExecuteNavigateToChangePassword, CanExecuteChangePassword);
             CancelCommand = new RelayCommand(ExecuteCancel);
             LoadPlayerSocials();
+        }
+
+        private bool CanExecuteChangePassword(object parameter)
+        {
+            return !IsLoading;
+        }
+
+        private async void ExecuteNavigateToChangePassword(object parameter)
+        {
+            try
+            {
+                IsLoading = true;
+
+                var passwordVM = new PasswordRecoveryViewModel();
+                passwordVM.Email = PlayerSession.CurrentPlayer.email;
+                passwordVM.IsEditProfileFlow = true;
+
+                bool success = await passwordVM.RequestChangePasswordTokenAsync();
+                if (success)
+                {
+                    var page = parameter as Page;
+                    page?.NavigationService?.Navigate(new CodeValidation(passwordVM));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
         }
 
         private void LoadPlayerSocials()
