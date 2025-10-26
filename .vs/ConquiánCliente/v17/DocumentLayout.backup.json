@@ -3,11 +3,27 @@
   "WorkspaceRootPath": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\tecnologias para el desarrollo de software\\cliente\\tcs-conquiangameclient\\conqui\u00E1ncliente\\view\\authentication\\passwordrecovery\\requestrecovery.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\authentication\\passwordrecovery\\requestrecovery.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\tecnologias para el desarrollo de software\\cliente\\tcs-conquiangameclient\\conqui\u00E1ncliente\\view\\authentication\\passwordrecovery\\passwordrecoverymainframe.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\authentication\\passwordrecovery\\passwordrecoverymainframe.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\tecnologias para el desarrollo de software\\cliente\\tcs-conquiangameclient\\conqui\u00E1ncliente\\view\\profile\\editinfopage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\profile\\editinfopage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\tecnologias para el desarrollo de software\\cliente\\tcs-conquiangameclient\\conqui\u00E1ncliente\\view\\authentication\\passwordrecovery\\codevalidation.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\view\\authentication\\passwordrecovery\\codevalidation.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\tecnologias para el desarrollo de software\\cliente\\tcs-conquiangameclient\\conqui\u00E1ncliente\\viewmodel\\mainmenu\\mainmenuviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\viewmodel\\mainmenu\\mainmenuviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|c:\\tecnologias para el desarrollo de software\\cliente\\tcs-conquiangameclient\\conqui\u00E1ncliente\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\conqui\u00E1ncliente\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{42327E8E-632B-481F-872B-AFD555EDC0B0}|Conqui\u00E1nCliente\\Conqui\u00E1nCliente.csproj|solutionrelative:conqui\u00E1ncliente\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -18,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,7 +50,55 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RequestRecovery.xaml",
+              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Authentication\\PasswordRecovery\\RequestRecovery.xaml",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\Authentication\\PasswordRecovery\\RequestRecovery.xaml",
+              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Authentication\\PasswordRecovery\\RequestRecovery.xaml",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\Authentication\\PasswordRecovery\\RequestRecovery.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-26T20:27:04.463Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "PasswordRecoveryMainFrame.xaml",
+              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Authentication\\PasswordRecovery\\PasswordRecoveryMainFrame.xaml",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\Authentication\\PasswordRecovery\\PasswordRecoveryMainFrame.xaml",
+              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Authentication\\PasswordRecovery\\PasswordRecoveryMainFrame.xaml",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\Authentication\\PasswordRecovery\\PasswordRecoveryMainFrame.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-26T20:27:02.495Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CodeValidation.xaml",
+              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Authentication\\PasswordRecovery\\CodeValidation.xaml",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\Authentication\\PasswordRecovery\\CodeValidation.xaml",
+              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Authentication\\PasswordRecovery\\CodeValidation.xaml",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\Authentication\\PasswordRecovery\\CodeValidation.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-26T20:26:16.052Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EditInfoPage.xaml",
+              "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Profile\\EditInfoPage.xaml",
+              "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\View\\Profile\\EditInfoPage.xaml",
+              "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\View\\Profile\\EditInfoPage.xaml",
+              "RelativeToolTip": "Conqui\u00E1nCliente\\View\\Profile\\EditInfoPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-26T20:25:47.508Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "App.xaml.cs",
               "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\App.xaml.cs",
               "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\App.xaml.cs",
@@ -42,18 +106,17 @@
               "RelativeToolTip": "Conqui\u00E1nCliente\\App.xaml.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T20:00:09.778Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-26T20:00:09.778Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "MainMenuViewModel.cs",
               "DocumentMoniker": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\MainMenu\\MainMenuViewModel.cs",
               "RelativeDocumentMoniker": "Conqui\u00E1nCliente\\ViewModel\\MainMenu\\MainMenuViewModel.cs",
               "ToolTip": "C:\\Tecnologias para el desarrollo de software\\Cliente\\TCS-ConquianGameClient\\Conqui\u00E1nCliente\\ViewModel\\MainMenu\\MainMenuViewModel.cs",
               "RelativeToolTip": "Conqui\u00E1nCliente\\ViewModel\\MainMenu\\MainMenuViewModel.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAswEYAAABkAAAAAAAAAA==",
+              "ViewState": "AgIAADYAAAAAAAAAAAAswEYAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-26T19:56:13.278Z",
               "EditorCaption": ""

@@ -224,16 +224,25 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
         {
             return !IsLoading;
         }
-
         private void ExecuteNavigateToStart(object parameter)
         {
             this.Token = string.Empty;
             this.NewPassword = string.Empty;
             this.ConfirmPassword = string.Empty;
             var page = parameter as Page;
-            page?.NavigationService?.Navigate(new RequestRecovery());
-        }
 
+            if (IsEditProfileFlow)
+            {
+                if (page?.NavigationService?.CanGoBack == true)
+                {
+                    page.NavigationService.GoBack();
+                }
+            }
+            else
+            {
+                page?.NavigationService?.Navigate(new RequestRecovery());
+            }
+        }
         private void ExecuteNavigateToLogin(object parameter)
         {
             var page = parameter as Page;
