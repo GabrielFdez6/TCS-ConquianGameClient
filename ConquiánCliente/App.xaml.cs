@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ConquiánCliente.ServiceLogin;
+using ConquiánCliente.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -14,6 +16,28 @@ namespace ConquiánCliente
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            this.Exit += App_Exit;
+        }
+
+        private void App_Exit(object sender, ExitEventArgs e)
+        {
+            if (PlayerSession.IsLoggedIn && PlayerSession.CurrentPlayer != null)
+            {
+                try
+                {
+                    var loginClient = new LoginClient();
+                    loginClient.SignOutPlayerAsync(PlayerSession.CurrentPlayer.idPlayer).GetAwaiter().GetResult();
+                    PresenceClientManager.Instance.Client.Unsubscribe(PlayerSession.CurrentPlayer.idPlayer);
+                    InvitationClientManager.Disconnect(PlayerSession.CurrentPlayer.idPlayer);
+                    PlayerSession.EndSession();
+                }
+                catch (Exception)
+                {
+                }
+            }
+        }
         protected override void OnStartup(StartupEventArgs e)
         {
             var langCode = ConquiánCliente.Properties.Settings.Default.languageCode;

@@ -62,8 +62,8 @@ namespace ConquiánCliente.ViewModel.Lobby
         public ICommand PreviousGameTypeCommand { get; }
         public ICommand GoBackCommand { get; }
         public ICommand SendMessageCommand { get; }
-
         public ICommand ShowInviteFriendsCommand { get; }
+        public ICommand ShutdownApplicationCommand { get; } 
 
         public LobbyGameViewModel(string receivedRoomCode)
         {
@@ -77,6 +77,7 @@ namespace ConquiánCliente.ViewModel.Lobby
             GoBackCommand = new RelayCommand(ExecuteGoBack);
             SendMessageCommand = new RelayCommand(ExecuteSendMessage, CanExecuteSendMessage);
             ShowInviteFriendsCommand = new RelayCommand(ExecuteShowInviteFriends, CanExecuteShowInviteFriends);
+            ShutdownApplicationCommand = new RelayCommand(ExecuteShutdownApplication); 
 
             InitializeConnectionAsync();
         }
@@ -114,6 +115,15 @@ namespace ConquiánCliente.ViewModel.Lobby
                 MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 NavigateToMainMenu();
             }
+        }
+
+        private void ExecuteShutdownApplication(object obj)
+        {
+            if (isNavigatingAway) return;
+            isNavigatingAway = true;
+
+            CloseClientConnection(notifyServer: true);
+            Application.Current.Shutdown();
         }
 
         private void HandlePlayerJoined(PlayerDto newPlayer)
