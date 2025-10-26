@@ -88,6 +88,10 @@ namespace ConquiánCliente.ViewModel.Authentication
                     MessageBox.Show(Lang.ErrorInvalidCredentials, Lang.TitleAuthenticationError);
                 }
             }
+            catch (FaultException<SessionActiveFault> sessionFault) 
+            {
+                MessageBox.Show(sessionFault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
             catch (EndpointNotFoundException)
             {
                 MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);

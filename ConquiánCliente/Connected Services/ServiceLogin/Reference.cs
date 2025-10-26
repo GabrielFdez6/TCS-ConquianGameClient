@@ -203,11 +203,59 @@ namespace ConquiánCliente.ServiceLogin {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SessionActiveFault", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultCont" +
+        "racts")]
+    [System.SerializableAttribute()]
+    public partial class SessionActiveFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceLogin.ILogin")]
     public interface ILogin {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogin/AuthenticatePlayer", ReplyAction="http://tempuri.org/ILogin/AuthenticatePlayerResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceLogin.SessionActiveFault), Action="http://tempuri.org/ILogin/AuthenticatePlayerSessionActiveFaultFault", Name="SessionActiveFault", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultCont" +
+            "racts")]
         ConquiánCliente.ServiceLogin.PlayerDto AuthenticatePlayer(string email, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogin/AuthenticatePlayer", ReplyAction="http://tempuri.org/ILogin/AuthenticatePlayerResponse")]

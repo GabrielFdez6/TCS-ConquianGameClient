@@ -363,6 +363,9 @@
     <None Include="Connected Services\ServiceLogin\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceLogin\Conqui%25C3%25A1nServidor.Contracts.FaultContracts.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceLogin\ConquiánCliente.ServiceLogin.PlayerDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

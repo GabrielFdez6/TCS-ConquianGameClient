@@ -36,6 +36,7 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultContracts" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" />
     </xsd:schema>
@@ -45,6 +46,9 @@
   </wsdl:message>
   <wsdl:message name="ILogin_AuthenticatePlayer_OutputMessage">
     <wsdl:part name="parameters" element="tns:AuthenticatePlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILogin_AuthenticatePlayer_SessionActiveFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultContracts" name="detail" element="q1:SessionActiveFault" />
   </wsdl:message>
   <wsdl:message name="ILogin_SignOutPlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:SignOutPlayer" />
@@ -56,6 +60,7 @@
     <wsdl:operation name="AuthenticatePlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/ILogin/AuthenticatePlayer" message="tns:ILogin_AuthenticatePlayer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILogin/AuthenticatePlayerResponse" message="tns:ILogin_AuthenticatePlayer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ILogin/AuthenticatePlayerSessionActiveFaultFault" name="SessionActiveFaultFault" message="tns:ILogin_AuthenticatePlayer_SessionActiveFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="SignOutPlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/ILogin/SignOutPlayer" message="tns:ILogin_SignOutPlayer_InputMessage" />
@@ -74,6 +79,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="SessionActiveFaultFault">
+        <soap12:fault use="literal" name="SessionActiveFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="SignOutPlayer">
       <soap12:operation soapAction="http://tempuri.org/ILogin/SignOutPlayer" style="document" />
