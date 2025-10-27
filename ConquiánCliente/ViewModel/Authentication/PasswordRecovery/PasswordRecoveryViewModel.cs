@@ -191,14 +191,15 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
                     }
                     else
                     {
-                        var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
-                        if (currentWindow is PasswordRecoveryMainFrame)
+                        var loginWindow = new LogIn();
+                        loginWindow.Show();
+
+                        var currentWindow = Window.GetWindow(page);
+
+                        if (currentWindow != null)
                         {
                             currentWindow.Close();
                         }
-
-                        var loginWindow = new LogIn();
-                        loginWindow.Show();
                     }
                 }
                 else
