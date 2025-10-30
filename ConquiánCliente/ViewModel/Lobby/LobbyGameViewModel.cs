@@ -18,9 +18,8 @@ namespace ConquiánCliente.ViewModel.Lobby
         private string playerCountText;
         private string roomCode;
         private string currentMessage;
-        public bool isNavigatingAway = false;
+        private bool isNavigatingAway = false;
         private LobbyClient client;
-        private LobbyCallbackHandler callbackHandler;
         private int idHost;
         private bool isHostBool;
         public bool IsHost
@@ -58,6 +57,16 @@ namespace ConquiánCliente.ViewModel.Lobby
             set { currentMessage = value; OnPropertyChanged(nameof(CurrentMessage)); }
         }
 
+        public bool IsNavigatingAway
+        {
+            get { return isNavigatingAway; }
+            set
+            {
+                isNavigatingAway = value;
+                OnPropertyChanged(nameof(IsNavigatingAway));
+            }
+        }
+
         public ICommand NextGameTypeCommand { get; }
         public ICommand PreviousGameTypeCommand { get; }
         public ICommand GoBackCommand { get; }
@@ -79,14 +88,14 @@ namespace ConquiánCliente.ViewModel.Lobby
             ShowInviteFriendsCommand = new RelayCommand(ExecuteShowInviteFriends, CanExecuteShowInviteFriends);
             ShutdownApplicationCommand = new RelayCommand(ExecuteShutdownApplication); 
 
-            InitializeConnectionAsync();
+            _=InitializeConnectionAsync();
         }
 
-        private async void InitializeConnectionAsync()
+        private async Task InitializeConnectionAsync()
         {
             try
             {
-                callbackHandler = new LobbyCallbackHandler();
+                var callbackHandler = new LobbyCallbackHandler();
 
                 callbackHandler.OnPlayerJoined += HandlePlayerJoined;
                 callbackHandler.OnPlayerLeft += HandlePlayerLeft;
@@ -119,8 +128,8 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private void ExecuteShutdownApplication(object obj)
         {
-            if (isNavigatingAway) return;
-            isNavigatingAway = true;
+            if (IsNavigatingAway) return;
+            IsNavigatingAway = true;
 
             CloseClientConnection(notifyServer: true);
             Application.Current.Shutdown();
@@ -153,8 +162,8 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private void HandleHostLeft()
         {
-            if (isNavigatingAway) return;
-            isNavigatingAway = true;
+            if (IsNavigatingAway) return;
+            IsNavigatingAway = true;
 
             Application.Current.Dispatcher.Invoke(() =>
             {

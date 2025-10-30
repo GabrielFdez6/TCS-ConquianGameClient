@@ -57,7 +57,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
                         MessageBox.Show(Lang.ErrorLobbyCreation, Lang.TitleError);
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError);
                 }
@@ -96,7 +96,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
                         MessageBox.Show(Lang.ErrorJoinLobby, Lang.TitleError);
                     }
                 }
-                catch (EndpointNotFoundException ex)
+                catch (EndpointNotFoundException)
                 {
                     MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError);
                 }
@@ -108,7 +108,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
             }
         }
 
-        private void ExecuteClose(object parameter)
+        private static void ExecuteClose(object parameter)
         {
             if (parameter is Window window)
             {

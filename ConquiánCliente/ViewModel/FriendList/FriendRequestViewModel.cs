@@ -3,6 +3,7 @@ using ConquiánCliente.ServiceFriendList;
 using ConquiánCliente.View.FriendList;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -32,10 +33,13 @@ namespace ConquiánCliente.ViewModel.FriendList
             AcceptRequestCommand = new RelayCommand(AcceptRequest);
             DeclineRequestCommand = new RelayCommand(DeclineRequest);
             BackCommand = new RelayCommand(ExecuteBackCommand);
-            LoadFriendRequests();
         }
 
-        private async void LoadFriendRequests()
+        public async Task InitializeAsync()
+        {
+            await LoadFriendRequests();
+        }
+        private async Task LoadFriendRequests()
         {
             var requestsList = await FriendListService.GetFriendRequestsAsync(PlayerSession.CurrentPlayer.idPlayer);
             if (requestsList != null)
@@ -71,7 +75,7 @@ namespace ConquiánCliente.ViewModel.FriendList
             }
         }
 
-        private void ExecuteBackCommand(object parameter)
+        private static void ExecuteBackCommand(object parameter)
         {
             if (parameter is Window currentWindow)
             {

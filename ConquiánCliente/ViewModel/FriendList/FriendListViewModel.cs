@@ -3,12 +3,13 @@ using ConquiánCliente.ServiceFriendList;
 using ConquiánCliente.ServiceUserProfile;
 using ConquiánCliente.View.FriendList;
 using ConquiánCliente.View.MainMenu;
-using ConquiánCliente.ViewModel.Lobby; 
+using ConquiánCliente.ViewModel.Lobby;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-using System.Linq; 
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ConquiánCliente.ViewModel
 {
@@ -48,31 +49,34 @@ namespace ConquiánCliente.ViewModel
             SearchResult = new ObservableCollection<FriendInviteItemViewModel>();
             ViewProfileCommand = new RelayCommand(ExecuteViewProfileCommand);
             AddFriendCommand = new RelayCommand(AddFriend);
-            RequestsCommand = new RelayCommand(ExecuteRequestsCommand);
+            RequestsCommand = new RelayCommand(ExecuteRequestsCommand); 
             DeleteFriendCommand = new RelayCommand(DeleteFriend);
-            BackCommand = new RelayCommand(ExecuteBackCommand);
-            LoadFriends();
+            BackCommand = new RelayCommand(ExecuteBackCommand); 
+            _ = LoadFriends();
 
             PresenceCallbackHandler.FriendStatusChanged += OnFriendStatusChanged;
         }
 
         private void OnFriendStatusChanged(int friendId, int newStatusId)
         {
-            var friendVM = Friends.FirstOrDefault(f => f.IdPlayer == friendId);
-            if (friendVM != null)
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                bool isOnline = (newStatusId == 1);
-                friendVM.IsOnline = isOnline;
-                friendVM.StatusText = isOnline ? Lang.StatusOnline : Lang.StatusOffline;
-            }
+                var friendVM = Friends.FirstOrDefault(f => f.IdPlayer == friendId);
+                if (friendVM != null)
+                {
+                    bool isOnline = (newStatusId == 1);
+                    friendVM.IsOnline = isOnline;
+                    friendVM.StatusText = isOnline ? Lang.StatusOnline : Lang.StatusOffline;
+                }
 
-            var searchVM = SearchResult.FirstOrDefault(f => f.IdPlayer == friendId);
-            if (searchVM != null)
-            {
-                bool isOnline = (newStatusId == 1);
-                searchVM.IsOnline = isOnline;
-                searchVM.StatusText = isOnline ? Lang.StatusOnline : Lang.StatusOffline;
-            }
+                var searchVM = SearchResult.FirstOrDefault(f => f.IdPlayer == friendId);
+                if (searchVM != null)
+                {
+                    bool isOnline = (newStatusId == 1);
+                    searchVM.IsOnline = isOnline;
+                    searchVM.StatusText = isOnline ? Lang.StatusOnline : Lang.StatusOffline;
+                }
+            });
         }
 
         public void Cleanup()
@@ -80,7 +84,7 @@ namespace ConquiánCliente.ViewModel
             PresenceCallbackHandler.FriendStatusChanged -= OnFriendStatusChanged;
         }
 
-        private async void LoadFriends()
+        private async Task LoadFriends()
         {
             var friendsList = await FriendListService.GetFriendsAsync(PlayerSession.CurrentPlayer.idPlayer);
 
@@ -94,7 +98,7 @@ namespace ConquiánCliente.ViewModel
             }
         }
 
-        public async void SearchPlayer(string nickname)
+        public async Task SearchPlayer(string nickname)
         {
             var player = await FriendListService.GetPlayerByNicknameAsync(nickname, PlayerSession.CurrentPlayer.idPlayer);
             SearchResult.Clear();
@@ -120,7 +124,7 @@ namespace ConquiánCliente.ViewModel
             }
         }
 
-        private void ExecuteRequestsCommand(object parameter)
+        private static void ExecuteRequestsCommand(object parameter)
         {
             if (parameter is Window currentWindow)
             {
@@ -130,7 +134,7 @@ namespace ConquiánCliente.ViewModel
             }
         }
 
-        private void ExecuteBackCommand(object parameter)
+        private static void ExecuteBackCommand(object parameter)
         {
             if (parameter is Window currentWindow)
             {

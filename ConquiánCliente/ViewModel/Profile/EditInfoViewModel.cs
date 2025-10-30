@@ -115,7 +115,7 @@ namespace ConquiánCliente.ViewModel.Profile
             }
         }
 
-        private bool CanExecuteSaveChanges(object parameter) => true;
+        private static bool CanExecuteSaveChanges(object parameter) => true;
 
         private void ExecuteSaveChanges(object parameter)
         {
@@ -157,7 +157,7 @@ namespace ConquiánCliente.ViewModel.Profile
                     socialsToUpdate.Add(new SocialDto { IdSocialType = 2, UserLink = this.FacebookLink });
                 }
 
-                bool socialsUpdated = client.UpdatePlayerSocials(Player.idPlayer, socialsToUpdate.ToArray());
+                client.UpdatePlayerSocials(Player.idPlayer, socialsToUpdate.ToArray());
 
                 if (profileUpdated)
                 {
@@ -180,7 +180,7 @@ namespace ConquiánCliente.ViewModel.Profile
             }
         }
 
-        private void ExecuteCancel(object parameter)
+        private static void ExecuteCancel(object parameter)
         {
             ProfileMainFrame.MainFrame.Navigate(new UserProfilePage());
         }

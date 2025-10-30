@@ -32,7 +32,7 @@ namespace ConquiánCliente.View.Lobby
         {
             if (DataContext is LobbyGameViewModel vm)
             {
-                if (vm.isNavigatingAway) return;
+                if (vm.IsNavigatingAway) return;
                 vm.ShutdownApplicationCommand.Execute(this);
                 e.Cancel = true;
             }

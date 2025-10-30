@@ -4,6 +4,8 @@ using ConquiánCliente.View.FriendList;
 using ConquiánCliente.View.Lobby;
 using ConquiánCliente.View.MainMenu;
 using ConquiánCliente.ViewModel.Lobby;
+using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -24,7 +26,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
         {
             LoadPlayerData();
             ViewProfileCommand = new RelayCommand(p => ExecuteViewProfileCommand(p));
-            LogoutCommand = new RelayCommand(p => ExecuteLogoutCommand(p));
+            LogoutCommand = new RelayCommand(async (p) => await ExecuteLogoutCommand(p));
             FriendsCommand = new RelayCommand(ExecuteFriendsCommand);
             PlayCommand = new RelayCommand(ExecutePlay);
             ChangeLanguageCommand = new RelayCommand(ExecuteChangeLanguage);
@@ -57,25 +59,35 @@ namespace ConquiánCliente.ViewModel.MainMenu
             }
         }
 
-        private void ExecuteViewProfileCommand(object parameter)
+        private static void ExecuteViewProfileCommand(object parameter)
         {
-            ProfileMainFrame userProfileView = new ProfileMainFrame();
+            ProfileMainFrame userProfileView = ProfileMainFrame.GetInstance();
             userProfileView.Show();
             (parameter as Window)?.Close();
         }
 
-        private async void ExecuteLogoutCommand(object parameter)
+        private static async Task ExecuteLogoutCommand(object parameter)
         {
-            var loginClient = new LoginClient();
-            await loginClient.SignOutPlayerAsync(PlayerSession.CurrentPlayer.idPlayer);
-            PresenceClientManager.Instance.Client.Unsubscribe(PlayerSession.CurrentPlayer.idPlayer);
-            PlayerSession.EndSession();
-            var loginWindow = new LogIn();
-            loginWindow.Show();
-            (parameter as Window)?.Close();
+            try
+            {
+                var loginClient = new LoginClient();
+                await loginClient.SignOutPlayerAsync(PlayerSession.CurrentPlayer.idPlayer);
+                await PresenceClientManager.Instance.Client.UnsubscribeAsync(PlayerSession.CurrentPlayer.idPlayer);
+            }
+            catch (System.ServiceModel.EndpointNotFoundException)
+            {
+
+            }
+            finally
+            {
+                PlayerSession.EndSession();
+                var loginWindow = new LogIn();
+                loginWindow.Show();
+                (parameter as Window)?.Close();
+            }
         }
 
-        private void ExecuteFriendsCommand(object obj)
+        private static void ExecuteFriendsCommand(object obj)
         {
             if (obj is Window mainMenuWindow)
             {
@@ -85,7 +97,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
             }
         }
 
-        private void ExecutePlay(object parameter)
+        private static void ExecutePlay(object parameter)
         {
             if (parameter is Window currentWindow)
             {
@@ -109,7 +121,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
             }
         }
 
-        private void ExecuteChangeLanguage(object parameter)
+        private static void ExecuteChangeLanguage(object parameter)
         {
             if (parameter is Window currentWindow)
             {

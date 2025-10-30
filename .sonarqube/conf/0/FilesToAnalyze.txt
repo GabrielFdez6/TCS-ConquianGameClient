@@ -1,0 +1,119 @@
+﻿C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Models\FriendRequest.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\Authentication\LogInViewModel.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\Authentication\PasswordRecovery\PasswordRecoveryViewModel.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\Authentication\SignUpViewModel.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\FriendList\FriendListViewModel.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\FriendList\FriendProfileViewModel.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\FriendList\FriendRequestViewModel.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\FriendList\StatusConverter.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\ImagePathToBooleanConverter.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\InvitationCallbackHandler.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\InvitationClientManager.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\Lobby\InvitationReceivedViewModel.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\Lobby\InviteFriendsViewModel.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\Lobby\LobbyCallbackHandler.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\Lobby\LobbyGameViewModel.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\Lobby\PlayerLobbyItemViewModel.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\MainMenu\CreateOrJoinViewModel.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\MainMenu\MainMenuViewModel.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\PlayerSession.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\PresenceCallbackHandler.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\PresenceClientManager.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\Profile\EditInfoViewModel.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\Profile\EditProfilePictureViewModel.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\Profile\UserProfileViewModel.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\RelayCommand.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\Validation\LogInValidator.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\Validation\PasswordRecoveryValidator.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\Validation\SignUpValidator.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\ViewModel\ViewModelBase.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\Authentication\PasswordRecovery\CodeValidation.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\Authentication\PasswordRecovery\PasswordRecoveryMainFrame.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\Authentication\PasswordRecovery\RequestRecovery.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\Authentication\PasswordRecovery\ResetPassword.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\FriendList\FriendList.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\FriendList\FriendProfile.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\FriendList\FriendRequests.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\Lobby\InvitationReceivedWindow.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\Lobby\InviteFriendsWindow.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\Lobby\LobbyGame.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\MainMenu\ChangeLanguage.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\MainMenu\CreateOrJoin.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\MainMenu\MainMenu.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\Profile\EditInfoPage.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\Profile\EditPassword.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\Profile\EditProfilePicture.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\Authentication\SignUp.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\Authentication\SignUpData.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\Profile\ProfileMainFrame.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\Authentication\VerificationCode.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\Profile\UserProfilePage.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\App.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\View\Authentication\LogIn.xaml.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Properties\AssemblyInfo.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Properties\Langs\Lang.resx
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Properties\Langs\Lang.en.resx
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Properties\Resources.resx
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceFriendList\Conqui%C3%A1nServidor.Contracts.DataContracts.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceFriendList\ConquiánCliente.ServiceFriendList.FriendRequestDto.datasource
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceFriendList\ConquiánCliente.ServiceFriendList.PlayerDto.datasource
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceFriendList\service.wsdl
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceFriendList\service.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceFriendList\service1.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceInvitation\service.wsdl
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceInvitation\service.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceInvitation\service1.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceLobby\Conqui%C3%A1nServidor.Contracts.DataContracts.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceLobby\ConquiánCliente.ServiceLobby.LobbyDto.datasource
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceLobby\service.wsdl
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceLobby\service.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceLobby\service1.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceLogin\Conqui%C3%A1nServidor.Contracts.DataContracts.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceLogin\Conqui%C3%A1nServidor.Contracts.FaultContracts.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceLogin\ConquiánCliente.ServiceLogin.PlayerDto.datasource
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceLogin\service.wsdl
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceLogin\service.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceLogin\service1.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServicePasswordRecovery\service.wsdl
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServicePasswordRecovery\service.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServicePasswordRecovery\service1.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServicePresence\service.wsdl
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServicePresence\service.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServicePresence\service1.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceSignUp\Conqui%C3%A1nServidor.Contracts.DataContracts.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceSignUp\service.wsdl
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceSignUp\service.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceSignUp\service1.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceUserProfile\Conqui%C3%A1nServidor.Contracts.DataContracts.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceUserProfile\ConquiánCliente.ServiceUserProfile.PlayerDto.datasource
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceUserProfile\ConquiánCliente.ServiceUserProfile.SocialDto.datasource
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceUserProfile\service.wsdl
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceUserProfile\service.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceUserProfile\service1.xsd
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\packages.config
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Properties\Settings.settings
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\App.config
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceLobby\configuration91.svcinfo
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceLobby\configuration.svcinfo
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceLobby\Reference.svcmap
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceFriendList\configuration91.svcinfo
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceFriendList\configuration.svcinfo
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceFriendList\Reference.svcmap
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceLogin\configuration91.svcinfo
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceLogin\configuration.svcinfo
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceLogin\Reference.svcmap
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceSignUp\configuration91.svcinfo
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceSignUp\configuration.svcinfo
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceSignUp\Reference.svcmap
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceUserProfile\configuration91.svcinfo
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceUserProfile\configuration.svcinfo
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceUserProfile\Reference.svcmap
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceInvitation\configuration91.svcinfo
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceInvitation\configuration.svcinfo
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServiceInvitation\Reference.svcmap
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServicePasswordRecovery\configuration91.svcinfo
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServicePasswordRecovery\configuration.svcinfo
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServicePasswordRecovery\Reference.svcmap
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServicePresence\configuration91.svcinfo
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServicePresence\configuration.svcinfo
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Connected Services\ServicePresence\Reference.svcmap

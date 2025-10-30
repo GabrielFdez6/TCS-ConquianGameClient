@@ -1,30 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ConquiánCliente.View
 {
-    /// <summary>
-    /// Interaction logic for ProfileMainFrame.xaml
-    /// </summary>
     public partial class ProfileMainFrame : Window
     {
-        public static Frame MainFrame;
-        public ProfileMainFrame()
+        private static ProfileMainFrame instance;
+
+        private bool isClosed = false;
+
+        public static Frame MainFrame
+        {
+            get { return GetInstance().ProfileFrame; }
+        }
+
+        public static ProfileMainFrame GetInstance()
+        {
+            if (instance == null || instance.isClosed)
+            {
+                instance = new ProfileMainFrame();
+            }
+            return instance;
+        }
+
+        private ProfileMainFrame()
         {
             InitializeComponent();
-            MainFrame = ProfileFrame;
-            MainFrame.Navigate(new Profile.UserProfilePage());
+            ProfileFrame.Navigate(new Profile.UserProfilePage());
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            this.isClosed = true;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace ConquiánCliente
             this.Exit += App_Exit;
         }
 
-        private void App_Exit(object sender, ExitEventArgs e)
+        private static void App_Exit(object sender, ExitEventArgs e)
         {
             if (PlayerSession.IsLoggedIn && PlayerSession.CurrentPlayer != null)
             {
@@ -42,7 +42,7 @@ namespace ConquiánCliente
         {
             var langCode = ConquiánCliente.Properties.Settings.Default.languageCode;
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(langCode);
-            base.OnStartup(e);            
+            base.OnStartup(e);
         }
     }
 }

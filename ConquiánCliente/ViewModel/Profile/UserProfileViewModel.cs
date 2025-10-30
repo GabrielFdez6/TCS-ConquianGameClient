@@ -8,7 +8,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using ConquiánCliente.Properties.Langs;
 using System;
-using System.Linq; 
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ConquiánCliente.ViewModel.Profile
 {
@@ -82,11 +83,10 @@ namespace ConquiánCliente.ViewModel.Profile
             NavigateBackCommand = new RelayCommand(ExecuteNavigateBack);
             NavigateToEditCommand = new RelayCommand(ExecuteNavigateToEdit);
             NavigateToEditProfilePictureCommand = new RelayCommand(ExecuteNavigateToEditProfilePicture);
-
-            LoadPlayerData();
+            _ = LoadPlayerData();
         }
 
-        private async void LoadPlayerData()
+        private async Task LoadPlayerData()
         {
             if (PlayerSession.IsLoggedIn)
             {
@@ -116,7 +116,7 @@ namespace ConquiánCliente.ViewModel.Profile
                     }
 
                     var socials = await userProfileClient.GetPlayerSocialsAsync(sessionPlayer.idPlayer);
-                    if (socials.Count() > 0)
+                    if (socials.Any())
                     {
                         Facebook = socials.FirstOrDefault(s => s.IdSocialType == 2)?.UserLink;
                         Instagram = socials.FirstOrDefault(s => s.IdSocialType == 1)?.UserLink;
@@ -144,7 +144,7 @@ namespace ConquiánCliente.ViewModel.Profile
         }
 
 
-        private void ExecuteNavigateBack(object parameter)
+        private static void ExecuteNavigateBack(object parameter)
         {
             var mainMenu = new View.MainMenu.MainMenu();
             mainMenu.Show();
@@ -156,8 +156,6 @@ namespace ConquiánCliente.ViewModel.Profile
         }
         private void ExecuteNavigateToEdit(object parameter)
         {
-            var currentPlayerDto = PlayerSession.CurrentPlayer;
-
             var editInfoViewModel = new EditInfoViewModel(fullPlayerProfile);
 
             var editInfoPage = new EditInfoPage

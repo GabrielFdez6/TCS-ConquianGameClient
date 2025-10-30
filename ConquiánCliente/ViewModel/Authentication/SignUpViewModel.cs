@@ -63,9 +63,9 @@ namespace ConquiánCliente.ViewModel.Authentication
             RegisterPlayerCommand = new RelayCommand(ExecuteRegisterPlayer, CanExecuteRegisterPlayer);
         }
 
-        private bool CanExecuteSendVerificationCode(object parameter) => true;
-        private bool CanExecuteVerifyCode(object parameter) => true;
-        private bool CanExecuteRegisterPlayer(object parameter) => true;
+        private static bool CanExecuteSendVerificationCode(object parameter) => true;
+        private static bool CanExecuteVerifyCode(object parameter) => true;
+        private static bool CanExecuteRegisterPlayer(object parameter) => true;
 
         private async void ExecuteSendVerificationCode(object parameter)
         {
@@ -215,7 +215,7 @@ namespace ConquiánCliente.ViewModel.Authentication
             }
         }
 
-        private void ExecuteNavigateToLogin(object parameter)
+        private static void ExecuteNavigateToLogin(object parameter)
         {
             var loginWindow = new LogIn();
             loginWindow.Show();

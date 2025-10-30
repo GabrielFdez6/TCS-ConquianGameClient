@@ -12,7 +12,7 @@ namespace ConquiánCliente.ViewModel.Lobby
 {
     public class InviteFriendsViewModel : ViewModelBase
     {
-        private string roomCode;
+        private readonly string roomCode;
         public ObservableCollection<FriendInviteItemViewModel> FriendsList { get; }
         public ICommand InviteFriendCommand { get; }
 
@@ -22,7 +22,7 @@ namespace ConquiánCliente.ViewModel.Lobby
             FriendsList = new ObservableCollection<FriendInviteItemViewModel>();
             InviteFriendCommand = new RelayCommand(async (param) => await ExecuteInviteFriend(param));
             PresenceCallbackHandler.FriendStatusChanged += OnFriendStatusChanged;
-            LoadFriends();
+            _=LoadFriends();
         }
 
         private void OnFriendStatusChanged(int friendId, int newStatusId)
@@ -35,7 +35,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 friendVM.StatusText = isOnline ? Lang.StatusOnline : Lang.StatusOffline;
             }
         }
-        private async void LoadFriends()
+        private async Task LoadFriends()
         {
             try
             {
@@ -81,7 +81,7 @@ namespace ConquiánCliente.ViewModel.Lobby
 
     public class FriendInviteItemViewModel : ViewModelBase
     {
-        private PlayerDto friend;
+        private readonly PlayerDto friend;
         private string statusText;
         private bool isOnline;
         public string Level => friend.level;

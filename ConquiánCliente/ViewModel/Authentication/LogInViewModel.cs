@@ -44,7 +44,7 @@ namespace ConquiánCliente.ViewModel.Authentication
             NavigateToForgotPasswordCommand = new RelayCommand(ExecuteNavigateToForgotPassword);
         }
 
-        private bool CanExecuteCommand(object parameter)
+        private static bool CanExecuteCommand(object parameter)
         {
             return true;
         }
@@ -102,14 +102,14 @@ namespace ConquiánCliente.ViewModel.Authentication
             }
         }
 
-        private void ExecuteNavigateToSignUp(object parameter)
+        private static void ExecuteNavigateToSignUp(object parameter)
         {
             var signUpWindow = new SignUp();
             signUpWindow.Show();
             (parameter as Window)?.Close();
         }
 
-        private void ExecuteNavigateToForgotPassword(object parameter)
+        private static void ExecuteNavigateToForgotPassword(object parameter)
         {
             var requestRecoveryWindow = new PasswordRecoveryMainFrame();
             requestRecoveryWindow.Show();

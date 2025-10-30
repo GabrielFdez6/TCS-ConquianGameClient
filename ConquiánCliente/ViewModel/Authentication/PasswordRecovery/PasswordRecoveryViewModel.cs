@@ -244,7 +244,7 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
                 page?.NavigationService?.Navigate(new RequestRecovery());
             }
         }
-        private void ExecuteNavigateToLogin(object parameter)
+        private static void ExecuteNavigateToLogin(object parameter)
         {
             var page = parameter as Page;
             var window = Window.GetWindow(page);
@@ -284,7 +284,7 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
             }
         }
 
-        private void HandleException(Exception ex)
+        private static void HandleException(Exception ex)
         {
             if (ex is EndpointNotFoundException)
             {

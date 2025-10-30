@@ -11,7 +11,7 @@ namespace ConquiánCliente.ViewModel.Lobby
 {
     public class InvitationReceivedViewModel : ViewModelBase
     {
-        private string roomCode;
+        private readonly string roomCode;
         public string InvitationText { get; }
         public ICommand AcceptCommand { get; }
         public ICommand RejectCommand { get; }
@@ -62,13 +62,12 @@ namespace ConquiánCliente.ViewModel.Lobby
             {
                 var lobbyGame = new LobbyGame(this.roomCode);
                 lobbyGame.Show();
-
-                foreach (Window openWindow in Application.Current.Windows.OfType<Window>().ToList())
+                var windowsToClose = Application.Current.Windows.OfType<Window>()
+                            .Where(w => w != lobbyGame)
+                            .ToList();
+                foreach (Window openWindow in windowsToClose)
                 {
-                    if (openWindow != lobbyGame)
-                    {
-                        openWindow.Close();
-                    }
+                    openWindow.Close();
                 }
             }
             catch (Exception ex)
@@ -77,7 +76,7 @@ namespace ConquiánCliente.ViewModel.Lobby
             }
         }
 
-        private void ExecuteReject(object parameter)
+        private static void ExecuteReject(object parameter)
         {
             (parameter as Window)?.Close();
         }

@@ -1,4 +1,5 @@
 ﻿using ConquiánCliente.ViewModel;
+using System;
 using System.Windows;
 
 namespace ConquiánCliente.View.FriendList
@@ -14,9 +15,9 @@ namespace ConquiánCliente.View.FriendList
             DataContext = viewModel;
         }
 
-        private void SearchButtonClick(object sender, RoutedEventArgs e)
+        private async void SearchButtonClick(object sender, RoutedEventArgs e)
         {
-            viewModel.SearchPlayer(txtBXSearchFriend.Text);
+            await viewModel.SearchPlayer(txtBXSearchFriend.Text);
             FriendsDataGrid.Visibility = Visibility.Collapsed;
             SearchDataGrid.Visibility = Visibility.Visible;
         }

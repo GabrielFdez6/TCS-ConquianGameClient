@@ -41,7 +41,7 @@ namespace ConquiánCliente.ViewModel.FriendList
             }
         }
 
-        private void ExecuteBackCommand(object parameter)
+        private static void ExecuteBackCommand(object parameter)
         {
             if (parameter is Window window)
             {

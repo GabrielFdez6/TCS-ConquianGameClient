@@ -10,8 +10,6 @@ namespace ConquiánCliente.ViewModel
     public static class InvitationClientManager
     {
         private static InvitationServiceClient client;
-        private static InvitationCallbackHandler callbackHandler;
-        private static InstanceContext context;
 
         public static void Connect(int idPlayer)
         {
@@ -22,8 +20,8 @@ namespace ConquiánCliente.ViewModel
 
             try
             {
-                callbackHandler = new InvitationCallbackHandler();
-                context = new InstanceContext(callbackHandler);
+                var callbackHandler = new InvitationCallbackHandler();
+                var context = new InstanceContext(callbackHandler);
                 client = new InvitationServiceClient(context);
                 client.Subscribe(idPlayer);
             }
