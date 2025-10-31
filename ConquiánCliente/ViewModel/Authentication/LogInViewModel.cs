@@ -15,7 +15,7 @@ namespace ConquiánCliente.ViewModel.Authentication
     {
         private string email;
         private int selectedLanguageIndex;
-
+        private bool isLoggingIn;
         public string Email
         {
             get { return email; }
@@ -39,38 +39,43 @@ namespace ConquiánCliente.ViewModel.Authentication
 
         public LogInViewModel()
         {
-            LoginCommand = new RelayCommand(ExecuteLogin, CanExecuteCommand);
+            isLoggingIn = false;
+            LoginCommand = new RelayCommand(ExecuteLogin, CanExecuteLogin);
             NavigateToSignUpCommand = new RelayCommand(ExecuteNavigateToSignUp);
             NavigateToForgotPasswordCommand = new RelayCommand(ExecuteNavigateToForgotPassword);
         }
 
-        private static bool CanExecuteCommand(object parameter)
+        private bool CanExecuteLogin(object parameter)
         {
-            return true;
+            return !isLoggingIn;
         }
-
         private async void ExecuteLogin(object parameter)
         {
-            var passwordBox = parameter as PasswordBox;
-            if (passwordBox == null) return;
-            string password = passwordBox.Password;
-
-            string emailError = LogInValidator.ValidateEmail(Email);
-            if (!string.IsNullOrEmpty(emailError))
-            {
-                MessageBox.Show(emailError, Lang.TitleValidation);
-                return;
-            }
-
-            string passwordError = LogInValidator.ValidatePassword(password);
-            if (!string.IsNullOrEmpty(passwordError))
-            {
-                MessageBox.Show(passwordError, Lang.TitleValidation);
-                return;
-            }
+            if (isLoggingIn) return;
 
             try
             {
+                isLoggingIn = true;
+                CommandManager.InvalidateRequerySuggested(); 
+
+                var passwordBox = parameter as PasswordBox;
+                if (passwordBox == null) return; 
+                string password = passwordBox.Password;
+
+                string emailError = LogInValidator.ValidateEmail(Email);
+                if (!string.IsNullOrEmpty(emailError))
+                {
+                    MessageBox.Show(emailError, Lang.TitleValidation);
+                    return; 
+                }
+
+                string passwordError = LogInValidator.ValidatePassword(password);
+                if (!string.IsNullOrEmpty(passwordError))
+                {
+                    MessageBox.Show(passwordError, Lang.TitleValidation);
+                    return; // 'finally' se ejecutará
+                }
+
                 var client = new LoginClient();
 
                 PlayerDto authenticatedPlayer = await client.AuthenticatePlayerAsync(Email, password);
@@ -88,7 +93,7 @@ namespace ConquiánCliente.ViewModel.Authentication
                     MessageBox.Show(Lang.ErrorInvalidCredentials, Lang.TitleAuthenticationError);
                 }
             }
-            catch (FaultException<SessionActiveFault> sessionFault) 
+            catch (FaultException<SessionActiveFault> sessionFault)
             {
                 MessageBox.Show(sessionFault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -99,6 +104,11 @@ namespace ConquiánCliente.ViewModel.Authentication
             catch (System.Exception ex)
             {
                 MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
+            }
+            finally
+            {
+                isLoggingIn = false;
+                CommandManager.InvalidateRequerySuggested(); 
             }
         }
 

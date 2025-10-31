@@ -158,8 +158,8 @@
     <Compile Include="View\FriendList\FriendRequests.xaml.cs">
       <DependentUpon>FriendRequests.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Lobby\InvitationReceivedWindow.xaml.cs">
-      <DependentUpon>InvitationReceivedWindow.xaml</DependentUpon>
+    <Compile Include="View\Lobby\InvitationReceived.xaml.cs">
+      <DependentUpon>InvitationReceived.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Lobby\InviteFriendsWindow.xaml.cs">
       <DependentUpon>InviteFriendsWindow.xaml</DependentUpon>
@@ -232,7 +232,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Lobby\InvitationReceivedWindow.xaml">
+    <Page Include="View\Lobby\InvitationReceived.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

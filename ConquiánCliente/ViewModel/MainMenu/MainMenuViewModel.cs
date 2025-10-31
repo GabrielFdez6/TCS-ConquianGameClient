@@ -40,7 +40,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
             Application.Current.Dispatcher.Invoke(() =>
             {
                 var vm = new InvitationReceivedViewModel(senderNickname, roomCode);
-                var window = new View.Lobby.InvitationReceivedWindow { DataContext = vm };
+                var window = new View.Lobby.InvitationReceived { DataContext = vm };
                 window.Show();
             });
         }

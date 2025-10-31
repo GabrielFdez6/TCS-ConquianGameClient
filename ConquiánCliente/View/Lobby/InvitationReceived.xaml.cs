@@ -17,9 +17,9 @@ namespace ConquiánCliente.View.Lobby
     /// <summary>
     /// Lógica de interacción para InvitationReceivedWindow.xaml
     /// </summary>
-    public partial class InvitationReceivedWindow : Window
+    public partial class InvitationReceived : Window
     {
-        public InvitationReceivedWindow()
+        public InvitationReceived()
         {
             InitializeComponent();
         }
