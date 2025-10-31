@@ -42,7 +42,7 @@
                            Margin="0,0,0,8"
                            Foreground="{StaticResource PrimaryTextBrush}"/>
                 <Border CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource TextBoxBorderBrush}">
-                    <TextBox x:Name="txtBxName" 
+                    <TextBox x:Name="txtBoxName" 
                              Padding="8" 
                              FontSize="16"
                              BorderThickness="0"
@@ -55,7 +55,7 @@
                            Margin="0,15,0,8"
                            Foreground="{StaticResource PrimaryTextBrush}"/>
                 <Border CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource TextBoxBorderBrush}">
-                    <TextBox x:Name="txtBxLastname" 
+                    <TextBox x:Name="txtBoxLastname" 
                              Padding="8" 
                              FontSize="16" 
                              BorderThickness="0"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="80debf0d-8f2b-4a24-9e8f-236c5e38006e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="ba524cc7-1377-4e4e-a0d5-55f7b1a83a6e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,12 +19,12 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="net.tcp://localhost:9001/Conqui%C3%A1nServidor/PasswordRecoveryService/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="net.tcp://localhost:9001/Conqui%C3%A1nServidor/PasswordRecovery/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="4b59a855-04fd-48a5-af87-d08c9b3f263b" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/PasswordRecoveryService/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="9b474d36-54af-4b25-9be4-3d41ce6a2f79" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/PasswordRecoveryService/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="2095c37c-ec05-4aae-acdd-e6ade2978b4f" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/PasswordRecoveryService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="2c0c43f8-a77b-4971-943e-9026ff66e890" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/PasswordRecovery/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="d95e542c-8af1-40e2-a646-f837539de13f" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/PasswordRecovery/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="c8d5f255-b2fe-4101-a0fb-26fa791d75f8" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/PasswordRecovery/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

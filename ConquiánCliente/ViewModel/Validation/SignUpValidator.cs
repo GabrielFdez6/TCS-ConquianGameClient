@@ -11,12 +11,12 @@ namespace ConquiánCliente.ViewModel.Validation
     public static class SignUpValidator
     {
         private static readonly TimeSpan RegexTimeout = TimeSpan.FromMilliseconds(250);
-        private const string NamePattern = @"^[a-zA-Z\s]+$";
-        private const string LastNamePattern = @"^[a-zA-Z\s]+$";
-        private const string NicknamePattern = @"^[a-zA-Z0-9]+$";
-        private const string EmailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]{2,}$";
-        private const string UppercasePattern = @"[A-Z]";
-        private const string SpecialCharPattern = @"[!@#$%^&*()_+\-=\[\]{};':""\\|,.<>\/?]";
+        private const string NAME_PATTERN = @"^[a-zA-Z\s]+$";
+        private const string LAST_NAME_PATTERN = @"^[a-zA-Z\s]+$";
+        private const string NICKNAME_PATTERN = @"^[a-zA-Z0-9]+$";
+        private const string EMAIL_PATTERN = @"^[^@\s]+@[^@\s]+\.[^@\s]{2,}$";
+        private const string UPPERCASE_PATTERN = @"[A-Z]";
+        private const string SPECIAL_CHAR_PATTERN = @"[!@#$%^&*()_+\-=\[\]{};':""\\|,.<>\/?]";
 
         private const int MAX_NAME_LENGTH = 25;
         private const int MAX_LAST_NAME_LENGTH = 50;
@@ -51,7 +51,7 @@ namespace ConquiánCliente.ViewModel.Validation
             {
                 return string.Format(Lang.ErrorNameLength, MAX_NAME_LENGTH);
             }
-            if (!IsMatchWithTimeout(name, NamePattern))
+            if (!IsMatchWithTimeout(name, NAME_PATTERN))
             {
                 return Lang.ErrorValidName;
             }
@@ -72,7 +72,7 @@ namespace ConquiánCliente.ViewModel.Validation
                 return string.Format(Lang.ErrorLastNameLength, MAX_LAST_NAME_LENGTH);
             }
 
-            if (!IsMatchWithTimeout(lastName, LastNamePattern))
+            if (!IsMatchWithTimeout(lastName, LAST_NAME_PATTERN))
             {
                 return Lang.ErrorLastNameInvalidChars;
             }
@@ -92,7 +92,7 @@ namespace ConquiánCliente.ViewModel.Validation
                 return string.Format(Lang.ErrorNicknameLength, MAX_NICKNAME_LENGTH);
             }
 
-            if (!IsMatchWithTimeout(nickname, NicknamePattern))
+            if (!IsMatchWithTimeout(nickname, NICKNAME_PATTERN))
             {
                 return Lang.ErrorNicknameInvalidChars;
             }
@@ -112,7 +112,7 @@ namespace ConquiánCliente.ViewModel.Validation
                 return string.Format(Lang.ErrorEmailLenght, MAX_EMAIL_LENGTH);
             }
 
-            if (!IsMatchWithTimeout(email, EmailPattern))
+            if (!IsMatchWithTimeout(email, EMAIL_PATTERN))
             {
                 return Lang.ErrorEmailInvalidFormat;
             }
@@ -137,12 +137,12 @@ namespace ConquiánCliente.ViewModel.Validation
                 return Lang.ErrorPasswordNoSpaces;
             }
 
-            if (!IsMatchWithTimeout(password, UppercasePattern))
+            if (!IsMatchWithTimeout(password, UPPERCASE_PATTERN))
             {
                 return Lang.ErrorPasswordNoUppercase;
             }
 
-            if (!IsMatchWithTimeout(password, SpecialCharPattern))
+            if (!IsMatchWithTimeout(password, SPECIAL_CHAR_PATTERN))
             {
                 return Lang.ErrorPasswordNoSpecialChar;
             }

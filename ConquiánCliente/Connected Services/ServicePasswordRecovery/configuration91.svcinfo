@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="QyZC/pp9Gkbg5svfgyFPm725tNsVvrTAa7TErzLTkCQ=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="hq8D/ZiQFr6peaBlwtM7raeIYynih0b7xU8Pq7K9fWE=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IPasswordRecovery">
       <properties>
@@ -121,10 +121,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_IPasswordRecovery" contract="ServicePasswordRecovery.IPasswordRecovery" bindingType="netTcpBinding" address="net.tcp://localhost:9001/ConquiánServidor/PasswordRecoveryService/" bindingConfiguration="NetTcpBinding_IPasswordRecovery">
+    <endpoint name="NetTcpBinding_IPasswordRecovery" contract="ServicePasswordRecovery.IPasswordRecovery" bindingType="netTcpBinding" address="net.tcp://localhost:9001/ConquiánServidor/PasswordRecovery/" bindingConfiguration="NetTcpBinding_IPasswordRecovery">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://localhost:9001/Conqui%C3%A1nServidor/PasswordRecoveryService/</serializedValue>
+          <serializedValue>net.tcp://localhost:9001/Conqui%C3%A1nServidor/PasswordRecovery/</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
