@@ -970,6 +970,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Enviar código de sala .
+        /// </summary>
+        public static string LobbySendRoomCode {
+            get {
+                return ResourceManager.GetString("LobbySendRoomCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Empezar juego.
         /// </summary>
         public static string LobbyStartGame {

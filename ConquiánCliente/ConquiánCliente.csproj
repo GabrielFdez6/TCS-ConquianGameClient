@@ -167,6 +167,9 @@
     <Compile Include="View\Lobby\LobbyGame.xaml.cs">
       <DependentUpon>LobbyGame.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Lobby\SendRoomCode.xaml.cs">
+      <DependentUpon>SendRoomCode.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainMenu\ChangeLanguage.xaml.cs">
       <DependentUpon>ChangeLanguage.xaml</DependentUpon>
     </Compile>
@@ -241,6 +244,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Lobby\LobbyGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Lobby\SendRoomCode.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -280,3 +280,5 @@ C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\Con
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.exe
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.pdb
 C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\ConquiánCliente.exe.config
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Lobby\SendRoomCode.g.cs
+C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\obj\Debug\View\Lobby\SendRoomCode.baml

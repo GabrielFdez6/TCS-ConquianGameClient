@@ -510,4 +510,7 @@
   <data name="TitleResetPassword" xml:space="preserve">
     <value>Reset password</value>
   </data>
+  <data name="LobbySendRoomCode" xml:space="preserve">
+    <value>Send room code</value>
+  </data>
 </root>
