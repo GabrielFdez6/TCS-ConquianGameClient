@@ -1,12 +1,15 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceFriendList;
+using ConquiánCliente.View.Lobby;
+using ConquiánCliente.ViewModel;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using ConquiánCliente.ViewModel;
+using System.Windows.Navigation;
 
 namespace ConquiánCliente.ViewModel.Lobby
 {
@@ -15,6 +18,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         private readonly string roomCode;
         public ObservableCollection<FriendInviteItemViewModel> FriendsList { get; }
         public ICommand InviteFriendCommand { get; }
+        public ICommand SendRoomCodeCommand { get; } 
 
         public InviteFriendsViewModel(string roomCode)
         {
@@ -22,9 +26,21 @@ namespace ConquiánCliente.ViewModel.Lobby
             FriendsList = new ObservableCollection<FriendInviteItemViewModel>();
             InviteFriendCommand = new RelayCommand(async (param) => await ExecuteInviteFriend(param));
             PresenceCallbackHandler.FriendStatusChanged += OnFriendStatusChanged;
-            _=LoadFriends();
+            SendRoomCodeCommand = new RelayCommand(ExecuteSendRoomCode); 
+            _ =LoadFriends();
         }
 
+        private void ExecuteSendRoomCode(object parameter)
+        {
+            var ownerWindow = parameter as Window;
+
+            var sendCodeWindow = new SendRoomCode()
+            {
+                Owner = ownerWindow
+            };
+
+            sendCodeWindow.ShowDialog();
+        }
         private void OnFriendStatusChanged(int friendId, int newStatusId)
         {
             var friendVM = FriendsList.FirstOrDefault(f => f.IdPlayer == friendId);

@@ -137,6 +137,9 @@
     <Compile Include="ViewModel\Validation\PasswordRecoveryValidator.cs" />
     <Compile Include="ViewModel\Validation\SignUpValidator.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\Authentication\GuestLogIn.xaml.cs">
+      <DependentUpon>GuestLogIn.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Authentication\PasswordRecovery\CodeValidation.xaml.cs">
       <DependentUpon>CodeValidation.xaml</DependentUpon>
     </Compile>
@@ -204,6 +207,10 @@
       <DependentUpon>UserProfilePage.xaml</DependentUpon>
     </Compile>
     <Page Include="Styles\GlobalStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Authentication\GuestLogIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -573,6 +580,50 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Assets\Bastos\bastos_10s.jpg" />
+    <Resource Include="Resources\Assets\Bastos\bastos_11s.jpg" />
+    <Resource Include="Resources\Assets\Bastos\bastos_12s.jpg" />
+    <Resource Include="Resources\Assets\Bastos\bastos_1s.jpg" />
+    <Resource Include="Resources\Assets\Bastos\bastos_2s.jpg" />
+    <Resource Include="Resources\Assets\Bastos\bastos_3s.jpg" />
+    <Resource Include="Resources\Assets\Bastos\bastos_4s.jpg" />
+    <Resource Include="Resources\Assets\Bastos\bastos_5s.jpg" />
+    <Resource Include="Resources\Assets\Bastos\bastos_6s.jpg" />
+    <Resource Include="Resources\Assets\Bastos\bastos_7s.jpg" />
+    <Resource Include="Resources\Assets\Copas\copas_10s.jpg" />
+    <Resource Include="Resources\Assets\Copas\copas_11s.jpg" />
+    <Resource Include="Resources\Assets\Copas\copas_12s.jpg" />
+    <Resource Include="Resources\Assets\Copas\copas_1s.jpg" />
+    <Resource Include="Resources\Assets\Copas\copas_2s.jpg" />
+    <Resource Include="Resources\Assets\Copas\copas_3s.jpg" />
+    <Resource Include="Resources\Assets\Copas\copas_4s.jpg" />
+    <Resource Include="Resources\Assets\Copas\copas_5s.jpg" />
+    <Resource Include="Resources\Assets\Copas\copas_6s.jpg" />
+    <Resource Include="Resources\Assets\Copas\copas_7s.jpg" />
+    <Resource Include="Resources\Assets\Oros\oros_10s.jpg" />
+    <Resource Include="Resources\Assets\Oros\oros_11s.jpg" />
+    <Resource Include="Resources\Assets\Oros\oros_12s.jpg" />
+    <Resource Include="Resources\Assets\Oros\oros_1s.jpg" />
+    <Resource Include="Resources\Assets\Oros\oros_2s.jpg" />
+    <Resource Include="Resources\Assets\Oros\oros_3s.jpg" />
+    <Resource Include="Resources\Assets\Oros\oros_4s.jpg" />
+    <Resource Include="Resources\Assets\Oros\oros_5s.jpg" />
+    <Resource Include="Resources\Assets\Oros\oros_6s.jpg" />
+    <Resource Include="Resources\Assets\Oros\oros_7s.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Assets\Espadas\espadas_10s.jpg" />
+    <Resource Include="Resources\Assets\Espadas\espadas_11s.jpg" />
+    <Resource Include="Resources\Assets\Espadas\espadas_12s.jpg" />
+    <Resource Include="Resources\Assets\Espadas\espadas_1s.jpg" />
+    <Resource Include="Resources\Assets\Espadas\espadas_2s.jpg" />
+    <Resource Include="Resources\Assets\Espadas\espadas_3s.jpg" />
+    <Resource Include="Resources\Assets\Espadas\espadas_4s.jpg" />
+    <Resource Include="Resources\Assets\Espadas\espadas_5s.jpg" />
+    <Resource Include="Resources\Assets\Espadas\espadas_6s.jpg" />
+    <Resource Include="Resources\Assets\Espadas\espadas_7s.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

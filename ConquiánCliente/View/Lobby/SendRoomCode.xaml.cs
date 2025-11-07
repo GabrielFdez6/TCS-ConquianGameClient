@@ -18,7 +18,7 @@ namespace ConquiánCliente.View.Lobby
     /// <summary>
     /// Lógica de interacción para SendRoomCode.xaml
     /// </summary>
-    public partial class SendRoomCode : Page
+    public partial class SendRoomCode : Window
     {
         public SendRoomCode()
         {
