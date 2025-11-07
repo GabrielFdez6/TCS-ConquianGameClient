@@ -14,7 +14,11 @@
         Background="Transparent">
 
     <Grid>
-        <Border Background="#F9D379" CornerRadius="15">
+        <!-- Cambiamos el color de fondo y añadimos borde, sin modificar el layout -->
+        <Border Background="{StaticResource PrimaryBackgroundBrush}"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="2"
+                CornerRadius="15">
             <Grid>
                 <Button Style="{StaticResource PrimaryButtonStyle}"
                         HorizontalAlignment="Right"
@@ -55,12 +59,20 @@
                                    Foreground="White"
                                    FontSize="18"
                                    HorizontalAlignment="Center"/>
-                        <TextBox Width="250"
-                                 Height="40"
-                                 FontSize="20"
-                                 TextAlignment="Center"
-                                 Margin="0,10,0,10"
-                                 Text="{Binding RoomCode, UpdateSourceTrigger=PropertyChanged}"/>
+                        
+                        <Border Width="250"
+                                Height="40"
+                                CornerRadius="5"
+                                BorderThickness="1"
+                                BorderBrush="{StaticResource TextBoxBorderBrush}"
+                                Margin="0,10,0,10">
+                            <TextBox Padding="8"
+                                     FontSize="20"
+                                     BorderThickness="0"
+                                     Background="{StaticResource TextBoxBackgroundBrush}"
+                                     TextAlignment="Center"
+                                     Text="{Binding RoomCode, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Border>
                         <Button Content="{x:Static language:Lang.LobbyJoinRoom}"
                                 Style="{StaticResource PrimaryButtonStyle}"
                                 Width="250"

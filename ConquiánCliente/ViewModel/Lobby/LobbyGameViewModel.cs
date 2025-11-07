@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using ConquiánCliente.View.Lobby;
+using ConquiánCliente.View.Game;
+
 namespace ConquiánCliente.ViewModel.Lobby
 {
     public class LobbyGameViewModel : ViewModelBase
@@ -72,7 +74,8 @@ namespace ConquiánCliente.ViewModel.Lobby
         public ICommand GoBackCommand { get; }
         public ICommand SendMessageCommand { get; }
         public ICommand ShowInviteFriendsCommand { get; }
-        public ICommand ShutdownApplicationCommand { get; } 
+        public ICommand ShutdownApplicationCommand { get; }
+        public ICommand StartGameCommand { get; }
 
         public LobbyGameViewModel(string receivedRoomCode)
         {
@@ -86,9 +89,10 @@ namespace ConquiánCliente.ViewModel.Lobby
             GoBackCommand = new RelayCommand(ExecuteGoBack);
             SendMessageCommand = new RelayCommand(ExecuteSendMessage, CanExecuteSendMessage);
             ShowInviteFriendsCommand = new RelayCommand(ExecuteShowInviteFriends, CanExecuteShowInviteFriends);
-            ShutdownApplicationCommand = new RelayCommand(ExecuteShutdownApplication); 
+            ShutdownApplicationCommand = new RelayCommand(ExecuteShutdownApplication);
+            StartGameCommand = new RelayCommand(ExecuteStartGame, CanExecuteStartGame);
 
-            _=InitializeConnectionAsync();
+            _ =InitializeConnectionAsync();
         }
 
         private async Task InitializeConnectionAsync()
@@ -318,6 +322,29 @@ namespace ConquiánCliente.ViewModel.Lobby
                     windowToClose.Close();
                 }
                 catch (InvalidOperationException) { }
+            }
+        }
+
+        private bool CanExecuteStartGame(object obj)
+        {
+            return IsHost;
+        }
+
+        private void ExecuteStartGame(object parameter)
+        {
+            if (IsNavigatingAway) return;
+            IsNavigatingAway = true;
+
+            CloseClientConnection(notifyServer: true);
+
+            // Crear y mostrar la ventana del juego
+            var gameWindow = new Game();
+            gameWindow.Show();
+
+            // Cerrar la ventana actual (LobbyGame)
+            if (parameter is Window currentWindow)
+            {
+                currentWindow.Close();
             }
         }
 

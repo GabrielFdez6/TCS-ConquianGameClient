@@ -1,0 +1,59 @@
+﻿<Window x:Class="ConquiánCliente.View.Game.ConfirmExitGame"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Border Background="{StaticResource PrimaryBackgroundBrush}"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="2"
+                CornerRadius="10"
+                Padding="40"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+            <StackPanel Width="360"
+                        Orientation="Vertical">
+                <TextBlock Text="¿Estás seguro de que quieres salir de la partida?"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="{StaticResource PrimaryTextBrush}"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"
+                           Margin="0,0,0,30"/>
+
+                <Button Content="Salir"
+                        Width="200" Height="60"
+                        Margin="0,0,0,10"
+                        Click="SalirButton_Click"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding ExitGameCommand}">
+                    <Button.Effect>
+                        <DropShadowEffect Color="#A43C42"
+                                          BlurRadius="10"
+                                          ShadowDepth="2"
+                                          Opacity="1"/>
+                    </Button.Effect>
+                </Button>
+
+                <Button Content="Volver al juego"
+                        Width="200" Height="60"
+                        Click="VolverAlJuegoButton_Click"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding CloseDialogCommand}">
+                    <Button.Effect>
+                        <DropShadowEffect Color="#A43C42"
+                                          BlurRadius="10"
+                                          ShadowDepth="2"
+                                          Opacity="1"/>
+                    </Button.Effect>
+                </Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

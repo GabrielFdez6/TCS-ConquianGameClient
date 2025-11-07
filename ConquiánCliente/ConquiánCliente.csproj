@@ -161,6 +161,12 @@
     <Compile Include="View\FriendList\FriendRequests.xaml.cs">
       <DependentUpon>FriendRequests.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Game\ConfirmExitGame.xaml.cs">
+      <DependentUpon>ConfirmExitGame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Game\Game.xaml.cs">
+      <DependentUpon>Game.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Lobby\InvitationReceived.xaml.cs">
       <DependentUpon>InvitationReceived.xaml</DependentUpon>
     </Compile>
@@ -239,6 +245,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FriendList\FriendRequests.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Game\ConfirmExitGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Game\Game.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -627,6 +641,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Assets\reverso.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\backgroundGame.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
