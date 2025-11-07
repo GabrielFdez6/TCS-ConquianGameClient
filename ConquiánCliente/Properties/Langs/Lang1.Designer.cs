@@ -592,6 +592,96 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Volver al lobby.
+        /// </summary>
+        public static string GameBackToLobby {
+            get {
+                return ResourceManager.GetString("GameBackToLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Derrota.
+        /// </summary>
+        public static string GameDefeat {
+            get {
+                return ResourceManager.GetString("GameDefeat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Salir.
+        /// </summary>
+        public static string GameExit {
+            get {
+                return ResourceManager.GetString("GameExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ¿Estas seguro de que quieres salir de la partida? .
+        /// </summary>
+        public static string GameLeaveTheMatch {
+            get {
+                return ResourceManager.GetString("GameLeaveTheMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Resultados .
+        /// </summary>
+        public static string GameResultsTitle {
+            get {
+                return ResourceManager.GetString("GameResultsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Volver al juego .
+        /// </summary>
+        public static string GameReturnToGame {
+            get {
+                return ResourceManager.GetString("GameReturnToGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tiempo 00:00.
+        /// </summary>
+        public static string GameTime {
+            get {
+                return ResourceManager.GetString("GameTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Pasar.
+        /// </summary>
+        public static string GameToPass {
+            get {
+                return ResourceManager.GetString("GameToPass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Turno 00:00.
+        /// </summary>
+        public static string GameTurn {
+            get {
+                return ResourceManager.GetString("GameTurn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Victoria.
+        /// </summary>
+        public static string GameVictory {
+            get {
+                return ResourceManager.GetString("GameVictory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Aceptar.
         /// </summary>
         public static string GlobalAccept {

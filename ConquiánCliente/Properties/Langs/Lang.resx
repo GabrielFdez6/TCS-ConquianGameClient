@@ -513,4 +513,34 @@
   <data name="LobbySendRoomCode" xml:space="preserve">
     <value>Enviar código de sala </value>
   </data>
+  <data name="GameToPass" xml:space="preserve">
+    <value>Pasar</value>
+  </data>
+  <data name="GameExit" xml:space="preserve">
+    <value>Salir</value>
+  </data>
+  <data name="GameReturnToGame" xml:space="preserve">
+    <value>Volver al juego </value>
+  </data>
+  <data name="GameLeaveTheMatch" xml:space="preserve">
+    <value>¿Estas seguro de que quieres salir de la partida? </value>
+  </data>
+  <data name="GameTime" xml:space="preserve">
+    <value>Tiempo 00:00</value>
+  </data>
+  <data name="GameTurn" xml:space="preserve">
+    <value>Turno 00:00</value>
+  </data>
+  <data name="GameResultsTitle" xml:space="preserve">
+    <value>Resultados </value>
+  </data>
+  <data name="GameBackToLobby" xml:space="preserve">
+    <value>Volver al lobby</value>
+  </data>
+  <data name="GameVictory" xml:space="preserve">
+    <value>Victoria</value>
+  </data>
+  <data name="GameDefeat" xml:space="preserve">
+    <value>Derrota</value>
+  </data>
 </root>

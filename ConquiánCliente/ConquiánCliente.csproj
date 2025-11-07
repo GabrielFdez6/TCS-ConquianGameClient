@@ -167,6 +167,9 @@
     <Compile Include="View\Game\Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Game\GameResults.xaml.cs">
+      <DependentUpon>GameResults.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Lobby\InvitationReceived.xaml.cs">
       <DependentUpon>InvitationReceived.xaml</DependentUpon>
     </Compile>
@@ -253,6 +256,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Game\Game.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Game\GameResults.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

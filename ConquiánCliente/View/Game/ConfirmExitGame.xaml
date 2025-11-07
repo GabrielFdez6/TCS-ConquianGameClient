@@ -1,6 +1,7 @@
 ﻿<Window x:Class="ConquiánCliente.View.Game.ConfirmExitGame"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:language="clr-namespace:ConquiánCliente.Properties.Langs"
         WindowStyle="None"
         ResizeMode="NoResize"
         AllowsTransparency="True"
@@ -19,7 +20,7 @@
 
             <StackPanel Width="360"
                         Orientation="Vertical">
-                <TextBlock Text="¿Estás seguro de que quieres salir de la partida?"
+                <TextBlock Text="{x:Static language:Lang.GameLeaveTheMatch}"
                            FontSize="26"
                            FontWeight="Bold"
                            Foreground="{StaticResource PrimaryTextBrush}"
@@ -30,7 +31,7 @@
                 <Button Content="Salir"
                         Width="200" Height="60"
                         Margin="0,0,0,10"
-                        Click="SalirButton_Click"
+                        Click="{x:Static language:Lang.GameExit}"
                         Style="{StaticResource PrimaryButtonStyle}"
                         Command="{Binding ExitGameCommand}">
                     <Button.Effect>
@@ -41,7 +42,7 @@
                     </Button.Effect>
                 </Button>
 
-                <Button Content="Volver al juego"
+                <Button Content="{x:Static language:Lang.GameReturnToGame}"
                         Width="200" Height="60"
                         Click="VolverAlJuegoButton_Click"
                         Style="{StaticResource PrimaryButtonStyle}"
