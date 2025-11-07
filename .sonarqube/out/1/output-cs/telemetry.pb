@@ -1,1 +1,0 @@
-ÉRuC:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\Conqui√°nCliente\Conqui√°nCliente.csprojÚ	CSharp7_3

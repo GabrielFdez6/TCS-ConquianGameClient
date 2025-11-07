@@ -19,3 +19,6 @@
 
 #Credenciales de conexion a BD
 credentials.config
+
+# SonarQube
+.sonarqube/
