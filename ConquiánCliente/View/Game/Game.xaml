@@ -5,145 +5,153 @@
         Title="Partida"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
-        Background="Transparent"
-        Height="1080" Width="1920">
+        Background="Black">
     <Grid>
+
         <Image Source="/Resources/backgroundGame.jpg"
                Stretch="UniformToFill"/>
 
-        <Grid HorizontalAlignment="Stretch"
-              VerticalAlignment="Top"
-              Margin="0,20,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <Viewbox Stretch="Uniform">
 
-            <Button Grid.Column="0"
-                    x:Name="BackButton"
-                    Click="BackButton_Click"
-                    Margin="20"
-                    Width="50" Height="50"
-                    Content="&lt;"
-                    FontSize="24"
-                    FontWeight="Bold"
-                    Style="{StaticResource PrimaryButtonStyle}">
-                <Button.Effect>
-                    <DropShadowEffect Color="#A43C42"
-                                      BlurRadius="10"
-                                      ShadowDepth="2"
-                                      Opacity="1"/>
-                </Button.Effect>
-            </Button>
+            <Grid Width="1920" Height="1080">
 
-            <Border Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    Padding="15,5"
-                    Background="#66000000"
-                    CornerRadius="5"
-                    Margin="0,0,0,45"
-                    Width="220">
-                <TextBlock Text="{x:Static language:Lang.GameTime}"
+                <Grid HorizontalAlignment="Stretch"
+                      VerticalAlignment="Top"
+                      Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0"
+                            x:Name="BackButton"
+                            Click="BackButton_Click"
+                            Margin="20"
+                            Width="50" Height="50"
+                            Content="&lt;"
+                            FontSize="24"
+                            FontWeight="Bold"
+                            Style="{StaticResource PrimaryButtonStyle}">
+                        <Button.Effect>
+                            <DropShadowEffect Color="#A43C42"
+                                              BlurRadius="10"
+                                              ShadowDepth="2"
+                                              Opacity="1"/>
+                        </Button.Effect>
+                    </Button>
+
+                    <Border Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            Padding="15,5"
+                            Background="#66000000"
+                            CornerRadius="5"
+                            Margin="0,0,0,45"
+                            Width="220">
+                        <TextBlock Text="{x:Static language:Lang.GameTime}"
+                                   FontSize="28"
+                                   FontWeight="Bold"
+                                   Foreground="White"/>
+                    </Border>
+                </Grid>
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Margin="0,100,60,0">
+                    <Border Width="80" Height="80" BorderBrush="Gray" BorderThickness="1">
+                        <Image Source="/Resources/imageProfile/avatar02.JPG"
+                               Stretch="UniformToFill"/>
+                    </Border>
+                    <TextBlock Text="Oponente"
+                               VerticalAlignment="Center"
+                               Margin="10,0,0,0"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               Foreground="White"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Margin="820,130,0,0">
+                    <Image Source="/Resources/Assets/reverso.jpg"
+                           Width="110" Height="165" Margin="5"/>
+                    <Image Source="/Resources/Assets/reverso.jpg"
+                           Width="110" Height="165" Margin="5"/>
+                    <Image Source="/Resources/Assets/reverso.jpg"
+                           Width="110" Height="165" Margin="5"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Margin="865,0,0,0">
+                    <Grid Margin="0,0,15,0">
+                        <Image Source="/Resources/Assets/Espadas/espadas_5s.jpg"
+                               Width="110" Height="165"/>
+                        <Image Source="/Resources/Assets/Espadas/espadas_6s.jpg"
+                               Width="110" Height="165"
+                               Margin="-85,10,0,0" Opacity="0.6"/>
+                    </Grid>
+                    <Image Source="/Resources/Assets/reverso.jpg"
+                           Width="110" Height="165"
+                           Margin="20,0,0,0"/>
+                </StackPanel>
+
+                <Button Content="{x:Static language:Lang.GameToPass}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Margin="910,0,0,310"
+                        Width="180" Height="55"
+                        Style="{StaticResource PrimaryButtonStyle}">
+                    <Button.Effect>
+                        <DropShadowEffect Color="#A43C42"
+                                          BlurRadius="10"
+                                          ShadowDepth="2"
+                                          Opacity="1"/>
+                    </Button.Effect>
+                </Button>
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Margin="760,0,0,10">
+                    <Image Source="/Resources/Assets/Copas/copas_3s.jpg"
+                           Width="144" Height="216" Margin="5"/>
+                    <Image Source="/Resources/Assets/Espadas/espadas_7s.jpg"
+                           Width="144" Height="216" Margin="5"/>
+                    <Image Source="/Resources/Assets/Bastos/bastos_2s.jpg"
+                           Width="144" Height="216" Margin="5"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Margin="60,0,0,60">
+                    <Border Width="80" Height="80"
+                            BorderBrush="Gray" BorderThickness="1">
+                        <Image Source="/Resources/imageProfile/avatar01.JPG"
+                               Stretch="UniformToFill"/>
+                    </Border>
+                    <TextBlock Text="Jugador"
+                               VerticalAlignment="Center"
+                               Margin="10,0,0,0"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               Foreground="White"/>
+                </StackPanel>
+
+                <TextBlock Text="{x:Static language:Lang.GameTurn}"
                            FontSize="28"
                            FontWeight="Bold"
-                           Foreground="White"/>
-            </Border>
-        </Grid>
-
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Margin="0,100,60,0">
-            <Border Width="80" Height="80" BorderBrush="Gray" BorderThickness="1">
-                <Image Source="/Resources/imageProfile/avatar02.JPG"
-                       Stretch="UniformToFill"/>
-            </Border>
-            <TextBlock Text="Oponente"
-                       VerticalAlignment="Center"
-                       Margin="10,0,0,0"
-                       FontSize="24"
-                       FontWeight="Bold"
-                       Foreground="White"/>
-        </StackPanel>
-
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Margin="795,117,0,0">
-            <Image Source="/Resources/Assets/reverso.jpg"
-                   Width="120" Height="180" Margin="5"/>
-            <Image Source="/Resources/Assets/reverso.jpg"
-                   Width="120" Height="180" Margin="5"/>
-            <Image Source="/Resources/Assets/reverso.jpg"
-                   Width="120" Height="180" Margin="5"/>
-        </StackPanel>
-
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Margin="845,0,0,0">
-            <Grid Margin="0,0,20,0">
-                <Image Source="/Resources/Assets/Espadas/espadas_5s.jpg"
-                       Width="120" Height="180"/>
-                <Image Source="/Resources/Assets/Espadas/espadas_6s.jpg"
-                       Width="120" Height="180"
-                       Margin="-90,10,0,0"
-                       Opacity="0.6"/>
+                           Foreground="White"
+                           Margin="430,789,1300,238"/>
+                <TextBlock Text="{x:Static language:Lang.GameTurn}"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           Margin="1301,270,429,757"/>
             </Grid>
-            <Image Source="/Resources/Assets/reverso.jpg"
-                   Width="120" Height="180"
-                   Margin="30,0,0,0"/>
-        </StackPanel>
-
-        <Button Content="{x:Static language:Lang.GameToPass}"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                Margin="890,0,0,306"
-                Width="200" Height="60"
-                Style="{StaticResource PrimaryButtonStyle}">
-            <Button.Effect>
-                <DropShadowEffect Color="#A43C42"
-                                  BlurRadius="10"
-                                  ShadowDepth="2"
-                                  Opacity="1"/>
-            </Button.Effect>
-        </Button>
-
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Bottom"
-                    Margin="720,0,0,10">
-            <Image Source="/Resources/Assets/Copas/copas_3s.jpg"
-                   Width="170" Height="255" Margin="5"/>
-            <Image Source="/Resources/Assets/Espadas/espadas_7s.jpg"
-                   Width="170" Height="255" Margin="5"/>
-            <Image Source="/Resources/Assets/Bastos/bastos_2s.jpg"
-                   Width="170" Height="255" Margin="5"/>
-        </StackPanel>
-
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Bottom"
-                    Margin="60,0,0,60">
-            <Border Width="80" Height="80"
-                    BorderBrush="Gray" BorderThickness="1">
-                <Image Source="/Resources/imageProfile/avatar01.JPG"
-                       Stretch="UniformToFill"/>
-            </Border>
-            <TextBlock Text="Jugador"
-                       VerticalAlignment="Center"
-                       Margin="10,0,0,0"
-                       FontSize="24"
-                       FontWeight="Bold"
-                       Foreground="White"/>
-        </StackPanel>
-        <TextBlock Text="{x:Static language:Lang.GameTurn}"
-            FontSize="28"
-            FontWeight="Bold"
-            Foreground="White" Margin="430,789,1300,238"/>
-        <TextBlock Text="{x:Static language:Lang.GameTurn}"
-            FontSize="28"
-            FontWeight="Bold"
-            Foreground="White" Margin="1301,270,429,757"/>
+        </Viewbox>
     </Grid>
 </Window>
