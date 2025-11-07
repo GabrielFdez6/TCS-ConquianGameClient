@@ -625,6 +625,9 @@
     <Resource Include="Resources\Assets\Espadas\espadas_6s.jpg" />
     <Resource Include="Resources\Assets\Espadas\espadas_7s.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Assets\reverso.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
