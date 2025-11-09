@@ -12,10 +12,14 @@
       WindowStartupLocation="CenterOwner" 
       WindowStyle="ToolWindow">
 
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
+
     <Grid Height="300" VerticalAlignment="Top">
 
         <Border BorderBrush="{StaticResource BorderBrush}" 
-                BorderThickness="2" 
+             BorderThickness="2" 
                 Background="Transparent" CornerRadius="10" 
                 Padding="35" 
                 HorizontalAlignment="Center" 
@@ -29,7 +33,7 @@
                                   BlurRadius="20"/>
             </Border.Effect>
 
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical" IsEnabled="{Binding IsControlEnabled}">
                 <TextBlock Text="{x:Static language:Lang.LobbySendRoomCode}" 
                            Style="{StaticResource TitleTextBlock}"
                            Margin="0,0,0,30"/>
@@ -41,7 +45,7 @@
                            HorizontalAlignment="Left"/>
 
                 <Border CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource TextBoxBorderBrush}">
-                    <TextBox Text="{Binding Email}" 
+                    <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" 
                              Padding="8" 
                              FontSize="16"
                              BorderThickness="0"
@@ -49,6 +53,7 @@
                 </Border>
 
                 <Button Margin="0,30,0,10" Height="43" Width="168" 
+                        Command="{Binding SendCommand}"
                         Style="{StaticResource PrimaryButtonStyle}">
                     <TextBlock Text="{x:Static language:Lang.GlobalAccept}" 
                                FontSize="16" 
@@ -58,12 +63,21 @@
                                Foreground="{StaticResource PrimaryTextBrush}"/>
                 </Button>
 
-                <Button Style="{StaticResource NoFocusButtonStyle}" Margin="0,15,0,0">
+                <Button Style="{StaticResource NoFocusButtonStyle}" Margin="0,15,0,0"
+                        Command="{Binding BackCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                     <TextBlock Text="{x:Static language:Lang.GlobalBack}"
                                Foreground="{StaticResource ForgotPasswordTextBrush}"
                                FontSize="14"/>
                 </Button>
             </StackPanel>
         </Border>
+
+        <TextBlock Text="{x:Static language:Lang.GlobalLoading}"
+                   Style="{StaticResource TitleTextBlock}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                   Margin="0,30,0,0"/>
     </Grid>
 </Window>

@@ -546,4 +546,10 @@
   <data name="ErrorStartingGame" xml:space="preserve">
     <value>Error al iniciar el juego</value>
   </data>
+  <data name="LobbyGuestInviteSent" xml:space="preserve">
+    <value>Invitación enviada</value>
+  </data>
+  <data name="GlobalLoading" xml:space="preserve">
+    <value>Cargando...</value>
+  </data>
 </root>

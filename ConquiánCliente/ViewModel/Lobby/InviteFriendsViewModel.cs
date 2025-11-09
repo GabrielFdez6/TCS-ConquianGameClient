@@ -34,9 +34,12 @@ namespace ConquiánCliente.ViewModel.Lobby
         {
             var ownerWindow = parameter as Window;
 
+            var viewModel = new SendRoomCodeViewModel(this.roomCode);
+
             var sendCodeWindow = new SendRoomCode()
             {
-                Owner = ownerWindow
+                Owner = ownerWindow,
+                DataContext = viewModel 
             };
 
             sendCodeWindow.ShowDialog();

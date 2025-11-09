@@ -1,0 +1,103 @@
+﻿using ConquiánCliente.Properties.Langs;
+using ConquiánCliente.View.Lobby;
+using ConquiánCliente.ServiceGuestInvitation;
+using ConquiánCliente.ViewModel.Validation;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+
+namespace ConquiánCliente.ViewModel.Lobby
+{
+    public class SendRoomCodeViewModel : ViewModelBase
+    {
+        private readonly string roomCode;
+        private string email;
+        private bool isLoading;
+
+        public string Email
+        {
+            get => email;
+            set
+            {
+                email = value;
+                OnPropertyChanged(nameof(Email));
+            }
+        }
+
+        public bool IsLoading
+        {
+            get => isLoading;
+            set
+            {
+                isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+                OnPropertyChanged(nameof(IsControlEnabled));
+            }
+        }
+
+        public bool IsControlEnabled => !IsLoading;
+
+        public ICommand SendCommand { get; }
+        public ICommand BackCommand { get; }
+
+        public SendRoomCodeViewModel(string roomCode)
+        {
+            this.roomCode = roomCode;
+            SendCommand = new RelayCommand(async (param) => await ExecuteSend());
+            BackCommand = new RelayCommand(ExecuteBack);
+        }
+
+
+
+        private async Task ExecuteSend()
+        {
+            string emailError = SignUpValidator.ValidateEmail(Email);
+
+            if (!string.IsNullOrEmpty(emailError))
+            {
+                MessageBox.Show(emailError, Lang.TitleValidation, MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            Email = Email.Trim();
+
+            IsLoading = true;
+            try
+            {
+                bool success;
+                using (var client = new GuestInvitationClient())
+                {
+                    success = await client.SendGuestInviteAsync(roomCode, Email);
+                }
+
+                if (success)
+                {
+                    MessageBox.Show(Lang.LobbyGuestInviteSent, Lang.Lobby, MessageBoxButton.OK, MessageBoxImage.Information);
+                    ExecuteBack(Application.Current.Windows.OfType<SendRoomCode>().FirstOrDefault(w => w.DataContext == this));
+                }
+                else
+                {
+                    MessageBox.Show(Lang.LobbyErrorInvitationFailed, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Lang.ErrorConnectingToServer + $": {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+
+        private void ExecuteBack(object parameter)
+        {
+            if (parameter is Window window)
+            {
+                window.Close();
+            }
+        }
+    }
+}

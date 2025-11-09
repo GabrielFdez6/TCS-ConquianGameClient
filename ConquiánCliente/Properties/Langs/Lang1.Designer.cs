@@ -772,6 +772,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cargando....
+        /// </summary>
+        public static string GlobalLoading {
+            get {
+                return ResourceManager.GetString("GlobalLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Iniciar sesión.
         /// </summary>
         public static string GlobalLogIn {
@@ -966,6 +975,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string LobbyGameMode {
             get {
                 return ResourceManager.GetString("LobbyGameMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invitación enviada.
+        /// </summary>
+        public static string LobbyGuestInviteSent {
+            get {
+                return ResourceManager.GetString("LobbyGuestInviteSent", resourceCulture);
             }
         }
         

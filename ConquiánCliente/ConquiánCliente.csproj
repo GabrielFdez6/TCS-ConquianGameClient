@@ -73,6 +73,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ServiceGuestInvitation\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ServiceInvitation\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -124,6 +129,7 @@
     <Compile Include="ViewModel\Lobby\LobbyCallbackHandler.cs" />
     <Compile Include="ViewModel\Lobby\LobbyGameViewModel.cs" />
     <Compile Include="ViewModel\Lobby\PlayerLobbyItemViewModel.cs" />
+    <Compile Include="ViewModel\Lobby\SendRoomCodeViewModel.cs" />
     <Compile Include="ViewModel\MainMenu\CreateOrJoinViewModel.cs" />
     <Compile Include="ViewModel\MainMenu\MainMenuViewModel.cs" />
     <Compile Include="ViewModel\PlayerSession.cs" />
@@ -382,6 +388,13 @@
     <None Include="Connected Services\ServiceFriendList\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceGuestInvitation\service.wsdl" />
+    <None Include="Connected Services\ServiceGuestInvitation\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceGuestInvitation\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceInvitation\service.wsdl" />
     <None Include="Connected Services\ServiceInvitation\service.xsd">
       <SubType>Designer</SubType>
@@ -498,6 +511,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServiceFriendList\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceGuestInvitation\" />
     <WCFMetadataStorage Include="Connected Services\ServiceInvitation\" />
     <WCFMetadataStorage Include="Connected Services\ServiceLobby\" />
     <WCFMetadataStorage Include="Connected Services\ServiceLogin\" />
@@ -651,6 +665,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\backgroundGame.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceGuestInvitation\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceGuestInvitation\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceGuestInvitation\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
