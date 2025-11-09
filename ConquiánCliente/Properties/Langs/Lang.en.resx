@@ -543,4 +543,7 @@
   <data name="GameDefeat" xml:space="preserve">
     <value>Defeat</value>
   </data>
+  <data name="ErrorStartingGame" xml:space="preserve">
+    <value>Error starting the game</value>
+  </data>
 </root>

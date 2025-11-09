@@ -58,6 +58,12 @@
   <wsdl:message name="ISignUp_VerifyCode_OutputMessage">
     <wsdl:part name="parameters" element="tns:VerifyCodeResponse" />
   </wsdl:message>
+  <wsdl:message name="ISignUp_CancelRegistration_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelRegistration" />
+  </wsdl:message>
+  <wsdl:message name="ISignUp_CancelRegistration_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelRegistrationResponse" />
+  </wsdl:message>
   <wsdl:portType name="ISignUp">
     <wsdl:operation name="RegisterPlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/ISignUp/RegisterPlayer" message="tns:ISignUp_RegisterPlayer_InputMessage" />
@@ -70,6 +76,10 @@
     <wsdl:operation name="VerifyCode">
       <wsdl:input wsaw:Action="http://tempuri.org/ISignUp/VerifyCode" message="tns:ISignUp_VerifyCode_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISignUp/VerifyCodeResponse" message="tns:ISignUp_VerifyCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelRegistration">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISignUp/CancelRegistration" message="tns:ISignUp_CancelRegistration_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISignUp/CancelRegistrationResponse" message="tns:ISignUp_CancelRegistration_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_ISignUp" type="tns:ISignUp">
@@ -96,6 +106,15 @@
     </wsdl:operation>
     <wsdl:operation name="VerifyCode">
       <soap12:operation soapAction="http://tempuri.org/ISignUp/VerifyCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelRegistration">
+      <soap12:operation soapAction="http://tempuri.org/ISignUp/CancelRegistration" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -224,6 +224,12 @@ namespace ConquiánCliente.ServiceSignUp {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/VerifyCode", ReplyAction="http://tempuri.org/ISignUp/VerifyCodeResponse")]
         System.Threading.Tasks.Task<bool> VerifyCodeAsync(string email, string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/CancelRegistration", ReplyAction="http://tempuri.org/ISignUp/CancelRegistrationResponse")]
+        bool CancelRegistration(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/CancelRegistration", ReplyAction="http://tempuri.org/ISignUp/CancelRegistrationResponse")]
+        System.Threading.Tasks.Task<bool> CancelRegistrationAsync(string email);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -275,6 +281,14 @@ namespace ConquiánCliente.ServiceSignUp {
         
         public System.Threading.Tasks.Task<bool> VerifyCodeAsync(string email, string code) {
             return base.Channel.VerifyCodeAsync(email, code);
+        }
+        
+        public bool CancelRegistration(string email) {
+            return base.Channel.CancelRegistration(email);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CancelRegistrationAsync(string email) {
+            return base.Channel.CancelRegistrationAsync(email);
         }
     }
 }

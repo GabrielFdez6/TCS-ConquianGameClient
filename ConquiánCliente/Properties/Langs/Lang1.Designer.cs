@@ -367,6 +367,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Error al iniciar el juego.
+        /// </summary>
+        public static string ErrorStartingGame {
+            get {
+                return ResourceManager.GetString("ErrorStartingGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error: La operación tardó demasiado tiempo..
         /// </summary>
         public static string ErrorTimeout {

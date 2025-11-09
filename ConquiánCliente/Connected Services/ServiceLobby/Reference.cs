@@ -39,6 +39,9 @@ namespace ConquiánCliente.ServiceLobby {
         private string StatusLobbyField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> idGamemodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int idHostPlayerField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -112,6 +115,19 @@ namespace ConquiánCliente.ServiceLobby {
                 if ((object.ReferenceEquals(this.StatusLobbyField, value) != true)) {
                     this.StatusLobbyField = value;
                     this.RaisePropertyChanged("StatusLobby");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> idGamemode {
+            get {
+                return this.idGamemodeField;
+            }
+            set {
+                if ((this.idGamemodeField.Equals(value) != true)) {
+                    this.idGamemodeField = value;
+                    this.RaisePropertyChanged("idGamemode");
                 }
             }
         }
@@ -440,6 +456,18 @@ namespace ConquiánCliente.ServiceLobby {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/SendMessage", ReplyAction="http://tempuri.org/ILobby/SendMessageResponse")]
         System.Threading.Tasks.Task SendMessageAsync(string roomCode, ConquiánCliente.ServiceLobby.MessageDto message);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/SelectGamemode", ReplyAction="http://tempuri.org/ILobby/SelectGamemodeResponse")]
+        void SelectGamemode(string roomCode, int idGamemode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/SelectGamemode", ReplyAction="http://tempuri.org/ILobby/SelectGamemodeResponse")]
+        System.Threading.Tasks.Task SelectGamemodeAsync(string roomCode, int idGamemode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/StartGame", ReplyAction="http://tempuri.org/ILobby/StartGameResponse")]
+        void StartGame(string roomCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/StartGame", ReplyAction="http://tempuri.org/ILobby/StartGameResponse")]
+        System.Threading.Tasks.Task StartGameAsync(string roomCode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -456,6 +484,12 @@ namespace ConquiánCliente.ServiceLobby {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/MessageReceived")]
         void MessageReceived(ConquiánCliente.ServiceLobby.MessageDto message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/NotifyGamemodeChanged")]
+        void NotifyGamemodeChanged(int newGamemodeId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/NotifyGameStarting")]
+        void NotifyGameStarting();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -524,6 +558,22 @@ namespace ConquiánCliente.ServiceLobby {
         
         public System.Threading.Tasks.Task SendMessageAsync(string roomCode, ConquiánCliente.ServiceLobby.MessageDto message) {
             return base.Channel.SendMessageAsync(roomCode, message);
+        }
+        
+        public void SelectGamemode(string roomCode, int idGamemode) {
+            base.Channel.SelectGamemode(roomCode, idGamemode);
+        }
+        
+        public System.Threading.Tasks.Task SelectGamemodeAsync(string roomCode, int idGamemode) {
+            return base.Channel.SelectGamemodeAsync(roomCode, idGamemode);
+        }
+        
+        public void StartGame(string roomCode) {
+            base.Channel.StartGame(roomCode);
+        }
+        
+        public System.Threading.Tasks.Task StartGameAsync(string roomCode) {
+            return base.Channel.StartGameAsync(roomCode);
         }
     }
 }

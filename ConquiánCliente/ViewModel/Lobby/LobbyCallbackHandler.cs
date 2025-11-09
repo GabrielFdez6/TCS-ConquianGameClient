@@ -1,10 +1,7 @@
 ﻿using ConquiánCliente.ServiceLobby;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ConquiánCliente.ViewModel.Lobby
 {
@@ -15,6 +12,8 @@ namespace ConquiánCliente.ViewModel.Lobby
         public event Action<int> OnPlayerLeft;
         public event Action OnHostLeft;
         public event Action<MessageDto> OnMessageReceived;
+        public event Action<int> OnGamemodeChanged;
+        public event Action OnGameStarting;
 
         public void HostLeft()
         {
@@ -34,6 +33,15 @@ namespace ConquiánCliente.ViewModel.Lobby
         public void PlayerLeft(int idPlayer)
         {
             OnPlayerLeft?.Invoke(idPlayer);
+        }
+        public void NotifyGamemodeChanged(int newGamemodeId)
+        {
+            OnGamemodeChanged?.Invoke(newGamemodeId);
+        }
+
+        public void NotifyGameStarting()
+        {
+            OnGameStarting?.Invoke();
         }
     }
 }

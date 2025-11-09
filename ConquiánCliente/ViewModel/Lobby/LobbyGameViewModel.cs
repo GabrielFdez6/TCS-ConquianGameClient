@@ -1,22 +1,27 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceLobby;
+using ConquiánCliente.View.Game;
+using ConquiánCliente.View.Lobby;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ServiceModel;
 using System.Linq;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using ConquiánCliente.View.Lobby;
-using ConquiánCliente.View.Game;
 
 namespace ConquiánCliente.ViewModel.Lobby
 {
     public class LobbyGameViewModel : ViewModelBase
     {
-        private readonly string[] gameTypes = { Lang.LobbyQuickGame, Lang.LobbyClassicGame };
-        private int currentGameIndex = 0;
-        private string selectedGameType;
+        private readonly Dictionary<int, string> gameModes = new Dictionary<int, string>
+        {
+            { 1, Lang.LobbyQuickGame }, 
+            { 2, Lang.LobbyClassicGame }
+        };
+        private List<int> gameModeIds;
+        private int currentGameModeId;
         private string playerCountText;
         private string roomCode;
         private string currentMessage;
@@ -44,8 +49,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         }
         public string SelectedGameType
         {
-            get { return selectedGameType; }
-            set { selectedGameType = value; OnPropertyChanged(nameof(SelectedGameType)); }
+            get { return gameModes.ContainsKey(currentGameModeId) ? gameModes[currentGameModeId] : ""; }
         }
         public string PlayerCountText
         {
@@ -81,11 +85,15 @@ namespace ConquiánCliente.ViewModel.Lobby
         {
             Players = new ObservableCollection<PlayerLobbyItemViewModel>();
             ChatMessages = new ObservableCollection<string>();
+            
             this.RoomCode = receivedRoomCode;
-            SelectedGameType = gameTypes[currentGameIndex];
 
-            NextGameTypeCommand = new RelayCommand(ExecuteNextGameType);
-            PreviousGameTypeCommand = new RelayCommand(ExecutePreviousGameType);
+            gameModeIds = gameModes.Keys.ToList();
+            currentGameModeId = gameModeIds.FirstOrDefault();
+
+            NextGameTypeCommand = new RelayCommand(ExecuteNextGameType, CanExecuteGameTypeChange);
+            PreviousGameTypeCommand = new RelayCommand(ExecutePreviousGameType, CanExecuteGameTypeChange);
+
             GoBackCommand = new RelayCommand(ExecuteGoBack);
             SendMessageCommand = new RelayCommand(ExecuteSendMessage, CanExecuteSendMessage);
             ShowInviteFriendsCommand = new RelayCommand(ExecuteShowInviteFriends, CanExecuteShowInviteFriends);
@@ -105,6 +113,8 @@ namespace ConquiánCliente.ViewModel.Lobby
                 callbackHandler.OnPlayerLeft += HandlePlayerLeft;
                 callbackHandler.OnHostLeft += HandleHostLeft;
                 callbackHandler.OnMessageReceived += HandleMessageReceived;
+                callbackHandler.OnGamemodeChanged += HandleGamemodeChanged;
+                callbackHandler.OnGameStarting += HandleGameStarting;
 
                 var context = new InstanceContext(callbackHandler);
                 client = new LobbyClient(context);
@@ -120,6 +130,11 @@ namespace ConquiánCliente.ViewModel.Lobby
                 this.IsHost = (PlayerSession.CurrentPlayer.idPlayer == idHost);
                 UpdatePlayerList(lobbyState.Players);
                 UpdateChat(lobbyState.ChatMessages);
+
+                if (lobbyState.idGamemode.HasValue)
+                {
+                    UpdateSelectedGamemode(lobbyState.idGamemode.Value);
+                }
 
                 await client.JoinAndSubscribeAsync(this.RoomCode, PlayerSession.CurrentPlayer.idPlayer);
             }
@@ -147,6 +162,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 {
                     Players.Add(CreatePlayerViewModel(newPlayer));
                     UpdatePlayerCount();
+                    OnPropertyChanged(nameof(StartGameCommand));
                 }
             });
         }
@@ -160,6 +176,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 {
                     Players.Remove(playerToRemove);
                     UpdatePlayerCount();
+                    OnPropertyChanged(nameof(StartGameCommand));
                 }
             });
         }
@@ -183,6 +200,30 @@ namespace ConquiánCliente.ViewModel.Lobby
             Application.Current.Dispatcher.Invoke(() =>
             {
                 ChatMessages.Add($"{message.Nickname}: {message.Message}");
+            });
+        }
+
+        private void HandleGamemodeChanged(int newGamemodeId)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                UpdateSelectedGamemode(newGamemodeId);
+            });
+        }
+
+        private void HandleGameStarting()
+        {
+            if (IsNavigatingAway) return;
+            IsNavigatingAway = true;
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                CloseClientConnection(notifyServer: false);
+
+                var gameWindow = new Game();
+                gameWindow.Show();
+
+                CloseCurrentWindow();
             });
         }
 
@@ -297,6 +338,22 @@ namespace ConquiánCliente.ViewModel.Lobby
             }
         }
 
+        private void CloseCurrentWindow()
+        {
+            foreach (Window window in Application.Current.Windows.OfType<Window>().ToList())
+            {
+                if (window.DataContext == this)
+                {
+                    try
+                    {
+                        window.Close();
+                    }
+                    catch (InvalidOperationException) { }
+                    break;
+                }
+            }
+        }
+
         private void NavigateToMainMenu(Window currentWindow = null)
         {
             var mainMenu = new View.MainMenu.MainMenu();
@@ -327,25 +384,28 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private bool CanExecuteStartGame(object obj)
         {
-            return IsHost;
+            return IsHost && Players.Count == 2;
         }
 
         private void ExecuteStartGame(object parameter)
         {
-            if (IsNavigatingAway) return;
-            IsNavigatingAway = true;
-
-            CloseClientConnection(notifyServer: true);
-
-            // Crear y mostrar la ventana del juego
-            var gameWindow = new Game();
-            gameWindow.Show();
-
-            // Cerrar la ventana actual (LobbyGame)
-            if (parameter is Window currentWindow)
+            Task.Run(async () =>
             {
-                currentWindow.Close();
-            }
+                try
+                {
+                    await client.StartGameAsync(this.RoomCode);
+                }
+                catch (Exception ex)
+                {
+                    if (!isNavigatingAway)
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            MessageBox.Show($"{Lang.ErrorStartingGame}: {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                        });
+                    }
+                }
+            });
         }
 
         private bool CanExecuteShowInviteFriends(object obj)
@@ -364,16 +424,54 @@ namespace ConquiánCliente.ViewModel.Lobby
             window.ShowDialog(); 
         }
 
+        private void UpdateSelectedGamemode(int id)
+        {
+            if (gameModes.ContainsKey(id))
+            {
+                currentGameModeId = id;
+                OnPropertyChanged(nameof(SelectedGameType));
+            }
+        }
+
+        private bool CanExecuteGameTypeChange(object obj)
+        {
+            return IsHost;
+        }
+
         private void ExecuteNextGameType(object obj)
         {
-            currentGameIndex = (currentGameIndex + 1) % gameTypes.Length;
-            SelectedGameType = gameTypes[currentGameIndex];
+            int currentIndex = gameModeIds.IndexOf(currentGameModeId);
+            int nextIndex = (currentIndex + 1) % gameModeIds.Count;
+            int newId = gameModeIds[nextIndex];
+
+            Task.Run(async () =>
+            {
+                try
+                {
+                    await client.SelectGamemodeAsync(this.RoomCode, newId);
+                }
+                catch (Exception)
+                {
+                }
+            });
         }
 
         private void ExecutePreviousGameType(object obj)
         {
-            currentGameIndex = (currentGameIndex - 1 + gameTypes.Length) % gameTypes.Length;
-            SelectedGameType = gameTypes[currentGameIndex];
+            int currentIndex = gameModeIds.IndexOf(currentGameModeId);
+            int prevIndex = (currentIndex - 1 + gameModeIds.Count) % gameModeIds.Count;
+            int newId = gameModeIds[prevIndex];
+
+            Task.Run(async () =>
+            {
+                try
+                {
+                    await client.SelectGamemodeAsync(this.RoomCode, newId);
+                }
+                catch (Exception)
+                {
+                }
+            });
         }
     }
 }
