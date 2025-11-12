@@ -31,7 +31,7 @@ namespace ConquiánCliente.ViewModel.Lobby
 
             try
             {
-                using (var lobbyClient = new LobbyClient(new InstanceContext(new LobbyCallbackHandler())))
+                using (var lobbyClient = new LobbyClient(new InstanceContext(LobbyCallbackHandler.Instance)))
                 {
                     lobbyState = await lobbyClient.GetLobbyStateAsync(this.roomCode);
                 }

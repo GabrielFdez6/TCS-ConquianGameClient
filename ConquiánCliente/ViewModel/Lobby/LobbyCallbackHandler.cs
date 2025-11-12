@@ -8,6 +8,15 @@ namespace ConquiánCliente.ViewModel.Lobby
     [CallbackBehavior(UseSynchronizationContext = false)]
     public class LobbyCallbackHandler : ILobbyCallback
     {
+        private static readonly LobbyCallbackHandler instance = new LobbyCallbackHandler();
+
+        private LobbyCallbackHandler() { }
+
+        public static LobbyCallbackHandler Instance
+        {
+            get { return instance; }
+        }
+
         public event Action<PlayerDto> OnPlayerJoined;
         public event Action<int> OnPlayerLeft;
         public event Action OnHostLeft;

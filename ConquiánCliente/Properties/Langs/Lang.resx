@@ -552,4 +552,7 @@
   <data name="GlobalLoading" xml:space="preserve">
     <value>Cargando...</value>
   </data>
+  <data name="ErrorGamemodeNotSelected" xml:space="preserve">
+    <value>No se ha seleccionado un modo de juego</value>
+  </data>
 </root>

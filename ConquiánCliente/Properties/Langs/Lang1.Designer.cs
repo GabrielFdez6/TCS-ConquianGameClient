@@ -151,6 +151,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No se ha seleccionado un modo de juego.
+        /// </summary>
+        public static string ErrorGamemodeNotSelected {
+            get {
+                return ResourceManager.GetString("ErrorGamemodeNotSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Ocurrió un error: {0}.
         /// </summary>
         public static string ErrorGeneric {

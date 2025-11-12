@@ -445,6 +445,12 @@ namespace ConquiánCliente.ServiceLobby {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/JoinAndSubscribe", ReplyAction="http://tempuri.org/ILobby/JoinAndSubscribeResponse")]
         System.Threading.Tasks.Task<bool> JoinAndSubscribeAsync(string roomCode, int idPlayer);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuest", ReplyAction="http://tempuri.org/ILobby/JoinAndSubscribeAsGuestResponse")]
+        ConquiánCliente.ServiceLobby.PlayerDto JoinAndSubscribeAsGuest(string roomCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuest", ReplyAction="http://tempuri.org/ILobby/JoinAndSubscribeAsGuestResponse")]
+        System.Threading.Tasks.Task<ConquiánCliente.ServiceLobby.PlayerDto> JoinAndSubscribeAsGuestAsync(string roomCode);
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/LeaveAndUnsubscribe")]
         void LeaveAndUnsubscribe(string roomCode, int idPlayer);
         
@@ -463,10 +469,10 @@ namespace ConquiánCliente.ServiceLobby {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/SelectGamemode", ReplyAction="http://tempuri.org/ILobby/SelectGamemodeResponse")]
         System.Threading.Tasks.Task SelectGamemodeAsync(string roomCode, int idGamemode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/StartGame", ReplyAction="http://tempuri.org/ILobby/StartGameResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/StartGame")]
         void StartGame(string roomCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/StartGame", ReplyAction="http://tempuri.org/ILobby/StartGameResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/StartGame")]
         System.Threading.Tasks.Task StartGameAsync(string roomCode);
     }
     
@@ -542,6 +548,14 @@ namespace ConquiánCliente.ServiceLobby {
         
         public System.Threading.Tasks.Task<bool> JoinAndSubscribeAsync(string roomCode, int idPlayer) {
             return base.Channel.JoinAndSubscribeAsync(roomCode, idPlayer);
+        }
+        
+        public ConquiánCliente.ServiceLobby.PlayerDto JoinAndSubscribeAsGuest(string roomCode) {
+            return base.Channel.JoinAndSubscribeAsGuest(roomCode);
+        }
+        
+        public System.Threading.Tasks.Task<ConquiánCliente.ServiceLobby.PlayerDto> JoinAndSubscribeAsGuestAsync(string roomCode) {
+            return base.Channel.JoinAndSubscribeAsGuestAsync(roomCode);
         }
         
         public void LeaveAndUnsubscribe(string roomCode, int idPlayer) {

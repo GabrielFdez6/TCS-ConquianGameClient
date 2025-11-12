@@ -44,6 +44,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="JoinAndSubscribeAsGuest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="roomCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="JoinAndSubscribeAsGuestResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" minOccurs="0" name="JoinAndSubscribeAsGuestResult" nillable="true" type="q2:PlayerDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="LeaveAndUnsubscribe">
     <xs:complexType>
       <xs:sequence>
@@ -56,7 +70,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="roomCode" nillable="true" type="xs:string" />
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" minOccurs="0" name="message" nillable="true" type="q2:MessageDto" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" minOccurs="0" name="message" nillable="true" type="q3:MessageDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -85,15 +99,10 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="StartGameResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="PlayerJoined">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" minOccurs="0" name="newPlayer" nillable="true" type="q3:PlayerDto" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" minOccurs="0" name="newPlayer" nillable="true" type="q4:PlayerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -112,7 +121,7 @@
   <xs:element name="MessageReceived">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" minOccurs="0" name="message" nillable="true" type="q4:MessageDto" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" minOccurs="0" name="message" nillable="true" type="q5:MessageDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

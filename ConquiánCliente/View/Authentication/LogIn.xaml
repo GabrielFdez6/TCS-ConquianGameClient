@@ -77,12 +77,15 @@
                                    Foreground="{StaticResource PrimaryTextBrush}"/>
                 </Button>
 
-                <Button Margin="0,5,0,15" Height="43" Width="168" Style="{StaticResource SecondaryButtonStyle}">
-                    <TextBlock Text="{x:Static language:Lang.LogInAsGuess}" 
-                                   FontSize="16"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"
-                                   Foreground="{StaticResource PrimaryTextBrush}"/>
+                <Button Margin="0,5,0,15" Height="43" Width="168" Style="{StaticResource SecondaryButtonStyle}"
+        
+                        Command="{Binding NavigateToGuestLogInCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                    <TextBlock Text="{x:Static language:Lang.LogInAsGuess}"
+                               FontSize="16"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Foreground="{StaticResource PrimaryTextBrush}"/>
                 </Button>
 
                 <Button Style="{StaticResource NoFocusButtonStyle}" Margin="0,25,0,0"

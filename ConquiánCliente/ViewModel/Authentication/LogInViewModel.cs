@@ -1,8 +1,8 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceLogin;
 using ConquiánCliente.View;
+using ConquiánCliente.View.Authentication;
 using ConquiánCliente.View.Authentication.PasswordRecovery;
-using ConquiánCliente.View.MainMenu;
 using ConquiánCliente.ViewModel.Validation;
 using System.ServiceModel;
 using System.Windows;
@@ -36,6 +36,7 @@ namespace ConquiánCliente.ViewModel.Authentication
         public ICommand LoginCommand { get; }
         public ICommand NavigateToSignUpCommand { get; }
         public ICommand NavigateToForgotPasswordCommand { get; }
+        public ICommand NavigateToGuestLogInCommand { get; }
 
         public LogInViewModel()
         {
@@ -43,6 +44,8 @@ namespace ConquiánCliente.ViewModel.Authentication
             LoginCommand = new RelayCommand(ExecuteLogin, CanExecuteLogin);
             NavigateToSignUpCommand = new RelayCommand(ExecuteNavigateToSignUp);
             NavigateToForgotPasswordCommand = new RelayCommand(ExecuteNavigateToForgotPassword);
+
+            NavigateToGuestLogInCommand = new RelayCommand(ExecuteNavigateToGuestLogIn);
         }
 
         private bool CanExecuteLogin(object parameter)
@@ -56,24 +59,24 @@ namespace ConquiánCliente.ViewModel.Authentication
             try
             {
                 isLoggingIn = true;
-                CommandManager.InvalidateRequerySuggested(); 
+                CommandManager.InvalidateRequerySuggested();
 
                 var passwordBox = parameter as PasswordBox;
-                if (passwordBox == null) return; 
+                if (passwordBox == null) return;
                 string password = passwordBox.Password;
 
                 string emailError = LogInValidator.ValidateEmail(Email);
                 if (!string.IsNullOrEmpty(emailError))
                 {
                     MessageBox.Show(emailError, Lang.TitleValidation);
-                    return; 
+                    return;
                 }
 
                 string passwordError = LogInValidator.ValidatePassword(password);
                 if (!string.IsNullOrEmpty(passwordError))
                 {
                     MessageBox.Show(passwordError, Lang.TitleValidation);
-                    return; // 'finally' se ejecutará
+                    return;
                 }
 
                 var client = new LoginClient();
@@ -108,7 +111,7 @@ namespace ConquiánCliente.ViewModel.Authentication
             finally
             {
                 isLoggingIn = false;
-                CommandManager.InvalidateRequerySuggested(); 
+                CommandManager.InvalidateRequerySuggested();
             }
         }
 
@@ -123,6 +126,13 @@ namespace ConquiánCliente.ViewModel.Authentication
         {
             var requestRecoveryWindow = new PasswordRecoveryMainFrame();
             requestRecoveryWindow.Show();
+            (parameter as Window)?.Close();
+        }
+
+        private static void ExecuteNavigateToGuestLogIn(object parameter)
+        {
+            var guestLogInWindow = new GuestLogIn();
+            guestLogInWindow.Show();
             (parameter as Window)?.Close();
         }
 

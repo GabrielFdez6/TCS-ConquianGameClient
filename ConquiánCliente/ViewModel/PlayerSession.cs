@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ConquiánCliente.ServiceLogin;
+﻿using ConquiánCliente.ServiceLogin;
 using PlayerLogin = ConquiánCliente.ServiceLogin.PlayerDto;
 
 namespace ConquiánCliente.ViewModel
@@ -12,12 +7,35 @@ namespace ConquiánCliente.ViewModel
     {
         public static PlayerLogin CurrentPlayer { get; private set; }
 
+        public static bool IsGuest { get; private set; }
+
         public static bool IsLoggedIn => CurrentPlayer != null;
 
-        public static void StartSession(PlayerDto player)
+        static PlayerSession()
+        {
+            IsGuest = false;
+        }
+
+        public static void StartSession(PlayerLogin player)
         {
             CurrentPlayer = player;
+            IsGuest = false; 
         }
+
+        public static void StartGuestSession(ServiceLobby.PlayerDto guestPlayer)
+        {
+            if (guestPlayer == null) return;
+
+            CurrentPlayer = new PlayerLogin
+            {
+                idPlayer = guestPlayer.idPlayer, 
+                nickname = guestPlayer.nickname, 
+                pathPhoto = guestPlayer.pathPhoto 
+            };
+
+            IsGuest = true;
+        }
+
 
         public static void UpdateSession(ServiceUserProfile.PlayerDto fullPlayerProfile)
         {
@@ -40,10 +58,10 @@ namespace ConquiánCliente.ViewModel
             }
         }
 
-
         public static void EndSession()
         {
             CurrentPlayer = null;
+            IsGuest = false;
         }
     }
 }

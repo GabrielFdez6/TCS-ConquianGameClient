@@ -58,6 +58,12 @@
   <wsdl:message name="ILobby_JoinAndSubscribe_OutputMessage">
     <wsdl:part name="parameters" element="tns:JoinAndSubscribeResponse" />
   </wsdl:message>
+  <wsdl:message name="ILobby_JoinAndSubscribeAsGuest_InputMessage">
+    <wsdl:part name="parameters" element="tns:JoinAndSubscribeAsGuest" />
+  </wsdl:message>
+  <wsdl:message name="ILobby_JoinAndSubscribeAsGuest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:JoinAndSubscribeAsGuestResponse" />
+  </wsdl:message>
   <wsdl:message name="ILobby_LeaveAndUnsubscribe_InputMessage">
     <wsdl:part name="parameters" element="tns:LeaveAndUnsubscribe" />
   </wsdl:message>
@@ -75,9 +81,6 @@
   </wsdl:message>
   <wsdl:message name="ILobby_StartGame_InputMessage">
     <wsdl:part name="parameters" element="tns:StartGame" />
-  </wsdl:message>
-  <wsdl:message name="ILobby_StartGame_OutputMessage">
-    <wsdl:part name="parameters" element="tns:StartGameResponse" />
   </wsdl:message>
   <wsdl:message name="ILobby_PlayerJoined_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PlayerJoined" />
@@ -110,6 +113,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ILobby/JoinAndSubscribe" message="tns:ILobby_JoinAndSubscribe_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/JoinAndSubscribeResponse" message="tns:ILobby_JoinAndSubscribe_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="JoinAndSubscribeAsGuest">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuest" message="tns:ILobby_JoinAndSubscribeAsGuest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuestResponse" message="tns:ILobby_JoinAndSubscribeAsGuest_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="LeaveAndUnsubscribe">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobby/LeaveAndUnsubscribe" message="tns:ILobby_LeaveAndUnsubscribe_InputMessage" />
     </wsdl:operation>
@@ -123,7 +130,6 @@
     </wsdl:operation>
     <wsdl:operation name="StartGame">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobby/StartGame" message="tns:ILobby_StartGame_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobby/StartGameResponse" message="tns:ILobby_StartGame_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="PlayerJoined">
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/PlayerJoined" message="tns:ILobby_PlayerJoined_OutputCallbackMessage" />
@@ -175,6 +181,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="JoinAndSubscribeAsGuest">
+      <soap12:operation soapAction="http://tempuri.org/ILobby/JoinAndSubscribeAsGuest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="LeaveAndUnsubscribe">
       <soap12:operation soapAction="http://tempuri.org/ILobby/LeaveAndUnsubscribe" style="document" />
       <wsdl:input>
@@ -204,9 +219,6 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="PlayerJoined">
       <soap12:operation soapAction="http://tempuri.org/ILobby/PlayerJoined" style="document" />

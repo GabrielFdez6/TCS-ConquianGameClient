@@ -17,7 +17,7 @@ namespace ConquiánCliente.ViewModel.Lobby
     {
         private readonly Dictionary<int, string> gameModes = new Dictionary<int, string>
         {
-            { 1, Lang.LobbyQuickGame }, 
+            { 1, Lang.LobbyQuickGame },
             { 2, Lang.LobbyClassicGame }
         };
         private List<int> gameModeIds;
@@ -85,7 +85,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         {
             Players = new ObservableCollection<PlayerLobbyItemViewModel>();
             ChatMessages = new ObservableCollection<string>();
-            
+
             this.RoomCode = receivedRoomCode;
 
             gameModeIds = gameModes.Keys.ToList();
@@ -100,14 +100,14 @@ namespace ConquiánCliente.ViewModel.Lobby
             ShutdownApplicationCommand = new RelayCommand(ExecuteShutdownApplication);
             StartGameCommand = new RelayCommand(ExecuteStartGame, CanExecuteStartGame);
 
-            _ =InitializeConnectionAsync();
+            _ = InitializeConnectionAsync();
         }
 
         private async Task InitializeConnectionAsync()
         {
             try
             {
-                var callbackHandler = new LobbyCallbackHandler();
+                var callbackHandler = LobbyCallbackHandler.Instance;
 
                 callbackHandler.OnPlayerJoined += HandlePlayerJoined;
                 callbackHandler.OnPlayerLeft += HandlePlayerLeft;
@@ -120,7 +120,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 client = new LobbyClient(context);
 
                 var lobbyState = await client.GetLobbyStateAsync(this.RoomCode);
-                if (string.IsNullOrEmpty(lobbyState.RoomCode))
+                if (lobbyState == null || string.IsNullOrEmpty(lobbyState.RoomCode))
                 {
                     HandleHostLeft();
                     return;
@@ -136,12 +136,15 @@ namespace ConquiánCliente.ViewModel.Lobby
                     UpdateSelectedGamemode(lobbyState.idGamemode.Value);
                 }
 
-                await client.JoinAndSubscribeAsync(this.RoomCode, PlayerSession.CurrentPlayer.idPlayer);
+                if (!PlayerSession.IsGuest)
+                {
+                    await client.JoinAndSubscribeAsync(this.RoomCode, PlayerSession.CurrentPlayer.idPlayer);
+                }
             }
             catch (Exception)
             {
                 MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                NavigateToMainMenu();
+                NavigateToLoginOrMainMenu();
             }
         }
 
@@ -162,7 +165,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 {
                     Players.Add(CreatePlayerViewModel(newPlayer));
                     UpdatePlayerCount();
-                    OnPropertyChanged(nameof(StartGameCommand));
+                    CommandManager.InvalidateRequerySuggested();
                 }
             });
         }
@@ -176,7 +179,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 {
                     Players.Remove(playerToRemove);
                     UpdatePlayerCount();
-                    OnPropertyChanged(nameof(StartGameCommand));
+                    CommandManager.InvalidateRequerySuggested();
                 }
             });
         }
@@ -191,7 +194,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 MessageBox.Show(Lang.InfoHostLeft, Lang.Lobby, MessageBoxButton.OK, MessageBoxImage.Information);
 
                 CloseClientConnection(notifyServer: false);
-                NavigateToMainMenu();
+                NavigateToLoginOrMainMenu();
             });
         }
 
@@ -306,7 +309,7 @@ namespace ConquiánCliente.ViewModel.Lobby
             isNavigatingAway = true;
 
             CloseClientConnection(notifyServer: true);
-            NavigateToMainMenu(parameter as Window);
+            NavigateToLoginOrMainMenu(parameter as Window);
         }
 
         private void CloseClientConnection(bool notifyServer)
@@ -354,10 +357,19 @@ namespace ConquiánCliente.ViewModel.Lobby
             }
         }
 
-        private void NavigateToMainMenu(Window currentWindow = null)
+        private void NavigateToLoginOrMainMenu(Window currentWindow = null)
         {
-            var mainMenu = new View.MainMenu.MainMenu();
-            mainMenu.Show();
+            if (PlayerSession.IsGuest)
+            {
+                PlayerSession.EndSession();
+                var loginView = new LogIn();
+                loginView.Show();
+            }
+            else
+            {
+                var mainMenu = new View.MainMenu.MainMenu();
+                mainMenu.Show();
+            }
 
             var windowToClose = currentWindow;
             if (windowToClose == null)
@@ -384,11 +396,17 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private bool CanExecuteStartGame(object obj)
         {
-            return IsHost && Players.Count == 2;
+            return IsHost && Players.Count == 2 && gameModes.ContainsKey(currentGameModeId);
         }
 
         private void ExecuteStartGame(object parameter)
         {
+            if (currentGameModeId == 0 || !gameModes.ContainsKey(currentGameModeId))
+            {
+                MessageBox.Show(Lang.ErrorGamemodeNotSelected, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             Task.Run(async () =>
             {
                 try
@@ -401,7 +419,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                     {
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            MessageBox.Show($"{Lang.ErrorStartingGame}: {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show(Lang.ErrorStartingGame, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                         });
                     }
                 }
@@ -410,7 +428,7 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private bool CanExecuteShowInviteFriends(object obj)
         {
-            return IsHost;
+            return IsHost && !PlayerSession.IsGuest;
         }
 
         private void ExecuteShowInviteFriends(object obj)
@@ -421,7 +439,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 DataContext = vm,
                 Owner = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.DataContext == this)
             };
-            window.ShowDialog(); 
+            window.ShowDialog();
         }
 
         private void UpdateSelectedGamemode(int id)
@@ -430,6 +448,10 @@ namespace ConquiánCliente.ViewModel.Lobby
             {
                 currentGameModeId = id;
                 OnPropertyChanged(nameof(SelectedGameType));
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    CommandManager.InvalidateRequerySuggested();
+                });
             }
         }
 
