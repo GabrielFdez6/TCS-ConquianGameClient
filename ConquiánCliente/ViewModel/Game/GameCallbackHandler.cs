@@ -11,7 +11,12 @@ namespace ConquiánCliente.ViewModel.Game
         public event Action<GameStateDto> OnGameUpdate;
         public event Action OnOpponentDrewDeck;
         public event Action<CardDto> OnOpponentDiscarded;
+        public event Action<int> TimeUpdated;
 
+        public void OnTimeUpdated(int remainingSeconds)
+        {
+            TimeUpdated?.Invoke(remainingSeconds);
+        }
         public void NotifyGameUpdate(GameStateDto newState)
         {
             OnGameUpdate?.Invoke(newState);

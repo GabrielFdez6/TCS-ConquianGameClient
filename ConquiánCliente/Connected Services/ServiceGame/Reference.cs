@@ -38,6 +38,9 @@ namespace ConquiánCliente.ServiceGame {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private ConquiánCliente.ServiceGame.CardDto TopDiscardCardField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int TotalGameSecondsField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -109,6 +112,19 @@ namespace ConquiánCliente.ServiceGame {
                 if ((object.ReferenceEquals(this.TopDiscardCardField, value) != true)) {
                     this.TopDiscardCardField = value;
                     this.RaisePropertyChanged("TopDiscardCard");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int TotalGameSeconds {
+            get {
+                return this.TotalGameSecondsField;
+            }
+            set {
+                if ((this.TotalGameSecondsField.Equals(value) != true)) {
+                    this.TotalGameSecondsField = value;
+                    this.RaisePropertyChanged("TotalGameSeconds");
                 }
             }
         }
@@ -429,6 +445,9 @@ namespace ConquiánCliente.ServiceGame {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/NotifyOpponentDiscarded")]
         void NotifyOpponentDiscarded(ConquiánCliente.ServiceGame.CardDto card);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/OnTimeUpdated")]
+        void OnTimeUpdated(int remainingSeconds);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

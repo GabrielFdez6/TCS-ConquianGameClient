@@ -1,11 +1,12 @@
 ﻿using ConquiánCliente.Properties.Langs;
-using ConquiánCliente.ServiceGame; // Revisa tu namespace de referencia
+using ConquiánCliente.ServiceGame;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
+
 
 namespace ConquiánCliente.ViewModel.Game
 {
@@ -15,9 +16,14 @@ namespace ConquiánCliente.ViewModel.Game
         private GameClient client;
         private GameCallbackHandler callbackHandler;
 
-        // --- Propiedades para Bindeo (UI) ---
-        public ObservableCollection<CardViewModel> PlayerHand { get; set; }
+        private string gameTimeDisplay;
+        public string GameTimeDisplay
+        {
+            get { return gameTimeDisplay; }
+            set { gameTimeDisplay = value; OnPropertyChanged(nameof(GameTimeDisplay)); }
+        }
 
+        public ObservableCollection<CardViewModel> PlayerHand { get; set; }
         public ObservableCollection<object> OpponentFaceDownCards { get; set; }
 
         private CardDto topDiscardCard;
@@ -41,11 +47,11 @@ namespace ConquiánCliente.ViewModel.Game
             set { currentPlayer = value; OnPropertyChanged(nameof(CurrentPlayer)); }
         }
 
-        private string _turnStatusText;
+        private string turnStatusText;
         public string TurnStatusText
         {
-            get { return _turnStatusText; }
-            set { _turnStatusText = value; OnPropertyChanged(nameof(TurnStatusText)); }
+            get { return turnStatusText; }
+            set { turnStatusText = value; OnPropertyChanged(nameof(TurnStatusText)); }
         }
 
         public GameViewModel(string roomCode)
@@ -74,13 +80,18 @@ namespace ConquiánCliente.ViewModel.Game
                 callbackHandler.OnOpponentDiscarded += (card) => {
                     Application.Current.Dispatcher.Invoke(() => {
                         TopDiscardCard = card;
-                        TurnStatusText = Lang.GameTurn; 
+                        TurnStatusText = Lang.GameTurn;
                     });
                 };
 
+                callbackHandler.TimeUpdated += (seconds) => {
+                    Application.Current.Dispatcher.Invoke(() => {
+                        UpdateTimerDisplay(seconds); 
+                    });
+                };
 
                 var context = new InstanceContext(callbackHandler);
-                client = new GameClient(context); 
+                client = new GameClient(context);
 
                 int playerId = PlayerSession.CurrentPlayer.idPlayer;
                 GameStateDto gameState = await client.JoinGameAsync(roomCode, playerId);
@@ -99,7 +110,6 @@ namespace ConquiánCliente.ViewModel.Game
                         Opponent = gameState.Opponent;
 
                         OpponentFaceDownCards.Clear();
-
                         for (int i = 0; i < gameState.OpponentCardCount; i++)
                         {
                             OpponentFaceDownCards.Add(new object());
@@ -107,12 +117,14 @@ namespace ConquiánCliente.ViewModel.Game
 
                         if (gameState.CurrentTurnPlayerId == playerId)
                         {
-                            TurnStatusText = Lang.GameTurn; 
+                            TurnStatusText = Lang.GameTurn;
                         }
                         else
                         {
-                            TurnStatusText = "Turno del oponente"; 
+                            TurnStatusText = "Turno del oponente";
                         }
+
+                        UpdateTimerDisplay(gameState.TotalGameSeconds);
                     });
                 }
                 else
@@ -127,5 +139,11 @@ namespace ConquiánCliente.ViewModel.Game
             }
         }
 
+
+        private void UpdateTimerDisplay(int seconds)
+        {
+            TimeSpan time = TimeSpan.FromSeconds(seconds);
+            GameTimeDisplay = time.ToString(@"mm\:ss");
+        }
     }
 }

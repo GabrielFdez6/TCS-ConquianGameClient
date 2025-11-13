@@ -55,6 +55,9 @@
   <wsdl:message name="IGame_NotifyOpponentDiscarded_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyOpponentDiscarded" />
   </wsdl:message>
+  <wsdl:message name="IGame_OnTimeUpdated_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnTimeUpdated" />
+  </wsdl:message>
   <wsdl:portType name="IGame">
     <wsdl:operation name="JoinGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/JoinGame" message="tns:IGame_JoinGame_InputMessage" />
@@ -68,6 +71,9 @@
     </wsdl:operation>
     <wsdl:operation name="NotifyOpponentDiscarded">
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/NotifyOpponentDiscarded" message="tns:IGame_NotifyOpponentDiscarded_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OnTimeUpdated">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGame/OnTimeUpdated" message="tns:IGame_OnTimeUpdated_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGame" type="tns:IGame">
@@ -97,6 +103,12 @@
     </wsdl:operation>
     <wsdl:operation name="NotifyOpponentDiscarded">
       <soap12:operation soapAction="http://tempuri.org/IGame/NotifyOpponentDiscarded" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnTimeUpdated">
+      <soap12:operation soapAction="http://tempuri.org/IGame/OnTimeUpdated" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
