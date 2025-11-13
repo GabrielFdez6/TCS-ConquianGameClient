@@ -30,6 +30,9 @@ namespace ConquiánCliente.ServiceGame {
         private ConquiánCliente.ServiceGame.PlayerDto OpponentField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int OpponentCardCountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private ConquiánCliente.ServiceGame.CardDto[] PlayerHandField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -67,6 +70,19 @@ namespace ConquiánCliente.ServiceGame {
                 if ((object.ReferenceEquals(this.OpponentField, value) != true)) {
                     this.OpponentField = value;
                     this.RaisePropertyChanged("Opponent");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int OpponentCardCount {
+            get {
+                return this.OpponentCardCountField;
+            }
+            set {
+                if ((this.OpponentCardCountField.Equals(value) != true)) {
+                    this.OpponentCardCountField = value;
+                    this.RaisePropertyChanged("OpponentCardCount");
                 }
             }
         }

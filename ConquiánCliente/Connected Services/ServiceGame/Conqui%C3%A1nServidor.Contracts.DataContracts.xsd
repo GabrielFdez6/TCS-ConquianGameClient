@@ -4,6 +4,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="CurrentTurnPlayerId" type="xs:int" />
       <xs:element minOccurs="0" name="Opponent" nillable="true" type="tns:PlayerDto" />
+      <xs:element minOccurs="0" name="OpponentCardCount" type="xs:int" />
       <xs:element minOccurs="0" name="PlayerHand" nillable="true" type="tns:ArrayOfCardDto" />
       <xs:element minOccurs="0" name="TopDiscardCard" nillable="true" type="tns:CardDto" />
     </xs:sequence>

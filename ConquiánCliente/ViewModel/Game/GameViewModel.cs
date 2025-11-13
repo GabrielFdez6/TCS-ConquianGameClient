@@ -18,6 +18,8 @@ namespace ConquiánCliente.ViewModel.Game
         // --- Propiedades para Bindeo (UI) ---
         public ObservableCollection<CardViewModel> PlayerHand { get; set; }
 
+        public ObservableCollection<object> OpponentFaceDownCards { get; set; }
+
         private CardDto topDiscardCard;
         public CardDto TopDiscardCard
         {
@@ -50,19 +52,16 @@ namespace ConquiánCliente.ViewModel.Game
         {
             this.roomCode = roomCode;
 
-            // Inicializar propiedades
             PlayerHand = new ObservableCollection<CardViewModel>();
+            OpponentFaceDownCards = new ObservableCollection<object>();
             var sessionPlayer = PlayerSession.CurrentPlayer;
 
-            // 2. Convertimos/Mapeamos al DTO del servicio de Game
             CurrentPlayer = new ServiceGame.PlayerDto
             {
                 idPlayer = sessionPlayer.idPlayer,
                 nickname = sessionPlayer.nickname,
                 pathPhoto = sessionPlayer.pathPhoto
-                // Asegúrate de copiar otras propiedades si las necesitas
             };
-            // Conectar al servicio
             _ = InitializeGameConnectionAsync();
         }
 
@@ -72,23 +71,20 @@ namespace ConquiánCliente.ViewModel.Game
             {
                 callbackHandler = new GameCallbackHandler();
 
-                // Suscribirse a eventos del callback
                 callbackHandler.OnOpponentDiscarded += (card) => {
                     Application.Current.Dispatcher.Invoke(() => {
                         TopDiscardCard = card;
-                        TurnStatusText = Lang.GameTurn; // Es tu turno
+                        TurnStatusText = Lang.GameTurn; 
                     });
                 };
 
-                // ... (suscribirse a otros eventos) ...
 
                 var context = new InstanceContext(callbackHandler);
-                client = new GameClient(context); // Esto fallaba antes
+                client = new GameClient(context); 
 
                 int playerId = PlayerSession.CurrentPlayer.idPlayer;
                 GameStateDto gameState = await client.JoinGameAsync(roomCode, playerId);
 
-                // Poblar el ViewModel con el estado inicial del juego
                 if (gameState != null)
                 {
                     Application.Current.Dispatcher.Invoke(() =>
@@ -102,32 +98,34 @@ namespace ConquiánCliente.ViewModel.Game
                         TopDiscardCard = gameState.TopDiscardCard;
                         Opponent = gameState.Opponent;
 
+                        OpponentFaceDownCards.Clear();
+
+                        for (int i = 0; i < gameState.OpponentCardCount; i++)
+                        {
+                            OpponentFaceDownCards.Add(new object());
+                        }
+
                         if (gameState.CurrentTurnPlayerId == playerId)
                         {
-                            TurnStatusText = Lang.GameTurn; // "Es tu turno"
+                            TurnStatusText = Lang.GameTurn; 
                         }
                         else
                         {
-                            TurnStatusText = "Turno del oponente"; // "Turno del oponente"
+                            TurnStatusText = "Turno del oponente"; 
                         }
                     });
                 }
                 else
                 {
-                    // Error: el juego no se encontró en el servidor
                     MessageBox.Show(Lang.ErrorGeneric, "Error de juego", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
-                // ESTE ES EL ERROR QUE PROBABLEMENTE TENÍAS
                 MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}",
                                 Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                // Aquí deberías navegar de vuelta al menú principal
             }
         }
 
-        // --- Comandos del Juego (Ej. Robar, Descartar) ---
-        // (Los implementaremos después)
     }
 }

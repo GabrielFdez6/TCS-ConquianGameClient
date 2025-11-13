@@ -61,23 +61,16 @@
                 </StackPanel>
 
                 <ItemsControl HorizontalAlignment="Left"
-                              VerticalAlignment="Top" 
-                              Margin="820,130,0,0"
-                              ItemTemplate="{StaticResource OpponentCardTemplate}">
+                      VerticalAlignment="Top" 
+                      Margin="820,130,0,0"
+                      ItemTemplate="{StaticResource OpponentCardTemplate}"
+                      ItemsSource="{Binding OpponentFaceDownCards}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
 
-                    <sys:String>1</sys:String>
-                    <sys:String>2</sys:String>
-                    <sys:String>3</sys:String>
-                    <sys:String>4</sys:String>
-                    <sys:String>5</sys:String>
-                    <sys:String>6</sys:String>
-                    <sys:String>7</sys:String>
-                    <sys:String>8</sys:String>
                 </ItemsControl>
 
 
