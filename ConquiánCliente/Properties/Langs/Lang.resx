@@ -529,7 +529,7 @@
     <value>Tiempo 00:00</value>
   </data>
   <data name="GameTurn" xml:space="preserve">
-    <value>Turno 00:00</value>
+    <value>Tu turno</value>
   </data>
   <data name="GameResultsTitle" xml:space="preserve">
     <value>Resultados </value>

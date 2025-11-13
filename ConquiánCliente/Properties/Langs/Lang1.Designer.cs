@@ -709,7 +709,7 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Turno 00:00.
+        ///   Busca una cadena traducida similar a Tu turno.
         /// </summary>
         public static string GameTurn {
             get {

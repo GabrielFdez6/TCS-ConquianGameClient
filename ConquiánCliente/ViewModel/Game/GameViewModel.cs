@@ -23,6 +23,13 @@ namespace ConquiánCliente.ViewModel.Game
             set { gameTimeDisplay = value; OnPropertyChanged(nameof(GameTimeDisplay)); }
         }
 
+        private string turnTimeDisplay;
+        public string TurnTimeDisplay
+        {
+            get { return turnTimeDisplay; }
+            set { turnTimeDisplay = value; OnPropertyChanged(nameof(TurnTimeDisplay)); }
+        }
+
         public ObservableCollection<CardViewModel> PlayerHand { get; set; }
         public ObservableCollection<object> OpponentFaceDownCards { get; set; }
 
@@ -84,9 +91,11 @@ namespace ConquiánCliente.ViewModel.Game
                     });
                 };
 
-                callbackHandler.TimeUpdated += (seconds) => {
+                callbackHandler.TimeStateUpdated += (gameSeconds, turnSeconds, newTurnPlayerId) => {
                     Application.Current.Dispatcher.Invoke(() => {
-                        UpdateTimerDisplay(seconds); 
+                        UpdateTimerDisplay(gameSeconds);
+                        UpdateTurnTimerDisplay(turnSeconds);
+                        UpdateTurnStatus(newTurnPlayerId); 
                     });
                 };
 
@@ -138,12 +147,29 @@ namespace ConquiánCliente.ViewModel.Game
                                 Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-
         private void UpdateTimerDisplay(int seconds)
         {
             TimeSpan time = TimeSpan.FromSeconds(seconds);
             GameTimeDisplay = time.ToString(@"mm\:ss");
+        }
+
+        private void UpdateTurnTimerDisplay(int seconds)
+        {
+            TimeSpan time = TimeSpan.FromSeconds(seconds);
+            TurnTimeDisplay = time.ToString(@"ss"); 
+        }
+        private void UpdateTurnStatus(int newTurnPlayerId)
+        {
+            if (CurrentPlayer == null) return; 
+
+            if (newTurnPlayerId == CurrentPlayer.idPlayer)
+            {
+                TurnStatusText = Lang.GameTurn;
+            }
+            else
+            {
+                TurnStatusText = "Turno del oponente";
+            }
         }
     }
 }

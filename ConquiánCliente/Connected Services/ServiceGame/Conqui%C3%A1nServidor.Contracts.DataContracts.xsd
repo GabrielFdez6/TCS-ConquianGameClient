@@ -8,6 +8,7 @@
       <xs:element minOccurs="0" name="PlayerHand" nillable="true" type="tns:ArrayOfCardDto" />
       <xs:element minOccurs="0" name="TopDiscardCard" nillable="true" type="tns:CardDto" />
       <xs:element minOccurs="0" name="TotalGameSeconds" type="xs:int" />
+      <xs:element minOccurs="0" name="TurnRemainingSeconds" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GameStateDto" nillable="true" type="tns:GameStateDto" />

@@ -115,10 +115,19 @@
                                Foreground="White"/>
                 </StackPanel>
 
-                <TextBlock Text="{Binding TurnStatusText}" FontSize="28"
+                <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                        Margin="430,0,0,238">
+
+                    <TextBlock Text="{Binding TurnStatusText}" FontSize="28"
                            FontWeight="Bold" Foreground="White"
-                           HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                           Margin="430,0,0,238"/>
+                           VerticalAlignment="Center"/>
+
+                    <TextBlock Text="{Binding TurnTimeDisplay}" FontSize="28"
+                           FontWeight="Bold" Foreground="Yellow"
+                           VerticalAlignment="Center"
+                           Margin="10,0,0,0" />
+                </StackPanel>
             </Grid>
         </Viewbox>
     </Grid>

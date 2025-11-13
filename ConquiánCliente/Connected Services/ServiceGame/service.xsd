@@ -38,7 +38,9 @@
   <xs:element name="OnTimeUpdated">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="remainingSeconds" type="xs:int" />
+        <xs:element minOccurs="0" name="gameRemainingSeconds" type="xs:int" />
+        <xs:element minOccurs="0" name="turnRemainingSeconds" type="xs:int" />
+        <xs:element minOccurs="0" name="currentTurnPlayerId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
