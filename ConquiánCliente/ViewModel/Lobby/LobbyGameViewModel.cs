@@ -135,6 +135,10 @@ namespace ConquiánCliente.ViewModel.Lobby
                 {
                     UpdateSelectedGamemode(lobbyState.idGamemode.Value);
                 }
+                else if (this.IsHost)
+                {
+                    await client.SelectGamemodeAsync(this.RoomCode, this.currentGameModeId);
+                }
 
                 if (!PlayerSession.IsGuest)
                 {
@@ -221,12 +225,16 @@ namespace ConquiánCliente.ViewModel.Lobby
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                CloseClientConnection(notifyServer: false);
+                CloseClientConnection(notifyServer: false); 
 
-                var gameWindow = new Game();
+                var gameViewModel = new ConquiánCliente.ViewModel.Game.GameViewModel(this.RoomCode);
+
+                var gameWindow = new ConquiánCliente.View.Game.Game();
+                gameWindow.DataContext = gameViewModel;
+
                 gameWindow.Show();
 
-                CloseCurrentWindow();
+                CloseCurrentWindow(); 
             });
         }
 

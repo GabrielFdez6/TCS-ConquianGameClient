@@ -73,6 +73,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ServiceGame\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ServiceGuestInvitation\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -118,10 +123,14 @@
     <Compile Include="ViewModel\Authentication\GuestLogInViewModel.cs" />
     <Compile Include="ViewModel\Authentication\PasswordRecovery\PasswordRecoveryViewModel.cs" />
     <Compile Include="ViewModel\Authentication\SignUpViewModel.cs" />
+    <Compile Include="ViewModel\BooleanToBorderThicknessConverter.cs" />
     <Compile Include="ViewModel\FriendList\FriendListViewModel.cs" />
     <Compile Include="ViewModel\FriendList\FriendProfileViewModel.cs" />
     <Compile Include="ViewModel\FriendList\FriendRequestViewModel.cs" />
     <Compile Include="ViewModel\FriendList\StatusConverter.cs" />
+    <Compile Include="ViewModel\Game\CardViewModel.cs" />
+    <Compile Include="ViewModel\Game\GameCallbackHandler.cs" />
+    <Compile Include="ViewModel\Game\GameViewModel.cs" />
     <Compile Include="ViewModel\ImagePathToBooleanConverter.cs" />
     <Compile Include="ViewModel\InvitationCallbackHandler.cs" />
     <Compile Include="ViewModel\InvitationClientManager.cs" />
@@ -389,6 +398,19 @@
     <None Include="Connected Services\ServiceFriendList\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceGame\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceGame\ConquiánCliente.ServiceGame.GameStateDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceGame\service.wsdl" />
+    <None Include="Connected Services\ServiceGame\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceGame\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceGuestInvitation\service.wsdl" />
     <None Include="Connected Services\ServiceGuestInvitation\service.xsd">
       <SubType>Designer</SubType>
@@ -518,6 +540,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServiceFriendList\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceGame\" />
     <WCFMetadataStorage Include="Connected Services\ServiceGuestInvitation\" />
     <WCFMetadataStorage Include="Connected Services\ServiceInvitation\" />
     <WCFMetadataStorage Include="Connected Services\ServiceLobby\" />
@@ -681,6 +704,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ServiceGuestInvitation\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceGame\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceGame\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceGame\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

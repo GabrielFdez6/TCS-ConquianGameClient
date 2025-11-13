@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="7a9fcf8d-8244-49c5-aef2-642fb916b6e2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.tcp://localhost:9001/Conqui%C3%A1nServidor/GameService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="d5159c3f-1d7a-402f-8825-387d326b9ee1" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/GameService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="0b9af804-309f-45ff-94c8-6e2bc8796cad" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/GameService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="90195f8e-3c06-421a-9082-e302324c0222" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/GameService/mex" />
+    <MetadataFile FileName="Conqui%C3%A1nServidor.Contracts.DataContracts.xsd" MetadataType="Schema" ID="943550a5-3db5-4f15-9d91-3e118e5441ce" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/GameService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
