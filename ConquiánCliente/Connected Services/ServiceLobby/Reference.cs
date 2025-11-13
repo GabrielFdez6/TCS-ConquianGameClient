@@ -423,6 +423,98 @@ namespace ConquiánCliente.ServiceLobby {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GuestInviteUsedFault", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultCont" +
+        "racts")]
+    [System.SerializableAttribute()]
+    public partial class GuestInviteUsedFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RegisteredUserAsGuestFault", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultCont" +
+        "racts")]
+    [System.SerializableAttribute()]
+    public partial class RegisteredUserAsGuestFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceLobby.ILobby", CallbackContract=typeof(ConquiánCliente.ServiceLobby.ILobbyCallback))]
     public interface ILobby {
@@ -446,10 +538,14 @@ namespace ConquiánCliente.ServiceLobby {
         System.Threading.Tasks.Task<bool> JoinAndSubscribeAsync(string roomCode, int idPlayer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuest", ReplyAction="http://tempuri.org/ILobby/JoinAndSubscribeAsGuestResponse")]
-        ConquiánCliente.ServiceLobby.PlayerDto JoinAndSubscribeAsGuest(string roomCode);
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceLobby.GuestInviteUsedFault), Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuestGuestInviteUsedFaultFault", Name="GuestInviteUsedFault", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultCont" +
+            "racts")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceLobby.RegisteredUserAsGuestFault), Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuestRegisteredUserAsGuestFaultFault", Name="RegisteredUserAsGuestFault", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultCont" +
+            "racts")]
+        ConquiánCliente.ServiceLobby.PlayerDto JoinAndSubscribeAsGuest(string email, string roomCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuest", ReplyAction="http://tempuri.org/ILobby/JoinAndSubscribeAsGuestResponse")]
-        System.Threading.Tasks.Task<ConquiánCliente.ServiceLobby.PlayerDto> JoinAndSubscribeAsGuestAsync(string roomCode);
+        System.Threading.Tasks.Task<ConquiánCliente.ServiceLobby.PlayerDto> JoinAndSubscribeAsGuestAsync(string email, string roomCode);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/LeaveAndUnsubscribe")]
         void LeaveAndUnsubscribe(string roomCode, int idPlayer);
@@ -550,12 +646,12 @@ namespace ConquiánCliente.ServiceLobby {
             return base.Channel.JoinAndSubscribeAsync(roomCode, idPlayer);
         }
         
-        public ConquiánCliente.ServiceLobby.PlayerDto JoinAndSubscribeAsGuest(string roomCode) {
-            return base.Channel.JoinAndSubscribeAsGuest(roomCode);
+        public ConquiánCliente.ServiceLobby.PlayerDto JoinAndSubscribeAsGuest(string email, string roomCode) {
+            return base.Channel.JoinAndSubscribeAsGuest(email, roomCode);
         }
         
-        public System.Threading.Tasks.Task<ConquiánCliente.ServiceLobby.PlayerDto> JoinAndSubscribeAsGuestAsync(string roomCode) {
-            return base.Channel.JoinAndSubscribeAsGuestAsync(roomCode);
+        public System.Threading.Tasks.Task<ConquiánCliente.ServiceLobby.PlayerDto> JoinAndSubscribeAsGuestAsync(string email, string roomCode) {
+            return base.Channel.JoinAndSubscribeAsGuestAsync(email, roomCode);
         }
         
         public void LeaveAndUnsubscribe(string roomCode, int idPlayer) {

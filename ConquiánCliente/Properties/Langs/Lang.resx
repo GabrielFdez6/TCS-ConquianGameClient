@@ -555,4 +555,13 @@
   <data name="ErrorGamemodeNotSelected" xml:space="preserve">
     <value>No se ha seleccionado un modo de juego</value>
   </data>
+  <data name="ErrorRoomCodeEmpty" xml:space="preserve">
+    <value>El código de sala no puede estar vacío.</value>
+  </data>
+  <data name="ErrorRoomCodeLength" xml:space="preserve">
+    <value>El código de sala debe tener 5 caracteres.</value>
+  </data>
+  <data name="ErrorGuestInviteMismatch" xml:space="preserve">
+    <value>La invitación no es válida o la sala ya no está disponible.</value>
+  </data>
 </root>

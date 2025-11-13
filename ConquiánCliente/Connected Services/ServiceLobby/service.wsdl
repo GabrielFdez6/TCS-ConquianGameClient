@@ -38,6 +38,7 @@
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultContracts" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ILobby_GetLobbyState_InputMessage">
@@ -63,6 +64,12 @@
   </wsdl:message>
   <wsdl:message name="ILobby_JoinAndSubscribeAsGuest_OutputMessage">
     <wsdl:part name="parameters" element="tns:JoinAndSubscribeAsGuestResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILobby_JoinAndSubscribeAsGuest_GuestInviteUsedFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultContracts" name="detail" element="q1:GuestInviteUsedFault" />
+  </wsdl:message>
+  <wsdl:message name="ILobby_JoinAndSubscribeAsGuest_RegisteredUserAsGuestFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultContracts" name="detail" element="q2:RegisteredUserAsGuestFault" />
   </wsdl:message>
   <wsdl:message name="ILobby_LeaveAndUnsubscribe_InputMessage">
     <wsdl:part name="parameters" element="tns:LeaveAndUnsubscribe" />
@@ -116,6 +123,8 @@
     <wsdl:operation name="JoinAndSubscribeAsGuest">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuest" message="tns:ILobby_JoinAndSubscribeAsGuest_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuestResponse" message="tns:ILobby_JoinAndSubscribeAsGuest_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuestGuestInviteUsedFaultFault" name="GuestInviteUsedFaultFault" message="tns:ILobby_JoinAndSubscribeAsGuest_GuestInviteUsedFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuestRegisteredUserAsGuestFaultFault" name="RegisteredUserAsGuestFaultFault" message="tns:ILobby_JoinAndSubscribeAsGuest_RegisteredUserAsGuestFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="LeaveAndUnsubscribe">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobby/LeaveAndUnsubscribe" message="tns:ILobby_LeaveAndUnsubscribe_InputMessage" />
@@ -189,6 +198,12 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="GuestInviteUsedFaultFault">
+        <soap12:fault use="literal" name="GuestInviteUsedFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="RegisteredUserAsGuestFaultFault">
+        <soap12:fault use="literal" name="RegisteredUserAsGuestFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="LeaveAndUnsubscribe">
       <soap12:operation soapAction="http://tempuri.org/ILobby/LeaveAndUnsubscribe" style="document" />

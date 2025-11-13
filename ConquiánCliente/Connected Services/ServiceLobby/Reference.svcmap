@@ -26,6 +26,7 @@
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="3dda6364-9c08-4f55-96da-9d2827f0a617" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/Lobby/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="cd36f642-bb32-4f6d-9800-593b2b699bcb" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/Lobby/mex" />
     <MetadataFile FileName="Conqui%C3%A1nServidor.Contracts.DataContracts.xsd" MetadataType="Schema" ID="894c2194-e1b0-4e29-a95f-0650ca5b0156" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/Lobby/mex" />
+    <MetadataFile FileName="Conqui%C3%A1nServidor.Contracts.FaultContracts.xsd" MetadataType="Schema" ID="65532055-36e9-413a-a8b7-a7291f8c820d" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/Lobby/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

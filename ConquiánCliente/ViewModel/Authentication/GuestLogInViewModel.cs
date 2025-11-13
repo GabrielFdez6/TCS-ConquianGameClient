@@ -7,6 +7,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using ConquiánCliente.ViewModel.Validation;
 
 namespace ConquiánCliente.ViewModel.Authentication
 {
@@ -16,6 +17,7 @@ namespace ConquiánCliente.ViewModel.Authentication
         private string roomCode;
         private LobbyClient lobbyClient;
         private Window currentWindow;
+        private bool isLoading;
 
         public string Email
         {
@@ -34,7 +36,6 @@ namespace ConquiánCliente.ViewModel.Authentication
             {
                 roomCode = value;
                 OnPropertyChanged(nameof(RoomCode));
-                CommandManager.InvalidateRequerySuggested();
             }
         }
 
@@ -54,34 +55,77 @@ namespace ConquiánCliente.ViewModel.Authentication
 
         private bool CanExecuteGuestLogin()
         {
-            return !string.IsNullOrWhiteSpace(RoomCode) && RoomCode.Length == 5;
+            return !isLoading;
+        }
+
+        private string ValidateRoomCode(string code)
+        {
+            if (string.IsNullOrWhiteSpace(code))
+            {
+                return Lang.ErrorRoomCodeEmpty;
+            }
+            if (code.Length != 5)
+            {
+                return Lang.ErrorRoomCodeLength;
+            }
+            return string.Empty; 
         }
 
         private async Task ExecuteGuestLogin()
         {
+
+            string emailError = LogInValidator.ValidateEmail(Email);
+            if (!string.IsNullOrEmpty(emailError))
+            {
+                MessageBox.Show(emailError, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                return; 
+            }
+
+            string roomCodeError = ValidateRoomCode(RoomCode);
+            if (!string.IsNullOrEmpty(roomCodeError))
+            {
+                MessageBox.Show(roomCodeError, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                return; 
+            }
+
+            isLoading = true;
+            CommandManager.InvalidateRequerySuggested();
+
             try
             {
-                PlayerDto guestPlayer = await lobbyClient.JoinAndSubscribeAsGuestAsync(RoomCode);
+                PlayerDto guestPlayer = await lobbyClient.JoinAndSubscribeAsGuestAsync(Email, RoomCode);
 
                 if (guestPlayer != null)
                 {
                     PlayerSession.StartGuestSession(guestPlayer);
-
                     var lobbyView = new LobbyGame(RoomCode);
                     lobbyView.Show();
-
                     currentWindow.Close();
                 }
                 else
                 {
-                    MessageBox.Show(
-                        Lang.ErrorJoinLobby,
-                        Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show(Lang.ErrorGuestInviteMismatch, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
+            }
+            catch (FaultException<ServiceLobby.GuestInviteUsedFault> ex)
+            {
+                MessageBox.Show(ex.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (FaultException<ServiceLobby.RegisteredUserAsGuestFault> ex)
+            {
+                MessageBox.Show(ex.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
+
+                ExecuteNavigateBack(null);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            finally
+            {
+                isLoading = false;
+                CommandManager.InvalidateRequerySuggested();
             }
         }
 

@@ -169,6 +169,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a La invitación no es válida o la sala ya no está disponible..
+        /// </summary>
+        public static string ErrorGuestInviteMismatch {
+            get {
+                return ResourceManager.GetString("ErrorGuestInviteMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Credenciales inválidas. Por favor, verifique su correo y contraseña..
         /// </summary>
         public static string ErrorInvalidCredentials {
@@ -354,6 +363,24 @@ namespace ConquiánCliente.Properties.Langs {
         public static string ErrorRegistrationFailed {
             get {
                 return ResourceManager.GetString("ErrorRegistrationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El código de sala no puede estar vacío..
+        /// </summary>
+        public static string ErrorRoomCodeEmpty {
+            get {
+                return ResourceManager.GetString("ErrorRoomCodeEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El código de sala debe tener 5 caracteres..
+        /// </summary>
+        public static string ErrorRoomCodeLength {
+            get {
+                return ResourceManager.GetString("ErrorRoomCodeLength", resourceCulture);
             }
         }
         
