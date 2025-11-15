@@ -125,28 +125,69 @@
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
+                
                 <Border x:Name="DropZone"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Width="600" Height="250"
-                        Background="#40FFFFFF" 
-                        BorderBrush="White"
-                        BorderThickness="2"
-                        CornerRadius="10"
-                        Margin="0,0,0,150"
-                        AllowDrop="True"
-                        Drop="DropZone_Drop"
-                        DragEnter="DropZone_DragEnter"
-                        DragLeave="DropZone_DragLeave">
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Width="600" Height="250"
+        Background="#40FFFFFF" 
+        BorderBrush="White"
+        BorderThickness="2"
+        CornerRadius="10"
+        Margin="0,0,0,150"
+        AllowDrop="True"
+        Drop="DropZone_Drop"
+        DragEnter="DropZone_DragEnter"
+        DragLeave="DropZone_DragLeave">
 
-                    <TextBlock Text="{x:Static language:Lang.GameDropZone}" 
-                               Foreground="White"
-                               FontSize="28"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               FontWeight="Bold"
-                               TextWrapping="Wrap"
-                               TextAlignment="Center"/>
+                    <Grid>
+                        <TextBlock Text="{x:Static language:Lang.GameDropZone}" 
+                   Foreground="White"
+                   FontSize="28"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontWeight="Bold"
+                   TextWrapping="Wrap"
+                   TextAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding TemporaryMeld.Count}" Value="0">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                        <ItemsControl ItemsSource="{Binding TemporaryMeld}"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Width="100" Height="150" Margin="5">
+                                        <Image Source="{Binding ImagePath}" ToolTip="{Binding Id}"/>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.Style>
+                                <Style TargetType="ItemsControl">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding TemporaryMeld.Count}" Value="0">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ItemsControl.Style>
+                        </ItemsControl>
+                    </Grid>
                 </Border>
 
                 <StackPanel Orientation="Horizontal" 

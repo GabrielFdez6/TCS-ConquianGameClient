@@ -35,6 +35,7 @@ namespace ConquiánCliente.ViewModel.Game
         public ObservableCollection<object> OpponentFaceDownCards { get; set; }
         public ObservableCollection<MeldViewModel> PlayerMelds { get; set; }
         public ObservableCollection<MeldViewModel> OpponentMelds { get; set; }
+        public ObservableCollection<CardViewModel> TemporaryMeld { get; set; }
 
         private CardDto topDiscardCard;
         public CardDto TopDiscardCard
@@ -79,6 +80,7 @@ namespace ConquiánCliente.ViewModel.Game
             OpponentFaceDownCards = new ObservableCollection<object>();
             PlayerMelds = new ObservableCollection<MeldViewModel>();
             OpponentMelds = new ObservableCollection<MeldViewModel>();
+            TemporaryMeld = new ObservableCollection<CardViewModel>();
 
             var sessionPlayer = PlayerSession.CurrentPlayer;
 
@@ -123,9 +125,19 @@ namespace ConquiánCliente.ViewModel.Game
                     });
                 };
 
-                callbackHandler.OnOpponentMeld += (meldCardDtos) => {
+                callbackHandler.OnOpponentMeld += async (meldCardDtos) => {
+                    var cardVMs = meldCardDtos.Select(dto => new CardViewModel(dto)).ToList();
                     Application.Current.Dispatcher.Invoke(() => {
-                        OpponentMelds.Add(new MeldViewModel(meldCardDtos));
+                        TemporaryMeld.Clear();
+                        foreach (var cardVM in cardVMs)
+                        {
+                            TemporaryMeld.Add(cardVM);
+                        }
+                    });
+                    await Task.Delay(1000);
+                    Application.Current.Dispatcher.Invoke(() => {
+                        TemporaryMeld.Clear();
+                        OpponentMelds.Add(new MeldViewModel(cardVMs));
                     });
                 };
 
@@ -198,7 +210,14 @@ namespace ConquiánCliente.ViewModel.Game
                 {
                     PlayerHand.Remove(cardVM);
                 }
-                PlayerMelds.Add(new MeldViewModel(cardsToPlay));
+
+                Application.Current.Dispatcher.Invoke(() => {
+                    TemporaryMeld.Clear();
+                    foreach (var cardVM in cardsToPlay)
+                    {
+                        TemporaryMeld.Add(cardVM);
+                    }
+                });
 
                 try
                 {
@@ -208,7 +227,23 @@ namespace ConquiánCliente.ViewModel.Game
                 {
                     MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}",
                                     Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    Application.Current.Dispatcher.Invoke(() => {
+                        TemporaryMeld.Clear();
+                        foreach (var cardVM in cardsToPlay)
+                        {
+                            PlayerHand.Add(cardVM);
+                        }
+                    });
+                    return;
                 }
+
+                await Task.Delay(1000);
+
+                Application.Current.Dispatcher.Invoke(() => {
+                    TemporaryMeld.Clear();
+                    PlayerMelds.Add(new MeldViewModel(cardsToPlay));
+                });
             }
             else
             {
