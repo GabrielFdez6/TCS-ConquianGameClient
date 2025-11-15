@@ -564,4 +564,10 @@
   <data name="ErrorGuestInviteMismatch" xml:space="preserve">
     <value>La invitación no es válida o la sala ya no está disponible.</value>
   </data>
+  <data name="GameDropZone" xml:space="preserve">
+    <value>Arrastra tu jugada aquí</value>
+  </data>
+  <data name="GameInvalidMeld" xml:space="preserve">
+    <value>Juego inválido</value>
+  </data>
 </root>

@@ -448,6 +448,30 @@ namespace ConquiánCliente.ServiceGame {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/JoinGame", ReplyAction="http://tempuri.org/IGame/JoinGameResponse")]
         System.Threading.Tasks.Task<ConquiánCliente.ServiceGame.GameStateDto> JoinGameAsync(string roomCode, int playerId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/PlayCards")]
+        void PlayCards(string roomCode, int playerId, string[] cardIds);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/PlayCards")]
+        System.Threading.Tasks.Task PlayCardsAsync(string roomCode, int playerId, string[] cardIds);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/DrawFromDeck")]
+        void DrawFromDeck(string roomCode, int playerId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/DrawFromDeck")]
+        System.Threading.Tasks.Task DrawFromDeckAsync(string roomCode, int playerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/DrawFromDiscard", ReplyAction="http://tempuri.org/IGame/DrawFromDiscardResponse")]
+        ConquiánCliente.ServiceGame.CardDto DrawFromDiscard(string roomCode, int playerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/DrawFromDiscard", ReplyAction="http://tempuri.org/IGame/DrawFromDiscardResponse")]
+        System.Threading.Tasks.Task<ConquiánCliente.ServiceGame.CardDto> DrawFromDiscardAsync(string roomCode, int playerId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/DiscardCard")]
+        void DiscardCard(string roomCode, int playerId, string cardId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/DiscardCard")]
+        System.Threading.Tasks.Task DiscardCardAsync(string roomCode, int playerId, string cardId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -464,6 +488,12 @@ namespace ConquiánCliente.ServiceGame {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/OnTimeUpdated")]
         void OnTimeUpdated(int gameRemainingSeconds, int turnRemainingSeconds, int currentTurnPlayerId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/OnOpponentHandUpdated")]
+        void OnOpponentHandUpdated(int newCardCount);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/NotifyOpponentMeld")]
+        void NotifyOpponentMeld(ConquiánCliente.ServiceGame.CardDto[] meldCards);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -500,6 +530,38 @@ namespace ConquiánCliente.ServiceGame {
         
         public System.Threading.Tasks.Task<ConquiánCliente.ServiceGame.GameStateDto> JoinGameAsync(string roomCode, int playerId) {
             return base.Channel.JoinGameAsync(roomCode, playerId);
+        }
+        
+        public void PlayCards(string roomCode, int playerId, string[] cardIds) {
+            base.Channel.PlayCards(roomCode, playerId, cardIds);
+        }
+        
+        public System.Threading.Tasks.Task PlayCardsAsync(string roomCode, int playerId, string[] cardIds) {
+            return base.Channel.PlayCardsAsync(roomCode, playerId, cardIds);
+        }
+        
+        public void DrawFromDeck(string roomCode, int playerId) {
+            base.Channel.DrawFromDeck(roomCode, playerId);
+        }
+        
+        public System.Threading.Tasks.Task DrawFromDeckAsync(string roomCode, int playerId) {
+            return base.Channel.DrawFromDeckAsync(roomCode, playerId);
+        }
+        
+        public ConquiánCliente.ServiceGame.CardDto DrawFromDiscard(string roomCode, int playerId) {
+            return base.Channel.DrawFromDiscard(roomCode, playerId);
+        }
+        
+        public System.Threading.Tasks.Task<ConquiánCliente.ServiceGame.CardDto> DrawFromDiscardAsync(string roomCode, int playerId) {
+            return base.Channel.DrawFromDiscardAsync(roomCode, playerId);
+        }
+        
+        public void DiscardCard(string roomCode, int playerId, string cardId) {
+            base.Channel.DiscardCard(roomCode, playerId, cardId);
+        }
+        
+        public System.Threading.Tasks.Task DiscardCardAsync(string roomCode, int playerId, string cardId) {
+            return base.Channel.DiscardCardAsync(roomCode, playerId, cardId);
         }
     }
 }

@@ -11,8 +11,25 @@
     <Window.Resources>
         <DataTemplate x:Key="CardTemplate">
             <Border Width="144" Height="216" Margin="-20"
-                    BorderBrush="Yellow"
-                    BorderThickness="0">
+                    MouseLeftButtonDown="PlayerCard_MouseLeftButtonDown"
+                    MouseMove="PlayerCard_MouseMove"
+                    MouseLeftButtonUp="PlayerCard_MouseLeftButtonUp">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="4"/>
+                        <Setter Property="Visibility" Value="Visible"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                <Setter Property="BorderBrush" Value="Yellow"/>
+                                <Setter Property="BorderThickness" Value="4"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsBeingDragged}" Value="True">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
                 <Image Source="{Binding ImagePath}" ToolTip="{Binding Id}"/>
             </Border>
         </DataTemplate>
@@ -23,13 +40,37 @@
                    Margin="5, 5, -114, 5"/>
         </DataTemplate>
 
+        <DataTemplate x:Key="MeldedCardTemplate">
+            <Border Width="144" Height="216" Margin="-80, 0, -80, 0">
+                <Image Source="{Binding ImagePath}" ToolTip="{Binding Id}"/>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MeldTemplate">
+            <ItemsControl 
+                ItemsSource="{Binding Cards}"
+                ItemTemplate="{StaticResource MeldedCardTemplate}"
+                Margin="0, -150, 0, -150">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </DataTemplate>
+
     </Window.Resources>
 
-    <Grid>
+    <Grid x:Name="RootGrid" 
+          AllowDrop="True" 
+          DragOver="RootGrid_DragOver">
+
         <Image Source="/Resources/backgroundGame.jpg" Stretch="UniformToFill"/>
 
         <Viewbox Stretch="Uniform">
-            <Grid Width="1920" Height="1080">
+
+            <Grid x:Name="MainGrid" Width="1920" Height="1080"
+                  GiveFeedback="MainGrid_GiveFeedback">
 
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
@@ -46,7 +87,7 @@
                     <Border Grid.Column="1" HorizontalAlignment="Center" Padding="15,5"
                                 Background="#66000000" CornerRadius="5" Margin="0,0,0,45" Width="220">
                         <TextBlock Text="{Binding GameTimeDisplay}" FontSize="28" 
-                                       FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+                                   FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
                     </Border>
                 </Grid>
 
@@ -61,26 +102,74 @@
                 </StackPanel>
 
                 <ItemsControl HorizontalAlignment="Left"
-                      VerticalAlignment="Top" 
-                      Margin="820,130,0,0"
-                      ItemTemplate="{StaticResource OpponentCardTemplate}"
-                      ItemsSource="{Binding OpponentFaceDownCards}">
+                        VerticalAlignment="Top" 
+                        Margin="820,130,0,0"
+                        ItemTemplate="{StaticResource OpponentCardTemplate}"
+                        ItemsSource="{Binding OpponentFaceDownCards}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
-
                 </ItemsControl>
 
+                <ItemsControl x:Name="OpponentMeldsItemsControl"
+                              ItemsSource="{Binding OpponentMelds}"
+                              ItemTemplate="{StaticResource MeldTemplate}"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Top"
+                              Margin="0,190,60,0">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Right"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+                <Border x:Name="DropZone"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Width="600" Height="250"
+                        Background="#40FFFFFF" 
+                        BorderBrush="White"
+                        BorderThickness="2"
+                        CornerRadius="10"
+                        Margin="0,0,0,150"
+                        AllowDrop="True"
+                        Drop="DropZone_Drop"
+                        DragEnter="DropZone_DragEnter"
+                        DragLeave="DropZone_DragLeave">
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"
-                            VerticalAlignment="Center" Margin="830,0,0,0">
-                    <Grid Margin="0,0,15,0">
+                    <TextBlock Text="{x:Static language:Lang.GameDropZone}" 
+                               Foreground="White"
+                               FontSize="28"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontWeight="Bold"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"/>
+                </Border>
+
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center" 
+                            Margin="0,0,60,0">
+
+                    <Grid x:Name="StockPileGrid" 
+                          Margin="0,0,15,0"
+                          MouseLeftButtonDown="StockPile_MouseLeftButtonDown"
+                          Cursor="Hand"
+                         
+                          AllowDrop="True"
+                          DragEnter="StockPile_DragEnter"
+                          Drop="StockPile_Drop">
                         <Image Source="/Resources/Assets/reverso.jpg" Width="144" Height="216"/>
                     </Grid>
-                    <Image Source="{Binding TopDiscardCard.ImagePath}"
-                           Width="144" Height="216" Margin="20,0,0,0"/>
+                    <Image x:Name="DiscardPileImage"
+                           Source="{Binding TopDiscardCard.ImagePath}"
+                           Width="144" Height="216" Margin="20,0,0,0"
+                           MouseLeftButtonDown="DiscardCard_MouseLeftButtonDown"
+                           MouseMove="DiscardCard_MouseMove"
+                           Cursor="Hand"/>
                 </StackPanel>
 
                 <Button Content="{x:Static language:Lang.GameToPass}"
@@ -92,11 +181,26 @@
                     </Button.Effect>
                 </Button>
 
-                <ItemsControl ItemsSource="{Binding PlayerHand}"
+                <ItemsControl x:Name="PlayerMeldsItemsControl"
+                              ItemsSource="{Binding PlayerMelds}"
+                              ItemTemplate="{StaticResource MeldTemplate}"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Bottom"
+                              Margin="60,0,0,150">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+                <ItemsControl x:Name="PlayerHandItemsControl"   
+                              ItemsSource="{Binding PlayerHand}"
                               ItemTemplate="{StaticResource CardTemplate}"
                               HorizontalAlignment="Center"
                               VerticalAlignment="Bottom"
-                              Margin="0,0,0,10">
+                              Margin="0,0,0,10"
+                              AllowDrop="True"    
+                              Drop="PlayerHand_Drop">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal"/>
@@ -104,9 +208,8 @@
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
 
-
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"
-                            VerticalAlignment="Bottom" Margin="60,0,0,60">
+                                VerticalAlignment="Bottom" Margin="60,0,0,60">
                     <Border Width="80" Height="80" BorderBrush="Gray" BorderThickness="1">
                         <Image Source="{Binding CurrentPlayer.pathPhoto}" Stretch="UniformToFill"/>
                     </Border>
@@ -116,13 +219,11 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                        Margin="430,0,0,238">
-
+                            HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                            Margin="430,0,0,238">
                     <TextBlock Text="{Binding TurnStatusText}" FontSize="28"
                            FontWeight="Bold" Foreground="White"
                            VerticalAlignment="Center"/>
-
                     <TextBlock Text="{Binding TurnTimeDisplay}" FontSize="28"
                            FontWeight="Bold" Foreground="Yellow"
                            VerticalAlignment="Center"

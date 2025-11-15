@@ -4,13 +4,17 @@ namespace ConquiánCliente.ViewModel.Game
 {
     public class CardViewModel : ViewModelBase
     {
-        public string Id { get; }
-        public string Suit { get; }
-        public int Rank { get; }
-        public string ImagePath { get; }
+        public CardDto Card { get; }
+
+        public string Id => Card.Id;
+        public string Suit => Card.Suit;
+        public int Rank => Card.Rank;
+        public string ImagePath => Card.ImagePath;
 
         private bool isSelected;
         private bool isPlayable;
+        private bool isBeingDragged;
+
         public bool IsSelected
         {
             get { return isSelected; }
@@ -32,15 +36,23 @@ namespace ConquiánCliente.ViewModel.Game
             }
         }
 
+        public bool IsBeingDragged
+        {
+            get { return isBeingDragged; }
+            set
+            {
+                isBeingDragged = value;
+                OnPropertyChanged(nameof(IsBeingDragged));
+            }
+        }
+
         public CardViewModel(CardDto cardDto)
         {
-            Id = cardDto.Id;
-            Suit = cardDto.Suit;
-            Rank = cardDto.Rank;
-            ImagePath = cardDto.ImagePath;
+            Card = cardDto;
 
             isSelected = false;
-            isPlayable = true; 
+            isPlayable = true;
+            IsBeingDragged = false;
         }
     }
 }

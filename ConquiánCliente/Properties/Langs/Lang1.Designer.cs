@@ -655,11 +655,29 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Arrastra tu jugada aquí.
+        /// </summary>
+        public static string GameDropZone {
+            get {
+                return ResourceManager.GetString("GameDropZone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Salir.
         /// </summary>
         public static string GameExit {
             get {
                 return ResourceManager.GetString("GameExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Juego inválido.
+        /// </summary>
+        public static string GameInvalidMeld {
+            get {
+                return ResourceManager.GetString("GameInvalidMeld", resourceCulture);
             }
         }
         

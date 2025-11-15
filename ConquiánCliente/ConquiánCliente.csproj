@@ -131,6 +131,7 @@
     <Compile Include="ViewModel\Game\CardViewModel.cs" />
     <Compile Include="ViewModel\Game\GameCallbackHandler.cs" />
     <Compile Include="ViewModel\Game\GameViewModel.cs" />
+    <Compile Include="ViewModel\Game\MeldViewModel.cs" />
     <Compile Include="ViewModel\ImagePathToBooleanConverter.cs" />
     <Compile Include="ViewModel\InvitationCallbackHandler.cs" />
     <Compile Include="ViewModel\InvitationClientManager.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="View\FriendList\FriendRequests.xaml.cs">
       <DependentUpon>FriendRequests.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Game\Behaviors\DragAdorner.cs" />
     <Compile Include="View\Game\ConfirmExitGame.xaml.cs">
       <DependentUpon>ConfirmExitGame.xaml</DependentUpon>
     </Compile>
@@ -398,8 +400,14 @@
     <None Include="Connected Services\ServiceFriendList\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceGame\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceGame\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceGame\ConquiánCliente.ServiceGame.CardDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceGame\ConquiánCliente.ServiceGame.GameStateDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>

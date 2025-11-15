@@ -229,7 +229,7 @@ namespace ConquiánCliente.ViewModel.Lobby
 
                 var gameViewModel = new ConquiánCliente.ViewModel.Game.GameViewModel(this.RoomCode);
 
-                var gameWindow = new ConquiánCliente.View.Game.Game();
+                var gameWindow = new ConquiánCliente.View.Game.Game(this.RoomCode);
                 gameWindow.DataContext = gameViewModel;
 
                 gameWindow.Show();

@@ -1,33 +1,360 @@
-﻿using System.Windows;
+﻿using ConquiánCliente.ServiceGame;
+using ConquiánCliente.View.Game.Behaviors;
+using ConquiánCliente.ViewModel.Game;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 
 namespace ConquiánCliente.View.Game
 {
-    /// <summary>
-    /// Lógica de interacción para Game.xaml
-    /// </summary>
     public partial class Game : Window
     {
-        public Game()
+        private Point? dragStartPoint = null;
+        private Point? discardDragStartPoint = null;
+        private DragAdorner dragAdorner;
+        private AdornerLayer adornerLayer;
+        private GameViewModel viewModel;
+
+        public Game(String roomCode)
         {
             InitializeComponent();
+            this.Loaded += Game_Loaded;
+        }
+
+        private void Game_Loaded(object sender, RoutedEventArgs e)
+        {
+            viewModel = DataContext as GameViewModel;
+
+            if (viewModel == null)
+            {
+                MessageBox.Show("Error fatal: No se pudo cargar el ViewModel del juego.");
+                this.Close();
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             ConfirmExitGame confirmDialog = new ConfirmExitGame();
-
             confirmDialog.Owner = this;
-
             bool? result = confirmDialog.ShowDialog();
 
             if (result == true)
             {
-
                 var mainMenu = new ConquiánCliente.View.MainMenu.MainMenu();
                 mainMenu.Show();
                 this.Close();
             }
+        }
+
+        // --- MANEJADORES DE LA MANO DEL JUGADOR ---
+        // (Ahora todos usan el campo 'viewModel' en lugar de 'DataContext as GameViewModel')
+
+        private void PlayerCard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (viewModel == null || !viewModel.IsMyTurn) return;
+
+            if (sender is Border cardBorder && cardBorder.DataContext is CardViewModel cardVM)
+            {
+                if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+                {
+                    cardVM.IsSelected = !cardVM.IsSelected;
+                }
+                else
+                {
+                    if (!cardVM.IsSelected)
+                    {
+                        ClearSelections();
+                        cardVM.IsSelected = true;
+                    }
+                }
+
+                dragStartPoint = e.GetPosition(RootGrid);
+                e.Handled = true;
+            }
+        }
+
+        private void PlayerCard_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (viewModel == null || !viewModel.IsMyTurn || e.LeftButton != MouseButtonState.Pressed || !dragStartPoint.HasValue)
+                return;
+
+            Point currentPosition = e.GetPosition(RootGrid);
+            Vector diff = dragStartPoint.Value - currentPosition;
+
+            if (Math.Abs(diff.X) < SystemParameters.MinimumHorizontalDragDistance &&
+                Math.Abs(diff.Y) < SystemParameters.MinimumVerticalDragDistance)
+                return;
+
+            var selectedCards = viewModel.PlayerHand.Where(c => c.IsSelected).ToList();
+            if (selectedCards.Count == 0 || selectedCards.Count == 2)
+            {
+                dragStartPoint = null;
+                return;
+            }
+
+            adornerLayer = AdornerLayer.GetAdornerLayer(RootGrid);
+            if (adornerLayer == null) return;
+
+            DataObject dragData;
+            UIElement dragVisual;
+
+            if (selectedCards.Count == 1)
+            {
+                var cardVM = selectedCards.First();
+                dragData = new DataObject(typeof(CardViewModel), cardVM);
+
+                var imageSource = new BitmapImage(new Uri("pack://application:,,," + cardVM.ImagePath, UriKind.Absolute));
+                var image = new Image { Source = imageSource, Width = 144, Height = 216 };
+                RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
+                image.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                image.Arrange(new Rect(image.DesiredSize));
+                dragVisual = image;
+
+                cardVM.IsBeingDragged = true;
+            }
+            else
+            {
+                dragData = new DataObject("SelectedCards", selectedCards);
+
+                StackPanel panel = new StackPanel { Orientation = Orientation.Horizontal };
+                foreach (var card in selectedCards.Take(4))
+                {
+                    var imageSource = new BitmapImage(new Uri("pack://application:,,," + card.ImagePath, UriKind.Absolute));
+                    var image = new Image { Source = imageSource, Width = 144, Height = 216, Margin = new Thickness(-100, 0, 0, 0) };
+                    if (panel.Children.Count == 0) image.Margin = new Thickness(0);
+                    RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
+                    panel.Children.Add(image);
+                }
+                panel.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                panel.Arrange(new Rect(panel.DesiredSize));
+                dragVisual = panel;
+
+                selectedCards.ForEach(c => c.IsBeingDragged = true);
+            }
+
+            dragAdorner = new DragAdorner(RootGrid, dragVisual, currentPosition);
+            adornerLayer.Add(dragAdorner);
+
+            try
+            {
+                DragDrop.DoDragDrop((DependencyObject)sender, dragData, DragDropEffects.Move);
+            }
+            finally
+            {
+                if (dragAdorner != null)
+                {
+                    adornerLayer.Remove(dragAdorner);
+                    dragAdorner = null;
+                }
+                selectedCards.ForEach(c => c.IsBeingDragged = false);
+                dragStartPoint = null;
+            }
+        }
+
+        private void PlayerCard_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            dragStartPoint = null;
+            discardDragStartPoint = null;
+        }
+
+        // --- MAZO (STOCKPILE) ---
+
+        private void StockPile_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (viewModel == null || !viewModel.IsMyTurn) return;
+            _ = viewModel.DrawFromDeckAsync();
+            e.Handled = true;
+        }
+
+        private void StockPile_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(CardViewModel)))
+            {
+                e.Effects = DragDropEffects.Move;
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+            e.Handled = true;
+        }
+
+        private async void StockPile_Drop(object sender, DragEventArgs e)
+        {
+            if (viewModel == null || !viewModel.IsMyTurn) return;
+
+            if (e.Data.GetDataPresent(typeof(CardViewModel)))
+            {
+                var cardVM = e.Data.GetData(typeof(CardViewModel)) as CardViewModel;
+                if (cardVM != null)
+                {
+                    await viewModel.DiscardCardAsync(cardVM);
+                }
+            }
+            ClearSelections();
+            e.Handled = true;
+        }
+
+        // --- PILA DE DESCARTE (DISCARD PILE) ---
+
+        private void DiscardCard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (viewModel == null || !viewModel.IsMyTurn || viewModel.TopDiscardCard == null) return;
+            discardDragStartPoint = e.GetPosition(RootGrid);
+            e.Handled = true;
+        }
+
+        private void DiscardCard_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (viewModel == null || !viewModel.IsMyTurn || e.LeftButton != MouseButtonState.Pressed || !discardDragStartPoint.HasValue)
+                return;
+
+            Point currentPosition = e.GetPosition(RootGrid);
+            Vector diff = discardDragStartPoint.Value - currentPosition;
+
+            if (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
+                Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance)
+            {
+                var discardCard = viewModel.TopDiscardCard;
+                if (discardCard == null) return;
+
+                var imageSource = new BitmapImage(new Uri("pack://application:,,," + discardCard.ImagePath, UriKind.Absolute));
+                var image = new Image { Source = imageSource, Width = 144, Height = 216 };
+                RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
+                image.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                image.Arrange(new Rect(image.DesiredSize));
+
+                adornerLayer = AdornerLayer.GetAdornerLayer(RootGrid);
+                if (adornerLayer != null)
+                {
+                    dragAdorner = new DragAdorner(RootGrid, image, currentPosition);
+                    adornerLayer.Add(dragAdorner);
+                }
+
+                DataObject dragData = new DataObject("DiscardCard", discardCard);
+
+                try
+                {
+                    DragDrop.DoDragDrop((DependencyObject)sender, dragData, DragDropEffects.Move);
+                }
+                finally
+                {
+                    if (dragAdorner != null)
+                    {
+                        adornerLayer.Remove(dragAdorner);
+                        dragAdorner = null;
+                    }
+                }
+                discardDragStartPoint = null;
+            }
+        }
+
+        // --- ZONA DE JUEGOS (DROP ZONE) ---
+
+        private void DropZone_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent("SelectedCards"))
+            {
+                e.Effects = DragDropEffects.Move;
+                (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0x80, 0x90, 0xEE, 0x90));
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+            e.Handled = true;
+        }
+
+        private void DropZone_DragLeave(object sender, DragEventArgs e)
+        {
+            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0x40, 0xFF, 0xFF, 0xFF));
+            e.Handled = true;
+        }
+
+        private async void DropZone_Drop(object sender, DragEventArgs e)
+        {
+            if (viewModel == null || !viewModel.IsMyTurn) return;
+
+            if (e.Data.GetDataPresent("SelectedCards"))
+            {
+                var selectedCards = e.Data.GetData("SelectedCards") as List<CardViewModel>;
+                if (selectedCards != null && selectedCards.Any())
+                {
+                    var cardIds = selectedCards.Select(c => c.Id).ToList();
+                    await viewModel.PlayCardsAsync(cardIds);
+                }
+            }
+
+            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0x40, 0xFF, 0xFF, 0xFF));
+            ClearSelections();
+            e.Handled = true;
+        }
+
+        // --- MANO DEL JUGADOR (Como Zona de Drop) ---
+
+        private void PlayerHand_DragEnter(object sender, DragEventArgs e)
+        {
+            if (viewModel != null && viewModel.IsMyTurn && e.Data.GetDataPresent("DiscardCard"))
+            {
+                e.Effects = DragDropEffects.Move;
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+            e.Handled = true;
+        }
+
+        private async void PlayerHand_Drop(object sender, DragEventArgs e)
+        {
+            if (viewModel == null || !viewModel.IsMyTurn)
+            {
+                e.Handled = true;
+                return;
+            }
+
+            if (e.Data.GetDataPresent("DiscardCard"))
+            {
+                var discardCard = e.Data.GetData("DiscardCard") as CardDto;
+                if (discardCard == null) return;
+
+                await viewModel.DrawFromDiscardAsync(discardCard);
+            }
+            e.Handled = true;
+        }
+
+        // --- MÉTODOS DE UTILIDAD ---
+
+        private void ClearSelections()
+        {
+            if (viewModel != null)
+            {
+                foreach (var card in viewModel.PlayerHand.Where(c => c.IsSelected))
+                {
+                    card.IsSelected = false;
+                }
+            }
+        }
+
+        private void RootGrid_DragOver(object sender, DragEventArgs e)
+        {
+            if (dragAdorner != null)
+            {
+                dragAdorner.UpdatePosition(e.GetPosition(RootGrid));
+            }
+        }
+
+        private void MainGrid_GiveFeedback(object sender, GiveFeedbackEventArgs e)
+        {
+            Mouse.SetCursor(Cursors.None);
+            e.Handled = true;
         }
     }
 }
