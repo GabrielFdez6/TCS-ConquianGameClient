@@ -11,7 +11,7 @@ namespace ConquiánCliente.View.Game.Behaviors
 {
     public class DragAdorner : Adorner
     {
-        private UIElement child;
+        private readonly UIElement child;
         private Point currentPosition;
         private Point startOffset;
 

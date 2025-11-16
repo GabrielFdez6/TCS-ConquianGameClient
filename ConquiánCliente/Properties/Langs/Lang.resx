@@ -570,4 +570,10 @@
   <data name="GameInvalidMeld" xml:space="preserve">
     <value>Juego inválido</value>
   </data>
+  <data name="ErrorSelectGameMode" xml:space="preserve">
+    <value>Error al seleccionar el modo de juego.</value>
+  </data>
+  <data name="ErrorLogOutSession" xml:space="preserve">
+    <value>Error al cerrar sesión.</value>
+  </data>
 </root>

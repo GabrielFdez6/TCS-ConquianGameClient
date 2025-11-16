@@ -4,12 +4,14 @@ using ConquiánCliente.ServiceUserProfile;
 using ConquiánCliente.View.FriendList;
 using ConquiánCliente.View.MainMenu;
 using ConquiánCliente.ViewModel.Lobby;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
+using System.ServiceModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ConquiánCliente.ViewModel
 {
@@ -165,9 +167,17 @@ namespace ConquiánCliente.ViewModel
                         MessageBox.Show("No se pudo cargar el perfil del jugador.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
-                catch (System.Exception ex)
+                catch (CommunicationException commEx)
                 {
-                    MessageBox.Show("Ocurrió un error al contactar el servicio.", "Error de conexión", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Console.WriteLine($"Error de comunicación al desconectar: {commEx.Message}");
+                }
+                catch (TimeoutException timeoutEx)
+                {
+                    Console.WriteLine($"Tiempo de espera agotado al desconectar: {timeoutEx.Message}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error inesperado al desconectar: {ex.Message}");
                 }
             }
         }

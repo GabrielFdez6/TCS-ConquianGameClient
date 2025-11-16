@@ -232,6 +232,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Error al cerrar sesión..
+        /// </summary>
+        public static string ErrorLogOutSession {
+            get {
+                return ResourceManager.GetString("ErrorLogOutSession", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El nombre no puede estar vacío..
         /// </summary>
         public static string ErrorNameEmpty {
@@ -381,6 +390,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string ErrorRoomCodeLength {
             get {
                 return ResourceManager.GetString("ErrorRoomCodeLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error al seleccionar el modo de juego..
+        /// </summary>
+        public static string ErrorSelectGameMode {
+            get {
+                return ResourceManager.GetString("ErrorSelectGameMode", resourceCulture);
             }
         }
         

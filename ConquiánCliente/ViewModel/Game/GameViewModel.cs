@@ -13,10 +13,8 @@ namespace ConquiánCliente.ViewModel.Game
 {
     public class GameViewModel : ViewModelBase
     {
-        private string roomCode;
+        private readonly string roomCode;
         private GameClient client;
-        private GameCallbackHandler callbackHandler;
-
         private string gameTimeDisplay;
         public string GameTimeDisplay
         {
@@ -97,8 +95,7 @@ namespace ConquiánCliente.ViewModel.Game
         {
             try
             {
-                callbackHandler = new GameCallbackHandler();
-
+                var callbackHandler = new GameCallbackHandler();
                 callbackHandler.OnOpponentDiscarded += (card) => {
                     Application.Current.Dispatcher.Invoke(() => {
                         TopDiscardCard = card;
@@ -127,7 +124,7 @@ namespace ConquiánCliente.ViewModel.Game
 
                 callbackHandler.OnOpponentMeld += async (meldCardDtos) => {
                     var cardVMs = meldCardDtos.Select(dto => new CardViewModel(dto)).ToList();
-                    Application.Current.Dispatcher.Invoke(() => {
+                    await Application.Current.Dispatcher.InvokeAsync(() => {
                         TemporaryMeld.Clear();
                         foreach (var cardVM in cardVMs)
                         {
@@ -135,7 +132,7 @@ namespace ConquiánCliente.ViewModel.Game
                         }
                     });
                     await Task.Delay(1000);
-                    Application.Current.Dispatcher.Invoke(() => {
+                    await Application.Current.Dispatcher.InvokeAsync(() => {
                         TemporaryMeld.Clear();
                         OpponentMelds.Add(new MeldViewModel(cardVMs));
                     });
@@ -149,7 +146,7 @@ namespace ConquiánCliente.ViewModel.Game
 
                 if (gameState != null)
                 {
-                    Application.Current.Dispatcher.Invoke(() =>
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
                     {
                         PlayerHand.Clear();
                         foreach (var cardDto in gameState.PlayerHand)
@@ -211,7 +208,7 @@ namespace ConquiánCliente.ViewModel.Game
                     PlayerHand.Remove(cardVM);
                 }
 
-                Application.Current.Dispatcher.Invoke(() => {
+                await Application.Current.Dispatcher.InvokeAsync(() => {
                     TemporaryMeld.Clear();
                     foreach (var cardVM in cardsToPlay)
                     {
@@ -228,7 +225,7 @@ namespace ConquiánCliente.ViewModel.Game
                     MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}",
                                     Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
 
-                    Application.Current.Dispatcher.Invoke(() => {
+                    await Application.Current.Dispatcher.InvokeAsync(() => {
                         TemporaryMeld.Clear();
                         foreach (var cardVM in cardsToPlay)
                         {
@@ -240,7 +237,7 @@ namespace ConquiánCliente.ViewModel.Game
 
                 await Task.Delay(1000);
 
-                Application.Current.Dispatcher.Invoke(() => {
+                await Application.Current.Dispatcher.InvokeAsync(() => {
                     TemporaryMeld.Clear();
                     PlayerMelds.Add(new MeldViewModel(cardsToPlay));
                 });
@@ -251,7 +248,7 @@ namespace ConquiánCliente.ViewModel.Game
             }
         }
 
-        private bool IsValidMeld(List<CardViewModel> cards)
+        private static bool IsValidMeld(List<CardViewModel> cards)
         {
             if (cards == null || cards.Count < 3) return false;
 

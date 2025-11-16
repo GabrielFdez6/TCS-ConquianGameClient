@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.ServiceModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,8 +34,17 @@ namespace ConquiánCliente
                     InvitationClientManager.Disconnect(PlayerSession.CurrentPlayer.idPlayer);
                     PlayerSession.EndSession();
                 }
-                catch (Exception)
+                catch (CommunicationException commEx)
                 {
+                    Console.WriteLine($"Error de comunicación al desconectar: {commEx.Message}");
+                }
+                catch (TimeoutException timeoutEx)
+                {
+                    Console.WriteLine($"Tiempo de espera agotado al desconectar: {timeoutEx.Message}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error inesperado al desconectar: {ex.Message}");
                 }
             }
         }

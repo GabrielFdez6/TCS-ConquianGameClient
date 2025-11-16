@@ -1,4 +1,5 @@
-﻿using ConquiánCliente.ServiceLogin;
+﻿using ConquiánCliente.Properties.Langs;
+using ConquiánCliente.ServiceLogin;
 using ConquiánCliente.View;
 using ConquiánCliente.View.FriendList;
 using ConquiánCliente.View.Lobby;
@@ -76,7 +77,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
             }
             catch (System.ServiceModel.EndpointNotFoundException)
             {
-
+                MessageBox.Show(Lang.ErrorLogOutSession, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {

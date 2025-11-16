@@ -92,7 +92,7 @@ namespace ConquiánCliente.ViewModel.Lobby
             }
         }
 
-        private void ExecuteBack(object parameter)
+        private static void ExecuteBack(object parameter)
         {
             if (parameter is Window window)
             {

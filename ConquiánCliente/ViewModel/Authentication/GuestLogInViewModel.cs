@@ -15,8 +15,8 @@ namespace ConquiánCliente.ViewModel.Authentication
     {
         private string email;
         private string roomCode;
-        private LobbyClient lobbyClient;
-        private Window currentWindow;
+        private readonly LobbyClient lobbyClient;
+        private readonly Window currentWindow;
         private bool isLoading;
 
         public string Email
@@ -58,7 +58,7 @@ namespace ConquiánCliente.ViewModel.Authentication
             return !isLoading;
         }
 
-        private string ValidateRoomCode(string code)
+        private static string ValidateRoomCode(string code)
         {
             if (string.IsNullOrWhiteSpace(code))
             {

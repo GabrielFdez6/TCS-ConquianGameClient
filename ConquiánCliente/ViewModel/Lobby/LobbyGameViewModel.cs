@@ -20,7 +20,7 @@ namespace ConquiánCliente.ViewModel.Lobby
             { 1, Lang.LobbyQuickGame },
             { 2, Lang.LobbyClassicGame }
         };
-        private List<int> gameModeIds;
+        private readonly List<int> gameModeIds;
         private int currentGameModeId;
         private string playerCountText;
         private string roomCode;
@@ -359,7 +359,9 @@ namespace ConquiánCliente.ViewModel.Lobby
                     {
                         window.Close();
                     }
-                    catch (InvalidOperationException) { }
+                    catch (InvalidOperationException ex) {
+                        System.Diagnostics.Debug.WriteLine($"Intento de cerrar ventana ya en proceso: {ex.Message}");
+                    }
                     break;
                 }
             }
@@ -398,7 +400,9 @@ namespace ConquiánCliente.ViewModel.Lobby
                 {
                     windowToClose.Close();
                 }
-                catch (InvalidOperationException) { }
+                catch (InvalidOperationException ex) {
+                    System.Diagnostics.Debug.WriteLine($"Intento de cerrar ventana ya en proceso: {ex.Message}");
+                }
             }
         }
 
@@ -421,7 +425,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 {
                     await client.StartGameAsync(this.RoomCode);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     if (!isNavigatingAway)
                     {
@@ -482,6 +486,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 }
                 catch (Exception)
                 {
+                    MessageBox.Show(Lang.ErrorSelectGameMode, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             });
         }
@@ -500,6 +505,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 }
                 catch (Exception)
                 {
+                    MessageBox.Show(Lang.ErrorSelectGameMode, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             });
         }

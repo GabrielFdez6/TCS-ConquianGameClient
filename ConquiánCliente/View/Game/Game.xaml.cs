@@ -21,6 +21,8 @@ namespace ConquiánCliente.View.Game
         private DragAdorner dragAdorner;
         private AdornerLayer adornerLayer;
         private GameViewModel viewModel;
+        private const string SELECTED_CARDS = "SelectedCards";
+        private const string DISCARD_CARD = "DiscardCard";
 
         public Game(String roomCode)
         {
@@ -104,10 +106,10 @@ namespace ConquiánCliente.View.Game
 
             if (selectedCards.Count == 1)
             {
-                var cardVM = selectedCards.First();
+                var cardVM = selectedCards[0];
                 dragData = new DataObject(typeof(CardViewModel), cardVM);
 
-                var imageSource = new BitmapImage(new Uri("pack://application:,,," + cardVM.ImagePath, UriKind.Absolute));
+                var imageSource = new BitmapImage(new Uri(cardVM.ImagePath, UriKind.Absolute));
                 var image = new Image { Source = imageSource, Width = 144, Height = 216 };
                 RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
                 image.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -118,12 +120,12 @@ namespace ConquiánCliente.View.Game
             }
             else
             {
-                dragData = new DataObject("SelectedCards", selectedCards);
+                dragData = new DataObject(SELECTED_CARDS, selectedCards);
 
                 StackPanel panel = new StackPanel { Orientation = Orientation.Horizontal };
                 foreach (var card in selectedCards.Take(4))
                 {
-                    var imageSource = new BitmapImage(new Uri("pack://application:,,," + card.ImagePath, UriKind.Absolute));
+                    var imageSource = new BitmapImage(new Uri(card.ImagePath, UriKind.Absolute));
                     var image = new Image { Source = imageSource, Width = 144, Height = 216, Margin = new Thickness(-100, 0, 0, 0) };
                     if (panel.Children.Count == 0) image.Margin = new Thickness(0);
                     RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
@@ -218,7 +220,7 @@ namespace ConquiánCliente.View.Game
                 var discardCard = viewModel.TopDiscardCard;
                 if (discardCard == null) return;
 
-                var imageSource = new BitmapImage(new Uri("pack://application:,,," + discardCard.ImagePath, UriKind.Absolute));
+                var imageSource = new BitmapImage(new Uri(discardCard.ImagePath, UriKind.Absolute));
                 var image = new Image { Source = imageSource, Width = 144, Height = 216 };
                 RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
                 image.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -231,7 +233,7 @@ namespace ConquiánCliente.View.Game
                     adornerLayer.Add(dragAdorner);
                 }
 
-                DataObject dragData = new DataObject("DiscardCard", discardCard);
+                DataObject dragData = new DataObject(DISCARD_CARD, discardCard);
 
                 try
                 {
@@ -251,7 +253,7 @@ namespace ConquiánCliente.View.Game
 
         private void DropZone_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent("SelectedCards"))
+            if (e.Data.GetDataPresent(SELECTED_CARDS))
             {
                 e.Effects = DragDropEffects.Move;
                 (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0x80, 0x90, 0xEE, 0x90));
@@ -273,9 +275,9 @@ namespace ConquiánCliente.View.Game
         {
             if (viewModel == null || !viewModel.IsMyTurn) return;
 
-            if (e.Data.GetDataPresent("SelectedCards"))
+            if (e.Data.GetDataPresent(SELECTED_CARDS))
             {
-                var selectedCards = e.Data.GetData("SelectedCards") as List<CardViewModel>;
+                var selectedCards = e.Data.GetData(SELECTED_CARDS) as List<CardViewModel>;
                 if (selectedCards != null && selectedCards.Any())
                 {
                     var cardIds = selectedCards.Select(c => c.Id).ToList();
@@ -290,7 +292,7 @@ namespace ConquiánCliente.View.Game
 
         private void PlayerHand_DragEnter(object sender, DragEventArgs e)
         {
-            if (viewModel != null && viewModel.IsMyTurn && e.Data.GetDataPresent("DiscardCard"))
+            if (viewModel != null && viewModel.IsMyTurn && e.Data.GetDataPresent(DISCARD_CARD))
             {
                 e.Effects = DragDropEffects.Move;
             }
@@ -309,9 +311,9 @@ namespace ConquiánCliente.View.Game
                 return;
             }
 
-            if (e.Data.GetDataPresent("DiscardCard"))
+            if (e.Data.GetDataPresent(DISCARD_CARD))
             {
-                var discardCard = e.Data.GetData("DiscardCard") as CardDto;
+                var discardCard = e.Data.GetData(DISCARD_CARD) as CardDto;
                 if (discardCard == null) return;
 
                 await viewModel.DrawFromDiscardAsync(discardCard);
