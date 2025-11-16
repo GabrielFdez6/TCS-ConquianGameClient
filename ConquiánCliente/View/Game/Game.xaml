@@ -60,6 +60,38 @@
             </ItemsControl>
         </DataTemplate>
 
+        <DataTemplate x:Key="DragCardVisualTemplate">
+            <Image Source="{Binding ImagePath}" 
+           Width="144" 
+           Height="216"
+           RenderOptions.BitmapScalingMode="HighQuality" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="DragMeldVisualTemplate">
+            <ItemsControl ItemsSource="{Binding}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding ImagePath}" 
+                       Width="144" 
+                       Height="216"
+                       RenderOptions.BitmapScalingMode="HighQuality"
+                       Margin="-100,0,0,0" />
+
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                <Setter Property="Margin" Value="0"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DataTemplate>
+
     </Window.Resources>
 
     <Grid x:Name="RootGrid" 

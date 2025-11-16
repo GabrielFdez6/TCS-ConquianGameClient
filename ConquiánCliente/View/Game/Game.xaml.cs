@@ -102,19 +102,16 @@ namespace ConquiánCliente.View.Game
             if (adornerLayer == null) return;
 
             DataObject dragData;
-            UIElement dragVisual;
-
+            FrameworkElement dragVisual;
             if (selectedCards.Count == 1)
             {
                 var cardVM = selectedCards[0];
                 dragData = new DataObject(typeof(CardViewModel), cardVM);
-
-                var imageSource = new BitmapImage(new Uri("pack://application:,,," + cardVM.ImagePath, UriKind.Absolute));
-                var image = new Image { Source = imageSource, Width = 144, Height = 216 };
-                RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
-                image.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                image.Arrange(new Rect(image.DesiredSize));
-                dragVisual = image;
+                DataTemplate template = this.FindResource("DragCardVisualTemplate") as DataTemplate;
+                dragVisual = (FrameworkElement)template.LoadContent();
+                dragVisual.DataContext = cardVM;
+                dragVisual.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                dragVisual.Arrange(new Rect(dragVisual.DesiredSize));
 
                 cardVM.IsBeingDragged = true;
             }
@@ -122,19 +119,11 @@ namespace ConquiánCliente.View.Game
             {
                 dragData = new DataObject(SELECTED_CARDS, selectedCards);
 
-                StackPanel panel = new StackPanel { Orientation = Orientation.Horizontal };
-                foreach (var card in selectedCards.Take(4))
-                {
-                    var imageSource = new BitmapImage(new Uri("pack://application:,,," + card.ImagePath, UriKind.Absolute));
-                    var image = new Image { Source = imageSource, Width = 144, Height = 216, Margin = new Thickness(-100, 0, 0, 0) };
-                    if (panel.Children.Count == 0) image.Margin = new Thickness(0);
-                    RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
-                    panel.Children.Add(image);
-                }
-                panel.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                panel.Arrange(new Rect(panel.DesiredSize));
-                dragVisual = panel;
-
+                DataTemplate template = this.FindResource("DragMeldVisualTemplate") as DataTemplate;
+                dragVisual = (FrameworkElement)template.LoadContent();
+                dragVisual.DataContext = selectedCards.Take(4).ToList();
+                dragVisual.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                dragVisual.Arrange(new Rect(dragVisual.DesiredSize));
                 selectedCards.ForEach(c => c.IsBeingDragged = true);
             }
 
@@ -220,9 +209,9 @@ namespace ConquiánCliente.View.Game
                 var discardCard = viewModel.TopDiscardCard;
                 if (discardCard == null) return;
 
-                var imageSource = new BitmapImage(new Uri("pack://application:,,," + discardCard.ImagePath, UriKind.Absolute));
-                var image = new Image { Source = imageSource, Width = 144, Height = 216 };
-                RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
+                DataTemplate template = this.FindResource("DragCardVisualTemplate") as DataTemplate;
+                FrameworkElement image = (FrameworkElement)template.LoadContent();
+                image.DataContext = discardCard;
                 image.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                 image.Arrange(new Rect(image.DesiredSize));
 
