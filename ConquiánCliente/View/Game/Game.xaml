@@ -41,20 +41,17 @@
                    Margin="5, 5, -114, 5"/>
         </DataTemplate>
 
-        <!-- Esta plantilla está bien, define las cartas DENTRO de una jugada -->
         <DataTemplate x:Key="MeldedCardTemplate">
             <Border Width="100" Height="150" Margin="-35, 0, -35, 0">
                 <Image Source="{Binding ImagePath}" ToolTip="{Binding Id}"/>
             </Border>
         </DataTemplate>
 
-        <!-- CAMBIO: Esta plantilla define CADA jugada. Se quita el margen negativo. -->
         <DataTemplate x:Key="MeldTemplate">
             <ItemsControl 
                 ItemsSource="{Binding Cards}"
                 ItemTemplate="{StaticResource MeldedCardTemplate}"
                 Margin="0, 0, 0, 10">
-                <!-- CAMBIO: De -120 a un margen positivo (10 abajo) para separar las jugadas -->
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"/>
@@ -105,11 +102,11 @@
                                Foreground="White"/>
                 </StackPanel>
 
-                <ItemsControl HorizontalAlignment="Left"
-                        VerticalAlignment="Top" 
-                        Margin="820,130,0,0"
-                        ItemTemplate="{StaticResource OpponentCardTemplate}"
-                        ItemsSource="{Binding OpponentFaceDownCards}">
+                <ItemsControl HorizontalAlignment="Center"
+                              VerticalAlignment="Top" 
+                              Margin="0,130,0,0"
+                              ItemTemplate="{StaticResource OpponentCardTemplate}"
+                              ItemsSource="{Binding OpponentFaceDownCards}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal"/>
@@ -125,7 +122,6 @@
                               Margin="0,290,60,0">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <!-- Este StackPanel apila las jugadas (MeldTemplate) verticalmente -->
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Right"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
@@ -220,7 +216,7 @@
 
                 <Button Content="{x:Static language:Lang.GameToPass}"
                         HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                        Margin="880,0,0,280" Width="180" Height="55"
+                        Margin="870,0,0,280" Width="180" Height="55"
                         Style="{StaticResource PrimaryButtonStyle}">
                     <Button.Effect>
                         <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
@@ -235,7 +231,6 @@
                               Margin="60,0,0,250">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <!-- Este StackPanel apila las jugadas (MeldTemplate) verticalmente -->
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Left"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
