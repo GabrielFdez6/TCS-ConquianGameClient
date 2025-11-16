@@ -53,9 +53,6 @@ namespace ConquiánCliente.View.Game
             }
         }
 
-        // --- MANEJADORES DE LA MANO DEL JUGADOR ---
-        // (Ahora todos usan el campo 'viewModel' en lugar de 'DataContext as GameViewModel')
-
         private void PlayerCard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (viewModel == null || !viewModel.IsMyTurn) return;
@@ -164,8 +161,6 @@ namespace ConquiánCliente.View.Game
             discardDragStartPoint = null;
         }
 
-        // --- MAZO (STOCKPILE) ---
-
         private void StockPile_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (viewModel == null || !viewModel.IsMyTurn) return;
@@ -201,8 +196,6 @@ namespace ConquiánCliente.View.Game
             ClearSelections();
             e.Handled = true;
         }
-
-        // --- PILA DE DESCARTE (DISCARD PILE) ---
 
         private void DiscardCard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -256,8 +249,6 @@ namespace ConquiánCliente.View.Game
             }
         }
 
-        // --- ZONA DE JUEGOS (DROP ZONE) ---
-
         private void DropZone_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent("SelectedCards"))
@@ -297,8 +288,6 @@ namespace ConquiánCliente.View.Game
             e.Handled = true;
         }
 
-        // --- MANO DEL JUGADOR (Como Zona de Drop) ---
-
         private void PlayerHand_DragEnter(object sender, DragEventArgs e)
         {
             if (viewModel != null && viewModel.IsMyTurn && e.Data.GetDataPresent("DiscardCard"))
@@ -329,8 +318,6 @@ namespace ConquiánCliente.View.Game
             }
             e.Handled = true;
         }
-
-        // --- MÉTODOS DE UTILIDAD ---
 
         private void ClearSelections()
         {

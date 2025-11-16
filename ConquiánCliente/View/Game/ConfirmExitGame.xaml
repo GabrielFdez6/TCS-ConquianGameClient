@@ -9,6 +9,7 @@
         ShowInTaskbar="False"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner">
+    
     <Grid>
         <Border Background="{StaticResource PrimaryBackgroundBrush}"
                 BorderBrush="{StaticResource BorderBrush}"

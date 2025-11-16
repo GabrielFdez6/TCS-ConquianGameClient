@@ -6,6 +6,7 @@
         xmlns:lang="clr-namespace:ConquiánCliente.Properties.Langs"
         mc:Ignorable="d"
         Title="{x:Static lang:Lang.GlobalInvite}" Height="520" Width="428" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow"
+        ShowInTaskbar="False"
         Background="#2E2E2E">
 
     <Window.Resources>
