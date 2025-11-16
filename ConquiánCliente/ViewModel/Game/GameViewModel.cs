@@ -165,7 +165,7 @@ namespace ConquiánCliente.ViewModel.Game
                         }
                         else
                         {
-                            TurnStatusText = "Turno del oponente";
+                            TurnStatusText = Lang.GameOpponentsturn;
                         }
 
                         IsMyTurn = (gameState.CurrentTurnPlayerId == playerId);
@@ -305,7 +305,7 @@ namespace ConquiánCliente.ViewModel.Game
             }
             else
             {
-                TurnStatusText = "Turno del oponente";
+                TurnStatusText = Lang.GameOpponentsturn;
                 IsMyTurn = false;
             }
         }

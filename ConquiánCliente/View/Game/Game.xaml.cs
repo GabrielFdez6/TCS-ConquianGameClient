@@ -109,7 +109,7 @@ namespace ConquiánCliente.View.Game
                 var cardVM = selectedCards[0];
                 dragData = new DataObject(typeof(CardViewModel), cardVM);
 
-                var imageSource = new BitmapImage(new Uri(cardVM.ImagePath, UriKind.Absolute));
+                var imageSource = new BitmapImage(new Uri("pack://application:,,," + cardVM.ImagePath, UriKind.Absolute));
                 var image = new Image { Source = imageSource, Width = 144, Height = 216 };
                 RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
                 image.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -125,7 +125,7 @@ namespace ConquiánCliente.View.Game
                 StackPanel panel = new StackPanel { Orientation = Orientation.Horizontal };
                 foreach (var card in selectedCards.Take(4))
                 {
-                    var imageSource = new BitmapImage(new Uri(card.ImagePath, UriKind.Absolute));
+                    var imageSource = new BitmapImage(new Uri("pack://application:,,," + card.ImagePath, UriKind.Absolute));
                     var image = new Image { Source = imageSource, Width = 144, Height = 216, Margin = new Thickness(-100, 0, 0, 0) };
                     if (panel.Children.Count == 0) image.Margin = new Thickness(0);
                     RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
@@ -220,7 +220,7 @@ namespace ConquiánCliente.View.Game
                 var discardCard = viewModel.TopDiscardCard;
                 if (discardCard == null) return;
 
-                var imageSource = new BitmapImage(new Uri(discardCard.ImagePath, UriKind.Absolute));
+                var imageSource = new BitmapImage(new Uri("pack://application:,,," + discardCard.ImagePath, UriKind.Absolute));
                 var image = new Image { Source = imageSource, Width = 144, Height = 216 };
                 RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
                 image.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));

@@ -709,6 +709,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Turno del oponente .
+        /// </summary>
+        public static string GameOpponentsturn {
+            get {
+                return ResourceManager.GetString("GameOpponentsturn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Resultados .
         /// </summary>
         public static string GameResultsTitle {
