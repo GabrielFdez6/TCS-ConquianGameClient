@@ -7,7 +7,8 @@
       xmlns:language="clr-namespace:ConquiánCliente.Properties.Langs"
       xmlns:profile="clr-namespace:ConquiánCliente.ViewModel.Profile"
       mc:Ignorable="d" 
-      Title="UserProfilePage">
+      Title="UserProfilePage"
+      Background="Transparent">
 
     <Page.DataContext>
         <profile:UserProfileViewModel/>
@@ -23,7 +24,10 @@
                 MaxWidth="600" MinWidth="550">
 
             <Border.Effect>
-                <DropShadowEffect ShadowDepth="6" Color="Black" Opacity="0.25" BlurRadius="20"/>
+                <DropShadowEffect Color="{Binding Color, Source={StaticResource BorderBrush}}" 
+                                  ShadowDepth="0" 
+                                  BlurRadius="20" 
+                                  Opacity="1"/>
             </Border.Effect>
 
             <StackPanel Orientation="Vertical">
@@ -49,11 +53,20 @@
                     </Grid.RowDefinitions>
 
                     <Button Grid.Row="0" Grid.Column="0" Grid.RowSpan="6" 
-                        VerticalAlignment="Top"
-                        Margin="0,0,20,0"
-                        Command="{Binding NavigateToEditProfilePictureCommand}"
-                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
-                        <Border Width="100" Height="100" BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1">
+                            VerticalAlignment="Top"
+                            Margin="0,0,20,0"
+                            Command="{Binding NavigateToEditProfilePictureCommand}"
+                            Style="{StaticResource NoFocusButtonStyle}">
+                        <Border Width="100" Height="100" 
+                                BorderBrush="{StaticResource PrimaryButtonBrush}" 
+                                BorderThickness="2"
+                                CornerRadius="5">
+                            <Border.Effect>
+                                <DropShadowEffect Color="{Binding Color, Source={StaticResource PrimaryButtonBrush}}" 
+                                                  ShadowDepth="0" 
+                                                  BlurRadius="10" 
+                                                  Opacity="0.9" />
+                            </Border.Effect>
                             <Image Source="{Binding ProfileImagePath}" Stretch="UniformToFill" />
                         </Border>
                     </Button>
@@ -84,15 +97,21 @@
 
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,20,0,0">
                     <Button Command="{Binding NavigateToEditCommand}" Style="{StaticResource PrimaryButtonStyle}" Margin="0,10,0,0" Width="165" Height="40">
-                        <TextBlock Text="{x:Static language:Lang.EditDataEdit}" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}"/>
+                        <TextBlock Text="{x:Static language:Lang.EditDataEdit}" 
+                                   FontSize="16" 
+                                   FontWeight="Bold" 
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center"/>
                     </Button>
 
-                    <Button Content="{x:Static language:Lang.GlobalBack}"
-                            Foreground="{StaticResource ForgotPasswordTextBrush}" 
-                            FontSize="14"
+                    <Button Style="{StaticResource NoFocusButtonStyle}"
                             Margin="0,15,0,0"
                             Command="{Binding NavigateBackCommand}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Page}}"/>
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Page}}">
+                        <TextBlock Text="{x:Static language:Lang.GlobalBack}"
+                                   Foreground="{StaticResource ForgotPasswordTextBrush}" 
+                                   FontSize="14"/>
+                    </Button>
                 </StackPanel>
             </StackPanel>
         </Border>

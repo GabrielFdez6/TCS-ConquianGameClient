@@ -6,22 +6,55 @@
         xmlns:lang="clr-namespace:ConquiánCliente.Properties.Langs"
         mc:Ignorable="d"
         Title="{x:Static lang:Lang.LobbyInvitation}" Height="200" Width="400"
-        WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" Topmost="True"
+        WindowStartupLocation="CenterScreen" 
+        Topmost="True"
         ShowInTaskbar="False"
-        Background="#2E2E2E">
-    <Grid VerticalAlignment="Center">
-        <StackPanel HorizontalAlignment="Center">
-            <TextBlock Text="{Binding InvitationText}" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
-                <Button Content="{x:Static lang:Lang.GlobalAccept}" 
-                        Command="{Binding AcceptCommand}"
-                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
-                        Style="{StaticResource PrimaryButtonStyle}" Width="120" Margin="10"/>
-                <Button Content="{x:Static lang:Lang.LobbyReject}" 
-                        Command="{Binding RejectCommand}"
-                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
-                        Style="{StaticResource SecondaryButtonStyle}" Width="120" Margin="10"/>
-            </StackPanel>
-        </StackPanel>
+        AllowsTransparency="True"
+        WindowStyle="None"
+        Background="Transparent">
+
+    <Grid>
+        <Border Background="{StaticResource PrimaryBackgroundBrush}"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="2"
+                CornerRadius="10"
+                Padding="30">
+
+            <Border.Effect>
+                <DropShadowEffect Color="{Binding Color, Source={StaticResource BorderBrush}}" 
+                                  ShadowDepth="0" 
+                                  BlurRadius="20" 
+                                  Opacity="1"/>
+            </Border.Effect>
+
+            <Grid VerticalAlignment="Center">
+                <StackPanel HorizontalAlignment="Center">
+                    <TextBlock Text="{Binding InvitationText}" 
+                               Foreground="{StaticResource PrimaryTextBrush}" 
+                               FontSize="16" 
+                               HorizontalAlignment="Center"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"/>
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                        <Button Content="{x:Static lang:Lang.GlobalAccept}" 
+                                Command="{Binding AcceptCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                                Style="{StaticResource PrimaryButtonStyle}" 
+                                Width="120" 
+                                Margin="10"
+                                FontSize="16"/>
+                        
+                        <Button Content="{x:Static lang:Lang.LobbyReject}" 
+                                Command="{Binding RejectCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                                Style="{StaticResource SecondaryButtonStyle}" 
+                                Width="120" 
+                                Margin="10"
+                                FontSize="16"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

@@ -22,7 +22,10 @@
                 MinWidth="550">
 
             <Border.Effect>
-                <DropShadowEffect ShadowDepth="6" Color="Black" Opacity="0.25" BlurRadius="20"/>
+                <DropShadowEffect Color="{Binding Color, Source={StaticResource BorderBrush}}" 
+                                  ShadowDepth="0" 
+                                  BlurRadius="20" 
+                                  Opacity="1"/>
             </Border.Effect>
 
             <Grid>

@@ -77,10 +77,10 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Image Source="{Binding ImagePath}" 
-                       Width="144" 
-                       Height="216"
-                       RenderOptions.BitmapScalingMode="HighQuality"
-                       Margin="-100,0,0,0" />
+                               Width="144" 
+                               Height="216"
+                               RenderOptions.BitmapScalingMode="HighQuality"
+                               Margin="-100,0,0,0" />
 
                         <DataTemplate.Triggers>
                             <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
@@ -111,14 +111,16 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" x:Name="BackButton" Click="BackButton_Click" Margin="20"
-                            Width="50" Height="50" Content="&lt;" FontSize="24" FontWeight="Bold"
+                            Width="50" Height="50"
                             Style="{StaticResource PrimaryButtonStyle}">
-                        <Button.Effect>
-                            <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
-                        </Button.Effect>
+                        <TextBlock Text="&lt;"
+                                   FontSize="24" 
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
                     </Button>
                     <Border Grid.Column="1" HorizontalAlignment="Center" Padding="15,5"
-                                Background="#66000000" CornerRadius="5" Margin="0,0,0,45" Width="220">
+                                Background="#66000000" CornerRadius="5" Margin="0,0,130,45" Width="220">
                         <TextBlock Text="{Binding GameTimeDisplay}" FontSize="28" 
                                    FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
                     </Border>
@@ -162,7 +164,7 @@
                 <StackPanel Orientation="Horizontal" 
                             HorizontalAlignment="Center" 
                             VerticalAlignment="Center"
-                            Margin="0,80,0,0">
+                            Margin="0,35,0,0">
 
                     <Image x:Name="DiscardPileImage"
                            Source="{Binding TopDiscardCard.ImagePath}"
@@ -246,13 +248,14 @@
 
                 </StackPanel>
 
-                <Button Content="{x:Static language:Lang.GameToPass}"
-                        HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                <Button HorizontalAlignment="Left" VerticalAlignment="Bottom"
                         Margin="870,0,0,280" Width="180" Height="55"
                         Style="{StaticResource PrimaryButtonStyle}">
-                    <Button.Effect>
-                        <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
-                    </Button.Effect>
+                    <TextBlock Text="{x:Static language:Lang.GameToPass}"
+                               FontSize="16"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
                 </Button>
 
                 <ItemsControl x:Name="PlayerMeldsItemsControl"
@@ -268,7 +271,7 @@
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
 
-                <ItemsControl x:Name="PlayerHandItemsControl"   
+                <ItemsControl x:Name="PlayerHandItemsControl"    
                               ItemsSource="{Binding PlayerHand}"
                               ItemTemplate="{StaticResource CardTemplate}"
                               HorizontalAlignment="Center"
@@ -297,12 +300,12 @@
                             HorizontalAlignment="Left" VerticalAlignment="Bottom"
                             Margin="430,0,0,238">
                     <TextBlock Text="{Binding TurnStatusText}" FontSize="28"
-                           FontWeight="Bold" Foreground="White"
-                           VerticalAlignment="Center"/>
+                               FontWeight="Bold" Foreground="White"
+                               VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding TurnTimeDisplay}" FontSize="28"
-                           FontWeight="Bold" Foreground="Yellow"
-                           VerticalAlignment="Center"
-                           Margin="10,0,0,0" />
+                               FontWeight="Bold" Foreground="Yellow"
+                               VerticalAlignment="Center"
+                               Margin="10,0,0,0" />
                 </StackPanel>
             </Grid>
         </Viewbox>

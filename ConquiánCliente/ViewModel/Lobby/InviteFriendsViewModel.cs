@@ -1,7 +1,6 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceFriendList;
 using ConquiánCliente.View.Lobby;
-using ConquiánCliente.ViewModel;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,7 +8,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Navigation;
 
 namespace ConquiánCliente.ViewModel.Lobby
 {

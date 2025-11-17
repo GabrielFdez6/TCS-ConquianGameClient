@@ -14,14 +14,17 @@ using System.Windows.Shapes;
 
 namespace ConquiánCliente.View.Lobby
 {
-    /// <summary>
-    /// Lógica de interacción para InviteFriendsWindow.xaml
-    /// </summary>
+
     public partial class InviteFriendsWindow : Window
     {
         public InviteFriendsWindow()
         {
             InitializeComponent();
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

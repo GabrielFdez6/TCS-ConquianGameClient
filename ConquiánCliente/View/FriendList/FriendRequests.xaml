@@ -17,7 +17,10 @@
     </Window.DataContext>
 
     <Grid>
-        <Image Source="/Resources/backgroundLogin.jpg" Stretch="UniformToFill" />
+        <Border Background="{StaticResource PrimaryBackgroundBrush}" />
+        <Image Source="/Resources/background.jpg" 
+               Stretch="UniformToFill" 
+               Opacity="0.5"/>
 
         <Border BorderBrush="{StaticResource BorderBrush}"
                 BorderThickness="2"
@@ -29,7 +32,10 @@
                 MaxWidth="800" MinWidth="700" Height="600">
 
             <Border.Effect>
-                <DropShadowEffect ShadowDepth="6" Color="Black" Opacity="0.25" BlurRadius="20"/>
+                <DropShadowEffect Color="{Binding Color, Source={StaticResource BorderBrush}}" 
+                                  ShadowDepth="0" 
+                                  BlurRadius="20" 
+                                  Opacity="1"/>
             </Border.Effect>
 
             <Grid>
@@ -55,7 +61,7 @@
                                     <Button Style="{StaticResource PrimaryButtonStyle}" Height="30"
                                             Command="{Binding DataContext.AcceptRequestCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                             CommandParameter="{Binding}">
-                                        <TextBlock Text="{x:Static language:Lang.GlobalAccept}" Foreground="{StaticResource PrimaryTextBrush}" FontWeight="Bold"/>
+                                        <TextBlock Text="{x:Static language:Lang.GlobalAccept}" FontWeight="Bold"/>
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -67,7 +73,7 @@
                                     <Button Style="{StaticResource SecondaryButtonStyle}" Height="30"
                                             Command="{Binding DataContext.DeclineRequestCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                             CommandParameter="{Binding}">
-                                        <TextBlock Text="{x:Static language:Lang.FriendRequestsDecline}" Foreground="{StaticResource PrimaryTextBrush}" FontWeight="Bold"/>
+                                        <TextBlock Text="{x:Static language:Lang.FriendRequestsDecline}" FontWeight="Bold"/>
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

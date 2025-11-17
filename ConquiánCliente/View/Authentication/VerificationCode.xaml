@@ -11,10 +11,12 @@
         WindowStartupLocation="CenterScreen"
         Background="Transparent">
     <Grid>
-        <Image Source="/Resources/backgroundLogin.jpg" 
+        <Border Background="{StaticResource PrimaryBackgroundBrush}" />
+        <Image Source="/Resources/background.jpg" 
                Stretch="UniformToFill" 
                HorizontalAlignment="Stretch" 
-               VerticalAlignment="Stretch"/>
+               VerticalAlignment="Stretch"
+               Opacity="0.5"/>
 
         <Border BorderBrush="{StaticResource BorderBrush}" 
                 BorderThickness="2" 
@@ -26,10 +28,10 @@
                 MaxWidth="600" Width="389">
 
             <Border.Effect>
-                <DropShadowEffect ShadowDepth="6" 
-                                  Color="Black" 
-                                  Opacity="0.25" 
-                                  BlurRadius="20"/>
+                <DropShadowEffect Color="{Binding Color, Source={StaticResource BorderBrush}}" 
+                                  ShadowDepth="0" 
+                                  BlurRadius="20" 
+                                  Opacity="1" />
             </Border.Effect>
 
             <StackPanel Orientation="Vertical">
@@ -50,25 +52,35 @@
 
                 <Border CornerRadius="5"
                         BorderThickness="1" 
-                        BorderBrush="{StaticResource TextBoxBorderBrush}">
+                        BorderBrush="{StaticResource TextBoxBorderBrush}"
+                        Background="Transparent">
+
+                    <Border.Effect>
+                        <DropShadowEffect Color="{Binding Color, Source={StaticResource TextBoxBorderBrush}}" 
+                                          ShadowDepth="0" 
+                                          BlurRadius="10" 
+                                          Opacity="0.9" />
+                    </Border.Effect>
+
                     <TextBox x:Name="tbVerificationCode" 
                              Padding="8" 
                              FontSize="16"
                              BorderThickness="0"
-                             Background="{StaticResource TextBoxBackgroundBrush}"
+                             Background="Transparent"
+                             Foreground="{StaticResource PrimaryTextBrush}"
+                             CaretBrush="{StaticResource PrimaryTextBrush}"
                              Text="{Binding EnteredVerificationCode, UpdateSourceTrigger=PropertyChanged}"/>
                 </Border>
-
                 <Button Margin="0,30,0,10" Height="43" Width="168"
                         Style="{StaticResource PrimaryButtonStyle}"
                         Command="{Binding VerifyCodeCommand}"
                         CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+
                     <TextBlock Text="{x:Static language:Lang.GlobalAccept}" 
-                                   FontSize="16" 
-                                   FontWeight="Bold"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"
-                                   Foreground="{StaticResource PrimaryTextBrush}"/>
+                               FontSize="16" 
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
                 </Button>
 
                 <Button Style="{StaticResource NoFocusButtonStyle}" Margin="0,15,0,0"

@@ -12,23 +12,32 @@
         Background="Transparent">
 
     <Grid>
+        <Border Background="{StaticResource PrimaryBackgroundBrush}" />
         <Image Source="/Resources/backgroundGame.jpg"
-               Stretch="UniformToFill"/>
+               Stretch="UniformToFill"
+               Opacity="0.5"/>
 
         <Border HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Width="800"
-                Background="#CC222222"
+                Background="{StaticResource PrimaryBackgroundBrush}"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="2"
                 CornerRadius="10"
                 Padding="40">
+
+            <Border.Effect>
+                <DropShadowEffect Color="{Binding Color, Source={StaticResource BorderBrush}}" 
+                                  ShadowDepth="0" 
+                                  BlurRadius="20" 
+                                  Opacity="1"/>
+            </Border.Effect>
 
             <StackPanel Orientation="Vertical">
 
                 <TextBlock Text="{x:Static language:Lang.GameVictory}" 
+                           Style="{StaticResource TitleTextBlock}"
                            FontSize="60"
-                           FontWeight="Bold"
-                           Foreground="White"
-                           HorizontalAlignment="Center"
                            Margin="0,0,0,40"/>
 
                 <Grid HorizontalAlignment="Center" Margin="0,20,0,20">
@@ -40,9 +49,9 @@
 
                     <StackPanel Grid.Column="0" Orientation="Vertical" Margin="30,0">
                         <Border Width="120" Height="120"
-                                BorderBrush="Gray" BorderThickness="1"
+                                BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1"
                                 CornerRadius="60">
-                            <Image Source="C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Resources\imageProfile\avatar03.JPG" 
+                            <Image Source="/Resources/imageProfile/avatar03.JPG" 
                                    Stretch="UniformToFill"/>
                         </Border>
                         <TextBlock Text="{Binding PlayerName}"
@@ -66,9 +75,9 @@
 
                     <StackPanel Grid.Column="2" Orientation="Vertical" Margin="30,0">
                         <Border Width="120" Height="120"
-                                BorderBrush="Gray" BorderThickness="1"
+                                BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1"
                                 CornerRadius="60">
-                            <Image Source="C:\Tecnologias para el desarrollo de software\Cliente\TCS-ConquianGameClient\ConquiánCliente\Resources\imageProfile\avatar01.JPG" 
+                            <Image Source="/Resources/imageProfile/avatar01.JPG" 
                                    Stretch="UniformToFill"/>
                         </Border>
                         <TextBlock Text="{Binding OpponentName}"
@@ -87,19 +96,17 @@
                 <StackPanel Orientation="Vertical" Margin="0,60,0,0" Width="350"
                             HorizontalAlignment="Center">
 
-                    <Button Content="{x:Static language:Lang.GameBackToLobby}"
-                            Style="{StaticResource PrimaryButtonStyle}"
+                    <Button Style="{StaticResource PrimaryButtonStyle}"
                             Height="55"
                             FontSize="24"
                             FontWeight="Bold"
                             Margin="0,0,0,20"
                             Command="{Binding BackToLobbyCommand}">
-                        <Button.Effect>
-                            <DropShadowEffect Color="#A43C42"
-                                              BlurRadius="10"
-                                              ShadowDepth="2"
-                                              Opacity="1"/>
-                        </Button.Effect>
+                        <TextBlock Text="{x:Static language:Lang.GameBackToLobby}"
+                                   FontSize="24" 
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
                     </Button>
                 </StackPanel>
 

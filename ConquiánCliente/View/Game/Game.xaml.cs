@@ -1,5 +1,5 @@
 ﻿using ConquiánCliente.ServiceGame;
-using ConquiánCliente.View.Game.Behaviors;
+using ConquiánCliente.ViewModel.Game.Behaviors;
 using ConquiánCliente.ViewModel.Game;
 using System;
 using System.Collections.Generic;
@@ -9,8 +9,6 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-
 
 namespace ConquiánCliente.View.Game
 {

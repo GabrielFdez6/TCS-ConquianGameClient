@@ -178,7 +178,7 @@
     <Compile Include="View\FriendList\FriendRequests.xaml.cs">
       <DependentUpon>FriendRequests.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Game\Behaviors\DragAdorner.cs" />
+    <Compile Include="ViewModel\Game\Behaviors\DragAdorner.cs" />
     <Compile Include="View\Game\ConfirmExitGame.xaml.cs">
       <DependentUpon>ConfirmExitGame.xaml</DependentUpon>
     </Compile>
@@ -518,14 +518,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\backgroundLogin.jpg" />
+    <Resource Include="Resources\background.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\facebook.png" />
     <Resource Include="Resources\instagram.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\backgroundMainMenu.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\MexicoFlag.png" />
@@ -655,9 +652,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\backgroundGame.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Connected Services\ServiceGuestInvitation\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -683,6 +677,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Assets\reverso.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\backgroundGame.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Assets\Bastos\bastos_10s.png" />
@@ -711,6 +708,7 @@
   <ItemGroup>
     <Resource Include="Resources\Assets\Espadas\espadas_10s.png" />
     <Resource Include="Resources\Assets\Espadas\espadas_11s.png" />
+    <Resource Include="Resources\Assets\Espadas\espadas_12s.png" />
     <Resource Include="Resources\Assets\Espadas\espadas_1s.png" />
     <Resource Include="Resources\Assets\Espadas\espadas_2s.png" />
     <Resource Include="Resources\Assets\Espadas\espadas_3s.png" />
@@ -718,9 +716,6 @@
     <Resource Include="Resources\Assets\Espadas\espadas_5s.png" />
     <Resource Include="Resources\Assets\Espadas\espadas_6s.png" />
     <Resource Include="Resources\Assets\Espadas\espadas_7s.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Assets\Espadas\espadas_12s.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Assets\Oros\oros_10s.png" />

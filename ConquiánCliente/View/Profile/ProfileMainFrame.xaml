@@ -17,7 +17,10 @@
     </Window.DataContext>
 
     <Grid>
-        <Image Source="/Resources/backgroundLogin.jpg" Stretch="UniformToFill" />
+        <Border Background="{StaticResource PrimaryBackgroundBrush}" />
+        <Image Source="/Resources/background.jpg" 
+               Stretch="UniformToFill" 
+               Opacity="0.5"/>
 
         <Frame x:Name="ProfileFrame" NavigationUIVisibility="Hidden"/>
     </Grid>

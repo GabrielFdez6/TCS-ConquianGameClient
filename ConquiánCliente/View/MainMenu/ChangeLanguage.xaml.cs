@@ -14,9 +14,7 @@ using System.Windows.Shapes;
 
 namespace ConquiánCliente.View.MainMenu
 {
-    /// <summary>
-    /// Lógica de interacción para ChangeLanguage.xaml
-    /// </summary>
+
     public partial class ChangeLanguage : Window
     {
         public ChangeLanguage()
@@ -35,6 +33,10 @@ namespace ConquiánCliente.View.MainMenu
             Properties.Settings.Default.languageCode = "en-US";
             Properties.Settings.Default.Save();
             this.DialogResult = true;
+        }
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

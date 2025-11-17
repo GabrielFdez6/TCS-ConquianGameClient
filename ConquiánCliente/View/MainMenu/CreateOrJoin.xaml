@@ -14,11 +14,18 @@
         Background="Transparent">
 
     <Grid>
-        <!-- Cambiamos el color de fondo y añadimos borde, sin modificar el layout -->
         <Border Background="{StaticResource PrimaryBackgroundBrush}"
                 BorderBrush="{StaticResource BorderBrush}"
                 BorderThickness="2"
                 CornerRadius="15">
+
+            <Border.Effect>
+                <DropShadowEffect Color="{Binding Color, Source={StaticResource BorderBrush}}" 
+                                  ShadowDepth="0" 
+                                  BlurRadius="20" 
+                                  Opacity="1"/>
+            </Border.Effect>
+
             <Grid>
                 <Button Style="{StaticResource PrimaryButtonStyle}"
                         HorizontalAlignment="Right"
@@ -27,12 +34,9 @@
                         Content="X"
                         Width="30"
                         Height="30"
+                        FontWeight="Bold"
                         Command="{Binding CloseCommand}"
-                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-                    <Button.Effect>
-                        <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
-                    </Button.Effect>
-                </Button>
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
 
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Button Content="{x:Static language:Lang.LobbyCreateRoom}"
@@ -40,15 +44,12 @@
                             Width="300"
                             Height="60"
                             FontSize="24"
+                            FontWeight="Bold"
                             Command="{Binding CreateRoomCommand}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-                        <Button.Effect>
-                            <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
-                        </Button.Effect>
-                    </Button>
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
 
                     <TextBlock Text="{x:Static language:Lang.GlobalOr}"
-                               Foreground="White"
+                               Foreground="{StaticResource PrimaryTextBrush}"
                                FontSize="22"
                                FontWeight="Bold"
                                HorizontalAlignment="Center"
@@ -56,34 +57,43 @@
 
                     <StackPanel>
                         <TextBlock Text="{x:Static language:Lang.LobbyJoinWithCode}"
-                                   Foreground="White"
+                                   Foreground="{StaticResource PrimaryTextBrush}"
                                    FontSize="18"
                                    HorizontalAlignment="Center"/>
-                        
+
                         <Border Width="250"
                                 Height="40"
                                 CornerRadius="5"
                                 BorderThickness="1"
                                 BorderBrush="{StaticResource TextBoxBorderBrush}"
+                                Background="Transparent"
                                 Margin="0,10,0,10">
+
+                            <Border.Effect>
+                                <DropShadowEffect Color="{Binding Color, Source={StaticResource TextBoxBorderBrush}}" 
+                                                  ShadowDepth="0" 
+                                                  BlurRadius="10" 
+                                                  Opacity="0.9" />
+                            </Border.Effect>
+
                             <TextBox Padding="8"
                                      FontSize="20"
                                      BorderThickness="0"
-                                     Background="{StaticResource TextBoxBackgroundBrush}"
+                                     Background="Transparent"
+                                     Foreground="{StaticResource PrimaryTextBrush}"
+                                     CaretBrush="{StaticResource PrimaryTextBrush}"
                                      TextAlignment="Center"
                                      Text="{Binding RoomCode, UpdateSourceTrigger=PropertyChanged}"/>
                         </Border>
+
                         <Button Content="{x:Static language:Lang.LobbyJoinRoom}"
                                 Style="{StaticResource PrimaryButtonStyle}"
                                 Width="250"
                                 Height="50"
                                 FontSize="20"
+                                FontWeight="Bold"
                                 Command="{Binding JoinRoomCommand}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-                            <Button.Effect>
-                                <DropShadowEffect Color="#A43C42" BlurRadius="10" ShadowDepth="2" Opacity="1"/>
-                            </Button.Effect>
-                        </Button>
+                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
