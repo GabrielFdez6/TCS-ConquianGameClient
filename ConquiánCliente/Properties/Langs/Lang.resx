@@ -579,4 +579,10 @@
   <data name="GameOpponentsturn" xml:space="preserve">
     <value>Turno del oponente </value>
   </data>
+  <data name="ErrorViewModel" xml:space="preserve">
+    <value>Error al cargar el viewmodel del juego.</value>
+  </data>
+  <data name="ErrorGame" xml:space="preserve">
+    <value>Error al cargar el juego.</value>
+  </data>
 </root>

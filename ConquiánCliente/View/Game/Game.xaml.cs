@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using ConquiánCliente.Properties.Langs;
 
 namespace ConquiánCliente.View.Game
 {
@@ -25,21 +26,21 @@ namespace ConquiánCliente.View.Game
         public Game(String roomCode)
         {
             InitializeComponent();
-            this.Loaded += Game_Loaded;
+            this.Loaded += GameLoaded;
         }
 
-        private void Game_Loaded(object sender, RoutedEventArgs e)
+        private void GameLoaded(object sender, RoutedEventArgs e)
         {
             viewModel = DataContext as GameViewModel;
 
             if (viewModel == null)
             {
-                MessageBox.Show("Error fatal: No se pudo cargar el ViewModel del juego.");
+                MessageBox.Show(Lang.ErrorViewModel);
                 this.Close();
             }
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             ConfirmExitGame confirmDialog = new ConfirmExitGame();
             confirmDialog.Owner = this;
@@ -53,7 +54,7 @@ namespace ConquiánCliente.View.Game
             }
         }
 
-        private void PlayerCard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void PlayerCardMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (viewModel == null || !viewModel.IsMyTurn) return;
 
@@ -77,7 +78,7 @@ namespace ConquiánCliente.View.Game
             }
         }
 
-        private void PlayerCard_MouseMove(object sender, MouseEventArgs e)
+        private void PlayerCardMouseMove(object sender, MouseEventArgs e)
         {
             if (viewModel == null || !viewModel.IsMyTurn || e.LeftButton != MouseButtonState.Pressed || !dragStartPoint.HasValue)
                 return;
@@ -144,20 +145,20 @@ namespace ConquiánCliente.View.Game
             }
         }
 
-        private void PlayerCard_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void PlayerCardMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             dragStartPoint = null;
             discardDragStartPoint = null;
         }
 
-        private void StockPile_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void StockPileMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (viewModel == null || !viewModel.IsMyTurn) return;
             _ = viewModel.DrawFromDeckAsync();
             e.Handled = true;
         }
 
-        private void StockPile_DragEnter(object sender, DragEventArgs e)
+        private void StockPileDragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(typeof(CardViewModel)))
             {
@@ -170,7 +171,7 @@ namespace ConquiánCliente.View.Game
             e.Handled = true;
         }
 
-        private async void StockPile_Drop(object sender, DragEventArgs e)
+        private async void StockPileDrop(object sender, DragEventArgs e)
         {
             if (viewModel == null || !viewModel.IsMyTurn) return;
 
@@ -186,7 +187,7 @@ namespace ConquiánCliente.View.Game
             e.Handled = true;
         }
 
-        private void DiscardCard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void DiscardCardMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (viewModel == null || !viewModel.IsMyTurn || viewModel.TopDiscardCard == null) return;
             discardDragStartPoint = e.GetPosition(RootGrid);
@@ -238,7 +239,7 @@ namespace ConquiánCliente.View.Game
             }
         }
 
-        private void DropZone_DragEnter(object sender, DragEventArgs e)
+        private void DropZoneDragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(SELECTED_CARDS))
             {
@@ -252,13 +253,13 @@ namespace ConquiánCliente.View.Game
             e.Handled = true;
         }
 
-        private void DropZone_DragLeave(object sender, DragEventArgs e)
+        private void DropZoneDragLeave(object sender, DragEventArgs e)
         {
             (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0x40, 0xFF, 0xFF, 0xFF));
             e.Handled = true;
         }
 
-        private async void DropZone_Drop(object sender, DragEventArgs e)
+        private async void DropZoneDrop(object sender, DragEventArgs e)
         {
             if (viewModel == null || !viewModel.IsMyTurn) return;
 
@@ -277,7 +278,7 @@ namespace ConquiánCliente.View.Game
             e.Handled = true;
         }
 
-        private void PlayerHand_DragEnter(object sender, DragEventArgs e)
+        private void PlayerHandDragEnter(object sender, DragEventArgs e)
         {
             if (viewModel != null && viewModel.IsMyTurn && e.Data.GetDataPresent(DISCARD_CARD))
             {
@@ -290,7 +291,7 @@ namespace ConquiánCliente.View.Game
             e.Handled = true;
         }
 
-        private async void PlayerHand_Drop(object sender, DragEventArgs e)
+        private async void PlayerHandDrop(object sender, DragEventArgs e)
         {
             if (viewModel == null || !viewModel.IsMyTurn)
             {
@@ -319,7 +320,7 @@ namespace ConquiánCliente.View.Game
             }
         }
 
-        private void RootGrid_DragOver(object sender, DragEventArgs e)
+        private void RootGridDragOver(object sender, DragEventArgs e)
         {
             if (dragAdorner != null)
             {
@@ -327,7 +328,7 @@ namespace ConquiánCliente.View.Game
             }
         }
 
-        private void MainGrid_GiveFeedback(object sender, GiveFeedbackEventArgs e)
+        private void MainGridGiveFeedback(object sender, GiveFeedbackEventArgs e)
         {
             Mouse.SetCursor(Cursors.None);
             e.Handled = true;

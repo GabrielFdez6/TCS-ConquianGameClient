@@ -174,7 +174,7 @@ namespace ConquiánCliente.ViewModel.Game
                 }
                 else
                 {
-                    MessageBox.Show(Lang.ErrorGeneric, "Error de juego", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(Lang.ErrorGeneric, Lang.ErrorGame, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)

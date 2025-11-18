@@ -12,9 +12,9 @@
 
         <DataTemplate x:Key="CardTemplate">
             <Border Width="144" Height="216" Margin="-20"
-                    MouseLeftButtonDown="PlayerCard_MouseLeftButtonDown"
-                    MouseMove="PlayerCard_MouseMove"
-                    MouseLeftButtonUp="PlayerCard_MouseLeftButtonUp">
+                    MouseLeftButtonDown="PlayerCardMouseLeftButtonDown"
+                    MouseMove="PlayerCardMouseMove"
+                    MouseLeftButtonUp="PlayerCardMouseLeftButtonUp">
                 <Border.Style>
                     <Style TargetType="Border">
                         <Setter Property="BorderBrush" Value="Transparent"/>
@@ -96,21 +96,21 @@
 
     <Grid x:Name="RootGrid" 
           AllowDrop="True" 
-          DragOver="RootGrid_DragOver">
+          DragOver="RootGridDragOver">
 
         <Image Source="/Resources/backgroundGame.jpg" Stretch="UniformToFill"/>
 
         <Viewbox Stretch="Uniform">
 
             <Grid x:Name="MainGrid" Width="1920" Height="1080"
-                  GiveFeedback="MainGrid_GiveFeedback">
+                  GiveFeedback="MainGridGiveFeedback">
 
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" x:Name="BackButton" Click="BackButton_Click" Margin="20"
+                    <Button Grid.Column="0" x:Name="BackButton" Click="BackButtonClick" Margin="20"
                             Width="50" Height="50"
                             Style="{StaticResource PrimaryButtonStyle}">
                         <TextBlock Text="&lt;"
@@ -170,7 +170,7 @@
                            Source="{Binding TopDiscardCard.ImagePath}"
                            Width="144" Height="216" 
                            Margin="0,0,20,0"
-                           MouseLeftButtonDown="DiscardCard_MouseLeftButtonDown"
+                           MouseLeftButtonDown="DiscardCardMouseLeftButtonDown"
                            MouseMove="DiscardCard_MouseMove"
                            Cursor="Hand"/>
 
@@ -182,9 +182,9 @@
                             BorderThickness="2"
                             CornerRadius="10"
                             AllowDrop="True"
-                            Drop="DropZone_Drop"
-                            DragEnter="DropZone_DragEnter"
-                            DragLeave="DropZone_DragLeave">
+                            Drop="DropZoneDrop"
+                            DragEnter="DropZoneDragEnter"
+                            DragLeave="DropZoneDragLeave">
 
                         <Grid>
                             <TextBlock Text="{x:Static language:Lang.GameDropZone}" 
@@ -238,11 +238,11 @@
 
                     <Grid x:Name="StockPileGrid" 
                           Margin="20,0,0,0"
-                          MouseLeftButtonDown="StockPile_MouseLeftButtonDown"
+                          MouseLeftButtonDown="StockPileMouseLeftButtonDown"
                           Cursor="Hand"
                           AllowDrop="True"
-                          DragEnter="StockPile_DragEnter"
-                          Drop="StockPile_Drop">
+                          DragEnter="StockPileDragEnter"
+                          Drop="StockPileDrop">
                         <Image Source="/Resources/Assets/reverso.png" Width="144" Height="216"/>
                     </Grid>
 
@@ -278,7 +278,7 @@
                               VerticalAlignment="Bottom"
                               Margin="0,0,0,30"
                               AllowDrop="True"    
-                              Drop="PlayerHand_Drop">
+                              Drop="PlayerHandDrop">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal"/>

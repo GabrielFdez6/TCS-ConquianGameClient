@@ -151,6 +151,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Error al cargar el juego..
+        /// </summary>
+        public static string ErrorGame {
+            get {
+                return ResourceManager.GetString("ErrorGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No se ha seleccionado un modo de juego.
         /// </summary>
         public static string ErrorGamemodeNotSelected {
@@ -489,6 +498,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string ErrorVerificationEmail {
             get {
                 return ResourceManager.GetString("ErrorVerificationEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error al cargar el viewmodel del juego..
+        /// </summary>
+        public static string ErrorViewModel {
+            get {
+                return ResourceManager.GetString("ErrorViewModel", resourceCulture);
             }
         }
         
