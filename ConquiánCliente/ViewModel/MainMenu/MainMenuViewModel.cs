@@ -71,9 +71,16 @@ namespace ConquiánCliente.ViewModel.MainMenu
         {
             try
             {
+                int playerId = PlayerSession.CurrentPlayer.idPlayer;
+
                 var loginClient = new LoginClient();
-                await loginClient.SignOutPlayerAsync(PlayerSession.CurrentPlayer.idPlayer);
-                await PresenceClientManager.Instance.Client.UnsubscribeAsync(PlayerSession.CurrentPlayer.idPlayer);
+                await loginClient.SignOutPlayerAsync(playerId);
+                if (PresenceClientManager.Instance.Client != null)
+                {
+                    await PresenceClientManager.Instance.Client.UnsubscribeAsync(playerId);
+                }
+
+                InvitationClientManager.Disconnect(playerId);
             }
             catch (System.ServiceModel.EndpointNotFoundException)
             {
@@ -82,6 +89,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
             finally
             {
                 PlayerSession.EndSession();
+
                 var loginWindow = new LogIn();
                 loginWindow.Show();
                 (parameter as Window)?.Close();
