@@ -105,7 +105,9 @@ namespace ConquiánCliente.View.Game
             if (selectedCards.Count == 1)
             {
                 var cardVM = selectedCards[0];
+
                 dragData = new DataObject(typeof(CardViewModel), cardVM);
+
                 DataTemplate template = this.FindResource("DragCardVisualTemplate") as DataTemplate;
                 dragVisual = (FrameworkElement)template.LoadContent();
                 dragVisual.DataContext = cardVM;
@@ -194,7 +196,7 @@ namespace ConquiánCliente.View.Game
             e.Handled = true;
         }
 
-        private void DiscardCard_MouseMove(object sender, MouseEventArgs e)
+        private void DiscardCardMouseMove(object sender, MouseEventArgs e)
         {
             if (viewModel == null || !viewModel.IsMyTurn || e.LeftButton != MouseButtonState.Pressed || !discardDragStartPoint.HasValue)
                 return;
