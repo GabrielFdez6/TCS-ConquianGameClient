@@ -195,11 +195,17 @@ namespace ConquiánCliente.ViewModel.Game
 
         public async Task PlayCardsAsync(List<string> cardIds)
         {
-            if (client == null || CurrentPlayer == null || cardIds == null || cardIds.Count < 3) return;
+            if (client == null || CurrentPlayer == null || cardIds == null || cardIds.Count != 3)
+            {
+                return;
+            }
 
             var cardsToPlay = PlayerHand.Where(vm => cardIds.Contains(vm.Id)).ToList();
 
-            if (cardsToPlay.Count != cardIds.Count) return;
+            if (cardsToPlay.Count != cardIds.Count)
+            {
+                return;
+            }
 
             if (IsValidMeld(cardsToPlay))
             {
@@ -250,7 +256,10 @@ namespace ConquiánCliente.ViewModel.Game
 
         private static bool IsValidMeld(List<CardViewModel> cards)
         {
-            if (cards == null || cards.Count < 3) return false;
+            if (cards == null || cards.Count != 3)
+            {
+                return false;
+            }
 
             cards = cards.OrderBy(c => c.Rank).ToList();
 
@@ -262,7 +271,10 @@ namespace ConquiánCliente.ViewModel.Game
             }
 
             bool isCorrida = cards.All(c => c.Suit == cards[0].Suit);
-            if (!isCorrida) return false;
+            if (!isCorrida)
+            {
+                return false;
+            }
 
             for (int i = 0; i < cards.Count - 1; i++)
             {
@@ -296,7 +308,10 @@ namespace ConquiánCliente.ViewModel.Game
         }
         private void UpdateTurnStatus(int newTurnPlayerId)
         {
-            if (CurrentPlayer == null) return;
+            if (CurrentPlayer == null)
+            {
+                return;
+            }
 
             if (newTurnPlayerId == CurrentPlayer.idPlayer)
             {
@@ -312,7 +327,10 @@ namespace ConquiánCliente.ViewModel.Game
 
         public async Task DrawFromDeckAsync()
         {
-            if (client == null || !IsMyTurn) return;
+            if (client == null || !IsMyTurn)
+            {
+                return;
+            }
 
             try
             {
@@ -327,7 +345,10 @@ namespace ConquiánCliente.ViewModel.Game
 
         public async Task DrawFromDiscardAsync(CardDto card)
         {
-            if (card == null || client == null || !IsMyTurn) return;
+            if (card == null || client == null || !IsMyTurn)
+            {
+                return;
+            }
 
             try
             {
@@ -347,7 +368,10 @@ namespace ConquiánCliente.ViewModel.Game
 
         public async Task DiscardCardAsync(CardViewModel cardVM)
         {
-            if (cardVM == null || client == null || !IsMyTurn) return;
+            if (cardVM == null || client == null || !IsMyTurn)
+            {
+                return;
+            }
 
             try
             {

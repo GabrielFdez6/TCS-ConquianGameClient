@@ -56,7 +56,10 @@ namespace ConquiánCliente.View.Game
 
         private void PlayerCardMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (viewModel == null || !viewModel.IsMyTurn) return;
+            if (viewModel == null || !viewModel.IsMyTurn)
+            {
+                return;
+            }
 
             if (sender is Border cardBorder && cardBorder.DataContext is CardViewModel cardVM)
             {
@@ -81,14 +84,18 @@ namespace ConquiánCliente.View.Game
         private void PlayerCardMouseMove(object sender, MouseEventArgs e)
         {
             if (viewModel == null || !viewModel.IsMyTurn || e.LeftButton != MouseButtonState.Pressed || !dragStartPoint.HasValue)
+            {
                 return;
+            }
 
             Point currentPosition = e.GetPosition(RootGrid);
             Vector diff = dragStartPoint.Value - currentPosition;
 
             if (Math.Abs(diff.X) < SystemParameters.MinimumHorizontalDragDistance &&
                 Math.Abs(diff.Y) < SystemParameters.MinimumVerticalDragDistance)
+            {
                 return;
+            }
 
             var selectedCards = viewModel.PlayerHand.Where(c => c.IsSelected).ToList();
             if (selectedCards.Count == 0 || selectedCards.Count == 2)
@@ -98,7 +105,10 @@ namespace ConquiánCliente.View.Game
             }
 
             adornerLayer = AdornerLayer.GetAdornerLayer(RootGrid);
-            if (adornerLayer == null) return;
+            if (adornerLayer == null)
+            {
+                return;
+            }
 
             DataObject dragData;
             FrameworkElement dragVisual;
@@ -155,7 +165,11 @@ namespace ConquiánCliente.View.Game
 
         private void StockPileMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (viewModel == null || !viewModel.IsMyTurn) return;
+            if (viewModel == null || !viewModel.IsMyTurn)
+            {
+                return;
+            }
+
             _ = viewModel.DrawFromDeckAsync();
             e.Handled = true;
         }
@@ -175,7 +189,10 @@ namespace ConquiánCliente.View.Game
 
         private async void StockPileDrop(object sender, DragEventArgs e)
         {
-            if (viewModel == null || !viewModel.IsMyTurn) return;
+            if (viewModel == null || !viewModel.IsMyTurn)
+            {
+                return;
+            }
 
             if (e.Data.GetDataPresent(typeof(CardViewModel)))
             {
@@ -191,7 +208,11 @@ namespace ConquiánCliente.View.Game
 
         private void DiscardCardMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (viewModel == null || !viewModel.IsMyTurn || viewModel.TopDiscardCard == null) return;
+            if (viewModel == null || !viewModel.IsMyTurn || viewModel.TopDiscardCard == null)
+            {
+                return;
+            }
+
             discardDragStartPoint = e.GetPosition(RootGrid);
             e.Handled = true;
         }
@@ -199,7 +220,9 @@ namespace ConquiánCliente.View.Game
         private void DiscardCardMouseMove(object sender, MouseEventArgs e)
         {
             if (viewModel == null || !viewModel.IsMyTurn || e.LeftButton != MouseButtonState.Pressed || !discardDragStartPoint.HasValue)
+            {
                 return;
+            }
 
             Point currentPosition = e.GetPosition(RootGrid);
             Vector diff = discardDragStartPoint.Value - currentPosition;
@@ -208,7 +231,10 @@ namespace ConquiánCliente.View.Game
                 Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance)
             {
                 var discardCard = viewModel.TopDiscardCard;
-                if (discardCard == null) return;
+                if (discardCard == null)
+                {
+                    return;
+                }
 
                 DataTemplate template = this.FindResource("DragCardVisualTemplate") as DataTemplate;
                 FrameworkElement image = (FrameworkElement)template.LoadContent();
@@ -263,7 +289,10 @@ namespace ConquiánCliente.View.Game
 
         private async void DropZoneDrop(object sender, DragEventArgs e)
         {
-            if (viewModel == null || !viewModel.IsMyTurn) return;
+            if (viewModel == null || !viewModel.IsMyTurn)
+            {
+                return;
+            }
 
             if (e.Data.GetDataPresent(SELECTED_CARDS))
             {
