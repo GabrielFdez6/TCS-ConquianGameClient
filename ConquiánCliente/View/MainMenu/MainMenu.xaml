@@ -15,10 +15,6 @@
         Closing="MainMenuWindow_Closing"
         Background="Transparent">
 
-    <Window.DataContext>
-        <mainMenu:MainMenuViewModel/>
-    </Window.DataContext>
-
     <Window.Resources>
         <Style x:Key="ProfileToggleButtonStyle" TargetType="ToggleButton">
             <Setter Property="Background" Value="Transparent"/>
