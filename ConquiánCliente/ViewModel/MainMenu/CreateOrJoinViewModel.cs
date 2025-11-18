@@ -81,9 +81,9 @@ namespace ConquiánCliente.ViewModel.MainMenu
                 var client = new LobbyClient(context);
                 try
                 {
-                    bool joinedSuccessfully = await client.JoinAndSubscribeAsync(RoomCode.ToUpper(), PlayerSession.CurrentPlayer.idPlayer);
+                    var lobbyState = await client.GetLobbyStateAsync(RoomCode.ToUpper());
 
-                    if (joinedSuccessfully)
+                    if (lobbyState != null)
                     {
                         CreatedRoomCode = RoomCode.ToUpper();
                         window.DialogResult = true;
