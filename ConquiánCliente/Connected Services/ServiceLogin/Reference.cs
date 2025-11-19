@@ -205,16 +205,22 @@ namespace ConquiánCliente.ServiceLogin {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SessionActiveFault", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultCont" +
-        "racts")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+        "acts")]
     [System.SerializableAttribute()]
-    public partial class SessionActiveFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class ServiceFaultDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceLogin.ServiceErrorType ErrorTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TargetField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -223,6 +229,19 @@ namespace ConquiánCliente.ServiceLogin {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceLogin.ServiceErrorType ErrorType {
+            get {
+                return this.ErrorTypeField;
+            }
+            set {
+                if ((this.ErrorTypeField.Equals(value) != true)) {
+                    this.ErrorTypeField = value;
+                    this.RaisePropertyChanged("ErrorType");
+                }
             }
         }
         
@@ -239,6 +258,19 @@ namespace ConquiánCliente.ServiceLogin {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Target {
+            get {
+                return this.TargetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TargetField, value) != true)) {
+                    this.TargetField = value;
+                    this.RaisePropertyChanged("Target");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -249,13 +281,49 @@ namespace ConquiánCliente.ServiceLogin {
         }
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceErrorType", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+        "acts")]
+    public enum ServiceErrorType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Unknown = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DatabaseError = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ValidationFailed = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotFound = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        OperationFailed = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SessionActive = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        GuestInviteUsed = 11,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RegisteredUserAsGuest = 12,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        LobbyFull = 13,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        GameInProgress = 14,
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceLogin.ILogin")]
     public interface ILogin {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogin/AuthenticatePlayer", ReplyAction="http://tempuri.org/ILogin/AuthenticatePlayerResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceLogin.SessionActiveFault), Action="http://tempuri.org/ILogin/AuthenticatePlayerSessionActiveFaultFault", Name="SessionActiveFault", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultCont" +
-            "racts")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceLogin.ServiceFaultDto), Action="http://tempuri.org/ILogin/AuthenticatePlayerServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
         ConquiánCliente.ServiceLogin.PlayerDto AuthenticatePlayer(string email, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogin/AuthenticatePlayer", ReplyAction="http://tempuri.org/ILogin/AuthenticatePlayerResponse")]

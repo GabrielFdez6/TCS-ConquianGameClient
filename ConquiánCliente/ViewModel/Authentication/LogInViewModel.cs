@@ -54,7 +54,10 @@ namespace ConquiánCliente.ViewModel.Authentication
         }
         private async void ExecuteLogin(object parameter)
         {
-            if (isLoggingIn) return;
+            if (isLoggingIn)
+            {
+                return;
+            }
 
             try
             {
@@ -62,7 +65,11 @@ namespace ConquiánCliente.ViewModel.Authentication
                 CommandManager.InvalidateRequerySuggested();
 
                 var passwordBox = parameter as PasswordBox;
-                if (passwordBox == null) return;
+                if (passwordBox == null)
+                {
+                    return;
+                }
+
                 string password = passwordBox.Password;
 
                 string emailError = LogInValidator.ValidateEmail(Email);
@@ -96,9 +103,16 @@ namespace ConquiánCliente.ViewModel.Authentication
                     MessageBox.Show(Lang.ErrorInvalidCredentials, Lang.TitleAuthenticationError);
                 }
             }
-            catch (FaultException<SessionActiveFault> sessionFault)
+            catch (FaultException<ServiceFaultDto> fault)
             {
-                MessageBox.Show(sessionFault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
+                if (fault.Detail.ErrorType == ServiceErrorType.SessionActive)
+                {
+                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             catch (EndpointNotFoundException)
             {
