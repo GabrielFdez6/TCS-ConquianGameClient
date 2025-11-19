@@ -36,6 +36,7 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
@@ -45,11 +46,17 @@
   <wsdl:message name="IPasswordRecovery_RequestPasswordRecovery_OutputMessage">
     <wsdl:part name="parameters" element="tns:RequestPasswordRecoveryResponse" />
   </wsdl:message>
+  <wsdl:message name="IPasswordRecovery_RequestPasswordRecovery_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q1:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:message name="IPasswordRecovery_ValidateRecoveryToken_InputMessage">
     <wsdl:part name="parameters" element="tns:ValidateRecoveryToken" />
   </wsdl:message>
   <wsdl:message name="IPasswordRecovery_ValidateRecoveryToken_OutputMessage">
     <wsdl:part name="parameters" element="tns:ValidateRecoveryTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPasswordRecovery_ValidateRecoveryToken_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q2:ServiceFaultDto" />
   </wsdl:message>
   <wsdl:message name="IPasswordRecovery_ResetPassword_InputMessage">
     <wsdl:part name="parameters" element="tns:ResetPassword" />
@@ -57,18 +64,24 @@
   <wsdl:message name="IPasswordRecovery_ResetPassword_OutputMessage">
     <wsdl:part name="parameters" element="tns:ResetPasswordResponse" />
   </wsdl:message>
+  <wsdl:message name="IPasswordRecovery_ResetPassword_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q3:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:portType name="IPasswordRecovery">
     <wsdl:operation name="RequestPasswordRecovery">
       <wsdl:input wsaw:Action="http://tempuri.org/IPasswordRecovery/RequestPasswordRecovery" message="tns:IPasswordRecovery_RequestPasswordRecovery_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPasswordRecovery/RequestPasswordRecoveryResponse" message="tns:IPasswordRecovery_RequestPasswordRecovery_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IPasswordRecovery/RequestPasswordRecoveryServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IPasswordRecovery_RequestPasswordRecovery_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="ValidateRecoveryToken">
       <wsdl:input wsaw:Action="http://tempuri.org/IPasswordRecovery/ValidateRecoveryToken" message="tns:IPasswordRecovery_ValidateRecoveryToken_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPasswordRecovery/ValidateRecoveryTokenResponse" message="tns:IPasswordRecovery_ValidateRecoveryToken_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IPasswordRecovery/ValidateRecoveryTokenServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IPasswordRecovery_ValidateRecoveryToken_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="ResetPassword">
       <wsdl:input wsaw:Action="http://tempuri.org/IPasswordRecovery/ResetPassword" message="tns:IPasswordRecovery_ResetPassword_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPasswordRecovery/ResetPasswordResponse" message="tns:IPasswordRecovery_ResetPassword_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IPasswordRecovery/ResetPasswordServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IPasswordRecovery_ResetPassword_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IPasswordRecovery" type="tns:IPasswordRecovery">
@@ -83,6 +96,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="ValidateRecoveryToken">
       <soap12:operation soapAction="http://tempuri.org/IPasswordRecovery/ValidateRecoveryToken" style="document" />
@@ -92,6 +108,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="ResetPassword">
       <soap12:operation soapAction="http://tempuri.org/IPasswordRecovery/ResetPassword" style="document" />
@@ -101,6 +120,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="PasswordRecovery">

@@ -468,6 +468,9 @@
     <None Include="Connected Services\ServiceLogin\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServicePasswordRecovery\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServicePasswordRecovery\service.wsdl" />
     <None Include="Connected Services\ServicePasswordRecovery\service.xsd">
       <SubType>Designer</SubType>

@@ -70,7 +70,9 @@ namespace ConquiánCliente.ViewModel.Authentication
         private async void ExecuteSendVerificationCode(object parameter)
         {
             var passwordBox = parameter as PasswordBox;
-            string password = passwordBox?.Password;
+            if (passwordBox == null) return;
+
+            string password = passwordBox.Password;
 
             var window = Window.GetWindow(passwordBox);
             var confirmPasswordBox = window?.FindName("pbConfirmPassowrd") as PasswordBox;
@@ -101,13 +103,10 @@ namespace ConquiánCliente.ViewModel.Authentication
             try
             {
                 var client = new SignUpClient();
-                string serverResponse = await client.SendVerificationCodeAsync(Email);
 
-                if (serverResponse == "ERROR_EMAIL_EXISTS")
-                {
-                    MessageBox.Show(Lang.ErrorEmailExists, Lang.TitleError);
-                }
-                else if (!string.IsNullOrEmpty(serverResponse))
+                string verificationCode = await client.SendVerificationCodeAsync(Email);
+
+                if (!string.IsNullOrEmpty(verificationCode))
                 {
                     playerInProgress.email = Email;
                     playerInProgress.password = password;
@@ -120,6 +119,21 @@ namespace ConquiánCliente.ViewModel.Authentication
                 else
                 {
                     MessageBox.Show(Lang.ErrorVerificationEmail, Lang.TitleError);
+                }
+            }
+            catch (FaultException<ServiceFaultDto> fault)
+            {
+                if (fault.Detail.ErrorType == ServiceErrorType.DuplicateRecord)
+                {
+                    MessageBox.Show(Lang.ErrorEmailExists, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else if (fault.Detail.ErrorType == ServiceErrorType.CommunicationError)
+                {
+                    MessageBox.Show(Lang.ErrorVerificationEmail, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (EndpointNotFoundException)
@@ -143,18 +157,26 @@ namespace ConquiánCliente.ViewModel.Authentication
             try
             {
                 var client = new SignUpClient();
-                bool isCodeValid = await client.VerifyCodeAsync(playerInProgress.email, EnteredVerificationCode);
 
-                if (isCodeValid)
+                bool success = await client.VerifyCodeAsync(playerInProgress.email, EnteredVerificationCode);
+
+                if (success)
                 {
                     var signUpDataWindow = new SignUpData();
                     signUpDataWindow.DataContext = this;
                     signUpDataWindow.Show();
                     (parameter as Window)?.Close();
                 }
+            }
+            catch (FaultException<ServiceFaultDto> fault)
+            {
+                if (fault.Detail.ErrorType == ServiceErrorType.ValidationFailed)
+                {
+                    MessageBox.Show(Lang.ErrorVerificationCodeIncorrect, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
                 else
                 {
-                    MessageBox.Show(Lang.ErrorVerificationCodeIncorrect, Lang.TitleError);
+                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (System.Exception ex)
@@ -200,9 +222,16 @@ namespace ConquiánCliente.ViewModel.Authentication
                     MessageBox.Show(Lang.SuccessAccountCreated, Lang.TitleRegistrationComplete);
                     ExecuteNavigateToLogin(parameter);
                 }
+            }
+            catch (FaultException<ServiceFaultDto> fault)
+            {
+                if (fault.Detail.ErrorType == ServiceErrorType.DuplicateRecord)
+                {
+                    MessageBox.Show(Lang.ErrorNicknameExists, Lang.TitleRegistrationError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
                 else
                 {
-                    MessageBox.Show(Lang.ErrorNicknameExists, Lang.TitleRegistrationError);
+                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (EndpointNotFoundException)

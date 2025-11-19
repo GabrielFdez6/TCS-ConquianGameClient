@@ -293,6 +293,9 @@ namespace ConquiánCliente.ServiceLogin {
         DatabaseError = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
+        DuplicateRecord = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
         ValidationFailed = 3,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
@@ -300,6 +303,9 @@ namespace ConquiánCliente.ServiceLogin {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         OperationFailed = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CommunicationError = 6,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         SessionActive = 10,

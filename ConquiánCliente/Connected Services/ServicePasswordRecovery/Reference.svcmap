@@ -25,6 +25,7 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="2c0c43f8-a77b-4971-943e-9026ff66e890" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/PasswordRecovery/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="d95e542c-8af1-40e2-a646-f837539de13f" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/PasswordRecovery/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="c8d5f255-b2fe-4101-a0fb-26fa791d75f8" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/PasswordRecovery/mex" />
+    <MetadataFile FileName="Conqui%C3%A1nServidor.Contracts.DataContracts.xsd" MetadataType="Schema" ID="da5e8436-2b78-4c58-afd9-a87b86e7baaa" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/PasswordRecovery/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -36,8 +36,8 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
-      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ISignUp_RegisterPlayer_InputMessage">
@@ -46,11 +46,17 @@
   <wsdl:message name="ISignUp_RegisterPlayer_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterPlayerResponse" />
   </wsdl:message>
+  <wsdl:message name="ISignUp_RegisterPlayer_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q1:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:message name="ISignUp_SendVerificationCode_InputMessage">
     <wsdl:part name="parameters" element="tns:SendVerificationCode" />
   </wsdl:message>
   <wsdl:message name="ISignUp_SendVerificationCode_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendVerificationCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISignUp_SendVerificationCode_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q2:ServiceFaultDto" />
   </wsdl:message>
   <wsdl:message name="ISignUp_VerifyCode_InputMessage">
     <wsdl:part name="parameters" element="tns:VerifyCode" />
@@ -58,28 +64,38 @@
   <wsdl:message name="ISignUp_VerifyCode_OutputMessage">
     <wsdl:part name="parameters" element="tns:VerifyCodeResponse" />
   </wsdl:message>
+  <wsdl:message name="ISignUp_VerifyCode_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q3:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:message name="ISignUp_CancelRegistration_InputMessage">
     <wsdl:part name="parameters" element="tns:CancelRegistration" />
   </wsdl:message>
   <wsdl:message name="ISignUp_CancelRegistration_OutputMessage">
     <wsdl:part name="parameters" element="tns:CancelRegistrationResponse" />
   </wsdl:message>
+  <wsdl:message name="ISignUp_CancelRegistration_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q4:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:portType name="ISignUp">
     <wsdl:operation name="RegisterPlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/ISignUp/RegisterPlayer" message="tns:ISignUp_RegisterPlayer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISignUp/RegisterPlayerResponse" message="tns:ISignUp_RegisterPlayer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ISignUp/RegisterPlayerServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:ISignUp_RegisterPlayer_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendVerificationCode">
       <wsdl:input wsaw:Action="http://tempuri.org/ISignUp/SendVerificationCode" message="tns:ISignUp_SendVerificationCode_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISignUp/SendVerificationCodeResponse" message="tns:ISignUp_SendVerificationCode_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ISignUp/SendVerificationCodeServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:ISignUp_SendVerificationCode_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="VerifyCode">
       <wsdl:input wsaw:Action="http://tempuri.org/ISignUp/VerifyCode" message="tns:ISignUp_VerifyCode_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISignUp/VerifyCodeResponse" message="tns:ISignUp_VerifyCode_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ISignUp/VerifyCodeServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:ISignUp_VerifyCode_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="CancelRegistration">
       <wsdl:input wsaw:Action="http://tempuri.org/ISignUp/CancelRegistration" message="tns:ISignUp_CancelRegistration_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISignUp/CancelRegistrationResponse" message="tns:ISignUp_CancelRegistration_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ISignUp/CancelRegistrationServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:ISignUp_CancelRegistration_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_ISignUp" type="tns:ISignUp">
@@ -94,6 +110,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="SendVerificationCode">
       <soap12:operation soapAction="http://tempuri.org/ISignUp/SendVerificationCode" style="document" />
@@ -103,6 +122,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="VerifyCode">
       <soap12:operation soapAction="http://tempuri.org/ISignUp/VerifyCode" style="document" />
@@ -112,6 +134,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="CancelRegistration">
       <soap12:operation soapAction="http://tempuri.org/ISignUp/CancelRegistration" style="document" />
@@ -121,6 +146,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="SignUp">
