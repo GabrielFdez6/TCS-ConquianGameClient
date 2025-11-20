@@ -585,4 +585,7 @@
   <data name="ErrorGame" xml:space="preserve">
     <value>Error loading game </value>
   </data>
+  <data name="ErrorUserNotFound" xml:space="preserve">
+    <value>The user was not found</value>
+  </data>
 </root>

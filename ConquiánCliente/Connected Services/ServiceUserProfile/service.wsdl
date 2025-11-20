@@ -36,8 +36,8 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
-      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IUserProfile_GetPlayerById_InputMessage">
@@ -46,11 +46,17 @@
   <wsdl:message name="IUserProfile_GetPlayerById_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPlayerByIdResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserProfile_GetPlayerById_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q1:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:message name="IUserProfile_UpdatePlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdatePlayer" />
   </wsdl:message>
   <wsdl:message name="IUserProfile_UpdatePlayer_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdatePlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserProfile_UpdatePlayer_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q2:ServiceFaultDto" />
   </wsdl:message>
   <wsdl:message name="IUserProfile_GetPlayerSocials_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPlayerSocials" />
@@ -58,11 +64,17 @@
   <wsdl:message name="IUserProfile_GetPlayerSocials_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPlayerSocialsResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserProfile_GetPlayerSocials_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q3:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:message name="IUserProfile_UpdatePlayerSocials_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdatePlayerSocials" />
   </wsdl:message>
   <wsdl:message name="IUserProfile_UpdatePlayerSocials_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdatePlayerSocialsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserProfile_UpdatePlayerSocials_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q4:ServiceFaultDto" />
   </wsdl:message>
   <wsdl:message name="IUserProfile_UpdateProfilePicture_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateProfilePicture" />
@@ -70,26 +82,34 @@
   <wsdl:message name="IUserProfile_UpdateProfilePicture_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateProfilePictureResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserProfile_UpdateProfilePicture_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q5:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:portType name="IUserProfile">
     <wsdl:operation name="GetPlayerById">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserProfile/GetPlayerById" message="tns:IUserProfile_GetPlayerById_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserProfile/GetPlayerByIdResponse" message="tns:IUserProfile_GetPlayerById_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IUserProfile/GetPlayerByIdServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IUserProfile_GetPlayerById_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdatePlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserProfile/UpdatePlayer" message="tns:IUserProfile_UpdatePlayer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserProfile/UpdatePlayerResponse" message="tns:IUserProfile_UpdatePlayer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IUserProfile/UpdatePlayerServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IUserProfile_UpdatePlayer_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetPlayerSocials">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserProfile/GetPlayerSocials" message="tns:IUserProfile_GetPlayerSocials_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserProfile/GetPlayerSocialsResponse" message="tns:IUserProfile_GetPlayerSocials_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IUserProfile/GetPlayerSocialsServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IUserProfile_GetPlayerSocials_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdatePlayerSocials">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserProfile/UpdatePlayerSocials" message="tns:IUserProfile_UpdatePlayerSocials_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserProfile/UpdatePlayerSocialsResponse" message="tns:IUserProfile_UpdatePlayerSocials_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IUserProfile/UpdatePlayerSocialsServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IUserProfile_UpdatePlayerSocials_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateProfilePicture">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserProfile/UpdateProfilePicture" message="tns:IUserProfile_UpdateProfilePicture_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserProfile/UpdateProfilePictureResponse" message="tns:IUserProfile_UpdateProfilePicture_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IUserProfile/UpdateProfilePictureServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IUserProfile_UpdateProfilePicture_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IUserProfile" type="tns:IUserProfile">
@@ -104,6 +124,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="UpdatePlayer">
       <soap12:operation soapAction="http://tempuri.org/IUserProfile/UpdatePlayer" style="document" />
@@ -113,6 +136,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetPlayerSocials">
       <soap12:operation soapAction="http://tempuri.org/IUserProfile/GetPlayerSocials" style="document" />
@@ -122,6 +148,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="UpdatePlayerSocials">
       <soap12:operation soapAction="http://tempuri.org/IUserProfile/UpdatePlayerSocials" style="document" />
@@ -131,6 +160,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="UpdateProfilePicture">
       <soap12:operation soapAction="http://tempuri.org/IUserProfile/UpdateProfilePicture" style="document" />
@@ -140,6 +172,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="UserProfile">

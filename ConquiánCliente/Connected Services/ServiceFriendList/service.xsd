@@ -40,9 +40,7 @@
   </xs:element>
   <xs:element name="SendFriendRequestResponse">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="SendFriendRequestResult" type="xs:boolean" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="GetFriendRequests">
@@ -69,9 +67,7 @@
   </xs:element>
   <xs:element name="UpdateFriendRequestStatusResponse">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="UpdateFriendRequestStatusResult" type="xs:boolean" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteFriend">
@@ -84,9 +80,7 @@
   </xs:element>
   <xs:element name="DeleteFriendResponse">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="DeleteFriendResult" type="xs:boolean" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

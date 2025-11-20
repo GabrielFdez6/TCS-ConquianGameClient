@@ -36,8 +36,8 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
-      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IFriendList_GetPlayerByNickname_InputMessage">
@@ -46,11 +46,17 @@
   <wsdl:message name="IFriendList_GetPlayerByNickname_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPlayerByNicknameResponse" />
   </wsdl:message>
+  <wsdl:message name="IFriendList_GetPlayerByNickname_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q1:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:message name="IFriendList_GetFriends_InputMessage">
     <wsdl:part name="parameters" element="tns:GetFriends" />
   </wsdl:message>
   <wsdl:message name="IFriendList_GetFriends_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetFriendsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFriendList_GetFriends_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q2:ServiceFaultDto" />
   </wsdl:message>
   <wsdl:message name="IFriendList_SendFriendRequest_InputMessage">
     <wsdl:part name="parameters" element="tns:SendFriendRequest" />
@@ -58,11 +64,17 @@
   <wsdl:message name="IFriendList_SendFriendRequest_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendFriendRequestResponse" />
   </wsdl:message>
+  <wsdl:message name="IFriendList_SendFriendRequest_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q3:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:message name="IFriendList_GetFriendRequests_InputMessage">
     <wsdl:part name="parameters" element="tns:GetFriendRequests" />
   </wsdl:message>
   <wsdl:message name="IFriendList_GetFriendRequests_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetFriendRequestsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFriendList_GetFriendRequests_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q4:ServiceFaultDto" />
   </wsdl:message>
   <wsdl:message name="IFriendList_UpdateFriendRequestStatus_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateFriendRequestStatus" />
@@ -70,36 +82,48 @@
   <wsdl:message name="IFriendList_UpdateFriendRequestStatus_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateFriendRequestStatusResponse" />
   </wsdl:message>
+  <wsdl:message name="IFriendList_UpdateFriendRequestStatus_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q5:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:message name="IFriendList_DeleteFriend_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteFriend" />
   </wsdl:message>
   <wsdl:message name="IFriendList_DeleteFriend_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteFriendResponse" />
   </wsdl:message>
+  <wsdl:message name="IFriendList_DeleteFriend_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q6:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:portType name="IFriendList">
     <wsdl:operation name="GetPlayerByNickname">
       <wsdl:input wsaw:Action="http://tempuri.org/IFriendList/GetPlayerByNickname" message="tns:IFriendList_GetPlayerByNickname_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFriendList/GetPlayerByNicknameResponse" message="tns:IFriendList_GetPlayerByNickname_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IFriendList/GetPlayerByNicknameServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IFriendList_GetPlayerByNickname_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetFriends">
       <wsdl:input wsaw:Action="http://tempuri.org/IFriendList/GetFriends" message="tns:IFriendList_GetFriends_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFriendList/GetFriendsResponse" message="tns:IFriendList_GetFriends_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IFriendList/GetFriendsServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IFriendList_GetFriends_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendFriendRequest">
       <wsdl:input wsaw:Action="http://tempuri.org/IFriendList/SendFriendRequest" message="tns:IFriendList_SendFriendRequest_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFriendList/SendFriendRequestResponse" message="tns:IFriendList_SendFriendRequest_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IFriendList/SendFriendRequestServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IFriendList_SendFriendRequest_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetFriendRequests">
       <wsdl:input wsaw:Action="http://tempuri.org/IFriendList/GetFriendRequests" message="tns:IFriendList_GetFriendRequests_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFriendList/GetFriendRequestsResponse" message="tns:IFriendList_GetFriendRequests_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IFriendList/GetFriendRequestsServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IFriendList_GetFriendRequests_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateFriendRequestStatus">
       <wsdl:input wsaw:Action="http://tempuri.org/IFriendList/UpdateFriendRequestStatus" message="tns:IFriendList_UpdateFriendRequestStatus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFriendList/UpdateFriendRequestStatusResponse" message="tns:IFriendList_UpdateFriendRequestStatus_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IFriendList/UpdateFriendRequestStatusServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IFriendList_UpdateFriendRequestStatus_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="DeleteFriend">
       <wsdl:input wsaw:Action="http://tempuri.org/IFriendList/DeleteFriend" message="tns:IFriendList_DeleteFriend_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFriendList/DeleteFriendResponse" message="tns:IFriendList_DeleteFriend_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IFriendList/DeleteFriendServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IFriendList_DeleteFriend_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IFriendList" type="tns:IFriendList">
@@ -114,6 +138,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetFriends">
       <soap12:operation soapAction="http://tempuri.org/IFriendList/GetFriends" style="document" />
@@ -123,6 +150,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="SendFriendRequest">
       <soap12:operation soapAction="http://tempuri.org/IFriendList/SendFriendRequest" style="document" />
@@ -132,6 +162,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetFriendRequests">
       <soap12:operation soapAction="http://tempuri.org/IFriendList/GetFriendRequests" style="document" />
@@ -141,6 +174,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="UpdateFriendRequestStatus">
       <soap12:operation soapAction="http://tempuri.org/IFriendList/UpdateFriendRequestStatus" style="document" />
@@ -150,6 +186,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="DeleteFriend">
       <soap12:operation soapAction="http://tempuri.org/IFriendList/DeleteFriend" style="document" />
@@ -159,6 +198,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="FriendList">

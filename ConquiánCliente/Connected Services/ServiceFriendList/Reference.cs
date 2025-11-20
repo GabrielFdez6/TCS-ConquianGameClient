@@ -205,6 +205,126 @@ namespace ConquiánCliente.ServiceFriendList {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+        "acts")]
+    [System.SerializableAttribute()]
+    public partial class ServiceFaultDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceFriendList.ServiceErrorType ErrorTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TargetField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceFriendList.ServiceErrorType ErrorType {
+            get {
+                return this.ErrorTypeField;
+            }
+            set {
+                if ((this.ErrorTypeField.Equals(value) != true)) {
+                    this.ErrorTypeField = value;
+                    this.RaisePropertyChanged("ErrorType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Target {
+            get {
+                return this.TargetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TargetField, value) != true)) {
+                    this.TargetField = value;
+                    this.RaisePropertyChanged("Target");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceErrorType", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+        "acts")]
+    public enum ServiceErrorType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Unknown = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DatabaseError = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DuplicateRecord = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ValidationFailed = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotFound = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        OperationFailed = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CommunicationError = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SessionActive = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        GuestInviteUsed = 11,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RegisteredUserAsGuest = 12,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        LobbyFull = 13,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        GameInProgress = 14,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="FriendRequestDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
         "acts")]
     [System.SerializableAttribute()]
@@ -270,40 +390,52 @@ namespace ConquiánCliente.ServiceFriendList {
     public interface IFriendList {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/GetPlayerByNickname", ReplyAction="http://tempuri.org/IFriendList/GetPlayerByNicknameResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceFriendList.ServiceFaultDto), Action="http://tempuri.org/IFriendList/GetPlayerByNicknameServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
         ConquiánCliente.ServiceFriendList.PlayerDto GetPlayerByNickname(string nickname, int idCurrentUser);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/GetPlayerByNickname", ReplyAction="http://tempuri.org/IFriendList/GetPlayerByNicknameResponse")]
         System.Threading.Tasks.Task<ConquiánCliente.ServiceFriendList.PlayerDto> GetPlayerByNicknameAsync(string nickname, int idCurrentUser);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/GetFriends", ReplyAction="http://tempuri.org/IFriendList/GetFriendsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceFriendList.ServiceFaultDto), Action="http://tempuri.org/IFriendList/GetFriendsServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
         ConquiánCliente.ServiceFriendList.PlayerDto[] GetFriends(int idPlayer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/GetFriends", ReplyAction="http://tempuri.org/IFriendList/GetFriendsResponse")]
         System.Threading.Tasks.Task<ConquiánCliente.ServiceFriendList.PlayerDto[]> GetFriendsAsync(int idPlayer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/SendFriendRequest", ReplyAction="http://tempuri.org/IFriendList/SendFriendRequestResponse")]
-        bool SendFriendRequest(int idSender, int idReceiver);
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceFriendList.ServiceFaultDto), Action="http://tempuri.org/IFriendList/SendFriendRequestServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
+        void SendFriendRequest(int idSender, int idReceiver);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/SendFriendRequest", ReplyAction="http://tempuri.org/IFriendList/SendFriendRequestResponse")]
-        System.Threading.Tasks.Task<bool> SendFriendRequestAsync(int idSender, int idReceiver);
+        System.Threading.Tasks.Task SendFriendRequestAsync(int idSender, int idReceiver);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/GetFriendRequests", ReplyAction="http://tempuri.org/IFriendList/GetFriendRequestsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceFriendList.ServiceFaultDto), Action="http://tempuri.org/IFriendList/GetFriendRequestsServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
         ConquiánCliente.ServiceFriendList.FriendRequestDto[] GetFriendRequests(int idPlayer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/GetFriendRequests", ReplyAction="http://tempuri.org/IFriendList/GetFriendRequestsResponse")]
         System.Threading.Tasks.Task<ConquiánCliente.ServiceFriendList.FriendRequestDto[]> GetFriendRequestsAsync(int idPlayer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/UpdateFriendRequestStatus", ReplyAction="http://tempuri.org/IFriendList/UpdateFriendRequestStatusResponse")]
-        bool UpdateFriendRequestStatus(int idFriendship, int idStatus);
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceFriendList.ServiceFaultDto), Action="http://tempuri.org/IFriendList/UpdateFriendRequestStatusServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
+        void UpdateFriendRequestStatus(int idFriendship, int idStatus);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/UpdateFriendRequestStatus", ReplyAction="http://tempuri.org/IFriendList/UpdateFriendRequestStatusResponse")]
-        System.Threading.Tasks.Task<bool> UpdateFriendRequestStatusAsync(int idFriendship, int idStatus);
+        System.Threading.Tasks.Task UpdateFriendRequestStatusAsync(int idFriendship, int idStatus);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/DeleteFriend", ReplyAction="http://tempuri.org/IFriendList/DeleteFriendResponse")]
-        bool DeleteFriend(int idPlayer, int idFriend);
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceFriendList.ServiceFaultDto), Action="http://tempuri.org/IFriendList/DeleteFriendServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
+        void DeleteFriend(int idPlayer, int idFriend);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendList/DeleteFriend", ReplyAction="http://tempuri.org/IFriendList/DeleteFriendResponse")]
-        System.Threading.Tasks.Task<bool> DeleteFriendAsync(int idPlayer, int idFriend);
+        System.Threading.Tasks.Task DeleteFriendAsync(int idPlayer, int idFriend);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -349,11 +481,11 @@ namespace ConquiánCliente.ServiceFriendList {
             return base.Channel.GetFriendsAsync(idPlayer);
         }
         
-        public bool SendFriendRequest(int idSender, int idReceiver) {
-            return base.Channel.SendFriendRequest(idSender, idReceiver);
+        public void SendFriendRequest(int idSender, int idReceiver) {
+            base.Channel.SendFriendRequest(idSender, idReceiver);
         }
         
-        public System.Threading.Tasks.Task<bool> SendFriendRequestAsync(int idSender, int idReceiver) {
+        public System.Threading.Tasks.Task SendFriendRequestAsync(int idSender, int idReceiver) {
             return base.Channel.SendFriendRequestAsync(idSender, idReceiver);
         }
         
@@ -365,19 +497,19 @@ namespace ConquiánCliente.ServiceFriendList {
             return base.Channel.GetFriendRequestsAsync(idPlayer);
         }
         
-        public bool UpdateFriendRequestStatus(int idFriendship, int idStatus) {
-            return base.Channel.UpdateFriendRequestStatus(idFriendship, idStatus);
+        public void UpdateFriendRequestStatus(int idFriendship, int idStatus) {
+            base.Channel.UpdateFriendRequestStatus(idFriendship, idStatus);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateFriendRequestStatusAsync(int idFriendship, int idStatus) {
+        public System.Threading.Tasks.Task UpdateFriendRequestStatusAsync(int idFriendship, int idStatus) {
             return base.Channel.UpdateFriendRequestStatusAsync(idFriendship, idStatus);
         }
         
-        public bool DeleteFriend(int idPlayer, int idFriend) {
-            return base.Channel.DeleteFriend(idPlayer, idFriend);
+        public void DeleteFriend(int idPlayer, int idFriend) {
+            base.Channel.DeleteFriend(idPlayer, idFriend);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteFriendAsync(int idPlayer, int idFriend) {
+        public System.Threading.Tasks.Task DeleteFriendAsync(int idPlayer, int idFriend) {
             return base.Channel.DeleteFriendAsync(idPlayer, idFriend);
         }
     }

@@ -466,6 +466,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El usuario no fue encontrado.
+        /// </summary>
+        public static string ErrorUserNotFound {
+            get {
+                return ResourceManager.GetString("ErrorUserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El nombre solo puede contener letras y espacios..
         /// </summary>
         public static string ErrorValidName {

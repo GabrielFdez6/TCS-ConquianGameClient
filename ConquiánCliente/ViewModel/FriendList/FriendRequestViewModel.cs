@@ -1,8 +1,11 @@
 ﻿using ConquiánCliente.Models;
+using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceFriendList;
 using ConquiánCliente.View.FriendList;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -41,13 +44,24 @@ namespace ConquiánCliente.ViewModel.FriendList
         }
         private async Task LoadFriendRequests()
         {
-            var requestsList = await FriendListService.GetFriendRequestsAsync(PlayerSession.CurrentPlayer.idPlayer);
-            if (requestsList != null)
+            try
             {
-                foreach (var req in requestsList)
+                var requestsList = await FriendListService.GetFriendRequestsAsync(PlayerSession.CurrentPlayer.idPlayer);
+                if (requestsList != null)
                 {
-                    Requests.Add(new FriendRequest { IdFriendship = req.IdFriendship, Nickname = req.Nickname });
+                    foreach (var req in requestsList)
+                    {
+                        Requests.Add(new FriendRequest { IdFriendship = req.IdFriendship, Nickname = req.Nickname });
+                    }
                 }
+            }
+            catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
+            {
+                MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
             }
         }
 
@@ -55,10 +69,23 @@ namespace ConquiánCliente.ViewModel.FriendList
         {
             if (parameter is FriendRequest request)
             {
-                bool success = await FriendListService.UpdateFriendRequestStatusAsync(request.IdFriendship, 1); 
-                if (success)
+                try
                 {
+                    await FriendListService.UpdateFriendRequestStatusAsync(request.IdFriendship, 1);
+
                     Requests.Remove(request);
+                }
+                catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
+                {
+                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (fault.Detail.ErrorType == ServiceFriendList.ServiceErrorType.NotFound)
+                    {
+                        Requests.Remove(request);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
                 }
             }
         }
@@ -67,10 +94,23 @@ namespace ConquiánCliente.ViewModel.FriendList
         {
             if (parameter is FriendRequest request)
             {
-                bool success = await FriendListService.UpdateFriendRequestStatusAsync(request.IdFriendship, 2);
-                if (success)
+                try
                 {
+                    await FriendListService.UpdateFriendRequestStatusAsync(request.IdFriendship, 2);
+
                     Requests.Remove(request);
+                }
+                catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
+                {
+                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (fault.Detail.ErrorType == ServiceFriendList.ServiceErrorType.NotFound)
+                    {
+                        Requests.Remove(request);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
                 }
             }
         }

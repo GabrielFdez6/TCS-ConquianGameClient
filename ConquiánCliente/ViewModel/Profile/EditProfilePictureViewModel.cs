@@ -47,26 +47,20 @@ namespace ConquiánCliente.ViewModel.Profile
         }
 
         private async void ExecuteChangeProfilePicture(object obj)
-        {
-            PlayerSession.UpdateProfilePicture(SelectedImagePath);
-
+        { 
             try
             {
-
                 var userProfileClient = new UserProfileClient();
-
                 int playerId = PlayerSession.CurrentPlayer.idPlayer;
 
-                bool success = await userProfileClient.UpdateProfilePictureAsync(playerId, SelectedImagePath);
+                await userProfileClient.UpdateProfilePictureAsync(playerId, SelectedImagePath);
 
-                if (success)
-                {
-                    ExecuteCloseWindow(obj);
-                }
-                else
-                {
-                    MessageBox.Show(Lang.ErrorUpdatePhoto, Lang.TitleError);
-                }
+                PlayerSession.UpdateProfilePicture(SelectedImagePath);
+                ExecuteCloseWindow(obj);
+            }
+            catch (FaultException<ServiceFaultDto> fault)
+            {
+                MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (EndpointNotFoundException)
             {

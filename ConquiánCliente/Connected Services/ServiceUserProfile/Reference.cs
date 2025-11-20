@@ -205,6 +205,126 @@ namespace ConquiánCliente.ServiceUserProfile {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+        "acts")]
+    [System.SerializableAttribute()]
+    public partial class ServiceFaultDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceUserProfile.ServiceErrorType ErrorTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TargetField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceUserProfile.ServiceErrorType ErrorType {
+            get {
+                return this.ErrorTypeField;
+            }
+            set {
+                if ((this.ErrorTypeField.Equals(value) != true)) {
+                    this.ErrorTypeField = value;
+                    this.RaisePropertyChanged("ErrorType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Target {
+            get {
+                return this.TargetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TargetField, value) != true)) {
+                    this.TargetField = value;
+                    this.RaisePropertyChanged("Target");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceErrorType", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+        "acts")]
+    public enum ServiceErrorType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Unknown = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DatabaseError = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DuplicateRecord = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ValidationFailed = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotFound = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        OperationFailed = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CommunicationError = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SessionActive = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        GuestInviteUsed = 11,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RegisteredUserAsGuest = 12,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        LobbyFull = 13,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        GameInProgress = 14,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="SocialDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
         "acts")]
     [System.SerializableAttribute()]
@@ -286,34 +406,44 @@ namespace ConquiánCliente.ServiceUserProfile {
     public interface IUserProfile {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserProfile/GetPlayerById", ReplyAction="http://tempuri.org/IUserProfile/GetPlayerByIdResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceUserProfile.ServiceFaultDto), Action="http://tempuri.org/IUserProfile/GetPlayerByIdServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
         ConquiánCliente.ServiceUserProfile.PlayerDto GetPlayerById(int idPlayer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserProfile/GetPlayerById", ReplyAction="http://tempuri.org/IUserProfile/GetPlayerByIdResponse")]
         System.Threading.Tasks.Task<ConquiánCliente.ServiceUserProfile.PlayerDto> GetPlayerByIdAsync(int idPlayer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserProfile/UpdatePlayer", ReplyAction="http://tempuri.org/IUserProfile/UpdatePlayerResponse")]
-        bool UpdatePlayer(ConquiánCliente.ServiceUserProfile.PlayerDto playerDto);
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceUserProfile.ServiceFaultDto), Action="http://tempuri.org/IUserProfile/UpdatePlayerServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
+        void UpdatePlayer(ConquiánCliente.ServiceUserProfile.PlayerDto playerDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserProfile/UpdatePlayer", ReplyAction="http://tempuri.org/IUserProfile/UpdatePlayerResponse")]
-        System.Threading.Tasks.Task<bool> UpdatePlayerAsync(ConquiánCliente.ServiceUserProfile.PlayerDto playerDto);
+        System.Threading.Tasks.Task UpdatePlayerAsync(ConquiánCliente.ServiceUserProfile.PlayerDto playerDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserProfile/GetPlayerSocials", ReplyAction="http://tempuri.org/IUserProfile/GetPlayerSocialsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceUserProfile.ServiceFaultDto), Action="http://tempuri.org/IUserProfile/GetPlayerSocialsServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
         ConquiánCliente.ServiceUserProfile.SocialDto[] GetPlayerSocials(int idPlayer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserProfile/GetPlayerSocials", ReplyAction="http://tempuri.org/IUserProfile/GetPlayerSocialsResponse")]
         System.Threading.Tasks.Task<ConquiánCliente.ServiceUserProfile.SocialDto[]> GetPlayerSocialsAsync(int idPlayer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserProfile/UpdatePlayerSocials", ReplyAction="http://tempuri.org/IUserProfile/UpdatePlayerSocialsResponse")]
-        bool UpdatePlayerSocials(int idPlayer, ConquiánCliente.ServiceUserProfile.SocialDto[] socials);
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceUserProfile.ServiceFaultDto), Action="http://tempuri.org/IUserProfile/UpdatePlayerSocialsServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
+        void UpdatePlayerSocials(int idPlayer, ConquiánCliente.ServiceUserProfile.SocialDto[] socials);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserProfile/UpdatePlayerSocials", ReplyAction="http://tempuri.org/IUserProfile/UpdatePlayerSocialsResponse")]
-        System.Threading.Tasks.Task<bool> UpdatePlayerSocialsAsync(int idPlayer, ConquiánCliente.ServiceUserProfile.SocialDto[] socials);
+        System.Threading.Tasks.Task UpdatePlayerSocialsAsync(int idPlayer, ConquiánCliente.ServiceUserProfile.SocialDto[] socials);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserProfile/UpdateProfilePicture", ReplyAction="http://tempuri.org/IUserProfile/UpdateProfilePictureResponse")]
-        bool UpdateProfilePicture(int idPlayer, string newPath);
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceUserProfile.ServiceFaultDto), Action="http://tempuri.org/IUserProfile/UpdateProfilePictureServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
+        void UpdateProfilePicture(int idPlayer, string newPath);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserProfile/UpdateProfilePicture", ReplyAction="http://tempuri.org/IUserProfile/UpdateProfilePictureResponse")]
-        System.Threading.Tasks.Task<bool> UpdateProfilePictureAsync(int idPlayer, string newPath);
+        System.Threading.Tasks.Task UpdateProfilePictureAsync(int idPlayer, string newPath);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -351,11 +481,11 @@ namespace ConquiánCliente.ServiceUserProfile {
             return base.Channel.GetPlayerByIdAsync(idPlayer);
         }
         
-        public bool UpdatePlayer(ConquiánCliente.ServiceUserProfile.PlayerDto playerDto) {
-            return base.Channel.UpdatePlayer(playerDto);
+        public void UpdatePlayer(ConquiánCliente.ServiceUserProfile.PlayerDto playerDto) {
+            base.Channel.UpdatePlayer(playerDto);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdatePlayerAsync(ConquiánCliente.ServiceUserProfile.PlayerDto playerDto) {
+        public System.Threading.Tasks.Task UpdatePlayerAsync(ConquiánCliente.ServiceUserProfile.PlayerDto playerDto) {
             return base.Channel.UpdatePlayerAsync(playerDto);
         }
         
@@ -367,19 +497,19 @@ namespace ConquiánCliente.ServiceUserProfile {
             return base.Channel.GetPlayerSocialsAsync(idPlayer);
         }
         
-        public bool UpdatePlayerSocials(int idPlayer, ConquiánCliente.ServiceUserProfile.SocialDto[] socials) {
-            return base.Channel.UpdatePlayerSocials(idPlayer, socials);
+        public void UpdatePlayerSocials(int idPlayer, ConquiánCliente.ServiceUserProfile.SocialDto[] socials) {
+            base.Channel.UpdatePlayerSocials(idPlayer, socials);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdatePlayerSocialsAsync(int idPlayer, ConquiánCliente.ServiceUserProfile.SocialDto[] socials) {
+        public System.Threading.Tasks.Task UpdatePlayerSocialsAsync(int idPlayer, ConquiánCliente.ServiceUserProfile.SocialDto[] socials) {
             return base.Channel.UpdatePlayerSocialsAsync(idPlayer, socials);
         }
         
-        public bool UpdateProfilePicture(int idPlayer, string newPath) {
-            return base.Channel.UpdateProfilePicture(idPlayer, newPath);
+        public void UpdateProfilePicture(int idPlayer, string newPath) {
+            base.Channel.UpdateProfilePicture(idPlayer, newPath);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateProfilePictureAsync(int idPlayer, string newPath) {
+        public System.Threading.Tasks.Task UpdateProfilePictureAsync(int idPlayer, string newPath) {
             return base.Channel.UpdateProfilePictureAsync(idPlayer, newPath);
         }
     }

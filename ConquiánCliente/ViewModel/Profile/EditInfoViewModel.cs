@@ -105,11 +105,15 @@ namespace ConquiánCliente.ViewModel.Profile
                 InstagramLink = socials.FirstOrDefault(s => s.IdSocialType == 1)?.UserLink ?? "";
                 FacebookLink = socials.FirstOrDefault(s => s.IdSocialType == 2)?.UserLink ?? "";
             }
+            catch (FaultException<ServiceFaultDto> fault)
+            {
+                 MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
             catch (EndpointNotFoundException)
             {
                 MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
             }
-            catch (FaultException ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
             }
@@ -120,13 +124,25 @@ namespace ConquiánCliente.ViewModel.Profile
         private void ExecuteSaveChanges(object parameter)
         {
             string nameError = SignUpValidator.ValidateName(Player.name);
-            if (!string.IsNullOrEmpty(nameError)) { MessageBox.Show(nameError, Lang.TitleValidation); return; }
+            if (!string.IsNullOrEmpty(nameError)) 
+            { 
+                MessageBox.Show(nameError, Lang.TitleValidation); 
+                return; 
+            }
 
             string lastNameError = SignUpValidator.ValidateLastName(Player.lastName);
-            if (!string.IsNullOrEmpty(lastNameError)) { MessageBox.Show(lastNameError, Lang.TitleValidation); return; }
+            if (!string.IsNullOrEmpty(lastNameError)) 
+            { 
+                MessageBox.Show(lastNameError, Lang.TitleValidation); 
+                return; 
+            }
 
             string nicknameError = SignUpValidator.ValidateNickname(Player.nickname);
-            if (!string.IsNullOrEmpty(nicknameError)) { MessageBox.Show(nicknameError, Lang.TitleValidation); return; }
+            if (!string.IsNullOrEmpty(nicknameError)) 
+            { 
+                MessageBox.Show(nicknameError, Lang.TitleValidation); 
+                return; 
+            }
 
             var passwordBox = parameter as System.Windows.Controls.PasswordBox;
             string password = passwordBox?.Password;
@@ -145,7 +161,8 @@ namespace ConquiánCliente.ViewModel.Profile
             try
             {
                 var client = new UserProfileClient();
-                bool profileUpdated = client.UpdatePlayer(this.Player);
+
+                client.UpdatePlayer(this.Player);
 
                 var socialsToUpdate = new List<SocialDto>();
                 if (!string.IsNullOrWhiteSpace(InstagramLink))
@@ -159,22 +176,26 @@ namespace ConquiánCliente.ViewModel.Profile
 
                 client.UpdatePlayerSocials(Player.idPlayer, socialsToUpdate.ToArray());
 
-                if (profileUpdated)
+                MessageBox.Show(Lang.InfoUpdateSuccess, Lang.TitleSuccess);
+                PlayerSession.CurrentPlayer.nickname = this.Player.nickname;
+                ExecuteCancel(null);
+            }
+            catch (FaultException<ServiceFaultDto> fault)
+            {
+                if (fault.Detail.ErrorType == ServiceErrorType.NotFound)
                 {
-                    MessageBox.Show(Lang.InfoUpdateSuccess, Lang.TitleSuccess);
-                    PlayerSession.CurrentPlayer.nickname = this.Player.nickname;
-                    ExecuteCancel(null);
+                    MessageBox.Show(Lang.ErrorUserNotFound, Lang.TitleError);
                 }
                 else
                 {
-                    MessageBox.Show(Lang.InfoUpdateFailed, Lang.TitleError);
+                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (EndpointNotFoundException)
             {
                 MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
             }
-            catch (FaultException ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
             }

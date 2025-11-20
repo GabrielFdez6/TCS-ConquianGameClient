@@ -27,15 +27,16 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
         private bool isLoading;
         private readonly IPasswordRecovery recoveryClient;
 
-        private PasswordUpdateMode _mode;
+        private PasswordUpdateMode mode;
+
         public PasswordUpdateMode Mode
         {
-            get => _mode;
+            get => mode;
             set
             {
-                _mode = value;
+                mode = value;
                 OnPropertyChanged(nameof(Mode));
-                OnPropertyChanged(nameof(PageTitle)); 
+                OnPropertyChanged(nameof(PageTitle));
             }
         }
 
@@ -179,9 +180,8 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
 
             try
             {
-                IsLoading = true; 
-                var client = new ServicePasswordRecovery.PasswordRecoveryClient();
-                bool success = await client.ResetPasswordAsync(Email, Token, newPassword);
+                IsLoading = true;
+                bool success = await recoveryClient.ResetPasswordAsync(Email, Token, newPassword);
 
                 if (success)
                 {
@@ -191,15 +191,12 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
                     }
                     else
                     {
+                        MessageBox.Show(Lang.SuccessPasswordReset, Lang.TitleSuccess);
                         var loginWindow = new LogIn();
                         loginWindow.Show();
 
                         var currentWindow = Window.GetWindow(page);
-
-                        if (currentWindow != null)
-                        {
-                            currentWindow.Close();
-                        }
+                        currentWindow?.Close();
                     }
                 }
                 else
@@ -207,11 +204,26 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
                     MessageBox.Show(Lang.ErrorRecoveryRequestFailed, Lang.TitleError);
                 }
             }
+            catch (FaultException<ServiceFaultDto> fault)
+            {
+                if (fault.Detail.ErrorType == ServiceErrorType.NotFound)
+                {
+                    MessageBox.Show(Lang.ErrorUserNotFound, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else if (fault.Detail.ErrorType == ServiceErrorType.ValidationFailed)
+                {
+                    MessageBox.Show(fault.Detail.Message, Lang.TitleValidation, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
             catch (EndpointNotFoundException)
             {
                 MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
             }
-            catch (FaultException ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
             }
@@ -286,7 +298,26 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
 
         private static void HandleException(Exception ex)
         {
-            if (ex is EndpointNotFoundException)
+            if (ex is FaultException<ServiceFaultDto> fault)
+            {
+                if (fault.Detail.ErrorType == ServiceErrorType.NotFound)
+                {
+                    MessageBox.Show(Lang.ErrorUserNotFound, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else if (fault.Detail.ErrorType == ServiceErrorType.CommunicationError)
+                {
+                    MessageBox.Show(fault.Detail.Message, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else if (fault.Detail.ErrorType == ServiceErrorType.ValidationFailed)
+                {
+                    MessageBox.Show(fault.Detail.Message, Lang.TitleValidation, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else if (ex is EndpointNotFoundException)
             {
                 MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
             }

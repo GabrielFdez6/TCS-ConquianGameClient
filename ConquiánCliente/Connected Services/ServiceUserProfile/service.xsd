@@ -24,9 +24,7 @@
   </xs:element>
   <xs:element name="UpdatePlayerResponse">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="UpdatePlayerResult" type="xs:boolean" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="GetPlayerSocials">
@@ -53,9 +51,7 @@
   </xs:element>
   <xs:element name="UpdatePlayerSocialsResponse">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="UpdatePlayerSocialsResult" type="xs:boolean" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateProfilePicture">
@@ -68,9 +64,7 @@
   </xs:element>
   <xs:element name="UpdateProfilePictureResponse">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="UpdateProfilePictureResult" type="xs:boolean" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>
