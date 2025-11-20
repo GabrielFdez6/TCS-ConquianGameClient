@@ -26,12 +26,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="PlayCardsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="DrawFromDeck">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="roomCode" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="playerId" type="xs:int" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DrawFromDeckResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="DrawFromDiscard">
@@ -56,6 +66,11 @@
         <xs:element minOccurs="0" name="playerId" type="xs:int" />
         <xs:element minOccurs="0" name="cardId" nillable="true" type="xs:string" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DiscardCardResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="NotifyGameUpdate">

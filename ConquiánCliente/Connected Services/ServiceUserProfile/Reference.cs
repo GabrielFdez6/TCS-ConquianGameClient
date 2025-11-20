@@ -308,6 +308,9 @@ namespace ConquiánCliente.ServiceUserProfile {
         CommunicationError = 6,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
+        ServerInternalError = 7,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
         SessionActive = 10,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]

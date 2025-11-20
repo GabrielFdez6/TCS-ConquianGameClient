@@ -33,6 +33,7 @@
       <xs:enumeration value="NotFound" />
       <xs:enumeration value="OperationFailed" />
       <xs:enumeration value="CommunicationError" />
+      <xs:enumeration value="ServerInternalError" />
       <xs:enumeration value="SessionActive">
         <xs:annotation>
           <xs:appinfo>

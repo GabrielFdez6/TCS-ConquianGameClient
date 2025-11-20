@@ -36,8 +36,8 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
-      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
@@ -47,11 +47,26 @@
   <wsdl:message name="IGame_JoinGame_OutputMessage">
     <wsdl:part name="parameters" element="tns:JoinGameResponse" />
   </wsdl:message>
+  <wsdl:message name="IGame_JoinGame_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q1:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:message name="IGame_PlayCards_InputMessage">
     <wsdl:part name="parameters" element="tns:PlayCards" />
   </wsdl:message>
+  <wsdl:message name="IGame_PlayCards_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PlayCardsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGame_PlayCards_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q2:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:message name="IGame_DrawFromDeck_InputMessage">
     <wsdl:part name="parameters" element="tns:DrawFromDeck" />
+  </wsdl:message>
+  <wsdl:message name="IGame_DrawFromDeck_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DrawFromDeckResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGame_DrawFromDeck_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q3:ServiceFaultDto" />
   </wsdl:message>
   <wsdl:message name="IGame_DrawFromDiscard_InputMessage">
     <wsdl:part name="parameters" element="tns:DrawFromDiscard" />
@@ -59,8 +74,17 @@
   <wsdl:message name="IGame_DrawFromDiscard_OutputMessage">
     <wsdl:part name="parameters" element="tns:DrawFromDiscardResponse" />
   </wsdl:message>
+  <wsdl:message name="IGame_DrawFromDiscard_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q4:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:message name="IGame_DiscardCard_InputMessage">
     <wsdl:part name="parameters" element="tns:DiscardCard" />
+  </wsdl:message>
+  <wsdl:message name="IGame_DiscardCard_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DiscardCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGame_DiscardCard_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q5:ServiceFaultDto" />
   </wsdl:message>
   <wsdl:message name="IGame_NotifyGameUpdate_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyGameUpdate" />
@@ -84,19 +108,27 @@
     <wsdl:operation name="JoinGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/JoinGame" message="tns:IGame_JoinGame_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/JoinGameResponse" message="tns:IGame_JoinGame_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGame/JoinGameServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IGame_JoinGame_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="PlayCards">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/PlayCards" message="tns:IGame_PlayCards_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGame/PlayCardsResponse" message="tns:IGame_PlayCards_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGame/PlayCardsServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IGame_PlayCards_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="DrawFromDeck">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/DrawFromDeck" message="tns:IGame_DrawFromDeck_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGame/DrawFromDeckResponse" message="tns:IGame_DrawFromDeck_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGame/DrawFromDeckServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IGame_DrawFromDeck_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="DrawFromDiscard">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/DrawFromDiscard" message="tns:IGame_DrawFromDiscard_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/DrawFromDiscardResponse" message="tns:IGame_DrawFromDiscard_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGame/DrawFromDiscardServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IGame_DrawFromDiscard_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="DiscardCard">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/DiscardCard" message="tns:IGame_DiscardCard_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGame/DiscardCardResponse" message="tns:IGame_DiscardCard_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGame/DiscardCardServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IGame_DiscardCard_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotifyGameUpdate">
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/NotifyGameUpdate" message="tns:IGame_NotifyGameUpdate_OutputCallbackMessage" />
@@ -129,18 +161,33 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="PlayCards">
       <soap12:operation soapAction="http://tempuri.org/IGame/PlayCards" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="DrawFromDeck">
       <soap12:operation soapAction="http://tempuri.org/IGame/DrawFromDeck" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="DrawFromDiscard">
       <soap12:operation soapAction="http://tempuri.org/IGame/DrawFromDiscard" style="document" />
@@ -150,12 +197,21 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="DiscardCard">
       <soap12:operation soapAction="http://tempuri.org/IGame/DiscardCard" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="NotifyGameUpdate">
       <soap12:operation soapAction="http://tempuri.org/IGame/NotifyGameUpdate" style="document" />

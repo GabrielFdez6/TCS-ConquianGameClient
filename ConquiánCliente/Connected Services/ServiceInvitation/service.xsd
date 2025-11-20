@@ -26,9 +26,7 @@
   </xs:element>
   <xs:element name="SendInvitationResponse">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="SendInvitationResult" type="xs:boolean" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="OnInvitationReceived">

@@ -8,7 +8,6 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 
-
 namespace ConquiánCliente.ViewModel.Game
 {
     public class GameViewModel : ViewModelBase
@@ -102,7 +101,6 @@ namespace ConquiánCliente.ViewModel.Game
                     });
                 };
 
-
                 callbackHandler.OnOpponentDrewDeck += () => {
                     Application.Current.Dispatcher.Invoke(() => {
                     });
@@ -177,6 +175,14 @@ namespace ConquiánCliente.ViewModel.Game
                     MessageBox.Show(Lang.ErrorGeneric, Lang.ErrorGame, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+            catch (FaultException<ServiceFaultDto> fault)
+            {
+                MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}",
@@ -225,33 +231,45 @@ namespace ConquiánCliente.ViewModel.Game
                 try
                 {
                     await client.PlayCardsAsync(roomCode, CurrentPlayer.idPlayer, cardIds.ToArray());
+
+                    await Task.Delay(1000);
+                    await Application.Current.Dispatcher.InvokeAsync(() => {
+                        TemporaryMeld.Clear();
+                        PlayerMelds.Add(new MeldViewModel(cardsToPlay));
+                    });
+                }
+                catch (FaultException<ServiceFaultDto> fault)
+                {
+                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    await RollbackPlayCards(cardsToPlay);
+                }
+                catch (CommunicationException)
+                {
+                    MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    await RollbackPlayCards(cardsToPlay);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}",
                                     Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-
-                    await Application.Current.Dispatcher.InvokeAsync(() => {
-                        TemporaryMeld.Clear();
-                        foreach (var cardVM in cardsToPlay)
-                        {
-                            PlayerHand.Add(cardVM);
-                        }
-                    });
-                    return;
+                    await RollbackPlayCards(cardsToPlay);
                 }
-
-                await Task.Delay(1000);
-
-                await Application.Current.Dispatcher.InvokeAsync(() => {
-                    TemporaryMeld.Clear();
-                    PlayerMelds.Add(new MeldViewModel(cardsToPlay));
-                });
             }
             else
             {
                 MessageBox.Show(Lang.GameInvalidMeld, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        private async Task RollbackPlayCards(List<CardViewModel> cardsToPlay)
+        {
+            await Application.Current.Dispatcher.InvokeAsync(() => {
+                TemporaryMeld.Clear();
+                foreach (var cardVM in cardsToPlay)
+                {
+                    PlayerHand.Add(cardVM);
+                }
+            });
         }
 
         private static bool IsValidMeld(List<CardViewModel> cards)
@@ -304,8 +322,9 @@ namespace ConquiánCliente.ViewModel.Game
         private void UpdateTurnTimerDisplay(int seconds)
         {
             TimeSpan time = TimeSpan.FromSeconds(seconds);
-            TurnTimeDisplay = time.ToString(@"ss"); 
+            TurnTimeDisplay = time.ToString(@"ss");
         }
+
         private void UpdateTurnStatus(int newTurnPlayerId)
         {
             if (CurrentPlayer == null)
@@ -336,10 +355,17 @@ namespace ConquiánCliente.ViewModel.Game
             {
                 await client.DrawFromDeckAsync(roomCode, CurrentPlayer.idPlayer);
             }
+            catch (FaultException<ServiceFaultDto> fault)
+            {
+                MessageBox.Show(fault.Detail.Message, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}",
-                                Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -359,10 +385,17 @@ namespace ConquiánCliente.ViewModel.Game
                     PlayerHand.Add(new CardViewModel(drawnCard));
                 }
             }
+            catch (FaultException<ServiceFaultDto> fault)
+            {
+                MessageBox.Show(fault.Detail.Message, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}",
-                                Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}",Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -380,10 +413,17 @@ namespace ConquiánCliente.ViewModel.Game
                 PlayerHand.Remove(cardVM);
                 TopDiscardCard = cardVM.Card;
             }
+            catch (FaultException<ServiceFaultDto> fault)
+            {
+                MessageBox.Show(fault.Detail.Message, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}",
-                                Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

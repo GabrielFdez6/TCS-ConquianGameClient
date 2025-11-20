@@ -4,6 +4,7 @@ using ConquiánCliente.View.Lobby;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -76,21 +77,33 @@ namespace ConquiánCliente.ViewModel.Lobby
         {
             if (parameter is FriendInviteItemViewModel friendVM)
             {
-                bool success = await InvitationClientManager.SendInvitation(
-                    PlayerSession.CurrentPlayer.idPlayer,
-                    PlayerSession.CurrentPlayer.nickname,
-                    friendVM.IdPlayer,
-                    this.roomCode
-                );
+                try
+                {
+                    await InvitationClientManager.SendInvitationAsync(
+                        PlayerSession.CurrentPlayer.idPlayer,
+                        PlayerSession.CurrentPlayer.nickname,
+                        friendVM.IdPlayer,
+                        this.roomCode
+                    );
 
-                if (success)
-                {
-                    friendVM.StatusText = Lang.LobbyInvitationSent; 
-                    friendVM.IsOnline = false; 
+                    friendVM.StatusText = Lang.LobbyInvitationSent;
                 }
-                else
+                catch (FaultException<ServiceFaultDto> fault)
                 {
-                    System.Windows.MessageBox.Show(Lang.LobbyErrorInvitationFailed); 
+                    MessageBox.Show(fault.Detail.Message, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+                    if (fault.Detail.ErrorType == ServiceErrorType.OperationFailed)
+                    {
+                        friendVM.StatusText = Lang.StatusOffline;
+                        friendVM.IsOnline = false;
+                    }
+                }
+                catch (CommunicationException)
+                {
+                    MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"{Lang.LobbyErrorInvitationFailed}: {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

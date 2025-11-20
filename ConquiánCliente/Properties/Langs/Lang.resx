@@ -588,4 +588,7 @@
   <data name="ErrorUserNotFound" xml:space="preserve">
     <value>El usuario no fue encontrado</value>
   </data>
+  <data name="TitleInfo" xml:space="preserve">
+    <value>Información.</value>
+  </data>
 </root>

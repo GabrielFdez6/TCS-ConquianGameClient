@@ -15,7 +15,7 @@ namespace ConquiánCliente.ViewModel
         {
             if (client != null && client.State == CommunicationState.Opened)
             {
-                return; 
+                return;
             }
 
             try
@@ -25,43 +25,53 @@ namespace ConquiánCliente.ViewModel
                 client = new InvitationServiceClient(context);
                 client.Subscribe(idPlayer);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message, Lang.ErrorUnexpected );
+                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         public static void Disconnect(int idPlayer)
         {
-            if (client != null && client.State == CommunicationState.Opened)
+            if (client != null)
             {
                 try
                 {
-                    client.Unsubscribe(idPlayer);
-                    client.Close();
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Unsubscribe(idPlayer);
+                        client.Close();
+                    }
+                    else
+                    {
+                        client.Abort();
+                    }
                 }
                 catch (Exception)
                 {
                     client.Abort();
                 }
+                finally
+                {
+                    client = null;
+                }
             }
-            client = null;
         }
 
-        public static async Task<bool> SendInvitation(int idSender, string senderNickname, int idReceiver, string roomCode)
+        public static async Task SendInvitationAsync(int idSender, string senderNickname, int idReceiver, string roomCode)
         {
             if (client == null || client.State != CommunicationState.Opened)
             {
-                Connect(idSender); 
+                Connect(idSender);
             }
 
-            try
+            if (client != null && client.State == CommunicationState.Opened)
             {
-                return await client.SendInvitationAsync(idSender, senderNickname, idReceiver, roomCode);
+                await client.SendInvitationAsync(idSender, senderNickname, idReceiver, roomCode);
             }
-            catch (Exception)
+            else
             {
-                return false;
+                throw new CommunicationException(Lang.ErrorConnectingToServer);
             }
         }
     }

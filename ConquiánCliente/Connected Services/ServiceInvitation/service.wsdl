@@ -37,6 +37,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IInvitationService_Subscribe_InputMessage">
@@ -51,6 +52,9 @@
   <wsdl:message name="IInvitationService_SendInvitation_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendInvitationResponse" />
   </wsdl:message>
+  <wsdl:message name="IInvitationService_SendInvitation_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q1:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:message name="IInvitationService_OnInvitationReceived_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:OnInvitationReceived" />
   </wsdl:message>
@@ -64,6 +68,7 @@
     <wsdl:operation name="SendInvitation">
       <wsdl:input wsaw:Action="http://tempuri.org/IInvitationService/SendInvitation" message="tns:IInvitationService_SendInvitation_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IInvitationService/SendInvitationResponse" message="tns:IInvitationService_SendInvitation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IInvitationService/SendInvitationServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IInvitationService_SendInvitation_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="OnInvitationReceived">
       <wsdl:output wsaw:Action="http://tempuri.org/IInvitationService/OnInvitationReceived" message="tns:IInvitationService_OnInvitationReceived_OutputCallbackMessage" />
@@ -93,6 +98,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="OnInvitationReceived">
       <soap12:operation soapAction="http://tempuri.org/IInvitationService/OnInvitationReceived" style="document" />

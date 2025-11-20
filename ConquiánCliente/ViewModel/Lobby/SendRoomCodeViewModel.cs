@@ -1,9 +1,10 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.View.Lobby;
-using ConquiánCliente.ServiceGuestInvitation;
+using ConquiánCliente.ServiceGuestInvitation; 
 using ConquiánCliente.ViewModel.Validation;
 using System;
 using System.Linq;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -19,11 +20,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         public string Email
         {
             get => email;
-            set
-            {
-                email = value;
-                OnPropertyChanged(nameof(Email));
-            }
+            set { email = value; OnPropertyChanged(nameof(Email)); }
         }
 
         public bool IsLoading
@@ -49,8 +46,6 @@ namespace ConquiánCliente.ViewModel.Lobby
             BackCommand = new RelayCommand(ExecuteBack);
         }
 
-
-
         private async Task ExecuteSend()
         {
             string emailError = SignUpValidator.ValidateEmail(Email);
@@ -62,25 +57,25 @@ namespace ConquiánCliente.ViewModel.Lobby
             }
 
             Email = Email.Trim();
-
             IsLoading = true;
+
             try
             {
-                bool success;
                 using (var client = new GuestInvitationClient())
                 {
-                    success = await client.SendGuestInviteAsync(roomCode, Email);
+                    await client.SendGuestInviteAsync(roomCode, Email);
                 }
 
-                if (success)
-                {
-                    MessageBox.Show(Lang.LobbyGuestInviteSent, Lang.Lobby, MessageBoxButton.OK, MessageBoxImage.Information);
-                    ExecuteBack(Application.Current.Windows.OfType<SendRoomCode>().FirstOrDefault(w => w.DataContext == this));
-                }
-                else
-                {
-                    MessageBox.Show(Lang.LobbyErrorInvitationFailed, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                MessageBox.Show(Lang.LobbyGuestInviteSent, Lang.Lobby, MessageBoxButton.OK, MessageBoxImage.Information);
+                ExecuteBack(Application.Current.Windows.OfType<SendRoomCode>().FirstOrDefault(w => w.DataContext == this));
+            }
+            catch (FaultException<ServiceGuestInvitation.ServiceFaultDto> fault)
+            {
+                MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (Exception ex)
             {

@@ -36,8 +36,8 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
-      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultContracts" />
     </xsd:schema>
   </wsdl:types>
@@ -47,11 +47,17 @@
   <wsdl:message name="ILobby_GetLobbyState_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetLobbyStateResponse" />
   </wsdl:message>
+  <wsdl:message name="ILobby_GetLobbyState_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q1:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:message name="ILobby_CreateLobby_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateLobby" />
   </wsdl:message>
   <wsdl:message name="ILobby_CreateLobby_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateLobbyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILobby_CreateLobby_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q2:ServiceFaultDto" />
   </wsdl:message>
   <wsdl:message name="ILobby_JoinAndSubscribe_InputMessage">
     <wsdl:part name="parameters" element="tns:JoinAndSubscribe" />
@@ -59,17 +65,23 @@
   <wsdl:message name="ILobby_JoinAndSubscribe_OutputMessage">
     <wsdl:part name="parameters" element="tns:JoinAndSubscribeResponse" />
   </wsdl:message>
+  <wsdl:message name="ILobby_JoinAndSubscribe_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q3:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:message name="ILobby_JoinAndSubscribeAsGuest_InputMessage">
     <wsdl:part name="parameters" element="tns:JoinAndSubscribeAsGuest" />
   </wsdl:message>
   <wsdl:message name="ILobby_JoinAndSubscribeAsGuest_OutputMessage">
     <wsdl:part name="parameters" element="tns:JoinAndSubscribeAsGuestResponse" />
   </wsdl:message>
+  <wsdl:message name="ILobby_JoinAndSubscribeAsGuest_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q4:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:message name="ILobby_JoinAndSubscribeAsGuest_GuestInviteUsedFaultFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultContracts" name="detail" element="q1:GuestInviteUsedFault" />
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultContracts" name="detail" element="q5:GuestInviteUsedFault" />
   </wsdl:message>
   <wsdl:message name="ILobby_JoinAndSubscribeAsGuest_RegisteredUserAsGuestFaultFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultContracts" name="detail" element="q2:RegisteredUserAsGuestFault" />
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultContracts" name="detail" element="q6:RegisteredUserAsGuestFault" />
   </wsdl:message>
   <wsdl:message name="ILobby_LeaveAndUnsubscribe_InputMessage">
     <wsdl:part name="parameters" element="tns:LeaveAndUnsubscribe" />
@@ -86,8 +98,17 @@
   <wsdl:message name="ILobby_SelectGamemode_OutputMessage">
     <wsdl:part name="parameters" element="tns:SelectGamemodeResponse" />
   </wsdl:message>
+  <wsdl:message name="ILobby_SelectGamemode_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q7:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:message name="ILobby_StartGame_InputMessage">
     <wsdl:part name="parameters" element="tns:StartGame" />
+  </wsdl:message>
+  <wsdl:message name="ILobby_StartGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StartGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILobby_StartGame_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q8:ServiceFaultDto" />
   </wsdl:message>
   <wsdl:message name="ILobby_PlayerJoined_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PlayerJoined" />
@@ -111,18 +132,22 @@
     <wsdl:operation name="GetLobbyState">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobby/GetLobbyState" message="tns:ILobby_GetLobbyState_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/GetLobbyStateResponse" message="tns:ILobby_GetLobbyState_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ILobby/GetLobbyStateServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:ILobby_GetLobbyState_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateLobby">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobby/CreateLobby" message="tns:ILobby_CreateLobby_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/CreateLobbyResponse" message="tns:ILobby_CreateLobby_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ILobby/CreateLobbyServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:ILobby_CreateLobby_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="JoinAndSubscribe">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobby/JoinAndSubscribe" message="tns:ILobby_JoinAndSubscribe_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/JoinAndSubscribeResponse" message="tns:ILobby_JoinAndSubscribe_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ILobby/JoinAndSubscribeServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:ILobby_JoinAndSubscribe_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="JoinAndSubscribeAsGuest">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuest" message="tns:ILobby_JoinAndSubscribeAsGuest_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuestResponse" message="tns:ILobby_JoinAndSubscribeAsGuest_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuestServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:ILobby_JoinAndSubscribeAsGuest_ServiceFaultDtoFault_FaultMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuestGuestInviteUsedFaultFault" name="GuestInviteUsedFaultFault" message="tns:ILobby_JoinAndSubscribeAsGuest_GuestInviteUsedFaultFault_FaultMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuestRegisteredUserAsGuestFaultFault" name="RegisteredUserAsGuestFaultFault" message="tns:ILobby_JoinAndSubscribeAsGuest_RegisteredUserAsGuestFaultFault_FaultMessage" />
     </wsdl:operation>
@@ -136,9 +161,12 @@
     <wsdl:operation name="SelectGamemode">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobby/SelectGamemode" message="tns:ILobby_SelectGamemode_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/SelectGamemodeResponse" message="tns:ILobby_SelectGamemode_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ILobby/SelectGamemodeServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:ILobby_SelectGamemode_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="StartGame">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobby/StartGame" message="tns:ILobby_StartGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobby/StartGameResponse" message="tns:ILobby_StartGame_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ILobby/StartGameServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:ILobby_StartGame_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="PlayerJoined">
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/PlayerJoined" message="tns:ILobby_PlayerJoined_OutputCallbackMessage" />
@@ -171,6 +199,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="CreateLobby">
       <soap12:operation soapAction="http://tempuri.org/ILobby/CreateLobby" style="document" />
@@ -180,6 +211,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="JoinAndSubscribe">
       <soap12:operation soapAction="http://tempuri.org/ILobby/JoinAndSubscribe" style="document" />
@@ -189,6 +223,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="JoinAndSubscribeAsGuest">
       <soap12:operation soapAction="http://tempuri.org/ILobby/JoinAndSubscribeAsGuest" style="document" />
@@ -198,6 +235,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
       <wsdl:fault name="GuestInviteUsedFaultFault">
         <soap12:fault use="literal" name="GuestInviteUsedFaultFault" namespace="" />
       </wsdl:fault>
@@ -228,12 +268,21 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="StartGame">
       <soap12:operation soapAction="http://tempuri.org/ILobby/StartGame" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="PlayerJoined">
       <soap12:operation soapAction="http://tempuri.org/ILobby/PlayerJoined" style="document" />

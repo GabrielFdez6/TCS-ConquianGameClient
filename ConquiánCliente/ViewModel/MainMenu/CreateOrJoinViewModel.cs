@@ -4,7 +4,6 @@ using ConquiánCliente.View.Lobby;
 using ConquiánCliente.ViewModel.Lobby;
 using System;
 using System.ServiceModel;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -52,12 +51,20 @@ namespace ConquiánCliente.ViewModel.MainMenu
                     }
                     else
                     {
-                        MessageBox.Show(Lang.ErrorLobbyCreation, Lang.TitleError);
+                        MessageBox.Show(Lang.ErrorLobbyCreation, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                     }
+                }
+                catch (FaultException<ServiceFaultDto> fault)
+                {
+                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                catch (CommunicationException)
+                {
+                    MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError);
+                    MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 finally
                 {
@@ -71,7 +78,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
         {
             if (string.IsNullOrWhiteSpace(RoomCode))
             {
-                MessageBox.Show(Lang.ErrorEmptyRoomCode, Lang.TitleError);
+                MessageBox.Show(Lang.ErrorEmptyRoomCode, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -89,14 +96,18 @@ namespace ConquiánCliente.ViewModel.MainMenu
                         window.DialogResult = true;
                         window.Close();
                     }
-                    else
-                    {
-                        MessageBox.Show(Lang.ErrorJoinLobby, Lang.TitleError);
-                    }
                 }
-                catch (EndpointNotFoundException)
+                catch (FaultException<ServiceFaultDto> fault)
                 {
-                    MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError);
+                    MessageBox.Show(fault.Detail.Message, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (CommunicationException)
+                {
+                    MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(Lang.ErrorJoinLobby, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 finally
                 {

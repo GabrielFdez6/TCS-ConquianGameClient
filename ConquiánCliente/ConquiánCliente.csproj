@@ -419,11 +419,17 @@
     <None Include="Connected Services\ServiceGame\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceGuestInvitation\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceGuestInvitation\service.wsdl" />
     <None Include="Connected Services\ServiceGuestInvitation\service.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceGuestInvitation\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceInvitation\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceInvitation\service.wsdl" />

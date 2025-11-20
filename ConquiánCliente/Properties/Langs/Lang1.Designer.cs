@@ -1411,6 +1411,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Información..
+        /// </summary>
+        public static string TitleInfo {
+            get {
+                return ResourceManager.GetString("TitleInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Registro Completo.
         /// </summary>
         public static string TitleRegistrationComplete {

@@ -36,6 +36,7 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
@@ -45,10 +46,14 @@
   <wsdl:message name="IGuestInvitation_SendGuestInvite_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendGuestInviteResponse" />
   </wsdl:message>
+  <wsdl:message name="IGuestInvitation_SendGuestInvite_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q1:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:portType name="IGuestInvitation">
     <wsdl:operation name="SendGuestInvite">
       <wsdl:input wsaw:Action="http://tempuri.org/IGuestInvitation/SendGuestInvite" message="tns:IGuestInvitation_SendGuestInvite_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGuestInvitation/SendGuestInviteResponse" message="tns:IGuestInvitation_SendGuestInvite_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGuestInvitation/SendGuestInviteServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IGuestInvitation_SendGuestInvite_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGuestInvitation" type="tns:IGuestInvitation">
@@ -63,6 +68,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="GuestInvitation">

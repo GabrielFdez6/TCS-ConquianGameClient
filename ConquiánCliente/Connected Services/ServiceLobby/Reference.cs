@@ -425,6 +425,129 @@ namespace ConquiánCliente.ServiceLobby {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+        "acts")]
+    [System.SerializableAttribute()]
+    public partial class ServiceFaultDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceLobby.ServiceErrorType ErrorTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TargetField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceLobby.ServiceErrorType ErrorType {
+            get {
+                return this.ErrorTypeField;
+            }
+            set {
+                if ((this.ErrorTypeField.Equals(value) != true)) {
+                    this.ErrorTypeField = value;
+                    this.RaisePropertyChanged("ErrorType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Target {
+            get {
+                return this.TargetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TargetField, value) != true)) {
+                    this.TargetField = value;
+                    this.RaisePropertyChanged("Target");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceErrorType", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+        "acts")]
+    public enum ServiceErrorType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Unknown = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DatabaseError = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DuplicateRecord = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ValidationFailed = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotFound = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        OperationFailed = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CommunicationError = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ServerInternalError = 7,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SessionActive = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        GuestInviteUsed = 11,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RegisteredUserAsGuest = 12,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        LobbyFull = 13,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        GameInProgress = 14,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="GuestInviteUsedFault", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultCont" +
         "racts")]
     [System.SerializableAttribute()]
@@ -520,24 +643,32 @@ namespace ConquiánCliente.ServiceLobby {
     public interface ILobby {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/GetLobbyState", ReplyAction="http://tempuri.org/ILobby/GetLobbyStateResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceLobby.ServiceFaultDto), Action="http://tempuri.org/ILobby/GetLobbyStateServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
         ConquiánCliente.ServiceLobby.LobbyDto GetLobbyState(string roomCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/GetLobbyState", ReplyAction="http://tempuri.org/ILobby/GetLobbyStateResponse")]
         System.Threading.Tasks.Task<ConquiánCliente.ServiceLobby.LobbyDto> GetLobbyStateAsync(string roomCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/CreateLobby", ReplyAction="http://tempuri.org/ILobby/CreateLobbyResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceLobby.ServiceFaultDto), Action="http://tempuri.org/ILobby/CreateLobbyServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
         string CreateLobby(int idHostPlayer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/CreateLobby", ReplyAction="http://tempuri.org/ILobby/CreateLobbyResponse")]
         System.Threading.Tasks.Task<string> CreateLobbyAsync(int idHostPlayer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/JoinAndSubscribe", ReplyAction="http://tempuri.org/ILobby/JoinAndSubscribeResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceLobby.ServiceFaultDto), Action="http://tempuri.org/ILobby/JoinAndSubscribeServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
         bool JoinAndSubscribe(string roomCode, int idPlayer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/JoinAndSubscribe", ReplyAction="http://tempuri.org/ILobby/JoinAndSubscribeResponse")]
         System.Threading.Tasks.Task<bool> JoinAndSubscribeAsync(string roomCode, int idPlayer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuest", ReplyAction="http://tempuri.org/ILobby/JoinAndSubscribeAsGuestResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceLobby.ServiceFaultDto), Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuestServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
         [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceLobby.GuestInviteUsedFault), Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuestGuestInviteUsedFaultFault", Name="GuestInviteUsedFault", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultCont" +
             "racts")]
         [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceLobby.RegisteredUserAsGuestFault), Action="http://tempuri.org/ILobby/JoinAndSubscribeAsGuestRegisteredUserAsGuestFaultFault", Name="RegisteredUserAsGuestFault", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.FaultCont" +
@@ -560,15 +691,19 @@ namespace ConquiánCliente.ServiceLobby {
         System.Threading.Tasks.Task SendMessageAsync(string roomCode, ConquiánCliente.ServiceLobby.MessageDto message);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/SelectGamemode", ReplyAction="http://tempuri.org/ILobby/SelectGamemodeResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceLobby.ServiceFaultDto), Action="http://tempuri.org/ILobby/SelectGamemodeServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
         void SelectGamemode(string roomCode, int idGamemode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/SelectGamemode", ReplyAction="http://tempuri.org/ILobby/SelectGamemodeResponse")]
         System.Threading.Tasks.Task SelectGamemodeAsync(string roomCode, int idGamemode);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/StartGame")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/StartGame", ReplyAction="http://tempuri.org/ILobby/StartGameResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceLobby.ServiceFaultDto), Action="http://tempuri.org/ILobby/StartGameServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
         void StartGame(string roomCode);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/StartGame")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/StartGame", ReplyAction="http://tempuri.org/ILobby/StartGameResponse")]
         System.Threading.Tasks.Task StartGameAsync(string roomCode);
     }
     

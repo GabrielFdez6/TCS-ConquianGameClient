@@ -68,7 +68,7 @@ namespace ConquiánCliente.ViewModel.Authentication
             {
                 return Lang.ErrorRoomCodeLength;
             }
-            return string.Empty; 
+            return string.Empty;
         }
 
         private async Task ExecuteGuestLogin()
@@ -78,14 +78,14 @@ namespace ConquiánCliente.ViewModel.Authentication
             if (!string.IsNullOrEmpty(emailError))
             {
                 MessageBox.Show(emailError, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                return; 
+                return;
             }
 
             string roomCodeError = ValidateRoomCode(RoomCode);
             if (!string.IsNullOrEmpty(roomCodeError))
             {
                 MessageBox.Show(roomCodeError, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                return; 
+                return;
             }
 
             isLoading = true;
@@ -114,8 +114,15 @@ namespace ConquiánCliente.ViewModel.Authentication
             catch (FaultException<ServiceLobby.RegisteredUserAsGuestFault> ex)
             {
                 MessageBox.Show(ex.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
-
                 ExecuteNavigateBack(null);
+            }
+            catch (FaultException<ServiceLobby.ServiceFaultDto> fault)
+            {
+                MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (Exception ex)
             {

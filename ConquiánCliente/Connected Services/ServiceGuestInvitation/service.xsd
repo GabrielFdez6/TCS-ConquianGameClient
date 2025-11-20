@@ -10,9 +10,7 @@
   </xs:element>
   <xs:element name="SendGuestInviteResponse">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="SendGuestInviteResult" type="xs:boolean" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

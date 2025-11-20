@@ -145,9 +145,19 @@ namespace ConquiánCliente.ViewModel.Lobby
                     await client.JoinAndSubscribeAsync(this.RoomCode, PlayerSession.CurrentPlayer.idPlayer);
                 }
             }
-            catch (Exception)
+            catch (FaultException<ServiceFaultDto> fault)
+            {
+                MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                NavigateToLoginOrMainMenu();
+            }
+            catch (CommunicationException)
             {
                 MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                NavigateToLoginOrMainMenu();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 NavigateToLoginOrMainMenu();
             }
         }
@@ -225,7 +235,7 @@ namespace ConquiánCliente.ViewModel.Lobby
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                CloseClientConnection(notifyServer: false); 
+                CloseClientConnection(notifyServer: false);
 
                 var gameViewModel = new ConquiánCliente.ViewModel.Game.GameViewModel(this.RoomCode);
 
@@ -234,7 +244,7 @@ namespace ConquiánCliente.ViewModel.Lobby
 
                 gameWindow.Show();
 
-                CloseCurrentWindow(); 
+                CloseCurrentWindow();
             });
         }
 
@@ -359,7 +369,8 @@ namespace ConquiánCliente.ViewModel.Lobby
                     {
                         window.Close();
                     }
-                    catch (InvalidOperationException ex) {
+                    catch (InvalidOperationException ex)
+                    {
                         System.Diagnostics.Debug.WriteLine($"Intento de cerrar ventana ya en proceso: {ex.Message}");
                     }
                     break;
@@ -400,7 +411,8 @@ namespace ConquiánCliente.ViewModel.Lobby
                 {
                     windowToClose.Close();
                 }
-                catch (InvalidOperationException ex) {
+                catch (InvalidOperationException ex)
+                {
                     System.Diagnostics.Debug.WriteLine($"Intento de cerrar ventana ya en proceso: {ex.Message}");
                 }
             }
@@ -424,6 +436,20 @@ namespace ConquiánCliente.ViewModel.Lobby
                 try
                 {
                     await client.StartGameAsync(this.RoomCode);
+                }
+                catch (FaultException<ServiceFaultDto> fault)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    });
+                }
+                catch (CommunicationException)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    });
                 }
                 catch (Exception)
                 {
@@ -484,6 +510,20 @@ namespace ConquiánCliente.ViewModel.Lobby
                 {
                     await client.SelectGamemodeAsync(this.RoomCode, newId);
                 }
+                catch (FaultException<ServiceFaultDto> fault)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    });
+                }
+                catch (CommunicationException)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    });
+                }
                 catch (Exception)
                 {
                     MessageBox.Show(Lang.ErrorSelectGameMode, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
@@ -502,6 +542,20 @@ namespace ConquiánCliente.ViewModel.Lobby
                 try
                 {
                     await client.SelectGamemodeAsync(this.RoomCode, newId);
+                }
+                catch (FaultException<ServiceFaultDto> fault)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    });
+                }
+                catch (CommunicationException)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    });
                 }
                 catch (Exception)
                 {
