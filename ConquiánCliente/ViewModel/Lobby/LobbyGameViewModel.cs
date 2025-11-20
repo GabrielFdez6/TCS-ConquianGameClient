@@ -230,22 +230,9 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private void HandleGameStarting()
         {
-            if (IsNavigatingAway) return;
-            IsNavigatingAway = true;
+            if (IsHost) return;
 
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                CloseClientConnection(notifyServer: false);
-
-                var gameViewModel = new ConquiánCliente.ViewModel.Game.GameViewModel(this.RoomCode);
-
-                var gameWindow = new ConquiánCliente.View.Game.Game(this.RoomCode);
-                gameWindow.DataContext = gameViewModel;
-
-                gameWindow.Show();
-
-                CloseCurrentWindow();
-            });
+            NavigateToGame();
         }
 
         private void UpdatePlayerList(PlayerDto[] players)
@@ -431,11 +418,17 @@ namespace ConquiánCliente.ViewModel.Lobby
                 return;
             }
 
+            if (IsNavigatingAway)
+            {
+                return;
+            }
+
             Task.Run(async () =>
             {
                 try
                 {
                     await client.StartGameAsync(this.RoomCode);
+                    NavigateToGame();
                 }
                 catch (FaultException<ServiceFaultDto> fault)
                 {
@@ -563,5 +556,24 @@ namespace ConquiánCliente.ViewModel.Lobby
                 }
             });
         }
+
+        private void NavigateToGame()
+        {
+            if (IsNavigatingAway) return;
+            IsNavigatingAway = true;
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                CloseClientConnection(notifyServer: false);
+
+                var gameViewModel = new ConquiánCliente.ViewModel.Game.GameViewModel(this.RoomCode);
+                var gameWindow = new ConquiánCliente.View.Game.Game(this.RoomCode);
+                gameWindow.DataContext = gameViewModel;
+
+                gameWindow.Show();
+                CloseCurrentWindow();
+            });
+        }
+
     }
 }
