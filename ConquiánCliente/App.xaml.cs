@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.ServiceModel;
 using System.Threading;
@@ -12,9 +13,7 @@ using System.Windows;
 
 namespace ConquiánCliente
 {
-    /// <summary>
-    /// Lógica de interacción para App.xaml
-    /// </summary>
+
     public partial class App : Application
     {
         public App()
@@ -50,8 +49,30 @@ namespace ConquiánCliente
         }
         protected override void OnStartup(StartupEventArgs e)
         {
-            var langCode = ConquiánCliente.Properties.Settings.Default.languageCode;
-            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(langCode);
+            var settings = ConquiánCliente.Properties.Settings.Default;
+
+            if (string.IsNullOrEmpty(settings.languageCode))
+            {
+                var osLanguage = CultureInfo.InstalledUICulture.TwoLetterISOLanguageName;
+
+                if (osLanguage == "es")
+                {
+                    settings.languageCode = "es-MX";
+                }
+                else
+                {
+                    settings.languageCode = "en-US";
+                }
+
+                settings.Save();
+            }
+
+            var langCode = settings.languageCode;
+            var culture = new CultureInfo(langCode);
+
+            Thread.CurrentThread.CurrentUICulture = culture;
+            Thread.CurrentThread.CurrentCulture = culture;
+
             base.OnStartup(e);
         }
     }
