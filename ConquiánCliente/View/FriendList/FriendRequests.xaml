@@ -12,9 +12,67 @@
         WindowStartupLocation="CenterScreen"
         Background="Transparent">
 
-    <Window.DataContext>
-        <viewModel:FriendRequestsViewModel/>
-    </Window.DataContext>
+    <Window.Resources>
+        <Style x:Key="CellTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="10,0,0,0"/>
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridCell">
+                        <Border Padding="{TemplateBinding Padding}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="0" 
+                                Background="{TemplateBinding Background}" 
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="DataGridRow">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBoxBorderBrush}"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#1A7edefb"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryButtonBrush}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBoxBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="0,0,0,2"/>
+        </Style>
+    </Window.Resources>
 
     <Grid>
         <Border Background="{StaticResource PrimaryBackgroundBrush}" />
@@ -49,31 +107,52 @@
                            Style="{StaticResource TitleTextBlock}" 
                            Margin="0,0,0,20"/>
 
-                <DataGrid x:Name="RequestsDataGrid" ItemsSource="{Binding Requests}" Grid.Row="1" Margin="0,0,0,20" AutoGenerateColumns="False" CanUserAddRows="False"
-                          Background="{StaticResource PrimaryBackgroundBrush}"
-                          BorderBrush="{StaticResource BorderBrush}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="{x:Static language:Lang.GlobalNickname}" Binding="{Binding Nickname}" Width="*" />
+                <DataGrid x:Name="RequestsDataGrid" 
+                          ItemsSource="{Binding Requests}" 
+                          Grid.Row="1" 
+                          Margin="0,0,0,20" 
+                          AutoGenerateColumns="False" 
+                          CanUserAddRows="False"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          GridLinesVisibility="None"
+                          HeadersVisibility="Column"
+                          RowBackground="Transparent"
+                          IsReadOnly="True">
 
-                        <DataGridTemplateColumn Header="{x:Static language:Lang.GlobalAccept}" Width="120">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="{x:Static language:Lang.GlobalNickname}" 
+                                            Binding="{Binding Nickname}" 
+                                            Width="*" 
+                                            ElementStyle="{StaticResource CellTextStyle}"/>
+
+                        <DataGridTemplateColumn Header="{x:Static language:Lang.GlobalAccept}" Width="140">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Style="{StaticResource PrimaryButtonStyle}" Height="30"
+                                    <Button Style="{StaticResource PrimaryButtonStyle}" 
+                                            Width="100"
+                                            Height="35"
                                             Command="{Binding DataContext.AcceptRequestCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                             CommandParameter="{Binding}">
-                                        <TextBlock Text="{x:Static language:Lang.GlobalAccept}" FontWeight="Bold"/>
+                                        <TextBlock Text="{x:Static language:Lang.GlobalAccept}" 
+                                                   FontWeight="Bold"
+                                                   FontSize="12"/>
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="{x:Static language:Lang.FriendRequestsDecline}" Width="120">
+                        <DataGridTemplateColumn Header="{x:Static language:Lang.FriendRequestsDecline}" Width="140">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Style="{StaticResource SecondaryButtonStyle}" Height="30"
+                                    <Button Style="{StaticResource SecondaryButtonStyle}" 
+                                            Width="100"
+                                            Height="35"
                                             Command="{Binding DataContext.DeclineRequestCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                             CommandParameter="{Binding}">
-                                        <TextBlock Text="{x:Static language:Lang.FriendRequestsDecline}" FontWeight="Bold"/>
+                                        <TextBlock Text="{x:Static language:Lang.FriendRequestsDecline}" 
+                                                   FontWeight="Bold"
+                                                   FontSize="12"/>
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
