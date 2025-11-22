@@ -12,6 +12,29 @@
         Background="Transparent">
 
     <Window.Resources>
+        <Style x:Key="KickButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#D32F2F"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" CornerRadius="5" 
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#B71C1C"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="LobbyHostButtonStyle" TargetType="Button" BasedOn="{StaticResource PrimaryButtonStyle}">
             <Style.Triggers>
                 <Trigger Property="IsEnabled" Value="False">
@@ -21,6 +44,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>
 
     <Grid>
@@ -56,21 +80,58 @@
             <StackPanel Orientation="Vertical"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
-                        Margin="20,100,0,0">
+                        Margin="40,100,0,0"
+                        Width="450">
                 <ItemsControl ItemsSource="{Binding Players}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                                <Border Width="70" Height="70" BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1" Background="Transparent">
-                                    <Image Source="{Binding ProfileImagePath}" />
-                                </Border>
-                                <TextBlock Text="{Binding DisplayName}"
-                                           VerticalAlignment="Center"
-                                           Margin="10,0,0,0"
-                                           FontSize="22"
-                                           Foreground="{StaticResource PrimaryTextBrush}"
-                                           FontWeight="Bold"/>
-                            </StackPanel>
+                            <Border Margin="0,0,0,20" 
+                                    BorderBrush="{StaticResource BorderBrush}" 
+                                    BorderThickness="2" 
+                                    Background="{StaticResource PrimaryBackgroundBrush}" 
+                                    CornerRadius="10" 
+                                    Padding="10">
+                                <Border.Effect>
+                                    <DropShadowEffect Color="{Binding Color, Source={StaticResource BorderBrush}}" 
+                                                      ShadowDepth="0" 
+                                                      BlurRadius="20" 
+                                                      Opacity="0.8"/>
+                                </Border.Effect>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Grid.Column="0" Width="50" Height="50" CornerRadius="25"
+                                            BorderBrush="{StaticResource PrimaryTextBrush}"
+                                            BorderThickness="1">
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding ProfileImagePath}" Stretch="UniformToFill"/>
+                                        </Border.Background>
+                                    </Border>
+
+                                    <TextBlock Grid.Column="1" 
+                                               Text="{Binding DisplayName}"
+                                               VerticalAlignment="Center"
+                                               Margin="15,0,0,0"
+                                               FontSize="20"
+                                               Foreground="{StaticResource PrimaryTextBrush}"
+                                               FontWeight="Bold"
+                                               TextTrimming="CharacterEllipsis"/>
+
+                                    <Button Grid.Column="2" 
+                                            Content="X"
+                                            Width="35" Height="35"
+                                            Style="{StaticResource KickButtonStyle}"
+                                            Margin="10,0,0,0"
+                                            Command="{Binding DataContext.KickPlayerCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                            CommandParameter="{Binding Id}"
+                                            Visibility="{Binding DataContext.IsHost, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                </Grid>
+                            </Border>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -92,21 +153,17 @@
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="422">
-
                 <Button Width="388" Height="62" Margin="0,20,0,0"
                         Style="{StaticResource LobbyHostButtonStyle}"
                         IsEnabled="{Binding IsHost}"
                         Command="{Binding StartGameCommand}"
                         CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                     <TextBlock Text="{x:Static language:Lang.LobbyStartGame}"
-                               FontSize="26"
-                               FontWeight="Bold"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
+                               FontSize="26" FontWeight="Bold"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Button>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,0">
-
                     <Button Width="60" Height="50" 
                             Style="{StaticResource LobbyHostButtonStyle}" 
                             Command="{Binding PreviousGameTypeCommand}"
@@ -117,29 +174,22 @@
                     <Border Width="200" Height="50" Margin="10,0,10,0" 
                             Background="Transparent"
                             BorderBrush="{StaticResource BorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="5">
-                        
+                            BorderThickness="1" CornerRadius="5">
                         <Border.Effect>
                             <DropShadowEffect Color="{Binding Color, Source={StaticResource BorderBrush}}" 
-                                              ShadowDepth="0" 
-                                              BlurRadius="10" 
-                                              Opacity="1"/>
+                                              ShadowDepth="0" BlurRadius="10" Opacity="1"/>
                         </Border.Effect>
-
                         <TextBlock Text="{Binding SelectedGameType}"
-                                   FontSize="26" 
-                                   FontWeight="Bold" 
+                                   FontSize="26" FontWeight="Bold" 
                                    Foreground="{StaticResource PrimaryTextBrush}"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
 
                     <Button Width="60" Height="50" 
                             Style="{StaticResource LobbyHostButtonStyle}" 
                             Command="{Binding NextGameTypeCommand}"
                             IsEnabled="{Binding IsHost}">
-                        <TextBlock Text=">" FontSize="26" FontWeight="Bold"/>
+                        <TextBlock Text="&gt;" FontSize="26" FontWeight="Bold"/>
                     </Button>
                 </StackPanel>
 
@@ -148,18 +198,13 @@
                         IsEnabled="{Binding IsHost}"
                         Command="{Binding ShowInviteFriendsCommand}">
                     <TextBlock Text="{x:Static language:Lang.GlobalInvite}"
-                               FontSize="26"
-                               FontWeight="Bold"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
+                               FontSize="26" FontWeight="Bold"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Button>
             </StackPanel>
 
-            <Grid HorizontalAlignment="Left"
-                  VerticalAlignment="Bottom"
-                  Margin="20,0,0,48"
-                  Width="500"
-                  Height="200">
+            <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                  Margin="20,0,0,48" Width="500" Height="200">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
@@ -175,24 +220,16 @@
                     </ItemsControl>
                 </ScrollViewer>
 
-                <Border Grid.Row="1"
-                        CornerRadius="5" 
-                        BorderThickness="1" 
+                <Border Grid.Row="1" CornerRadius="5" BorderThickness="1" 
                         BorderBrush="{StaticResource TextBoxBorderBrush}"
-                        Background="Transparent"
-                        Margin="0,5,0,0">
+                        Background="Transparent" Margin="0,5,0,0">
                     <Border.Effect>
                         <DropShadowEffect Color="{Binding Color, Source={StaticResource TextBoxBorderBrush}}" 
-                                          ShadowDepth="0" 
-                                          BlurRadius="10" 
-                                          Opacity="0.9" />
+                                          ShadowDepth="0" BlurRadius="10" Opacity="0.9" />
                     </Border.Effect>
-                    <TextBox Height="40"
-                             FontSize="16"
-                             VerticalContentAlignment="Center"
+                    <TextBox Height="40" FontSize="16" VerticalContentAlignment="Center"
                              Text="{Binding CurrentMessage, UpdateSourceTrigger=PropertyChanged}"
-                             Background="Transparent"
-                             BorderThickness="0"
+                             Background="Transparent" BorderThickness="0"
                              Foreground="{StaticResource PrimaryTextBrush}"
                              CaretBrush="{StaticResource PrimaryTextBrush}">
                         <TextBox.InputBindings>

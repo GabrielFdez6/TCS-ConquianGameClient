@@ -591,4 +591,16 @@
   <data name="TitleInfo" xml:space="preserve">
     <value>Información.</value>
   </data>
+  <data name="ConfirmKickPlayer" xml:space="preserve">
+    <value>¿Estás seguro que quieres expulsar a este jugador?</value>
+  </data>
+  <data name="TitleConfirm" xml:space="preserve">
+    <value>Confirmación</value>
+  </data>
+  <data name="ErrorLobbyAction" xml:space="preserve">
+    <value>No se pudo realizar la acción solicitada. Por favor, intente de nuevo.</value>
+  </data>
+  <data name="InfoYouWereKicked" xml:space="preserve">
+    <value>Has sido expulsado de la sala por el anfitrión.</value>
+  </data>
 </root>

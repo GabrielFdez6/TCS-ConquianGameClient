@@ -591,4 +591,16 @@
   <data name="TitleInfo" xml:space="preserve">
     <value>Information</value>
   </data>
+  <data name="ConfirmKickPlayer" xml:space="preserve">
+    <value>Are you sure you want to kick this player?</value>
+  </data>
+  <data name="TitleConfirm" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="ErrorLobbyAction" xml:space="preserve">
+    <value>Could not perform the requested action. Please try again.</value>
+  </data>
+  <data name="InfoYouWereKicked" xml:space="preserve">
+    <value>You have been kicked from the lobby by the host.</value>
+  </data>
 </root>

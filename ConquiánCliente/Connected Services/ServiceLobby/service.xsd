@@ -105,6 +105,20 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="KickPlayer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="roomCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idRequestingPlayer" type="xs:int" />
+        <xs:element minOccurs="0" name="idPlayerToKick" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="KickPlayerResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="PlayerJoined">
     <xs:complexType>
       <xs:sequence>
@@ -139,6 +153,11 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="NotifyGameStarting">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="YouWereKicked">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

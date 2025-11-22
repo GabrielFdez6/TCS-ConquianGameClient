@@ -23,6 +23,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         public event Action<MessageDto> OnMessageReceived;
         public event Action<int> OnGamemodeChanged;
         public event Action OnGameStarting;
+        public event Action OnYouWereKicked;
 
         public void HostLeft()
         {
@@ -51,6 +52,11 @@ namespace ConquiánCliente.ViewModel.Lobby
         public void NotifyGameStarting()
         {
             OnGameStarting?.Invoke();
+        }
+
+        public void YouWereKicked()
+        {
+            OnYouWereKicked?.Invoke();
         }
     }
 }

@@ -705,6 +705,14 @@ namespace ConquiánCliente.ServiceLobby {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/StartGame", ReplyAction="http://tempuri.org/ILobby/StartGameResponse")]
         System.Threading.Tasks.Task StartGameAsync(string roomCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/KickPlayer", ReplyAction="http://tempuri.org/ILobby/KickPlayerResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceLobby.ServiceFaultDto), Action="http://tempuri.org/ILobby/KickPlayerServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
+        void KickPlayer(string roomCode, int idRequestingPlayer, int idPlayerToKick);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/KickPlayer", ReplyAction="http://tempuri.org/ILobby/KickPlayerResponse")]
+        System.Threading.Tasks.Task KickPlayerAsync(string roomCode, int idRequestingPlayer, int idPlayerToKick);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -727,6 +735,9 @@ namespace ConquiánCliente.ServiceLobby {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/NotifyGameStarting")]
         void NotifyGameStarting();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/YouWereKicked")]
+        void YouWereKicked();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -819,6 +830,14 @@ namespace ConquiánCliente.ServiceLobby {
         
         public System.Threading.Tasks.Task StartGameAsync(string roomCode) {
             return base.Channel.StartGameAsync(roomCode);
+        }
+        
+        public void KickPlayer(string roomCode, int idRequestingPlayer, int idPlayerToKick) {
+            base.Channel.KickPlayer(roomCode, idRequestingPlayer, idPlayerToKick);
+        }
+        
+        public System.Threading.Tasks.Task KickPlayerAsync(string roomCode, int idRequestingPlayer, int idPlayerToKick) {
+            return base.Channel.KickPlayerAsync(roomCode, idRequestingPlayer, idPlayerToKick);
         }
     }
 }

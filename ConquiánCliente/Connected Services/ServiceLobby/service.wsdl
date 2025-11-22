@@ -110,6 +110,15 @@
   <wsdl:message name="ILobby_StartGame_ServiceFaultDtoFault_FaultMessage">
     <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q8:ServiceFaultDto" />
   </wsdl:message>
+  <wsdl:message name="ILobby_KickPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:KickPlayer" />
+  </wsdl:message>
+  <wsdl:message name="ILobby_KickPlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:KickPlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILobby_KickPlayer_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q9:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:message name="ILobby_PlayerJoined_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PlayerJoined" />
   </wsdl:message>
@@ -127,6 +136,9 @@
   </wsdl:message>
   <wsdl:message name="ILobby_NotifyGameStarting_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyGameStarting" />
+  </wsdl:message>
+  <wsdl:message name="ILobby_YouWereKicked_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:YouWereKicked" />
   </wsdl:message>
   <wsdl:portType name="ILobby">
     <wsdl:operation name="GetLobbyState">
@@ -168,6 +180,11 @@
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/StartGameResponse" message="tns:ILobby_StartGame_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ILobby/StartGameServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:ILobby_StartGame_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
+    <wsdl:operation name="KickPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobby/KickPlayer" message="tns:ILobby_KickPlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobby/KickPlayerResponse" message="tns:ILobby_KickPlayer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ILobby/KickPlayerServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:ILobby_KickPlayer_ServiceFaultDtoFault_FaultMessage" />
+    </wsdl:operation>
     <wsdl:operation name="PlayerJoined">
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/PlayerJoined" message="tns:ILobby_PlayerJoined_OutputCallbackMessage" />
     </wsdl:operation>
@@ -185,6 +202,9 @@
     </wsdl:operation>
     <wsdl:operation name="NotifyGameStarting">
       <wsdl:output wsaw:Action="http://tempuri.org/ILobby/NotifyGameStarting" message="tns:ILobby_NotifyGameStarting_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="YouWereKicked">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobby/YouWereKicked" message="tns:ILobby_YouWereKicked_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_ILobby" type="tns:ILobby">
@@ -284,6 +304,18 @@
         <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="KickPlayer">
+      <soap12:operation soapAction="http://tempuri.org/ILobby/KickPlayer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="PlayerJoined">
       <soap12:operation soapAction="http://tempuri.org/ILobby/PlayerJoined" style="document" />
       <wsdl:output>
@@ -316,6 +348,12 @@
     </wsdl:operation>
     <wsdl:operation name="NotifyGameStarting">
       <soap12:operation soapAction="http://tempuri.org/ILobby/NotifyGameStarting" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="YouWereKicked">
+      <soap12:operation soapAction="http://tempuri.org/ILobby/YouWereKicked" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

@@ -61,6 +61,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a ¿Estás seguro que quieres expulsar a este jugador?.
+        /// </summary>
+        public static string ConfirmKickPlayer {
+            get {
+                return ResourceManager.GetString("ConfirmKickPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Crear o unirse.
         /// </summary>
         public static string CreateOrJoin {
@@ -228,6 +237,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string ErrorLastNameLength {
             get {
                 return ResourceManager.GetString("ErrorLastNameLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo realizar la acción solicitada. Por favor, intente de nuevo..
+        /// </summary>
+        public static string ErrorLobbyAction {
+            get {
+                return ResourceManager.GetString("ErrorLobbyAction", resourceCulture);
             }
         }
         
@@ -1024,6 +1042,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Has sido expulsado de la sala por el anfitrión..
+        /// </summary>
+        public static string InfoYouWereKicked {
+            get {
+                return ResourceManager.GetString("InfoYouWereKicked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Sala de espera.
         /// </summary>
         public static string Lobby {
@@ -1380,6 +1407,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string TitleAuthenticationError {
             get {
                 return ResourceManager.GetString("TitleAuthenticationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Confirmación.
+        /// </summary>
+        public static string TitleConfirm {
+            get {
+                return ResourceManager.GetString("TitleConfirm", resourceCulture);
             }
         }
         

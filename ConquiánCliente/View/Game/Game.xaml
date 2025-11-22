@@ -126,15 +126,30 @@
                     </Border>
                 </Grid>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
-                            VerticalAlignment="Top" Margin="0,100,60,0">
-                    <Border Width="80" Height="80" BorderBrush="Gray" BorderThickness="1">
-                        <Image Source="{Binding Opponent.pathPhoto}" Stretch="UniformToFill"/>
-                    </Border>
-                    <TextBlock Text="{Binding Opponent.nickname}" VerticalAlignment="Center"
-                               Margin="10,0,0,0" FontSize="24" FontWeight="Bold"
-                               Foreground="White"/>
-                </StackPanel>
+                <Border HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,60,0"
+                        Background="{StaticResource PrimaryBackgroundBrush}"
+                        BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="2"
+                        CornerRadius="10"
+                        Padding="15,10">
+                    <Border.Effect>
+                        <DropShadowEffect Color="{Binding Color, Source={StaticResource BorderBrush}}"
+                                          ShadowDepth="0" BlurRadius="20" Opacity="0.8"/>
+                    </Border.Effect>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="60" Height="60" CornerRadius="30"
+                                BorderBrush="{StaticResource PrimaryTextBrush}"
+                                BorderThickness="1">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding Opponent.pathPhoto}" Stretch="UniformToFill"/>
+                            </Border.Background>
+                        </Border>
+
+                        <TextBlock Text="{Binding Opponent.nickname}" VerticalAlignment="Center"
+                                   Margin="15,0,0,0" FontSize="24" FontWeight="Bold"
+                                   Foreground="{StaticResource PrimaryTextBrush}"/>
+                    </StackPanel>
+                </Border>
 
                 <ItemsControl HorizontalAlignment="Center"
                               VerticalAlignment="Top" 
@@ -286,15 +301,30 @@
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"
-                                VerticalAlignment="Bottom" Margin="60,0,0,60">
-                    <Border Width="80" Height="80" BorderBrush="Gray" BorderThickness="1">
-                        <Image Source="{Binding CurrentPlayer.pathPhoto}" Stretch="UniformToFill"/>
-                    </Border>
-                    <TextBlock Text="{Binding CurrentPlayer.nickname}" VerticalAlignment="Center"
-                               Margin="10,0,0,0" FontSize="24" FontWeight="Bold"
-                               Foreground="White"/>
-                </StackPanel>
+                <Border HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="60,0,0,60"
+                        Background="{StaticResource PrimaryBackgroundBrush}"
+                        BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="2"
+                        CornerRadius="10"
+                        Padding="15,10">
+                    <Border.Effect>
+                        <DropShadowEffect Color="{Binding Color, Source={StaticResource BorderBrush}}"
+                                          ShadowDepth="0" BlurRadius="20" Opacity="0.8"/>
+                    </Border.Effect>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="60" Height="60" CornerRadius="30"
+                                BorderBrush="{StaticResource PrimaryTextBrush}"
+                                BorderThickness="1">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding CurrentPlayer.pathPhoto}" Stretch="UniformToFill"/>
+                            </Border.Background>
+                        </Border>
+
+                        <TextBlock Text="{Binding CurrentPlayer.nickname}" VerticalAlignment="Center"
+                                   Margin="15,0,0,0" FontSize="24" FontWeight="Bold"
+                                   Foreground="{StaticResource PrimaryTextBrush}"/>
+                    </StackPanel>
+                </Border>
 
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Left" VerticalAlignment="Bottom"

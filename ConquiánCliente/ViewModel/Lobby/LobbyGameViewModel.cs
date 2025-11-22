@@ -1,6 +1,5 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceLobby;
-using ConquiánCliente.View.Game;
 using ConquiánCliente.View.Lobby;
 using System;
 using System.Collections.Generic;
@@ -80,6 +79,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         public ICommand ShowInviteFriendsCommand { get; }
         public ICommand ShutdownApplicationCommand { get; }
         public ICommand StartGameCommand { get; }
+        public ICommand KickPlayerCommand { get; }
 
         public LobbyGameViewModel(string receivedRoomCode)
         {
@@ -99,6 +99,7 @@ namespace ConquiánCliente.ViewModel.Lobby
             ShowInviteFriendsCommand = new RelayCommand(ExecuteShowInviteFriends, CanExecuteShowInviteFriends);
             ShutdownApplicationCommand = new RelayCommand(ExecuteShutdownApplication);
             StartGameCommand = new RelayCommand(ExecuteStartGame, CanExecuteStartGame);
+            KickPlayerCommand = new RelayCommand(ExecuteKickPlayer, CanExecuteKickPlayer);
 
             _ = InitializeConnectionAsync();
         }
@@ -115,6 +116,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 callbackHandler.OnMessageReceived += HandleMessageReceived;
                 callbackHandler.OnGamemodeChanged += HandleGamemodeChanged;
                 callbackHandler.OnGameStarting += HandleGameStarting;
+                callbackHandler.OnYouWereKicked += HandleYouWereKicked;
 
                 var context = new InstanceContext(callbackHandler);
                 client = new LobbyClient(context);
@@ -147,7 +149,14 @@ namespace ConquiánCliente.ViewModel.Lobby
             }
             catch (FaultException<ServiceFaultDto> fault)
             {
-                MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                IsNavigatingAway = true;
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                });
+
+                CloseClientConnection(notifyServer: false);
                 NavigateToLoginOrMainMenu();
             }
             catch (CommunicationException)
@@ -160,6 +169,68 @@ namespace ConquiánCliente.ViewModel.Lobby
                 MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 NavigateToLoginOrMainMenu();
             }
+        }
+
+        private bool CanExecuteKickPlayer(object parameter)
+        {
+            if (!IsHost || parameter == null)
+            {
+                return false;
+            }
+
+            if (int.TryParse(parameter.ToString(), out int idTarget))
+            {
+                return idTarget != PlayerSession.CurrentPlayer.idPlayer;
+            }
+            return false;
+        }
+
+        private void ExecuteKickPlayer(object parameter)
+        {
+            if (int.TryParse(parameter.ToString(), out int idPlayerToKick))
+            {
+                var result = MessageBox.Show(Lang.ConfirmKickPlayer, Lang.TitleConfirm, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result != MessageBoxResult.Yes) return;
+
+                Task.Run(async () =>
+                {
+                    try
+                    {
+                        await client.KickPlayerAsync(this.RoomCode, PlayerSession.CurrentPlayer.idPlayer, idPlayerToKick);
+                    }
+                    catch (FaultException<ServiceFaultDto> fault)
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                        });
+                    }
+                    catch (Exception)
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            MessageBox.Show(Lang.ErrorLobbyAction, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                        });
+                    }
+                });
+            }
+        }
+
+        private void HandleYouWereKicked()
+        {
+            if (IsNavigatingAway)
+            {
+                return;
+            }
+
+            IsNavigatingAway = true;
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                MessageBox.Show(Lang.InfoYouWereKicked, Lang.Lobby, MessageBoxButton.OK, MessageBoxImage.Information);
+                CloseClientConnection(notifyServer: false);
+                NavigateToLoginOrMainMenu();
+            });
         }
 
         private void ExecuteShutdownApplication(object obj)
@@ -200,7 +271,11 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private void HandleHostLeft()
         {
-            if (IsNavigatingAway) return;
+            if (IsNavigatingAway)
+            {
+                return;
+            }
+
             IsNavigatingAway = true;
 
             Application.Current.Dispatcher.Invoke(() =>
@@ -230,7 +305,10 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private void HandleGameStarting()
         {
-            if (IsHost) return;
+            if (IsHost)
+            {
+                return;
+            }
 
             NavigateToGame();
         }
@@ -310,7 +388,11 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private void ExecuteGoBack(object parameter)
         {
-            if (isNavigatingAway) return;
+            if (isNavigatingAway)
+            {
+                return;
+            }
+
             isNavigatingAway = true;
 
             CloseClientConnection(notifyServer: true);
@@ -319,7 +401,10 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private void CloseClientConnection(bool notifyServer)
         {
-            if (client == null) return;
+            if (client == null)
+            {
+                return;
+            }
 
             try
             {
@@ -367,17 +452,20 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private void NavigateToLoginOrMainMenu(Window currentWindow = null)
         {
+            Window newWindow = null;
+
             if (PlayerSession.IsGuest)
             {
                 PlayerSession.EndSession();
-                var loginView = new LogIn();
-                loginView.Show();
+                newWindow = new LogIn();
             }
             else
             {
-                var mainMenu = new View.MainMenu.MainMenu();
-                mainMenu.Show();
+                newWindow = new View.MainMenu.MainMenu();
             }
+
+            newWindow.Show();
+            Application.Current.MainWindow = newWindow;
 
             var windowToClose = currentWindow;
             if (windowToClose == null)
@@ -559,7 +647,11 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private void NavigateToGame()
         {
-            if (IsNavigatingAway) return;
+            if (IsNavigatingAway)
+            {
+                return;
+            }
+
             IsNavigatingAway = true;
 
             Application.Current.Dispatcher.Invoke(() =>
