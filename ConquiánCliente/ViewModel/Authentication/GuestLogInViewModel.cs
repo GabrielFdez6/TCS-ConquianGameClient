@@ -107,18 +107,23 @@ namespace ConquiánCliente.ViewModel.Authentication
                     MessageBox.Show(Lang.ErrorGuestInviteMismatch, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (FaultException<ServiceLobby.GuestInviteUsedFault> ex)
-            {
-                MessageBox.Show(ex.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            catch (FaultException<ServiceLobby.RegisteredUserAsGuestFault> ex)
-            {
-                MessageBox.Show(ex.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
-                ExecuteNavigateBack(null);
-            }
             catch (FaultException<ServiceLobby.ServiceFaultDto> fault)
             {
-                MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                switch (fault.Detail.ErrorType)
+                {
+                    case ServiceLobby.ServiceErrorType.GuestInviteUsed:
+                        MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+
+                    case ServiceLobby.ServiceErrorType.RegisteredUserAsGuest:
+                        MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
+                        ExecuteNavigateBack(null);
+                        break;
+
+                    default:
+                        MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                }
             }
             catch (CommunicationException)
             {

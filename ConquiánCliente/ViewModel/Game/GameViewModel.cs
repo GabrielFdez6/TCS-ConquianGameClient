@@ -94,47 +94,7 @@ namespace ConquiánCliente.ViewModel.Game
         {
             try
             {
-                var callbackHandler = new GameCallbackHandler();
-                callbackHandler.OnOpponentDiscarded += (card) => {
-                    Application.Current.Dispatcher.Invoke(() => {
-                        TopDiscardCard = card;
-                    });
-                };
-
-                callbackHandler.OnOpponentDrewDeck += () => {
-                    Application.Current.Dispatcher.Invoke(() => {
-                    });
-                };
-
-                callbackHandler.TimeStateUpdated += (gameSeconds, turnSeconds, newTurnPlayerId) => {
-                    Application.Current.Dispatcher.Invoke(() => {
-                        UpdateTimerDisplay(gameSeconds);
-                        UpdateTurnTimerDisplay(turnSeconds);
-                        UpdateTurnStatus(newTurnPlayerId);
-                    });
-                };
-
-                callbackHandler.OpponentHandUpdated += (newCardCount) => {
-                    Application.Current.Dispatcher.Invoke(() => {
-                        UpdateOpponentCardCount(newCardCount);
-                    });
-                };
-
-                callbackHandler.OnOpponentMeld += async (meldCardDtos) => {
-                    var cardVMs = meldCardDtos.Select(dto => new CardViewModel(dto)).ToList();
-                    await Application.Current.Dispatcher.InvokeAsync(() => {
-                        TemporaryMeld.Clear();
-                        foreach (var cardVM in cardVMs)
-                        {
-                            TemporaryMeld.Add(cardVM);
-                        }
-                    });
-                    await Task.Delay(1000);
-                    await Application.Current.Dispatcher.InvokeAsync(() => {
-                        TemporaryMeld.Clear();
-                        OpponentMelds.Add(new MeldViewModel(cardVMs));
-                    });
-                };
+                var callbackHandler = ConfigureGameCallbacks();
 
                 var context = new InstanceContext(callbackHandler);
                 client = new GameClient(context);
@@ -185,9 +145,56 @@ namespace ConquiánCliente.ViewModel.Game
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}",
-                                Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private GameCallbackHandler ConfigureGameCallbacks()
+        {
+            var callbackHandler = new GameCallbackHandler();
+
+            callbackHandler.OnOpponentDiscarded += (card) => {
+                Application.Current.Dispatcher.Invoke(() => {
+                    TopDiscardCard = card;
+                });
+            };
+
+            callbackHandler.OnOpponentDrewDeck += () => {
+                Application.Current.Dispatcher.Invoke(() => {
+                });
+            };
+
+            callbackHandler.TimeStateUpdated += (gameSeconds, turnSeconds, newTurnPlayerId) => {
+                Application.Current.Dispatcher.Invoke(() => {
+                    UpdateTimerDisplay(gameSeconds);
+                    UpdateTurnTimerDisplay(turnSeconds);
+                    UpdateTurnStatus(newTurnPlayerId);
+                });
+            };
+
+            callbackHandler.OpponentHandUpdated += (newCardCount) => {
+                Application.Current.Dispatcher.Invoke(() => {
+                    UpdateOpponentCardCount(newCardCount);
+                });
+            };
+
+            callbackHandler.OnOpponentMeld += async (meldCardDtos) => {
+                var cardVMs = meldCardDtos.Select(dto => new CardViewModel(dto)).ToList();
+                await Application.Current.Dispatcher.InvokeAsync(() => {
+                    TemporaryMeld.Clear();
+                    foreach (var cardVM in cardVMs)
+                    {
+                        TemporaryMeld.Add(cardVM);
+                    }
+                });
+                await Task.Delay(1000);
+                await Application.Current.Dispatcher.InvokeAsync(() => {
+                    TemporaryMeld.Clear();
+                    OpponentMelds.Add(new MeldViewModel(cardVMs));
+                });
+            };
+
+            return callbackHandler;
         }
 
         private void UpdateOpponentCardCount(int newCardCount)
