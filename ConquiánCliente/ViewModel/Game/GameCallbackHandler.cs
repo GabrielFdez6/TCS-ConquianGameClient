@@ -14,6 +14,7 @@ namespace ConquiánCliente.ViewModel.Game
         public event Action<int, int, int> TimeStateUpdated;
         public event Action<int> OpponentHandUpdated;
         public event Action<CardDto[]> OnOpponentMeld;
+        public event Action OnOpponentLeftEvent;
 
         public void OnTimeUpdated(int gameRemainingSeconds, int turnRemainingSeconds, int currentTurnPlayerId)
         {
@@ -42,6 +43,11 @@ namespace ConquiánCliente.ViewModel.Game
         public void NotifyOpponentMeld(CardDto[] meldCards)
         {
             OnOpponentMeld?.Invoke(meldCards);
+        }
+
+        public void OnOpponentLeft()
+        {
+            OnOpponentLeftEvent?.Invoke();
         }
     }
 }

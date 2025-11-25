@@ -258,12 +258,44 @@
                           AllowDrop="True"
                           DragEnter="StockPileDragEnter"
                           Drop="StockPileDrop">
+
                         <Image Source="/Resources/Assets/reverso.png" Width="144" Height="216"/>
+
+                        <Border x:Name="BlinkingBorder"
+                                BorderBrush="Yellow"
+                                BorderThickness="4"
+                                CornerRadius="12"
+                                IsHitTestVisible="False">
+                            <Border.Effect>
+                                <DropShadowEffect Color="Gold" BlurRadius="25" ShadowDepth="0"/>
+                            </Border.Effect>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Setter Property="Opacity" Value="1"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsStockPileBlinking}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                            <DataTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                     From="0.2" To="1.0" 
+                                                     Duration="0:0:0.6"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.EnterActions>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
                     </Grid>
 
                 </StackPanel>
 
-                <Button HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                <Button Command="{Binding PassTurnCommand}"
+                        HorizontalAlignment="Left" VerticalAlignment="Bottom"
                         Margin="870,0,0,280" Width="180" Height="55"
                         Style="{StaticResource PrimaryButtonStyle}">
                     <TextBlock Text="{x:Static language:Lang.GameToPass}"
@@ -332,10 +364,6 @@
                     <TextBlock Text="{Binding TurnStatusText}" FontSize="28"
                                FontWeight="Bold" Foreground="White"
                                VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding TurnTimeDisplay}" FontSize="28"
-                               FontWeight="Bold" Foreground="Yellow"
-                               VerticalAlignment="Center"
-                               Margin="10,0,0,0" />
                 </StackPanel>
             </Grid>
         </Viewbox>

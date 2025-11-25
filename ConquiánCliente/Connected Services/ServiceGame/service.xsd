@@ -44,21 +44,6 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="DrawFromDiscard">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="roomCode" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="playerId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DrawFromDiscardResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" minOccurs="0" name="DrawFromDiscardResult" nillable="true" type="q3:CardDto" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="DiscardCard">
     <xs:complexType>
       <xs:sequence>
@@ -73,10 +58,31 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="LeaveGame">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="roomCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="playerId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PassTurn">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="roomCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="playerId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PassTurnResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="NotifyGameUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" minOccurs="0" name="newState" nillable="true" type="q4:GameStateDto" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" minOccurs="0" name="newState" nillable="true" type="q3:GameStateDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -88,7 +94,7 @@
   <xs:element name="NotifyOpponentDiscarded">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" minOccurs="0" name="card" nillable="true" type="q5:CardDto" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" minOccurs="0" name="card" nillable="true" type="q4:CardDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -111,8 +117,13 @@
   <xs:element name="NotifyOpponentMeld">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" minOccurs="0" name="meldCards" nillable="true" type="q6:ArrayOfCardDto" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" minOccurs="0" name="meldCards" nillable="true" type="q5:ArrayOfCardDto" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OnOpponentLeft">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

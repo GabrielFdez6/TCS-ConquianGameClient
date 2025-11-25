@@ -745,11 +745,29 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Para tomar esta carta, selecciona al menos 2 cartas de tu mano que formen una tercia o corrida..
+        /// </summary>
+        public static string GameInvalidMove {
+            get {
+                return ResourceManager.GetString("GameInvalidMove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a ¿Estas seguro de que quieres salir de la partida? .
         /// </summary>
         public static string GameLeaveTheMatch {
             get {
                 return ResourceManager.GetString("GameLeaveTheMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ¡Jugada realizada!\n\nAhora debes pagar una carta de tu mano para terminar tu turno..
+        /// </summary>
+        public static string GameMoveMade {
+            get {
+                return ResourceManager.GetString("GameMoveMade", resourceCulture);
             }
         }
         
@@ -1452,6 +1470,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string TitleInfo {
             get {
                 return ResourceManager.GetString("TitleInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Pagar.
+        /// </summary>
+        public static string TitlePay {
+            get {
+                return ResourceManager.GetString("TitlePay", resourceCulture);
             }
         }
         

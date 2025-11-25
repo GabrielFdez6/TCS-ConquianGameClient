@@ -603,4 +603,14 @@
   <data name="InfoYouWereKicked" xml:space="preserve">
     <value>You have been kicked from the lobby by the host.</value>
   </data>
+  <data name="GameMoveMade" xml:space="preserve">
+    <value>Play made!\n\nNow you must pay a card from your hand to end your turn.</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TitlePay" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="GameInvalidMove" xml:space="preserve">
+    <value>To take this card, select at least 2 cards from your hand that form a set or run.</value>
+  </data>
 </root>

@@ -406,9 +406,6 @@
     <None Include="Connected Services\ServiceGame\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceGame\ConquiánCliente.ServiceGame.CardDto.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Connected Services\ServiceGame\ConquiánCliente.ServiceGame.GameStateDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

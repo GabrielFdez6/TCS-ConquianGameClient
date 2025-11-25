@@ -603,4 +603,13 @@
   <data name="InfoYouWereKicked" xml:space="preserve">
     <value>Has sido expulsado de la sala por el anfitrión.</value>
   </data>
+  <data name="GameMoveMade" xml:space="preserve">
+    <value>¡Jugada realizada!\n\nAhora debes pagar una carta de tu mano para terminar tu turno.</value>
+  </data>
+  <data name="TitlePay" xml:space="preserve">
+    <value>Pagar</value>
+  </data>
+  <data name="GameInvalidMove" xml:space="preserve">
+    <value>Para tomar esta carta, selecciona al menos 2 cartas de tu mano que formen una tercia o corrida.</value>
+  </data>
 </root>

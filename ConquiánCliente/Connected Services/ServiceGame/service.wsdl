@@ -68,15 +68,6 @@
   <wsdl:message name="IGame_DrawFromDeck_ServiceFaultDtoFault_FaultMessage">
     <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q3:ServiceFaultDto" />
   </wsdl:message>
-  <wsdl:message name="IGame_DrawFromDiscard_InputMessage">
-    <wsdl:part name="parameters" element="tns:DrawFromDiscard" />
-  </wsdl:message>
-  <wsdl:message name="IGame_DrawFromDiscard_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DrawFromDiscardResponse" />
-  </wsdl:message>
-  <wsdl:message name="IGame_DrawFromDiscard_ServiceFaultDtoFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q4:ServiceFaultDto" />
-  </wsdl:message>
   <wsdl:message name="IGame_DiscardCard_InputMessage">
     <wsdl:part name="parameters" element="tns:DiscardCard" />
   </wsdl:message>
@@ -84,7 +75,16 @@
     <wsdl:part name="parameters" element="tns:DiscardCardResponse" />
   </wsdl:message>
   <wsdl:message name="IGame_DiscardCard_ServiceFaultDtoFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q5:ServiceFaultDto" />
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q4:ServiceFaultDto" />
+  </wsdl:message>
+  <wsdl:message name="IGame_LeaveGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveGame" />
+  </wsdl:message>
+  <wsdl:message name="IGame_PassTurn_InputMessage">
+    <wsdl:part name="parameters" element="tns:PassTurn" />
+  </wsdl:message>
+  <wsdl:message name="IGame_PassTurn_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PassTurnResponse" />
   </wsdl:message>
   <wsdl:message name="IGame_NotifyGameUpdate_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyGameUpdate" />
@@ -104,6 +104,9 @@
   <wsdl:message name="IGame_NotifyOpponentMeld_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyOpponentMeld" />
   </wsdl:message>
+  <wsdl:message name="IGame_OnOpponentLeft_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnOpponentLeft" />
+  </wsdl:message>
   <wsdl:portType name="IGame">
     <wsdl:operation name="JoinGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/JoinGame" message="tns:IGame_JoinGame_InputMessage" />
@@ -120,15 +123,17 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/DrawFromDeckResponse" message="tns:IGame_DrawFromDeck_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IGame/DrawFromDeckServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IGame_DrawFromDeck_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
-    <wsdl:operation name="DrawFromDiscard">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGame/DrawFromDiscard" message="tns:IGame_DrawFromDiscard_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGame/DrawFromDiscardResponse" message="tns:IGame_DrawFromDiscard_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IGame/DrawFromDiscardServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IGame_DrawFromDiscard_ServiceFaultDtoFault_FaultMessage" />
-    </wsdl:operation>
     <wsdl:operation name="DiscardCard">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/DiscardCard" message="tns:IGame_DiscardCard_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/DiscardCardResponse" message="tns:IGame_DiscardCard_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IGame/DiscardCardServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IGame_DiscardCard_ServiceFaultDtoFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LeaveGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGame/LeaveGame" message="tns:IGame_LeaveGame_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PassTurn">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGame/PassTurn" message="tns:IGame_PassTurn_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGame/PassTurnResponse" message="tns:IGame_PassTurn_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotifyGameUpdate">
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/NotifyGameUpdate" message="tns:IGame_NotifyGameUpdate_OutputCallbackMessage" />
@@ -147,6 +152,9 @@
     </wsdl:operation>
     <wsdl:operation name="NotifyOpponentMeld">
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/NotifyOpponentMeld" message="tns:IGame_NotifyOpponentMeld_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OnOpponentLeft">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGame/OnOpponentLeft" message="tns:IGame_OnOpponentLeft_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGame" type="tns:IGame">
@@ -189,18 +197,6 @@
         <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="DrawFromDiscard">
-      <soap12:operation soapAction="http://tempuri.org/IGame/DrawFromDiscard" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="ServiceFaultDtoFault">
-        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
     <wsdl:operation name="DiscardCard">
       <soap12:operation soapAction="http://tempuri.org/IGame/DiscardCard" style="document" />
       <wsdl:input>
@@ -212,6 +208,21 @@
       <wsdl:fault name="ServiceFaultDtoFault">
         <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
       </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="LeaveGame">
+      <soap12:operation soapAction="http://tempuri.org/IGame/LeaveGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="PassTurn">
+      <soap12:operation soapAction="http://tempuri.org/IGame/PassTurn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="NotifyGameUpdate">
       <soap12:operation soapAction="http://tempuri.org/IGame/NotifyGameUpdate" style="document" />
@@ -245,6 +256,12 @@
     </wsdl:operation>
     <wsdl:operation name="NotifyOpponentMeld">
       <soap12:operation soapAction="http://tempuri.org/IGame/NotifyOpponentMeld" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnOpponentLeft">
+      <soap12:operation soapAction="http://tempuri.org/IGame/OnOpponentLeft" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
