@@ -99,4 +99,13 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="ServiceErrorType" nillable="true" type="tns:ServiceErrorType" />
+  <xs:complexType name="GameResultDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsDraw" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LoserId" type="xs:int" />
+      <xs:element minOccurs="0" name="PointsWon" type="xs:int" />
+      <xs:element minOccurs="0" name="WinnerId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GameResultDto" nillable="true" type="tns:GameResultDto" />
 </xs:schema>

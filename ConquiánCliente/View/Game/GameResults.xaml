@@ -15,7 +15,7 @@
         <Border Background="{StaticResource PrimaryBackgroundBrush}" />
         <Image Source="/Resources/backgroundGame.jpg"
                Stretch="UniformToFill"
-               Opacity="0.5"/>
+               Opacity="0.5" Cursor="Hand"/>
 
         <Border HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -35,7 +35,7 @@
 
             <StackPanel Orientation="Vertical">
 
-                <TextBlock Text="{x:Static language:Lang.GameVictory}" 
+                <TextBlock Text="{Binding ResultTitle}"
                            Style="{StaticResource TitleTextBlock}"
                            FontSize="60"
                            Margin="0,0,0,40"/>
@@ -64,6 +64,13 @@
                                    FontSize="20"
                                    Foreground="LightGray"
                                    HorizontalAlignment="Center"/>
+
+                        <TextBlock Text="{Binding PlayerScore, StringFormat='Puntos ganados: {0}'}"
+                                   FontSize="22"
+                                   FontWeight="Bold"
+                                   Foreground="#FFD700"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,10,0,0"/>
                     </StackPanel>
 
                     <TextBlock Grid.Column="1" Text="VS"
@@ -90,6 +97,13 @@
                                    FontSize="20"
                                    Foreground="LightGray"
                                    HorizontalAlignment="Center"/>
+
+                        <TextBlock Text="{Binding OpponentScore, StringFormat='Puntos: {0}'}"
+                                   FontSize="22"
+                                   FontWeight="Bold"
+                                   Foreground="#FFD700"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,10,0,0"/>
                     </StackPanel>
                 </Grid>
 
@@ -103,6 +117,18 @@
                             Margin="0,0,0,20"
                             Command="{Binding BackToLobbyCommand}">
                         <TextBlock Text="{x:Static language:Lang.GameBackToLobby}"
+                                   FontSize="24" 
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                    </Button>
+
+                    <Button Style="{StaticResource PrimaryButtonStyle}"
+                            Height="55"
+                            FontSize="24"
+                            FontWeight="Bold"
+                            Command="{Binding ExitGameCommand}">
+                        <TextBlock Text="{x:Static language:Lang.GameExit}"
                                    FontSize="24" 
                                    FontWeight="Bold"
                                    VerticalAlignment="Center"

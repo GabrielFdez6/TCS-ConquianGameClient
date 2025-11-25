@@ -562,6 +562,100 @@ namespace ConquiánCliente.ServiceGame {
         GameInProgress = 14,
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GameResultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+        "acts")]
+    [System.SerializableAttribute()]
+    public partial class GameResultDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsDrawField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int LoserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PointsWonField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int WinnerIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsDraw {
+            get {
+                return this.IsDrawField;
+            }
+            set {
+                if ((this.IsDrawField.Equals(value) != true)) {
+                    this.IsDrawField = value;
+                    this.RaisePropertyChanged("IsDraw");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int LoserId {
+            get {
+                return this.LoserIdField;
+            }
+            set {
+                if ((this.LoserIdField.Equals(value) != true)) {
+                    this.LoserIdField = value;
+                    this.RaisePropertyChanged("LoserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PointsWon {
+            get {
+                return this.PointsWonField;
+            }
+            set {
+                if ((this.PointsWonField.Equals(value) != true)) {
+                    this.PointsWonField = value;
+                    this.RaisePropertyChanged("PointsWon");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int WinnerId {
+            get {
+                return this.WinnerIdField;
+            }
+            set {
+                if ((this.WinnerIdField.Equals(value) != true)) {
+                    this.WinnerIdField = value;
+                    this.RaisePropertyChanged("WinnerId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceGame.IGame", CallbackContract=typeof(ConquiánCliente.ServiceGame.IGameCallback))]
     public interface IGame {
@@ -634,6 +728,9 @@ namespace ConquiánCliente.ServiceGame {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/OnOpponentLeft")]
         void OnOpponentLeft();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/NotifyGameEnded")]
+        void NotifyGameEnded(ConquiánCliente.ServiceGame.GameResultDto result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

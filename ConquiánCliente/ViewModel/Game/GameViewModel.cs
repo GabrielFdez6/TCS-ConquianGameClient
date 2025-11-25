@@ -211,8 +211,59 @@ namespace ConquiánCliente.ViewModel.Game
                 });
             };
 
+            callbackHandler.OnGameEnded += (result) =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ShowGameResults(result);
+                });
+            };
+
             return callbackHandler;
         }
+
+        private void ShowGameResults(GameResultDto result)
+        {
+            string myName = CurrentPlayer.nickname;
+            string opponentName = Opponent.nickname;
+
+            int myScore = 0;
+            int opponentScore = 0;
+
+            if (result.IsDraw)
+            {
+                myScore = 0;
+                opponentScore = 0;
+            }
+            else
+            {
+                if (result.WinnerId == CurrentPlayer.idPlayer)
+                {
+                    myScore = result.PointsWon; 
+                    opponentScore = 0;
+                }
+                else
+                {
+                    myScore = 0;
+                    opponentScore = result.PointsWon; 
+                }
+            }
+
+            var resultsVM = new GameResultsViewModel(myName, myScore, opponentName, opponentScore);
+            var resultsWindow = new ConquiánCliente.View.Game.GameResults();
+            resultsWindow.DataContext = resultsVM;
+            resultsWindow.Show();
+
+            foreach (Window win in Application.Current.Windows)
+            {
+                if (win.DataContext == this)
+                {
+                    win.Close();
+                    break;
+                }
+            }
+        }
+
 
         private void UpdateOpponentCardCount(int newCardCount)
         {

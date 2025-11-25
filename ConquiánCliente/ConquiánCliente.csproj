@@ -130,6 +130,7 @@
     <Compile Include="ViewModel\FriendList\StatusConverter.cs" />
     <Compile Include="ViewModel\Game\CardViewModel.cs" />
     <Compile Include="ViewModel\Game\GameCallbackHandler.cs" />
+    <Compile Include="ViewModel\Game\GameResultsViewModel.cs" />
     <Compile Include="ViewModel\Game\GameViewModel.cs" />
     <Compile Include="ViewModel\Game\MeldViewModel.cs" />
     <Compile Include="ViewModel\ImagePathToBooleanConverter.cs" />
