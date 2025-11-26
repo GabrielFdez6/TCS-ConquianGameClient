@@ -1,19 +1,50 @@
 ﻿using System.ServiceModel;
 using ConquiánCliente.ServicePresence; 
-using ConquiánCliente.ViewModel; 
 
 namespace ConquiánCliente.ViewModel
 {
     public class PresenceClientManager
     {
         private static PresenceClientManager instance;
-        public PresenceClient Client { get; private set; }
+        private PresenceClient client;
+
+        public PresenceClient Client
+        {
+            get
+            {
+                if (client == null ||
+                    client.State == CommunicationState.Closed ||
+                    client.State == CommunicationState.Faulted)
+                {
+                    InitializeClient();
+                }
+                return client;
+            }
+        }
 
         private PresenceClientManager()
         {
+            InitializeClient();
+        }
+
+        private void InitializeClient()
+        {
+            if (client != null)
+            {
+                try
+                {
+                    if (client.State == CommunicationState.Faulted)
+                        client.Abort();
+                    else
+                        client.Close();
+                }
+                catch
+                {
+                }
+            }
 
             var context = new InstanceContext(new PresenceCallbackHandler());
-            Client = new PresenceClient(context);
+            client = new PresenceClient(context);
         }
 
         public static PresenceClientManager Instance

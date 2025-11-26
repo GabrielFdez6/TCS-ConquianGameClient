@@ -173,7 +173,7 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private bool CanExecuteKickPlayer(object parameter)
         {
-            if (!IsHost || parameter == null)
+            if (!IsHost || parameter == null || PlayerSession.CurrentPlayer == null)
             {
                 return false;
             }

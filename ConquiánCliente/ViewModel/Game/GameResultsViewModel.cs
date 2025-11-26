@@ -41,13 +41,11 @@ namespace ConquiánCliente.ViewModel.Game
             set { opponentScore = value; OnPropertyChanged(nameof(OpponentScore)); }
         }
 
-        public ICommand BackToLobbyCommand { get; private set; }
-        public ICommand ExitGameCommand { get; private set; }
+        public ICommand ReturnToMainMenuCommand { get; private set; }
 
         public GameResultsViewModel()
         {
-            BackToLobbyCommand = new RelayCommand(BackToLobby);
-            ExitGameCommand = new RelayCommand(ExitGame);
+            ReturnToMainMenuCommand = new RelayCommand(ReturnToMainMenu);
         }
 
         public GameResultsViewModel(string pName, int pScore, string oName, int oScore) : this()
@@ -71,17 +69,11 @@ namespace ConquiánCliente.ViewModel.Game
                 ResultTitle = "Empate";
             }
         }
-
-        private void BackToLobby(object obj)
+        private void ReturnToMainMenu(object obj)
         {
             var mainMenu = new ConquiánCliente.View.MainMenu.MainMenu();
             mainMenu.Show();
             CloseWindow(obj);
-        }
-
-        private void ExitGame(object obj)
-        {
-            Application.Current.Shutdown();
         }
 
         private void CloseWindow(object obj)

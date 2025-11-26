@@ -115,25 +115,14 @@
                             FontSize="24"
                             FontWeight="Bold"
                             Margin="0,0,0,20"
-                            Command="{Binding BackToLobbyCommand}">
-                        <TextBlock Text="{x:Static language:Lang.GameBackToLobby}"
+                            Command="{Binding ReturnToMainMenuCommand}">
+                        <TextBlock Text="Menú Principal"
                                    FontSize="24" 
                                    FontWeight="Bold"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"/>
                     </Button>
 
-                    <Button Style="{StaticResource PrimaryButtonStyle}"
-                            Height="55"
-                            FontSize="24"
-                            FontWeight="Bold"
-                            Command="{Binding ExitGameCommand}">
-                        <TextBlock Text="{x:Static language:Lang.GameExit}"
-                                   FontSize="24" 
-                                   FontWeight="Bold"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
-                    </Button>
                 </StackPanel>
 
             </StackPanel>
