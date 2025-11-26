@@ -52,6 +52,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Width="100" Height="100" BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1" Margin="0,0,20,0" VerticalAlignment="Top">
@@ -61,22 +62,28 @@
                     <Label Grid.Row="0" Grid.Column="1" Content="{x:Static language:Lang.GlobalLevel}" FontWeight="Bold" Foreground="{StaticResource PrimaryTextBrush}"/>
                     <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Player.level}" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}" Margin="5,0,0,0"/>
 
-                    <Label Grid.Row="1" Grid.Column="1" Content="{x:Static language:Lang.GlobalNickname}" FontWeight="Bold" Foreground="{StaticResource PrimaryTextBrush}" Margin="0,5,0,0"/>
-                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Player.nickname}" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}" Margin="5,5,0,0"/>
+                    <Label Grid.Row="1" Grid.Column="1" Content="{x:Static language:Lang.GlobalPoints}" FontWeight="Bold" Foreground="{StaticResource PrimaryTextBrush}" Margin="0,5,0,0"/>
+                    <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" Margin="5,5,0,0" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Player.currentPoints}" Foreground="{StaticResource PrimaryTextBrush}"/>
+                        <TextBlock Text=" pts" Foreground="{StaticResource PrimaryTextBrush}"/>
+                    </StackPanel>
 
-                    <Label Grid.Row="2" Grid.Column="1" Content="{x:Static language:Lang.GlobalEmail}" FontWeight="Bold" Foreground="{StaticResource PrimaryTextBrush}" Margin="0,10,0,0"/>
-                    <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Player.email}" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}" Margin="5,10,0,0"/>
+                    <Label Grid.Row="2" Grid.Column="1" Content="{x:Static language:Lang.GlobalNickname}" FontWeight="Bold" Foreground="{StaticResource PrimaryTextBrush}" Margin="0,5,0,0"/>
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Player.nickname}" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}" Margin="5,5,0,0"/>
 
-                    <Label Grid.Row="3" Grid.Column="1" Content="{x:Static language:Lang.GlobalSocial}" FontWeight="Bold" Margin="0,15,0,5" VerticalAlignment="Top" Foreground="{StaticResource PrimaryTextBrush}"/>
+                    <Label Grid.Row="3" Grid.Column="1" Content="{x:Static language:Lang.GlobalEmail}" FontWeight="Bold" Foreground="{StaticResource PrimaryTextBrush}" Margin="0,10,0,0"/>
+                    <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding Player.email}" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}" Margin="5,10,0,0"/>
 
-                    <StackPanel Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+                    <Label Grid.Row="4" Grid.Column="1" Content="{x:Static language:Lang.GlobalSocial}" FontWeight="Bold" Margin="0,15,0,5" VerticalAlignment="Top" Foreground="{StaticResource PrimaryTextBrush}"/>
+
+                    <StackPanel Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal">
                         <Image Source="/Resources/facebook.png" Width="24" Height="24" Margin="0,5,10,5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                         <TextBlock VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}" Margin="5,5">
                                 <TextBlock Text="{Binding FacebookLink}" />
                         </TextBlock>
                     </StackPanel>
 
-                    <StackPanel Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+                    <StackPanel Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal">
                         <Image Source="/Resources/instagram.png" Width="24" Height="24" Margin="0,5,10,5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                         <TextBlock VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}" Margin="5,5">
                                 <TextBlock Text="{Binding InstagramLink}" />

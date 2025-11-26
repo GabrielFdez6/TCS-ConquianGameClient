@@ -328,7 +328,7 @@
     <value>Error connecting to server: {0}</value>
   </data>
   <data name="ErrorGeneric" xml:space="preserve">
-    <value>An error occurred: {0}</value>
+    <value>An error occurred: </value>
   </data>
   <data name="ErrorRegistrationFailed" xml:space="preserve">
     <value>Registration failed. The email or nickname may already be in use.</value>
@@ -534,8 +534,8 @@
   <data name="GameResultsTitle" xml:space="preserve">
     <value>Results</value>
   </data>
-  <data name="GameBackToLobby" xml:space="preserve">
-    <value>Back to lobby</value>
+  <data name="GameBackToMainMenu" xml:space="preserve">
+    <value>Back to main menu</value>
   </data>
   <data name="GameVictory" xml:space="preserve">
     <value>Victory</value>
@@ -612,5 +612,17 @@
   </data>
   <data name="GameInvalidMove" xml:space="preserve">
     <value>To take this card, select at least 2 cards from your hand that form a set or run.</value>
+  </data>
+  <data name="GameOpponentLeft" xml:space="preserve">
+    <value>The opponent has abandoned the game.</value>
+  </data>
+  <data name="GlobalPoints" xml:space="preserve">
+    <value>Points</value>
+  </data>
+  <data name="GamePlayer" xml:space="preserve">
+    <value>Player</value>
+  </data>
+  <data name="GameOpponent" xml:space="preserve">
+    <value>Opponent</value>
   </data>
 </root>

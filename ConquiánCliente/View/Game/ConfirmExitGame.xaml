@@ -37,7 +37,7 @@
 
                 <Button Width="200" Height="60"
                         Margin="0,0,0,10"
-                        Click="VolverAlJuegoButton_Click"
+                        Click="SalirButtonClick"
                         Style="{StaticResource PrimaryButtonStyle}"
                         Command="{Binding ExitGameCommand}">
                     <TextBlock Text="{x:Static language:Lang.GameExit}"
@@ -48,7 +48,7 @@
                 </Button>
 
                 <Button Width="200" Height="60"
-                        Click="VolverAlJuegoButton_Click"
+                        Click="VolverAlJuegoButtonClick"
                         Style="{StaticResource PrimaryButtonStyle}"
                         Command="{Binding CloseDialogCommand}">
                     <TextBlock Text="{x:Static language:Lang.GameReturnToGame}"

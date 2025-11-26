@@ -1,13 +1,11 @@
 ﻿using ConquiánCliente.ServiceUserProfile;
 using ConquiánCliente.View;
-using ConquiánCliente.View.MainMenu;
 using ConquiánCliente.View.Profile;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ConquiánCliente.Properties.Langs;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,6 +27,30 @@ namespace ConquiánCliente.ViewModel.Profile
         {
             get => nickname;
             set { nickname = value; OnPropertyChanged(); }
+        }
+
+        private int currentPoints;
+        public int CurrentPoints
+        {
+            get => currentPoints;
+            set
+            {
+                currentPoints = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(PointsDisplay));
+            }
+        }
+
+        public string PointsDisplay
+        {
+            get
+            {
+                if (int.TryParse(Level, out int levelInt))
+                {
+                    return $"{CurrentPoints} / {levelInt * 100}";
+                }
+                return $"{CurrentPoints} / 100";
+            }
         }
 
         private string email;
@@ -108,6 +130,7 @@ namespace ConquiánCliente.ViewModel.Profile
                         Name = fullPlayerProfile.name;
                         LastName = fullPlayerProfile.lastName;
                         Level = fullPlayerProfile.level?.ToString() ?? "1";
+                        CurrentPoints = fullPlayerProfile.currentPoints;
 
                         string serverImageName = System.IO.Path.GetFileName(fullPlayerProfile.pathPhoto);
                         SetProfileImage(serverImageName);

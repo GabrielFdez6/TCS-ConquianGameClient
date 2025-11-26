@@ -90,6 +90,21 @@ namespace ConquiánCliente.ViewModel.Game
             _ = InitializeGameConnectionAsync();
         }
 
+        public void LeaveGame()
+        {
+            try
+            {
+                if (client != null && CurrentPlayer != null)
+                {
+                    client.LeaveGame(roomCode, CurrentPlayer.idPlayer);
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine(Lang.ErrorGeneric);
+            }
+        }
+
         public async Task PassTurnAsync()
         {
             if (client == null || !IsMyTurn)
@@ -112,9 +127,9 @@ namespace ConquiánCliente.ViewModel.Game
             {
                 MessageBox.Show(fault.Detail.Message, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show($"{Lang.ErrorGeneric}: {ex.Message}");
+                MessageBox.Show(Lang.ErrorGeneric);
             }
         }
 
@@ -219,7 +234,32 @@ namespace ConquiánCliente.ViewModel.Game
                 });
             };
 
+            callbackHandler.OnOpponentLeftEvent += () =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    MessageBox.Show(Lang.GameOpponentLeft, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    NavigateToMainMenu();
+                });
+            };
+
             return callbackHandler;
+        }
+
+        private void NavigateToMainMenu()
+        {
+            var mainMenu = new ConquiánCliente.View.MainMenu.MainMenu();
+            mainMenu.Show();
+
+            foreach (Window win in Application.Current.Windows)
+            {
+                if (win.DataContext == this)
+                {
+                    win.Close();
+                    break;
+                }
+            }
         }
 
         private void ShowGameResults(GameResultDto result)

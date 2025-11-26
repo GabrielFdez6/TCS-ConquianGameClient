@@ -166,7 +166,7 @@ namespace ConquiánCliente.ServiceGame {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string currentPointsField;
+        private int currentPointsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string emailField;
@@ -206,12 +206,12 @@ namespace ConquiánCliente.ServiceGame {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string currentPoints {
+        public int currentPoints {
             get {
                 return this.currentPointsField;
             }
             set {
-                if ((object.ReferenceEquals(this.currentPointsField, value) != true)) {
+                if ((this.currentPointsField.Equals(value) != true)) {
                     this.currentPointsField = value;
                     this.RaisePropertyChanged("currentPoints");
                 }

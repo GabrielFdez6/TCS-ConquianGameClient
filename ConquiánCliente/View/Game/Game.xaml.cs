@@ -48,6 +48,11 @@ namespace ConquiánCliente.View.Game
 
             if (result == true)
             {
+                if (viewModel != null)
+                {
+                    viewModel.LeaveGame();
+                }
+
                 var mainMenu = new ConquiánCliente.View.MainMenu.MainMenu();
                 mainMenu.Show();
                 this.Close();

@@ -178,7 +178,7 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Ocurrió un error: {0}.
+        ///   Busca una cadena traducida similar a Ocurrió un error: .
         /// </summary>
         public static string ErrorGeneric {
             get {
@@ -700,11 +700,11 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Volver al lobby.
+        ///   Busca una cadena traducida similar a Volver al menú principal.
         /// </summary>
-        public static string GameBackToLobby {
+        public static string GameBackToMainMenu {
             get {
-                return ResourceManager.GetString("GameBackToLobby", resourceCulture);
+                return ResourceManager.GetString("GameBackToMainMenu", resourceCulture);
             }
         }
         
@@ -772,11 +772,38 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Oponente.
+        /// </summary>
+        public static string GameOpponent {
+            get {
+                return ResourceManager.GetString("GameOpponent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El oponente ha abandonado la partida..
+        /// </summary>
+        public static string GameOpponentLeft {
+            get {
+                return ResourceManager.GetString("GameOpponentLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Turno del oponente .
         /// </summary>
         public static string GameOpponentsturn {
             get {
                 return ResourceManager.GetString("GameOpponentsturn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Jugador.
+        /// </summary>
+        public static string GamePlayer {
+            get {
+                return ResourceManager.GetString("GamePlayer", resourceCulture);
             }
         }
         
@@ -975,6 +1002,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string GlobalPasswordRecovery {
             get {
                 return ResourceManager.GetString("GlobalPasswordRecovery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Puntos.
+        /// </summary>
+        public static string GlobalPoints {
+            get {
+                return ResourceManager.GetString("GlobalPoints", resourceCulture);
             }
         }
         

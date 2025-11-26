@@ -328,7 +328,7 @@
     <value>Error al conectar con el servidor: {0}</value>
   </data>
   <data name="ErrorGeneric" xml:space="preserve">
-    <value>Ocurrió un error: {0}</value>
+    <value>Ocurrió un error: </value>
   </data>
   <data name="ErrorRegistrationFailed" xml:space="preserve">
     <value>No se pudo registrar. El correo o nombre de usuario ya podrían estar en uso.</value>
@@ -534,8 +534,8 @@
   <data name="GameResultsTitle" xml:space="preserve">
     <value>Resultados </value>
   </data>
-  <data name="GameBackToLobby" xml:space="preserve">
-    <value>Volver al lobby</value>
+  <data name="GameBackToMainMenu" xml:space="preserve">
+    <value>Volver al menú principal</value>
   </data>
   <data name="GameVictory" xml:space="preserve">
     <value>Victoria</value>
@@ -611,5 +611,17 @@
   </data>
   <data name="GameInvalidMove" xml:space="preserve">
     <value>Para tomar esta carta, selecciona al menos 2 cartas de tu mano que formen una tercia o corrida.</value>
+  </data>
+  <data name="GameOpponentLeft" xml:space="preserve">
+    <value>El oponente ha abandonado la partida.</value>
+  </data>
+  <data name="GlobalPoints" xml:space="preserve">
+    <value>Puntos</value>
+  </data>
+  <data name="GamePlayer" xml:space="preserve">
+    <value>Jugador</value>
+  </data>
+  <data name="GameOpponent" xml:space="preserve">
+    <value>Oponente</value>
   </data>
 </root>

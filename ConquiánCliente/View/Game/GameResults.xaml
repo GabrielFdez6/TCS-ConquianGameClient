@@ -60,7 +60,7 @@
                                    Foreground="White"
                                    HorizontalAlignment="Center"
                                    Margin="0,10,0,0"/>
-                        <TextBlock Text="Jugador"
+                        <TextBlock Text="{x:Static language:Lang.GamePlayer}"
                                    FontSize="20"
                                    Foreground="LightGray"
                                    HorizontalAlignment="Center"/>
@@ -93,7 +93,7 @@
                                    Foreground="White"
                                    HorizontalAlignment="Center"
                                    Margin="0,10,0,0"/>
-                        <TextBlock Text="Oponente"
+                        <TextBlock Text="{x:Static language:Lang.GameOpponent}"
                                    FontSize="20"
                                    Foreground="LightGray"
                                    HorizontalAlignment="Center"/>
@@ -116,7 +116,7 @@
                             FontWeight="Bold"
                             Margin="0,0,0,20"
                             Command="{Binding ReturnToMainMenuCommand}">
-                        <TextBlock Text="Menú Principal"
+                        <TextBlock Text="{x:Static language:Lang.GameBackToMainMenu}"
                                    FontSize="24" 
                                    FontWeight="Bold"
                                    VerticalAlignment="Center"
