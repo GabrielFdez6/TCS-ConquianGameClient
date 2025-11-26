@@ -703,6 +703,14 @@ namespace ConquiánCliente.ServiceGame {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/PassTurn", ReplyAction="http://tempuri.org/IGame/PassTurnResponse")]
         System.Threading.Tasks.Task PassTurnAsync(string roomCode, int playerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/SwapDrawnCard", ReplyAction="http://tempuri.org/IGame/SwapDrawnCardResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceGame.ServiceFaultDto), Action="http://tempuri.org/IGame/SwapDrawnCardServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
+        void SwapDrawnCard(string roomCode, int playerId, string cardIdToDiscard);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/SwapDrawnCard", ReplyAction="http://tempuri.org/IGame/SwapDrawnCardResponse")]
+        System.Threading.Tasks.Task SwapDrawnCardAsync(string roomCode, int playerId, string cardIdToDiscard);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -807,6 +815,14 @@ namespace ConquiánCliente.ServiceGame {
         
         public System.Threading.Tasks.Task PassTurnAsync(string roomCode, int playerId) {
             return base.Channel.PassTurnAsync(roomCode, playerId);
+        }
+        
+        public void SwapDrawnCard(string roomCode, int playerId, string cardIdToDiscard) {
+            base.Channel.SwapDrawnCard(roomCode, playerId, cardIdToDiscard);
+        }
+        
+        public System.Threading.Tasks.Task SwapDrawnCardAsync(string roomCode, int playerId, string cardIdToDiscard) {
+            return base.Channel.SwapDrawnCardAsync(roomCode, playerId, cardIdToDiscard);
         }
     }
 }

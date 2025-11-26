@@ -14,6 +14,7 @@ namespace ConquiánCliente.ViewModel.Game
     {
         private readonly string roomCode;
         private GameClient client;
+        private bool hasJustDrawnFromDeck = false;
         public RelayCommand PassTurnCommand { get; set; }
         private string gameTimeDisplay;
         public string GameTimeDisplay
@@ -116,7 +117,12 @@ namespace ConquiánCliente.ViewModel.Game
             {
                 await client.PassTurnAsync(roomCode, CurrentPlayer.idPlayer);
 
-                foreach (var card in PlayerHand) card.IsSelected = false;
+                hasJustDrawnFromDeck = false;
+
+                foreach (var card in PlayerHand)
+                {
+                    card.IsSelected = false;
+                }
 
                 if (IsMyTurn)
                 {
@@ -458,21 +464,60 @@ namespace ConquiánCliente.ViewModel.Game
             try
             {
                 await client.DrawFromDeckAsync(roomCode, CurrentPlayer.idPlayer);
+                hasJustDrawnFromDeck = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}");
+                MessageBox.Show(Lang.ErrorConnectingToServer);
             }
         }
         public async Task DrawFromDiscardAsync(CardDto card)
         {
-            if (card == null || client == null || !IsMyTurn) return;
+            if (card == null || client == null || !IsMyTurn)
+            {
+                return;
+            }
 
             var selectedCards = PlayerHand.Where(c => c.IsSelected).ToList();
 
+            if (hasJustDrawnFromDeck && selectedCards.Count == 1)
+            {
+                var cardToPay = selectedCards.First();
+                try
+                {
+                    await client.SwapDrawnCardAsync(roomCode, CurrentPlayer.idPlayer, cardToPay.Id);
+
+                    PlayerHand.Remove(cardToPay);            
+                    PlayerHand.Add(new CardViewModel(card)); 
+                    TopDiscardCard = cardToPay.Card;        
+
+                    hasJustDrawnFromDeck = false;
+                    foreach (var c in PlayerHand) c.IsSelected = false;
+                }
+                catch (FaultException<ServiceFaultDto> fault)
+                {
+                    MessageBox.Show(fault.Detail.Message, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"{Lang.ErrorGeneric}: {ex.Message}");
+                }
+                return;
+            }
+
             if (selectedCards.Count < 2)
             {
-                MessageBox.Show(Lang.GameInvalidMove, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+                string msg;
+                if (hasJustDrawnFromDeck)
+                {
+                    msg = "Para cambiar la carta, selecciona 1 carta de tu mano.\nPara bajar juego, selecciona 2 o más.";
+                }
+                else
+                {
+                    msg = Lang.GameInvalidMove;
+                }
+
+                MessageBox.Show(msg, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
@@ -480,6 +525,8 @@ namespace ConquiánCliente.ViewModel.Game
             cardIdsToPlay.Add(card.Id);
 
             await PlayCardsAsync(cardIdsToPlay);
+
+            hasJustDrawnFromDeck = false;
         }
 
         public async Task DiscardCardAsync(CardViewModel cardVM)

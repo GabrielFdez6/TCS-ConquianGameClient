@@ -79,6 +79,20 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="SwapDrawnCard">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="roomCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="playerId" type="xs:int" />
+        <xs:element minOccurs="0" name="cardIdToDiscard" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SwapDrawnCardResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="NotifyGameUpdate">
     <xs:complexType>
       <xs:sequence>

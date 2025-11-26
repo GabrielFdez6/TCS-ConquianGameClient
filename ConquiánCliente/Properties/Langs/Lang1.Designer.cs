@@ -763,7 +763,8 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a ¡Jugada realizada!\n\nAhora debes pagar una carta de tu mano para terminar tu turno..
+        ///   Busca una cadena traducida similar a ¡Jugada realizada!
+        ///Ahora debes pagar una carta de tu mano para terminar tu turno..
         /// </summary>
         public static string GameMoveMade {
             get {
@@ -822,6 +823,16 @@ namespace ConquiánCliente.Properties.Langs {
         public static string GameReturnToGame {
             get {
                 return ResourceManager.GetString("GameReturnToGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Para cambiar la carta, selecciona 1 carta de tu mano.
+        ///Para bajar juego, selecciona 2 o más..
+        /// </summary>
+        public static string GameSwapInstruction {
+            get {
+                return ResourceManager.GetString("GameSwapInstruction", resourceCulture);
             }
         }
         

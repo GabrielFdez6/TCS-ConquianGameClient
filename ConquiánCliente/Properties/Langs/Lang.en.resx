@@ -604,7 +604,8 @@
     <value>You have been kicked from the lobby by the host.</value>
   </data>
   <data name="GameMoveMade" xml:space="preserve">
-    <value>Play made!\n\nNow you must pay a card from your hand to end your turn.</value>
+    <value>Play made!
+Now you must pay a card from your hand to end your turn.</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TitlePay" type="System.Resources.ResXNullRef, System.Windows.Forms">
@@ -624,5 +625,9 @@
   </data>
   <data name="GameOpponent" xml:space="preserve">
     <value>Opponent</value>
+  </data>
+  <data name="GameSwapInstruction" xml:space="preserve">
+    <value>To swap the card, select 1 card from your hand.
+To meld, select 2 or more.</value>
   </data>
 </root>

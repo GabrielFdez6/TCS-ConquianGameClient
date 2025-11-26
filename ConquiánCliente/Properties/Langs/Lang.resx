@@ -604,7 +604,8 @@
     <value>Has sido expulsado de la sala por el anfitrión.</value>
   </data>
   <data name="GameMoveMade" xml:space="preserve">
-    <value>¡Jugada realizada!\n\nAhora debes pagar una carta de tu mano para terminar tu turno.</value>
+    <value>¡Jugada realizada!
+Ahora debes pagar una carta de tu mano para terminar tu turno.</value>
   </data>
   <data name="TitlePay" xml:space="preserve">
     <value>Pagar</value>
@@ -623,5 +624,9 @@
   </data>
   <data name="GameOpponent" xml:space="preserve">
     <value>Oponente</value>
+  </data>
+  <data name="GameSwapInstruction" xml:space="preserve">
+    <value>Para cambiar la carta, selecciona 1 carta de tu mano.
+Para bajar juego, selecciona 2 o más.</value>
   </data>
 </root>
