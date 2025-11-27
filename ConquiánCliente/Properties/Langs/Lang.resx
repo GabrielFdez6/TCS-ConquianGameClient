@@ -629,4 +629,8 @@ Ahora debes pagar una carta de tu mano para terminar tu turno.</value>
     <value>Para cambiar la carta, selecciona 1 carta de tu mano.
 Para bajar juego, selecciona 2 o más.</value>
   </data>
+  <data name="GameDiscardRestriction" xml:space="preserve">
+    <value>Solo puedes descartar una carta para pagar después de bajar juego.
+Si la carta no te sirve, usa el botón 'Pasar'.</value>
+  </data>
 </root>

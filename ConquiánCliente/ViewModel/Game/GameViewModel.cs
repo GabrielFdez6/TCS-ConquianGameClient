@@ -14,7 +14,6 @@ namespace ConquiánCliente.ViewModel.Game
     {
         private readonly string roomCode;
         private GameClient client;
-        private bool hasJustDrawnFromDeck = false;
         public RelayCommand PassTurnCommand { get; set; }
         private string gameTimeDisplay;
         public string GameTimeDisplay
@@ -70,6 +69,21 @@ namespace ConquiánCliente.ViewModel.Game
             get { return isStockPileBlinking; }
             set { isStockPileBlinking = value; OnPropertyChanged(nameof(IsStockPileBlinking)); }
         }
+
+        private bool canDiscard;
+        public bool CanDiscard
+        {
+            get { return canDiscard; }
+            set { canDiscard = value; OnPropertyChanged(nameof(CanDiscard)); }
+        }
+
+        private bool hasJustDrawnFromDeck;
+        public bool HasJustDrawnFromDeck
+        {
+            get { return hasJustDrawnFromDeck; }
+            set { hasJustDrawnFromDeck = value; OnPropertyChanged(nameof(HasJustDrawnFromDeck)); }
+        }
+
         public GameViewModel(string roomCode)
         {
             this.roomCode = roomCode;
@@ -117,7 +131,8 @@ namespace ConquiánCliente.ViewModel.Game
             {
                 await client.PassTurnAsync(roomCode, CurrentPlayer.idPlayer);
 
-                hasJustDrawnFromDeck = false;
+                HasJustDrawnFromDeck = false;
+                CanDiscard = false;
 
                 foreach (var card in PlayerHand)
                 {
@@ -285,13 +300,13 @@ namespace ConquiánCliente.ViewModel.Game
             {
                 if (result.WinnerId == CurrentPlayer.idPlayer)
                 {
-                    myScore = result.PointsWon; 
+                    myScore = result.PointsWon;
                     opponentScore = 0;
                 }
                 else
                 {
                     myScore = 0;
-                    opponentScore = result.PointsWon; 
+                    opponentScore = result.PointsWon;
                 }
             }
 
@@ -319,11 +334,11 @@ namespace ConquiánCliente.ViewModel.Game
                 OpponentFaceDownCards.Add(new object());
             }
         }
-        public async Task PlayCardsAsync(List<string> cardIds)
+        public async Task<bool> PlayCardsAsync(List<string> cardIds)
         {
             if (client == null || CurrentPlayer == null || cardIds == null)
             {
-                return;
+                return false;
             }
             bool isUsingDiscardCard = (TopDiscardCard != null && cardIds.Contains(TopDiscardCard.Id));
             var cardsToPlay = PlayerHand.Where(vm => cardIds.Contains(vm.Id)).ToList();
@@ -336,7 +351,7 @@ namespace ConquiánCliente.ViewModel.Game
 
             if (cardsToPlay.Count != cardIds.Count)
             {
-                return;
+                return false;
             }
 
             if (IsValidMeld(cardsToPlay))
@@ -369,23 +384,27 @@ namespace ConquiánCliente.ViewModel.Game
 
                     if (isUsingDiscardCard)
                     {
-                        MessageBox.Show(Lang.GameMoveMade,Lang.TitlePay, MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show(Lang.GameMoveMade, Lang.TitlePay, MessageBoxButton.OK, MessageBoxImage.Information);
                     }
+                    return true;
                 }
                 catch (FaultException<ServiceFaultDto> fault)
                 {
                     MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
                     await RollbackPlayCards(cardsToPlay);
+                    return false;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                     await RollbackPlayCards(cardsToPlay);
+                    return false;
                 }
             }
             else
             {
                 MessageBox.Show(Lang.GameInvalidMeld, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
             }
         }
 
@@ -448,7 +467,7 @@ namespace ConquiánCliente.ViewModel.Game
             {
                 TurnStatusText = Lang.GameOpponentsturn;
                 IsMyTurn = false;
-                IsStockPileBlinking = false; 
+                IsStockPileBlinking = false;
             }
         }
 
@@ -460,11 +479,12 @@ namespace ConquiánCliente.ViewModel.Game
             }
 
             IsStockPileBlinking = false;
+            CanDiscard = true;
 
             try
             {
                 await client.DrawFromDeckAsync(roomCode, CurrentPlayer.idPlayer);
-                hasJustDrawnFromDeck = true;
+                HasJustDrawnFromDeck = true;
             }
             catch (Exception)
             {
@@ -480,19 +500,24 @@ namespace ConquiánCliente.ViewModel.Game
 
             var selectedCards = PlayerHand.Where(c => c.IsSelected).ToList();
 
-            if (hasJustDrawnFromDeck && selectedCards.Count == 1)
+            if (HasJustDrawnFromDeck && selectedCards.Count == 1)
             {
                 var cardToPay = selectedCards.First();
                 try
                 {
                     await client.SwapDrawnCardAsync(roomCode, CurrentPlayer.idPlayer, cardToPay.Id);
 
-                    PlayerHand.Remove(cardToPay);            
-                    PlayerHand.Add(new CardViewModel(card)); 
-                    TopDiscardCard = cardToPay.Card;        
+                    PlayerHand.Remove(cardToPay);
+                    PlayerHand.Add(new CardViewModel(card));
+                    TopDiscardCard = cardToPay.Card;
 
-                    hasJustDrawnFromDeck = false;
-                    foreach (var c in PlayerHand) c.IsSelected = false;
+                    HasJustDrawnFromDeck = false;
+                    CanDiscard = false;
+
+                    foreach (var c in PlayerHand)
+                    {
+                        c.IsSelected = false;
+                    }
                 }
                 catch (FaultException<ServiceFaultDto> fault)
                 {
@@ -508,9 +533,9 @@ namespace ConquiánCliente.ViewModel.Game
             if (selectedCards.Count < 2)
             {
                 string msg;
-                if (hasJustDrawnFromDeck)
+                if (HasJustDrawnFromDeck)
                 {
-                    msg = "Para cambiar la carta, selecciona 1 carta de tu mano.\nPara bajar juego, selecciona 2 o más.";
+                    msg = Lang.GameSwapInstruction;
                 }
                 else
                 {
@@ -524,14 +549,21 @@ namespace ConquiánCliente.ViewModel.Game
             var cardIdsToPlay = selectedCards.Select(c => c.Id).ToList();
             cardIdsToPlay.Add(card.Id);
 
-            await PlayCardsAsync(cardIdsToPlay);
+            bool playSuccessful = await PlayCardsAsync(cardIdsToPlay);
 
-            hasJustDrawnFromDeck = false;
+            if (playSuccessful)
+            {
+                HasJustDrawnFromDeck = false;
+                CanDiscard = true;
+            }
         }
 
         public async Task DiscardCardAsync(CardViewModel cardVM)
         {
-            if (cardVM == null || client == null || !IsMyTurn) return;
+            if (cardVM == null || client == null || !IsMyTurn || !CanDiscard)
+            {
+                return;
+            }
 
             try
             {
@@ -539,12 +571,16 @@ namespace ConquiánCliente.ViewModel.Game
 
                 PlayerHand.Remove(cardVM);
                 TopDiscardCard = cardVM.Card;
+                CanDiscard = false;
 
-                foreach (var c in PlayerHand) c.IsSelected = false;
+                foreach (var c in PlayerHand)
+                {
+                    c.IsSelected = false;
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}");
+                MessageBox.Show(Lang.ErrorConnectingToServer);
             }
         }
     }

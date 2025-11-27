@@ -181,7 +181,8 @@ namespace ConquiánCliente.View.Game
 
         private void StockPileDragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(typeof(CardViewModel)))
+            if (viewModel != null && viewModel.IsMyTurn && viewModel.CanDiscard && !viewModel.HasJustDrawnFromDeck 
+                && e.Data.GetDataPresent(typeof(CardViewModel)))
             {
                 e.Effects = DragDropEffects.Move;
             }
@@ -194,7 +195,7 @@ namespace ConquiánCliente.View.Game
 
         private async void StockPileDrop(object sender, DragEventArgs e)
         {
-            if (viewModel == null || !viewModel.IsMyTurn)
+           if (viewModel == null || !viewModel.IsMyTurn || !viewModel.CanDiscard || viewModel.HasJustDrawnFromDeck)
             {
                 return;
             }

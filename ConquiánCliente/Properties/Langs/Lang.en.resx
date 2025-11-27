@@ -630,4 +630,8 @@ Now you must pay a card from your hand to end your turn.</value>
     <value>To swap the card, select 1 card from your hand.
 To meld, select 2 or more.</value>
   </data>
+  <data name="GameDiscardRestriction" xml:space="preserve">
+    <value>You can only discard a card to pay after melding.
+If the card is not useful, use the 'To Pass' button.</value>
+  </data>
 </root>

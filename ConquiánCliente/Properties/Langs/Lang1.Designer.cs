@@ -718,6 +718,16 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Solo puedes descartar una carta para pagar después de bajar juego.
+        ///Si la carta no te sirve, usa el botón &apos;Pasar&apos;..
+        /// </summary>
+        public static string GameDiscardRestriction {
+            get {
+                return ResourceManager.GetString("GameDiscardRestriction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Arrastra tu jugada aquí.
         /// </summary>
         public static string GameDropZone {
