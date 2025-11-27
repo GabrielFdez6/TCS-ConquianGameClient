@@ -473,7 +473,7 @@ namespace ConquiánCliente.ViewModel.Game
 
         public async Task DrawFromDeckAsync()
         {
-            if (client == null || !IsMyTurn)
+            if (client == null || !IsMyTurn || HasJustDrawnFromDeck)
             {
                 return;
             }
@@ -486,11 +486,16 @@ namespace ConquiánCliente.ViewModel.Game
                 await client.DrawFromDeckAsync(roomCode, CurrentPlayer.idPlayer);
                 HasJustDrawnFromDeck = true;
             }
+            catch (FaultException<ServiceFaultDto> fault)
+            {
+                MessageBox.Show(fault.Detail.Message, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
             catch (Exception)
             {
                 MessageBox.Show(Lang.ErrorConnectingToServer);
             }
         }
+
         public async Task DrawFromDiscardAsync(CardDto card)
         {
             if (card == null || client == null || !IsMyTurn)

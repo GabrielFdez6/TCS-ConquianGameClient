@@ -170,7 +170,7 @@ namespace ConquiánCliente.View.Game
 
         private void StockPileMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (viewModel == null || !viewModel.IsMyTurn)
+            if (viewModel == null || !viewModel.IsMyTurn || viewModel.HasJustDrawnFromDeck)
             {
                 return;
             }
