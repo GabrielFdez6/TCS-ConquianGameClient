@@ -14,19 +14,21 @@ namespace ConquiánCliente.ViewModel.Game
     {
         private readonly string roomCode;
         private GameClient client;
+        private bool isGameEnded = false;
+
         public RelayCommand PassTurnCommand { get; set; }
+        public ObservableCollection<CardViewModel> PlayerHand { get; set; }
+        public ObservableCollection<object> OpponentFaceDownCards { get; set; }
+        public ObservableCollection<MeldViewModel> PlayerMelds { get; set; }
+        public ObservableCollection<MeldViewModel> OpponentMelds { get; set; }
+        public ObservableCollection<CardViewModel> TemporaryMeld { get; set; }
+
         private string gameTimeDisplay;
         public string GameTimeDisplay
         {
             get { return gameTimeDisplay; }
             set { gameTimeDisplay = value; OnPropertyChanged(nameof(GameTimeDisplay)); }
         }
-
-        public ObservableCollection<CardViewModel> PlayerHand { get; set; }
-        public ObservableCollection<object> OpponentFaceDownCards { get; set; }
-        public ObservableCollection<MeldViewModel> PlayerMelds { get; set; }
-        public ObservableCollection<MeldViewModel> OpponentMelds { get; set; }
-        public ObservableCollection<CardViewModel> TemporaryMeld { get; set; }
 
         private CardDto topDiscardCard;
         public CardDto TopDiscardCard
@@ -251,6 +253,7 @@ namespace ConquiánCliente.ViewModel.Game
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
+                    isGameEnded = true;
                     ShowGameResults(result);
                 });
             };
@@ -377,12 +380,18 @@ namespace ConquiánCliente.ViewModel.Game
                     await client.PlayCardsAsync(roomCode, CurrentPlayer.idPlayer, cardIds.ToArray());
 
                     await Task.Delay(1000);
+
+                    if (isGameEnded)
+                    {
+                        return true;
+                    }
+
                     await Application.Current.Dispatcher.InvokeAsync(() => {
                         TemporaryMeld.Clear();
                         PlayerMelds.Add(new MeldViewModel(cardsToPlay));
                     });
 
-                    if (isUsingDiscardCard)
+                    if (isUsingDiscardCard && !isGameEnded)
                     {
                         MessageBox.Show(Lang.GameMoveMade, Lang.TitlePay, MessageBoxButton.OK, MessageBoxImage.Information);
                     }
@@ -556,7 +565,7 @@ namespace ConquiánCliente.ViewModel.Game
 
             bool playSuccessful = await PlayCardsAsync(cardIdsToPlay);
 
-            if (playSuccessful)
+            if (playSuccessful && !isGameEnded)
             {
                 HasJustDrawnFromDeck = false;
                 CanDiscard = true;
