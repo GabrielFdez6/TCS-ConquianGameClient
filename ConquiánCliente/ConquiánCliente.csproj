@@ -119,6 +119,8 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Models\FriendRequest.cs" />
+    <Compile Include="Utilities\Messages\IMessageResolver.cs" />
+    <Compile Include="Utilities\Messages\ResourceMessageResolver.cs" />
     <Compile Include="ViewModel\Authentication\LogInViewModel.cs" />
     <Compile Include="ViewModel\Authentication\GuestLogInViewModel.cs" />
     <Compile Include="ViewModel\Authentication\PasswordRecovery\PasswordRecoveryViewModel.cs" />

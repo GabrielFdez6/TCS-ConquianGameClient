@@ -1,4 +1,5 @@
-﻿using ConquiánCliente.View;
+﻿using ConquiánCliente.Utilities.Messages;
+using ConquiánCliente.View;
 using ConquiánCliente.View.Authentication.PasswordRecovery;
 using ConquiánCliente.View.MainMenu;
 using ConquiánCliente.ViewModel.Authentication;
@@ -29,7 +30,8 @@ namespace ConquiánCliente
         public LogIn()
         {
             InitializeComponent();
-            DataContext = new LogInViewModel();
+            IMessageResolver resolver = new ResourceMessageResolver();
+            DataContext = new LogInViewModel(resolver);
         } 
     }
 }

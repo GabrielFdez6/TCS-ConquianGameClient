@@ -634,4 +634,22 @@ To meld, select 2 or more.</value>
     <value>You can only discard a card to pay after melding.
 If the card is not useful, use the 'To Pass' button.</value>
   </data>
+  <data name="ErrorSessionActive" xml:space="preserve">
+    <value>You already have an active session. Please log out of the active session in order to open a new one.</value>
+  </data>
+  <data name="GlobalSqlError" xml:space="preserve">
+    <value>Error connecting to the database</value>
+  </data>
+  <data name="ErrorLobbyFull" xml:space="preserve">
+    <value>The room is full or in play.</value>
+  </data>
+  <data name="ErrorUsedInvitation" xml:space="preserve">
+    <value>This invitation has already been used.</value>
+  </data>
+  <data name="ErrorRegisteredMail" xml:space="preserve">
+    <value>This email is already registered, please log in.</value>
+  </data>
+  <data name="GlobalSmtpError" xml:space="preserve">
+    <value>Error sending email, please try again later</value>
+  </data>
 </root>

@@ -259,6 +259,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a La sala está llena o en juego..
+        /// </summary>
+        public static string ErrorLobbyFull {
+            get {
+                return ResourceManager.GetString("ErrorLobbyFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error al cerrar sesión..
         /// </summary>
         public static string ErrorLogOutSession {
@@ -394,6 +403,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Este correo ya está registrado, por favor inicie sesión.
+        /// </summary>
+        public static string ErrorRegisteredMail {
+            get {
+                return ResourceManager.GetString("ErrorRegisteredMail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No se pudo registrar. El correo o nombre de usuario ya podrían estar en uso..
         /// </summary>
         public static string ErrorRegistrationFailed {
@@ -448,6 +466,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ya cuenta con una sesión activa, por favor cierre la sesión activa para poder abrir una nueva.
+        /// </summary>
+        public static string ErrorSessionActive {
+            get {
+                return ResourceManager.GetString("ErrorSessionActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error al iniciar el juego.
         /// </summary>
         public static string ErrorStartingGame {
@@ -480,6 +507,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string ErrorUpdatePhoto {
             get {
                 return ResourceManager.GetString("ErrorUpdatePhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Esta invitación ya ha sido utilizada..
+        /// </summary>
+        public static string ErrorUsedInvitation {
+            get {
+                return ResourceManager.GetString("ErrorUsedInvitation", resourceCulture);
             }
         }
         
@@ -1045,11 +1081,29 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Error al enviar el correo, vuelve a intentarlo más tarde.
+        /// </summary>
+        public static string GlobalSmtpError {
+            get {
+                return ResourceManager.GetString("GlobalSmtpError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Redes.
         /// </summary>
         public static string GlobalSocial {
             get {
                 return ResourceManager.GetString("GlobalSocial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error al conectar con la base de datos.
+        /// </summary>
+        public static string GlobalSqlError {
+            get {
+                return ResourceManager.GetString("GlobalSqlError", resourceCulture);
             }
         }
         

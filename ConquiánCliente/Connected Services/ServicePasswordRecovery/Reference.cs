@@ -121,6 +121,12 @@ namespace ConquiánCliente.ServicePasswordRecovery {
         ServerInternalError = 7,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
+        UserNotFound = 8,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        InvalidPassword = 9,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
         SessionActive = 10,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]

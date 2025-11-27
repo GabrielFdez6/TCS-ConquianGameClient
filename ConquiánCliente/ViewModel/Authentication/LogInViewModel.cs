@@ -1,5 +1,6 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceLogin;
+using ConquiánCliente.Utilities.Messages;
 using ConquiánCliente.View;
 using ConquiánCliente.View.Authentication;
 using ConquiánCliente.View.Authentication.PasswordRecovery;
@@ -16,6 +17,8 @@ namespace ConquiánCliente.ViewModel.Authentication
         private string email;
         private int selectedLanguageIndex;
         private bool isLoggingIn;
+        private readonly IMessageResolver messageResolver;
+
         public string Email
         {
             get { return email; }
@@ -38,13 +41,14 @@ namespace ConquiánCliente.ViewModel.Authentication
         public ICommand NavigateToForgotPasswordCommand { get; }
         public ICommand NavigateToGuestLogInCommand { get; }
 
-        public LogInViewModel()
+        public LogInViewModel(IMessageResolver messageResolver)
         {
+            this.messageResolver = messageResolver;
             isLoggingIn = false;
             LoginCommand = new RelayCommand(ExecuteLogin, CanExecuteLogin);
+
             NavigateToSignUpCommand = new RelayCommand(ExecuteNavigateToSignUp);
             NavigateToForgotPasswordCommand = new RelayCommand(ExecuteNavigateToForgotPassword);
-
             NavigateToGuestLogInCommand = new RelayCommand(ExecuteNavigateToGuestLogIn);
         }
 
@@ -105,13 +109,16 @@ namespace ConquiánCliente.ViewModel.Authentication
             }
             catch (FaultException<ServiceFaultDto> fault)
             {
-                if (fault.Detail.ErrorType == ServiceErrorType.SessionActive)
+                ServiceErrorType errorType = fault.Detail.ErrorType;
+                string localMessage = messageResolver.GetMessage(errorType);
+
+                if (errorType == ServiceErrorType.SessionActive)
                 {
-                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(localMessage, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
-                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(localMessage, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (EndpointNotFoundException)
