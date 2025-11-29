@@ -330,6 +330,21 @@ namespace ConquiánCliente.ServiceLogin {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         GameInProgress = 14,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        InvalidEmailFormat = 15,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        InvalidPasswordFormat = 16,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        InvalidNameFormat = 17,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        InvalidVerificationCode = 18,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        VerificationCodeExpired = 19,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

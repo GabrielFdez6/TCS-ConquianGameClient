@@ -25,6 +25,11 @@
       <xs:enumeration value="RegisteredUserAsGuest" />
       <xs:enumeration value="LobbyFull" />
       <xs:enumeration value="GameInProgress" />
+      <xs:enumeration value="InvalidEmailFormat" />
+      <xs:enumeration value="InvalidPasswordFormat" />
+      <xs:enumeration value="InvalidNameFormat" />
+      <xs:enumeration value="InvalidVerificationCode" />
+      <xs:enumeration value="VerificationCodeExpired" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="ServiceErrorType" nillable="true" type="tns:ServiceErrorType" />
