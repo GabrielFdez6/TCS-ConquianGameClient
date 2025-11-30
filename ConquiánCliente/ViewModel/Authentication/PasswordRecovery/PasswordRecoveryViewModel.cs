@@ -1,9 +1,9 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServicePasswordRecovery;
+using ConquiánCliente.Utilities.Messages;
 using ConquiánCliente.View.Authentication.PasswordRecovery;
-using ConquiánCliente.View.Profile; 
+using ConquiánCliente.View.Profile;
 using ConquiánCliente.ViewModel.Validation;
-using System.Linq;
 using System;
 using System.ServiceModel;
 using System.Threading.Tasks;
@@ -15,9 +15,10 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
 {
     public enum PasswordUpdateMode
     {
-        Recovery = 0, 
-        Change = 1    
+        Recovery = 0,
+        Change = 1
     }
+
     public class PasswordRecoveryViewModel : ViewModelBase
     {
         private string email;
@@ -26,8 +27,8 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
         private string confirmPassword;
         private bool isLoading;
         private readonly IPasswordRecovery recoveryClient;
-
         private PasswordUpdateMode mode;
+        private readonly IMessageResolver messageResolver;
 
         public PasswordUpdateMode Mode
         {
@@ -41,35 +42,13 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
         }
 
         public bool IsEditProfileFlow { get; set; } = false;
-        public string PageTitle
-        {
-            get
-            {
-                return Mode == PasswordUpdateMode.Change
-                    ? Lang.EditDataEdit
-                    : Lang.GlobalPasswordRecovery;
-            }
-        }
-        public string Email
-        {
-            get => email;
-            set { email = value; OnPropertyChanged(nameof(Email)); }
-        }
-        public string Token
-        {
-            get => token;
-            set { token = value; OnPropertyChanged(nameof(Token)); }
-        }
-        public string NewPassword
-        {
-            get => newPassword;
-            set { newPassword = value; OnPropertyChanged(nameof(NewPassword)); }
-        }
-        public string ConfirmPassword
-        {
-            get => confirmPassword;
-            set { confirmPassword = value; OnPropertyChanged(nameof(ConfirmPassword)); }
-        }
+        public string PageTitle => Mode == PasswordUpdateMode.Change ? Lang.EditDataEdit : Lang.GlobalPasswordRecovery;
+
+        public string Email { get => email; set { email = value; OnPropertyChanged(nameof(Email)); } }
+        public string Token { get => token; set { token = value; OnPropertyChanged(nameof(Token)); } }
+        public string NewPassword { get => newPassword; set { newPassword = value; OnPropertyChanged(nameof(NewPassword)); } }
+        public string ConfirmPassword { get => confirmPassword; set { confirmPassword = value; OnPropertyChanged(nameof(ConfirmPassword)); } }
+
         public bool IsLoading
         {
             get => isLoading;
@@ -89,12 +68,14 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
 
         public PasswordRecoveryViewModel()
         {
-            Mode = PasswordUpdateMode.Recovery; 
+            Mode = PasswordUpdateMode.Recovery;
             RequestRecoveryCommand = new RelayCommand(ExecuteRequestRecovery, CanExecuteCommand);
             ValidateTokenCommand = new RelayCommand(ExecuteValidateToken, CanExecuteCommand);
             ResetPasswordCommand = new RelayCommand(ExecuteResetPassword, CanExecuteCommand);
             NavigateToLoginCommand = new RelayCommand(ExecuteNavigateToLogin);
             NavigateToStartCommand = new RelayCommand(ExecuteNavigateToStart, CanExecuteNavigateToStart);
+
+            this.messageResolver = new ResourceMessageResolver();
 
             try
             {
@@ -102,19 +83,15 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    string.Format(Lang.ErrorConnectingToServer, ex.Message), Lang.TitleConnectionError);
+                MessageBox.Show(string.Format(Lang.ErrorConnectingToServer, ex.Message), Lang.TitleConnectionError);
             }
         }
 
-        private bool CanExecuteCommand(object parameter)
-        {
-            return !IsLoading;
-        }
+        private bool CanExecuteCommand(object parameter) => !IsLoading;
 
         private async void ExecuteRequestRecovery(object parameter)
         {
-            this.Mode = PasswordUpdateMode.Recovery; 
+            this.Mode = PasswordUpdateMode.Recovery;
 
             string validationError = PasswordRecoveryValidator.ValidateEmail(Email);
             if (!string.IsNullOrEmpty(validationError))
@@ -124,27 +101,24 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
             }
 
             bool success = await TryExecuteServiceCall(
-                () => recoveryClient.RequestPasswordRecoveryAsync(Email, (int)this.Mode),
-                Lang.ErrorRecoveryRequestFailed
+                () => recoveryClient.RequestPasswordRecoveryAsync(Email, (int)this.Mode)
             );
 
             if (success)
             {
                 var page = parameter as Page;
-                page?.NavigationService?.Navigate(new CodeValidation(this)); 
+                page?.NavigationService?.Navigate(new CodeValidation(this));
             }
         }
 
         public async Task<bool> RequestChangePasswordTokenAsync()
         {
             this.Mode = PasswordUpdateMode.Change;
-            bool success = await TryExecuteServiceCall(
-                () => recoveryClient.RequestPasswordRecoveryAsync(Email, (int)this.Mode),
-                Lang.ErrorRecoveryRequestFailed
+            return await TryExecuteServiceCall(
+                () => recoveryClient.RequestPasswordRecoveryAsync(Email, (int)this.Mode)
             );
-
-            return success; 
         }
+
         private async void ExecuteValidateToken(object parameter)
         {
             string validationError = PasswordRecoveryValidator.ValidateToken(Token);
@@ -155,8 +129,7 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
             }
 
             bool success = await TryExecuteServiceCall(
-                () => recoveryClient.ValidateRecoveryTokenAsync(Email, Token),
-                Lang.ErrorVerificationCodeIncorrect
+                () => recoveryClient.ValidateRecoveryTokenAsync(Email, Token)
             );
 
             if (success)
@@ -169,7 +142,6 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
         private async void ExecuteResetPassword(object parameter)
         {
             var page = parameter as Page;
-
             string validationError = PasswordRecoveryValidator.ValidatePasswords(NewPassword, ConfirmPassword);
 
             if (!string.IsNullOrEmpty(validationError))
@@ -178,10 +150,10 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
                 return;
             }
 
+            IsLoading = true;
             try
             {
-                IsLoading = true;
-                bool success = await recoveryClient.ResetPasswordAsync(Email, Token, newPassword);
+                bool success = await recoveryClient.ResetPasswordAsync(Email, Token, NewPassword);
 
                 if (success)
                 {
@@ -194,9 +166,7 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
                         MessageBox.Show(Lang.SuccessPasswordReset, Lang.TitleSuccess);
                         var loginWindow = new LogIn();
                         loginWindow.Show();
-
-                        var currentWindow = Window.GetWindow(page);
-                        currentWindow?.Close();
+                        Window.GetWindow(page)?.Close();
                     }
                 }
                 else
@@ -204,28 +174,9 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
                     MessageBox.Show(Lang.ErrorRecoveryRequestFailed, Lang.TitleError);
                 }
             }
-            catch (FaultException<ServiceFaultDto> fault)
-            {
-                if (fault.Detail.ErrorType == ServiceErrorType.NotFound)
-                {
-                    MessageBox.Show(Lang.ErrorUserNotFound, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                else if (fault.Detail.ErrorType == ServiceErrorType.ValidationFailed)
-                {
-                    MessageBox.Show(fault.Detail.Message, Lang.TitleValidation, MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                else
-                {
-                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            catch (EndpointNotFoundException)
-            {
-                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
-            }
             catch (Exception ex)
             {
-                MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
+                HandleException(ex); 
             }
             finally
             {
@@ -233,10 +184,7 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
             }
         }
 
-        private bool CanExecuteNavigateToStart(object parameter)
-        {
-            return !IsLoading;
-        }
+        private bool CanExecuteNavigateToStart(object parameter) => !IsLoading;
         private void ExecuteNavigateToStart(object parameter)
         {
             this.Token = string.Empty;
@@ -246,10 +194,7 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
 
             if (IsEditProfileFlow)
             {
-                if (page?.NavigationService?.CanGoBack == true)
-                {
-                    page.NavigationService.GoBack();
-                }
+                if (page?.NavigationService?.CanGoBack == true) page.NavigationService.GoBack();
             }
             else
             {
@@ -260,13 +205,11 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
         {
             var page = parameter as Page;
             var window = Window.GetWindow(page);
-
-            var loginWindow = new LogIn();
-            loginWindow.Show();
+            new LogIn().Show();
             window?.Close();
         }
 
-        private async Task<bool> TryExecuteServiceCall(Func<Task<bool>> serviceCall, string businessErrorMessage)
+        private async Task<bool> TryExecuteServiceCall(Func<Task<bool>> serviceCall)
         {
             if (recoveryClient == null)
             {
@@ -278,11 +221,6 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
             try
             {
                 bool success = await serviceCall();
-
-                if (!success)
-                {
-                    MessageBox.Show(businessErrorMessage, Lang.TitleError);
-                }
                 return success;
             }
             catch (Exception ex)
@@ -296,42 +234,24 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
             }
         }
 
-        private static void HandleException(Exception ex)
+        private void HandleException(Exception ex)
         {
             if (ex is FaultException<ServiceFaultDto> fault)
             {
-                if (fault.Detail.ErrorType == ServiceErrorType.NotFound)
-                {
-                    MessageBox.Show(Lang.ErrorUserNotFound, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                else if (fault.Detail.ErrorType == ServiceErrorType.CommunicationError)
-                {
-                    MessageBox.Show(fault.Detail.Message, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                else if (fault.Detail.ErrorType == ServiceErrorType.ValidationFailed)
-                {
-                    MessageBox.Show(fault.Detail.Message, Lang.TitleValidation, MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                else
-                {
-                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                int errorValue = (int)fault.Detail.ErrorType;
+                var targetErrorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)errorValue;
+
+                string errorMessage = messageResolver.GetMessage(targetErrorType);
+
+                MessageBox.Show(errorMessage, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            else if (ex is EndpointNotFoundException)
+            else if (ex is EndpointNotFoundException || ex is CommunicationException || ex is TimeoutException)
             {
-                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
-            }
-            else if (ex is CommunicationException)
-            {
-                MessageBox.Show(string.Format(Lang.ErrorConnectingToServer, ex.Message), Lang.TitleConnectionError);
-            }
-            else if (ex is TimeoutException)
-            {
-                MessageBox.Show(Lang.ErrorTimeout, Lang.TitleConnectionError);
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
-                MessageBox.Show(string.Format(Lang.ErrorGeneric, ex.Message), Lang.TitleError);
+                MessageBox.Show(string.Format(Lang.ErrorGeneric, ex.Message), Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

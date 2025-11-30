@@ -9,6 +9,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using ConquiánCliente.Utilities.Messages; 
 
 namespace ConquiánCliente.ViewModel.FriendList
 {
@@ -28,10 +29,13 @@ namespace ConquiánCliente.ViewModel.FriendList
         public ICommand BackCommand { get; }
 
         private readonly FriendListClient FriendListService;
+        private readonly IMessageResolver messageResolver; 
 
         public FriendRequestsViewModel()
         {
             FriendListService = new FriendListClient();
+            this.messageResolver = new ResourceMessageResolver(); 
+
             Requests = new ObservableCollection<FriendRequest>();
             AcceptRequestCommand = new RelayCommand(AcceptRequest);
             DeclineRequestCommand = new RelayCommand(DeclineRequest);
@@ -42,6 +46,7 @@ namespace ConquiánCliente.ViewModel.FriendList
         {
             await LoadFriendRequests();
         }
+
         private async Task LoadFriendRequests()
         {
             try
@@ -57,7 +62,9 @@ namespace ConquiánCliente.ViewModel.FriendList
             }
             catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
             {
-                MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                string msg = messageResolver.GetMessage(errorType);
+                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -72,13 +79,15 @@ namespace ConquiánCliente.ViewModel.FriendList
                 try
                 {
                     await FriendListService.UpdateFriendRequestStatusAsync(request.IdFriendship, 1);
-
                     Requests.Remove(request);
                 }
                 catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
                 {
-                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                    if (fault.Detail.ErrorType == ServiceFriendList.ServiceErrorType.NotFound)
+                    var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                    string msg = messageResolver.GetMessage(errorType);
+                    MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.NotFound)
                     {
                         Requests.Remove(request);
                     }
@@ -97,13 +106,15 @@ namespace ConquiánCliente.ViewModel.FriendList
                 try
                 {
                     await FriendListService.UpdateFriendRequestStatusAsync(request.IdFriendship, 2);
-
                     Requests.Remove(request);
                 }
                 catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
                 {
-                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                    if (fault.Detail.ErrorType == ServiceFriendList.ServiceErrorType.NotFound)
+                    var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                    string msg = messageResolver.GetMessage(errorType);
+                    MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.NotFound)
                     {
                         Requests.Remove(request);
                     }

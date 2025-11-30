@@ -1,24 +1,29 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceUserProfile;
 using ConquiánCliente.View;
-using ConquiánCliente.View.Authentication.PasswordRecovery; 
+using ConquiánCliente.View.Authentication.PasswordRecovery;
 using ConquiánCliente.View.Profile;
-using ConquiánCliente.ViewModel.Authentication.PasswordRecovery; 
+using ConquiánCliente.ViewModel.Authentication.PasswordRecovery;
 using ConquiánCliente.ViewModel.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Windows;
-using System.Windows.Controls; 
+using System.Windows.Controls;
 using System.Windows.Input;
+using ConquiánCliente.Utilities.Messages; 
 
 namespace ConquiánCliente.ViewModel.Profile
 {
     public class EditInfoViewModel : ViewModelBase
     {
-
         private bool isLoading;
+        private PlayerDto player;
+        private string instagramLink;
+        private string facebookLink;
+        private readonly IMessageResolver messageResolver; 
+
         public bool IsLoading
         {
             get => isLoading;
@@ -29,21 +34,19 @@ namespace ConquiánCliente.ViewModel.Profile
                 CommandManager.InvalidateRequerySuggested();
             }
         }
-        private PlayerDto player;
+
         public PlayerDto Player
         {
             get => player;
             set { player = value; OnPropertyChanged(); }
         }
 
-        private string instagramLink;
         public string InstagramLink
         {
             get => instagramLink;
             set { instagramLink = value; OnPropertyChanged(); }
         }
 
-        private string facebookLink;
         public string FacebookLink
         {
             get => facebookLink;
@@ -53,19 +56,19 @@ namespace ConquiánCliente.ViewModel.Profile
         public ICommand SaveChangesCommand { get; }
         public ICommand CancelCommand { get; }
         public ICommand NavigateToChangePasswordCommand { get; }
+
         public EditInfoViewModel(PlayerDto playerDto)
         {
             Player = playerDto;
+            this.messageResolver = new ResourceMessageResolver(); 
+
             SaveChangesCommand = new RelayCommand(ExecuteSaveChanges, CanExecuteSaveChanges);
             NavigateToChangePasswordCommand = new RelayCommand(ExecuteNavigateToChangePassword, CanExecuteChangePassword);
             CancelCommand = new RelayCommand(ExecuteCancel);
             LoadPlayerSocials();
         }
 
-        private bool CanExecuteChangePassword(object parameter)
-        {
-            return !IsLoading;
-        }
+        private bool CanExecuteChangePassword(object parameter) => !IsLoading;
 
         private async void ExecuteNavigateToChangePassword(object parameter)
         {
@@ -78,6 +81,7 @@ namespace ConquiánCliente.ViewModel.Profile
                 passwordVM.IsEditProfileFlow = true;
 
                 bool success = await passwordVM.RequestChangePasswordTokenAsync();
+
                 if (success)
                 {
                     var page = parameter as Page;
@@ -86,7 +90,7 @@ namespace ConquiánCliente.ViewModel.Profile
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error");
+                MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
             }
             finally
             {
@@ -105,9 +109,12 @@ namespace ConquiánCliente.ViewModel.Profile
                 InstagramLink = socials.FirstOrDefault(s => s.IdSocialType == 1)?.UserLink ?? "";
                 FacebookLink = socials.FirstOrDefault(s => s.IdSocialType == 2)?.UserLink ?? "";
             }
-            catch (FaultException<ServiceFaultDto> fault)
+            catch (FaultException<ServiceUserProfile.ServiceFaultDto> fault)
             {
-                 MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                var errorType = (ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                string msg = messageResolver.GetMessage(errorType);
+
+                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             catch (EndpointNotFoundException)
             {
@@ -124,27 +131,27 @@ namespace ConquiánCliente.ViewModel.Profile
         private void ExecuteSaveChanges(object parameter)
         {
             string nameError = SignUpValidator.ValidateName(Player.name);
-            if (!string.IsNullOrEmpty(nameError)) 
-            { 
-                MessageBox.Show(nameError, Lang.TitleValidation); 
-                return; 
+            if (!string.IsNullOrEmpty(nameError))
+            {
+                MessageBox.Show(nameError, Lang.TitleValidation);
+                return;
             }
 
             string lastNameError = SignUpValidator.ValidateLastName(Player.lastName);
-            if (!string.IsNullOrEmpty(lastNameError)) 
-            { 
-                MessageBox.Show(lastNameError, Lang.TitleValidation); 
-                return; 
+            if (!string.IsNullOrEmpty(lastNameError))
+            {
+                MessageBox.Show(lastNameError, Lang.TitleValidation);
+                return;
             }
 
             string nicknameError = SignUpValidator.ValidateNickname(Player.nickname);
-            if (!string.IsNullOrEmpty(nicknameError)) 
-            { 
-                MessageBox.Show(nicknameError, Lang.TitleValidation); 
-                return; 
+            if (!string.IsNullOrEmpty(nicknameError))
+            {
+                MessageBox.Show(nicknameError, Lang.TitleValidation);
+                return;
             }
 
-            var passwordBox = parameter as System.Windows.Controls.PasswordBox;
+            var passwordBox = parameter as PasswordBox;
             string password = passwordBox?.Password;
 
             if (!string.IsNullOrEmpty(password))
@@ -180,16 +187,12 @@ namespace ConquiánCliente.ViewModel.Profile
                 PlayerSession.CurrentPlayer.nickname = this.Player.nickname;
                 ExecuteCancel(null);
             }
-            catch (FaultException<ServiceFaultDto> fault)
+            catch (FaultException<ServiceUserProfile.ServiceFaultDto> fault)
             {
-                if (fault.Detail.ErrorType == ServiceErrorType.NotFound)
-                {
-                    MessageBox.Show(Lang.ErrorUserNotFound, Lang.TitleError);
-                }
-                else
-                {
-                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                var errorType = (ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                string msg = messageResolver.GetMessage(errorType);
+
+                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             catch (EndpointNotFoundException)
             {

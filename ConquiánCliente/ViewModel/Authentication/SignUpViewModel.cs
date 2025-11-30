@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ConquiánCliente.Utilities.Messages; 
 
 namespace ConquiánCliente.ViewModel.Authentication
 {
@@ -17,6 +18,7 @@ namespace ConquiánCliente.ViewModel.Authentication
         private string nickname;
         private string enteredVerificationCode;
         private readonly PlayerDto playerInProgress;
+        private readonly IMessageResolver messageResolver; 
 
         public string Email
         {
@@ -53,6 +55,7 @@ namespace ConquiánCliente.ViewModel.Authentication
         public SignUpViewModel()
         {
             playerInProgress = new PlayerDto();
+            this.messageResolver = new ResourceMessageResolver(); 
 
             SendVerificationCodeCommand = new RelayCommand(ExecuteSendVerificationCode, CanExecuteSendVerificationCode);
             NavigateToLoginCommand = new RelayCommand(ExecuteNavigateToLogin);
@@ -123,18 +126,10 @@ namespace ConquiánCliente.ViewModel.Authentication
             }
             catch (FaultException<ServiceFaultDto> fault)
             {
-                if (fault.Detail.ErrorType == ServiceErrorType.DuplicateRecord)
-                {
-                    MessageBox.Show(Lang.ErrorEmailExists, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                else if (fault.Detail.ErrorType == ServiceErrorType.CommunicationError)
-                {
-                    MessageBox.Show(Lang.ErrorVerificationEmail, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                else
-                {
-                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                string msg = messageResolver.GetMessage(errorType);
+
+                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (EndpointNotFoundException)
             {
@@ -170,14 +165,10 @@ namespace ConquiánCliente.ViewModel.Authentication
             }
             catch (FaultException<ServiceFaultDto> fault)
             {
-                if (fault.Detail.ErrorType == ServiceErrorType.ValidationFailed)
-                {
-                    MessageBox.Show(Lang.ErrorVerificationCodeIncorrect, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                else
-                {
-                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                string msg = messageResolver.GetMessage(errorType);
+
+                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (System.Exception ex)
             {
@@ -225,14 +216,10 @@ namespace ConquiánCliente.ViewModel.Authentication
             }
             catch (FaultException<ServiceFaultDto> fault)
             {
-                if (fault.Detail.ErrorType == ServiceErrorType.DuplicateRecord)
-                {
-                    MessageBox.Show(Lang.ErrorNicknameExists, Lang.TitleRegistrationError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                else
-                {
-                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                string msg = messageResolver.GetMessage(errorType);
+
+                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (EndpointNotFoundException)
             {

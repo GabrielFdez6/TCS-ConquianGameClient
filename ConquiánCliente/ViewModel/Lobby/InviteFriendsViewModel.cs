@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using ConquiánCliente.Utilities.Messages; 
 
 namespace ConquiánCliente.ViewModel.Lobby
 {
@@ -17,42 +18,48 @@ namespace ConquiánCliente.ViewModel.Lobby
         private readonly string roomCode;
         public ObservableCollection<FriendInviteItemViewModel> FriendsList { get; }
         public ICommand InviteFriendCommand { get; }
-        public ICommand SendRoomCodeCommand { get; } 
+        public ICommand SendRoomCodeCommand { get; }
+        private readonly IMessageResolver messageResolver; 
 
         public InviteFriendsViewModel(string roomCode)
         {
             this.roomCode = roomCode;
+            this.messageResolver = new ResourceMessageResolver(); 
+
             FriendsList = new ObservableCollection<FriendInviteItemViewModel>();
             InviteFriendCommand = new RelayCommand(async (param) => await ExecuteInviteFriend(param));
+            SendRoomCodeCommand = new RelayCommand(ExecuteSendRoomCode);
+
             PresenceCallbackHandler.FriendStatusChanged += OnFriendStatusChanged;
-            SendRoomCodeCommand = new RelayCommand(ExecuteSendRoomCode); 
-            _ =LoadFriends();
+            _ = LoadFriends();
         }
 
         private void ExecuteSendRoomCode(object parameter)
         {
             var ownerWindow = parameter as Window;
-
             var viewModel = new SendRoomCodeViewModel(this.roomCode);
-
             var sendCodeWindow = new SendRoomCode()
             {
                 Owner = ownerWindow,
-                DataContext = viewModel 
+                DataContext = viewModel
             };
-
             sendCodeWindow.ShowDialog();
         }
+
         private void OnFriendStatusChanged(int friendId, int newStatusId)
         {
-            var friendVM = FriendsList.FirstOrDefault(f => f.IdPlayer == friendId);
-            if (friendVM != null)
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                bool isOnline = (newStatusId == 1);
-                friendVM.IsOnline = isOnline;
-                friendVM.StatusText = isOnline ? Lang.StatusOnline : Lang.StatusOffline;
-            }
+                var friendVM = FriendsList.FirstOrDefault(f => f.IdPlayer == friendId);
+                if (friendVM != null)
+                {
+                    bool isOnline = (newStatusId == 1);
+                    friendVM.IsOnline = isOnline;
+                    friendVM.StatusText = isOnline ? Lang.StatusOnline : Lang.StatusOffline;
+                }
+            });
         }
+
         private async Task LoadFriends()
         {
             try
@@ -61,15 +68,21 @@ namespace ConquiánCliente.ViewModel.Lobby
                 {
                     var friends = await client.GetFriendsAsync(PlayerSession.CurrentPlayer.idPlayer);
                     FriendsList.Clear();
-                    foreach (var friend in friends.OrderByDescending(f => f.idStatus)) 
+                    foreach (var friend in friends.OrderByDescending(f => f.idStatus))
                     {
                         FriendsList.Add(new FriendInviteItemViewModel(friend));
                     }
                 }
             }
+            catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
+            {
+                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                string msg = messageResolver.GetMessage(errorType);
+                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(Lang.LobbyErrorLoadingFriends + $": {ex.Message}");
+                MessageBox.Show(Lang.LobbyErrorLoadingFriends + $": {ex.Message}");
             }
         }
 
@@ -88,10 +101,14 @@ namespace ConquiánCliente.ViewModel.Lobby
 
                     friendVM.StatusText = Lang.LobbyInvitationSent;
                 }
-                catch (FaultException<ServiceFaultDto> fault)
+                catch (FaultException<ConquiánCliente.ServiceInvitation.ServiceFaultDto> fault)
                 {
-                    MessageBox.Show(fault.Detail.Message, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
-                    if (fault.Detail.ErrorType == ServiceErrorType.OperationFailed)
+                    var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                    string msg = messageResolver.GetMessage(errorType);
+
+                    MessageBox.Show(msg, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.UserOffline)
                     {
                         friendVM.StatusText = Lang.StatusOffline;
                         friendVM.IsOnline = false;
@@ -115,10 +132,11 @@ namespace ConquiánCliente.ViewModel.Lobby
         private string statusText;
         private bool isOnline;
         public string Level => friend.level;
+
         public FriendInviteItemViewModel(PlayerDto friend)
         {
             this.friend = friend;
-            this.IsOnline = friend.idStatus == 1; 
+            this.IsOnline = friend.idStatus == 1;
             this.StatusText = this.IsOnline ? Lang.StatusOnline : Lang.StatusOffline;
         }
 
@@ -128,7 +146,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         public bool IsOnline
         {
             get => isOnline;
-            set { isOnline = value; OnPropertyChanged(nameof(IsOnline)); }
+            set { isOnline = value; OnPropertyChanged(nameof(IsOnline)); OnPropertyChanged(nameof(StatusColor)); }
         }
 
         public string StatusText

@@ -110,16 +110,10 @@ namespace ConquiánCliente.ViewModel.Authentication
             catch (FaultException<ServiceFaultDto> fault)
             {
                 ServiceErrorType errorType = fault.Detail.ErrorType;
+
                 string localMessage = messageResolver.GetMessage(errorType);
 
-                if (errorType == ServiceErrorType.SessionActive)
-                {
-                    MessageBox.Show(localMessage, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else
-                {
-                    MessageBox.Show(localMessage, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                MessageBox.Show(localMessage, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (EndpointNotFoundException)
             {

@@ -651,4 +651,76 @@ Si la carta no te sirve, usa el botón 'Pasar'.</value>
   <data name="GlobalSmtpError" xml:space="preserve">
     <value>Error al enviar el correo, vuelve a intentarlo más tarde</value>
   </data>
+  <data name="ErrorExistingRequest" xml:space="preserve">
+    <value>Ya existe una solicitud pendiente o una amistad con este jugador.</value>
+  </data>
+  <data name="ErrorNotFound" xml:space="preserve">
+    <value>No encontrado.</value>
+  </data>
+  <data name="ErrorNotYourTurn" xml:space="preserve">
+    <value>No es tu turno para realizar esta acción.</value>
+  </data>
+  <data name="ErrorMustDiscardToFinish" xml:space="preserve">
+    <value>Debes pagar una carta para terminar.</value>
+  </data>
+  <data name="ErrorGameRuleViolation" xml:space="preserve">
+    <value>El movimiento intentado no es válido.</value>
+  </data>
+  <data name="ErrorInvalidCardAction" xml:space="preserve">
+    <value>No puedes tomar esta carta ahora.</value>
+  </data>
+  <data name="ErrorInvalidMeld" xml:space="preserve">
+    <value>Las jugadas deben de tener al menos 3 cartas validas.</value>
+  </data>
+  <data name="ErrorOperationFailed" xml:space="preserve">
+    <value>Fallo la operación en el servidor.</value>
+  </data>
+  <data name="ErrorAlreadyDrawn" xml:space="preserve">
+    <value>Ya has tomado una carta del mazo en este turno.</value>
+  </data>
+  <data name="ErrorPendingDiscardAction" xml:space="preserve">
+    <value>Debes decidir sobre la carta del descarte primero (Tomar o Pasar).</value>
+  </data>
+  <data name="ErrorDeckEmpty" xml:space="preserve">
+    <value>Mazo vacío. </value>
+  </data>
+  <data name="ErrorEmptyDiscaard" xml:space="preserve">
+    <value>Descarte vacío.</value>
+  </data>
+  <data name="ErrorCommunicationError" xml:space="preserve">
+    <value>Error de comunicación con el servidor.</value>
+  </data>
+  <data name="ErrorServerInternalError" xml:space="preserve">
+    <value>Error interno del servidor.</value>
+  </data>
+  <data name="ErrorLobbyNotFound" xml:space="preserve">
+    <value>No se encontró el lobby.</value>
+  </data>
+  <data name="ErrorHostUserNotFound" xml:space="preserve">
+    <value>Anfitrión no encontrado.</value>
+  </data>
+  <data name="ErrorValidationFailed" xml:space="preserve">
+    <value>No cuenta con una invitación.</value>
+  </data>
+  <data name="ErrorNotEnoughPlayers" xml:space="preserve">
+    <value>Debe haber al menos dos jugadores para iniciar la partida.</value>
+  </data>
+  <data name="ErrorNotLobbyHost" xml:space="preserve">
+    <value>No puedes expulsar debido a que no eres el host.</value>
+  </data>
+  <data name="ErrorNotKickYourSelf" xml:space="preserve">
+    <value>No puedes expulsarte a ti mismo.</value>
+  </data>
+  <data name="ErrorInvalidNameFormat" xml:space="preserve">
+    <value>Formato de nombre invalido.</value>
+  </data>
+  <data name="ErrorInvalidPasswordFormat" xml:space="preserve">
+    <value>Formato de contraseña invalido.</value>
+  </data>
+  <data name="ErrorVerificationCodeExpired" xml:space="preserve">
+    <value>El código de verificación ha expirado.</value>
+  </data>
+  <data name="ErrorInvalidVerificationCode" xml:space="preserve">
+    <value>El código introducido es incorrecto.</value>
+  </data>
 </root>

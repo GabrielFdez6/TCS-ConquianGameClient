@@ -5,12 +5,15 @@ using System.IO;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Input;
+using ConquiánCliente.Utilities.Messages; 
 
 namespace ConquiánCliente.ViewModel.Profile
 {
     public class EditProfilePictureViewModel : ViewModelBase
     {
         private string selectedImagePath;
+        private readonly IMessageResolver messageResolver;
+
         public string SelectedImagePath
         {
             get { return selectedImagePath; }
@@ -29,13 +32,14 @@ namespace ConquiánCliente.ViewModel.Profile
 
         public EditProfilePictureViewModel()
         {
+            this.messageResolver = new ResourceMessageResolver(); 
             CurrentProfilePicturePath = PlayerSession.CurrentPlayer.pathPhoto;
+
             SelectImageCommand = new RelayCommand(ExecuteSelectImage);
-
             ChangeProfilePictureCommand = new RelayCommand(ExecuteChangeProfilePicture, CanExecuteChangeProfilePicture);
-
             CloseWindowCommand = new RelayCommand(ExecuteCloseWindow);
         }
+
         private void ExecuteSelectImage(object parameter)
         {
             SelectedImagePath = parameter as string;
@@ -47,7 +51,7 @@ namespace ConquiánCliente.ViewModel.Profile
         }
 
         private async void ExecuteChangeProfilePicture(object obj)
-        { 
+        {
             try
             {
                 var userProfileClient = new UserProfileClient();
@@ -60,7 +64,10 @@ namespace ConquiánCliente.ViewModel.Profile
             }
             catch (FaultException<ServiceFaultDto> fault)
             {
-                MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                var errorType = (ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                string msg = messageResolver.GetMessage(errorType);
+
+                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             catch (EndpointNotFoundException)
             {

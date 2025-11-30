@@ -1,6 +1,6 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.View.Lobby;
-using ConquiánCliente.ServiceGuestInvitation; 
+using ConquiánCliente.ServiceGuestInvitation;
 using ConquiánCliente.ViewModel.Validation;
 using System;
 using System.Linq;
@@ -8,6 +8,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using ConquiánCliente.Utilities.Messages; 
 
 namespace ConquiánCliente.ViewModel.Lobby
 {
@@ -16,6 +17,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         private readonly string roomCode;
         private string email;
         private bool isLoading;
+        private readonly IMessageResolver messageResolver; 
 
         public string Email
         {
@@ -42,6 +44,8 @@ namespace ConquiánCliente.ViewModel.Lobby
         public SendRoomCodeViewModel(string roomCode)
         {
             this.roomCode = roomCode;
+            this.messageResolver = new ResourceMessageResolver(); 
+
             SendCommand = new RelayCommand(async (param) => await ExecuteSend());
             BackCommand = new RelayCommand(ExecuteBack);
         }
@@ -71,7 +75,10 @@ namespace ConquiánCliente.ViewModel.Lobby
             }
             catch (FaultException<ServiceGuestInvitation.ServiceFaultDto> fault)
             {
-                MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                string msg = messageResolver.GetMessage(errorType);
+
+                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             catch (CommunicationException)
             {

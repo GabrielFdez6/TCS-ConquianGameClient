@@ -12,6 +12,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using ConquiánCliente.Utilities.Messages; 
 
 namespace ConquiánCliente.ViewModel
 {
@@ -42,18 +43,23 @@ namespace ConquiánCliente.ViewModel
 
         private readonly FriendListClient FriendListService;
         private readonly UserProfileClient UserProfileService;
+        private readonly IMessageResolver messageResolver; 
 
         public FriendListViewModel()
         {
             FriendListService = new FriendListClient();
             UserProfileService = new UserProfileClient();
+            this.messageResolver = new ResourceMessageResolver(); 
+
             Friends = new ObservableCollection<FriendInviteItemViewModel>();
             SearchResult = new ObservableCollection<FriendInviteItemViewModel>();
+
             ViewProfileCommand = new RelayCommand(ExecuteViewProfileCommand);
             AddFriendCommand = new RelayCommand(AddFriend);
-            RequestsCommand = new RelayCommand(ExecuteRequestsCommand); 
+            RequestsCommand = new RelayCommand(ExecuteRequestsCommand);
             DeleteFriendCommand = new RelayCommand(DeleteFriend);
-            BackCommand = new RelayCommand(ExecuteBackCommand); 
+            BackCommand = new RelayCommand(ExecuteBackCommand);
+
             _ = LoadFriends();
 
             PresenceCallbackHandler.FriendStatusChanged += OnFriendStatusChanged;
@@ -103,7 +109,9 @@ namespace ConquiánCliente.ViewModel
             }
             catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
             {
-                MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                string msg = messageResolver.GetMessage(errorType);
+                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -125,18 +133,9 @@ namespace ConquiánCliente.ViewModel
             }
             catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
             {
-                if (fault.Detail.ErrorType == ServiceFriendList.ServiceErrorType.NotFound)
-                {
-                    MessageBox.Show(Lang.ErrorUserNotFound, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else if (fault.Detail.ErrorType == ServiceFriendList.ServiceErrorType.ValidationFailed)
-                {
-                    MessageBox.Show(fault.Detail.Message, Lang.TitleValidation, MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                else
-                {
-                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                string msg = messageResolver.GetMessage(errorType);
+                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -151,19 +150,13 @@ namespace ConquiánCliente.ViewModel
                 try
                 {
                     await FriendListService.SendFriendRequestAsync(PlayerSession.CurrentPlayer.idPlayer, friendVM.IdPlayer);
-
                     MessageBox.Show(Lang.FriendRequestSentSuccess, Lang.TitleSuccess);
                 }
                 catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
                 {
-                    if (fault.Detail.ErrorType == ServiceFriendList.ServiceErrorType.DuplicateRecord)
-                    {
-                        MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
-                    else
-                    {
-                        MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
+                    var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                    string msg = messageResolver.GetMessage(errorType);
+                    MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
@@ -192,8 +185,6 @@ namespace ConquiánCliente.ViewModel
             }
         }
 
-
-
         private async void ExecuteViewProfileCommand(object parameter)
         {
             if (parameter is FriendInviteItemViewModel friendVM)
@@ -211,7 +202,9 @@ namespace ConquiánCliente.ViewModel
                 }
                 catch (FaultException<ServiceUserProfile.ServiceFaultDto> fault)
                 {
-                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                    string msg = messageResolver.GetMessage(errorType);
+                    MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
@@ -237,7 +230,9 @@ namespace ConquiánCliente.ViewModel
                     }
                     catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
                     {
-                        MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                        var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                        string msg = messageResolver.GetMessage(errorType);
+                        MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     catch (Exception ex)
                     {

@@ -7,12 +7,15 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using ConquiánCliente.Utilities.Messages; 
 
 namespace ConquiánCliente.ViewModel.MainMenu
 {
     public class CreateOrJoinViewModel : ViewModelBase
     {
         private string roomCode;
+        private readonly IMessageResolver messageResolver; 
+
         public string RoomCode
         {
             get { return roomCode; }
@@ -30,6 +33,8 @@ namespace ConquiánCliente.ViewModel.MainMenu
 
         public CreateOrJoinViewModel()
         {
+            this.messageResolver = new ResourceMessageResolver(); 
+
             CreateRoomCommand = new RelayCommand(async (p) => await ExecuteCreateRoom(p));
             JoinRoomCommand = new RelayCommand(async (p) => await ExecuteJoinRoom(p));
             CloseCommand = new RelayCommand(ExecuteClose);
@@ -56,7 +61,10 @@ namespace ConquiánCliente.ViewModel.MainMenu
                 }
                 catch (FaultException<ServiceFaultDto> fault)
                 {
-                    MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                    string msg = messageResolver.GetMessage(errorType);
+
+                    MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 catch (CommunicationException)
                 {
@@ -99,7 +107,10 @@ namespace ConquiánCliente.ViewModel.MainMenu
                 }
                 catch (FaultException<ServiceFaultDto> fault)
                 {
-                    MessageBox.Show(fault.Detail.Message, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+                    var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                    string msg = messageResolver.GetMessage(errorType);
+
+                    MessageBox.Show(msg, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (CommunicationException)
                 {

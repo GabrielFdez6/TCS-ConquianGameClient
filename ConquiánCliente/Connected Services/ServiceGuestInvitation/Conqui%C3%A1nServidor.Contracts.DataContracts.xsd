@@ -30,6 +30,26 @@
       <xs:enumeration value="InvalidNameFormat" />
       <xs:enumeration value="InvalidVerificationCode" />
       <xs:enumeration value="VerificationCodeExpired" />
+      <xs:enumeration value="GameNotFound" />
+      <xs:enumeration value="NotYourTurn" />
+      <xs:enumeration value="MustDiscardToFinish" />
+      <xs:enumeration value="AlreadyDrawn" />
+      <xs:enumeration value="PendingDiscardAction" />
+      <xs:enumeration value="DeckEmpty" />
+      <xs:enumeration value="InvalidMeld" />
+      <xs:enumeration value="CardNotFound" />
+      <xs:enumeration value="InvalidCardAction" />
+      <xs:enumeration value="GameRuleViolation" />
+      <xs:enumeration value="EmptyDiscaard" />
+      <xs:enumeration value="LobbyNotFound" />
+      <xs:enumeration value="UserOffline" />
+      <xs:enumeration value="InvitationFailed" />
+      <xs:enumeration value="ExistingRequest" />
+      <xs:enumeration value="HostUserNotFound" />
+      <xs:enumeration value="NotEnoughPlayers" />
+      <xs:enumeration value="NotLobbyHost" />
+      <xs:enumeration value="NotKickYourSelf" />
+      <xs:enumeration value="RegisteredMail" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="ServiceErrorType" nillable="true" type="tns:ServiceErrorType" />

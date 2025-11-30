@@ -106,11 +106,38 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ya has tomado una carta del mazo en este turno..
+        /// </summary>
+        public static string ErrorAlreadyDrawn {
+            get {
+                return ResourceManager.GetString("ErrorAlreadyDrawn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error de comunicación con el servidor..
+        /// </summary>
+        public static string ErrorCommunicationError {
+            get {
+                return ResourceManager.GetString("ErrorCommunicationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error al conectar con el servidor: {0}.
         /// </summary>
         public static string ErrorConnectingToServer {
             get {
                 return ResourceManager.GetString("ErrorConnectingToServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Mazo vacío. .
+        /// </summary>
+        public static string ErrorDeckEmpty {
+            get {
+                return ResourceManager.GetString("ErrorDeckEmpty", resourceCulture);
             }
         }
         
@@ -151,11 +178,29 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Descarte vacío..
+        /// </summary>
+        public static string ErrorEmptyDiscaard {
+            get {
+                return ResourceManager.GetString("ErrorEmptyDiscaard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El código de sala no puede estar vacío.
         /// </summary>
         public static string ErrorEmptyRoomCode {
             get {
                 return ResourceManager.GetString("ErrorEmptyRoomCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ya existe una solicitud pendiente o una amistad con este jugador..
+        /// </summary>
+        public static string ErrorExistingRequest {
+            get {
+                return ResourceManager.GetString("ErrorExistingRequest", resourceCulture);
             }
         }
         
@@ -178,6 +223,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El movimiento intentado no es válido..
+        /// </summary>
+        public static string ErrorGameRuleViolation {
+            get {
+                return ResourceManager.GetString("ErrorGameRuleViolation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Ocurrió un error: .
         /// </summary>
         public static string ErrorGeneric {
@@ -196,11 +250,65 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Anfitrión no encontrado..
+        /// </summary>
+        public static string ErrorHostUserNotFound {
+            get {
+                return ResourceManager.GetString("ErrorHostUserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No puedes tomar esta carta ahora..
+        /// </summary>
+        public static string ErrorInvalidCardAction {
+            get {
+                return ResourceManager.GetString("ErrorInvalidCardAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Credenciales inválidas. Por favor, verifique su correo y contraseña..
         /// </summary>
         public static string ErrorInvalidCredentials {
             get {
                 return ResourceManager.GetString("ErrorInvalidCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Las jugadas deben de tener al menos 3 cartas validas..
+        /// </summary>
+        public static string ErrorInvalidMeld {
+            get {
+                return ResourceManager.GetString("ErrorInvalidMeld", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Formato de nombre invalido..
+        /// </summary>
+        public static string ErrorInvalidNameFormat {
+            get {
+                return ResourceManager.GetString("ErrorInvalidNameFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Formato de contraseña invalido..
+        /// </summary>
+        public static string ErrorInvalidPasswordFormat {
+            get {
+                return ResourceManager.GetString("ErrorInvalidPasswordFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El código introducido es incorrecto..
+        /// </summary>
+        public static string ErrorInvalidVerificationCode {
+            get {
+                return ResourceManager.GetString("ErrorInvalidVerificationCode", resourceCulture);
             }
         }
         
@@ -268,11 +376,29 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No se encontró el lobby..
+        /// </summary>
+        public static string ErrorLobbyNotFound {
+            get {
+                return ResourceManager.GetString("ErrorLobbyNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error al cerrar sesión..
         /// </summary>
         public static string ErrorLogOutSession {
             get {
                 return ResourceManager.GetString("ErrorLogOutSession", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Debes pagar una carta para terminar..
+        /// </summary>
+        public static string ErrorMustDiscardToFinish {
+            get {
+                return ResourceManager.GetString("ErrorMustDiscardToFinish", resourceCulture);
             }
         }
         
@@ -327,6 +453,60 @@ namespace ConquiánCliente.Properties.Langs {
         public static string ErrorNicknameLength {
             get {
                 return ResourceManager.GetString("ErrorNicknameLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Debe haber al menos dos jugadores para iniciar la partida..
+        /// </summary>
+        public static string ErrorNotEnoughPlayers {
+            get {
+                return ResourceManager.GetString("ErrorNotEnoughPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No encontrado..
+        /// </summary>
+        public static string ErrorNotFound {
+            get {
+                return ResourceManager.GetString("ErrorNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No puedes expulsarte a ti mismo..
+        /// </summary>
+        public static string ErrorNotKickYourSelf {
+            get {
+                return ResourceManager.GetString("ErrorNotKickYourSelf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No puedes expulsar debido a que no eres el host..
+        /// </summary>
+        public static string ErrorNotLobbyHost {
+            get {
+                return ResourceManager.GetString("ErrorNotLobbyHost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No es tu turno para realizar esta acción..
+        /// </summary>
+        public static string ErrorNotYourTurn {
+            get {
+                return ResourceManager.GetString("ErrorNotYourTurn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fallo la operación en el servidor..
+        /// </summary>
+        public static string ErrorOperationFailed {
+            get {
+                return ResourceManager.GetString("ErrorOperationFailed", resourceCulture);
             }
         }
         
@@ -394,6 +574,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Debes decidir sobre la carta del descarte primero (Tomar o Pasar)..
+        /// </summary>
+        public static string ErrorPendingDiscardAction {
+            get {
+                return ResourceManager.GetString("ErrorPendingDiscardAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No se pudo procesar la solicitud. Verifique que el correo esté registrado y verificado..
         /// </summary>
         public static string ErrorRecoveryRequestFailed {
@@ -453,6 +642,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string ErrorSendMessageFailed {
             get {
                 return ResourceManager.GetString("ErrorSendMessageFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error interno del servidor..
+        /// </summary>
+        public static string ErrorServerInternalError {
+            get {
+                return ResourceManager.GetString("ErrorServerInternalError", resourceCulture);
             }
         }
         
@@ -529,6 +727,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No cuenta con una invitación..
+        /// </summary>
+        public static string ErrorValidationFailed {
+            get {
+                return ResourceManager.GetString("ErrorValidationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El nombre solo puede contener letras y espacios..
         /// </summary>
         public static string ErrorValidName {
@@ -543,6 +750,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string ErrorVerificationCodeEmpty {
             get {
                 return ResourceManager.GetString("ErrorVerificationCodeEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El código de verificación ha expirado..
+        /// </summary>
+        public static string ErrorVerificationCodeExpired {
+            get {
+                return ResourceManager.GetString("ErrorVerificationCodeExpired", resourceCulture);
             }
         }
         

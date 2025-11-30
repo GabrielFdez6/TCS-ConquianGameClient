@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using ConquiánCliente.ViewModel.Validation;
+using ConquiánCliente.Utilities.Messages; 
 
 namespace ConquiánCliente.ViewModel.Authentication
 {
@@ -18,6 +19,7 @@ namespace ConquiánCliente.ViewModel.Authentication
         private readonly LobbyClient lobbyClient;
         private readonly Window currentWindow;
         private bool isLoading;
+        private readonly IMessageResolver messageResolver; 
 
         public string Email
         {
@@ -45,6 +47,7 @@ namespace ConquiánCliente.ViewModel.Authentication
         public GuestLogInViewModel(Window window)
         {
             this.currentWindow = window;
+            this.messageResolver = new ResourceMessageResolver();
 
             var context = new InstanceContext(LobbyCallbackHandler.Instance);
             lobbyClient = new LobbyClient(context);
@@ -73,7 +76,6 @@ namespace ConquiánCliente.ViewModel.Authentication
 
         private async Task ExecuteGuestLogin()
         {
-
             string emailError = LogInValidator.ValidateEmail(Email);
             if (!string.IsNullOrEmpty(emailError))
             {
@@ -109,20 +111,18 @@ namespace ConquiánCliente.ViewModel.Authentication
             }
             catch (FaultException<ServiceLobby.ServiceFaultDto> fault)
             {
-                switch (fault.Detail.ErrorType)
+                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+
+                string message = messageResolver.GetMessage(errorType);
+
+                if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.RegisteredUserAsGuest)
                 {
-                    case ServiceLobby.ServiceErrorType.GuestInviteUsed:
-                        MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                        break;
-
-                    case ServiceLobby.ServiceErrorType.RegisteredUserAsGuest:
-                        MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
-                        ExecuteNavigateBack(null);
-                        break;
-
-                    default:
-                        MessageBox.Show(fault.Detail.Message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                        break;
+                    MessageBox.Show(message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
+                    ExecuteNavigateBack(null);
+                }
+                else
+                {
+                    MessageBox.Show(message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
             catch (CommunicationException)
@@ -133,7 +133,6 @@ namespace ConquiánCliente.ViewModel.Authentication
             {
                 MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
             finally
             {
                 isLoading = false;

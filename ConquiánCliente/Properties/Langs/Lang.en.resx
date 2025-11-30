@@ -652,4 +652,76 @@ If the card is not useful, use the 'To Pass' button.</value>
   <data name="GlobalSmtpError" xml:space="preserve">
     <value>Error sending email, please try again later</value>
   </data>
+  <data name="ErrorExistingRequest" xml:space="preserve">
+    <value>There is already a pending request or friendship with this player.</value>
+  </data>
+  <data name="ErrorNotFound" xml:space="preserve">
+    <value>Not found.</value>
+  </data>
+  <data name="ErrorNotYourTurn" xml:space="preserve">
+    <value>It's not your turn to perform this action.</value>
+  </data>
+  <data name="ErrorMustDiscardToFinish" xml:space="preserve">
+    <value>You need to pay a card to finish.</value>
+  </data>
+  <data name="ErrorGameRuleViolation" xml:space="preserve">
+    <value>The attempted move is not valid.</value>
+  </data>
+  <data name="ErrorInvalidCardAction" xml:space="preserve">
+    <value>You can't take this letter right now.</value>
+  </data>
+  <data name="ErrorInvalidMeld" xml:space="preserve">
+    <value>The plays must have at least 3 valid cards.</value>
+  </data>
+  <data name="ErrorOperationFailed" xml:space="preserve">
+    <value>The operation on the server failed.</value>
+  </data>
+  <data name="ErrorAlreadyDrawn" xml:space="preserve">
+    <value>You have already drawn a card from the deck this turn.</value>
+  </data>
+  <data name="ErrorPendingDiscardAction" xml:space="preserve">
+    <value>You must decide on the discard card first (Take or Pass).</value>
+  </data>
+  <data name="ErrorDeckEmpty" xml:space="preserve">
+    <value>Empty deck.</value>
+  </data>
+  <data name="ErrorEmptyDiscaard" xml:space="preserve">
+    <value>Empty discard.</value>
+  </data>
+  <data name="ErrorCommunicationError" xml:space="preserve">
+    <value>Communication error with the server.</value>
+  </data>
+  <data name="ErrorServerInternalError" xml:space="preserve">
+    <value>Internal server error.</value>
+  </data>
+  <data name="ErrorLobbyNotFound" xml:space="preserve">
+    <value>Lobby not found.</value>
+  </data>
+  <data name="ErrorHostUserNotFound" xml:space="preserve">
+    <value>Host not found.</value>
+  </data>
+  <data name="ErrorValidationFailed" xml:space="preserve">
+    <value>Does not have an invitation.</value>
+  </data>
+  <data name="ErrorNotEnoughPlayers" xml:space="preserve">
+    <value>There must be at least two players to start the game.</value>
+  </data>
+  <data name="ErrorNotLobbyHost" xml:space="preserve">
+    <value>You cannot kick someone because you are not the host.</value>
+  </data>
+  <data name="ErrorNotKickYourSelf" xml:space="preserve">
+    <value>Cannot kick yourself.</value>
+  </data>
+  <data name="ErrorInvalidNameFormat" xml:space="preserve">
+    <value>Invalid name format.</value>
+  </data>
+  <data name="ErrorInvalidPasswordFormat" xml:space="preserve">
+    <value>Invalid password format.</value>
+  </data>
+  <data name="ErrorVerificationCodeExpired" xml:space="preserve">
+    <value>Verification code expired.</value>
+  </data>
+  <data name="ErrorInvalidVerificationCode" xml:space="preserve">
+    <value>Invalid verification code</value>
+  </data>
 </root>

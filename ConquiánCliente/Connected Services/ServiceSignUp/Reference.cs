@@ -345,6 +345,66 @@ namespace ConquiánCliente.ServiceSignUp {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         VerificationCodeExpired = 19,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        GameNotFound = 20,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotYourTurn = 21,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        MustDiscardToFinish = 22,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AlreadyDrawn = 23,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PendingDiscardAction = 24,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DeckEmpty = 25,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        InvalidMeld = 26,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CardNotFound = 27,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        InvalidCardAction = 28,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        GameRuleViolation = 29,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        EmptyDiscaard = 30,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        LobbyNotFound = 31,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UserOffline = 32,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        InvitationFailed = 33,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ExistingRequest = 34,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        HostUserNotFound = 35,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotEnoughPlayers = 36,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotLobbyHost = 37,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotKickYourSelf = 38,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RegisteredMail = 39,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
