@@ -1,5 +1,6 @@
-﻿using System.ServiceModel;
-using ConquiánCliente.ServicePresence; 
+﻿using ConquiánCliente.ServicePresence; 
+using System;
+using System.ServiceModel;
 
 namespace ConquiánCliente.ViewModel
 {
@@ -38,8 +39,9 @@ namespace ConquiánCliente.ViewModel
                     else
                         client.Close();
                 }
-                catch
+                catch (Exception)
                 {
+                    client.Abort();
                 }
             }
 

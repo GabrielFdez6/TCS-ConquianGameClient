@@ -150,7 +150,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
                 string msg = messageResolver.GetMessage(errorType);
 
-                Application.Current.Dispatcher.Invoke(() =>
+                await Application.Current.Dispatcher.InvokeAsync(() =>
                 {
                     MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
                 });
@@ -163,9 +163,9 @@ namespace ConquiánCliente.ViewModel.Lobby
                 MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 NavigateToLoginOrMainMenu();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 NavigateToLoginOrMainMenu();
             }
         }
