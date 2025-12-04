@@ -13,6 +13,16 @@ namespace ConquiánCliente.ViewModel.Game
 {
     public class GameViewModel : ViewModelBase
     {
+        private const int ANIMATION_DELAY_MS = 1000;
+        private const int MINIMUM_MELD_SIZE = 3;
+        private const int SINGLE_CARD_COUNT = 1;
+        private const int MINIMUM_CARDS_FOR_MELD_FROM_HAND = 2;
+        private const int INITIAL_SCORE = 0;
+        private const int RANK_INCREMENT = 1;
+
+        private const int RANK_BEFORE_SKIP = 7;
+        private const int RANK_AFTER_SKIP = 10;
+
         private readonly string roomCode;
         private GameClient client;
         private bool isGameEnded = false;
@@ -128,7 +138,10 @@ namespace ConquiánCliente.ViewModel.Game
 
         public async Task PassTurnAsync()
         {
-            if (client == null || !IsMyTurn) return;
+            if (client == null || !IsMyTurn)
+            {
+                return;
+            }
 
             try
             {
@@ -137,9 +150,15 @@ namespace ConquiánCliente.ViewModel.Game
                 HasJustDrawnFromDeck = false;
                 CanDiscard = false;
 
-                foreach (var card in PlayerHand) card.IsSelected = false;
+                foreach (var card in PlayerHand)
+                {
+                    card.IsSelected = false;
+                }
 
-                if (IsMyTurn) IsStockPileBlinking = true;
+                if (IsMyTurn)
+                {
+                    IsStockPileBlinking = true;
+                }
             }
             catch (FaultException<ServiceFaultDto> fault)
             {
@@ -177,9 +196,13 @@ namespace ConquiánCliente.ViewModel.Game
                         UpdateOpponentCardCount(gameState.OpponentCardCount);
 
                         if (gameState.CurrentTurnPlayerId == playerId)
+                        {
                             TurnStatusText = Lang.GameTurn;
+                        }
                         else
+                        {
                             TurnStatusText = Lang.GameOpponentsturn;
+                        }
 
                         IsMyTurn = (gameState.CurrentTurnPlayerId == playerId);
                         UpdateTimerDisplay(gameState.TotalGameSeconds);
@@ -190,9 +213,9 @@ namespace ConquiánCliente.ViewModel.Game
                     MessageBox.Show(Lang.ErrorGeneric, Lang.ErrorGame, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -232,7 +255,7 @@ namespace ConquiánCliente.ViewModel.Game
                         TemporaryMeld.Add(cardVM);
                     }
                 });
-                await Task.Delay(1000);
+                await Task.Delay(ANIMATION_DELAY_MS);
                 await Application.Current.Dispatcher.InvokeAsync(() => {
                     TemporaryMeld.Clear();
                     OpponentMelds.Add(new MeldViewModel(cardVMs));
@@ -281,24 +304,24 @@ namespace ConquiánCliente.ViewModel.Game
             string myName = CurrentPlayer.nickname;
             string opponentName = Opponent.nickname;
 
-            int myScore = 0;
-            int opponentScore = 0;
+            int myScore = INITIAL_SCORE;
+            int opponentScore = INITIAL_SCORE;
 
             if (result.IsDraw)
             {
-                myScore = 0;
-                opponentScore = 0;
+                myScore = INITIAL_SCORE;
+                opponentScore = INITIAL_SCORE;
             }
             else
             {
                 if (result.WinnerId == CurrentPlayer.idPlayer)
                 {
                     myScore = result.PointsWon;
-                    opponentScore = 0;
+                    opponentScore = INITIAL_SCORE;
                 }
                 else
                 {
-                    myScore = 0;
+                    myScore = INITIAL_SCORE;
                     opponentScore = result.PointsWon;
                 }
             }
@@ -330,66 +353,120 @@ namespace ConquiánCliente.ViewModel.Game
 
         public async Task<bool> PlayCardsAsync(List<string> cardIds)
         {
-            if (client == null || CurrentPlayer == null || cardIds == null) return false;
+            bool executionResult = false;
 
-            bool isUsingDiscardCard = (TopDiscardCard != null && cardIds.Contains(TopDiscardCard.Id));
-            var cardsToPlay = PlayerHand.Where(vm => cardIds.Contains(vm.Id)).ToList();
+            if (!CanPlayCards(cardIds))
+            {
+                executionResult = false;
+                return executionResult;
+            }
+
+            bool isUsingDiscardCard = TopDiscardCard != null && cardIds.Contains(TopDiscardCard.Id);
+
+            var cardsToPlay = GetCardsToPlay(cardIds);
+
+            if (cardsToPlay.Count != cardIds.Count)
+            {
+                executionResult = false;
+                return executionResult;
+            }
+
+            if (!IsValidMeld(cardsToPlay))
+            {
+                MessageBox.Show(Lang.GameInvalidMeld, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                executionResult = false;
+                return executionResult;
+            }
+
+            await MoveCardsToTemporaryMeldAsync(cardsToPlay);
+
+            executionResult = await TryExecutePlayCardsAsync(cardsToPlay, cardIds, isUsingDiscardCard);
+            return executionResult;
+        }
+
+        private bool CanPlayCards(List<string> cardIds)
+        {
+            bool isPlayable = true;
+            if (client == null || CurrentPlayer == null || cardIds == null)
+            {
+                isPlayable = false;
+            }
+            return isPlayable;
+        }
+
+        private List<CardViewModel> GetCardsToPlay(List<string> cardIds)
+        {
+            var cards = PlayerHand.Where(vm => cardIds.Contains(vm.Id)).ToList();
 
             if (TopDiscardCard != null && cardIds.Contains(TopDiscardCard.Id))
             {
                 var discardVM = new CardViewModel(TopDiscardCard);
-                cardsToPlay.Add(discardVM);
+                cards.Add(discardVM);
             }
 
-            if (cardsToPlay.Count != cardIds.Count) return false;
+            return cards;
+        }
 
-            if (IsValidMeld(cardsToPlay))
+        private async Task MoveCardsToTemporaryMeldAsync(List<CardViewModel> cardsToPlay)
+        {
+            foreach (var cardVM in cardsToPlay.Where(c => PlayerHand.Contains(c)).ToList())
             {
-                foreach (var cardVM in cardsToPlay.ToList())
-                {
-                    if (PlayerHand.Contains(cardVM)) PlayerHand.Remove(cardVM);
-                }
-
-                await Application.Current.Dispatcher.InvokeAsync(() => {
-                    TemporaryMeld.Clear();
-                    foreach (var cardVM in cardsToPlay) TemporaryMeld.Add(cardVM);
-                });
-
-                try
-                {
-                    await client.PlayCardsAsync(roomCode, CurrentPlayer.idPlayer, cardIds.ToArray());
-                    await Task.Delay(1000);
-
-                    if (isGameEnded) return true;
-
-                    await Application.Current.Dispatcher.InvokeAsync(() => {
-                        TemporaryMeld.Clear();
-                        PlayerMelds.Add(new MeldViewModel(cardsToPlay));
-                    });
-
-                    if (isUsingDiscardCard && !isGameEnded)
-                    {
-                        MessageBox.Show(Lang.GameMoveMade, Lang.TitlePay, MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    return true;
-                }
-                catch (FaultException<ServiceFaultDto> fault)
-                {
-                    HandleGameFault(fault);
-                    await RollbackPlayCards(cardsToPlay);
-                    return false;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                    await RollbackPlayCards(cardsToPlay);
-                    return false;
-                }
+                PlayerHand.Remove(cardVM);
             }
-            else
+
+            await Application.Current.Dispatcher.InvokeAsync(() =>
             {
-                MessageBox.Show(Lang.GameInvalidMeld, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
+                TemporaryMeld.Clear();
+                foreach (var cardVM in cardsToPlay)
+                {
+                    TemporaryMeld.Add(cardVM);
+                }
+            });
+        }
+
+        private async Task<bool> TryExecutePlayCardsAsync(List<CardViewModel> cardsToPlay, List<string> cardIds, bool isUsingDiscardCard)
+        {
+            bool isSuccess = false;
+            try
+            {
+                await client.PlayCardsAsync(roomCode, CurrentPlayer.idPlayer, cardIds.ToArray());
+                await Task.Delay(ANIMATION_DELAY_MS);
+
+                if (isGameEnded)
+                {
+                    isSuccess = true;
+                    return isSuccess;
+                }
+
+                await FinalizeSuccessfulPlayAsync(cardsToPlay, isUsingDiscardCard);
+                isSuccess = true;
+            }
+            catch (FaultException<ServiceFaultDto> fault)
+            {
+                HandleGameFault(fault);
+                await RollbackPlayCards(cardsToPlay);
+                isSuccess = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                await RollbackPlayCards(cardsToPlay);
+                isSuccess = false;
+            }
+            return isSuccess;
+        }
+
+        private async Task FinalizeSuccessfulPlayAsync(List<CardViewModel> cardsToPlay, bool isUsingDiscardCard)
+        {
+            await Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                TemporaryMeld.Clear();
+                PlayerMelds.Add(new MeldViewModel(cardsToPlay));
+            });
+
+            if (isUsingDiscardCard)
+            {
+                MessageBox.Show(Lang.GameMoveMade, Lang.TitlePay, MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -409,28 +486,53 @@ namespace ConquiánCliente.ViewModel.Game
 
         private static bool IsValidMeld(List<CardViewModel> cards)
         {
-            if (cards == null || cards.Count < 3) return false;
+            bool isValid = false;
+
+            if (cards == null || cards.Count < MINIMUM_MELD_SIZE)
+            {
+                isValid = false;
+                return isValid;
+            }
 
             cards = cards.OrderBy(c => c.Rank).ToList();
 
             bool isTercia = cards.All(c => c.Rank == cards[0].Rank);
             bool distinctSuits = cards.Select(c => c.Suit).Distinct().Count() == cards.Count;
-            if (isTercia && distinctSuits) return true;
+
+            if (isTercia && distinctSuits)
+            {
+                isValid = true;
+                return isValid;
+            }
 
             bool isCorrida = cards.All(c => c.Suit == cards[0].Suit);
-            if (!isCorrida) return false;
 
+            if (!isCorrida)
+            {
+                isValid = false;
+                return isValid;
+            }
+
+            bool isSequential = true;
             for (int i = 0; i < cards.Count - 1; i++)
             {
                 int currentRank = cards[i].Rank;
                 int nextRank = cards[i + 1].Rank;
 
-                if (currentRank == 7 && nextRank == 10) continue;
+                if (currentRank == RANK_BEFORE_SKIP && nextRank == RANK_AFTER_SKIP)
+                {
+                    continue;
+                }
 
-                if (nextRank != currentRank + 1) return false;
+                if (nextRank != currentRank + RANK_INCREMENT)
+                {
+                    isSequential = false;
+                    break;
+                }
             }
 
-            return true;
+            isValid = isSequential;
+            return isValid;
         }
 
         private void UpdateTimerDisplay(int seconds)
@@ -441,7 +543,10 @@ namespace ConquiánCliente.ViewModel.Game
 
         private void UpdateTurnStatus(int newTurnPlayerId)
         {
-            if (CurrentPlayer == null) return;
+            if (CurrentPlayer == null)
+            {
+                return;
+            }
 
             if (newTurnPlayerId == CurrentPlayer.idPlayer)
             {
@@ -458,7 +563,10 @@ namespace ConquiánCliente.ViewModel.Game
 
         public async Task DrawFromDeckAsync()
         {
-            if (client == null || !IsMyTurn || HasJustDrawnFromDeck) return;
+            if (client == null || !IsMyTurn || HasJustDrawnFromDeck)
+            {
+                return;
+            }
 
             IsStockPileBlinking = false;
             CanDiscard = true;
@@ -480,13 +588,16 @@ namespace ConquiánCliente.ViewModel.Game
 
         public async Task DrawFromDiscardAsync(CardDto card)
         {
-            if (card == null || client == null || !IsMyTurn) return;
+            if (card == null || client == null || !IsMyTurn)
+            {
+                return;
+            }
 
             var selectedCards = PlayerHand.Where(c => c.IsSelected).ToList();
 
-            if (HasJustDrawnFromDeck && selectedCards.Count == 1)
+            if (HasJustDrawnFromDeck && selectedCards.Count == SINGLE_CARD_COUNT)
             {
-                var cardToPay = selectedCards.First();
+                var cardToPay = selectedCards[0];
                 try
                 {
                     await client.SwapDrawnCardAsync(roomCode, CurrentPlayer.idPlayer, cardToPay.Id);
@@ -498,7 +609,10 @@ namespace ConquiánCliente.ViewModel.Game
                     HasJustDrawnFromDeck = false;
                     CanDiscard = false;
 
-                    foreach (var c in PlayerHand) c.IsSelected = false;
+                    foreach (var c in PlayerHand)
+                    {
+                        c.IsSelected = false;
+                    }
                 }
                 catch (FaultException<ServiceFaultDto> fault)
                 {
@@ -511,7 +625,7 @@ namespace ConquiánCliente.ViewModel.Game
                 return;
             }
 
-            if (selectedCards.Count < 2)
+            if (selectedCards.Count < MINIMUM_CARDS_FOR_MELD_FROM_HAND)
             {
                 string msg = HasJustDrawnFromDeck ? Lang.GameSwapInstruction : Lang.GameInvalidMove;
                 MessageBox.Show(msg, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
@@ -532,7 +646,10 @@ namespace ConquiánCliente.ViewModel.Game
 
         public async Task DiscardCardAsync(CardViewModel cardVM)
         {
-            if (cardVM == null || client == null || !IsMyTurn || !CanDiscard) return;
+            if (cardVM == null || client == null || !IsMyTurn || !CanDiscard)
+            {
+                return;
+            }
 
             try
             {
@@ -542,7 +659,10 @@ namespace ConquiánCliente.ViewModel.Game
                 TopDiscardCard = cardVM.Card;
                 CanDiscard = false;
 
-                foreach (var c in PlayerHand) c.IsSelected = false;
+                foreach (var c in PlayerHand)
+                {
+                    c.IsSelected = false;
+                }
             }
             catch (FaultException<ServiceFaultDto> fault)
             {

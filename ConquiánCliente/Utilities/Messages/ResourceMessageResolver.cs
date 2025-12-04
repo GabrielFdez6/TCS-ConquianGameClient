@@ -23,7 +23,7 @@ namespace ConquiánCliente.Utilities.Messages
             return Lang.ErrorConnectingToServer;
         }
 
-        private Dictionary<ServiceErrorType, Func<string>> InitializeMessageMap()
+        private static Dictionary<ServiceErrorType, Func<string>> InitializeMessageMap()
         {
             return new Dictionary<ServiceErrorType, Func<string>>
             {
