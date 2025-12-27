@@ -301,36 +301,19 @@ namespace ConquiánCliente.ViewModel.Game
 
         private void ShowGameResults(GameResultDto result)
         {
-            string myName = CurrentPlayer.nickname;
-            string opponentName = Opponent.nickname;
+            int myPlayerId = CurrentPlayer.idPlayer;
 
-            int myScore = INITIAL_SCORE;
-            int opponentScore = INITIAL_SCORE;
+            var resultsVM = new GameResultsViewModel(result, myPlayerId);
 
-            if (result.IsDraw)
-            {
-                myScore = INITIAL_SCORE;
-                opponentScore = INITIAL_SCORE;
-            }
-            else
-            {
-                if (result.WinnerId == CurrentPlayer.idPlayer)
-                {
-                    myScore = result.PointsWon;
-                    opponentScore = INITIAL_SCORE;
-                }
-                else
-                {
-                    myScore = INITIAL_SCORE;
-                    opponentScore = result.PointsWon;
-                }
-            }
-
-            var resultsVM = new GameResultsViewModel(myName, myScore, opponentName, opponentScore);
             var resultsWindow = new ConquiánCliente.View.Game.GameResults();
             resultsWindow.DataContext = resultsVM;
             resultsWindow.Show();
 
+            CloseWindow();
+        }
+
+        private void CloseWindow()
+        {
             foreach (Window win in Application.Current.Windows)
             {
                 if (win.DataContext == this)
@@ -340,7 +323,6 @@ namespace ConquiánCliente.ViewModel.Game
                 }
             }
         }
-
 
         private void UpdateOpponentCardCount(int newCardCount)
         {

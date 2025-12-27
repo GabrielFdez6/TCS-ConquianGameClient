@@ -1,4 +1,5 @@
 ﻿using ConquiánCliente.Properties.Langs;
+using ConquiánCliente.ServiceGame;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,12 +12,20 @@ namespace ConquiánCliente.ViewModel.Game
         private string opponentName;
         private int opponentScore;
         private string resultTitle;
+        private string resultDetails;
 
         public string ResultTitle
         {
             get { return resultTitle; }
             set { resultTitle = value; OnPropertyChanged(nameof(ResultTitle)); }
         }
+
+        public string ResultDetails
+        {
+            get { return resultDetails; }
+            set { resultDetails = value; OnPropertyChanged(nameof(ResultDetails)); }
+        }
+
         public string PlayerName
         {
             get { return playerName; }
@@ -48,27 +57,44 @@ namespace ConquiánCliente.ViewModel.Game
             ReturnToMainMenuCommand = new RelayCommand(ReturnToMainMenu);
         }
 
-        public GameResultsViewModel(string pName, int pScore, string oName, int oScore) : this()
+        public GameResultsViewModel(GameResultDto result, int myPlayerId) : this()
         {
-            PlayerName = pName;
-            PlayerScore = pScore;
-            OpponentName = oName;
-            OpponentScore = oScore;
+            LoadResultData(result, myPlayerId);
+        }
 
-            if (pScore > oScore)
+        private void LoadResultData(GameResultDto result, int myPlayerId)
+        {
+            bool amIPlayer1 = (result.Player1Id == myPlayerId);
+
+            PlayerName = amIPlayer1 ? result.Player1Name : result.Player2Name;
+            OpponentName = amIPlayer1 ? result.Player2Name : result.Player1Name;
+
+            bool amIWinner = (result.WinnerId == myPlayerId);
+            bool isDraw = result.IsDraw;
+
+            if (isDraw)
             {
-
-                ResultTitle = Lang.GameVictory; 
+                ResultTitle = "Empate";
+                ResultDetails = $"Empataste contra {OpponentName}";
+                PlayerScore = 0;
+                OpponentScore = 0;
             }
-            else if (pScore < oScore)
+            else if (amIWinner)
             {
-                ResultTitle = Lang.GameDefeat; 
+                ResultTitle = Lang.GameVictory;
+                ResultDetails = $"¡Le ganaste a {OpponentName}!";
+                PlayerScore = result.PointsWon;
+                OpponentScore = 0;
             }
             else
             {
-                ResultTitle = "Empate";
+                ResultTitle = Lang.GameDefeat;
+                ResultDetails = $"Perdiste contra {OpponentName}";
+                PlayerScore = 0;
+                OpponentScore = result.PointsWon;
             }
         }
+
         private void ReturnToMainMenu(object obj)
         {
             var mainMenu = new ConquiánCliente.View.MainMenu.MainMenu();

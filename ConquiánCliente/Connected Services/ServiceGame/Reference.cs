@@ -654,10 +654,25 @@ namespace ConquiánCliente.ServiceGame {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int GamemodeIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsDrawField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int LoserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int Player1IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Player1NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int Player2IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Player2NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PointsWonField;
@@ -672,6 +687,19 @@ namespace ConquiánCliente.ServiceGame {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int GamemodeId {
+            get {
+                return this.GamemodeIdField;
+            }
+            set {
+                if ((this.GamemodeIdField.Equals(value) != true)) {
+                    this.GamemodeIdField = value;
+                    this.RaisePropertyChanged("GamemodeId");
+                }
             }
         }
         
@@ -697,6 +725,58 @@ namespace ConquiánCliente.ServiceGame {
                 if ((this.LoserIdField.Equals(value) != true)) {
                     this.LoserIdField = value;
                     this.RaisePropertyChanged("LoserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Player1Id {
+            get {
+                return this.Player1IdField;
+            }
+            set {
+                if ((this.Player1IdField.Equals(value) != true)) {
+                    this.Player1IdField = value;
+                    this.RaisePropertyChanged("Player1Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Player1Name {
+            get {
+                return this.Player1NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Player1NameField, value) != true)) {
+                    this.Player1NameField = value;
+                    this.RaisePropertyChanged("Player1Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Player2Id {
+            get {
+                return this.Player2IdField;
+            }
+            set {
+                if ((this.Player2IdField.Equals(value) != true)) {
+                    this.Player2IdField = value;
+                    this.RaisePropertyChanged("Player2Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Player2Name {
+            get {
+                return this.Player2NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Player2NameField, value) != true)) {
+                    this.Player2NameField = value;
+                    this.RaisePropertyChanged("Player2Name");
                 }
             }
         }
