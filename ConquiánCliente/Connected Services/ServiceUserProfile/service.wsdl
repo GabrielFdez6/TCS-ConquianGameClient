@@ -85,6 +85,15 @@
   <wsdl:message name="IUserProfile_UpdateProfilePicture_ServiceFaultDtoFault_FaultMessage">
     <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q5:ServiceFaultDto" />
   </wsdl:message>
+  <wsdl:message name="IUserProfile_GetPlayerGameHistory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerGameHistory" />
+  </wsdl:message>
+  <wsdl:message name="IUserProfile_GetPlayerGameHistory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerGameHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserProfile_GetPlayerGameHistory_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q6:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:portType name="IUserProfile">
     <wsdl:operation name="GetPlayerById">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserProfile/GetPlayerById" message="tns:IUserProfile_GetPlayerById_InputMessage" />
@@ -110,6 +119,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUserProfile/UpdateProfilePicture" message="tns:IUserProfile_UpdateProfilePicture_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserProfile/UpdateProfilePictureResponse" message="tns:IUserProfile_UpdateProfilePicture_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IUserProfile/UpdateProfilePictureServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IUserProfile_UpdateProfilePicture_ServiceFaultDtoFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayerGameHistory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserProfile/GetPlayerGameHistory" message="tns:IUserProfile_GetPlayerGameHistory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserProfile/GetPlayerGameHistoryResponse" message="tns:IUserProfile_GetPlayerGameHistory_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IUserProfile/GetPlayerGameHistoryServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IUserProfile_GetPlayerGameHistory_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IUserProfile" type="tns:IUserProfile">
@@ -166,6 +180,18 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateProfilePicture">
       <soap12:operation soapAction="http://tempuri.org/IUserProfile/UpdateProfilePicture" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayerGameHistory">
+      <soap12:operation soapAction="http://tempuri.org/IUserProfile/GetPlayerGameHistory" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

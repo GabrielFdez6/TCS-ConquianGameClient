@@ -724,4 +724,10 @@ If the card is not useful, use the 'To Pass' button.</value>
   <data name="ErrorInvalidVerificationCode" xml:space="preserve">
     <value>Invalid verification code</value>
   </data>
+  <data name="ProfileMatchHistory" xml:space="preserve">
+    <value>Match history</value>
+  </data>
+  <data name="ProfileNoRecentMatches" xml:space="preserve">
+    <value>There are no recent games.</value>
+  </data>
 </root>

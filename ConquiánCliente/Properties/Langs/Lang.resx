@@ -723,4 +723,10 @@ Si la carta no te sirve, usa el botón 'Pasar'.</value>
   <data name="ErrorInvalidVerificationCode" xml:space="preserve">
     <value>El código introducido es incorrecto.</value>
   </data>
+  <data name="ProfileMatchHistory" xml:space="preserve">
+    <value>Historial de partidas</value>
+  </data>
+  <data name="ProfileNoRecentMatches" xml:space="preserve">
+    <value>No hay partidas recientes</value>
+  </data>
 </root>

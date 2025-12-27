@@ -485,6 +485,116 @@ namespace ConquiánCliente.ServiceUserProfile {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GameHistoryDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+        "acts")]
+    [System.SerializableAttribute()]
+    public partial class GameHistoryDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GameModeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GameTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string OpponentNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PointsEarnedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ResultStatusField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string GameMode {
+            get {
+                return this.GameModeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GameModeField, value) != true)) {
+                    this.GameModeField = value;
+                    this.RaisePropertyChanged("GameMode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string GameTime {
+            get {
+                return this.GameTimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GameTimeField, value) != true)) {
+                    this.GameTimeField = value;
+                    this.RaisePropertyChanged("GameTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string OpponentName {
+            get {
+                return this.OpponentNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OpponentNameField, value) != true)) {
+                    this.OpponentNameField = value;
+                    this.RaisePropertyChanged("OpponentName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PointsEarned {
+            get {
+                return this.PointsEarnedField;
+            }
+            set {
+                if ((this.PointsEarnedField.Equals(value) != true)) {
+                    this.PointsEarnedField = value;
+                    this.RaisePropertyChanged("PointsEarned");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ResultStatus {
+            get {
+                return this.ResultStatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ResultStatusField, value) != true)) {
+                    this.ResultStatusField = value;
+                    this.RaisePropertyChanged("ResultStatus");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceUserProfile.IUserProfile")]
     public interface IUserProfile {
@@ -528,6 +638,14 @@ namespace ConquiánCliente.ServiceUserProfile {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserProfile/UpdateProfilePicture", ReplyAction="http://tempuri.org/IUserProfile/UpdateProfilePictureResponse")]
         System.Threading.Tasks.Task UpdateProfilePictureAsync(int idPlayer, string newPath);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserProfile/GetPlayerGameHistory", ReplyAction="http://tempuri.org/IUserProfile/GetPlayerGameHistoryResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceUserProfile.ServiceFaultDto), Action="http://tempuri.org/IUserProfile/GetPlayerGameHistoryServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
+        ConquiánCliente.ServiceUserProfile.GameHistoryDto[] GetPlayerGameHistory(int idPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserProfile/GetPlayerGameHistory", ReplyAction="http://tempuri.org/IUserProfile/GetPlayerGameHistoryResponse")]
+        System.Threading.Tasks.Task<ConquiánCliente.ServiceUserProfile.GameHistoryDto[]> GetPlayerGameHistoryAsync(int idPlayer);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -595,6 +713,14 @@ namespace ConquiánCliente.ServiceUserProfile {
         
         public System.Threading.Tasks.Task UpdateProfilePictureAsync(int idPlayer, string newPath) {
             return base.Channel.UpdateProfilePictureAsync(idPlayer, newPath);
+        }
+        
+        public ConquiánCliente.ServiceUserProfile.GameHistoryDto[] GetPlayerGameHistory(int idPlayer) {
+            return base.Channel.GetPlayerGameHistory(idPlayer);
+        }
+        
+        public System.Threading.Tasks.Task<ConquiánCliente.ServiceUserProfile.GameHistoryDto[]> GetPlayerGameHistoryAsync(int idPlayer) {
+            return base.Channel.GetPlayerGameHistoryAsync(idPlayer);
         }
     }
 }

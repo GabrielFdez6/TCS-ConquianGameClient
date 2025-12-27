@@ -1,13 +1,14 @@
-﻿using ConquiánCliente.ServiceUserProfile;
+﻿using ConquiánCliente.Properties.Langs;
+using ConquiánCliente.ServiceUserProfile;
 using ConquiánCliente.View;
 using ConquiánCliente.View.Profile;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ConquiánCliente.Properties.Langs;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ConquiánCliente.ViewModel.Profile
 {
@@ -15,6 +16,20 @@ namespace ConquiánCliente.ViewModel.Profile
     {
         private string profileImagePath;
         private PlayerDto fullPlayerProfile;
+
+        private ObservableCollection<GameHistoryDto> matchHistoryList;
+        public ObservableCollection<GameHistoryDto> MatchHistoryList
+        {
+            get => matchHistoryList;
+            set { matchHistoryList = value; OnPropertyChanged(); }
+        }
+
+        private bool isHistoryEmpty;
+        public bool IsHistoryEmpty
+        {
+            get => isHistoryEmpty;
+            set { isHistoryEmpty = value; OnPropertyChanged(); }
+        }
 
         public string ProfileImagePath
         {
@@ -102,6 +117,9 @@ namespace ConquiánCliente.ViewModel.Profile
 
         public UserProfileViewModel()
         {
+            MatchHistoryList = new ObservableCollection<GameHistoryDto>();
+            IsHistoryEmpty = true;
+
             NavigateBackCommand = new RelayCommand(ExecuteNavigateBack);
             NavigateToEditCommand = new RelayCommand(ExecuteNavigateToEdit);
             NavigateToEditProfilePictureCommand = new RelayCommand(ExecuteNavigateToEditProfilePicture);
@@ -143,6 +161,22 @@ namespace ConquiánCliente.ViewModel.Profile
                     {
                         Facebook = socials.FirstOrDefault(s => s.IdSocialType == 2)?.UserLink;
                         Instagram = socials.FirstOrDefault(s => s.IdSocialType == 1)?.UserLink;
+                    }
+
+                    var history = await userProfileClient.GetPlayerGameHistoryAsync(sessionPlayer.idPlayer);
+
+                    MatchHistoryList.Clear();
+                    if (history != null && history.Length > 0)
+                    {
+                        foreach (var game in history)
+                        {
+                            MatchHistoryList.Add(game);
+                        }
+                        IsHistoryEmpty = false;
+                    }
+                    else
+                    {
+                        IsHistoryEmpty = true;
                     }
 
                 }

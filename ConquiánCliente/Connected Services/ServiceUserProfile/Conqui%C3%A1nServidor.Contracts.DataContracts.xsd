@@ -82,4 +82,20 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SocialDto" nillable="true" type="tns:SocialDto" />
+  <xs:complexType name="ArrayOfGameHistoryDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GameHistoryDto" nillable="true" type="tns:GameHistoryDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGameHistoryDto" nillable="true" type="tns:ArrayOfGameHistoryDto" />
+  <xs:complexType name="GameHistoryDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GameMode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GameTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OpponentName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PointsEarned" type="xs:int" />
+      <xs:element minOccurs="0" name="ResultStatus" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GameHistoryDto" nillable="true" type="tns:GameHistoryDto" />
 </xs:schema>

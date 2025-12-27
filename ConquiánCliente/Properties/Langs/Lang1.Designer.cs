@@ -1693,6 +1693,24 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Historial de partidas.
+        /// </summary>
+        public static string ProfileMatchHistory {
+            get {
+                return ResourceManager.GetString("ProfileMatchHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No hay partidas recientes.
+        /// </summary>
+        public static string ProfileNoRecentMatches {
+            get {
+                return ResourceManager.GetString("ProfileNoRecentMatches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Escribe el código de verificación enviado a tu correo..
         /// </summary>
         public static string RecoveryCodeInfo {

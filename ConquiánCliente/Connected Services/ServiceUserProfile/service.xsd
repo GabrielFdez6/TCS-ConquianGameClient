@@ -67,4 +67,18 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetPlayerGameHistory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idPlayer" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPlayerGameHistoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" minOccurs="0" name="GetPlayerGameHistoryResult" nillable="true" type="q5:ArrayOfGameHistoryDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
