@@ -16,6 +16,7 @@
 
     <Page.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <profile:ResultStatusConverter x:Key="ResultStatusConverter"/>
     </Page.Resources>
 
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -203,7 +204,7 @@
                                                 HorizontalAlignment="Center"
                                                 Orientation="Vertical">
 
-                                        <TextBlock Text="{Binding ResultStatus}" 
+                                        <TextBlock Text="{Binding ResultStatus, Converter={StaticResource ResultStatusConverter}}" 
                                                    Foreground="{StaticResource SecondaryButtonBrush}" 
                                                    FontWeight="Bold"
                                                    FontSize="18"

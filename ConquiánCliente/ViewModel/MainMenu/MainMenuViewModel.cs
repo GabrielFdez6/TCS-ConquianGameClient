@@ -1,11 +1,9 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceLogin;
 using ConquiánCliente.View;
-using ConquiánCliente.View.FriendList;
 using ConquiánCliente.View.Lobby;
 using ConquiánCliente.View.MainMenu;
 using ConquiánCliente.ViewModel.Lobby;
-using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -21,7 +19,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
         public ICommand LogoutCommand { get; }
         public ICommand FriendsCommand { get; }
         public ICommand PlayCommand { get; }
-        public ICommand ChangeLanguageCommand { get; }
+        public ICommand OpenSettingsCommand { get; }
 
         public MainMenuViewModel()
         {
@@ -30,7 +28,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
             LogoutCommand = new RelayCommand(async (p) => await ExecuteLogoutCommand(p));
             FriendsCommand = new RelayCommand(ExecuteFriendsCommand);
             PlayCommand = new RelayCommand(ExecutePlay);
-            ChangeLanguageCommand = new RelayCommand(ExecuteChangeLanguage);
+            OpenSettingsCommand = new RelayCommand(ExecuteOpenSettings);
             InvitationClientManager.Connect(PlayerSession.CurrentPlayer.idPlayer);
             InvitationCallbackHandler.OnGlobalInvitationReceived += HandleInvitation;
             PresenceClientManager.Instance.Client.Subscribe(PlayerSession.CurrentPlayer.idPlayer);
@@ -130,13 +128,13 @@ namespace ConquiánCliente.ViewModel.MainMenu
             }
         }
 
-        private static void ExecuteChangeLanguage(object parameter)
+        private static void ExecuteOpenSettings(object parameter)
         {
             if (parameter is Window currentWindow)
             {
-                var selector = new ChangeLanguage();
-                selector.Owner = currentWindow;
-                selector.ShowDialog();
+                var settingsView = new Settings();
+                settingsView.Owner = currentWindow;
+                settingsView.ShowDialog();
             }
         }
     }

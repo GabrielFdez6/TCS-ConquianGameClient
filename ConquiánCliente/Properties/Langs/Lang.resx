@@ -216,12 +216,6 @@
   <data name="FriendsOptionsDelete" xml:space="preserve">
     <value>Eliminar</value>
   </data>
-  <data name="HistoryVictory" xml:space="preserve">
-    <value>Victoria</value>
-  </data>
-  <data name="HistoryDefeat" xml:space="preserve">
-    <value>Derrota</value>
-  </data>
   <data name="LobbyReady" xml:space="preserve">
     <value>Listo</value>
   </data>
@@ -537,12 +531,6 @@
   <data name="GameBackToMainMenu" xml:space="preserve">
     <value>Volver al menú principal</value>
   </data>
-  <data name="GameVictory" xml:space="preserve">
-    <value>Victoria</value>
-  </data>
-  <data name="GameDefeat" xml:space="preserve">
-    <value>Derrota</value>
-  </data>
   <data name="ErrorStartingGame" xml:space="preserve">
     <value>Error al iniciar el juego</value>
   </data>
@@ -728,5 +716,32 @@ Si la carta no te sirve, usa el botón 'Pasar'.</value>
   </data>
   <data name="ProfileNoRecentMatches" xml:space="preserve">
     <value>No hay partidas recientes</value>
+  </data>
+  <data name="GlobalGameDraw" xml:space="preserve">
+    <value>Empate</value>
+  </data>
+  <data name="ResultDrawMessage" xml:space="preserve">
+    <value>Empataste contra {0}</value>
+  </data>
+  <data name="ResultWinMessage" xml:space="preserve">
+    <value>¡Le ganaste a {0}!</value>
+  </data>
+  <data name="ResultLossMessage" xml:space="preserve">
+    <value>Perdiste contra {0}</value>
+  </data>
+  <data name="GlobalGameVictory" xml:space="preserve">
+    <value>Victoria</value>
+  </data>
+  <data name="GlobalGameDefeat" xml:space="preserve">
+    <value>Derrota</value>
+  </data>
+  <data name="MainMenuSettings" xml:space="preserve">
+    <value>Configuracion</value>
+  </data>
+  <data name="MainMenuVolume" xml:space="preserve">
+    <value>Volumen</value>
+  </data>
+  <data name="MainMenuMusic" xml:space="preserve">
+    <value>Música</value>
   </data>
 </root>

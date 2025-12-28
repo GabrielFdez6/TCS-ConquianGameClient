@@ -216,12 +216,6 @@
   <data name="FriendsOptionsDelete" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="HistoryVictory" xml:space="preserve">
-    <value>Victory</value>
-  </data>
-  <data name="HistoryDefeat" xml:space="preserve">
-    <value>Defeat</value>
-  </data>
   <data name="LobbyReady" xml:space="preserve">
     <value>Ready</value>
   </data>
@@ -537,12 +531,6 @@
   <data name="GameBackToMainMenu" xml:space="preserve">
     <value>Back to main menu</value>
   </data>
-  <data name="GameVictory" xml:space="preserve">
-    <value>Victory</value>
-  </data>
-  <data name="GameDefeat" xml:space="preserve">
-    <value>Defeat</value>
-  </data>
   <data name="ErrorStartingGame" xml:space="preserve">
     <value>Error starting the game</value>
   </data>
@@ -729,5 +717,32 @@ If the card is not useful, use the 'To Pass' button.</value>
   </data>
   <data name="ProfileNoRecentMatches" xml:space="preserve">
     <value>There are no recent games.</value>
+  </data>
+  <data name="GlobalGameDraw" xml:space="preserve">
+    <value>Draw</value>
+  </data>
+  <data name="ResultDrawMessage" xml:space="preserve">
+    <value>You tied against {0}</value>
+  </data>
+  <data name="ResultWinMessage" xml:space="preserve">
+    <value>You won against {0}!</value>
+  </data>
+  <data name="ResultLossMessage" xml:space="preserve">
+    <value>You lost against {0}</value>
+  </data>
+  <data name="GlobalGameVictory" xml:space="preserve">
+    <value>Victory</value>
+  </data>
+  <data name="GlobalGameDefeat" xml:space="preserve">
+    <value>Defeat</value>
+  </data>
+  <data name="MainMenuSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="MainMenuVolume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="MainMenuMusic" xml:space="preserve">
+    <value>Music</value>
   </data>
 </root>

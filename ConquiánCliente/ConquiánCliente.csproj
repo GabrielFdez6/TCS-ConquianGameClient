@@ -119,6 +119,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Models\FriendRequest.cs" />
+    <Compile Include="Utilities\AudioManager.cs" />
     <Compile Include="Utilities\Messages\IMessageResolver.cs" />
     <Compile Include="Utilities\Messages\ResourceMessageResolver.cs" />
     <Compile Include="ViewModel\Authentication\LogInViewModel.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="ViewModel\PresenceClientManager.cs" />
     <Compile Include="ViewModel\Profile\EditInfoViewModel.cs" />
     <Compile Include="ViewModel\Profile\EditProfilePictureViewModel.cs" />
+    <Compile Include="ViewModel\Profile\ResultStatusConverter.cs" />
     <Compile Include="ViewModel\Profile\UserProfileViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\Validation\LogInValidator.cs" />
@@ -203,14 +205,14 @@
     <Compile Include="View\Lobby\SendRoomCode.xaml.cs">
       <DependentUpon>SendRoomCode.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainMenu\ChangeLanguage.xaml.cs">
-      <DependentUpon>ChangeLanguage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\MainMenu\CreateOrJoin.xaml.cs">
       <DependentUpon>CreateOrJoin.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainMenu\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainMenu\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Profile\EditInfoPage.xaml.cs">
       <DependentUpon>EditInfoPage.xaml</DependentUpon>
@@ -300,15 +302,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainMenu\ChangeLanguage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\MainMenu\CreateOrJoin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainMenu\MainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainMenu\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -740,6 +742,14 @@
     <Resource Include="Resources\Assets\Oros\oros_5s.png" />
     <Resource Include="Resources\Assets\Oros\oros_6s.png" />
     <Resource Include="Resources\Assets\Oros\oros_7s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Music\MainMenuMusic.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Music\GameMusic.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

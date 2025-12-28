@@ -74,22 +74,22 @@ namespace ConquiánCliente.ViewModel.Game
 
             if (isDraw)
             {
-                ResultTitle = "Empate";
-                ResultDetails = $"Empataste contra {OpponentName}";
+                ResultTitle = Lang.GlobalGameDraw;
+                ResultDetails = string.Format(Lang.ResultDrawMessage, OpponentName);
                 PlayerScore = 0;
                 OpponentScore = 0;
             }
             else if (amIWinner)
             {
-                ResultTitle = Lang.GameVictory;
-                ResultDetails = $"¡Le ganaste a {OpponentName}!";
+                ResultTitle = Lang.GlobalGameVictory;
+                ResultDetails = string.Format(Lang.ResultWinMessage, OpponentName);
                 PlayerScore = result.PointsWon;
                 OpponentScore = 0;
             }
             else
             {
-                ResultTitle = Lang.GameDefeat;
-                ResultDetails = $"Perdiste contra {OpponentName}";
+                ResultTitle = Lang.GlobalGameDefeat;
+                ResultDetails = string.Format(Lang.ResultLossMessage, OpponentName);
                 PlayerScore = 0;
                 OpponentScore = result.PointsWon;
             }

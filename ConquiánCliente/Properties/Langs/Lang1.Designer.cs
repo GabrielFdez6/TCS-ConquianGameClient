@@ -961,15 +961,6 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Derrota.
-        /// </summary>
-        public static string GameDefeat {
-            get {
-                return ResourceManager.GetString("GameDefeat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Solo puedes descartar una carta para pagar después de bajar juego.
         ///Si la carta no te sirve, usa el botón &apos;Pasar&apos;..
         /// </summary>
@@ -1126,15 +1117,6 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Victoria.
-        /// </summary>
-        public static string GameVictory {
-            get {
-                return ResourceManager.GetString("GameVictory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Aceptar.
         /// </summary>
         public static string GlobalAccept {
@@ -1167,6 +1149,33 @@ namespace ConquiánCliente.Properties.Langs {
         public static string GlobalEmail {
             get {
                 return ResourceManager.GetString("GlobalEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Derrota.
+        /// </summary>
+        public static string GlobalGameDefeat {
+            get {
+                return ResourceManager.GetString("GlobalGameDefeat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Empate.
+        /// </summary>
+        public static string GlobalGameDraw {
+            get {
+                return ResourceManager.GetString("GlobalGameDraw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Victoria.
+        /// </summary>
+        public static string GlobalGameVictory {
+            get {
+                return ResourceManager.GetString("GlobalGameVictory", resourceCulture);
             }
         }
         
@@ -1338,24 +1347,6 @@ namespace ConquiánCliente.Properties.Langs {
         public static string GlobalViewProfile {
             get {
                 return ResourceManager.GetString("GlobalViewProfile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Derrota.
-        /// </summary>
-        public static string HistoryDefeat {
-            get {
-                return ResourceManager.GetString("HistoryDefeat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Victoria.
-        /// </summary>
-        public static string HistoryVictory {
-            get {
-                return ResourceManager.GetString("HistoryVictory", resourceCulture);
             }
         }
         
@@ -1630,11 +1621,38 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Música.
+        /// </summary>
+        public static string MainMenuMusic {
+            get {
+                return ResourceManager.GetString("MainMenuMusic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Jugar.
         /// </summary>
         public static string MainMenuPlay {
             get {
                 return ResourceManager.GetString("MainMenuPlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Configuracion.
+        /// </summary>
+        public static string MainMenuSettings {
+            get {
+                return ResourceManager.GetString("MainMenuSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Volumen.
+        /// </summary>
+        public static string MainMenuVolume {
+            get {
+                return ResourceManager.GetString("MainMenuVolume", resourceCulture);
             }
         }
         
@@ -1725,6 +1743,33 @@ namespace ConquiánCliente.Properties.Langs {
         public static string RecoveryInfo {
             get {
                 return ResourceManager.GetString("RecoveryInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Empataste contra {0}.
+        /// </summary>
+        public static string ResultDrawMessage {
+            get {
+                return ResourceManager.GetString("ResultDrawMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Perdiste contra {0}.
+        /// </summary>
+        public static string ResultLossMessage {
+            get {
+                return ResourceManager.GetString("ResultLossMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ¡Le ganaste a {0}!.
+        /// </summary>
+        public static string ResultWinMessage {
+            get {
+                return ResourceManager.GetString("ResultWinMessage", resourceCulture);
             }
         }
         

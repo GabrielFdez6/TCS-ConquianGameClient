@@ -34,5 +34,17 @@ namespace ConquiánCliente.Properties {
                 this["languageCode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public double MusicVolume {
+            get {
+                return ((double)(this["MusicVolume"]));
+            }
+            set {
+                this["MusicVolume"] = value;
+            }
+        }
     }
 }

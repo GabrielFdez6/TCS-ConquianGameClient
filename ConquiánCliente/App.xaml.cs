@@ -1,14 +1,11 @@
 ﻿using ConquiánCliente.ServiceLogin;
+using ConquiánCliente.Utilities;
 using ConquiánCliente.ViewModel;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Data;
 using System.Globalization;
-using System.Linq;
 using System.ServiceModel;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ConquiánCliente
@@ -32,6 +29,7 @@ namespace ConquiánCliente
                     PresenceClientManager.Instance.Client.Unsubscribe(PlayerSession.CurrentPlayer.idPlayer);
                     InvitationClientManager.Disconnect(PlayerSession.CurrentPlayer.idPlayer);
                     PlayerSession.EndSession();
+                    AudioManager.Instance.StopMusic();
                 }
                 catch (CommunicationException commEx)
                 {
@@ -72,6 +70,25 @@ namespace ConquiánCliente
 
             Thread.CurrentThread.CurrentUICulture = culture;
             Thread.CurrentThread.CurrentCulture = culture;
+
+            try
+            {
+                double savedVolume = settings.MusicVolume;
+
+                AudioManager.Instance.SetVolume(savedVolume);
+                AudioManager.Instance.PlayMenuMusic();
+            }
+            catch (SettingsPropertyNotFoundException ex)
+            {
+                Console.WriteLine($"No se encontró la configuración de volumen, usando valor por defecto: {ex.Message}");
+
+                AudioManager.Instance.SetVolume(50);
+                AudioManager.Instance.PlayMenuMusic();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al inicializar el sistema de audio: {ex.Message}");
+            }
 
             base.OnStartup(e);
         }

@@ -17,9 +17,7 @@ using System.Windows.Shapes;
 
 namespace ConquiánCliente.View.MainMenu
 {
-    /// <summary>
-    /// Lógica de interacción para MainMenu.xaml
-    /// </summary>
+
     public partial class MainMenu : Window
     {
         public MainMenu()

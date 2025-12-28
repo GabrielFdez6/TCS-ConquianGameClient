@@ -1,6 +1,8 @@
-﻿using ConquiánCliente.ServiceGame;
-using ConquiánCliente.ViewModel.Game.Behaviors;
+﻿using ConquiánCliente.Properties.Langs;
+using ConquiánCliente.ServiceGame;
+using ConquiánCliente.Utilities;
 using ConquiánCliente.ViewModel.Game;
+using ConquiánCliente.ViewModel.Game.Behaviors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,6 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using ConquiánCliente.Properties.Langs;
 
 namespace ConquiánCliente.View.Game
 {
@@ -27,6 +28,7 @@ namespace ConquiánCliente.View.Game
         {
             InitializeComponent();
             this.Loaded += GameLoaded;
+            AudioManager.Instance.PlayGameMusic();
         }
 
         private void GameLoaded(object sender, RoutedEventArgs e)
@@ -53,10 +55,17 @@ namespace ConquiánCliente.View.Game
                     viewModel.LeaveGame();
                 }
 
+                AudioManager.Instance.PlayMenuMusic();
                 var mainMenu = new ConquiánCliente.View.MainMenu.MainMenu();
                 mainMenu.Show();
                 this.Close();
             }
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            AudioManager.Instance.PlayMenuMusic();
         }
 
         private void PlayerCardMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
