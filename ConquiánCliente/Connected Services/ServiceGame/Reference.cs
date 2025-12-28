@@ -654,6 +654,9 @@ namespace ConquiánCliente.ServiceGame {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int DurationSecondsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int GamemodeIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -669,10 +672,16 @@ namespace ConquiánCliente.ServiceGame {
         private string Player1NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int Player1ScoreField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int Player2IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string Player2NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int Player2ScoreField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PointsWonField;
@@ -687,6 +696,19 @@ namespace ConquiánCliente.ServiceGame {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DurationSeconds {
+            get {
+                return this.DurationSecondsField;
+            }
+            set {
+                if ((this.DurationSecondsField.Equals(value) != true)) {
+                    this.DurationSecondsField = value;
+                    this.RaisePropertyChanged("DurationSeconds");
+                }
             }
         }
         
@@ -756,6 +778,19 @@ namespace ConquiánCliente.ServiceGame {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Player1Score {
+            get {
+                return this.Player1ScoreField;
+            }
+            set {
+                if ((this.Player1ScoreField.Equals(value) != true)) {
+                    this.Player1ScoreField = value;
+                    this.RaisePropertyChanged("Player1Score");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int Player2Id {
             get {
                 return this.Player2IdField;
@@ -777,6 +812,19 @@ namespace ConquiánCliente.ServiceGame {
                 if ((object.ReferenceEquals(this.Player2NameField, value) != true)) {
                     this.Player2NameField = value;
                     this.RaisePropertyChanged("Player2Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Player2Score {
+            get {
+                return this.Player2ScoreField;
+            }
+            set {
+                if ((this.Player2ScoreField.Equals(value) != true)) {
+                    this.Player2ScoreField = value;
+                    this.RaisePropertyChanged("Player2Score");
                 }
             }
         }

@@ -67,7 +67,7 @@ namespace ConquiánCliente.Utilities
 
         public void SetVolume(double volume)
         {
-            double maxRealVolume = 0.2;
+            double maxRealVolume = 0.1;
 
             mediaPlayer.Volume = (volume / 100.0) * maxRealVolume;
         }

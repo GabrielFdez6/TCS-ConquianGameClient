@@ -93,6 +93,7 @@
       <xs:element minOccurs="0" name="GameMode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="GameTime" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OpponentName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PlayerName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PointsEarned" type="xs:int" />
       <xs:element minOccurs="0" name="ResultStatus" nillable="true" type="xs:string" />
     </xs:sequence>

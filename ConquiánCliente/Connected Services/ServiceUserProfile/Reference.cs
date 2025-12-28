@@ -505,6 +505,9 @@ namespace ConquiánCliente.ServiceUserProfile {
         private string OpponentNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PlayerNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PointsEarnedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -555,6 +558,19 @@ namespace ConquiánCliente.ServiceUserProfile {
                 if ((object.ReferenceEquals(this.OpponentNameField, value) != true)) {
                     this.OpponentNameField = value;
                     this.RaisePropertyChanged("OpponentName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PlayerName {
+            get {
+                return this.PlayerNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PlayerNameField, value) != true)) {
+                    this.PlayerNameField = value;
+                    this.RaisePropertyChanged("PlayerName");
                 }
             }
         }

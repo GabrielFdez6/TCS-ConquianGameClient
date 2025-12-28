@@ -83,6 +83,7 @@ namespace ConquiánCliente.ViewModel.Game
             {
                 ResultTitle = Lang.GlobalGameVictory;
                 ResultDetails = string.Format(Lang.ResultWinMessage, OpponentName);
+
                 PlayerScore = result.PointsWon;
                 OpponentScore = 0;
             }
@@ -90,6 +91,7 @@ namespace ConquiánCliente.ViewModel.Game
             {
                 ResultTitle = Lang.GlobalGameDefeat;
                 ResultDetails = string.Format(Lang.ResultLossMessage, OpponentName);
+
                 PlayerScore = 0;
                 OpponentScore = result.PointsWon;
             }
