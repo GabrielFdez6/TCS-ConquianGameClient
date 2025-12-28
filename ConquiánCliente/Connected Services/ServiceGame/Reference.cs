@@ -920,6 +920,12 @@ namespace ConquiánCliente.ServiceGame {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/SwapDrawnCard", ReplyAction="http://tempuri.org/IGame/SwapDrawnCardResponse")]
         System.Threading.Tasks.Task SwapDrawnCardAsync(string roomCode, int playerId, string cardIdToDiscard);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/ReportAFK")]
+        void ReportAFK(string roomCode, int playerId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/ReportAFK")]
+        System.Threading.Tasks.Task ReportAFKAsync(string roomCode, int playerId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -948,6 +954,9 @@ namespace ConquiánCliente.ServiceGame {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/NotifyGameEnded")]
         void NotifyGameEnded(ConquiánCliente.ServiceGame.GameResultDto result);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/NotifyGameEndedByAFK")]
+        void NotifyGameEndedByAFK(string reasonKey);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1032,6 +1041,14 @@ namespace ConquiánCliente.ServiceGame {
         
         public System.Threading.Tasks.Task SwapDrawnCardAsync(string roomCode, int playerId, string cardIdToDiscard) {
             return base.Channel.SwapDrawnCardAsync(roomCode, playerId, cardIdToDiscard);
+        }
+        
+        public void ReportAFK(string roomCode, int playerId) {
+            base.Channel.ReportAFK(roomCode, playerId);
+        }
+        
+        public System.Threading.Tasks.Task ReportAFKAsync(string roomCode, int playerId) {
+            return base.Channel.ReportAFKAsync(roomCode, playerId);
         }
     }
 }

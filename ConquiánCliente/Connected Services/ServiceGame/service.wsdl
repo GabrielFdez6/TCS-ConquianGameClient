@@ -95,6 +95,9 @@
   <wsdl:message name="IGame_SwapDrawnCard_ServiceFaultDtoFault_FaultMessage">
     <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q5:ServiceFaultDto" />
   </wsdl:message>
+  <wsdl:message name="IGame_ReportAFK_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReportAFK" />
+  </wsdl:message>
   <wsdl:message name="IGame_NotifyGameUpdate_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyGameUpdate" />
   </wsdl:message>
@@ -118,6 +121,9 @@
   </wsdl:message>
   <wsdl:message name="IGame_NotifyGameEnded_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyGameEnded" />
+  </wsdl:message>
+  <wsdl:message name="IGame_NotifyGameEndedByAFK_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyGameEndedByAFK" />
   </wsdl:message>
   <wsdl:portType name="IGame">
     <wsdl:operation name="JoinGame">
@@ -152,6 +158,9 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/SwapDrawnCardResponse" message="tns:IGame_SwapDrawnCard_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IGame/SwapDrawnCardServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IGame_SwapDrawnCard_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ReportAFK">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGame/ReportAFK" message="tns:IGame_ReportAFK_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="NotifyGameUpdate">
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/NotifyGameUpdate" message="tns:IGame_NotifyGameUpdate_OutputCallbackMessage" />
     </wsdl:operation>
@@ -175,6 +184,9 @@
     </wsdl:operation>
     <wsdl:operation name="NotifyGameEnded">
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/NotifyGameEnded" message="tns:IGame_NotifyGameEnded_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyGameEndedByAFK">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGame/NotifyGameEndedByAFK" message="tns:IGame_NotifyGameEndedByAFK_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGame" type="tns:IGame">
@@ -256,6 +268,12 @@
         <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="ReportAFK">
+      <soap12:operation soapAction="http://tempuri.org/IGame/ReportAFK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="NotifyGameUpdate">
       <soap12:operation soapAction="http://tempuri.org/IGame/NotifyGameUpdate" style="document" />
       <wsdl:output>
@@ -300,6 +318,12 @@
     </wsdl:operation>
     <wsdl:operation name="NotifyGameEnded">
       <soap12:operation soapAction="http://tempuri.org/IGame/NotifyGameEnded" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyGameEndedByAFK">
+      <soap12:operation soapAction="http://tempuri.org/IGame/NotifyGameEndedByAFK" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

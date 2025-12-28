@@ -93,6 +93,14 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="ReportAFK">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="roomCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="playerId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="NotifyGameUpdate">
     <xs:complexType>
       <xs:sequence>
@@ -144,6 +152,13 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" minOccurs="0" name="result" nillable="true" type="q6:GameResultDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotifyGameEndedByAFK">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="reasonKey" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

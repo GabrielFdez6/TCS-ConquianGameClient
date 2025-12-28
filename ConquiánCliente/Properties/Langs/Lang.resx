@@ -744,4 +744,16 @@ Si la carta no te sirve, usa el botón 'Pasar'.</value>
   <data name="MainMenuMusic" xml:space="preserve">
     <value>Música</value>
   </data>
+  <data name="AFKWarningMessage" xml:space="preserve">
+    <value>Ha transcurrido más de un minuto sin que se detecte actividad, por favor realice un movimiento dentro de los siguientes 60 segundos para continuar en la partida, de lo contrario la partida será terminada.</value>
+  </data>
+  <data name="AFKGameEndedRival" xml:space="preserve">
+    <value>La partida ha finalizado debido a la inactividad del rival.</value>
+  </data>
+  <data name="AFKGameEndedSelf" xml:space="preserve">
+    <value>La partida ha finalizado debido a tu inactividad.</value>
+  </data>
+  <data name="AFKNotice" xml:space="preserve">
+    <value>Aviso de inactividad</value>
+  </data>
 </root>

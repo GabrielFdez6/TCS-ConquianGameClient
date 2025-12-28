@@ -745,4 +745,16 @@ If the card is not useful, use the 'To Pass' button.</value>
   <data name="MainMenuMusic" xml:space="preserve">
     <value>Music</value>
   </data>
+  <data name="AFKWarningMessage" xml:space="preserve">
+    <value>More than a minute has passed without activity. Please make a move within the next 60 seconds to continue, otherwise the game will be terminated.</value>
+  </data>
+  <data name="AFKGameEndedRival" xml:space="preserve">
+    <value>The game has ended due to the opponent's inactivity.</value>
+  </data>
+  <data name="AFKGameEndedSelf" xml:space="preserve">
+    <value>The game has ended due to your inactivity.</value>
+  </data>
+  <data name="AFKNotice" xml:space="preserve">
+    <value>Inactivity notice</value>
+  </data>
 </root>

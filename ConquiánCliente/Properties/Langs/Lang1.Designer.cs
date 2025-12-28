@@ -61,6 +61,42 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a La partida ha finalizado debido a la inactividad del rival..
+        /// </summary>
+        public static string AFKGameEndedRival {
+            get {
+                return ResourceManager.GetString("AFKGameEndedRival", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La partida ha finalizado debido a tu inactividad..
+        /// </summary>
+        public static string AFKGameEndedSelf {
+            get {
+                return ResourceManager.GetString("AFKGameEndedSelf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Aviso de inactividad.
+        /// </summary>
+        public static string AFKNotice {
+            get {
+                return ResourceManager.GetString("AFKNotice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ha transcurrido más de un minuto sin que se detecte actividad, por favor realice un movimiento dentro de los siguientes 60 segundos para continuar en la partida, de lo contrario la partida será terminada..
+        /// </summary>
+        public static string AFKWarningMessage {
+            get {
+                return ResourceManager.GetString("AFKWarningMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a ¿Estás seguro que quieres expulsar a este jugador?.
         /// </summary>
         public static string ConfirmKickPlayer {

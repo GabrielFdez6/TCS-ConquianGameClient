@@ -6,10 +6,11 @@
         Title="Partida"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
-        Background="Black">
+        Background="Black"
+        MouseMove="WindowMouseMove">
 
     <Window.Resources>
-
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <DataTemplate x:Key="CardTemplate">
             <Border Width="144" Height="216" Margin="-20"
                     MouseLeftButtonDown="PlayerCardMouseLeftButtonDown"
@@ -367,5 +368,54 @@
                 </StackPanel>
             </Grid>
         </Viewbox>
+        <Grid Background="#CC000000" Visibility="{Binding IsAFKWarningVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Border Width="550" Height="320" 
+                    CornerRadius="20" 
+                    BorderThickness="3"
+                    Padding="30"
+                    Background="{StaticResource PrimaryBackgroundBrush}"
+                    BorderBrush="{StaticResource BorderBrush}">
+
+                <Border.Effect>
+                    <DropShadowEffect Color="Black" BlurRadius="40" ShadowDepth="10" Opacity="0.8"/>
+                </Border.Effect>
+
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="{x:Static language:Lang.AFKNotice}" 
+                               FontSize="28" 
+                               FontWeight="ExtraBold" 
+                               Foreground="#FFD700" 
+                               HorizontalAlignment="Center" 
+                               TextAlignment="Center"
+                               Margin="0,0,0,10">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="5" ShadowDepth="2" Opacity="0.5"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+
+                    <Rectangle Height="2" Width="150" Fill="{StaticResource BorderBrush}" Margin="0,0,0,20" RadiusX="1" RadiusY="1"/>
+
+                    <TextBlock Text="{x:Static language:Lang.AFKWarningMessage}" 
+                               TextWrapping="Wrap" 
+                               TextAlignment="Center" 
+                               FontSize="18" 
+                               LineHeight="24"
+                               Foreground="{StaticResource PrimaryTextBrush}" 
+                               Margin="0,0,0,30"/>
+
+                    <Button Content="{x:Static language:Lang.GlobalAccept}" 
+                            Command="{Binding AcceptAFKCommand}"
+                            Width="160" Height="50" 
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Cursor="Hand"
+                            Style="{StaticResource PrimaryButtonStyle}">
+                        <Button.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="3" Opacity="0.4"/>
+                        </Button.Effect>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </Window>

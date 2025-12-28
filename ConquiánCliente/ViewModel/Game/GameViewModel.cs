@@ -1,5 +1,6 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceGame;
+using ConquiánCliente.Utilities.Messages; 
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
-using ConquiánCliente.Utilities.Messages; 
+using System.Windows.Threading;
 
 namespace ConquiánCliente.ViewModel.Game
 {
@@ -20,13 +21,28 @@ namespace ConquiánCliente.ViewModel.Game
         private const int INITIAL_SCORE = 0;
         private const int RANK_INCREMENT = 1;
 
+        private DispatcherTimer activityTimer;
+        private DateTime lastActivityTime;
+        private bool isWarningShown;
+        private const int INACTIVITY_LIMIT_SECONDS = 60; 
+        private const int GRACE_PERIOD_SECONDS = 60;     
+
         private const int RANK_BEFORE_SKIP = 7;
         private const int RANK_AFTER_SKIP = 10;
 
         private readonly string roomCode;
         private GameClient client;
         private bool isGameEnded = false;
-        private readonly IMessageResolver messageResolver; 
+        private readonly IMessageResolver messageResolver;
+
+        private bool isAFKWarningVisible;
+        public bool IsAFKWarningVisible
+        {
+            get { return isAFKWarningVisible; }
+            set { isAFKWarningVisible = value; OnPropertyChanged(nameof(IsAFKWarningVisible)); }
+        }
+
+        public RelayCommand AcceptAFKCommand { get; set; }
 
         public RelayCommand PassTurnCommand { get; set; }
         public ObservableCollection<CardViewModel> PlayerHand { get; set; }
@@ -118,6 +134,9 @@ namespace ConquiánCliente.ViewModel.Game
                 pathPhoto = sessionPlayer.pathPhoto
             };
 
+            InitializeAFKTimer();
+            AcceptAFKCommand = new RelayCommand(OnAcceptAFK);
+
             _ = InitializeGameConnectionAsync();
         }
 
@@ -138,6 +157,8 @@ namespace ConquiánCliente.ViewModel.Game
 
         public async Task PassTurnAsync()
         {
+            StopTurnTimer(); 
+
             if (client == null || !IsMyTurn)
             {
                 return;
@@ -198,13 +219,15 @@ namespace ConquiánCliente.ViewModel.Game
                         if (gameState.CurrentTurnPlayerId == playerId)
                         {
                             TurnStatusText = Lang.GameTurn;
+                            IsMyTurn = true;
+                            StartTurnTimer();
                         }
                         else
                         {
                             TurnStatusText = Lang.GameOpponentsturn;
+                            IsMyTurn = false;
+                            StopTurnTimer();
                         }
-
-                        IsMyTurn = (gameState.CurrentTurnPlayerId == playerId);
                         UpdateTimerDisplay(gameState.TotalGameSeconds);
                     });
                 }
@@ -278,6 +301,14 @@ namespace ConquiánCliente.ViewModel.Game
                     MessageBox.Show(Lang.GameOpponentLeft, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
 
                     NavigateToMainMenu();
+                });
+            };
+
+            callbackHandler.OnGameEndedByAFKEvent += (reasonKey) =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    OnGameEndedByAFK(reasonKey);
                 });
             };
 
@@ -530,16 +561,26 @@ namespace ConquiánCliente.ViewModel.Game
                 return;
             }
 
-            if (newTurnPlayerId == CurrentPlayer.idPlayer)
+            bool isItMyTurnNow = (newTurnPlayerId == CurrentPlayer.idPlayer);
+
+            if (isItMyTurnNow)
             {
                 TurnStatusText = Lang.GameTurn;
-                IsMyTurn = true;
+                if (!IsMyTurn)
+                {
+                    IsMyTurn = true;
+                    StartTurnTimer();
+                }
             }
             else
             {
                 TurnStatusText = Lang.GameOpponentsturn;
-                IsMyTurn = false;
-                IsStockPileBlinking = false;
+                if (IsMyTurn)
+                {
+                    IsMyTurn = false;
+                    IsStockPileBlinking = false;
+                    StopTurnTimer();
+                }
             }
         }
 
@@ -628,6 +669,8 @@ namespace ConquiánCliente.ViewModel.Game
 
         public async Task DiscardCardAsync(CardViewModel cardVM)
         {
+            StopTurnTimer();
+
             if (cardVM == null || client == null || !IsMyTurn || !CanDiscard)
             {
                 return;
@@ -662,6 +705,102 @@ namespace ConquiánCliente.ViewModel.Game
             string msg = messageResolver.GetMessage(errorType);
 
             MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+
+        private void InitializeAFKTimer()
+        {
+            activityTimer = new DispatcherTimer();
+            activityTimer.Interval = TimeSpan.FromSeconds(1);
+            activityTimer.Tick += ActivityTimerTick;
+        }
+
+        private void ActivityTimerTick(object sender, EventArgs e)
+        {
+            if (!IsMyTurn) return;
+
+            var timeSinceActivity = DateTime.Now - lastActivityTime;
+
+            if (!isWarningShown && timeSinceActivity.TotalSeconds >= INACTIVITY_LIMIT_SECONDS)
+            {
+                ShowAFKWarning();
+            }
+
+            if (isWarningShown && timeSinceActivity.TotalSeconds >= (INACTIVITY_LIMIT_SECONDS + GRACE_PERIOD_SECONDS))
+            {
+                activityTimer.Stop();
+                ReportSelfAFK();
+            }
+        }
+
+        public void OnUserActivity()
+        {
+            if (!isWarningShown)
+            {
+                lastActivityTime = DateTime.Now;
+            }
+        }
+
+        private void OnAcceptAFK(object obj)
+        {
+            IsAFKWarningVisible = false;
+        }
+
+        private void ShowAFKWarning()
+        {
+            isWarningShown = true;
+            IsAFKWarningVisible = true;
+        }
+
+        private void ReportSelfAFK()
+        {
+            IsAFKWarningVisible = false;
+            try
+            {
+                client.ReportAFK(roomCode, CurrentPlayer.idPlayer);
+            }
+            catch (Exception)
+            {
+                ReturnToMainMenu();
+            }
+        }
+
+        public void StartTurnTimer()
+        {
+            lastActivityTime = DateTime.Now;
+            isWarningShown = false;
+            IsAFKWarningVisible = false;
+            activityTimer.Start();
+        }
+
+        public void StopTurnTimer()
+        {
+            activityTimer.Stop();
+            IsAFKWarningVisible = false;
+            isWarningShown = false;
+        }
+
+        public void OnGameEndedByAFK(string reasonKey)
+        {
+            activityTimer.Stop();
+            IsAFKWarningVisible = false;
+
+            string message = Lang.ResourceManager.GetString(reasonKey);
+            MessageBox.Show(message, Lang.TitleAuthenticationError, MessageBoxButton.OK, MessageBoxImage.Information);
+
+            ReturnToMainMenu();
+        }
+
+        private void ReturnToMainMenu()
+        {
+            Application.Current.Dispatcher.Invoke(() => {
+                var mainWindow = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w is View.MainMenu.MainMenu);
+                if (mainWindow == null)
+                {
+                    var menu = new View.MainMenu.MainMenu();
+                    menu.Show();
+                }
+                Application.Current.Windows.OfType<View.Game.Game>().FirstOrDefault()?.Close();
+            });
         }
     }
 }

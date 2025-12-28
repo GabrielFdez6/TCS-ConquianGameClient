@@ -379,5 +379,13 @@ namespace ConquiánCliente.View.Game
             Mouse.SetCursor(Cursors.None);
             e.Handled = true;
         }
+
+        private void WindowMouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.DataContext is GameViewModel vm)
+            {
+                vm.OnUserActivity();
+            }
+        }
     }
 }
