@@ -4,10 +4,10 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="currentPoints" type="xs:int" />
       <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="idLevel" type="xs:int" />
       <xs:element minOccurs="0" name="idPlayer" type="xs:int" />
       <xs:element minOccurs="0" name="idStatus" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="lastName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="level" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />

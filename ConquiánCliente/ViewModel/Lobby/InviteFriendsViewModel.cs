@@ -131,7 +131,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         private readonly PlayerDto friend;
         private string statusText;
         private bool isOnline;
-        public string Level => friend.level;
+        public int Level => friend.idLevel;
 
         public FriendInviteItemViewModel(PlayerDto friend)
         {

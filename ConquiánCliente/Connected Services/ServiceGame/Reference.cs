@@ -172,6 +172,9 @@ namespace ConquiánCliente.ServiceGame {
         private string emailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idLevelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int idPlayerField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -179,9 +182,6 @@ namespace ConquiánCliente.ServiceGame {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string lastNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string levelField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string nameField;
@@ -232,6 +232,19 @@ namespace ConquiánCliente.ServiceGame {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idLevel {
+            get {
+                return this.idLevelField;
+            }
+            set {
+                if ((this.idLevelField.Equals(value) != true)) {
+                    this.idLevelField = value;
+                    this.RaisePropertyChanged("idLevel");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int idPlayer {
             get {
                 return this.idPlayerField;
@@ -266,19 +279,6 @@ namespace ConquiánCliente.ServiceGame {
                 if ((object.ReferenceEquals(this.lastNameField, value) != true)) {
                     this.lastNameField = value;
                     this.RaisePropertyChanged("lastName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string level {
-            get {
-                return this.levelField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.levelField, value) != true)) {
-                    this.levelField = value;
-                    this.RaisePropertyChanged("level");
                 }
             }
         }

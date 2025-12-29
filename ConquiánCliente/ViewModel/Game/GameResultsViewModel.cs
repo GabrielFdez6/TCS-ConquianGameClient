@@ -69,7 +69,7 @@ namespace ConquiánCliente.ViewModel.Game
             PlayerName = amIPlayer1 ? result.Player1Name : result.Player2Name;
             OpponentName = amIPlayer1 ? result.Player2Name : result.Player1Name;
 
-            bool amIWinner = (result.WinnerId == myPlayerId);
+            bool palyerIsWinner = (result.WinnerId == myPlayerId);
             bool isDraw = result.IsDraw;
 
             if (isDraw)
@@ -79,7 +79,7 @@ namespace ConquiánCliente.ViewModel.Game
                 PlayerScore = 0;
                 OpponentScore = 0;
             }
-            else if (amIWinner)
+            else if (palyerIsWinner)
             {
                 ResultTitle = Lang.GlobalGameVictory;
                 ResultDetails = string.Format(Lang.ResultWinMessage, OpponentName);

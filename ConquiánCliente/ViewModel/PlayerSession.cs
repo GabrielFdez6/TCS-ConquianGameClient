@@ -44,7 +44,7 @@ namespace ConquiánCliente.ViewModel
                 CurrentPlayer.name = fullPlayerProfile.name;
                 CurrentPlayer.lastName = fullPlayerProfile.lastName;
                 CurrentPlayer.email = fullPlayerProfile.email;
-                CurrentPlayer.level = fullPlayerProfile.level;
+                CurrentPlayer.idLevel = fullPlayerProfile.idLevel;
                 CurrentPlayer.pathPhoto = fullPlayerProfile.pathPhoto;
                 CurrentPlayer.currentPoints = fullPlayerProfile.currentPoints;
                 CurrentPlayer.nickname = fullPlayerProfile.nickname;

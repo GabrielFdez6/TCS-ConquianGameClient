@@ -60,11 +60,7 @@ namespace ConquiánCliente.ViewModel.Profile
         {
             get
             {
-                if (int.TryParse(Level, out int levelInt))
-                {
-                    return $"{CurrentPoints} / {levelInt * 100}";
-                }
-                return $"{CurrentPoints} / 100";
+                return $"{CurrentPoints} / {Level * 100}";
             }
         }
 
@@ -89,11 +85,16 @@ namespace ConquiánCliente.ViewModel.Profile
             set { lastName = value; OnPropertyChanged(); }
         }
 
-        private string level;
-        public string Level
+        private int level;
+        public int Level
         {
             get => level;
-            set { level = value; OnPropertyChanged(); }
+            set
+            {
+                level = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(PointsDisplay));
+            }
         }
 
         private string facebook;
@@ -147,7 +148,7 @@ namespace ConquiánCliente.ViewModel.Profile
                         Email = fullPlayerProfile.email;
                         Name = fullPlayerProfile.name;
                         LastName = fullPlayerProfile.lastName;
-                        Level = fullPlayerProfile.level?.ToString() ?? "1";
+                        Level = fullPlayerProfile.idLevel;
                         CurrentPoints = fullPlayerProfile.currentPoints;
 
                         string serverImageName = System.IO.Path.GetFileName(fullPlayerProfile.pathPhoto);
