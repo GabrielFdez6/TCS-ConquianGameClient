@@ -56,12 +56,36 @@ namespace ConquiánCliente.ViewModel.Profile
             }
         }
 
+        private int pointsToNextLevel;
+        public int PointsToNextLevel
+        {
+            get => pointsToNextLevel;
+            set
+            {
+                pointsToNextLevel = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(PointsDisplay));
+            }
+        }
+
         public string PointsDisplay
         {
             get
             {
-                return $"{CurrentPoints} / {Level * 100}";
+                if (PointsToNextLevel <= 0 || (CurrentPoints >= PointsToNextLevel && PointsToNextLevel != 0))
+                {
+                    return $"{CurrentPoints} (MAX)";
+                }
+
+                return $"{CurrentPoints} / {PointsToNextLevel}";
             }
+        }
+
+        private string rankName;
+        public string RankName
+        {
+            get => rankName;
+            set { rankName = value; OnPropertyChanged(); }
         }
 
         private string email;
@@ -150,6 +174,8 @@ namespace ConquiánCliente.ViewModel.Profile
                         LastName = fullPlayerProfile.lastName;
                         Level = fullPlayerProfile.idLevel;
                         CurrentPoints = fullPlayerProfile.currentPoints;
+                        PointsToNextLevel = fullPlayerProfile.PointsToNextLevel;
+                        RankName = fullPlayerProfile.RankName;
 
                         string serverImageName = System.IO.Path.GetFileName(fullPlayerProfile.pathPhoto);
                         SetProfileImage(serverImageName);
@@ -219,7 +245,7 @@ namespace ConquiánCliente.ViewModel.Profile
             var editInfoPage = new EditInfoPage
             {
                 DataContext = editInfoViewModel
-            };
+            };  
 
             ProfileMainFrame.MainFrame.Navigate(editInfoPage);
         }

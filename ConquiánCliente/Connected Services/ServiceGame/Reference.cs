@@ -166,6 +166,12 @@ namespace ConquiánCliente.ServiceGame {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PointsToNextLevelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RankNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int currentPointsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -202,6 +208,32 @@ namespace ConquiánCliente.ServiceGame {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PointsToNextLevel {
+            get {
+                return this.PointsToNextLevelField;
+            }
+            set {
+                if ((this.PointsToNextLevelField.Equals(value) != true)) {
+                    this.PointsToNextLevelField = value;
+                    this.RaisePropertyChanged("PointsToNextLevel");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RankName {
+            get {
+                return this.RankNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RankNameField, value) != true)) {
+                    this.RankNameField = value;
+                    this.RaisePropertyChanged("RankName");
+                }
             }
         }
         
@@ -687,6 +719,9 @@ namespace ConquiánCliente.ServiceGame {
         private int PointsWonField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RoomCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int WinnerIdField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -838,6 +873,19 @@ namespace ConquiánCliente.ServiceGame {
                 if ((this.PointsWonField.Equals(value) != true)) {
                     this.PointsWonField = value;
                     this.RaisePropertyChanged("PointsWon");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RoomCode {
+            get {
+                return this.RoomCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RoomCodeField, value) != true)) {
+                    this.RoomCodeField = value;
+                    this.RaisePropertyChanged("RoomCode");
                 }
             }
         }

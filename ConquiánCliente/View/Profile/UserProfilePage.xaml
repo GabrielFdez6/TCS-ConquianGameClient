@@ -62,24 +62,41 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Button Grid.Row="0" Grid.Column="0" Grid.RowSpan="6" 
-                            VerticalAlignment="Top"
-                            Margin="0,0,20,0"
-                            Command="{Binding NavigateToEditProfilePictureCommand}"
-                            Style="{StaticResource NoFocusButtonStyle}">
-                        <Border Width="100" Height="100" 
-                                BorderBrush="{StaticResource PrimaryButtonBrush}" 
-                                BorderThickness="2"
-                                CornerRadius="5">
-                            <Border.Effect>
-                                <DropShadowEffect Color="{Binding Color, Source={StaticResource PrimaryButtonBrush}}" 
-                                                  ShadowDepth="0" 
-                                                  BlurRadius="10" 
-                                                  Opacity="0.9" />
-                            </Border.Effect>
-                            <Image Source="{Binding ProfileImagePath}" Stretch="UniformToFill" />
-                        </Border>
-                    </Button>
+                    <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="7" 
+                                Orientation="Vertical" 
+                                VerticalAlignment="Top" 
+                                Margin="0,0,20,0">
+
+                        <Button Command="{Binding NavigateToEditProfilePictureCommand}"
+                                Style="{StaticResource NoFocusButtonStyle}"
+                                HorizontalAlignment="Center">
+                            <Border Width="100" Height="100"                                     
+                                    BorderBrush="{StaticResource PrimaryButtonBrush}" 
+                                    BorderThickness="2" 
+                                    CornerRadius="5">
+                                <Border.Effect>
+                                    <DropShadowEffect Color="{Binding Color, Source={StaticResource PrimaryButtonBrush}}" 
+                                                      ShadowDepth="0" 
+                                                      BlurRadius="10" 
+                                                      Opacity="0.9" />
+                                </Border.Effect>
+                                <Image Source="{Binding ProfileImagePath}" Stretch="UniformToFill" />
+                            </Border>
+                        </Button>
+
+                        <TextBlock Text="{Binding RankName}" 
+                                   Foreground="#FFD700" 
+                                   FontSize="16" 
+                                   FontWeight="Bold" 
+                                   FontStyle="Italic"
+                                   HorizontalAlignment="Center" 
+                                   TextAlignment="Center"
+                                   Margin="0,15,0,0">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Black" BlurRadius="4" ShadowDepth="2" Opacity="0.6"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </StackPanel>
 
                     <Label Grid.Row="0" Grid.Column="1" Content="{x:Static language:Lang.GlobalLevel}" FontWeight="Bold" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}"/>
                     <TextBlock Text="{Binding Level}" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Foreground="{StaticResource PrimaryTextBrush}" Margin="5,0"/>

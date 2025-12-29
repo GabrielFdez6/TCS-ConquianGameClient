@@ -244,6 +244,12 @@ namespace ConquiánCliente.ServiceLobby {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PointsToNextLevelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RankNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int currentPointsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -280,6 +286,32 @@ namespace ConquiánCliente.ServiceLobby {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PointsToNextLevel {
+            get {
+                return this.PointsToNextLevelField;
+            }
+            set {
+                if ((this.PointsToNextLevelField.Equals(value) != true)) {
+                    this.PointsToNextLevelField = value;
+                    this.RaisePropertyChanged("PointsToNextLevel");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RankName {
+            get {
+                return this.RankNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RankNameField, value) != true)) {
+                    this.RankNameField = value;
+                    this.RaisePropertyChanged("RankName");
+                }
             }
         }
         

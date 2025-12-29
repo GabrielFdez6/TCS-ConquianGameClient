@@ -76,8 +76,8 @@ namespace ConquiánCliente.ViewModel.Game
             {
                 ResultTitle = Lang.GlobalGameDraw;
                 ResultDetails = string.Format(Lang.ResultDrawMessage, OpponentName);
-                PlayerScore = 0;
-                OpponentScore = 0;
+                PlayerScore = result.PointsWon;
+                OpponentScore = result.PointsWon;
             }
             else if (palyerIsWinner)
             {

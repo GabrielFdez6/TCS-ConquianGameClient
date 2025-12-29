@@ -14,6 +14,8 @@
   <xs:element name="GameStateDto" nillable="true" type="tns:GameStateDto" />
   <xs:complexType name="PlayerDto">
     <xs:sequence>
+      <xs:element minOccurs="0" name="PointsToNextLevel" type="xs:int" />
+      <xs:element minOccurs="0" name="RankName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="currentPoints" type="xs:int" />
       <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="idLevel" type="xs:int" />
@@ -108,6 +110,7 @@
       <xs:element minOccurs="0" name="Player2Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Player2Score" type="xs:int" />
       <xs:element minOccurs="0" name="PointsWon" type="xs:int" />
+      <xs:element minOccurs="0" name="RoomCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="WinnerId" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
