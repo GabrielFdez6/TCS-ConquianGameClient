@@ -26,6 +26,12 @@ namespace ConquiánCliente.ServicePresence {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPresence/Unsubscribe")]
         System.Threading.Tasks.Task UnsubscribeAsync(int idPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPresence/Ping")]
+        void Ping(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPresence/Ping")]
+        System.Threading.Tasks.Task PingAsync(int userId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -77,6 +83,14 @@ namespace ConquiánCliente.ServicePresence {
         
         public System.Threading.Tasks.Task UnsubscribeAsync(int idPlayer) {
             return base.Channel.UnsubscribeAsync(idPlayer);
+        }
+        
+        public void Ping(int userId) {
+            base.Channel.Ping(userId);
+        }
+        
+        public System.Threading.Tasks.Task PingAsync(int userId) {
+            return base.Channel.PingAsync(userId);
         }
     }
 }

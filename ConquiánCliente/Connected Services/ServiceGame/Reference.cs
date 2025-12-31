@@ -956,6 +956,8 @@ namespace ConquiánCliente.ServiceGame {
         System.Threading.Tasks.Task LeaveGameAsync(string roomCode, int playerId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/PassTurn", ReplyAction="http://tempuri.org/IGame/PassTurnResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceGame.ServiceFaultDto), Action="http://tempuri.org/IGame/PassTurnServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+            "acts")]
         void PassTurn(string roomCode, int playerId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/PassTurn", ReplyAction="http://tempuri.org/IGame/PassTurnResponse")]

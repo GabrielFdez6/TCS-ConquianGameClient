@@ -45,6 +45,9 @@
   <wsdl:message name="IPresence_Unsubscribe_InputMessage">
     <wsdl:part name="parameters" element="tns:Unsubscribe" />
   </wsdl:message>
+  <wsdl:message name="IPresence_Ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
   <wsdl:message name="IPresence_OnFriendStatusChanged_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:OnFriendStatusChanged" />
   </wsdl:message>
@@ -54,6 +57,9 @@
     </wsdl:operation>
     <wsdl:operation name="Unsubscribe">
       <wsdl:input wsaw:Action="http://tempuri.org/IPresence/Unsubscribe" message="tns:IPresence_Unsubscribe_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPresence/Ping" message="tns:IPresence_Ping_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="OnFriendStatusChanged">
       <wsdl:output wsaw:Action="http://tempuri.org/IPresence/OnFriendStatusChanged" message="tns:IPresence_OnFriendStatusChanged_OutputCallbackMessage" />
@@ -71,6 +77,12 @@
     </wsdl:operation>
     <wsdl:operation name="Unsubscribe">
       <soap12:operation soapAction="http://tempuri.org/IPresence/Unsubscribe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap12:operation soapAction="http://tempuri.org/IPresence/Ping" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

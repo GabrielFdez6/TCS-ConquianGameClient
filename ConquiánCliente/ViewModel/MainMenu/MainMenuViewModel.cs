@@ -70,7 +70,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
             try
             {
                 int playerId = PlayerSession.CurrentPlayer.idPlayer;
-
+                PresenceClientManager.Instance.StopHeartbeat();
                 var loginClient = new LoginClient();
                 await loginClient.SignOutPlayerAsync(playerId);
                 if (PresenceClientManager.Instance.Client != null)
@@ -86,6 +86,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
             }
             finally
             {
+                PresenceClientManager.Instance.StopHeartbeat();
                 PlayerSession.EndSession();
 
                 var loginWindow = new LogIn();

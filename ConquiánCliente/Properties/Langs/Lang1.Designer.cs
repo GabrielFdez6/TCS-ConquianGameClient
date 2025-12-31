@@ -430,6 +430,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Se ha perdido la conexión con el servidor. Volviendo al inicio de sesión..
+        /// </summary>
+        public static string ErrorLostConnection {
+            get {
+                return ResourceManager.GetString("ErrorLostConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Debes pagar una carta para terminar..
         /// </summary>
         public static string ErrorMustDiscardToFinish {

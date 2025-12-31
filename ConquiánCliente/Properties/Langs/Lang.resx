@@ -756,4 +756,7 @@ Si la carta no te sirve, usa el botón 'Pasar'.</value>
   <data name="AFKNotice" xml:space="preserve">
     <value>Aviso de inactividad</value>
   </data>
+  <data name="ErrorLostConnection" xml:space="preserve">
+    <value>Se ha perdido la conexión con el servidor. Volviendo al inicio de sesión.</value>
+  </data>
 </root>

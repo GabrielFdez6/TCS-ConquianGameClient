@@ -86,6 +86,9 @@
   <wsdl:message name="IGame_PassTurn_OutputMessage">
     <wsdl:part name="parameters" element="tns:PassTurnResponse" />
   </wsdl:message>
+  <wsdl:message name="IGame_PassTurn_ServiceFaultDtoFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q5:ServiceFaultDto" />
+  </wsdl:message>
   <wsdl:message name="IGame_SwapDrawnCard_InputMessage">
     <wsdl:part name="parameters" element="tns:SwapDrawnCard" />
   </wsdl:message>
@@ -93,7 +96,7 @@
     <wsdl:part name="parameters" element="tns:SwapDrawnCardResponse" />
   </wsdl:message>
   <wsdl:message name="IGame_SwapDrawnCard_ServiceFaultDtoFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q5:ServiceFaultDto" />
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" name="detail" element="q6:ServiceFaultDto" />
   </wsdl:message>
   <wsdl:message name="IGame_ReportAFK_InputMessage">
     <wsdl:part name="parameters" element="tns:ReportAFK" />
@@ -152,6 +155,7 @@
     <wsdl:operation name="PassTurn">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/PassTurn" message="tns:IGame_PassTurn_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/PassTurnResponse" message="tns:IGame_PassTurn_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGame/PassTurnServiceFaultDtoFault" name="ServiceFaultDtoFault" message="tns:IGame_PassTurn_ServiceFaultDtoFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="SwapDrawnCard">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/SwapDrawnCard" message="tns:IGame_SwapDrawnCard_InputMessage" />
@@ -255,6 +259,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultDtoFault">
+        <soap12:fault use="literal" name="ServiceFaultDtoFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="SwapDrawnCard">
       <soap12:operation soapAction="http://tempuri.org/IGame/SwapDrawnCard" style="document" />
