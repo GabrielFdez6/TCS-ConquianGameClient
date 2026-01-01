@@ -172,6 +172,9 @@ namespace ConquiánCliente.ServiceGame {
         private string RankNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ConquiánCliente.ServiceGame.PlayerStatus StatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int currentPointsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -182,9 +185,6 @@ namespace ConquiánCliente.ServiceGame {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int idPlayerField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> idStatusField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string lastNameField;
@@ -238,6 +238,19 @@ namespace ConquiánCliente.ServiceGame {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public ConquiánCliente.ServiceGame.PlayerStatus Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((this.StatusField.Equals(value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int currentPoints {
             get {
                 return this.currentPointsField;
@@ -285,19 +298,6 @@ namespace ConquiánCliente.ServiceGame {
                 if ((this.idPlayerField.Equals(value) != true)) {
                     this.idPlayerField = value;
                     this.RaisePropertyChanged("idPlayer");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> idStatus {
-            get {
-                return this.idStatusField;
-            }
-            set {
-                if ((this.idStatusField.Equals(value) != true)) {
-                    this.idStatusField = value;
-                    this.RaisePropertyChanged("idStatus");
                 }
             }
         }
@@ -469,6 +469,17 @@ namespace ConquiánCliente.ServiceGame {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerStatus", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.Enums")]
+    public enum PlayerStatus : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Online = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Offline = 2,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

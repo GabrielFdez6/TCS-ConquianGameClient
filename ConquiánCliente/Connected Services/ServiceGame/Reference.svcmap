@@ -26,6 +26,7 @@
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="0b9af804-309f-45ff-94c8-6e2bc8796cad" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/GameService/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="90195f8e-3c06-421a-9082-e302324c0222" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/GameService/mex" />
     <MetadataFile FileName="Conqui%C3%A1nServidor.Contracts.DataContracts.xsd" MetadataType="Schema" ID="943550a5-3db5-4f15-9d91-3e118e5441ce" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/GameService/mex" />
+    <MetadataFile FileName="Conqui%C3%A1nServidor.Contracts.Enums.xsd" MetadataType="Schema" ID="4254269a-56d1-490d-985a-3573f29ae9ce" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/GameService/mex" />
     <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="94bcd793-252f-4e16-b151-1889111fa3b5" SourceId="1" SourceUrl="net.tcp://localhost:9001/Conqui%C3%A1nServidor/GameService/mex" />
   </Metadata>
   <Extensions>

@@ -392,6 +392,9 @@
     <None Include="Connected Services\ServiceFriendList\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceFriendList\Conqui%25C3%25A1nServidor.Contracts.Enums.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceFriendList\ConquiánCliente.ServiceFriendList.FriendRequestDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -409,6 +412,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceGame\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceGame\Conqui%25C3%25A1nServidor.Contracts.Enums.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceGame\ConquiánCliente.ServiceGame.GameStateDto.datasource">
@@ -444,6 +450,9 @@
     <None Include="Connected Services\ServiceLobby\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceLobby\Conqui%25C3%25A1nServidor.Contracts.Enums.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceLobby\Conqui%25C3%25A1nServidor.Contracts.FaultContracts.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -461,6 +470,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceLogin\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceLogin\Conqui%25C3%25A1nServidor.Contracts.Enums.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceLogin\Conqui%25C3%25A1nServidor.Contracts.FaultContracts.xsd">
@@ -496,6 +508,9 @@
     <None Include="Connected Services\ServiceSignUp\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceSignUp\Conqui%25C3%25A1nServidor.Contracts.Enums.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceSignUp\service.wsdl" />
     <None Include="Connected Services\ServiceSignUp\service.xsd">
       <SubType>Designer</SubType>
@@ -504,6 +519,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceUserProfile\Conqui%25C3%25A1nServidor.Contracts.DataContracts.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceUserProfile\Conqui%25C3%25A1nServidor.Contracts.Enums.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceUserProfile\ConquiánCliente.ServiceUserProfile.GameHistoryDto.datasource">

@@ -1,8 +1,6 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceFriendList;
-using ConquiánCliente.ServiceUserProfile;
 using ConquiánCliente.View.FriendList;
-using ConquiánCliente.View.MainMenu;
 using ConquiánCliente.ViewModel.Lobby;
 using System;
 using System.Collections.ObjectModel;
@@ -42,13 +40,13 @@ namespace ConquiánCliente.ViewModel
         }
 
         private readonly FriendListClient FriendListService;
-        private readonly UserProfileClient UserProfileService;
+        private readonly ConquiánCliente.ServiceUserProfile.UserProfileClient UserProfileService;
         private readonly IMessageResolver messageResolver; 
 
         public FriendListViewModel()
         {
             FriendListService = new FriendListClient();
-            UserProfileService = new UserProfileClient();
+            UserProfileService = new ConquiánCliente.ServiceUserProfile.UserProfileClient();
             this.messageResolver = new ResourceMessageResolver(); 
 
             Friends = new ObservableCollection<FriendInviteItemViewModel>();
@@ -78,20 +76,24 @@ namespace ConquiánCliente.ViewModel
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
+
+                var newStatus = (PlayerStatus)newStatusId;
+                bool isOnline = (newStatus == PlayerStatus.Online);
+
                 var friendVM = Friends.FirstOrDefault(f => f.IdPlayer == friendId);
                 if (friendVM != null)
                 {
-                    bool isOnline = (newStatusId == 1);
                     friendVM.IsOnline = isOnline;
                     friendVM.StatusText = isOnline ? Lang.StatusOnline : Lang.StatusOffline;
+                    friendVM.PlayerDto.Status = newStatus;
                 }
 
                 var searchVM = SearchResult.FirstOrDefault(f => f.IdPlayer == friendId);
                 if (searchVM != null)
                 {
-                    bool isOnline = (newStatusId == 1);
                     searchVM.IsOnline = isOnline;
                     searchVM.StatusText = isOnline ? Lang.StatusOnline : Lang.StatusOffline;
+                    searchVM.PlayerDto.Status = newStatus;
                 }
             });
         }
@@ -111,7 +113,7 @@ namespace ConquiánCliente.ViewModel
                 Friends.Clear();
                 if (friendsList != null)
                 {
-                    foreach (var friendDto in friendsList.OrderByDescending(f => f.idStatus))
+                    foreach (var friendDto in friendsList.OrderBy(f => f.Status))
                     {
                         Friends.Add(new FriendInviteItemViewModel(friendDto));
                     }
@@ -208,7 +210,7 @@ namespace ConquiánCliente.ViewModel
 
                     if (fullPlayerProfile != null)
                     {
-                        var profileWindow = new FriendProfile(fullPlayerProfile, new ObservableCollection<ServiceUserProfile.SocialDto>(socials));
+                        var profileWindow = new FriendProfile(fullPlayerProfile, new ObservableCollection<ConquiánCliente.ServiceUserProfile.SocialDto>(socials));
                         profileWindow.ShowDialog();
                     }
                 }

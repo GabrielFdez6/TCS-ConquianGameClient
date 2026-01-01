@@ -53,7 +53,9 @@ namespace ConquiánCliente.ViewModel.Lobby
                 var friendVM = FriendsList.FirstOrDefault(f => f.IdPlayer == friendId);
                 if (friendVM != null)
                 {
-                    bool isOnline = (newStatusId == 1);
+                    var newStatus = (PlayerStatus)newStatusId;
+                    bool isOnline = (newStatus == PlayerStatus.Online);
+
                     friendVM.IsOnline = isOnline;
                     friendVM.StatusText = isOnline ? Lang.StatusOnline : Lang.StatusOffline;
                 }
@@ -67,8 +69,10 @@ namespace ConquiánCliente.ViewModel.Lobby
                 using (var client = new FriendListClient())
                 {
                     var friends = await client.GetFriendsAsync(PlayerSession.CurrentPlayer.idPlayer);
+
                     FriendsList.Clear();
-                    foreach (var friend in friends.OrderByDescending(f => f.idStatus))
+
+                    foreach (var friend in friends.OrderBy(f => f.Status))
                     {
                         FriendsList.Add(new FriendInviteItemViewModel(friend));
                     }
@@ -129,6 +133,7 @@ namespace ConquiánCliente.ViewModel.Lobby
     public class FriendInviteItemViewModel : ViewModelBase
     {
         private readonly PlayerDto friend;
+        public PlayerDto PlayerDto => friend;
         private string statusText;
         private bool isOnline;
         public int Level => friend.idLevel;
@@ -136,7 +141,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         public FriendInviteItemViewModel(PlayerDto friend)
         {
             this.friend = friend;
-            this.IsOnline = friend.idStatus == 1;
+            this.IsOnline = friend.Status == PlayerStatus.Online;
             this.StatusText = this.IsOnline ? Lang.StatusOnline : Lang.StatusOffline;
         }
 

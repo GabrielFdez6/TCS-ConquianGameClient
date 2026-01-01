@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.Enums" />
   <xs:complexType name="PlayerDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="PointsToNextLevel" type="xs:int" />
       <xs:element minOccurs="0" name="RankName" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.Enums" minOccurs="0" name="Status" type="q1:PlayerStatus" />
       <xs:element minOccurs="0" name="currentPoints" type="xs:int" />
       <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="idLevel" type="xs:int" />
       <xs:element minOccurs="0" name="idPlayer" type="xs:int" />
-      <xs:element minOccurs="0" name="idStatus" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="lastName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />

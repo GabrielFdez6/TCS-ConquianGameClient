@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using ConquiánCliente.ServiceFriendList;
 
 namespace ConquiánCliente.ViewModel.FriendList
 {
@@ -8,18 +9,24 @@ namespace ConquiánCliente.ViewModel.FriendList
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is int status)
+            if (value is PlayerStatus status)
             {
                 switch (status)
                 {
-                    case 1:
+                    case PlayerStatus.Online:
                         return "Online";
-                    case 2:
+                    case PlayerStatus.Offline:
                         return "Offline";
                     default:
                         return "Desconocido";
                 }
             }
+
+            if (value is int intStatus)
+            {
+                return intStatus == 1 ? "Online" : "Offline";
+            }
+
             return "Desconocido";
         }
 
