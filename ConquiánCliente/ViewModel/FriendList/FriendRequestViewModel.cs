@@ -48,6 +48,11 @@ namespace ConquiánCliente.ViewModel.FriendList
             await LoadFriendRequests();
         }
 
+        public void Cleanup()
+        {
+            PresenceCallbackHandler.FriendRequestReceived -= OnFriendRequestReceived;
+        }
+
         private void OnFriendRequestReceived()
         {
             Application.Current.Dispatcher.Invoke(async () =>
@@ -139,7 +144,7 @@ namespace ConquiánCliente.ViewModel.FriendList
 
         private void ExecuteBackCommand(object parameter)
         {
-            PresenceCallbackHandler.FriendRequestReceived -= OnFriendRequestReceived;
+            Cleanup();
 
             if (parameter is Window currentWindow)
             {

@@ -1,11 +1,10 @@
 ﻿using ConquiánCliente.ViewModel.FriendList;
+using System;
 using System.Windows;
 
 namespace ConquiánCliente.View.FriendList
 {
-    /// <summary>
-    /// Interaction logic for FriendRequests.xaml
-    /// </summary>
+
     public partial class FriendRequests : Window
     {
         private readonly FriendRequestsViewModel viewModel;
@@ -15,11 +14,17 @@ namespace ConquiánCliente.View.FriendList
             viewModel = new FriendRequestsViewModel();
             DataContext = viewModel;
             Loaded += OnWindowLoaded;
+            Closed += OnWindowClosed;
         }
 
         private async void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
             await viewModel.InitializeAsync();
+        }
+
+        private void OnWindowClosed(object sender, EventArgs e)
+        {
+            viewModel.Cleanup();
         }
     }
 }
