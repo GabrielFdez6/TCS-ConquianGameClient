@@ -201,6 +201,7 @@ namespace ConquiánCliente.ViewModel.Authentication
             playerInProgress.lastName = LastName.Trim();
             playerInProgress.nickname = Nickname.Trim();
             playerInProgress.pathPhoto = "/Resources/imageProfile/default.JPG";
+            playerInProgress.Status = PlayerStatus.Offline;
 
             try
             {
