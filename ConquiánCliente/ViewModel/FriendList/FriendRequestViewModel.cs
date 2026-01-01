@@ -40,6 +40,7 @@ namespace ConquiánCliente.ViewModel.FriendList
             AcceptRequestCommand = new RelayCommand(AcceptRequest);
             DeclineRequestCommand = new RelayCommand(DeclineRequest);
             BackCommand = new RelayCommand(ExecuteBackCommand);
+            PresenceCallbackHandler.FriendRequestReceived += OnFriendRequestReceived;
         }
 
         public async Task InitializeAsync()
@@ -47,11 +48,21 @@ namespace ConquiánCliente.ViewModel.FriendList
             await LoadFriendRequests();
         }
 
+        private void OnFriendRequestReceived()
+        {
+            Application.Current.Dispatcher.Invoke(async () =>
+            {
+                Requests.Clear();
+                await LoadFriendRequests();
+            });
+        }
+
         private async Task LoadFriendRequests()
         {
             try
             {
                 var requestsList = await FriendListService.GetFriendRequestsAsync(PlayerSession.CurrentPlayer.idPlayer);
+                Requests.Clear();
                 if (requestsList != null)
                 {
                     foreach (var req in requestsList)
@@ -126,8 +137,10 @@ namespace ConquiánCliente.ViewModel.FriendList
             }
         }
 
-        private static void ExecuteBackCommand(object parameter)
+        private void ExecuteBackCommand(object parameter)
         {
+            PresenceCallbackHandler.FriendRequestReceived -= OnFriendRequestReceived;
+
             if (parameter is Window currentWindow)
             {
                 var friendListWindow = new View.FriendList.FriendList();

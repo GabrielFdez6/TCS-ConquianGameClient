@@ -51,6 +51,12 @@
   <wsdl:message name="IPresence_OnFriendStatusChanged_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:OnFriendStatusChanged" />
   </wsdl:message>
+  <wsdl:message name="IPresence_OnFriendRequestReceived_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnFriendRequestReceived" />
+  </wsdl:message>
+  <wsdl:message name="IPresence_OnFriendListUpdated_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnFriendListUpdated" />
+  </wsdl:message>
   <wsdl:portType name="IPresence">
     <wsdl:operation name="Subscribe">
       <wsdl:input wsaw:Action="http://tempuri.org/IPresence/Subscribe" message="tns:IPresence_Subscribe_InputMessage" />
@@ -63,6 +69,12 @@
     </wsdl:operation>
     <wsdl:operation name="OnFriendStatusChanged">
       <wsdl:output wsaw:Action="http://tempuri.org/IPresence/OnFriendStatusChanged" message="tns:IPresence_OnFriendStatusChanged_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OnFriendRequestReceived">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPresence/OnFriendRequestReceived" message="tns:IPresence_OnFriendRequestReceived_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OnFriendListUpdated">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPresence/OnFriendListUpdated" message="tns:IPresence_OnFriendListUpdated_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IPresence" type="tns:IPresence">
@@ -89,6 +101,18 @@
     </wsdl:operation>
     <wsdl:operation name="OnFriendStatusChanged">
       <soap12:operation soapAction="http://tempuri.org/IPresence/OnFriendStatusChanged" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnFriendRequestReceived">
+      <soap12:operation soapAction="http://tempuri.org/IPresence/OnFriendRequestReceived" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnFriendListUpdated">
+      <soap12:operation soapAction="http://tempuri.org/IPresence/OnFriendListUpdated" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

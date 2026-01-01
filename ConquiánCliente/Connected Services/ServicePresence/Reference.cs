@@ -39,6 +39,12 @@ namespace ConquiánCliente.ServicePresence {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPresence/OnFriendStatusChanged")]
         void OnFriendStatusChanged(int friendId, int newStatusId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPresence/OnFriendRequestReceived")]
+        void OnFriendRequestReceived();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPresence/OnFriendListUpdated")]
+        void OnFriendListUpdated();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

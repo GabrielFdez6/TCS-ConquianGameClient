@@ -63,6 +63,15 @@ namespace ConquiánCliente.ViewModel
             _ = LoadFriends();
 
             PresenceCallbackHandler.FriendStatusChanged += OnFriendStatusChanged;
+            PresenceCallbackHandler.FriendListUpdated += OnFriendListUpdated;
+        }
+
+        private void OnFriendListUpdated()
+        {
+            Application.Current.Dispatcher.Invoke(async () =>
+            {
+                await LoadFriends();
+            });
         }
 
         private void OnFriendStatusChanged(int friendId, int newStatusId)
@@ -90,6 +99,7 @@ namespace ConquiánCliente.ViewModel
         public void Cleanup()
         {
             PresenceCallbackHandler.FriendStatusChanged -= OnFriendStatusChanged;
+            PresenceCallbackHandler.FriendListUpdated -= OnFriendListUpdated;
         }
 
         private async Task LoadFriends()
@@ -165,20 +175,22 @@ namespace ConquiánCliente.ViewModel
             }
         }
 
-        private static void ExecuteRequestsCommand(object parameter)
+        private void ExecuteRequestsCommand(object parameter)
         {
             if (parameter is Window currentWindow)
             {
+                Cleanup();
                 var requestsWindow = new View.FriendList.FriendRequests();
                 requestsWindow.Show();
                 currentWindow.Close();
             }
         }
 
-        private static void ExecuteBackCommand(object parameter)
+        private void ExecuteBackCommand(object parameter)
         {
             if (parameter is Window currentWindow)
             {
+                Cleanup();
                 var mainMenu = new View.MainMenu.MainMenu();
                 mainMenu.Show();
                 currentWindow.Close();
