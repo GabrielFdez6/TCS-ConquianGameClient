@@ -15,26 +15,26 @@ namespace ConquiánCliente.ViewModel.Profile
         {
             if (value is string status)
             {
-                switch (status.ToLower().Trim())
+
+                if (string.Equals(status, "Victory", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(status, "Won", StringComparison.OrdinalIgnoreCase))
                 {
-                    case "victoria":
-                    case "win":
-                        return Lang.GlobalGameVictory;
+                    return Lang.GlobalGameVictory; 
+                }
 
-                    case "derrota":
-                    case "defeat":
-                    case "loss":
-                        return Lang.GlobalGameDefeat;
+                if (string.Equals(status, "Defeat", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(status, "Lost", StringComparison.OrdinalIgnoreCase))
+                {
+                    return Lang.GlobalGameDefeat; 
+                }
 
-                    case "empate":
-                    case "draw":
-                        return Lang.GlobalGameDraw;
-
-                    default:
-                        return status;
+                if (string.Equals(status, "Draw", StringComparison.OrdinalIgnoreCase))
+                {
+                    return Lang.GlobalGameDraw; 
                 }
             }
-            return value;
+
+            return value; 
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

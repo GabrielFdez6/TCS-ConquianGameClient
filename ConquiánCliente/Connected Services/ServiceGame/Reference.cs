@@ -715,6 +715,9 @@ namespace ConquiánCliente.ServiceGame {
         private string Player1NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Player1PathPhotoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int Player1ScoreField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -722,6 +725,9 @@ namespace ConquiánCliente.ServiceGame {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string Player2NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Player2PathPhotoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int Player2ScoreField;
@@ -824,6 +830,19 @@ namespace ConquiánCliente.ServiceGame {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Player1PathPhoto {
+            get {
+                return this.Player1PathPhotoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Player1PathPhotoField, value) != true)) {
+                    this.Player1PathPhotoField = value;
+                    this.RaisePropertyChanged("Player1PathPhoto");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int Player1Score {
             get {
                 return this.Player1ScoreField;
@@ -858,6 +877,19 @@ namespace ConquiánCliente.ServiceGame {
                 if ((object.ReferenceEquals(this.Player2NameField, value) != true)) {
                     this.Player2NameField = value;
                     this.RaisePropertyChanged("Player2Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Player2PathPhoto {
+            get {
+                return this.Player2PathPhotoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Player2PathPhotoField, value) != true)) {
+                    this.Player2PathPhotoField = value;
+                    this.RaisePropertyChanged("Player2PathPhoto");
                 }
             }
         }

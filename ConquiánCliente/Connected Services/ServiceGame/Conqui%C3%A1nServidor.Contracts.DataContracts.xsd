@@ -106,9 +106,11 @@
       <xs:element minOccurs="0" name="LoserId" type="xs:int" />
       <xs:element minOccurs="0" name="Player1Id" type="xs:int" />
       <xs:element minOccurs="0" name="Player1Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Player1PathPhoto" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Player1Score" type="xs:int" />
       <xs:element minOccurs="0" name="Player2Id" type="xs:int" />
       <xs:element minOccurs="0" name="Player2Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Player2PathPhoto" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Player2Score" type="xs:int" />
       <xs:element minOccurs="0" name="PointsWon" type="xs:int" />
       <xs:element minOccurs="0" name="RoomCode" nillable="true" type="xs:string" />

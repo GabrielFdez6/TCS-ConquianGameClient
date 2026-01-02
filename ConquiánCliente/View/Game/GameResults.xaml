@@ -48,11 +48,20 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0" Orientation="Vertical" Margin="30,0">
-                        <Border Width="120" Height="120"
-                                BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1"
-                                CornerRadius="60">
-                            <Image Source="/Resources/imageProfile/avatar03.JPG" 
-                                   Stretch="UniformToFill"/>
+                        <Border Grid.Row="0" Width="150" Height="150" CornerRadius="75" BorderBrush="#FFD700" BorderThickness="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid>
+                                <Ellipse Fill="Black" />
+
+                                <Image Source="{Binding PlayerImage}" 
+                                   Width="150" Height="150" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                   Stretch="UniformToFill">
+
+                                    <Image.Clip>
+                                        <EllipseGeometry Center="75,75" RadiusX="75" RadiusY="75" />
+                                    </Image.Clip>
+                                </Image>
+                            </Grid>
                         </Border>
                         <TextBlock Text="{Binding PlayerName}"
                                    FontSize="28"
@@ -81,11 +90,21 @@
                                Margin="25,0,25,-30"/>
 
                     <StackPanel Grid.Column="2" Orientation="Vertical" Margin="30,0">
-                        <Border Width="120" Height="120"
-                                BorderBrush="{StaticResource PrimaryTextBrush}" BorderThickness="1"
-                                CornerRadius="60">
-                            <Image Source="/Resources/imageProfile/avatar01.JPG" 
-                                   Stretch="UniformToFill"/>
+                        <Border Grid.Row="0" Width="150" Height="150" CornerRadius="75" BorderBrush="#FFD700" BorderThickness="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid>
+                                <Ellipse Fill="Black" />
+
+                                <Image Source="{Binding OpponentImage}" 
+                                   Width="150" Height="150" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                   Stretch="UniformToFill">
+
+                                    <Image.Clip>
+                                        <EllipseGeometry Center="75,75" RadiusX="75" RadiusY="75" />
+                                    </Image.Clip>
+
+                                </Image>
+                            </Grid>
                         </Border>
                         <TextBlock Text="{Binding OpponentName}"
                                    FontSize="28"

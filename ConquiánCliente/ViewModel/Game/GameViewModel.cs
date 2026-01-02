@@ -298,6 +298,8 @@ namespace ConquiánCliente.ViewModel.Game
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
+                    StopTurnTimer();
+
                     MessageBox.Show(Lang.GameOpponentLeft, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
 
                     NavigateToMainMenu();
@@ -332,6 +334,8 @@ namespace ConquiánCliente.ViewModel.Game
 
         private void ShowGameResults(GameResultDto result)
         {
+            StopTurnTimer(); 
+
             int myPlayerId = CurrentPlayer.idPlayer;
 
             var resultsVM = new GameResultsViewModel(result, myPlayerId);

@@ -9,8 +9,10 @@ namespace ConquiánCliente.ViewModel.Game
     {
         private string playerName;
         private int playerScore;
+        private string playerImage; 
         private string opponentName;
         private int opponentScore;
+        private string opponentImage; 
         private string resultTitle;
         private string resultDetails;
 
@@ -38,6 +40,12 @@ namespace ConquiánCliente.ViewModel.Game
             set { playerScore = value; OnPropertyChanged(nameof(PlayerScore)); }
         }
 
+        public string PlayerImage
+        {
+            get { return playerImage; }
+            set { playerImage = value; OnPropertyChanged(nameof(PlayerImage)); }
+        }
+
         public string OpponentName
         {
             get { return opponentName; }
@@ -49,7 +57,11 @@ namespace ConquiánCliente.ViewModel.Game
             get { return opponentScore; }
             set { opponentScore = value; OnPropertyChanged(nameof(OpponentScore)); }
         }
-
+        public string OpponentImage
+        {
+            get { return opponentImage; }
+            set { opponentImage = value; OnPropertyChanged(nameof(OpponentImage)); }
+        }
         public ICommand ReturnToMainMenuCommand { get; private set; }
 
         public GameResultsViewModel()
@@ -68,6 +80,9 @@ namespace ConquiánCliente.ViewModel.Game
 
             PlayerName = amIPlayer1 ? result.Player1Name : result.Player2Name;
             OpponentName = amIPlayer1 ? result.Player2Name : result.Player1Name;
+
+            PlayerImage = amIPlayer1 ? result.Player1PathPhoto : result.Player2PathPhoto;
+            OpponentImage = amIPlayer1 ? result.Player2PathPhoto : result.Player1PathPhoto;
 
             bool palyerIsWinner = (result.WinnerId == myPlayerId);
             bool isDraw = result.IsDraw;
