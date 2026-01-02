@@ -1,12 +1,13 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceSignUp;
+using ConquiánCliente.Utilities.Messages; 
 using ConquiánCliente.View;
 using ConquiánCliente.ViewModel.Validation;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ConquiánCliente.Utilities.Messages; 
 
 namespace ConquiánCliente.ViewModel.Authentication
 {
@@ -18,8 +19,11 @@ namespace ConquiánCliente.ViewModel.Authentication
         private string nickname;
         private string enteredVerificationCode;
         private readonly PlayerDto playerInProgress;
-        private readonly IMessageResolver messageResolver; 
+        private readonly IMessageResolver messageResolver;
 
+        public bool IsVerificationSuccessful { get; set; } = false;
+
+        public bool IsRegistrationCompleted { get; set; } = false;
         public string Email
         {
             get { return email; }
@@ -157,6 +161,7 @@ namespace ConquiánCliente.ViewModel.Authentication
 
                 if (success)
                 {
+                    IsVerificationSuccessful = true;
                     var signUpDataWindow = new SignUpData();
                     signUpDataWindow.DataContext = this;
                     signUpDataWindow.Show();
@@ -211,6 +216,7 @@ namespace ConquiánCliente.ViewModel.Authentication
 
                 if (isRegistrationSuccessful)
                 {
+                    IsRegistrationCompleted = true;
                     MessageBox.Show(Lang.SuccessAccountCreated, Lang.TitleRegistrationComplete);
                     ExecuteNavigateToLogin(parameter);
                 }
@@ -232,6 +238,33 @@ namespace ConquiánCliente.ViewModel.Authentication
             }
         }
 
+        public async Task CancelRegistrationOnServerAsync()
+        {
+            if (string.IsNullOrEmpty(this.Email)) return;
+
+            try
+            {
+                using (var client = new SignUpClient())
+                {
+                    await client.CancelRegistrationAsync(this.Email);
+                }
+            }
+            catch (FaultException<ServiceFaultDto> fault)
+            {
+                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                string msg = messageResolver.GetMessage(errorType);
+
+                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(string.Format(Lang.ErrorConnectingToServer, ex.Message), Lang.TitleConnectionError);
+            }
+        }
         private static void ExecuteNavigateToLogin(object parameter)
         {
             var loginWindow = new LogIn();

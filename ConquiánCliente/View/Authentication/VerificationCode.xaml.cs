@@ -1,4 +1,5 @@
 ﻿using ConquiánCliente.ServiceSignUp;
+using ConquiánCliente.ViewModel.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,18 @@ namespace ConquiánCliente.View
         public VerificationCode()
         {
             InitializeComponent();
+            this.Closing += VerificationCodeClosing;
+        }
+
+        private async void VerificationCodeClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (this.DataContext is SignUpViewModel vm)
+            {
+                if (!vm.IsVerificationSuccessful)
+                {
+                    await vm.CancelRegistrationOnServerAsync();
+                }
+            }
         }
     }
 }

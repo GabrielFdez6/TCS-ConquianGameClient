@@ -1,4 +1,5 @@
 ﻿using ConquiánCliente.ServiceSignUp;
+using ConquiánCliente.ViewModel.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,18 @@ namespace ConquiánCliente.View
         public SignUpData()
         {
             InitializeComponent();
+            this.Closing += SignUpData_Closing;
+        }
+
+        private async void SignUpData_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (this.DataContext is SignUpViewModel vm)
+            {
+                if (!vm.IsRegistrationCompleted)
+                {
+                    await vm.CancelRegistrationOnServerAsync();
+                }
+            }
         }
     }
 }
