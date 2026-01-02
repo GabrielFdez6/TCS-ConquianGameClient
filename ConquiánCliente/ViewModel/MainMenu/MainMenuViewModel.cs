@@ -30,23 +30,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
             PlayCommand = new RelayCommand(ExecutePlay);
             OpenSettingsCommand = new RelayCommand(ExecuteOpenSettings);
             InvitationClientManager.Connect(PlayerSession.CurrentPlayer.idPlayer);
-            InvitationCallbackHandler.OnGlobalInvitationReceived += HandleInvitation;
             PresenceClientManager.Instance.Client.Subscribe(PlayerSession.CurrentPlayer.idPlayer);
-        }
-
-        private void HandleInvitation(string senderNickname, string roomCode)
-        {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                var vm = new InvitationReceivedViewModel(senderNickname, roomCode);
-                var window = new View.Lobby.InvitationReceived { DataContext = vm };
-                window.Show();
-            });
-        }
-
-        public void OnWindowClosing()
-        {
-            InvitationCallbackHandler.OnGlobalInvitationReceived -= HandleInvitation;
         }
 
         private void LoadPlayerData()

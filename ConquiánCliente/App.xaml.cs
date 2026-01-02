@@ -1,6 +1,8 @@
 ﻿using ConquiánCliente.ServiceLogin;
 using ConquiánCliente.Utilities;
+using ConquiánCliente.View.Lobby; 
 using ConquiánCliente.ViewModel;
+using ConquiánCliente.ViewModel.Lobby;
 using System;
 using System.Configuration;
 using System.Globalization;
@@ -89,8 +91,30 @@ namespace ConquiánCliente
             {
                 Console.WriteLine($"Error al inicializar el sistema de audio: {ex.Message}");
             }
-
+            InvitationCallbackHandler.OnGlobalInvitationReceived += ShowInvitationPopup;
             base.OnStartup(e);
+        }
+
+        private void ShowInvitationPopup(string senderNickname, string roomCode)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window is InvitationReceived)
+                    {
+                        return;
+                    }
+                }
+
+                var vm = new InvitationReceivedViewModel(senderNickname, roomCode);
+
+                var invitationWindow = new InvitationReceived();
+
+                invitationWindow.DataContext = vm;
+
+                invitationWindow.Show();
+            });
         }
     }
 }

@@ -25,13 +25,5 @@ namespace ConquiánCliente.View.MainMenu
             InitializeComponent();
             DataContext = new MainMenuViewModel();
         }
-
-        private void MainMenuWindow_Closing(object sender, CancelEventArgs e)
-        {
-            if (this.DataContext is MainMenuViewModel vm)
-            {
-                vm.OnWindowClosing();
-            }
-        }
     }
 }
