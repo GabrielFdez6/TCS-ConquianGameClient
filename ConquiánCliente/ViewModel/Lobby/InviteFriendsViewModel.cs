@@ -108,14 +108,20 @@ namespace ConquiánCliente.ViewModel.Lobby
                 catch (FaultException<ConquiánCliente.ServiceInvitation.ServiceFaultDto> fault)
                 {
                     var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
-                    string msg = messageResolver.GetMessage(errorType);
 
-                    MessageBox.Show(msg, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
-
-                    if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.UserOffline)
+                    if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.UserInGame)
+                    {
+                        MessageBox.Show(Lang.ErrorPlayerInGame, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.UserOffline)
                     {
                         friendVM.StatusText = Lang.StatusOffline;
                         friendVM.IsOnline = false;
+                    }
+                    else
+                    {
+                        string msg = messageResolver.GetMessage(errorType);
+                        MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 catch (CommunicationException)

@@ -27,6 +27,18 @@ namespace ConquiánCliente.ViewModel.Lobby
         private async void ExecuteAccept(object parameter)
         {
             var window = parameter as Window;
+
+            var openLobbyWindow = Application.Current.Windows.OfType<LobbyGame>().FirstOrDefault();
+
+            if (openLobbyWindow != null && openLobbyWindow.DataContext is LobbyGameViewModel lobbyVM)
+            {
+                lobbyVM.IsNavigatingAway = true;
+
+                lobbyVM.CloseClientConnection(true);
+
+                openLobbyWindow.Close();
+            }
+
             LobbyDto lobbyState = null;
 
             try

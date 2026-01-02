@@ -244,6 +244,12 @@ namespace ConquiánCliente.ServiceFriendList {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Offline = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        InGame = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        InLobby = 4,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -448,6 +454,9 @@ namespace ConquiánCliente.ServiceFriendList {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         RegisteredMail = 39,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UserInGame = 40,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

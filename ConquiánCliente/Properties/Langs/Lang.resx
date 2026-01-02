@@ -759,4 +759,7 @@ Si la carta no te sirve, usa el botón 'Pasar'.</value>
   <data name="ErrorLostConnection" xml:space="preserve">
     <value>Se ha perdido la conexión con el servidor. Volviendo al inicio de sesión.</value>
   </data>
+  <data name="ErrorPlayerInGame" xml:space="preserve">
+    <value>Tu amigo se encuentra en una partida actualmente. Inténtalo más tarde.</value>
+  </data>
 </root>

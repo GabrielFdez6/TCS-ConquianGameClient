@@ -628,6 +628,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Tu amigo se encuentra en una partida actualmente. Inténtalo más tarde..
+        /// </summary>
+        public static string ErrorPlayerInGame {
+            get {
+                return ResourceManager.GetString("ErrorPlayerInGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No se pudo procesar la solicitud. Verifique que el correo esté registrado y verificado..
         /// </summary>
         public static string ErrorRecoveryRequestFailed {

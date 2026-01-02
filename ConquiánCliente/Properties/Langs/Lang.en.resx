@@ -760,4 +760,7 @@ If the card is not useful, use the 'To Pass' button.</value>
   <data name="ErrorLostConnection" xml:space="preserve">
     <value>The connection to the server has been lost. Returning to the login.</value>
   </data>
+  <data name="ErrorPlayerInGame" xml:space="preserve">
+    <value>Your friend is currently in a game. Try again later.</value>
+  </data>
 </root>

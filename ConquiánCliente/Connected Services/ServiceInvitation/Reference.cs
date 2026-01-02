@@ -215,6 +215,9 @@ namespace ConquiánCliente.ServiceInvitation {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         RegisteredMail = 39,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UserInGame = 40,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

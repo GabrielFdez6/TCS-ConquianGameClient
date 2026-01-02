@@ -347,7 +347,7 @@ namespace ConquiánCliente.ViewModel.Lobby
             CloseClientConnection(notifyServer: true);
             NavigateToLoginOrMainMenu(parameter as Window);
         }
-        private void CloseClientConnection(bool notifyServer)
+        public void CloseClientConnection(bool notifyServer)
         {
             if (client == null) return;
             try
@@ -369,7 +369,9 @@ namespace ConquiánCliente.ViewModel.Lobby
                 if (window.DataContext == this)
                 {
                     try { window.Close(); }
-                    catch (InvalidOperationException ex) { System.Diagnostics.Debug.WriteLine($"Intento de cerrar ventana ya en proceso: {ex.Message}"); }
+                    catch (InvalidOperationException ex) { 
+                        System.Diagnostics.Debug.WriteLine($"Intento de cerrar ventana ya en proceso: {ex.Message}"); 
+                    }
                     break;
                 }
             }
