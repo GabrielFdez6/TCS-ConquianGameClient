@@ -763,4 +763,10 @@ If the card is not useful, use the 'To Pass' button.</value>
   <data name="ErrorPlayerInGame" xml:space="preserve">
     <value>Your friend is currently in a game. Try again later.</value>
   </data>
+  <data name="StatusInLobby" xml:space="preserve">
+    <value>In lobby</value>
+  </data>
+  <data name="StatusInGame" xml:space="preserve">
+    <value>In game</value>
+  </data>
 </root>

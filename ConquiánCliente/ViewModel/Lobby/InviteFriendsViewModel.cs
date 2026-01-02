@@ -54,10 +54,26 @@ namespace ConquiánCliente.ViewModel.Lobby
                 if (friendVM != null)
                 {
                     var newStatus = (PlayerStatus)newStatusId;
-                    bool isOnline = (newStatus == PlayerStatus.Online);
+
+                    bool isOnline = (newStatus != PlayerStatus.Offline);
 
                     friendVM.IsOnline = isOnline;
-                    friendVM.StatusText = isOnline ? Lang.StatusOnline : Lang.StatusOffline;
+
+                    switch (newStatus)
+                    {
+                        case PlayerStatus.Online:
+                            friendVM.StatusText = Lang.StatusOnline;
+                            break;
+                        case PlayerStatus.InLobby:
+                            friendVM.StatusText = Lang.StatusInLobby; 
+                            break;
+                        case PlayerStatus.InGame:
+                            friendVM.StatusText = Lang.StatusInGame; 
+                            break;
+                        default:
+                            friendVM.StatusText = Lang.StatusOffline;
+                            break;
+                    }
                 }
             });
         }
@@ -147,10 +163,22 @@ namespace ConquiánCliente.ViewModel.Lobby
         public FriendInviteItemViewModel(PlayerDto friend)
         {
             this.friend = friend;
-            this.IsOnline = friend.Status == PlayerStatus.Online;
-            this.StatusText = this.IsOnline ? Lang.StatusOnline : Lang.StatusOffline;
-        }
 
+            this.IsOnline = friend.Status != PlayerStatus.Offline;
+
+            if (friend.Status == PlayerStatus.InLobby)
+            {
+                this.StatusText = Lang.StatusInLobby;
+            }
+            else if (friend.Status == PlayerStatus.InGame)
+            {
+                this.StatusText = Lang.StatusInGame;
+            }
+            else
+            {
+                this.StatusText = this.IsOnline ? Lang.StatusOnline : Lang.StatusOffline;
+            }
+        }
         public int IdPlayer => friend.idPlayer;
         public string Nickname => friend.nickname;
         public string ProfileImagePath => friend.pathPhoto;

@@ -38,8 +38,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         }
 
         public ObservableCollection<PlayerLobbyItemViewModel> Players { get; }
-        public ObservableCollection<string> ChatMessages { get; }
-
+        public ObservableCollection<MessageDto> ChatMessages { get; }
         public string RoomCode
         {
             get { return roomCode; }
@@ -79,7 +78,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         public LobbyGameViewModel(string receivedRoomCode)
         {
             Players = new ObservableCollection<PlayerLobbyItemViewModel>();
-            ChatMessages = new ObservableCollection<string>();
+            ChatMessages = new ObservableCollection<MessageDto>();
             this.messageResolver = new ResourceMessageResolver(); 
 
             this.RoomCode = receivedRoomCode;
@@ -270,7 +269,10 @@ namespace ConquiánCliente.ViewModel.Lobby
         }
         private void HandleMessageReceived(MessageDto message)
         {
-            Application.Current.Dispatcher.Invoke(() => { ChatMessages.Add($"{message.Nickname}: {message.Message}"); });
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                ChatMessages.Add(message);
+            });
         }
         private void HandleGamemodeChanged(int newGamemodeId)
         {
@@ -292,7 +294,10 @@ namespace ConquiánCliente.ViewModel.Lobby
             ChatMessages.Clear();
             if (messages != null)
             {
-                foreach (var message in messages) ChatMessages.Add($"{message.Nickname}: {message.Message}");
+                foreach (var message in messages)
+                {
+                    ChatMessages.Add(message);
+                }
             }
         }
         private PlayerLobbyItemViewModel CreatePlayerViewModel(PlayerDto playerDto)

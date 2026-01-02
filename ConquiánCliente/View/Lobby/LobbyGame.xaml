@@ -211,13 +211,42 @@
                 </Grid.RowDefinitions>
 
                 <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Background="#66000000" Padding="5">
-                    <ItemsControl ItemsSource="{Binding ChatMessages}">
-                        <ItemsControl.ItemTemplate>
+                    <ListBox ItemsSource="{Binding ChatMessages}" 
+         Background="Transparent" 
+         BorderThickness="0"
+         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                        <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}" Foreground="{StaticResource PrimaryTextBrush}" FontSize="16" Margin="0,2" TextWrapping="Wrap"/>
+                                <TextBlock TextWrapping="Wrap" Margin="0,2">
+                
+                <Run Text="{Binding Nickname}" 
+                     FontWeight="Bold" 
+                     Foreground="#FFD700"/> 
+                
+                <Run Text=": " Foreground="White"/>
+                
+                <Run Text="{Binding Message}" 
+                     Foreground="White"/>
+
+                                </TextBlock>
                             </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                        </ListBox.ItemTemplate>
+
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Focusable" Value="False"/>
+                                <Setter Property="IsHitTestVisible" Value="False"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
                 </ScrollViewer>
 
                 <Border Grid.Row="1" CornerRadius="5" BorderThickness="1" 
@@ -229,6 +258,7 @@
                     </Border.Effect>
                     <TextBox Height="40" FontSize="16" VerticalContentAlignment="Center"
                              Text="{Binding CurrentMessage, UpdateSourceTrigger=PropertyChanged}"
+                             MaxLength="200"
                              Background="Transparent" BorderThickness="0"
                              Foreground="{StaticResource PrimaryTextBrush}"
                              CaretBrush="{StaticResource PrimaryTextBrush}">

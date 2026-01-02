@@ -762,4 +762,10 @@ Si la carta no te sirve, usa el botón 'Pasar'.</value>
   <data name="ErrorPlayerInGame" xml:space="preserve">
     <value>Tu amigo se encuentra en una partida actualmente. Inténtalo más tarde.</value>
   </data>
+  <data name="StatusInLobby" xml:space="preserve">
+    <value>En lobby</value>
+  </data>
+  <data name="StatusInGame" xml:space="preserve">
+    <value>En partida</value>
+  </data>
 </root>

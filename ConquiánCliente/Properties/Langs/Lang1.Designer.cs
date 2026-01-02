@@ -1828,6 +1828,24 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a En partida.
+        /// </summary>
+        public static string StatusInGame {
+            get {
+                return ResourceManager.GetString("StatusInGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a En lobby.
+        /// </summary>
+        public static string StatusInLobby {
+            get {
+                return ResourceManager.GetString("StatusInLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Desconectado.
         /// </summary>
         public static string StatusOffline {
