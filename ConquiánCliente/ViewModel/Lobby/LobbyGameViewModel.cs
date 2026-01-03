@@ -217,11 +217,12 @@ namespace ConquiánCliente.ViewModel.Lobby
         {
             if (IsNavigatingAway) return;
             IsNavigatingAway = true;
+
             Application.Current.Dispatcher.Invoke(() =>
             {
-                MessageBox.Show(Lang.InfoYouWereKicked, Lang.Lobby, MessageBoxButton.OK, MessageBoxImage.Information);
                 CloseClientConnection(notifyServer: false);
                 NavigateToLoginOrMainMenu();
+                MessageBox.Show(Lang.InfoYouWereKicked, Lang.Lobby, MessageBoxButton.OK, MessageBoxImage.Information);
             });
         }
         private void ExecuteShutdownApplication(object obj)
