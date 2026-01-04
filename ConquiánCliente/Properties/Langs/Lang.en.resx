@@ -769,4 +769,7 @@ If the card is not useful, use the 'To Pass' button.</value>
   <data name="StatusInGame" xml:space="preserve">
     <value>In game</value>
   </data>
+  <data name="ErrorPlayerBanned" xml:space="preserve">
+    <value>You have been expelled from the room and cannot re-enter.</value>
+  </data>
 </root>

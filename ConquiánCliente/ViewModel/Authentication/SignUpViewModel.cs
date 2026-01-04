@@ -189,12 +189,14 @@ namespace ConquiánCliente.ViewModel.Authentication
                 MessageBox.Show(nameError, Lang.TitleValidation);
                 return;
             }
+
             string lastNameError = SignUpValidator.ValidateLastName(LastName);
             if (!string.IsNullOrEmpty(lastNameError))
             {
                 MessageBox.Show(lastNameError, Lang.TitleValidation);
                 return;
             }
+
             string nicknameError = SignUpValidator.ValidateNickname(Nickname);
             if (!string.IsNullOrEmpty(nicknameError))
             {

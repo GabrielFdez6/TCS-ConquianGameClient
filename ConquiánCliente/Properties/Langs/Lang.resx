@@ -768,4 +768,7 @@ Si la carta no te sirve, usa el botón 'Pasar'.</value>
   <data name="StatusInGame" xml:space="preserve">
     <value>En partida</value>
   </data>
+  <data name="ErrorPlayerBanned" xml:space="preserve">
+    <value>Has sido expulsado de la sala y no puedes volver a entrar.</value>
+  </data>
 </root>

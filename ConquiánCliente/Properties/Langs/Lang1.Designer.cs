@@ -628,6 +628,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Has sido expulsado de la sala y no puedes volver a entrar..
+        /// </summary>
+        public static string ErrorPlayerBanned {
+            get {
+                return ResourceManager.GetString("ErrorPlayerBanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Tu amigo se encuentra en una partida actualmente. Inténtalo más tarde..
         /// </summary>
         public static string ErrorPlayerInGame {

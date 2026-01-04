@@ -693,6 +693,9 @@ namespace ConquiánCliente.ServiceGame {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         UserInGame = 40,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PlayerBanned = 41,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

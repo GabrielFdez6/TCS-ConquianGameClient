@@ -457,6 +457,9 @@ namespace ConquiánCliente.ServiceSignUp {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         UserInGame = 40,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PlayerBanned = 41,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

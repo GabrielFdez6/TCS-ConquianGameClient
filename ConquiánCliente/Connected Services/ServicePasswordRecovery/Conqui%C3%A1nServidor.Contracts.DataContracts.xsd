@@ -51,6 +51,7 @@
       <xs:enumeration value="NotKickYourSelf" />
       <xs:enumeration value="RegisteredMail" />
       <xs:enumeration value="UserInGame" />
+      <xs:enumeration value="PlayerBanned" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="ServiceErrorType" nillable="true" type="tns:ServiceErrorType" />
