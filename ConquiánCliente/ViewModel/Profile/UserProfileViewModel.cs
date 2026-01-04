@@ -197,6 +197,17 @@ namespace ConquiánCliente.ViewModel.Profile
                     {
                         foreach (var game in history)
                         {
+
+                            if (game.PlayerName == "Unknown" || string.IsNullOrEmpty(game.PlayerName))
+                            {
+                                game.PlayerName = Lang.GlobalGuess;
+                            }
+
+                            if (game.OpponentName == "Unknown" || string.IsNullOrEmpty(game.OpponentName))
+                            {
+                                game.OpponentName = Lang.GlobalGuess;
+                            }
+
                             MatchHistoryList.Add(game);
                         }
                         IsHistoryEmpty = false;
