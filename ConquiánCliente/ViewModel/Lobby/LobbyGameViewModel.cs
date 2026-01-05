@@ -9,7 +9,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using ConquiánCliente.Utilities.Messages; 
+using ConquiánCliente.Utilities.Messages;
 
 namespace ConquiánCliente.ViewModel.Lobby
 {
@@ -29,7 +29,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         private LobbyClient client;
         private int idHost;
         private bool isHostBool;
-        private readonly IMessageResolver messageResolver; 
+        private readonly IMessageResolver messageResolver;
 
         public bool IsHost
         {
@@ -79,7 +79,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         {
             Players = new ObservableCollection<PlayerLobbyItemViewModel>();
             ChatMessages = new ObservableCollection<MessageDto>();
-            this.messageResolver = new ResourceMessageResolver(); 
+            this.messageResolver = new ResourceMessageResolver();
 
             this.RoomCode = receivedRoomCode;
 
@@ -159,13 +159,30 @@ namespace ConquiánCliente.ViewModel.Lobby
             }
             catch (CommunicationException)
             {
-                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                NavigateToLoginOrMainMenu();
+                IsNavigatingAway = true;
+
+                PresenceClientManager.Instance.StopHeartbeat();
+
+                InvitationClientManager.Disconnect(PlayerSession.CurrentPlayer.idPlayer);
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                });
+
+                NavigateToLoginOrMainMenu(isConnectionLost: true);
             }
             catch (Exception)
             {
-                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                NavigateToLoginOrMainMenu();
+                IsNavigatingAway = true;
+                PresenceClientManager.Instance.StopHeartbeat();
+                InvitationClientManager.Disconnect(PlayerSession.CurrentPlayer.idPlayer);
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                });
+                NavigateToLoginOrMainMenu(isConnectionLost: true);
             }
         }
 
@@ -358,15 +375,24 @@ namespace ConquiánCliente.ViewModel.Lobby
             if (client == null) return;
             try
             {
-                if (client.State == CommunicationState.Opened)
+                if (notifyServer && client.State == CommunicationState.Opened)
                 {
-                    if (notifyServer) client.LeaveAndUnsubscribe(this.RoomCode, PlayerSession.CurrentPlayer.idPlayer);
-                    client.Close();
+                    try
+                    {
+                        client.LeaveAndUnsubscribe(this.RoomCode, PlayerSession.CurrentPlayer.idPlayer);
+                    }
+                    catch (Exception) { }
                 }
-                else client.Abort();
+                client.Close();
             }
-            catch (Exception) { client.Abort(); }
-            finally { client = null; }
+            catch (Exception)
+            {
+                client.Abort();
+            }
+            finally
+            {
+                client = null;
+            }
         }
         private void CloseCurrentWindow()
         {
@@ -375,17 +401,26 @@ namespace ConquiánCliente.ViewModel.Lobby
                 if (window.DataContext == this)
                 {
                     try { window.Close(); }
-                    catch (InvalidOperationException ex) { 
-                        System.Diagnostics.Debug.WriteLine($"Intento de cerrar ventana ya en proceso: {ex.Message}"); 
+                    catch (InvalidOperationException ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Intento de cerrar ventana ya en proceso: {ex.Message}");
                     }
                     break;
                 }
             }
         }
-        private void NavigateToLoginOrMainMenu(Window currentWindow = null)
+        private void NavigateToLoginOrMainMenu(Window currentWindow = null, bool isConnectionLost = false)
         {
+            if (isConnectionLost)
+            {
+                PresenceClientManager.Instance.StopHeartbeat();
+                if (PlayerSession.CurrentPlayer != null)
+                    InvitationClientManager.Disconnect(PlayerSession.CurrentPlayer.idPlayer);
+            }
+
             Window newWindow = null;
-            if (PlayerSession.IsGuest)
+
+            if (PlayerSession.IsGuest || isConnectionLost)
             {
                 PlayerSession.EndSession();
                 newWindow = new LogIn();
@@ -394,8 +429,10 @@ namespace ConquiánCliente.ViewModel.Lobby
             {
                 newWindow = new View.MainMenu.MainMenu();
             }
+
             newWindow.Show();
             Application.Current.MainWindow = newWindow;
+
             var windowToClose = currentWindow;
             if (windowToClose == null)
             {
@@ -408,6 +445,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                     }
                 }
             }
+
             if (windowToClose != null)
             {
                 try { windowToClose.Close(); }
@@ -453,6 +491,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                     {
                         MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                     });
+
                 }
                 catch (Exception)
                 {

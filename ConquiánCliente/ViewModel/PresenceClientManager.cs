@@ -4,7 +4,8 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using System.Linq; 
+using System.Linq;
+using ConquiánCliente.ViewModel.Lobby;
 
 namespace ConquiánCliente.ViewModel
 {
@@ -13,6 +14,7 @@ namespace ConquiánCliente.ViewModel
         private static PresenceClientManager instance;
         private PresenceClient client;
 
+        private bool isHandlingConnectionLoss = false;
         private DispatcherTimer heartbeatTimer;
         private int currentUserId;
         private bool isConnected;
@@ -71,7 +73,7 @@ namespace ConquiánCliente.ViewModel
 
         public void StartHeartbeat(int userId)
         {
-            if (isConnected) return; 
+            if (isConnected) return;
 
             currentUserId = userId;
 
@@ -100,10 +102,11 @@ namespace ConquiánCliente.ViewModel
         {
             heartbeatTimer?.Stop();
             isConnected = false;
+            isHandlingConnectionLoss = false;
 
             try
             {
-                if (client != null && client.State == CommunicationState.Opened)
+                if (client != null)
                 {
                     client.Unsubscribe(currentUserId);
                     client.Close();
@@ -148,10 +151,22 @@ namespace ConquiánCliente.ViewModel
 
         private void HandleConnectionLoss()
         {
+            if (isHandlingConnectionLoss)
+            {
+                return;
+            }
+
+            isHandlingConnectionLoss = true;
             heartbeatTimer?.Stop();
             isConnected = false;
 
-            try { client?.Abort(); } catch { } 
+            try
+            {
+                client?.Abort();
+            }
+            catch
+            {
+            }
 
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -161,19 +176,26 @@ namespace ConquiánCliente.ViewModel
                                 MessageBoxImage.Error);
 
                 NavigateToLogin();
+                isHandlingConnectionLoss = false;
             });
         }
-
         private void NavigateToLogin()
         {
             var loginWindow = new LogIn();
             loginWindow.Show();
+
+            Application.Current.MainWindow = loginWindow;
 
             var windowsToClose = Application.Current.Windows.OfType<Window>()
                                      .Where(w => w != loginWindow).ToList();
 
             foreach (var win in windowsToClose)
             {
+                if (win.DataContext is LobbyGameViewModel lobbyVm)
+                {
+                    lobbyVm.IsNavigatingAway = true;
+                }
+
                 win.Close();
             }
         }
