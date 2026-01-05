@@ -150,17 +150,19 @@ namespace ConquiánCliente.ViewModel.Game
 
             isNavigatingAway = true;
 
-            try
+            Task.Run(() =>
             {
-                if (client != null && CurrentPlayer != null)
+                try
                 {
-                    client.LeaveGame(roomCode, CurrentPlayer.idPlayer);
+                    if (client != null && CurrentPlayer != null)
+                    {
+                        client.LeaveGame(roomCode, CurrentPlayer.idPlayer);
+                    }
                 }
-            }
-            catch (Exception)
-            {
-                Console.WriteLine(Lang.ErrorGeneric);
-            }
+                catch (Exception)
+                {
+                }
+            });
         }
 
         public async Task PassTurnAsync()
@@ -308,6 +310,7 @@ namespace ConquiánCliente.ViewModel.Game
                     }
 
                     StopTurnTimer();
+                    ShowGameResults(results);
                 });
             };
 

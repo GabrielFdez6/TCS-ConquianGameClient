@@ -30,6 +30,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         private int idHost;
         private bool isHostBool;
         private readonly IMessageResolver messageResolver;
+        private int myPlayerId;
 
         public bool IsHost
         {
@@ -101,6 +102,11 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private async Task InitializeConnectionAsync()
         {
+            if (PlayerSession.CurrentPlayer != null)
+            {
+                this.myPlayerId = PlayerSession.CurrentPlayer.idPlayer;
+            }
+
             try
             {
                 var callbackHandler = LobbyCallbackHandler.Instance;
@@ -379,7 +385,10 @@ namespace ConquiánCliente.ViewModel.Lobby
                 {
                     try
                     {
-                        client.LeaveAndUnsubscribe(this.RoomCode, PlayerSession.CurrentPlayer.idPlayer);
+                        if (this.myPlayerId > 0)
+                        {
+                            client.LeaveAndUnsubscribe(this.RoomCode, this.myPlayerId);
+                        }
                     }
                     catch (Exception) { }
                 }

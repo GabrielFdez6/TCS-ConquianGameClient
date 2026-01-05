@@ -11,6 +11,7 @@ namespace ConquiánCliente.ViewModel
 {
     public class PresenceClientManager
     {
+        private const int MAX_RETRY_ATTEMPTS = 3;
         private static PresenceClientManager instance;
         private PresenceClient client;
 
@@ -18,6 +19,7 @@ namespace ConquiánCliente.ViewModel
         private DispatcherTimer heartbeatTimer;
         private int currentUserId;
         private bool isConnected;
+        private int failureCount = 0;
 
         public PresenceClient Client
         {
@@ -76,6 +78,7 @@ namespace ConquiánCliente.ViewModel
             if (isConnected) return;
 
             currentUserId = userId;
+            failureCount = 0;
 
             try
             {
@@ -103,13 +106,21 @@ namespace ConquiánCliente.ViewModel
             heartbeatTimer?.Stop();
             isConnected = false;
             isHandlingConnectionLoss = false;
+            failureCount = 0;
 
             try
             {
                 if (client != null)
                 {
-                    client.Unsubscribe(currentUserId);
-                    client.Close();
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Unsubscribe(currentUserId);
+                        client.Close();
+                    }
+                    else
+                    {
+                        client.Abort();
+                    }
                 }
             }
             catch (Exception)
@@ -120,30 +131,60 @@ namespace ConquiánCliente.ViewModel
 
         private async void SendPing(object sender, EventArgs e)
         {
-            if (!isConnected || client == null) return;
+            if (!isConnected)
+            {
+                return;
+            }
 
-            bool isConnectionSuccess = true;
+            int timeoutMs = 3000;
+            bool pingSuccess = false;
 
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
                 try
                 {
+                    if (client == null || client.State == CommunicationState.Faulted || client.State == CommunicationState.Closed)
+                    {
+                        InitializeClient();
+                    }
+
                     if (client.State == CommunicationState.Opened)
                     {
-                        client.Ping(currentUserId);
+                        var pingTask = Task.Run(() => client.Ping(currentUserId));
+
+                        if (await Task.WhenAny(pingTask, Task.Delay(timeoutMs)) == pingTask)
+                        {
+                            await pingTask;
+                            pingSuccess = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Heartbeat Timeout: El servidor no respondió en 3s.");
+                            pingSuccess = false;
+                        }
                     }
                     else
                     {
-                        isConnectionSuccess = false;
+                        pingSuccess = false;
                     }
                 }
                 catch (Exception)
                 {
-                    isConnectionSuccess = false;
+                    pingSuccess = false;
                 }
             });
 
-            if (!isConnectionSuccess)
+            if (pingSuccess)
+            {
+                failureCount = 0;
+            }
+            else
+            {
+                failureCount++;
+                Console.WriteLine($"Heartbeat fallido: {failureCount}/{MAX_RETRY_ATTEMPTS}");
+            }
+
+            if (failureCount >= MAX_RETRY_ATTEMPTS)
             {
                 HandleConnectionLoss();
             }
@@ -170,31 +211,44 @@ namespace ConquiánCliente.ViewModel
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                MessageBox.Show(ConquiánCliente.Properties.Langs.Lang.ErrorLostConnection,
-                                ConquiánCliente.Properties.Langs.Lang.TitleError,
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Error);
+                if (ConquiánCliente.ViewModel.PlayerSession.IsLoggedIn)
+                {
 
-                NavigateToLogin();
+                    NavigateToLogin();
+
+                    MessageBox.Show(ConquiánCliente.Properties.Langs.Lang.ErrorLostConnection,
+                                    ConquiánCliente.Properties.Langs.Lang.TitleError,
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
+                }
+
                 isHandlingConnectionLoss = false;
             });
         }
         private void NavigateToLogin()
         {
+            var windowsToClose = Application.Current.Windows.OfType<Window>()
+                                                         .Where(w => !(w is LogIn)).ToList();
+
             PlayerSession.EndSession();
+
             var loginWindow = new LogIn();
             loginWindow.Show();
 
             Application.Current.MainWindow = loginWindow;
-
-            var windowsToClose = Application.Current.Windows.OfType<Window>()
-                                     .Where(w => w != loginWindow).ToList();
 
             foreach (var win in windowsToClose)
             {
                 if (win.DataContext is LobbyGameViewModel lobbyVm)
                 {
                     lobbyVm.IsNavigatingAway = true;
+
+                    lobbyVm.CloseClientConnection(notifyServer: true);
+                }
+
+                if (win.DataContext is ConquiánCliente.ViewModel.Game.GameViewModel gameVm)
+                {
+                    gameVm.LeaveGame();
                 }
 
                 win.Close();
