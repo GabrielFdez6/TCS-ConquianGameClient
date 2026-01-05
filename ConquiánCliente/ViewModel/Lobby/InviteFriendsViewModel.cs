@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using ConquiánCliente.Utilities.Messages; 
+using ConquiánCliente.Utilities.Messages;
 
 namespace ConquiánCliente.ViewModel.Lobby
 {
@@ -19,12 +19,12 @@ namespace ConquiánCliente.ViewModel.Lobby
         public ObservableCollection<FriendInviteItemViewModel> FriendsList { get; }
         public ICommand InviteFriendCommand { get; }
         public ICommand SendRoomCodeCommand { get; }
-        private readonly IMessageResolver messageResolver; 
+        private readonly IMessageResolver messageResolver;
 
         public InviteFriendsViewModel(string roomCode)
         {
             this.roomCode = roomCode;
-            this.messageResolver = new ResourceMessageResolver(); 
+            this.messageResolver = new ResourceMessageResolver();
 
             FriendsList = new ObservableCollection<FriendInviteItemViewModel>();
             InviteFriendCommand = new RelayCommand(async (param) => await ExecuteInviteFriend(param));
@@ -53,27 +53,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 var friendVM = FriendsList.FirstOrDefault(f => f.IdPlayer == friendId);
                 if (friendVM != null)
                 {
-                    var newStatus = (PlayerStatus)newStatusId;
-
-                    bool isOnline = (newStatus != PlayerStatus.Offline);
-
-                    friendVM.IsOnline = isOnline;
-
-                    switch (newStatus)
-                    {
-                        case PlayerStatus.Online:
-                            friendVM.StatusText = Lang.StatusOnline;
-                            break;
-                        case PlayerStatus.InLobby:
-                            friendVM.StatusText = Lang.StatusInLobby; 
-                            break;
-                        case PlayerStatus.InGame:
-                            friendVM.StatusText = Lang.StatusInGame; 
-                            break;
-                        default:
-                            friendVM.StatusText = Lang.StatusOffline;
-                            break;
-                    }
+                    friendVM.CurrentStatus = (PlayerStatus)newStatusId;
                 }
             });
         }
@@ -110,6 +90,13 @@ namespace ConquiánCliente.ViewModel.Lobby
         {
             if (parameter is FriendInviteItemViewModel friendVM)
             {
+
+                if (friendVM.CurrentStatus == PlayerStatus.InGame)
+                {
+                    MessageBox.Show(Lang.ErrorPlayerInGame, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+
                 try
                 {
                     await InvitationClientManager.SendInvitationAsync(
@@ -156,6 +143,7 @@ namespace ConquiánCliente.ViewModel.Lobby
     {
         private readonly PlayerDto friend;
         public PlayerDto PlayerDto => friend;
+        private PlayerStatus currentStatus;
         private string statusText;
         private bool isOnline;
         public int Level => friend.idLevel;
@@ -164,21 +152,20 @@ namespace ConquiánCliente.ViewModel.Lobby
         {
             this.friend = friend;
 
-            this.IsOnline = friend.Status != PlayerStatus.Offline;
+            this.CurrentStatus = friend.Status;
+        }
 
-            if (friend.Status == PlayerStatus.InLobby)
+        public PlayerStatus CurrentStatus
+        {
+            get => currentStatus;
+            set
             {
-                this.StatusText = Lang.StatusInLobby;
-            }
-            else if (friend.Status == PlayerStatus.InGame)
-            {
-                this.StatusText = Lang.StatusInGame;
-            }
-            else
-            {
-                this.StatusText = this.IsOnline ? Lang.StatusOnline : Lang.StatusOffline;
+                currentStatus = value;
+                OnPropertyChanged(nameof(CurrentStatus));
+                UpdateVisuals();
             }
         }
+
         public int IdPlayer => friend.idPlayer;
         public string Nickname => friend.nickname;
         public string ProfileImagePath => friend.pathPhoto;
@@ -195,5 +182,23 @@ namespace ConquiánCliente.ViewModel.Lobby
         }
 
         public Brush StatusColor => IsOnline ? Brushes.Green : Brushes.Gray;
+
+        private void UpdateVisuals()
+        {
+            this.IsOnline = (this.CurrentStatus != PlayerStatus.Offline);
+
+            if (this.CurrentStatus == PlayerStatus.InLobby)
+            {
+                this.StatusText = Lang.StatusInLobby;
+            }
+            else if (this.CurrentStatus == PlayerStatus.InGame)
+            {
+                this.StatusText = Lang.StatusInGame;
+            }
+            else
+            {
+                this.StatusText = this.IsOnline ? Lang.StatusOnline : Lang.StatusOffline;
+            }
+        }
     }
 }

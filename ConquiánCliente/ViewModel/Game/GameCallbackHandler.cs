@@ -1,4 +1,4 @@
-﻿using ConquiánCliente.ServiceGame; 
+﻿using ConquiánCliente.ServiceGame;
 using System;
 using System.ServiceModel;
 

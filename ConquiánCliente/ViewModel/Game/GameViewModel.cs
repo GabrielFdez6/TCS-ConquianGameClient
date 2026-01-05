@@ -1,6 +1,6 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceGame;
-using ConquiánCliente.Utilities.Messages; 
+using ConquiánCliente.Utilities.Messages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,8 +24,8 @@ namespace ConquiánCliente.ViewModel.Game
         private DispatcherTimer activityTimer;
         private DateTime lastActivityTime;
         private bool isWarningShown;
-        private const int INACTIVITY_LIMIT_SECONDS = 60; 
-        private const int GRACE_PERIOD_SECONDS = 60;     
+        private const int INACTIVITY_LIMIT_SECONDS = 60;
+        private const int GRACE_PERIOD_SECONDS = 60;
 
         private const int RANK_BEFORE_SKIP = 7;
         private const int RANK_AFTER_SKIP = 10;
@@ -34,6 +34,7 @@ namespace ConquiánCliente.ViewModel.Game
         private GameClient client;
         private bool isGameEnded = false;
         private readonly IMessageResolver messageResolver;
+        private bool isNavigatingAway = false;
 
         private bool isAFKWarningVisible;
         public bool IsAFKWarningVisible
@@ -116,7 +117,7 @@ namespace ConquiánCliente.ViewModel.Game
         public GameViewModel(string roomCode)
         {
             this.roomCode = roomCode;
-            this.messageResolver = new ResourceMessageResolver(); 
+            this.messageResolver = new ResourceMessageResolver();
 
             PlayerHand = new ObservableCollection<CardViewModel>();
             OpponentFaceDownCards = new ObservableCollection<object>();
@@ -142,6 +143,13 @@ namespace ConquiánCliente.ViewModel.Game
 
         public void LeaveGame()
         {
+            if (isNavigatingAway)
+            {
+                return;
+            }
+
+            isNavigatingAway = true;
+
             try
             {
                 if (client != null && CurrentPlayer != null)
@@ -157,7 +165,7 @@ namespace ConquiánCliente.ViewModel.Game
 
         public async Task PassTurnAsync()
         {
-            StopTurnTimer(); 
+            StopTurnTimer();
 
             if (client == null || !IsMyTurn)
             {
@@ -285,21 +293,41 @@ namespace ConquiánCliente.ViewModel.Game
                 });
             };
 
-            callbackHandler.OnGameEnded += (result) =>
+            callbackHandler.OnGameEnded += (results) =>
             {
-                Application.Current.Dispatcher.Invoke(() =>
+                Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    isGameEnded = true;
-                    ShowGameResults(result);
+                    if (!PlayerSession.IsLoggedIn)
+                    {
+                        return;
+                    }
+
+                    if (isNavigatingAway)
+                    {
+                        return;
+                    }
+
+                    StopTurnTimer();
                 });
             };
 
             callbackHandler.OnOpponentLeftEvent += () =>
             {
-                Application.Current.Dispatcher.Invoke(() =>
+                Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    StopTurnTimer();
+                    if (!PlayerSession.IsLoggedIn)
+                    {
+                        return;
+                    }
 
+                    if (isNavigatingAway)
+                    {
+                        return;
+                    }
+
+                    isNavigatingAway = true;
+
+                    StopTurnTimer();
                     MessageBox.Show(Lang.GameOpponentLeft, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
 
                     NavigateToMainMenu();
@@ -308,9 +336,27 @@ namespace ConquiánCliente.ViewModel.Game
 
             callbackHandler.OnGameEndedByAFKEvent += (reasonKey) =>
             {
-                Application.Current.Dispatcher.Invoke(() =>
+                Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    OnGameEndedByAFK(reasonKey);
+                    if (!PlayerSession.IsLoggedIn)
+                    {
+                        return;
+                    }
+
+                    if (isNavigatingAway)
+                    {
+                        return;
+                    }
+
+                    isNavigatingAway = true;
+
+                    activityTimer.Stop();
+                    IsAFKWarningVisible = false;
+
+                    string message = Lang.ResourceManager.GetString(reasonKey);
+                    MessageBox.Show(message, Lang.TitleAuthenticationError, MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    NavigateToMainMenu();
                 });
             };
 
@@ -319,22 +365,38 @@ namespace ConquiánCliente.ViewModel.Game
 
         private void NavigateToMainMenu()
         {
-            var mainMenu = new ConquiánCliente.View.MainMenu.MainMenu();
-            mainMenu.Show();
-
-            foreach (Window win in Application.Current.Windows)
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                if (win.DataContext == this)
+                var existingMenu = Application.Current.Windows.OfType<ConquiánCliente.View.MainMenu.MainMenu>().FirstOrDefault();
+
+                if (existingMenu != null)
                 {
-                    win.Close();
-                    break;
+                    existingMenu.Activate();
+                    if (existingMenu.WindowState == WindowState.Minimized)
+                    {
+                        existingMenu.WindowState = WindowState.Normal;
+                    }
                 }
-            }
+                else
+                {
+                    var mainMenu = new ConquiánCliente.View.MainMenu.MainMenu();
+                    mainMenu.Show();
+                }
+
+                foreach (Window win in Application.Current.Windows)
+                {
+                    if (win.DataContext == this)
+                    {
+                        win.Close();
+                        break;
+                    }
+                }
+            });
         }
 
         private void ShowGameResults(GameResultDto result)
         {
-            StopTurnTimer(); 
+            StopTurnTimer();
 
             int myPlayerId = CurrentPlayer.idPlayer;
 

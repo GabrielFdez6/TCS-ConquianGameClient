@@ -181,6 +181,7 @@ namespace ConquiánCliente.ViewModel
         }
         private void NavigateToLogin()
         {
+            PlayerSession.EndSession();
             var loginWindow = new LogIn();
             loginWindow.Show();
 

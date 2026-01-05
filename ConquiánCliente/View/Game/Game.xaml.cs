@@ -65,6 +65,12 @@ namespace ConquiánCliente.View.Game
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
+
+            if (viewModel != null)
+            {
+                viewModel.LeaveGame();
+            }
+
             AudioManager.Instance.PlayMenuMusic();
         }
 
@@ -190,7 +196,7 @@ namespace ConquiánCliente.View.Game
 
         private void StockPileDragEnter(object sender, DragEventArgs e)
         {
-            if (viewModel != null && viewModel.IsMyTurn && viewModel.CanDiscard && !viewModel.HasJustDrawnFromDeck 
+            if (viewModel != null && viewModel.IsMyTurn && viewModel.CanDiscard && !viewModel.HasJustDrawnFromDeck
                 && e.Data.GetDataPresent(typeof(CardViewModel)))
             {
                 e.Effects = DragDropEffects.Move;
@@ -204,7 +210,7 @@ namespace ConquiánCliente.View.Game
 
         private async void StockPileDrop(object sender, DragEventArgs e)
         {
-           if (viewModel == null || !viewModel.IsMyTurn || !viewModel.CanDiscard || viewModel.HasJustDrawnFromDeck)
+            if (viewModel == null || !viewModel.IsMyTurn || !viewModel.CanDiscard || viewModel.HasJustDrawnFromDeck)
             {
                 return;
             }
