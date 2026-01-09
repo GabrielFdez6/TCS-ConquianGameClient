@@ -309,6 +309,7 @@ namespace ConquiánCliente.ViewModel.Game
                         return;
                     }
 
+                    isGameEnded = true;
                     StopTurnTimer();
                     ShowGameResults(results);
                 });
