@@ -135,7 +135,7 @@
                             FontWeight="Bold"
                             Margin="0,0,0,20"
                             Command="{Binding ReturnToMainMenuCommand}">
-                        <TextBlock Text="{x:Static language:Lang.GameBackToMainMenu}"
+                        <TextBlock Text="{Binding ReturnButtonText}"
                                    FontSize="24" 
                                    FontWeight="Bold"
                                    VerticalAlignment="Center"

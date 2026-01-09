@@ -1,20 +1,19 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceLobby;
-using ConquiánCliente.View.Lobby;
 using ConquiánCliente.ViewModel.Lobby;
 using System;
 using System.ServiceModel;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using ConquiánCliente.Utilities.Messages; 
+using ConquiánCliente.Utilities.Messages;
 
 namespace ConquiánCliente.ViewModel.MainMenu
 {
     public class CreateOrJoinViewModel : ViewModelBase
     {
         private string roomCode;
-        private readonly IMessageResolver messageResolver; 
+        private bool isLoading; 
+        private readonly IMessageResolver messageResolver;
 
         public string RoomCode
         {
@@ -33,17 +32,28 @@ namespace ConquiánCliente.ViewModel.MainMenu
 
         public CreateOrJoinViewModel()
         {
-            this.messageResolver = new ResourceMessageResolver(); 
+            this.messageResolver = new ResourceMessageResolver();
+            isLoading = false;
 
-            CreateRoomCommand = new RelayCommand(async (p) => await ExecuteCreateRoom(p));
-            JoinRoomCommand = new RelayCommand(async (p) => await ExecuteJoinRoom(p));
+            CreateRoomCommand = new RelayCommand(ExecuteCreateRoom, CanExecuteSubmit);
+            JoinRoomCommand = new RelayCommand(ExecuteJoinRoom, CanExecuteSubmit);
             CloseCommand = new RelayCommand(ExecuteClose);
         }
 
-        private async Task ExecuteCreateRoom(object parameter)
+        private bool CanExecuteSubmit(object parameter)
         {
+            return !isLoading;
+        }
+
+        private async void ExecuteCreateRoom(object parameter)
+        {
+            if (isLoading) return;
+
             if (parameter is Window window)
             {
+                isLoading = true; 
+                CommandManager.InvalidateRequerySuggested();
+
                 var client = new LobbyClient(new InstanceContext(LobbyCallbackHandler.Instance));
                 try
                 {
@@ -78,11 +88,14 @@ namespace ConquiánCliente.ViewModel.MainMenu
                 {
                     if (client.State == CommunicationState.Opened) client.Close();
                     else client.Abort();
+
+                    isLoading = false;
+                    CommandManager.InvalidateRequerySuggested();
                 }
             }
         }
 
-        private async Task ExecuteJoinRoom(object parameter)
+        private async void ExecuteJoinRoom(object parameter)
         {
             if (string.IsNullOrWhiteSpace(RoomCode))
             {
@@ -90,8 +103,13 @@ namespace ConquiánCliente.ViewModel.MainMenu
                 return;
             }
 
+            if (isLoading) return;
+
             if (parameter is Window window)
             {
+                isLoading = true; 
+                CommandManager.InvalidateRequerySuggested();
+
                 var context = new InstanceContext(LobbyCallbackHandler.Instance);
                 var client = new LobbyClient(context);
                 try
@@ -124,6 +142,9 @@ namespace ConquiánCliente.ViewModel.MainMenu
                 {
                     if (client.State == CommunicationState.Opened) client.Close();
                     else client.Abort();
+
+                    isLoading = false;
+                    CommandManager.InvalidateRequerySuggested();
                 }
             }
         }

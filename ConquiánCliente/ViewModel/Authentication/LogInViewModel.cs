@@ -17,7 +17,11 @@ namespace ConquiánCliente.ViewModel.Authentication
         private string email;
         private int selectedLanguageIndex;
         private bool isLoggingIn;
+        private bool isLoading; 
         private readonly IMessageResolver messageResolver;
+
+        private const string SPANISH_LANGUAGE_CODE = "es-MX";
+        private const string ENGLISH_LANGUAGE_CODE = "en-US";
 
         public string Email
         {
@@ -45,16 +49,23 @@ namespace ConquiánCliente.ViewModel.Authentication
         {
             this.messageResolver = messageResolver;
             isLoggingIn = false;
+            isLoading = false;
+
             LoginCommand = new RelayCommand(ExecuteLogin, CanExecuteLogin);
 
-            NavigateToSignUpCommand = new RelayCommand(ExecuteNavigateToSignUp);
-            NavigateToForgotPasswordCommand = new RelayCommand(ExecuteNavigateToForgotPassword);
-            NavigateToGuestLogInCommand = new RelayCommand(ExecuteNavigateToGuestLogIn);
+            NavigateToSignUpCommand = new RelayCommand(ExecuteNavigateToSignUp, CanExecuteNavigation);
+            NavigateToForgotPasswordCommand = new RelayCommand(ExecuteNavigateToForgotPassword, CanExecuteNavigation);
+            NavigateToGuestLogInCommand = new RelayCommand(ExecuteNavigateToGuestLogIn, CanExecuteNavigation);
         }
 
         private bool CanExecuteLogin(object parameter)
         {
             return !isLoggingIn;
+        }
+
+        private bool CanExecuteNavigation(object parameter)
+        {
+            return !isLoading && !isLoggingIn;
         }
         private async void ExecuteLogin(object parameter)
         {
@@ -130,22 +141,42 @@ namespace ConquiánCliente.ViewModel.Authentication
             }
         }
 
-        private static void ExecuteNavigateToSignUp(object parameter)
+        private void ExecuteNavigateToSignUp(object parameter)
         {
+            if (isLoading)
+            {
+                return;
+            }
+
+            isLoading = true;
+            CommandManager.InvalidateRequerySuggested(); 
+
             var signUpWindow = new SignUp();
             signUpWindow.Show();
             (parameter as Window)?.Close();
+
+
         }
 
-        private static void ExecuteNavigateToForgotPassword(object parameter)
+        private void ExecuteNavigateToForgotPassword(object parameter)
         {
+            if (isLoading) return;
+
+            isLoading = true;
+            CommandManager.InvalidateRequerySuggested();
+
             var requestRecoveryWindow = new PasswordRecoveryMainFrame();
             requestRecoveryWindow.Show();
             (parameter as Window)?.Close();
         }
 
-        private static void ExecuteNavigateToGuestLogIn(object parameter)
+        private void ExecuteNavigateToGuestLogIn(object parameter)
         {
+            if (isLoading) return;
+
+            isLoading = true;
+            CommandManager.InvalidateRequerySuggested();
+
             var guestLogInWindow = new GuestLogIn();
             guestLogInWindow.Show();
             (parameter as Window)?.Close();
@@ -155,11 +186,11 @@ namespace ConquiánCliente.ViewModel.Authentication
         {
             if (SelectedLanguageIndex == 1)
             {
-                Properties.Settings.Default.languageCode = "es-MX";
+                Properties.Settings.Default.languageCode = SPANISH_LANGUAGE_CODE;
             }
             else if (SelectedLanguageIndex == 2)
             {
-                Properties.Settings.Default.languageCode = "en-US";
+                Properties.Settings.Default.languageCode = ENGLISH_LANGUAGE_CODE;
             }
             Properties.Settings.Default.Save();
         }

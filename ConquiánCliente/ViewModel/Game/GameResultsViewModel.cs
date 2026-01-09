@@ -114,9 +114,26 @@ namespace ConquiánCliente.ViewModel.Game
 
         private void ReturnToMainMenu(object obj)
         {
-            var mainMenu = new ConquiánCliente.View.MainMenu.MainMenu();
-            mainMenu.Show();
+            if (ConquiánCliente.ViewModel.PlayerSession.IsGuest)
+            {
+                ConquiánCliente.ViewModel.PlayerSession.EndSession();
+                var loginWindow = new ConquiánCliente.LogIn();
+                loginWindow.Show();
+            }
+            else
+            {
+                var mainMenu = new ConquiánCliente.View.MainMenu.MainMenu();
+                mainMenu.Show();
+            }
             CloseWindow(obj);
+        }
+
+        public string ReturnButtonText
+        {
+            get
+            {
+                return ConquiánCliente.ViewModel.PlayerSession.IsGuest ? Lang.GameExit : Lang.GameBackToMainMenu;
+            }
         }
 
         private void CloseWindow(object obj)

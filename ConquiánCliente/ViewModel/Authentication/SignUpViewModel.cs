@@ -18,8 +18,11 @@ namespace ConquiánCliente.ViewModel.Authentication
         private string lastName;
         private string nickname;
         private string enteredVerificationCode;
+        private bool isLoading; 
         private readonly PlayerDto playerInProgress;
         private readonly IMessageResolver messageResolver;
+
+        private const string DEFAULT_PATH_PHOTO = "/Resources/imageProfile/default.JPG";
 
         public bool IsVerificationSuccessful { get; set; } = false;
 
@@ -59,23 +62,42 @@ namespace ConquiánCliente.ViewModel.Authentication
         public SignUpViewModel()
         {
             playerInProgress = new PlayerDto();
-            this.messageResolver = new ResourceMessageResolver(); 
+            this.messageResolver = new ResourceMessageResolver();
+            isLoading = false; 
 
             SendVerificationCodeCommand = new RelayCommand(ExecuteSendVerificationCode, CanExecuteSendVerificationCode);
-            NavigateToLoginCommand = new RelayCommand(ExecuteNavigateToLogin);
+            NavigateToLoginCommand = new RelayCommand(ExecuteNavigateToLogin, CanExecuteNavigation);
 
             VerifyCodeCommand = new RelayCommand(ExecuteVerifyCode, CanExecuteVerifyCode);
-            NavigateToSignUpCommand = new RelayCommand(ExecuteNavigateToSignUp);
+            NavigateToSignUpCommand = new RelayCommand(ExecuteNavigateToSignUp, CanExecuteNavigation);
 
             RegisterPlayerCommand = new RelayCommand(ExecuteRegisterPlayer, CanExecuteRegisterPlayer);
         }
 
-        private static bool CanExecuteSendVerificationCode(object parameter) => true;
-        private static bool CanExecuteVerifyCode(object parameter) => true;
-        private static bool CanExecuteRegisterPlayer(object parameter) => true;
+        private bool CanExecuteNavigation(object parameter)
+        {
+            return !isLoading;
+        }
+
+        private bool CanExecuteSendVerificationCode(object parameter)
+        {
+            return !isLoading;
+        }
+
+        private bool CanExecuteVerifyCode(object parameter)
+        {
+            return !isLoading;
+        }
+
+        private bool CanExecuteRegisterPlayer(object parameter)
+        {
+            return !isLoading;
+        }
 
         private async void ExecuteSendVerificationCode(object parameter)
         {
+            if (isLoading) return; 
+
             var passwordBox = parameter as PasswordBox;
             if (passwordBox == null) return;
 
@@ -109,6 +131,9 @@ namespace ConquiánCliente.ViewModel.Authentication
 
             try
             {
+                isLoading = true;
+                CommandManager.InvalidateRequerySuggested();
+
                 var client = new SignUpClient();
 
                 string verificationCode = await client.SendVerificationCodeAsync(Email);
@@ -142,6 +167,11 @@ namespace ConquiánCliente.ViewModel.Authentication
             catch (System.Exception ex)
             {
                 MessageBox.Show(string.Format(Lang.ErrorGeneric, ex.Message), Lang.TitleError);
+            }
+            finally
+            {
+                isLoading = false;
+                CommandManager.InvalidateRequerySuggested();
             }
         }
 
@@ -207,7 +237,7 @@ namespace ConquiánCliente.ViewModel.Authentication
             playerInProgress.name = Name.Trim();
             playerInProgress.lastName = LastName.Trim();
             playerInProgress.nickname = Nickname.Trim();
-            playerInProgress.pathPhoto = "/Resources/imageProfile/default.JPG";
+            playerInProgress.pathPhoto = DEFAULT_PATH_PHOTO;
             playerInProgress.Status = PlayerStatus.Offline;
 
             try
@@ -267,8 +297,12 @@ namespace ConquiánCliente.ViewModel.Authentication
                 MessageBox.Show(string.Format(Lang.ErrorConnectingToServer, ex.Message), Lang.TitleConnectionError);
             }
         }
-        private static void ExecuteNavigateToLogin(object parameter)
+        private void ExecuteNavigateToLogin(object parameter)
         {
+            if (isLoading) return;
+
+            isLoading = true;
+
             var loginWindow = new LogIn();
             loginWindow.Show();
             (parameter as Window)?.Close();
