@@ -1,6 +1,7 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceGame;
 using ConquiánCliente.Utilities;
+using ConquiánCliente.ViewModel;
 using ConquiánCliente.ViewModel.Game;
 using ConquiánCliente.ViewModel.Game.Behaviors;
 using System;
@@ -65,6 +66,11 @@ namespace ConquiánCliente.View.Game
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
+
+            if (PlayerSession.IsNetworkDown)
+            {
+                return;
+            }
 
             if (viewModel != null)
             {

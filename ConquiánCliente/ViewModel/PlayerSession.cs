@@ -9,6 +9,7 @@ namespace ConquiánCliente.ViewModel
 
         public static bool IsGuest { get; private set; }
 
+        public static bool IsNetworkDown { get; set; } = false;
         public static bool IsLoggedIn => CurrentPlayer != null;
 
         static PlayerSession()
@@ -19,7 +20,7 @@ namespace ConquiánCliente.ViewModel
         public static void StartSession(PlayerLogin player)
         {
             CurrentPlayer = player;
-            IsGuest = false; 
+            IsGuest = false;
         }
 
         public static void StartGuestSession(ServiceLobby.PlayerDto guestPlayer)
@@ -28,9 +29,9 @@ namespace ConquiánCliente.ViewModel
 
             CurrentPlayer = new PlayerLogin
             {
-                idPlayer = guestPlayer.idPlayer, 
-                nickname = guestPlayer.nickname, 
-                pathPhoto = guestPlayer.pathPhoto 
+                idPlayer = guestPlayer.idPlayer,
+                nickname = guestPlayer.nickname,
+                pathPhoto = guestPlayer.pathPhoto
             };
 
             IsGuest = true;

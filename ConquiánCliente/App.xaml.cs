@@ -1,6 +1,8 @@
-﻿using ConquiánCliente.ServiceLogin;
+﻿using ConquianClient.Utilities;
+using ConquiánCliente.Properties.Langs;
+using ConquiánCliente.ServiceLogin;
 using ConquiánCliente.Utilities;
-using ConquiánCliente.View.Lobby; 
+using ConquiánCliente.View.Lobby;
 using ConquiánCliente.ViewModel;
 using ConquiánCliente.ViewModel.Lobby;
 using System;
@@ -15,12 +17,13 @@ namespace ConquiánCliente
 
     public partial class App : Application
     {
+        private NetworkConnectionMonitor _networkMonitor;
         public App()
         {
-            this.Exit += App_Exit;
+            this.Exit += AppExit;
         }
 
-        private static void App_Exit(object sender, ExitEventArgs e)
+        private static void AppExit(object sender, ExitEventArgs e)
         {
             if (PlayerSession.IsLoggedIn && PlayerSession.CurrentPlayer != null)
             {
@@ -49,6 +52,10 @@ namespace ConquiánCliente
         }
         protected override void OnStartup(StartupEventArgs e)
         {
+
+            _networkMonitor = new NetworkConnectionMonitor();
+            _networkMonitor.OnNetworkStatusLost += HandleNetworkLost;
+
             var settings = ConquiánCliente.Properties.Settings.Default;
 
             if (string.IsNullOrEmpty(settings.languageCode))
@@ -93,6 +100,43 @@ namespace ConquiánCliente
             }
             InvitationCallbackHandler.OnGlobalInvitationReceived += ShowInvitationPopup;
             base.OnStartup(e);
+        }
+
+        private void HandleNetworkLost()
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                if (!PlayerSession.IsLoggedIn)
+                {
+                    return;
+                }
+
+                PlayerSession.IsNetworkDown = true;
+
+                MessageBox.Show(Lang.ErrorLostConnection, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                PlayerSession.EndSession();
+
+                NavigateToLogin();
+            });
+        }
+
+        private void NavigateToLogin()
+        {
+            LogIn loginWindow = new LogIn();
+            loginWindow.Show();
+
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window != loginWindow)
+                {
+                    window.Close();
+                }
+            }
+
+            Application.Current.MainWindow = loginWindow;
+            PlayerSession.IsNetworkDown = false;
+
         }
 
         private void ShowInvitationPopup(string senderNickname, string roomCode)

@@ -173,6 +173,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    NavigateToLoginOrMainMenu(isConnectionLost: true);
                 });
 
                 NavigateToLoginOrMainMenu(isConnectionLost: true);
@@ -185,8 +186,9 @@ namespace ConquiánCliente.ViewModel.Lobby
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    NavigateToLoginOrMainMenu(isConnectionLost: true);
+
                 });
-                NavigateToLoginOrMainMenu(isConnectionLost: true);
             }
         }
 

@@ -122,6 +122,7 @@
     <Compile Include="Utilities\AudioManager.cs" />
     <Compile Include="Utilities\Messages\IMessageResolver.cs" />
     <Compile Include="Utilities\Messages\ResourceMessageResolver.cs" />
+    <Compile Include="Utilities\NetworkConnectionMonitor.cs" />
     <Compile Include="ViewModel\Authentication\LogInViewModel.cs" />
     <Compile Include="ViewModel\Authentication\GuestLogInViewModel.cs" />
     <Compile Include="ViewModel\Authentication\PasswordRecovery\PasswordRecoveryViewModel.cs" />

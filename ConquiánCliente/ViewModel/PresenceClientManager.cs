@@ -14,9 +14,6 @@ namespace ConquiánCliente.ViewModel
         private static PresenceClientManager instance;
         private PresenceClient client;
 
-        private int currentUserId;
-        private bool isConnected;
-
         public PresenceClient Client
         {
             get

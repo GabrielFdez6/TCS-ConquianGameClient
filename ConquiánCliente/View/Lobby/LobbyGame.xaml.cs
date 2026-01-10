@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using ConquiánCliente.ViewModel;
 using ConquiánCliente.ViewModel.Lobby;
 
 namespace ConquiánCliente.View.Lobby
@@ -17,6 +18,12 @@ namespace ConquiánCliente.View.Lobby
 
         private void LobbyGame_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+
+            if (PlayerSession.IsNetworkDown)
+            {
+                return;
+            }
+
             if (DataContext is LobbyGameViewModel vm)
             {
                 if (vm.IsNavigatingAway) return;
