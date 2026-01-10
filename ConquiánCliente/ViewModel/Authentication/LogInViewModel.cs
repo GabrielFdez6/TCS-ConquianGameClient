@@ -108,7 +108,6 @@ namespace ConquiánCliente.ViewModel.Authentication
                 if (authenticatedPlayer.idPlayer > 0)
                 {
                     PlayerSession.StartSession(authenticatedPlayer);
-                    PresenceClientManager.Instance.StartHeartbeat(authenticatedPlayer.idPlayer);
                     var mainMenu = new View.MainMenu.MainMenu();
                     mainMenu.Show();
                     Window.GetWindow(passwordBox)?.Close();

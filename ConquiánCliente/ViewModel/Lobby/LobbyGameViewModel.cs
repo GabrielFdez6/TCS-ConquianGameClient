@@ -167,7 +167,6 @@ namespace ConquiánCliente.ViewModel.Lobby
             {
                 IsNavigatingAway = true;
 
-                PresenceClientManager.Instance.StopHeartbeat();
 
                 InvitationClientManager.Disconnect(PlayerSession.CurrentPlayer.idPlayer);
 
@@ -181,7 +180,6 @@ namespace ConquiánCliente.ViewModel.Lobby
             catch (Exception)
             {
                 IsNavigatingAway = true;
-                PresenceClientManager.Instance.StopHeartbeat();
                 InvitationClientManager.Disconnect(PlayerSession.CurrentPlayer.idPlayer);
 
                 Application.Current.Dispatcher.Invoke(() =>
@@ -422,7 +420,6 @@ namespace ConquiánCliente.ViewModel.Lobby
         {
             if (isConnectionLost)
             {
-                PresenceClientManager.Instance.StopHeartbeat();
                 if (PlayerSession.CurrentPlayer != null)
                     InvitationClientManager.Disconnect(PlayerSession.CurrentPlayer.idPlayer);
             }
