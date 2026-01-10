@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Threading;
 using System.Linq;
 using ConquiánCliente.ViewModel.Lobby;
+using ConquiánCliente.Properties.Langs;
 
 namespace ConquiánCliente.ViewModel
 {
@@ -50,6 +51,9 @@ namespace ConquiánCliente.ViewModel
             {
                 try
                 {
+                    client.InnerChannel.Closed -= OnConnectionLost;
+                    client.InnerChannel.Faulted -= OnConnectionLost;
+
                     if (client.State == CommunicationState.Faulted)
                         client.Abort();
                     else
@@ -63,7 +67,41 @@ namespace ConquiánCliente.ViewModel
 
             var context = new InstanceContext(new PresenceCallbackHandler());
             client = new PresenceClient(context);
+
+            client.InnerChannel.Closed += OnConnectionLost;
+            client.InnerChannel.Faulted += OnConnectionLost;
         }
 
+        private void OnConnectionLost(object sender, EventArgs e)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                if (PlayerSession.IsNetworkDown)
+                {
+                    return;
+                }
+
+                PlayerSession.IsNetworkDown = true;
+
+                MessageBox.Show(Lang.ErrorLostConnection, Lang.TitleError,
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
+
+                LogIn loginWindow = new LogIn();
+                loginWindow.Show();
+
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window != loginWindow)
+                    {
+                        window.Close();
+                    }
+                }
+
+                Application.Current.MainWindow = loginWindow;
+                PlayerSession.EndSession();
+                PlayerSession.IsNetworkDown = false;
+            });
+        }
     }
 }
