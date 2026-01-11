@@ -3,8 +3,6 @@ using ConquiánCliente.ServiceLogin;
 using ConquiánCliente.View;
 using ConquiánCliente.View.Lobby;
 using ConquiánCliente.View.MainMenu;
-using ConquiánCliente.ViewModel.Lobby;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -33,8 +31,14 @@ namespace ConquiánCliente.ViewModel.MainMenu
             PlayCommand = new RelayCommand(ExecutePlay, CanExecuteNavigation);
             OpenSettingsCommand = new RelayCommand(ExecuteOpenSettings, CanExecuteNavigation);
 
-            InvitationClientManager.Connect(PlayerSession.CurrentPlayer.idPlayer);
-            PresenceClientManager.Instance.Client.Subscribe(PlayerSession.CurrentPlayer.idPlayer);
+            if (PlayerSession.CurrentPlayer != null)
+            {
+                InvitationClientManager.Connect(PlayerSession.CurrentPlayer.idPlayer);
+                if (PresenceClientManager.Instance.Client != null)
+                {
+                    PresenceClientManager.Instance.Client.Subscribe(PlayerSession.CurrentPlayer.idPlayer);
+                }
+            }
         }
 
         private bool CanExecuteNavigation(object parameter)

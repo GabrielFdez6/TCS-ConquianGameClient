@@ -1,10 +1,11 @@
-﻿using ConquiánCliente.Utilities;
-using ConquiánCliente.Properties.Langs;
+﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceLogin;
+using ConquiánCliente.Utilities;
 using ConquiánCliente.View.Lobby;
 using ConquiánCliente.ViewModel;
 using ConquiánCliente.ViewModel.Lobby;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.ServiceModel;
@@ -134,11 +135,12 @@ namespace ConquiánCliente
 
         private void HandleNetworkRestored()
         {
-            this.Dispatcher.Invoke(() =>
+            this.Dispatcher.Invoke(async () =>
             {
                 if (reconnectionTimer.IsEnabled)
                 {
                     reconnectionTimer.Stop();
+                    await System.Threading.Tasks.Task.Delay(5000);
                     PlayerSession.IsNetworkDown = false;
 
                     if (reconnectingWindow != null)
@@ -181,12 +183,19 @@ namespace ConquiánCliente
             LogIn loginWindow = new LogIn();
             loginWindow.Show();
 
+            List<Window> windowsToClose = new List<Window>();
+
             foreach (Window window in Application.Current.Windows)
             {
                 if (window != loginWindow)
                 {
-                    window.Close();
+                    windowsToClose.Add(window);
                 }
+            }
+
+            foreach (Window window in windowsToClose)
+            {
+                window.Close();
             }
 
             Application.Current.MainWindow = loginWindow;

@@ -31,6 +31,14 @@ namespace ConquiánCliente.ViewModel.Lobby
         private bool isHostBool;
         private readonly IMessageResolver messageResolver;
         private int myPlayerId;
+        private int recentMessageCount = 0;
+        private DateTime lastMessageTime = DateTime.MinValue;
+        private bool isChatCooldownActive = false;
+        private const int SPAM_THRESHOLD = 5;
+        private const int SPAM_TIME_WINDOW = 2;
+        private const int COOLDOWN_DURATION = 5;
+        private string cooldownText;
+        private bool isCooldownVisible;
 
         public bool IsHost
         {
@@ -40,15 +48,30 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         public ObservableCollection<PlayerLobbyItemViewModel> Players { get; }
         public ObservableCollection<MessageDto> ChatMessages { get; }
+
+        public string CooldownText
+        {
+            get { return cooldownText; }
+            set { cooldownText = value; OnPropertyChanged(nameof(CooldownText)); }
+        }
+
+        public bool IsCooldownVisible
+        {
+            get { return isCooldownVisible; }
+            set { isCooldownVisible = value; OnPropertyChanged(nameof(IsCooldownVisible)); }
+        }
+
         public string RoomCode
         {
             get { return roomCode; }
             set { roomCode = value; OnPropertyChanged(nameof(RoomCode)); }
         }
+
         public string SelectedGameType
         {
             get { return gameModes.ContainsKey(currentGameModeId) ? gameModes[currentGameModeId] : ""; }
         }
+
         public string PlayerCountText
         {
             get { return playerCountText; }
@@ -248,6 +271,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 MessageBox.Show(Lang.InfoYouWereKicked, Lang.Lobby, MessageBoxButton.OK, MessageBoxImage.Information);
             });
         }
+
         private void ExecuteShutdownApplication(object obj)
         {
             if (IsNavigatingAway) return;
@@ -255,6 +279,7 @@ namespace ConquiánCliente.ViewModel.Lobby
             CloseClientConnection(notifyServer: true);
             Application.Current.Shutdown();
         }
+
         private void HandlePlayerJoined(PlayerDto newPlayer)
         {
             Application.Current.Dispatcher.Invoke(() =>
@@ -267,6 +292,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 }
             });
         }
+
         private void HandlePlayerLeft(int idPlayer)
         {
             Application.Current.Dispatcher.Invoke(() =>
@@ -280,6 +306,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 }
             });
         }
+
         private void HandleHostLeft()
         {
             if (IsNavigatingAway) return;
@@ -291,6 +318,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 NavigateToLoginOrMainMenu();
             });
         }
+
         private void HandleMessageReceived(MessageDto message)
         {
             Application.Current.Dispatcher.Invoke(() =>
@@ -298,21 +326,25 @@ namespace ConquiánCliente.ViewModel.Lobby
                 ChatMessages.Add(message);
             });
         }
+
         private void HandleGamemodeChanged(int newGamemodeId)
         {
             Application.Current.Dispatcher.Invoke(() => { UpdateSelectedGamemode(newGamemodeId); });
         }
+
         private void HandleGameStarting()
         {
             if (IsHost) return;
             NavigateToGame();
         }
+
         private void UpdatePlayerList(PlayerDto[] players)
         {
             Players.Clear();
             foreach (var playerDto in players) Players.Add(CreatePlayerViewModel(playerDto));
             UpdatePlayerCount();
         }
+
         private void UpdateChat(MessageDto[] messages)
         {
             ChatMessages.Clear();
@@ -338,15 +370,33 @@ namespace ConquiánCliente.ViewModel.Lobby
             }
             return playerItem;
         }
+
         private void UpdatePlayerCount()
         {
             int maxPlayers = 2;
             PlayerCountText = $"{Players.Count}/{maxPlayers}";
         }
-        private bool CanExecuteSendMessage(object obj) => !string.IsNullOrWhiteSpace(CurrentMessage);
+
+        private bool CanExecuteSendMessage(object obj)
+        {
+            return !string.IsNullOrWhiteSpace(CurrentMessage) && !isChatCooldownActive;
+        }
 
         private void ExecuteSendMessage(object obj)
         {
+            var currentTimestamp = DateTime.UtcNow;
+
+            if ((currentTimestamp - lastMessageTime).TotalSeconds < SPAM_TIME_WINDOW)
+            {
+                recentMessageCount++;
+            }
+            else
+            {
+                recentMessageCount = 1;
+            }
+
+            lastMessageTime = currentTimestamp;
+
             var messageDto = new MessageDto
             {
                 Nickname = PlayerSession.CurrentPlayer.nickname,
@@ -367,6 +417,36 @@ namespace ConquiánCliente.ViewModel.Lobby
             });
 
             CurrentMessage = string.Empty;
+
+            if (recentMessageCount >= SPAM_THRESHOLD)
+            {
+                ActivateChatCooldown();
+            }
+        }
+
+        private void ActivateChatCooldown()
+        {
+            isChatCooldownActive = true;
+            recentMessageCount = 0;
+            IsCooldownVisible = true;
+
+            Application.Current.Dispatcher.Invoke(CommandManager.InvalidateRequerySuggested);
+
+            Task.Run(async () =>
+            {
+                for (int i = COOLDOWN_DURATION; i > 0; i--)
+                {
+                    CooldownText = string.Format(Lang.ChatCooldownWarning, i);
+
+                    await Task.Delay(1000);
+                }
+
+                isChatCooldownActive = false;
+                IsCooldownVisible = false;
+                CooldownText = string.Empty;
+
+                Application.Current.Dispatcher.Invoke(CommandManager.InvalidateRequerySuggested);
+            });
         }
 
         private void ExecuteGoBack(object parameter)

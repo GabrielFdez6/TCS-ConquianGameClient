@@ -208,31 +208,23 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Background="#66000000" Padding="5">
                     <ListBox ItemsSource="{Binding ChatMessages}" 
-         Background="Transparent" 
-         BorderThickness="0"
-         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-
+                             Background="Transparent" 
+                             BorderThickness="0"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock TextWrapping="Wrap" Margin="0,2">
-                
-                <Run Text="{Binding Nickname}" 
-                     FontWeight="Bold" 
-                     Foreground="#FFD700"/> 
-                
-                <Run Text=": " Foreground="White"/>
-                
-                <Run Text="{Binding Message}" 
-                     Foreground="White"/>
-
+                                    <Run Text="{Binding Nickname}" FontWeight="Bold" Foreground="#FFD700"/> 
+                                    <Run Text=": " Foreground="White"/>
+                                    <Run Text="{Binding Message}" Foreground="White"/>
                                 </TextBlock>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
-
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
                                 <Setter Property="Focusable" Value="False"/>
@@ -249,7 +241,22 @@
                     </ListBox>
                 </ScrollViewer>
 
-                <Border Grid.Row="1" CornerRadius="5" BorderThickness="1" 
+                <TextBlock Grid.Row="1"
+                           Text="{Binding CooldownText}"
+                           Visibility="{Binding IsCooldownVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           Foreground="#FF5252"
+                           FontWeight="Bold"
+                           FontSize="14"
+                           HorizontalAlignment="Center"
+                           Margin="0,2,0,2"
+                           TextWrapping="Wrap"
+                           TextAlignment="Center">
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="1" BlurRadius="2" Color="Black" Opacity="0.8"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+
+                <Border Grid.Row="2" CornerRadius="5" BorderThickness="1" 
                         BorderBrush="{StaticResource TextBoxBorderBrush}"
                         Background="Transparent" Margin="0,5,0,0">
                     <Border.Effect>

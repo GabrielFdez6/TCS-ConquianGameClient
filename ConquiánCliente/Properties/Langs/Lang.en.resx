@@ -781,4 +781,7 @@ If the card is not useful, use the 'To Pass' button.</value>
   <data name="TextPopUpReconecting" xml:space="preserve">
     <value>Attempting to reconnect... Please wait.</value>
   </data>
+  <data name="ChatCooldownWarning" xml:space="preserve">
+    <value>You are sending messages too quickly. Please wait {0} seconds...</value>
+  </data>
 </root>

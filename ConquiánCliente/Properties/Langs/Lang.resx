@@ -780,4 +780,7 @@ Si la carta no te sirve, usa el botón 'Pasar'.</value>
   <data name="TextPopUpReconecting" xml:space="preserve">
     <value>Intentando reconectar... Por favor espere.</value>
   </data>
+  <data name="ChatCooldownWarning" xml:space="preserve">
+    <value>Estás enviando mensajes muy rápido. Espera {0} segundos...</value>
+  </data>
 </root>

@@ -97,6 +97,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Estás enviando mensajes muy rápido. Espera {0} segundos....
+        /// </summary>
+        public static string ChatCooldownWarning {
+            get {
+                return ResourceManager.GetString("ChatCooldownWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a ¿Estás seguro que quieres expulsar a este jugador?.
         /// </summary>
         public static string ConfirmKickPlayer {
