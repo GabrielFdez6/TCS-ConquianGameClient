@@ -128,6 +128,20 @@ namespace ConquiánCliente
                     reconnectionTimer.Start();
 
                     reconnectingWindow = new ConquiánCliente.View.Utilities.ReconnectionWindow();
+
+                    if (Application.Current.MainWindow != null && Application.Current.MainWindow.IsVisible)
+                    {
+                        reconnectingWindow.Owner = Application.Current.MainWindow;
+                    }
+
+                    foreach (Window window in Application.Current.Windows)
+                    {
+                        if (window != reconnectingWindow)
+                        {
+                            window.IsEnabled = false;
+                        }
+                    }
+
                     reconnectingWindow.Show();
                 }
             });
@@ -148,6 +162,11 @@ namespace ConquiánCliente
                         reconnectingWindow.Close();
                         reconnectingWindow = null;
                     }
+
+                    foreach (Window window in Application.Current.Windows)
+                    {
+                        window.IsEnabled = true;
+                    }
                 }
             });
         }
@@ -162,6 +181,11 @@ namespace ConquiánCliente
                 {
                     reconnectingWindow.Close();
                     reconnectingWindow = null;
+                }
+
+                foreach (Window window in Application.Current.Windows)
+                {
+                    window.IsEnabled = true;
                 }
 
                 PerformLogoutAndNavigate();
