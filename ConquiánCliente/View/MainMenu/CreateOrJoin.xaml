@@ -9,6 +9,7 @@
         Title="CreateOrJoin" Height="400" Width="600"
         WindowStyle="None"
         ResizeMode="NoResize"
+        ShowInTaskbar="False"
         WindowStartupLocation="CenterOwner"
         AllowsTransparency="True"
         Background="Transparent">

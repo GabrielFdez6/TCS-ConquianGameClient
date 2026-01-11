@@ -1360,6 +1360,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Reconectando.
+        /// </summary>
+        public static string GlobalReconnecting {
+            get {
+                return ResourceManager.GetString("GlobalReconnecting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Registrarse.
         /// </summary>
         public static string GlobalSignUp {
@@ -1891,6 +1900,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Intentando reconectar... Por favor espere..
+        /// </summary>
+        public static string TextPopUpReconecting {
+            get {
+                return ResourceManager.GetString("TextPopUpReconecting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error de Autenticación.
         /// </summary>
         public static string TitleAuthenticationError {
@@ -1923,6 +1941,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string TitleConnectionError {
             get {
                 return ResourceManager.GetString("TitleConnectionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Conexión perdida..
+        /// </summary>
+        public static string TitleConnectionLost {
+            get {
+                return ResourceManager.GetString("TitleConnectionLost", resourceCulture);
             }
         }
         

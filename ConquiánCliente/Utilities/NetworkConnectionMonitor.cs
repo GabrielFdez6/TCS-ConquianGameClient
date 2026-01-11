@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Net.NetworkInformation;
 
-namespace ConquianClient.Utilities
+namespace ConquiánCliente.Utilities
 {
     public class NetworkConnectionMonitor
     {
         public event Action OnNetworkStatusLost;
+        public event Action OnNetworkStatusRestored;
 
         public NetworkConnectionMonitor()
         {
@@ -17,6 +18,10 @@ namespace ConquianClient.Utilities
             if (!e.IsAvailable)
             {
                 OnNetworkStatusLost?.Invoke();
+            }
+            else
+            {
+                OnNetworkStatusRestored?.Invoke();
             }
         }
 

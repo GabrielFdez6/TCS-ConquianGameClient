@@ -772,4 +772,13 @@ If the card is not useful, use the 'To Pass' button.</value>
   <data name="ErrorPlayerBanned" xml:space="preserve">
     <value>You have been expelled from the room and cannot re-enter.</value>
   </data>
+  <data name="GlobalReconnecting" xml:space="preserve">
+    <value>Reconnecting</value>
+  </data>
+  <data name="TitleConnectionLost" xml:space="preserve">
+    <value>Connection lost.</value>
+  </data>
+  <data name="TextPopUpReconecting" xml:space="preserve">
+    <value>Attempting to reconnect... Please wait.</value>
+  </data>
 </root>

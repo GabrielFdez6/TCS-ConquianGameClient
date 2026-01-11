@@ -771,4 +771,13 @@ Si la carta no te sirve, usa el botón 'Pasar'.</value>
   <data name="ErrorPlayerBanned" xml:space="preserve">
     <value>Has sido expulsado de la sala y no puedes volver a entrar.</value>
   </data>
+  <data name="GlobalReconnecting" xml:space="preserve">
+    <value>Reconectando</value>
+  </data>
+  <data name="TitleConnectionLost" xml:space="preserve">
+    <value>Conexión perdida.</value>
+  </data>
+  <data name="TextPopUpReconecting" xml:space="preserve">
+    <value>Intentando reconectar... Por favor espere.</value>
+  </data>
 </root>

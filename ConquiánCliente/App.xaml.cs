@@ -1,7 +1,6 @@
-﻿using ConquianClient.Utilities;
+﻿using ConquiánCliente.Utilities;
 using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceLogin;
-using ConquiánCliente.Utilities;
 using ConquiánCliente.View.Lobby;
 using ConquiánCliente.ViewModel;
 using ConquiánCliente.ViewModel.Lobby;
@@ -11,13 +10,18 @@ using System.Globalization;
 using System.ServiceModel;
 using System.Threading;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace ConquiánCliente
 {
-
     public partial class App : Application
     {
-        private NetworkConnectionMonitor _networkMonitor;
+        private const int RECONNECTION_TIMEOUT_SECONDS = 60;
+
+        private NetworkConnectionMonitor networkMonitor;
+        private DispatcherTimer reconnectionTimer;
+        private Window reconnectingWindow;
+
         public App()
         {
             this.Exit += AppExit;
@@ -53,8 +57,13 @@ namespace ConquiánCliente
         protected override void OnStartup(StartupEventArgs e)
         {
 
-            _networkMonitor = new NetworkConnectionMonitor();
-            _networkMonitor.OnNetworkStatusLost += HandleNetworkLost;
+            reconnectionTimer = new DispatcherTimer();
+            reconnectionTimer.Interval = TimeSpan.FromSeconds(RECONNECTION_TIMEOUT_SECONDS);
+            reconnectionTimer.Tick += OnReconnectionTimeout;
+
+            networkMonitor = new NetworkConnectionMonitor();
+            networkMonitor.OnNetworkStatusLost += HandleNetworkLost;
+            networkMonitor.OnNetworkStatusRestored += HandleNetworkRestored;
 
             var settings = ConquiánCliente.Properties.Settings.Default;
 
@@ -113,12 +122,58 @@ namespace ConquiánCliente
 
                 PlayerSession.IsNetworkDown = true;
 
-                MessageBox.Show(Lang.ErrorLostConnection, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                if (reconnectingWindow == null)
+                {
+                    reconnectionTimer.Start();
 
-                PlayerSession.EndSession();
-
-                NavigateToLogin();
+                    reconnectingWindow = new ConquiánCliente.View.Utilities.ReconnectionWindow();
+                    reconnectingWindow.Show();
+                }
             });
+        }
+
+        private void HandleNetworkRestored()
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                if (reconnectionTimer.IsEnabled)
+                {
+                    reconnectionTimer.Stop();
+                    PlayerSession.IsNetworkDown = false;
+
+                    if (reconnectingWindow != null)
+                    {
+                        reconnectingWindow.Close();
+                        reconnectingWindow = null;
+                    }
+                }
+            });
+        }
+
+        private void OnReconnectionTimeout(object sender, EventArgs e)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                reconnectionTimer.Stop();
+
+                if (reconnectingWindow != null)
+                {
+                    reconnectingWindow.Close();
+                    reconnectingWindow = null;
+                }
+
+                PerformLogoutAndNavigate();
+            });
+        }
+
+        private void PerformLogoutAndNavigate()
+        {
+            if (!PlayerSession.IsLoggedIn) return;
+
+            MessageBox.Show(Lang.ErrorLostConnection, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+
+            PlayerSession.EndSession();
+            NavigateToLogin();
         }
 
         private void NavigateToLogin()

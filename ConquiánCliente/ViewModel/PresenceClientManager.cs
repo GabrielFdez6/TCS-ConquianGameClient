@@ -81,6 +81,11 @@ namespace ConquiánCliente.ViewModel
                     return;
                 }
 
+                if (!PlayerSession.IsLoggedIn)
+                {
+                    return;
+                }
+
                 PlayerSession.IsNetworkDown = true;
 
                 MessageBox.Show(Lang.ErrorLostConnection, Lang.TitleError,
