@@ -192,7 +192,7 @@ namespace ConquiánCliente
             });
         }
 
-        private void PerformLogoutAndNavigate()
+        private static void PerformLogoutAndNavigate()
         {
             if (!PlayerSession.IsLoggedIn)
             {
@@ -204,7 +204,7 @@ namespace ConquiánCliente
             NavigateToLogin();
         }
 
-        private void NavigateToLogin()
+        private static void NavigateToLogin()
         {
             LogIn loginWindow = new LogIn();
             loginWindow.Show();
@@ -229,7 +229,7 @@ namespace ConquiánCliente
 
         }
 
-        private void ShowInvitationPopup(string senderNickname, string roomCode)
+        private static void ShowInvitationPopup(string senderNickname, string roomCode)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {

@@ -40,7 +40,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
             }
         }
 
-        private void InitializeServerConnections(int playerId)
+        private static void InitializeServerConnections(int playerId)
         {
             try
             {
@@ -91,13 +91,16 @@ namespace ConquiánCliente.ViewModel.MainMenu
             {
                 int playerId = PlayerSession.CurrentPlayer.idPlayer;
                 await Task.Run(async () =>
-                {
+                {   
                     var loginClient = new LoginClient();
                     try
                     {
                         await loginClient.SignOutPlayerAsync(playerId);
                     }
-                    catch (Exception) { }
+                    catch (Exception) 
+                    {
+                        // Exception is ignored because the local session must end regardless of the server response.
+                    }
 
                     try
                     {
@@ -106,13 +109,19 @@ namespace ConquiánCliente.ViewModel.MainMenu
                             await PresenceClientManager.Instance.Client.UnsubscribeAsync(playerId);
                         }
                     }
-                    catch (Exception) { }
+                    catch (Exception) 
+                    {
+                        // Exception is ignored to ensure the logout process completes even if presence unsubscription fails.
+                    }
 
                     try
                     {
                         InvitationClientManager.Disconnect(playerId);
                     }
-                    catch (Exception) { }
+                    catch (Exception) 
+                    {
+                        // Exception is ignored to prevent blocking the logout flow due to connection issues.
+                    }
                 });
             }
             catch (System.ServiceModel.EndpointNotFoundException)

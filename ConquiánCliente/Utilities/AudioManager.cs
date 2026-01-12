@@ -9,9 +9,9 @@ namespace ConquiánCliente.Utilities
         private static AudioManager instance;
         public static AudioManager Instance => instance ?? (instance = new AudioManager());
 
-        private MediaPlayer mediaPlayer;
-        private string menuMusicPath;
-        private string gameMusicPath;
+        private readonly MediaPlayer mediaPlayer;
+        private readonly string menuMusicPath;
+        private readonly string gameMusicPath;
         private bool isGameMusicPlaying = false;
 
         private AudioManager()

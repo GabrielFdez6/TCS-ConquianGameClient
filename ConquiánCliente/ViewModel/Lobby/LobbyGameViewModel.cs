@@ -132,99 +132,95 @@ namespace ConquiánCliente.ViewModel.Lobby
 
             try
             {
-                var callbackHandler = LobbyCallbackHandler.Instance;
-
-                callbackHandler.OnPlayerJoined += HandlePlayerJoined;
-                callbackHandler.OnPlayerLeft += HandlePlayerLeft;
-                callbackHandler.OnHostLeft += HandleHostLeft;
-                callbackHandler.OnMessageReceived += HandleMessageReceived;
-                callbackHandler.OnGamemodeChanged += HandleGamemodeChanged;
-                callbackHandler.OnGameStarting += HandleGameStarting;
-                callbackHandler.OnYouWereKicked += HandleYouWereKicked;
-
-                var context = new InstanceContext(callbackHandler);
-                client = new LobbyClient(context);
-
-                var lobbyState = await client.GetLobbyStateAsync(this.RoomCode);
-                if (lobbyState == null || string.IsNullOrEmpty(lobbyState.RoomCode))
-                {
-                    HandleHostLeft();
-                    return;
-                }
-
-                idHost = lobbyState.idHostPlayer;
-                this.IsHost = (PlayerSession.CurrentPlayer.idPlayer == idHost);
-                UpdatePlayerList(lobbyState.Players);
-                UpdateChat(lobbyState.ChatMessages);
-
-                if (lobbyState.idGamemode.HasValue)
-                {
-                    UpdateSelectedGamemode(lobbyState.idGamemode.Value);
-                }
-                else if (this.IsHost)
-                {
-                    await client.SelectGamemodeAsync(this.RoomCode, this.currentGameModeId);
-                }
-
-                if (!PlayerSession.IsGuest)
-                {
-                    await client.JoinAndSubscribeAsync(this.RoomCode, PlayerSession.CurrentPlayer.idPlayer);
-                }
+                SetupCallbacks();
+                await JoinLobbyAndSyncState();
             }
-            catch (FaultException<ServiceFaultDto> fault)
+            catch (Exception ex)
             {
-                IsNavigatingAway = true;
+                await HandleConnectionError(ex);
+            }
+        }
 
+        private void SetupCallbacks()
+        {
+            var callbackHandler = LobbyCallbackHandler.Instance;
+            callbackHandler.OnPlayerJoined += HandlePlayerJoined;
+            callbackHandler.OnPlayerLeft += HandlePlayerLeft;
+            callbackHandler.OnHostLeft += HandleHostLeft;
+            callbackHandler.OnMessageReceived += HandleMessageReceived;
+            callbackHandler.OnGamemodeChanged += HandleGamemodeChanged;
+            callbackHandler.OnGameStarting += HandleGameStarting;
+            callbackHandler.OnYouWereKicked += HandleYouWereKicked;
+
+            var context = new InstanceContext(callbackHandler);
+            client = new LobbyClient(context);
+        }
+
+        private async Task JoinLobbyAndSyncState()
+        {
+            var lobbyState = await client.GetLobbyStateAsync(this.RoomCode);
+            if (lobbyState == null || string.IsNullOrEmpty(lobbyState.RoomCode))
+            {
+                HandleHostLeft();
+                return;
+            }
+
+            idHost = lobbyState.idHostPlayer;
+            this.IsHost = (PlayerSession.CurrentPlayer.idPlayer == idHost);
+            UpdatePlayerList(lobbyState.Players);
+            UpdateChat(lobbyState.ChatMessages);
+
+            if (lobbyState.idGamemode.HasValue)
+            {
+                UpdateSelectedGamemode(lobbyState.idGamemode.Value);
+            }
+            else if (this.IsHost)
+            {
+                await client.SelectGamemodeAsync(this.RoomCode, this.currentGameModeId);
+            }
+
+            if (!PlayerSession.IsGuest)
+            {
+                await client.JoinAndSubscribeAsync(this.RoomCode, PlayerSession.CurrentPlayer.idPlayer);
+            }
+        }
+
+        private async Task HandleConnectionError(Exception ex)
+        {
+            if (IsNavigatingAway) return;
+            IsNavigatingAway = true;
+
+            string errorMessage = Lang.ErrorConnectingToServer;
+            string title = Lang.TitleError;
+            bool isConnectionLost = true;
+
+            if (ex is FaultException<ServiceFaultDto> fault)
+            {
                 var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
-                string msg = messageResolver.GetMessage(errorType);
+                errorMessage = messageResolver.GetMessage(errorType);
+                title = Lang.TitleError;
+                isConnectionLost = false;
+            }
+            else if (ex is EndpointNotFoundException)
+            {
+                errorMessage = Lang.ErrorServerUnavailable;
+                title = Lang.TitleConnectionError;
+            }
 
-                await Application.Current.Dispatcher.InvokeAsync(() =>
-                {
-                    MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                });
+            await Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                MessageBox.Show(errorMessage, title, MessageBoxButton.OK, MessageBoxImage.Error);
+            });
 
+            if (!isConnectionLost)
+            {
                 CloseClientConnection(notifyServer: false);
                 NavigateToLoginOrMainMenu();
             }
-            catch (EndpointNotFoundException)
+            else
             {
-                if (IsNavigatingAway)
+                await Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    return;
-                }
-
-                IsNavigatingAway = true;
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
-                    NavigateToLoginOrMainMenu(isConnectionLost: true);
-                });
-            }
-            catch (CommunicationException)
-            {
-                if (IsNavigatingAway)
-                {
-                    return;
-                }
-
-                IsNavigatingAway = true;
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                    NavigateToLoginOrMainMenu(isConnectionLost: true);
-                });
-            }
-            catch (Exception)
-            {
-                if (IsNavigatingAway)
-                {
-                    return;
-                }
-
-                IsNavigatingAway = true;
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                     NavigateToLoginOrMainMenu(isConnectionLost: true);
                 });
             }
@@ -253,34 +249,42 @@ namespace ConquiánCliente.ViewModel.Lobby
                     {
                         await client.KickPlayerAsync(this.RoomCode, PlayerSession.CurrentPlayer.idPlayer, idPlayerToKick);
                     }
-                    catch (FaultException<ServiceFaultDto> fault)
+                    catch (Exception ex)
                     {
-                        var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
-                        string msg = messageResolver.GetMessage(errorType);
-
-                        Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                        });
-                    }
-                    catch (EndpointNotFoundException)
-                    {
-                        Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
-                        });
-                    }
-                    catch (Exception)
-                    {
-                        if (!IsNavigatingAway)
-                        {
-                            Application.Current.Dispatcher.Invoke(() =>
-                            {
-                                MessageBox.Show(Lang.ErrorLobbyAction, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                            });
-                        }
+                        HandleKickPlayerError(ex);
                     }
                 });
+            }
+        }
+
+        private void HandleKickPlayerError(Exception ex)
+        {
+            if (ex is FaultException<ServiceFaultDto> fault)
+            {
+                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                string msg = messageResolver.GetMessage(errorType);
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                });
+            }
+            else if (ex is EndpointNotFoundException)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+                });
+            }
+            else
+            {
+                if (!IsNavigatingAway)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        MessageBox.Show(Lang.ErrorLobbyAction, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    });
+                }
             }
         }
 
@@ -497,6 +501,7 @@ namespace ConquiánCliente.ViewModel.Lobby
             Task.Run(() => CloseClientConnection(notifyServer: true));
             NavigateToLoginOrMainMenu(parameter as Window);
         }
+
         public void CloseClientConnection(bool notifyServer)
         {
             if (client == null) return;
@@ -511,7 +516,10 @@ namespace ConquiánCliente.ViewModel.Lobby
                             client.LeaveAndUnsubscribe(this.RoomCode, this.myPlayerId);
                         }
                     }
-                    catch (Exception) { }
+                    catch (Exception) 
+                    {
+                        // The exception is ignored when attempting to notify the server, as disconnection is unavoidable.
+                    }
                 }
                 client.Close();
             }
@@ -541,6 +549,17 @@ namespace ConquiánCliente.ViewModel.Lobby
         }
         private void NavigateToLoginOrMainMenu(Window currentWindow = null, bool isConnectionLost = false)
         {
+            DisconnectInvitationServiceAsync(isConnectionLost);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Window newWindow = CreateNextWindow(isConnectionLost);
+                TransitionToWindow(newWindow, currentWindow);
+            });
+        }
+
+        private static void DisconnectInvitationServiceAsync(bool isConnectionLost)
+        {
             if (isConnectionLost && PlayerSession.CurrentPlayer != null)
             {
                 Task.Run(() =>
@@ -549,46 +568,45 @@ namespace ConquiánCliente.ViewModel.Lobby
                     {
                         InvitationClientManager.Disconnect(PlayerSession.CurrentPlayer.idPlayer);
                     }
-                    catch { }
+                    catch 
+                    {
+                        // Exception intentionally ignored: Failure to disconnect from the invitation service is secondary to the loss of connection.
+                    }
                 });
             }
+        }
 
-            Application.Current.Dispatcher.Invoke(() =>
+        private static Window CreateNextWindow(bool isConnectionLost)
+        {
+            Window newWindow;
+            if (PlayerSession.IsGuest || isConnectionLost)
             {
-                Window newWindow = null;
+                PlayerSession.EndSession();
+                newWindow = new LogIn();
+            }
+            else
+            {
+                newWindow = new View.MainMenu.MainMenu();
+            }
+            return newWindow;
+        }
 
-                if (PlayerSession.IsGuest || isConnectionLost)
-                {
-                    PlayerSession.EndSession();
-                    newWindow = new LogIn();
-                }
-                else
-                {
-                    newWindow = new View.MainMenu.MainMenu();
-                }
+        private void TransitionToWindow(Window newWindow, Window currentWindow)
+        {
+            newWindow.Show();
+            Application.Current.MainWindow = newWindow;
 
-                newWindow.Show();
-                Application.Current.MainWindow = newWindow;
+            var windowToClose = currentWindow;
+            if (windowToClose == null)
+            {
+                windowToClose = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.DataContext == this);
+            }
 
-                var windowToClose = currentWindow;
-                if (windowToClose == null)
-                {
-                    foreach (Window window in Application.Current.Windows.OfType<Window>().ToList())
-                    {
-                        if (window.DataContext == this)
-                        {
-                            windowToClose = window;
-                            break;
-                        }
-                    }
-                }
-
-                if (windowToClose != null)
-                {
-                    try { windowToClose.Close(); }
-                    catch (InvalidOperationException ex) { System.Diagnostics.Debug.WriteLine($"Intento de cerrar ventana ya en proceso: {ex.Message}"); }
-                }
-            });
+            if (windowToClose != null)
+            {
+                try { windowToClose.Close(); }
+                catch (InvalidOperationException ex) { System.Diagnostics.Debug.WriteLine($"Intento de cerrar ventana ya en proceso: {ex.Message}"); }
+            }
         }
 
         private bool CanExecuteStartGame(object obj)
@@ -655,6 +673,7 @@ namespace ConquiánCliente.ViewModel.Lobby
             };
             window.ShowDialog();
         }
+
         private void UpdateSelectedGamemode(int id)
         {
             if (gameModes.ContainsKey(id))
@@ -664,6 +683,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 Application.Current.Dispatcher.Invoke(() => { CommandManager.InvalidateRequerySuggested(); });
             }
         }
+
         private bool CanExecuteGameTypeChange(object obj) => IsHost;
 
         private void ExecuteNextGameType(object obj)

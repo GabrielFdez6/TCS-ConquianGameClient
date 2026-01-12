@@ -128,7 +128,7 @@ namespace ConquiánCliente.ViewModel.Game
             CloseWindow(obj);
         }
 
-        public string ReturnButtonText
+        public static string ReturnButtonText
         {
             get
             {

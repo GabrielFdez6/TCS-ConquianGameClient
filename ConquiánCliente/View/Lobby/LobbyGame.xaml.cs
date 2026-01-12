@@ -37,13 +37,10 @@ namespace ConquiánCliente.View.Lobby
             {
                 collection.CollectionChanged += (s, args) =>
                 {
-                    if (args.Action == NotifyCollectionChangedAction.Add)
+                    if (args.Action == NotifyCollectionChangedAction.Add && ltBxChat.Items.Count > 0)
                     {
-                        if (ltBxChat.Items.Count > 0)
-                        {
-                            var ultimoMensaje = ltBxChat.Items[ltBxChat.Items.Count - 1];
-                            ltBxChat.ScrollIntoView(ultimoMensaje);
-                        }
+                        var ultimoMensaje = ltBxChat.Items[ltBxChat.Items.Count - 1];
+                        ltBxChat.ScrollIntoView(ultimoMensaje);
                     }
                 };
             }

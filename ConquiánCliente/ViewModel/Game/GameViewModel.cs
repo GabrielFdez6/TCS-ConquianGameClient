@@ -9,6 +9,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using System.Diagnostics;
 
 namespace ConquiánCliente.ViewModel.Game
 {
@@ -18,11 +19,10 @@ namespace ConquiánCliente.ViewModel.Game
         private const int MINIMUM_MELD_SIZE = 3;
         private const int SINGLE_CARD_COUNT = 1;
         private const int MINIMUM_CARDS_FOR_MELD_FROM_HAND = 2;
-        private const int INITIAL_SCORE = 0;
         private const int RANK_INCREMENT = 1;
 
         private DispatcherTimer activityTimer;
-        private DateTime lastActivityTime;
+        private readonly Stopwatch afkStopwatch;
         private bool isWarningShown;
         private const int INACTIVITY_LIMIT_SECONDS = 60;
         private const int GRACE_PERIOD_SECONDS = 60;
@@ -119,6 +119,8 @@ namespace ConquiánCliente.ViewModel.Game
             this.roomCode = roomCode;
             this.messageResolver = new ResourceMessageResolver();
 
+            afkStopwatch = new Stopwatch();
+
             PlayerHand = new ObservableCollection<CardViewModel>();
             OpponentFaceDownCards = new ObservableCollection<object>();
             PlayerMelds = new ObservableCollection<MeldViewModel>();
@@ -161,6 +163,7 @@ namespace ConquiánCliente.ViewModel.Game
                 }
                 catch (Exception)
                 {
+                    // The exception is intentionally ignored so as not to block navigation if the connection fails upon exit. 
                 }
             });
         }
@@ -265,9 +268,7 @@ namespace ConquiánCliente.ViewModel.Game
             var callbackHandler = new GameCallbackHandler();
 
             callbackHandler.OnOpponentDiscarded += (card) => {
-                Application.Current.Dispatcher.Invoke(() => {
-                    TopDiscardCard = card;
-                });
+                Application.Current.Dispatcher.Invoke(() => TopDiscardCard = card);
             };
 
             callbackHandler.OnOpponentDrewDeck += () => {
@@ -282,97 +283,85 @@ namespace ConquiánCliente.ViewModel.Game
             };
 
             callbackHandler.OpponentHandUpdated += (newCardCount) => {
-                Application.Current.Dispatcher.Invoke(() => {
-                    UpdateOpponentCardCount(newCardCount);
-                });
+                Application.Current.Dispatcher.Invoke(() => UpdateOpponentCardCount(newCardCount));
             };
 
-            callbackHandler.OnOpponentMeld += async (meldCardDtos) => {
-                var cardVMs = meldCardDtos.Select(dto => new CardViewModel(dto)).ToList();
-                await Application.Current.Dispatcher.InvokeAsync(() => {
-                    TemporaryMeld.Clear();
-                    foreach (var cardVM in cardVMs)
-                    {
-                        TemporaryMeld.Add(cardVM);
-                    }
-                });
-                await Task.Delay(ANIMATION_DELAY_MS);
-                await Application.Current.Dispatcher.InvokeAsync(() => {
-                    TemporaryMeld.Clear();
-                    OpponentMelds.Add(new MeldViewModel(cardVMs));
-                });
-            };
-
-            callbackHandler.OnGameEnded += (results) =>
-            {
-                Application.Current.Dispatcher.InvokeAsync(() =>
-                {
-                    if (!PlayerSession.IsLoggedIn)
-                    {
-                        return;
-                    }
-
-                    if (isNavigatingAway)
-                    {
-                        return;
-                    }
-
-                    isGameEnded = true;
-                    StopTurnTimer();
-                    ShowGameResults(results);
-                });
-            };
-
-            callbackHandler.OnOpponentLeftEvent += () =>
-            {
-                Application.Current.Dispatcher.InvokeAsync(() =>
-                {
-                    if (!PlayerSession.IsLoggedIn)
-                    {
-                        return;
-                    }
-
-                    if (isNavigatingAway)
-                    {
-                        return;
-                    }
-
-                    isNavigatingAway = true;
-
-                    StopTurnTimer();
-                    MessageBox.Show(Lang.GameOpponentLeft, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
-
-                    NavigateToMainMenu();
-                });
-            };
-
-            callbackHandler.OnGameEndedByAFKEvent += (reasonKey) =>
-            {
-                Application.Current.Dispatcher.InvokeAsync(() =>
-                {
-                    if (!PlayerSession.IsLoggedIn)
-                    {
-                        return;
-                    }
-
-                    if (isNavigatingAway)
-                    {
-                        return;
-                    }
-
-                    isNavigatingAway = true;
-
-                    activityTimer.Stop();
-                    IsAFKWarningVisible = false;
-
-                    string message = Lang.ResourceManager.GetString(reasonKey);
-                    MessageBox.Show(message, Lang.TitleAuthenticationError, MessageBoxButton.OK, MessageBoxImage.Information);
-
-                    NavigateToMainMenu();
-                });
-            };
+            callbackHandler.OnOpponentMeld += HandleOpponentMeld;
+            callbackHandler.OnGameEnded += HandleGameEnded;
+            callbackHandler.OnOpponentLeftEvent += HandleOpponentLeft;
+            callbackHandler.OnGameEndedByAFKEvent += HandleGameEndedByAFK;
 
             return callbackHandler;
+        }
+
+        private async void HandleOpponentMeld(CardDto[] meldCardDtos)
+        {
+            var cardVMs = meldCardDtos.Select(dto => new CardViewModel(dto)).ToList();
+            await Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                TemporaryMeld.Clear();
+                foreach (var cardVM in cardVMs)
+                {
+                    TemporaryMeld.Add(cardVM);
+                }
+            });
+            await Task.Delay(ANIMATION_DELAY_MS);
+            await Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                TemporaryMeld.Clear();
+                OpponentMelds.Add(new MeldViewModel(cardVMs));
+            });
+        }
+
+        private void HandleGameEnded(GameResultDto results)
+        {
+            Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                if (!PlayerSession.IsLoggedIn || isNavigatingAway)
+                {
+                    return;
+                }
+
+                isGameEnded = true;
+                StopTurnTimer();
+                ShowGameResults(results);
+            });
+        }
+
+        private void HandleOpponentLeft()
+        {
+            Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                if (!PlayerSession.IsLoggedIn || isNavigatingAway)
+                {
+                    return;
+                }
+
+                isNavigatingAway = true;
+                StopTurnTimer();
+                MessageBox.Show(Lang.GameOpponentLeft, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+                NavigateToMainMenu();
+            });
+        }
+
+        private void HandleGameEndedByAFK(string reasonKey)
+        {
+            Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                if (!PlayerSession.IsLoggedIn || isNavigatingAway)
+                {
+                    return;
+                }
+
+                isNavigatingAway = true;
+                activityTimer.Stop();
+                IsAFKWarningVisible = false;
+
+                string message = Lang.ResourceManager.GetString(reasonKey);
+                MessageBox.Show(message, Lang.TitleAuthenticationError, MessageBoxButton.OK, MessageBoxImage.Information);
+
+                NavigateToMainMenu();
+            });
         }
 
         private void NavigateToMainMenu()
@@ -800,9 +789,12 @@ namespace ConquiánCliente.ViewModel.Game
 
         private void ActivityTimerTick(object sender, EventArgs e)
         {
-            if (!IsMyTurn) return;
+            if (!IsMyTurn)
+            {
+                return;
+            }
 
-            var timeSinceActivity = DateTime.Now - lastActivityTime;
+            var timeSinceActivity = afkStopwatch.Elapsed;
 
             if (!isWarningShown && timeSinceActivity.TotalSeconds >= INACTIVITY_LIMIT_SECONDS)
             {
@@ -820,7 +812,7 @@ namespace ConquiánCliente.ViewModel.Game
         {
             if (!isWarningShown)
             {
-                lastActivityTime = DateTime.Now;
+                afkStopwatch.Restart();
             }
         }
 
@@ -850,7 +842,7 @@ namespace ConquiánCliente.ViewModel.Game
 
         public void StartTurnTimer()
         {
-            lastActivityTime = DateTime.Now;
+            afkStopwatch.Restart();
             isWarningShown = false;
             IsAFKWarningVisible = false;
             activityTimer.Start();
@@ -874,7 +866,7 @@ namespace ConquiánCliente.ViewModel.Game
             ReturnToMainMenu();
         }
 
-        private void ReturnToMainMenu()
+        private static void ReturnToMainMenu()
         {
             Application.Current.Dispatcher.Invoke(() => {
                 var mainWindow = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w is View.MainMenu.MainMenu);

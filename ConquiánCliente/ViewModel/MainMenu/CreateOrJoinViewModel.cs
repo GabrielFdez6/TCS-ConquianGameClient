@@ -69,24 +69,9 @@ namespace ConquiánCliente.ViewModel.MainMenu
                         MessageBox.Show(Lang.ErrorLobbyCreation, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
-                catch (FaultException<ServiceFaultDto> fault)
+                catch (Exception ex)
                 {
-                    var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
-                    string msg = messageResolver.GetMessage(errorType);
-
-                    MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                catch (EndpointNotFoundException)
-                {
-                    MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (CommunicationException)
-                {
-                    MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    HandleServiceException(ex);
                 }
                 finally
                 {
@@ -96,6 +81,28 @@ namespace ConquiánCliente.ViewModel.MainMenu
                     isLoading = false;
                     CommandManager.InvalidateRequerySuggested();
                 }
+            }
+        }
+
+        private void HandleServiceException(Exception ex)
+        {
+            if (ex is FaultException<ServiceFaultDto> fault)
+            {
+                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                string msg = messageResolver.GetMessage(errorType);
+                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else if (ex is EndpointNotFoundException)
+            {
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (ex is CommunicationException)
+            {
+                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -127,24 +134,9 @@ namespace ConquiánCliente.ViewModel.MainMenu
                         window.Close();
                     }
                 }
-                catch (FaultException<ServiceFaultDto> fault)
+                catch (Exception ex)
                 {
-                    var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
-                    string msg = messageResolver.GetMessage(errorType);
-
-                    MessageBox.Show(msg, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                catch (EndpointNotFoundException)
-                {
-                    MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (CommunicationException)
-                {
-                    MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show(Lang.ErrorJoinLobby, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    HandleJoinRoomException(ex);
                 }
                 finally
                 {
@@ -154,6 +146,28 @@ namespace ConquiánCliente.ViewModel.MainMenu
                     isLoading = false;
                     CommandManager.InvalidateRequerySuggested();
                 }
+            }
+        }
+
+        private void HandleJoinRoomException(Exception ex)
+        {
+            if (ex is FaultException<ServiceFaultDto> fault)
+            {
+                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                string msg = messageResolver.GetMessage(errorType);
+                MessageBox.Show(msg, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if (ex is EndpointNotFoundException)
+            {
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (ex is CommunicationException)
+            {
+                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                MessageBox.Show(Lang.ErrorJoinLobby, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

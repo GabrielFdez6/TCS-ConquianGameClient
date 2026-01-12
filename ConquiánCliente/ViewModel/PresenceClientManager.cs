@@ -1,11 +1,7 @@
 ﻿using ConquiánCliente.ServicePresence;
 using System;
 using System.ServiceModel;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
-using System.Linq;
-using ConquiánCliente.ViewModel.Lobby;
 using ConquiánCliente.Properties.Langs;
 
 namespace ConquiánCliente.ViewModel
@@ -72,7 +68,7 @@ namespace ConquiánCliente.ViewModel
             client.InnerChannel.Faulted += OnConnectionLost;
         }
 
-        private void OnConnectionLost(object sender, EventArgs e)
+        private static void OnConnectionLost(object sender, EventArgs e)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {

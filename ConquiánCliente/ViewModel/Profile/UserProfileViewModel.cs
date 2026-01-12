@@ -153,79 +153,88 @@ namespace ConquiánCliente.ViewModel.Profile
 
         private async Task LoadPlayerData()
         {
-            if (PlayerSession.IsLoggedIn)
+            if (!PlayerSession.IsLoggedIn) return;
+
+            var sessionPlayer = PlayerSession.CurrentPlayer;
+            Nickname = sessionPlayer.nickname;
+            SetProfileImage(System.IO.Path.GetFileName(sessionPlayer.pathPhoto));
+
+            try
             {
-                var sessionPlayer = PlayerSession.CurrentPlayer;
-                Nickname = sessionPlayer.nickname;
+                var userProfileClient = new UserProfileClient();
+                await LoadUserProfileAsync(userProfileClient, sessionPlayer.idPlayer);
+                await LoadUserSocialsAsync(userProfileClient, sessionPlayer.idPlayer);
+                await LoadMatchHistoryAsync(userProfileClient, sessionPlayer.idPlayer);
+            }
+            catch (System.Exception ex)
+            {
+                HandleLoadDataError(ex);
+            }
+        }
 
-                string initialImageName = System.IO.Path.GetFileName(sessionPlayer.pathPhoto);
-                SetProfileImage(initialImageName);
+        private async Task LoadUserProfileAsync(UserProfileClient client, int playerId)
+        {
+            fullPlayerProfile = await client.GetPlayerByIdAsync(playerId);
 
-                try
+            if (fullPlayerProfile.idPlayer > 0)
+            {
+                Email = fullPlayerProfile.email;
+                Name = fullPlayerProfile.name;
+                LastName = fullPlayerProfile.lastName;
+                Level = fullPlayerProfile.idLevel;
+                CurrentPoints = fullPlayerProfile.currentPoints;
+                PointsToNextLevel = fullPlayerProfile.PointsToNextLevel;
+                RankName = fullPlayerProfile.RankName;
+
+                SetProfileImage(System.IO.Path.GetFileName(fullPlayerProfile.pathPhoto));
+                PlayerSession.UpdateSession(fullPlayerProfile);
+            }
+        }
+
+        private async Task LoadUserSocialsAsync(UserProfileClient client, int playerId)
+        {
+            var socials = await client.GetPlayerSocialsAsync(playerId);
+            if (socials.Any())
+            {
+                Facebook = socials.FirstOrDefault(s => s.IdSocialType == 2)?.UserLink;
+                Instagram = socials.FirstOrDefault(s => s.IdSocialType == 1)?.UserLink;
+            }
+        }
+
+        private async Task LoadMatchHistoryAsync(UserProfileClient client, int playerId)
+        {
+            var history = await client.GetPlayerGameHistoryAsync(playerId);
+
+            MatchHistoryList.Clear();
+            if (history != null && history.Length > 0)
+            {
+                foreach (var game in history)
                 {
-                    var userProfileClient = new UserProfileClient();
+                    if (string.IsNullOrEmpty(game.PlayerName) || game.PlayerName == "Unknown")
+                        game.PlayerName = Lang.GlobalGuess;
 
-                    fullPlayerProfile = await userProfileClient.GetPlayerByIdAsync(sessionPlayer.idPlayer);
+                    if (string.IsNullOrEmpty(game.OpponentName) || game.OpponentName == "Unknown")
+                        game.OpponentName = Lang.GlobalGuess;
 
-                    if (fullPlayerProfile.idPlayer > 0)
-                    {
-                        Email = fullPlayerProfile.email;
-                        Name = fullPlayerProfile.name;
-                        LastName = fullPlayerProfile.lastName;
-                        Level = fullPlayerProfile.idLevel;
-                        CurrentPoints = fullPlayerProfile.currentPoints;
-                        PointsToNextLevel = fullPlayerProfile.PointsToNextLevel;
-                        RankName = fullPlayerProfile.RankName;
-
-                        string serverImageName = System.IO.Path.GetFileName(fullPlayerProfile.pathPhoto);
-                        SetProfileImage(serverImageName);
-
-                        PlayerSession.UpdateSession(fullPlayerProfile);
-                    }
-
-                    var socials = await userProfileClient.GetPlayerSocialsAsync(sessionPlayer.idPlayer);
-                    if (socials.Any())
-                    {
-                        Facebook = socials.FirstOrDefault(s => s.IdSocialType == 2)?.UserLink;
-                        Instagram = socials.FirstOrDefault(s => s.IdSocialType == 1)?.UserLink;
-                    }
-
-                    var history = await userProfileClient.GetPlayerGameHistoryAsync(sessionPlayer.idPlayer);
-
-                    MatchHistoryList.Clear();
-                    if (history != null && history.Length > 0)
-                    {
-                        foreach (var game in history)
-                        {
-
-                            if (game.PlayerName == "Unknown" || string.IsNullOrEmpty(game.PlayerName))
-                            {
-                                game.PlayerName = Lang.GlobalGuess;
-                            }
-
-                            if (game.OpponentName == "Unknown" || string.IsNullOrEmpty(game.OpponentName))
-                            {
-                                game.OpponentName = Lang.GlobalGuess;
-                            }
-
-                            MatchHistoryList.Add(game);
-                        }
-                        IsHistoryEmpty = false;
-                    }
-                    else
-                    {
-                        IsHistoryEmpty = true;
-                    }
-
+                    MatchHistoryList.Add(game);
                 }
-                catch (EndpointNotFoundException)
-                {
-                    MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
-                }
-                catch (System.Exception ex)
-                {
-                    MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
-                }
+                IsHistoryEmpty = false;
+            }
+            else
+            {
+                IsHistoryEmpty = true;
+            }
+        }
+
+        private static void HandleLoadDataError(System.Exception ex)
+        {
+            if (ex is EndpointNotFoundException)
+            {
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
+            }
+            else
+            {
+                MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
             }
         }
 

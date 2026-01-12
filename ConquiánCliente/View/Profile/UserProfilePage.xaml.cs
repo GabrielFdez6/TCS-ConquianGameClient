@@ -8,10 +8,5 @@ namespace ConquiánCliente.View.Profile
         {
             InitializeComponent();
         }
-
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

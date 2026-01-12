@@ -1,25 +1,8 @@
-﻿using ConquiánCliente.ServiceSignUp;
-using ConquiánCliente.ViewModel.Authentication;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ConquiánCliente.ViewModel.Authentication;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ConquiánCliente.View
 {
-    /// <summary>
-    /// Lógica de interacción para VerificationCode.xaml
-    /// </summary>
     public partial class VerificationCode : Window
     {
         public VerificationCode()
@@ -30,12 +13,9 @@ namespace ConquiánCliente.View
 
         private async void VerificationCodeClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (this.DataContext is SignUpViewModel vm)
+            if (this.DataContext is SignUpViewModel vm && !vm.IsVerificationSuccessful)
             {
-                if (!vm.IsVerificationSuccessful)
-                {
-                    await vm.CancelRegistrationOnServerAsync();
-                }
+                await vm.CancelRegistrationOnServerAsync();
             }
         }
     }
