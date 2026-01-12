@@ -792,4 +792,7 @@ Si la carta no te sirve, usa el botón 'Pasar'.</value>
   <data name="ErrorVerificationCodeFormat" xml:space="preserve">
     <value>El formato del código de verificación es invalido.</value>
   </data>
+  <data name="GameResultErrorSQL" xml:space="preserve">
+    <value>Los resultados de esta partida no se pudieron registrar debido a un error de conexión de base de datos.</value>
+  </data>
 </root>

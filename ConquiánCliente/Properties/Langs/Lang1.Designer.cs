@@ -1161,6 +1161,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Los resultados de esta partida no se pudieron registrar debido a un error de conexión de base de datos..
+        /// </summary>
+        public static string GameResultErrorSQL {
+            get {
+                return ResourceManager.GetString("GameResultErrorSQL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Resultados .
         /// </summary>
         public static string GameResultsTitle {

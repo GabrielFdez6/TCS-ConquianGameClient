@@ -351,6 +351,11 @@ namespace ConquiánCliente.ViewModel.Game
                     return;
                 }
 
+                if (results.ErrorSavingToDatabase)
+                {
+                    MessageBox.Show(Lang.GameResultErrorSQL, Lang.TitleError, MessageBoxButton.OK);
+                }
+
                 isGameEnded = true;
                 StopTurnTimer();
                 ShowGameResults(results);
