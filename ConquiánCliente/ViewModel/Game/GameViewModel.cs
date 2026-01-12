@@ -195,6 +195,10 @@ namespace ConquiánCliente.ViewModel.Game
             {
                 HandleGameFault(fault);
             }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             catch (Exception)
             {
                 MessageBox.Show(Lang.ErrorGeneric);
@@ -245,6 +249,10 @@ namespace ConquiánCliente.ViewModel.Game
                 {
                     MessageBox.Show(Lang.ErrorGeneric, Lang.ErrorGame, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (Exception)
             {
@@ -530,9 +538,15 @@ namespace ConquiánCliente.ViewModel.Game
                 await RollbackPlayCards(cardsToPlay);
                 isSuccess = false;
             }
-            catch (Exception ex)
+            catch (EndpointNotFoundException)
             {
-                MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+                await RollbackPlayCards(cardsToPlay);
+                isSuccess = false;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 await RollbackPlayCards(cardsToPlay);
                 isSuccess = false;
             }

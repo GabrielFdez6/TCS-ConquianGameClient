@@ -19,7 +19,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         public InvitationReceivedViewModel(string senderNickname, string roomCode)
         {
             this.roomCode = roomCode;
-            this.InvitationText = $"{senderNickname} {Lang.LobbyInvitedYou}"; 
+            this.InvitationText = $"{senderNickname} {Lang.LobbyInvitedYou}";
             AcceptCommand = new RelayCommand(ExecuteAccept);
             RejectCommand = new RelayCommand(ExecuteReject);
         }
@@ -48,6 +48,12 @@ namespace ConquiánCliente.ViewModel.Lobby
                     lobbyState = await lobbyClient.GetLobbyStateAsync(this.roomCode);
                 }
             }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
+                window?.Close();
+                return;
+            }
             catch (Exception)
             {
                 MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError);
@@ -57,19 +63,19 @@ namespace ConquiánCliente.ViewModel.Lobby
 
             if (lobbyState == null)
             {
-                MessageBox.Show(Lang.InfoHostLeft, Lang.Lobby); 
+                MessageBox.Show(Lang.InfoHostLeft, Lang.Lobby);
                 window?.Close();
                 return;
             }
 
             if (lobbyState.Players.Length >= 2)
             {
-                MessageBox.Show(Lang.LobbyFull, Lang.Lobby); 
+                MessageBox.Show(Lang.LobbyFull, Lang.Lobby);
                 window?.Close();
                 return;
             }
 
- 
+
             try
             {
                 var lobbyGame = new LobbyGame(this.roomCode);

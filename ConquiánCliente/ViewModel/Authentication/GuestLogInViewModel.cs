@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using ConquiánCliente.ViewModel.Validation;
-using ConquiánCliente.Utilities.Messages; 
+using ConquiánCliente.Utilities.Messages;
 
 namespace ConquiánCliente.ViewModel.Authentication
 {
@@ -19,7 +19,7 @@ namespace ConquiánCliente.ViewModel.Authentication
         private readonly LobbyClient lobbyClient;
         private readonly Window currentWindow;
         private bool isLoading;
-        private readonly IMessageResolver messageResolver; 
+        private readonly IMessageResolver messageResolver;
 
         public string Email
         {
@@ -125,13 +125,17 @@ namespace ConquiánCliente.ViewModel.Authentication
                     MessageBox.Show(message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             catch (CommunicationException)
             {
                 MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {

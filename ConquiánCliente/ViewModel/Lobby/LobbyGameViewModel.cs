@@ -186,6 +186,20 @@ namespace ConquiánCliente.ViewModel.Lobby
                 CloseClientConnection(notifyServer: false);
                 NavigateToLoginOrMainMenu();
             }
+            catch (EndpointNotFoundException)
+            {
+                if (IsNavigatingAway)
+                {
+                    return;
+                }
+
+                IsNavigatingAway = true;
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    NavigateToLoginOrMainMenu(isConnectionLost: true);
+                });
+            }
             catch (CommunicationException)
             {
                 if (IsNavigatingAway)
@@ -247,6 +261,13 @@ namespace ConquiánCliente.ViewModel.Lobby
                         Application.Current.Dispatcher.Invoke(() =>
                         {
                             MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                        });
+                    }
+                    catch (EndpointNotFoundException)
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
                         });
                     }
                     catch (Exception)
@@ -413,6 +434,16 @@ namespace ConquiánCliente.ViewModel.Lobby
                 try
                 {
                     await client.SendMessageAsync(this.RoomCode, messageDto);
+                }
+                catch (EndpointNotFoundException)
+                {
+                    if (!IsNavigatingAway)
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+                        });
+                    }
                 }
                 catch (Exception)
                 {

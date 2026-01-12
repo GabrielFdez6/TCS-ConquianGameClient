@@ -12,7 +12,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
     public class CreateOrJoinViewModel : ViewModelBase
     {
         private string roomCode;
-        private bool isLoading; 
+        private bool isLoading;
         private readonly IMessageResolver messageResolver;
 
         public string RoomCode
@@ -51,7 +51,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
 
             if (parameter is Window window)
             {
-                isLoading = true; 
+                isLoading = true;
                 CommandManager.InvalidateRequerySuggested();
 
                 var client = new LobbyClient(new InstanceContext(LobbyCallbackHandler.Instance));
@@ -75,6 +75,10 @@ namespace ConquiánCliente.ViewModel.MainMenu
                     string msg = messageResolver.GetMessage(errorType);
 
                     MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                catch (EndpointNotFoundException)
+                {
+                    MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 catch (CommunicationException)
                 {
@@ -107,7 +111,7 @@ namespace ConquiánCliente.ViewModel.MainMenu
 
             if (parameter is Window window)
             {
-                isLoading = true; 
+                isLoading = true;
                 CommandManager.InvalidateRequerySuggested();
 
                 var context = new InstanceContext(LobbyCallbackHandler.Instance);
@@ -129,6 +133,10 @@ namespace ConquiánCliente.ViewModel.MainMenu
                     string msg = messageResolver.GetMessage(errorType);
 
                     MessageBox.Show(msg, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (EndpointNotFoundException)
+                {
+                    MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 catch (CommunicationException)
                 {

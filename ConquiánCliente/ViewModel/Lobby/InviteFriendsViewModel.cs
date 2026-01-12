@@ -80,9 +80,13 @@ namespace ConquiánCliente.ViewModel.Lobby
                 string msg = messageResolver.GetMessage(errorType);
                 MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (Exception ex)
+            catch (EndpointNotFoundException)
             {
-                MessageBox.Show(Lang.LobbyErrorLoadingFriends + $": {ex.Message}");
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(Lang.LobbyErrorLoadingFriends, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -133,9 +137,9 @@ namespace ConquiánCliente.ViewModel.Lobby
                 {
                     MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    MessageBox.Show($"{Lang.LobbyErrorInvitationFailed}: {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(Lang.LobbyErrorInvitationFailed, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

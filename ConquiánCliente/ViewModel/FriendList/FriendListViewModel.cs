@@ -10,7 +10,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using ConquiánCliente.Utilities.Messages; 
+using ConquiánCliente.Utilities.Messages;
 
 namespace ConquiánCliente.ViewModel
 {
@@ -41,13 +41,13 @@ namespace ConquiánCliente.ViewModel
 
         private readonly FriendListClient FriendListService;
         private readonly ConquiánCliente.ServiceUserProfile.UserProfileClient UserProfileService;
-        private readonly IMessageResolver messageResolver; 
+        private readonly IMessageResolver messageResolver;
 
         public FriendListViewModel()
         {
             FriendListService = new FriendListClient();
             UserProfileService = new ConquiánCliente.ServiceUserProfile.UserProfileClient();
-            this.messageResolver = new ResourceMessageResolver(); 
+            this.messageResolver = new ResourceMessageResolver();
 
             Friends = new ObservableCollection<FriendInviteItemViewModel>();
             SearchResult = new ObservableCollection<FriendInviteItemViewModel>();
@@ -125,9 +125,13 @@ namespace ConquiánCliente.ViewModel
                 string msg = messageResolver.GetMessage(errorType);
                 MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (Exception ex)
+            catch (EndpointNotFoundException)
             {
-                MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(string.Format(Lang.ErrorUnexpected), Lang.TitleError);
             }
         }
 
@@ -149,9 +153,13 @@ namespace ConquiánCliente.ViewModel
                 string msg = messageResolver.GetMessage(errorType);
                 MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (Exception ex)
+            catch (EndpointNotFoundException)
             {
-                MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(string.Format(Lang.ErrorUnexpected), Lang.TitleError);
             }
         }
 
@@ -170,9 +178,13 @@ namespace ConquiánCliente.ViewModel
                     string msg = messageResolver.GetMessage(errorType);
                     MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                catch (Exception ex)
+                catch (EndpointNotFoundException)
                 {
-                    MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
+                    MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(string.Format(Lang.ErrorUnexpected), Lang.TitleError);
                 }
             }
         }
@@ -220,9 +232,13 @@ namespace ConquiánCliente.ViewModel
                     string msg = messageResolver.GetMessage(errorType);
                     MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                catch (Exception ex)
+                catch (EndpointNotFoundException)
                 {
-                    MessageBox.Show(string.Format(Lang.ErrorConnectingToServer, ex.Message), Lang.TitleError);
+                    MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(string.Format(Lang.ErrorConnectingToServer), Lang.TitleError);
                 }
             }
         }
@@ -248,9 +264,13 @@ namespace ConquiánCliente.ViewModel
                         string msg = messageResolver.GetMessage(errorType);
                         MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
                     }
-                    catch (Exception ex)
+                    catch (EndpointNotFoundException)
                     {
-                        MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
+                        MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show(string.Format(Lang.ErrorUnexpected), Lang.TitleError);
                     }
                 }
             }

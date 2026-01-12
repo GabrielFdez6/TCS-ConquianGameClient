@@ -1,7 +1,6 @@
 ﻿using ConquiánCliente.Models;
 using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceFriendList;
-using ConquiánCliente.View.FriendList;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,7 +8,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using ConquiánCliente.Utilities.Messages; 
+using ConquiánCliente.Utilities.Messages;
 
 namespace ConquiánCliente.ViewModel.FriendList
 {
@@ -29,12 +28,12 @@ namespace ConquiánCliente.ViewModel.FriendList
         public ICommand BackCommand { get; }
 
         private readonly FriendListClient FriendListService;
-        private readonly IMessageResolver messageResolver; 
+        private readonly IMessageResolver messageResolver;
 
         public FriendRequestsViewModel()
         {
             FriendListService = new FriendListClient();
-            this.messageResolver = new ResourceMessageResolver(); 
+            this.messageResolver = new ResourceMessageResolver();
 
             Requests = new ObservableCollection<FriendRequest>();
             AcceptRequestCommand = new RelayCommand(AcceptRequest);
@@ -82,6 +81,10 @@ namespace ConquiánCliente.ViewModel.FriendList
                 string msg = messageResolver.GetMessage(errorType);
                 MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
             }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
@@ -107,6 +110,10 @@ namespace ConquiánCliente.ViewModel.FriendList
                     {
                         Requests.Remove(request);
                     }
+                }
+                catch (EndpointNotFoundException)
+                {
+                    MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 catch (Exception ex)
                 {
@@ -134,6 +141,10 @@ namespace ConquiánCliente.ViewModel.FriendList
                     {
                         Requests.Remove(request);
                     }
+                }
+                catch (EndpointNotFoundException)
+                {
+                    MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 catch (Exception ex)
                 {

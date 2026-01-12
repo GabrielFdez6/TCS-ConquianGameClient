@@ -1,6 +1,6 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceSignUp;
-using ConquiánCliente.Utilities.Messages; 
+using ConquiánCliente.Utilities.Messages;
 using ConquiánCliente.View;
 using ConquiánCliente.ViewModel.Validation;
 using System.ServiceModel;
@@ -18,7 +18,7 @@ namespace ConquiánCliente.ViewModel.Authentication
         private string lastName;
         private string nickname;
         private string enteredVerificationCode;
-        private bool isLoading; 
+        private bool isLoading;
         private readonly PlayerDto playerInProgress;
         private readonly IMessageResolver messageResolver;
 
@@ -63,7 +63,7 @@ namespace ConquiánCliente.ViewModel.Authentication
         {
             playerInProgress = new PlayerDto();
             this.messageResolver = new ResourceMessageResolver();
-            isLoading = false; 
+            isLoading = false;
 
             SendVerificationCodeCommand = new RelayCommand(ExecuteSendVerificationCode, CanExecuteSendVerificationCode);
             NavigateToLoginCommand = new RelayCommand(ExecuteNavigateToLogin, CanExecuteNavigation);
@@ -96,7 +96,7 @@ namespace ConquiánCliente.ViewModel.Authentication
 
         private async void ExecuteSendVerificationCode(object parameter)
         {
-            if (isLoading) return; 
+            if (isLoading) return;
 
             var passwordBox = parameter as PasswordBox;
             if (passwordBox == null) return;
@@ -164,9 +164,9 @@ namespace ConquiánCliente.ViewModel.Authentication
             {
                 MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
-                MessageBox.Show(string.Format(Lang.ErrorGeneric, ex.Message), Lang.TitleError);
+                MessageBox.Show(string.Format(Lang.ErrorGeneric), Lang.TitleError);
             }
             finally
             {
@@ -205,9 +205,13 @@ namespace ConquiánCliente.ViewModel.Authentication
 
                 MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (System.Exception ex)
+            catch (EndpointNotFoundException)
             {
-                MessageBox.Show(string.Format(Lang.ErrorGeneric, ex.Message), Lang.TitleError);
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (System.Exception)
+            {
+                MessageBox.Show(string.Format(Lang.ErrorGeneric), Lang.TitleError);
             }
         }
 
@@ -264,9 +268,9 @@ namespace ConquiánCliente.ViewModel.Authentication
             {
                 MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
-                MessageBox.Show(string.Format(Lang.ErrorConnectingToServer, ex.Message), Lang.TitleConnectionError);
+                MessageBox.Show(string.Format(Lang.ErrorConnectingToServer), Lang.TitleConnectionError);
             }
         }
 
@@ -292,9 +296,9 @@ namespace ConquiánCliente.ViewModel.Authentication
             {
                 MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
-                MessageBox.Show(string.Format(Lang.ErrorConnectingToServer, ex.Message), Lang.TitleConnectionError);
+                MessageBox.Show(string.Format(Lang.ErrorConnectingToServer), Lang.TitleConnectionError);
             }
         }
         private void ExecuteNavigateToLogin(object parameter)

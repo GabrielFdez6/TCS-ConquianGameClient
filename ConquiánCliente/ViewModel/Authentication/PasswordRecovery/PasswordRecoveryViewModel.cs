@@ -81,13 +81,20 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
             {
                 recoveryClient = new PasswordRecoveryClient();
             }
-            catch (Exception ex)
+            catch (EndpointNotFoundException)
             {
-                MessageBox.Show(string.Format(Lang.ErrorConnectingToServer, ex.Message), Lang.TitleConnectionError);
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(string.Format(Lang.ErrorConnectingToServer), Lang.TitleConnectionError);
             }
         }
 
-        private bool CanExecuteCommand(object parameter) => !IsLoading;
+        private bool CanExecuteCommand(object parameter)
+        {
+            return !IsLoading;
+        }
 
         private async void ExecuteRequestRecovery(object parameter)
         {
@@ -176,7 +183,7 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
             }
             catch (Exception ex)
             {
-                HandleException(ex); 
+                HandleException(ex);
             }
             finally
             {

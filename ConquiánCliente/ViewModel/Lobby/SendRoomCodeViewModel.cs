@@ -8,7 +8,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using ConquiánCliente.Utilities.Messages; 
+using ConquiánCliente.Utilities.Messages;
 
 namespace ConquiánCliente.ViewModel.Lobby
 {
@@ -17,7 +17,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         private readonly string roomCode;
         private string email;
         private bool isLoading;
-        private readonly IMessageResolver messageResolver; 
+        private readonly IMessageResolver messageResolver;
 
         public string Email
         {
@@ -44,7 +44,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         public SendRoomCodeViewModel(string roomCode)
         {
             this.roomCode = roomCode;
-            this.messageResolver = new ResourceMessageResolver(); 
+            this.messageResolver = new ResourceMessageResolver();
 
             SendCommand = new RelayCommand(async (param) => await ExecuteSend());
             BackCommand = new RelayCommand(ExecuteBack);
@@ -80,13 +80,17 @@ namespace ConquiánCliente.ViewModel.Lobby
 
                 MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             catch (CommunicationException)
             {
                 MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(Lang.ErrorConnectingToServer + $": {ex.Message}", Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
