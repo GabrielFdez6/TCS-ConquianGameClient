@@ -104,6 +104,7 @@
   <xs:complexType name="GameResultDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="DurationSeconds" type="xs:int" />
+      <xs:element minOccurs="0" name="ErrorSavingToDatabase" type="xs:boolean" />
       <xs:element minOccurs="0" name="GamemodeId" type="xs:int" />
       <xs:element minOccurs="0" name="IsDraw" type="xs:boolean" />
       <xs:element minOccurs="0" name="LoserId" type="xs:int" />

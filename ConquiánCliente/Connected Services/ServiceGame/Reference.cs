@@ -715,6 +715,9 @@ namespace ConquiánCliente.ServiceGame {
         private int DurationSecondsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool ErrorSavingToDatabaseField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int GamemodeIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -775,6 +778,19 @@ namespace ConquiánCliente.ServiceGame {
                 if ((this.DurationSecondsField.Equals(value) != true)) {
                     this.DurationSecondsField = value;
                     this.RaisePropertyChanged("DurationSeconds");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool ErrorSavingToDatabase {
+            get {
+                return this.ErrorSavingToDatabaseField;
+            }
+            set {
+                if ((this.ErrorSavingToDatabaseField.Equals(value) != true)) {
+                    this.ErrorSavingToDatabaseField = value;
+                    this.RaisePropertyChanged("ErrorSavingToDatabase");
                 }
             }
         }
