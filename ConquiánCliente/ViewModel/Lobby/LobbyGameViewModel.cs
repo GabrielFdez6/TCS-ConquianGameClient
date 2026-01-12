@@ -154,6 +154,35 @@ namespace ConquiánCliente.ViewModel.Lobby
 
             var context = new InstanceContext(callbackHandler);
             client = new LobbyClient(context);
+
+            if (client.InnerChannel != null)
+            {
+                client.InnerChannel.Closed += OnConnectionLost;
+                client.InnerChannel.Faulted += OnConnectionLost;
+            }
+        }
+
+        private void OnConnectionLost(object sender, EventArgs e)
+        {
+            if (PlayerSession.IsGuest)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    if (IsNavigatingAway) return;
+                    IsNavigatingAway = true;
+
+                    MessageBox.Show(Lang.ErrorLostConnection, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                    CloseClientConnection(notifyServer: false);
+
+                    PlayerSession.EndSession();
+
+                    var loginWindow = new LogIn();
+                    loginWindow.Show();
+
+                    CloseCurrentWindow();
+                });
+            }
         }
 
         private async Task JoinLobbyAndSyncState()
