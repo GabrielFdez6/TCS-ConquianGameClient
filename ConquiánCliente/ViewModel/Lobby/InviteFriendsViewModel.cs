@@ -80,9 +80,9 @@ namespace ConquiánCliente.ViewModel.Lobby
                 string msg = messageResolver.GetMessage(errorType);
                 MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show(Lang.LobbyErrorLoadingFriends);
+                MessageBox.Show(Lang.LobbyErrorLoadingFriends + $": {ex.Message}");
             }
         }
 
