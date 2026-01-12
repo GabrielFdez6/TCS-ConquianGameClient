@@ -216,6 +216,12 @@ namespace ConquiánCliente.ViewModel.Game
                 var context = new InstanceContext(callbackHandler);
                 client = new GameClient(context);
 
+                if (client.InnerChannel != null)
+                {
+                    client.InnerChannel.Closed += OnConnectionLost;
+                    client.InnerChannel.Faulted += OnConnectionLost;
+                }
+
                 int playerId = PlayerSession.CurrentPlayer.idPlayer;
                 GameStateDto gameState = await client.JoinGameAsync(roomCode, playerId);
 
@@ -260,6 +266,29 @@ namespace ConquiánCliente.ViewModel.Game
             catch (Exception)
             {
                 MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void OnConnectionLost(object sender, EventArgs e)
+        {
+            if (PlayerSession.IsGuest)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    if (isNavigatingAway) return;
+                    isNavigatingAway = true;
+
+                    StopTurnTimer();
+
+                    MessageBox.Show(Lang.ErrorLostConnection, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                    var loginWindow = new LogIn();
+                    loginWindow.Show();
+
+                    CloseWindow();
+
+                    PlayerSession.EndSession();
+                });
             }
         }
 

@@ -49,7 +49,7 @@ namespace ConquiánCliente.View.Game
             confirmDialog.Owner = this;
             bool? result = confirmDialog.ShowDialog();
 
-            if (result == true)
+            if (result == true) 
             {
                 if (viewModel != null)
                 {
@@ -57,8 +57,20 @@ namespace ConquiánCliente.View.Game
                 }
 
                 AudioManager.Instance.PlayMenuMusic();
-                var mainMenu = new ConquiánCliente.View.MainMenu.MainMenu();
-                mainMenu.Show();
+
+                if (PlayerSession.IsGuest)
+                {
+                    PlayerSession.EndSession();
+
+                    var loginView = new ConquiánCliente.LogIn();
+                    loginView.Show();
+                }
+                else
+                {
+                    var mainMenu = new ConquiánCliente.View.MainMenu.MainMenu();
+                    mainMenu.Show();
+                }
+
                 this.Close();
             }
         }
