@@ -783,4 +783,7 @@ Si la carta no te sirve, usa el botón 'Pasar'.</value>
   <data name="ChatCooldownWarning" xml:space="preserve">
     <value>Estás enviando mensajes muy rápido. Espera {0} segundos...</value>
   </data>
+  <data name="ErrorPlayerInLobby" xml:space="preserve">
+    <value>El jugador ya se encuentra en un lobby.</value>
+  </data>
 </root>

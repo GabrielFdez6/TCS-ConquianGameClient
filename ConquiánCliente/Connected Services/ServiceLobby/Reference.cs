@@ -680,6 +680,9 @@ namespace ConquiánCliente.ServiceLobby {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         PlayerBanned = 41,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UserInLobby = 42,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

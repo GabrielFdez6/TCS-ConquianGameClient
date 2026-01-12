@@ -80,9 +80,9 @@ namespace ConquiánCliente.ViewModel.Lobby
                 string msg = messageResolver.GetMessage(errorType);
                 MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(Lang.LobbyErrorLoadingFriends + $": {ex.Message}");
+                MessageBox.Show(Lang.LobbyErrorLoadingFriends);
             }
         }
 
@@ -94,6 +94,12 @@ namespace ConquiánCliente.ViewModel.Lobby
                 if (friendVM.CurrentStatus == PlayerStatus.InGame)
                 {
                     MessageBox.Show(Lang.ErrorPlayerInGame, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+
+                if (friendVM.CurrentStatus == PlayerStatus.InLobby)
+                {
+                    MessageBox.Show(Lang.ErrorPlayerInLobby, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
                 }
 
@@ -112,11 +118,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 {
                     var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
 
-                    if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.UserInGame)
-                    {
-                        MessageBox.Show(Lang.ErrorPlayerInGame, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    else if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.UserOffline)
+                    if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.UserOffline)
                     {
                         friendVM.StatusText = Lang.StatusOffline;
                         friendVM.IsOnline = false;
@@ -124,7 +126,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                     else
                     {
                         string msg = messageResolver.GetMessage(errorType);
-                        MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
                 catch (CommunicationException)

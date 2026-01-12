@@ -655,6 +655,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El jugador ya se encuentra en un lobby..
+        /// </summary>
+        public static string ErrorPlayerInLobby {
+            get {
+                return ResourceManager.GetString("ErrorPlayerInLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No se pudo procesar la solicitud. Verifique que el correo esté registrado y verificado..
         /// </summary>
         public static string ErrorRecoveryRequestFailed {

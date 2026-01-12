@@ -221,6 +221,9 @@ namespace ConquiánCliente.ServiceInvitation {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         PlayerBanned = 41,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UserInLobby = 42,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

@@ -784,4 +784,7 @@ If the card is not useful, use the 'To Pass' button.</value>
   <data name="ChatCooldownWarning" xml:space="preserve">
     <value>You are sending messages too quickly. Please wait {0} seconds...</value>
   </data>
+  <data name="ErrorPlayerInLobby" xml:space="preserve">
+    <value>The player is already in a lobby.</value>
+  </data>
 </root>

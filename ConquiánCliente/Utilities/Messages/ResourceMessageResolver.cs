@@ -63,6 +63,7 @@ namespace ConquiánCliente.Utilities.Messages
                 { ServiceErrorType.InvalidVerificationCode, () => Lang.ErrorInvalidVerificationCode },
                 { ServiceErrorType.UserInGame, () => Lang.ErrorPlayerInGame },
                 { ServiceErrorType.PlayerBanned, () => Lang.ErrorPlayerBanned },
+                { ServiceErrorType.UserInLobby, () => Lang.ErrorPlayerInLobby }
             };
         }
     }

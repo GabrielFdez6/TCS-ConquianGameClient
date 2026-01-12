@@ -4,7 +4,7 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
-          <wsrm:InactivityTimeout Milliseconds="60000">
+          <wsrm:InactivityTimeout Milliseconds="90000">
           </wsrm:InactivityTimeout>
           <wsrm:AcknowledgementInterval Milliseconds="200">
           </wsrm:AcknowledgementInterval>
