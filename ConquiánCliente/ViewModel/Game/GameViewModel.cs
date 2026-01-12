@@ -470,7 +470,7 @@ namespace ConquiánCliente.ViewModel.Game
         {
             bool executionResult = false;
 
-            if (!CanPlayCards(cardIds))
+            if (!CanPlayCards(cardIds) || cardIds.Count > MINIMUM_MELD_SIZE)
             {
                 executionResult = false;
                 return executionResult;
@@ -609,7 +609,7 @@ namespace ConquiánCliente.ViewModel.Game
         {
             bool isValid = false;
 
-            if (cards == null || cards.Count < MINIMUM_MELD_SIZE)
+            if (cards == null || cards.Count < MINIMUM_MELD_SIZE || cards.Count > MINIMUM_MELD_SIZE)
             {
                 isValid = false;
                 return isValid;
@@ -725,6 +725,12 @@ namespace ConquiánCliente.ViewModel.Game
             }
 
             var selectedCards = PlayerHand.Where(c => c.IsSelected).ToList();
+
+            if (selectedCards.Count + 1 > MINIMUM_MELD_SIZE)
+            {
+                MessageBox.Show(Lang.GameInvalidMeld, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
             if (HasJustDrawnFromDeck && selectedCards.Count == SINGLE_CARD_COUNT)
             {
