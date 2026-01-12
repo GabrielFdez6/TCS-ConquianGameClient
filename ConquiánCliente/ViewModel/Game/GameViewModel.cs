@@ -351,14 +351,15 @@ namespace ConquiánCliente.ViewModel.Game
                     return;
                 }
 
+                isNavigatingAway = true;
+                isGameEnded = true;
+                StopTurnTimer();
+                ShowGameResults(results);
+
                 if (results.ErrorSavingToDatabase)
                 {
                     MessageBox.Show(Lang.GameResultErrorSQL, Lang.TitleError, MessageBoxButton.OK);
                 }
-
-                isGameEnded = true;
-                StopTurnTimer();
-                ShowGameResults(results);
             });
         }
 
