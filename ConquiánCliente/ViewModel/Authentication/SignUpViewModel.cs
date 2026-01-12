@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+
 namespace ConquiánCliente.ViewModel.Authentication
 {
     public class SignUpViewModel : ViewModelBase
@@ -182,6 +183,20 @@ namespace ConquiánCliente.ViewModel.Authentication
                 MessageBox.Show(string.Format(Lang.ErrorVerificationCodeEmpty));
                 return;
             }
+
+            if (enteredVerificationCode.Length > 6)
+            {
+                MessageBox.Show(string.Format(Lang.ErrorVerificationCode,MessageBoxImage.Information));
+                return;
+            }
+
+            string code = SignUpValidator.ValidateCodeVerification(enteredVerificationCode);
+            if (!string.IsNullOrEmpty(code))
+            {
+                MessageBox.Show(string.Format(Lang.ErrorVerificationCodeFormat));
+                return;
+            }
+
 
             try
             {

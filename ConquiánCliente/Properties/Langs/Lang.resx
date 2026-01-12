@@ -786,4 +786,10 @@ Si la carta no te sirve, usa el botón 'Pasar'.</value>
   <data name="ErrorPlayerInLobby" xml:space="preserve">
     <value>El jugador ya se encuentra en un lobby.</value>
   </data>
+  <data name="ErrorVerificationCode" xml:space="preserve">
+    <value>El código de verificación es demasiado largo.</value>
+  </data>
+  <data name="ErrorVerificationCodeFormat" xml:space="preserve">
+    <value>El formato del código de verificación es invalido.</value>
+  </data>
 </root>

@@ -826,6 +826,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El código de verificación es demasiado largo..
+        /// </summary>
+        public static string ErrorVerificationCode {
+            get {
+                return ResourceManager.GetString("ErrorVerificationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El código de verificación no puede estar vacio.
         /// </summary>
         public static string ErrorVerificationCodeEmpty {
@@ -840,6 +849,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string ErrorVerificationCodeExpired {
             get {
                 return ResourceManager.GetString("ErrorVerificationCodeExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El formato del código de verificación es invalido..
+        /// </summary>
+        public static string ErrorVerificationCodeFormat {
+            get {
+                return ResourceManager.GetString("ErrorVerificationCodeFormat", resourceCulture);
             }
         }
         

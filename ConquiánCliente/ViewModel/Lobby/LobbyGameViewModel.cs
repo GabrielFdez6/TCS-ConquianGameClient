@@ -165,8 +165,23 @@ namespace ConquiánCliente.ViewModel.Lobby
                 return;
             }
 
+            if (PlayerSession.CurrentPlayer != null)
+            {
+                var myUserOnServer = lobbyState.Players.FirstOrDefault(p => p.nickname == PlayerSession.CurrentPlayer.nickname);
+                if (myUserOnServer != null)
+                {
+                    this.myPlayerId = myUserOnServer.idPlayer;
+                    PlayerSession.CurrentPlayer.idPlayer = myUserOnServer.idPlayer;
+                }
+            }
+
             idHost = lobbyState.idHostPlayer;
-            this.IsHost = (PlayerSession.CurrentPlayer.idPlayer == idHost);
+
+            if (PlayerSession.CurrentPlayer != null)
+            {
+                this.IsHost = (PlayerSession.CurrentPlayer.idPlayer == idHost);
+            }
+
             UpdatePlayerList(lobbyState.Players);
             UpdateChat(lobbyState.ChatMessages);
 
@@ -179,7 +194,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 await client.SelectGamemodeAsync(this.RoomCode, this.currentGameModeId);
             }
 
-            if (!PlayerSession.IsGuest)
+            if (!PlayerSession.IsGuest && PlayerSession.CurrentPlayer != null)
             {
                 await client.JoinAndSubscribeAsync(this.RoomCode, PlayerSession.CurrentPlayer.idPlayer);
             }
@@ -507,11 +522,11 @@ namespace ConquiánCliente.ViewModel.Lobby
             if (client == null) return;
             try
             {
-                if (notifyServer && client.State == CommunicationState.Opened)
+                if (notifyServer)
                 {
                     try
                     {
-                        if (this.myPlayerId > 0)
+                        if (this.myPlayerId != 0)
                         {
                             client.LeaveAndUnsubscribe(this.RoomCode, this.myPlayerId);
                         }

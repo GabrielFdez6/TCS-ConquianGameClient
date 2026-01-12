@@ -250,13 +250,6 @@
                                    HorizontalAlignment="Center"/>
                     </Button>
 
-                    <Button Grid.Column="1" Margin="10,0,0,0" Style="{StaticResource PrimaryButtonStyle}" Width="140" Height="40">
-                        <TextBlock Text="{x:Static language:Lang.GlobalInvite}"
-                                   FontSize="14"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
-                    </Button>
-
                     <Button Grid.Column="2" Content="{x:Static language:Lang.GlobalBack}"
                             Foreground="{StaticResource ForgotPasswordTextBrush}"
                             FontSize="14"

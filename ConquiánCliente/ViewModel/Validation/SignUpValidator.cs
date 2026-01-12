@@ -17,6 +17,7 @@ namespace ConquiánCliente.ViewModel.Validation
         private const string EMAIL_PATTERN = @"^[^@\s]+@[^@\s]+\.[^@\s]{2,}$";
         private const string UPPERCASE_PATTERN = @"[A-Z]";
         private const string SPECIAL_CHAR_PATTERN = @"[!@#$%^&*()_+\-=\[\]{};':""\\|,.<>\/?]";
+        private const string NUMBER_VERIFICATION_CODE_PATTER = @"^[0-9]{6}$";
 
         private const int MAX_NAME_LENGTH = 25;
         private const int MAX_LAST_NAME_LENGTH = 50;
@@ -56,6 +57,15 @@ namespace ConquiánCliente.ViewModel.Validation
                 return Lang.ErrorValidName;
             }
 
+            return string.Empty;
+        }
+
+        public static string ValidateCodeVerification(string codeVerification)
+        {
+            if (!IsMatchWithTimeout(codeVerification, NUMBER_VERIFICATION_CODE_PATTER))
+            {
+                return Lang.ErrorVerificationCodeIncorrect;
+            }
             return string.Empty;
         }
 
