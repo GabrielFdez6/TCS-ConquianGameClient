@@ -20,6 +20,9 @@ namespace ConquiánCliente.ViewModel.Authentication
         private bool isLoading; 
         private readonly IMessageResolver messageResolver;
 
+        private const int LanguageIndexSpanish = 1;
+        private const int LanguageIndexEnglish = 2;
+
         private const string SPANISH_LANGUAGE_CODE = "es-MX";
         private const string ENGLISH_LANGUAGE_CODE = "en-US";
 
@@ -183,14 +186,18 @@ namespace ConquiánCliente.ViewModel.Authentication
 
         private void ChangeLanguage()
         {
-            if (SelectedLanguageIndex == 1)
+            switch (SelectedLanguageIndex)
             {
-                Properties.Settings.Default.languageCode = SPANISH_LANGUAGE_CODE;
+                case LanguageIndexSpanish:
+                    Properties.Settings.Default.languageCode = SPANISH_LANGUAGE_CODE;
+                    break;
+                case LanguageIndexEnglish:
+                    Properties.Settings.Default.languageCode = ENGLISH_LANGUAGE_CODE;
+                    break;
+                default:
+                    return;
             }
-            else if (SelectedLanguageIndex == 2)
-            {
-                Properties.Settings.Default.languageCode = ENGLISH_LANGUAGE_CODE;
-            }
+
             Properties.Settings.Default.Save();
         }
     }
