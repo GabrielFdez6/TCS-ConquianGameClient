@@ -3,6 +3,8 @@ using ConquiánCliente.ServiceLogin;
 using ConquiánCliente.View;
 using ConquiánCliente.View.Lobby;
 using ConquiánCliente.View.MainMenu;
+using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -33,11 +35,24 @@ namespace ConquiánCliente.ViewModel.MainMenu
 
             if (PlayerSession.CurrentPlayer != null)
             {
-                InvitationClientManager.Connect(PlayerSession.CurrentPlayer.idPlayer);
+                int playerId = PlayerSession.CurrentPlayer.idPlayer;
+                Task.Run(() => InitializeServerConnections(playerId));
+            }
+        }
+
+        private void InitializeServerConnections(int playerId)
+        {
+            try
+            {
+                InvitationClientManager.Connect(playerId);
                 if (PresenceClientManager.Instance.Client != null)
                 {
                     PresenceClientManager.Instance.Client.Subscribe(PlayerSession.CurrentPlayer.idPlayer);
                 }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error connecting services in background: " + ex.Message);
             }
         }
 
@@ -75,14 +90,30 @@ namespace ConquiánCliente.ViewModel.MainMenu
             try
             {
                 int playerId = PlayerSession.CurrentPlayer.idPlayer;
-                var loginClient = new LoginClient();
-                await loginClient.SignOutPlayerAsync(playerId);
-                if (PresenceClientManager.Instance.Client != null)
+                await Task.Run(async () =>
                 {
-                    await PresenceClientManager.Instance.Client.UnsubscribeAsync(playerId);
-                }
+                    var loginClient = new LoginClient();
+                    try
+                    {
+                        await loginClient.SignOutPlayerAsync(playerId);
+                    }
+                    catch (Exception) { }
 
-                InvitationClientManager.Disconnect(playerId);
+                    try
+                    {
+                        if (PresenceClientManager.Instance.Client != null)
+                        {
+                            await PresenceClientManager.Instance.Client.UnsubscribeAsync(playerId);
+                        }
+                    }
+                    catch (Exception) { }
+
+                    try
+                    {
+                        InvitationClientManager.Disconnect(playerId);
+                    }
+                    catch (Exception) { }
+                });
             }
             catch (System.ServiceModel.EndpointNotFoundException)
             {
@@ -91,7 +122,6 @@ namespace ConquiánCliente.ViewModel.MainMenu
             finally
             {
                 PlayerSession.EndSession();
-
                 var loginWindow = new LogIn();
                 loginWindow.Show();
                 (parameter as Window)?.Close();

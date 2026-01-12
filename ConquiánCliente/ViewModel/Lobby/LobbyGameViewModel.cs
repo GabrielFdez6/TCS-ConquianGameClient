@@ -188,29 +188,30 @@ namespace ConquiánCliente.ViewModel.Lobby
             }
             catch (CommunicationException)
             {
+                if (IsNavigatingAway)
+                {
+                    return;
+                }
+
                 IsNavigatingAway = true;
-
-
-                InvitationClientManager.Disconnect(PlayerSession.CurrentPlayer.idPlayer);
-
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                     NavigateToLoginOrMainMenu(isConnectionLost: true);
                 });
-
-                NavigateToLoginOrMainMenu(isConnectionLost: true);
             }
             catch (Exception)
             {
-                IsNavigatingAway = true;
-                InvitationClientManager.Disconnect(PlayerSession.CurrentPlayer.idPlayer);
+                if (IsNavigatingAway)
+                {
+                    return;
+                }
 
+                IsNavigatingAway = true;
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                     NavigateToLoginOrMainMenu(isConnectionLost: true);
-
                 });
             }
         }
@@ -250,10 +251,13 @@ namespace ConquiánCliente.ViewModel.Lobby
                     }
                     catch (Exception)
                     {
-                        Application.Current.Dispatcher.Invoke(() =>
+                        if (!IsNavigatingAway)
                         {
-                            MessageBox.Show(Lang.ErrorLobbyAction, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                        });
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                MessageBox.Show(Lang.ErrorLobbyAction, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                            });
+                        }
                     }
                 });
             }
@@ -276,7 +280,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         {
             if (IsNavigatingAway) return;
             IsNavigatingAway = true;
-            CloseClientConnection(notifyServer: true);
+            Task.Run(() => CloseClientConnection(notifyServer: true));
             Application.Current.Shutdown();
         }
 
@@ -412,7 +416,13 @@ namespace ConquiánCliente.ViewModel.Lobby
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show(Lang.ErrorSendMessageFailed, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (!IsNavigatingAway)
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            MessageBox.Show(Lang.ErrorSendMessageFailed, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                        });
+                    }
                 }
             });
 
@@ -436,7 +446,7 @@ namespace ConquiánCliente.ViewModel.Lobby
             {
                 for (int i = COOLDOWN_DURATION; i > 0; i--)
                 {
-                    CooldownText = string.Format(Lang.ChatCooldownWarning, i);
+                    CooldownText = string.Format(Lang.ChatCooldownWarning, i);                    
 
                     await Task.Delay(1000);
                 }
@@ -453,7 +463,7 @@ namespace ConquiánCliente.ViewModel.Lobby
         {
             if (isNavigatingAway) return;
             isNavigatingAway = true;
-            CloseClientConnection(notifyServer: true);
+            Task.Run(() => CloseClientConnection(notifyServer: true));
             NavigateToLoginOrMainMenu(parameter as Window);
         }
         public void CloseClientConnection(bool notifyServer)
@@ -500,45 +510,54 @@ namespace ConquiánCliente.ViewModel.Lobby
         }
         private void NavigateToLoginOrMainMenu(Window currentWindow = null, bool isConnectionLost = false)
         {
-            if (isConnectionLost)
+            if (isConnectionLost && PlayerSession.CurrentPlayer != null)
             {
-                if (PlayerSession.CurrentPlayer != null)
-                    InvitationClientManager.Disconnect(PlayerSession.CurrentPlayer.idPlayer);
-            }
-
-            Window newWindow = null;
-
-            if (PlayerSession.IsGuest || isConnectionLost)
-            {
-                PlayerSession.EndSession();
-                newWindow = new LogIn();
-            }
-            else
-            {
-                newWindow = new View.MainMenu.MainMenu();
-            }
-
-            newWindow.Show();
-            Application.Current.MainWindow = newWindow;
-
-            var windowToClose = currentWindow;
-            if (windowToClose == null)
-            {
-                foreach (Window window in Application.Current.Windows.OfType<Window>().ToList())
+                Task.Run(() =>
                 {
-                    if (window.DataContext == this)
+                    try
                     {
-                        windowToClose = window;
-                        break;
+                        InvitationClientManager.Disconnect(PlayerSession.CurrentPlayer.idPlayer);
+                    }
+                    catch { }
+                });
+            }
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Window newWindow = null;
+
+                if (PlayerSession.IsGuest || isConnectionLost)
+                {
+                    PlayerSession.EndSession();
+                    newWindow = new LogIn();
+                }
+                else
+                {
+                    newWindow = new View.MainMenu.MainMenu();
+                }
+
+                newWindow.Show();
+                Application.Current.MainWindow = newWindow;
+
+                var windowToClose = currentWindow;
+                if (windowToClose == null)
+                {
+                    foreach (Window window in Application.Current.Windows.OfType<Window>().ToList())
+                    {
+                        if (window.DataContext == this)
+                        {
+                            windowToClose = window;
+                            break;
+                        }
                     }
                 }
-            }
 
-            if (windowToClose != null)
-            {
-                try { windowToClose.Close(); }
-                catch (InvalidOperationException ex) { System.Diagnostics.Debug.WriteLine($"Intento de cerrar ventana ya en proceso: {ex.Message}"); }
-            }
+                if (windowToClose != null)
+                {
+                    try { windowToClose.Close(); }
+                    catch (InvalidOperationException ex) { System.Diagnostics.Debug.WriteLine($"Intento de cerrar ventana ya en proceso: {ex.Message}"); }
+                }
+            });
         }
 
         private bool CanExecuteStartGame(object obj)

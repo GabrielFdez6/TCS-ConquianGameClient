@@ -194,10 +194,12 @@ namespace ConquiánCliente
 
         private void PerformLogoutAndNavigate()
         {
-            if (!PlayerSession.IsLoggedIn) return;
+            if (!PlayerSession.IsLoggedIn)
+            {
+                return;
+            }
 
             MessageBox.Show(Lang.ErrorLostConnection, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-
             PlayerSession.EndSession();
             NavigateToLogin();
         }
