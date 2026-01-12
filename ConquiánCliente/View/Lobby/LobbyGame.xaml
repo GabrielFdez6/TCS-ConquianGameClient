@@ -212,10 +212,12 @@
                 </Grid.RowDefinitions>
 
                 <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Background="#66000000" Padding="5">
-                    <ListBox ItemsSource="{Binding ChatMessages}" 
+                    <ListBox x:Name="ltBxChat"
+                             ItemsSource="{Binding ChatMessages}" 
                              Background="Transparent" 
                              BorderThickness="0"
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             Style="{StaticResource ChatListBoxStyle}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock TextWrapping="Wrap" Margin="0,2">
