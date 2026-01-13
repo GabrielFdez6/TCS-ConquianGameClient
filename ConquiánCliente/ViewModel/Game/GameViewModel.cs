@@ -392,7 +392,19 @@ namespace ConquiánCliente.ViewModel.Game
                 isNavigatingAway = true;
                 StopTurnTimer();
                 MessageBox.Show(Lang.GameOpponentLeft, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
-                NavigateToMainMenu();
+                if (PlayerSession.IsGuest)
+                {
+                    PlayerSession.EndSession();
+
+                    var loginView = new ConquiánCliente.LogIn();
+                    loginView.Show();
+
+                    CloseWindow();
+                }
+                else
+                {
+                    NavigateToMainMenu();
+                }
             });
         }
 

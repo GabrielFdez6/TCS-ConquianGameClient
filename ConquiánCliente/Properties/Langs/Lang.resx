@@ -795,4 +795,7 @@ Si la carta no te sirve, usa el botón 'Pasar'.</value>
   <data name="GameResultErrorSQL" xml:space="preserve">
     <value>Los resultados de esta partida no se pudieron registrar debido a un error de conexión de base de datos.</value>
   </data>
+  <data name="OpponentConnectionLost" xml:space="preserve">
+    <value>No se puede iniciar la partida debido a que el oponente no tiene conexión. Por favor espere</value>
+  </data>
 </root>

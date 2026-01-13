@@ -796,4 +796,7 @@ If the card is not useful, use the 'To Pass' button.</value>
   <data name="GameResultErrorSQL" xml:space="preserve">
     <value>The results of this game could not be recorded due to a database connection error.</value>
   </data>
+  <data name="OpponentConnectionLost" xml:space="preserve">
+    <value>The game cannot be started because your opponent is not connected. Please wait.</value>
+  </data>
 </root>

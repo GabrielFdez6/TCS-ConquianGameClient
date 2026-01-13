@@ -224,6 +224,9 @@ namespace ConquiánCliente.ServiceGuestInvitation {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         UserInLobby = 42,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        OpponentConnectionLost = 43,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

@@ -699,6 +699,9 @@ namespace ConquiánCliente.ServiceGame {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         UserInLobby = 42,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        OpponentConnectionLost = 43,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

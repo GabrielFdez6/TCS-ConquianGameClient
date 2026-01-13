@@ -1774,6 +1774,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No se puede iniciar la partida debido a que el oponente no tiene conexión. Por favor espere.
+        /// </summary>
+        public static string OpponentConnectionLost {
+            get {
+                return ResourceManager.GetString("OpponentConnectionLost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Nueva contraseña.
         /// </summary>
         public static string PasswordRecoveryNewPassword {
