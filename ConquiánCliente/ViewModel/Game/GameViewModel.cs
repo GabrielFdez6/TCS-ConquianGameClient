@@ -320,6 +320,12 @@ namespace ConquiánCliente.ViewModel.Game
             callbackHandler.OnOpponentLeftEvent += HandleOpponentLeft;
             callbackHandler.OnGameEndedByAFKEvent += HandleGameEndedByAFK;
 
+            if (client.InnerChannel != null)
+            {
+                client.InnerChannel.Closed += OnConnectionLost;
+                client.InnerChannel.Faulted += OnConnectionLost;
+            }
+
             return callbackHandler;
         }
 
