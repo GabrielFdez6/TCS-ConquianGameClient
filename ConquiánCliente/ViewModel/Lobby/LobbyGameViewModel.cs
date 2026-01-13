@@ -679,11 +679,19 @@ namespace ConquiánCliente.ViewModel.Lobby
                 catch (FaultException<ServiceFaultDto> fault)
                 {
                     var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+
                     string msg = messageResolver.GetMessage(errorType);
 
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                        if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.OpponentConnectionLost)
+                        {
+                            MessageBox.Show(msg, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
+                        else
+                        {
+                            MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     });
                 }
                 catch (CommunicationException)
