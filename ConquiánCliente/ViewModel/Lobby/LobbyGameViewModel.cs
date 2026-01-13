@@ -576,6 +576,7 @@ namespace ConquiánCliente.ViewModel.Lobby
                 client = null;
             }
         }
+
         private void CloseCurrentWindow()
         {
             foreach (Window window in Application.Current.Windows.OfType<Window>().ToList())
