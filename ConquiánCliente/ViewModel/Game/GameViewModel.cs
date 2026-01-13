@@ -35,6 +35,8 @@ namespace ConquiánCliente.ViewModel.Game
         private bool isGameEnded = false;
         private readonly IMessageResolver messageResolver;
         private bool isNavigatingAway = false;
+        private bool isCatchingUp = false;
+        private DateTime lastEventTime = DateTime.MinValue;
 
         private bool isAFKWarningVisible;
         public bool IsAFKWarningVisible
@@ -325,16 +327,31 @@ namespace ConquiánCliente.ViewModel.Game
 
         private async void HandleOpponentMeld(CardDto[] meldCardDtos)
         {
-            var cardVMs = meldCardDtos.Select(dto => new CardViewModel(dto)).ToList();
-            await Application.Current.Dispatcher.InvokeAsync(() =>
+            if ((DateTime.Now - lastEventTime).TotalMilliseconds < 200)
             {
-                TemporaryMeld.Clear();
-                foreach (var cardVM in cardVMs)
+                isCatchingUp = true;
+            }
+            else
+            {
+                isCatchingUp = false;
+            }
+            lastEventTime = DateTime.Now;
+
+            var cardVMs = meldCardDtos.Select(dto => new CardViewModel(dto)).ToList();
+
+            if (!isCatchingUp)
+            {
+                await Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    TemporaryMeld.Add(cardVM);
-                }
-            });
-            await Task.Delay(ANIMATION_DELAY_MS);
+                    TemporaryMeld.Clear();
+                    foreach (var cardVM in cardVMs)
+                    {
+                        TemporaryMeld.Add(cardVM);
+                    }
+                });
+                await Task.Delay(ANIMATION_DELAY_MS);
+            }
+
             await Application.Current.Dispatcher.InvokeAsync(() =>
             {
                 TemporaryMeld.Clear();

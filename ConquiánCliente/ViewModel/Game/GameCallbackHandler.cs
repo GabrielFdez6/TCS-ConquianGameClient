@@ -4,7 +4,7 @@ using System.ServiceModel;
 
 namespace ConquiánCliente.ViewModel.Game
 {
-    [CallbackBehavior(UseSynchronizationContext = false)]
+    [CallbackBehavior(UseSynchronizationContext = true)]
     public class GameCallbackHandler : IGameCallback
     {
 
