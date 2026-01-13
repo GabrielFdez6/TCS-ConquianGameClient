@@ -877,6 +877,9 @@ namespace ConquiánCliente.ServiceLobby {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobby/YouWereKicked")]
         void YouWereKicked();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobby/Ping", ReplyAction="http://tempuri.org/ILobby/PingResponse")]
+        bool Ping();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

@@ -58,5 +58,10 @@ namespace ConquiánCliente.ViewModel.Lobby
         {
             OnYouWereKicked?.Invoke();
         }
+
+        public bool Ping()
+        {
+            return true;
+        }
     }
 }
