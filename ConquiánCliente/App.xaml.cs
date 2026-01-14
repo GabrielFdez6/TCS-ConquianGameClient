@@ -17,11 +17,7 @@ namespace ConquiánCliente
 {
     public partial class App : Application
     {
-        private const int RECONNECTION_TIMEOUT_SECONDS = 60;
-
         private NetworkConnectionMonitor networkMonitor;
-        private DispatcherTimer reconnectionTimer;
-        private Window reconnectingWindow;
         private static bool isHandlingCriticalError = false;
         private static readonly object lockObject = new object();
 
@@ -59,11 +55,6 @@ namespace ConquiánCliente
         }
         protected override void OnStartup(StartupEventArgs e)
         {
-
-            reconnectionTimer = new DispatcherTimer();
-            reconnectionTimer.Interval = TimeSpan.FromSeconds(RECONNECTION_TIMEOUT_SECONDS);
-            reconnectionTimer.Tick += OnReconnectionTimeout;
-
             networkMonitor = new NetworkConnectionMonitor();
             networkMonitor.OnNetworkStatusLost += HandleNetworkLost;
             networkMonitor.OnNetworkStatusRestored += HandleNetworkRestored;
@@ -124,73 +115,14 @@ namespace ConquiánCliente
                 }
 
                 PlayerSession.IsNetworkDown = true;
-
-                if (reconnectingWindow == null)
-                {
-                    reconnectionTimer.Start();
-
-                    reconnectingWindow = new ConquiánCliente.View.Utilities.ReconnectionWindow();
-
-                    if (Application.Current.MainWindow != null && Application.Current.MainWindow.IsVisible)
-                    {
-                        reconnectingWindow.Owner = Application.Current.MainWindow;
-                    }
-
-                    foreach (Window window in Application.Current.Windows)
-                    {
-                        if (window != reconnectingWindow)
-                        {
-                            window.IsEnabled = false;
-                        }
-                    }
-
-                    reconnectingWindow.Show();
-                }
             });
         }
 
         private void HandleNetworkRestored()
         {
-            this.Dispatcher.Invoke(async () =>
-            {
-                if (reconnectionTimer.IsEnabled)
-                {
-                    reconnectionTimer.Stop();
-                    await System.Threading.Tasks.Task.Delay(5000);
-                    PlayerSession.IsNetworkDown = false;
-
-                    if (reconnectingWindow != null)
-                    {
-                        reconnectingWindow.Close();
-                        reconnectingWindow = null;
-                    }
-
-                    foreach (Window window in Application.Current.Windows)
-                    {
-                        window.IsEnabled = true;
-                    }
-                }
-            });
-        }
-
-        private void OnReconnectionTimeout(object sender, EventArgs e)
-        {
             this.Dispatcher.Invoke(() =>
-            {
-                reconnectionTimer.Stop();
-
-                if (reconnectingWindow != null)
-                {
-                    reconnectingWindow.Close();
-                    reconnectingWindow = null;
-                }
-
-                foreach (Window window in Application.Current.Windows)
-                {
-                    window.IsEnabled = true;
-                }
-
-                PerformLogoutAndNavigate();
+            { 
+                PlayerSession.IsNetworkDown = false;
             });
         }
 
