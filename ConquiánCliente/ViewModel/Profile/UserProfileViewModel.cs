@@ -146,7 +146,7 @@ namespace ConquiánCliente.ViewModel.Profile
             IsHistoryEmpty = true;
 
             NavigateBackCommand = new RelayCommand(ExecuteNavigateBack);
-            NavigateToEditCommand = new RelayCommand(ExecuteNavigateToEdit);
+            NavigateToEditCommand = new RelayCommand(ExecuteNavigateToEdit, CanExecuteNavigateToEdit);
             NavigateToEditProfilePictureCommand = new RelayCommand(ExecuteNavigateToEditProfilePicture);
             _ = LoadPlayerData();
         }
@@ -188,6 +188,11 @@ namespace ConquiánCliente.ViewModel.Profile
 
                 SetProfileImage(System.IO.Path.GetFileName(fullPlayerProfile.pathPhoto));
                 PlayerSession.UpdateSession(fullPlayerProfile);
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    CommandManager.InvalidateRequerySuggested();
+                });
             }
         }
 
@@ -269,6 +274,11 @@ namespace ConquiánCliente.ViewModel.Profile
                 parentWindow?.Close();
             }
         }
+        private bool CanExecuteNavigateToEdit(object parameter)
+        {
+            return fullPlayerProfile != null;
+        }
+
         private void ExecuteNavigateToEdit(object parameter)
         {
             var editInfoViewModel = new EditInfoViewModel(fullPlayerProfile);
