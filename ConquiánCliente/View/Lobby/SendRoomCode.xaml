@@ -58,6 +58,7 @@
                     </Border.Effect>
 
                     <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" 
+                             MaxLength="45"
                              Padding="8" 
                              FontSize="16"
                              BorderThickness="0"

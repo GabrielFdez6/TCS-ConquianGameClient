@@ -78,6 +78,7 @@
                             </Border.Effect>
 
                             <TextBox Padding="8"
+                                     MaxLength="6"
                                      FontSize="20"
                                      BorderThickness="0"
                                      Background="Transparent"

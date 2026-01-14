@@ -62,6 +62,7 @@
                                               Opacity="0.9" />
                         </Border.Effect>
                         <TextBox Text="{Binding Player.nickname}" 
+                                 MaxLength="15"
                                  Padding="8" 
                                  FontSize="16" 
                                  BorderThickness="0" 
@@ -84,6 +85,7 @@
                                               Opacity="0.9" />
                         </Border.Effect>
                         <TextBox Text="{Binding Player.name}" 
+                                 MaxLength="25"
                                  Padding="8" 
                                  FontSize="16" 
                                  BorderThickness="0" 
@@ -106,6 +108,7 @@
                                               Opacity="0.9" />
                         </Border.Effect>
                         <TextBox Text="{Binding Player.lastName}" 
+                                 MaxLength="50"
                                  Padding="8" 
                                  FontSize="16" 
                                  BorderThickness="0" 
@@ -151,6 +154,7 @@
                                               Opacity="0.9" />
                         </Border.Effect>
                         <TextBox Text="{Binding FacebookLink}" 
+                                 MaxLength="25"
                                  Padding="8" 
                                  FontSize="16" 
                                  BorderThickness="0" 
@@ -173,6 +177,7 @@
                                               Opacity="0.9" />
                         </Border.Effect>
                         <TextBox Text="{Binding InstagramLink}" 
+                                 MaxLength="25"
                                  Padding="8" 
                                  FontSize="16" 
                                  BorderThickness="0" 

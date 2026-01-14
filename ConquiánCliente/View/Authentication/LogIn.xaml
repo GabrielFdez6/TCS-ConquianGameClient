@@ -57,6 +57,7 @@
                     </Border.Effect>
 
                     <TextBox x:Name="txtBoxEmail" 
+                             MaxLength="45"
                              Padding="8" 
                              FontSize="16"
                              BorderThickness="0"
@@ -84,6 +85,7 @@
                     </Border.Effect>
 
                     <PasswordBox x:Name="pbPassword" 
+                                 MaxLength="20"
                                  Padding="8" 
                                  FontSize="16" 
                                  BorderThickness="0"

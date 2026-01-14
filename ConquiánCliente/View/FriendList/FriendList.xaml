@@ -132,6 +132,7 @@
                         </Border.Effect>
 
                         <TextBox x:Name="txtBXSearchFriend" 
+                                 MaxLength="15"
                                  Padding="8" 
                                  FontSize="16" 
                                  BorderThickness="0" 
