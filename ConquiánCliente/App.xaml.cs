@@ -199,6 +199,31 @@ namespace ConquiánCliente
                 return;
             }
 
+            if (PlayerSession.CurrentPlayer != null)
+            {
+                var playerId = PlayerSession.CurrentPlayer.idPlayer;
+
+                System.Threading.Tasks.Task.Run(async () =>
+                {
+                    try
+                    {
+                        var loginClient = new LoginClient();
+                        await loginClient.SignOutPlayerAsync(playerId);
+                        loginClient.Close();
+
+                        try
+                        {
+                            PresenceClientManager.Instance.Client.Unsubscribe(playerId);
+                            InvitationClientManager.Disconnect(playerId);
+                        }
+                        catch { }
+                    }
+                    catch (Exception)
+                    {
+                    }
+                });
+            }
+
             MessageBox.Show(Lang.ErrorLostConnection, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
             PlayerSession.EndSession();
             NavigateToLogin();
