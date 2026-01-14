@@ -232,6 +232,17 @@ namespace ConquiánCliente.ViewModel.Profile
             {
                 MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
             }
+            else if (ex is FaultException<ServiceFaultDto> faultEx)
+            {
+                if (faultEx.Detail.ErrorType == ServiceErrorType.DatabaseError)
+                {
+                    MessageBox.Show(Lang.GlobalSqlError, Lang.TitleConnectionError);
+                }
+                else
+                {
+                    MessageBox.Show(Lang.ErrorUserNotFound, Lang.TitleError);
+                }
+            }
             else
             {
                 MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
