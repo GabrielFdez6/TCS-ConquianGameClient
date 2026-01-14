@@ -20,6 +20,9 @@ namespace ConquiánCliente.ViewModel.Lobby
             { 1, Lang.LobbyQuickGame },
             { 2, Lang.LobbyClassicGame }
         };
+
+        private static bool isHandlingCriticalError = false;
+        private static readonly object lockObject = new object();
         private readonly List<int> gameModeIds;
         private int currentGameModeId;
         private string playerCountText;
@@ -162,25 +165,76 @@ namespace ConquiánCliente.ViewModel.Lobby
             }
         }
 
+        private void ShowErrorSafely(string message, string title, Action onClosed = null)
+        {
+            lock (lockObject)
+            {
+                if (isHandlingCriticalError) return;
+                isHandlingCriticalError = true;
+            }
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                try
+                {
+                    MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Error);
+                    onClosed?.Invoke();
+                }
+                finally
+                {
+                    lock (lockObject)
+                    {
+                        isHandlingCriticalError = false;
+                    }
+                }
+            });
+        }
+
         private void OnConnectionLost(object sender, EventArgs e)
         {
             if (PlayerSession.IsGuest)
             {
+
+                lock (lockObject)
+                {
+                    if (isHandlingCriticalError)
+                    {
+                        return;
+                    }
+
+                    isHandlingCriticalError = true;
+                }
+
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    if (IsNavigatingAway) return;
-                    IsNavigatingAway = true;
+                    try
+                    {
+                        if (IsNavigatingAway)
+                        {
+                            return;
+                        }
 
-                    MessageBox.Show(Lang.ErrorLostConnection, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                        IsNavigatingAway = true;
 
-                    CloseClientConnection(notifyServer: false);
+                        MessageBox.Show(Lang.ErrorLostConnection, Lang.TitleError, MessageBoxButton.OK,
+                            MessageBoxImage.Warning);
 
-                    PlayerSession.EndSession();
+                        CloseClientConnection(notifyServer: false);
 
-                    var loginWindow = new LogIn();
-                    loginWindow.Show();
+                        PlayerSession.EndSession();
 
-                    CloseCurrentWindow();
+                        var loginWindow = new LogIn();
+                        loginWindow.Show();
+
+                        CloseCurrentWindow();
+                    }
+                    finally
+                    {
+                        lock (lockObject)
+                        {
+                            isHandlingCriticalError = false;
+                        }
+                    }
                 });
             }
         }
@@ -231,7 +285,10 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private async Task HandleConnectionError(Exception ex)
         {
-            if (IsNavigatingAway) return;
+            if (IsNavigatingAway)
+            {
+                return;
+            }
             IsNavigatingAway = true;
 
             string errorMessage = Lang.ErrorConnectingToServer;
@@ -251,23 +308,39 @@ namespace ConquiánCliente.ViewModel.Lobby
                 title = Lang.TitleConnectionError;
             }
 
+            lock (lockObject)
+            {
+                if (isHandlingCriticalError) return;
+                isHandlingCriticalError = true;
+            }
+
             await Application.Current.Dispatcher.InvokeAsync(() =>
             {
-                MessageBox.Show(errorMessage, title, MessageBoxButton.OK, MessageBoxImage.Error);
-            });
-
-            if (!isConnectionLost)
-            {
-                CloseClientConnection(notifyServer: false);
-                NavigateToLoginOrMainMenu();
-            }
-            else
-            {
-                await Application.Current.Dispatcher.InvokeAsync(() =>
+                try
                 {
-                    NavigateToLoginOrMainMenu(isConnectionLost: true);
-                });
-            }
+                    if (IsNavigatingAway)
+                    {
+                        return;
+                    }
+                    IsNavigatingAway = true;
+
+                    MessageBox.Show(errorMessage, title, MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    if (!isConnectionLost)
+                    {
+                        CloseClientConnection(notifyServer: false);
+                        NavigateToLoginOrMainMenu();
+                    }
+                    else
+                    {
+                        NavigateToLoginOrMainMenu(isConnectionLost: true);
+                    }
+                }
+                finally
+                {
+                    lock (lockObject) { isHandlingCriticalError = false; }
+                }
+            });
         }
 
         private bool CanExecuteKickPlayer(object parameter)
@@ -334,14 +407,30 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private void HandleYouWereKicked()
         {
-            if (IsNavigatingAway) return;
-            IsNavigatingAway = true;
+            lock (lockObject)
+            {
+                if (isHandlingCriticalError) return;
+                isHandlingCriticalError = true;
+            }
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                CloseClientConnection(notifyServer: false);
-                NavigateToLoginOrMainMenu();
-                MessageBox.Show(Lang.InfoYouWereKicked, Lang.Lobby, MessageBoxButton.OK, MessageBoxImage.Information);
+                try
+                {
+                    if (IsNavigatingAway)
+                    {
+                        return;
+                    }
+                    IsNavigatingAway = true;
+
+                    CloseClientConnection(notifyServer: false);
+                    NavigateToLoginOrMainMenu();
+                    MessageBox.Show(Lang.InfoYouWereKicked, Lang.Lobby, MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                finally
+                {
+                    lock (lockObject) { isHandlingCriticalError = false; }
+                }
             });
         }
 
@@ -382,13 +471,33 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private void HandleHostLeft()
         {
-            if (IsNavigatingAway) return;
-            IsNavigatingAway = true;
+            lock (lockObject)
+            {
+                if (isHandlingCriticalError)
+                {
+                    return;
+                }
+                isHandlingCriticalError = true;
+            }
+
             Application.Current.Dispatcher.Invoke(() =>
             {
-                MessageBox.Show(Lang.InfoHostLeft, Lang.Lobby, MessageBoxButton.OK, MessageBoxImage.Information);
-                CloseClientConnection(notifyServer: false);
-                NavigateToLoginOrMainMenu();
+                try
+                {
+                    if (IsNavigatingAway)
+                    {
+                        return;
+                    }
+                    IsNavigatingAway = true;
+
+                    MessageBox.Show(Lang.InfoHostLeft, Lang.Lobby, MessageBoxButton.OK, MessageBoxImage.Information);
+                    CloseClientConnection(notifyServer: false);
+                    NavigateToLoginOrMainMenu();
+                }
+                finally
+                {
+                    lock (lockObject) { isHandlingCriticalError = false; }
+                }
             });
         }
 
@@ -407,7 +516,10 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private void HandleGameStarting()
         {
-            if (IsHost) return;
+            if (IsHost)
+            {
+                return;
+            }
             NavigateToGame();
         }
 
@@ -540,7 +652,10 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private void ExecuteGoBack(object parameter)
         {
-            if (isNavigatingAway) return;
+            if (isNavigatingAway)
+            {
+                return;
+            }
             isNavigatingAway = true;
             Task.Run(() => CloseClientConnection(notifyServer: true));
             NavigateToLoginOrMainMenu(parameter as Window);
@@ -548,7 +663,10 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         public void CloseClientConnection(bool notifyServer)
         {
-            if (client == null) return;
+            if (client == null)
+            {
+                return;
+            }
             try
             {
                 if (notifyServer)
@@ -813,7 +931,10 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private void NavigateToGame()
         {
-            if (IsNavigatingAway) return;
+            if (IsNavigatingAway)
+            {
+                return;
+            }
             IsNavigatingAway = true;
 
             Application.Current.Dispatcher.Invoke(() =>
