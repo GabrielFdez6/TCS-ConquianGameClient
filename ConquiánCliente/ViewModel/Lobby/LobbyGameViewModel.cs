@@ -702,48 +702,58 @@ namespace ConquiánCliente.ViewModel.Lobby
                 return;
             }
 
-            Task.Run(async () =>
+            Task.Run(ProcessStartGameRequest);
+        }
+
+        private async Task ProcessStartGameRequest()
+        {
+            try
             {
-                try
-                {
-                    await client.StartGameAsync(this.RoomCode);
-                    NavigateToGame();
-                }
-                catch (FaultException<ServiceFaultDto> fault)
-                {
-                    var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                await client.StartGameAsync(this.RoomCode);
+                NavigateToGame();
+            }
+            catch (Exception ex)
+            {
+                HandleStartGameException(ex);
+            }
+        }
 
-                    string msg = messageResolver.GetMessage(errorType);
-
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.OpponentConnectionLost)
-                        {
-                            MessageBox.Show(msg, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                        }
-                        else
-                        {
-                            MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                    });
-                }
-                catch (CommunicationException)
+        private void HandleStartGameException(Exception ex)
+        {
+            if (ex is FaultException<ServiceFaultDto> fault)
+            {
+                HandleStartGameFault(fault);
+            }
+            else if (ex is CommunicationException)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
                 {
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                    });
-
-                }
-                catch (Exception)
+                    MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                });
+            }
+            else if (!IsNavigatingAway)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
                 {
-                    if (!isNavigatingAway)
-                    {
-                        Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            MessageBox.Show(Lang.ErrorStartingGame, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                        });
-                    }
+                    MessageBox.Show(Lang.ErrorStartingGame, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                });
+            }
+        }
+
+        private void HandleStartGameFault(FaultException<ServiceFaultDto> fault)
+        {
+            var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+            string msg = messageResolver.GetMessage(errorType);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.OpponentConnectionLost)
+                {
+                    MessageBox.Show(msg, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             });
         }

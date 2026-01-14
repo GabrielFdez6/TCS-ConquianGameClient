@@ -327,7 +327,7 @@ namespace ConquiánCliente.ViewModel.Game
 
         private async void HandleOpponentMeld(CardDto[] meldCardDtos)
         {
-            if ((DateTime.Now - lastEventTime).TotalMilliseconds < 200)
+            if ((DateTime.UtcNow - lastEventTime).TotalMilliseconds < 200)
             {
                 isCatchingUp = true;
             }
@@ -335,7 +335,7 @@ namespace ConquiánCliente.ViewModel.Game
             {
                 isCatchingUp = false;
             }
-            lastEventTime = DateTime.Now;
+            lastEventTime = DateTime.UtcNow;
 
             var cardVMs = meldCardDtos.Select(dto => new CardViewModel(dto)).ToList();
 
@@ -763,34 +763,44 @@ namespace ConquiánCliente.ViewModel.Game
 
             if (HasJustDrawnFromDeck && selectedCards.Count == SINGLE_CARD_COUNT)
             {
-                var cardToPay = selectedCards[0];
-                try
-                {
-                    await client.SwapDrawnCardAsync(roomCode, CurrentPlayer.idPlayer, cardToPay.Id);
-
-                    PlayerHand.Remove(cardToPay);
-                    PlayerHand.Add(new CardViewModel(card));
-                    TopDiscardCard = cardToPay.Card;
-
-                    HasJustDrawnFromDeck = false;
-                    CanDiscard = false;
-
-                    foreach (var c in PlayerHand)
-                    {
-                        c.IsSelected = false;
-                    }
-                }
-                catch (FaultException<ServiceFaultDto> fault)
-                {
-                    HandleGameFault(fault);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"{Lang.ErrorGeneric}: {ex.Message}");
-                }
-                return;
+                await ExecuteSwapDrawnCardAsync(card, selectedCards[0]);
             }
+            else
+            {
+                await ExecuteMeldFromDiscardAsync(card, selectedCards);
+            }
+        }
 
+        private async Task ExecuteSwapDrawnCardAsync(CardDto newCard, CardViewModel cardToPay)
+        {
+            try
+            {
+                await client.SwapDrawnCardAsync(roomCode, CurrentPlayer.idPlayer, cardToPay.Id);
+
+                PlayerHand.Remove(cardToPay);
+                PlayerHand.Add(new CardViewModel(newCard));
+                TopDiscardCard = cardToPay.Card;
+
+                HasJustDrawnFromDeck = false;
+                CanDiscard = false;
+
+                foreach (var c in PlayerHand)
+                {
+                    c.IsSelected = false;
+                }
+            }
+            catch (FaultException<ServiceFaultDto> fault)
+            {
+                HandleGameFault(fault);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{Lang.ErrorGeneric}: {ex.Message}");
+            }
+        }
+
+        private async Task ExecuteMeldFromDiscardAsync(CardDto card, List<CardViewModel> selectedCards)
+        {
             if (selectedCards.Count < MINIMUM_CARDS_FOR_MELD_FROM_HAND)
             {
                 string msg = HasJustDrawnFromDeck ? Lang.GameSwapInstruction : Lang.GameInvalidMove;
