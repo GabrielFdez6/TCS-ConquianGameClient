@@ -153,7 +153,11 @@ namespace ConquiánCliente.ViewModel
                 string msg = messageResolver.GetMessage(errorType);
                 MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (EndpointNotFoundException)
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (TimeoutException)
             {
                 MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -264,7 +268,11 @@ namespace ConquiánCliente.ViewModel
                         string msg = messageResolver.GetMessage(errorType);
                         MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
                     }
-                    catch (EndpointNotFoundException)
+                    catch (CommunicationException)
+                    {
+                        MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    catch (TimeoutException)
                     {
                         MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
                     }
