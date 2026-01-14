@@ -84,14 +84,6 @@ namespace ConquiánCliente.ViewModel
 
                 PlayerSession.IsNetworkDown = true;
 
-                foreach (Window window in Application.Current.Windows)
-                {
-                    if (window.IsEnabled)
-                    {
-                        window.IsEnabled = false;
-                    }
-                }
-
                 MessageBox.Show(Lang.ErrorLostConnection, Lang.TitleError,
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Warning);

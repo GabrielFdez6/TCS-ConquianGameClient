@@ -319,7 +319,7 @@
     <value>La contraseña debe contener al menos un carácter especial.</value>
   </data>
   <data name="ErrorConnectingToServer" xml:space="preserve">
-    <value>Error al conectar con el servidor: {0}</value>
+    <value>Error al conectar con el servidor</value>
   </data>
   <data name="ErrorGeneric" xml:space="preserve">
     <value>Ocurrió un error: </value>
@@ -358,7 +358,7 @@
     <value>Credenciales inválidas. Por favor, verifique su correo y contraseña.</value>
   </data>
   <data name="ErrorUnexpected" xml:space="preserve">
-    <value>Ocurrió un error inesperado: {0}</value>
+    <value>Ocurrió un error inesperado</value>
   </data>
   <data name="TitleAuthenticationError" xml:space="preserve">
     <value>Error de Autenticación</value>

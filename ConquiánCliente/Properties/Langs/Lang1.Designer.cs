@@ -169,7 +169,7 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Error al conectar con el servidor: {0}.
+        ///   Busca una cadena traducida similar a Error al conectar con el servidor.
         /// </summary>
         public static string ErrorConnectingToServer {
             get {
@@ -772,7 +772,7 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Ocurrió un error inesperado: {0}.
+        ///   Busca una cadena traducida similar a Ocurrió un error inesperado.
         /// </summary>
         public static string ErrorUnexpected {
             get {

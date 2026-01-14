@@ -22,6 +22,8 @@ namespace ConquiánCliente
         private NetworkConnectionMonitor networkMonitor;
         private DispatcherTimer reconnectionTimer;
         private Window reconnectingWindow;
+        private static bool isHandlingCriticalError = false;
+        private static readonly object lockObject = new object();
 
         public App()
         {
@@ -199,34 +201,28 @@ namespace ConquiánCliente
                 return;
             }
 
-            if (PlayerSession.CurrentPlayer != null)
+            lock (lockObject)
             {
-                var playerId = PlayerSession.CurrentPlayer.idPlayer;
-
-                System.Threading.Tasks.Task.Run(async () =>
+                if (isHandlingCriticalError)
                 {
-                    try
-                    {
-                        var loginClient = new LoginClient();
-                        await loginClient.SignOutPlayerAsync(playerId);
-                        loginClient.Close();
-
-                        try
-                        {
-                            PresenceClientManager.Instance.Client.Unsubscribe(playerId);
-                            InvitationClientManager.Disconnect(playerId);
-                        }
-                        catch { }
-                    }
-                    catch (Exception)
-                    {
-                    }
-                });
+                    return;
+                }
+                isHandlingCriticalError = true;
             }
 
-            MessageBox.Show(Lang.ErrorLostConnection, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-            PlayerSession.EndSession();
-            NavigateToLogin();
+            try
+            {
+                MessageBox.Show(Lang.ErrorLostConnection, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                PlayerSession.EndSession();
+                NavigateToLogin();
+            }
+            finally
+            {
+                lock (lockObject)
+                {
+                    isHandlingCriticalError = false;
+                }
+            }
         }
 
         private static void NavigateToLogin()

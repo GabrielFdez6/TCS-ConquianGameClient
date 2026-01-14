@@ -319,7 +319,7 @@
     <value>The password must contain at least one special character.</value>
   </data>
   <data name="ErrorConnectingToServer" xml:space="preserve">
-    <value>Error connecting to server: {0}</value>
+    <value>Error connecting to server</value>
   </data>
   <data name="ErrorGeneric" xml:space="preserve">
     <value>An error occurred: </value>
@@ -358,7 +358,7 @@
     <value>Invalid credentials. Please check your email and password.</value>
   </data>
   <data name="ErrorUnexpected" xml:space="preserve">
-    <value>An unexpected error occurred: {0}</value>
+    <value>An unexpected error occurred</value>
   </data>
   <data name="TitleAuthenticationError" xml:space="preserve">
     <value>Authentication Error</value>
