@@ -11,7 +11,6 @@ using System.Globalization;
 using System.Linq;
 using System.ServiceModel;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -121,27 +120,9 @@ namespace ConquiánCliente
 
         private void HandleNetworkRestored()
         {
-            this.Dispatcher.Invoke(async () =>
-            {
+            this.Dispatcher.Invoke(() =>
+            { 
                 PlayerSession.IsNetworkDown = false;
-
-                if (PlayerSession.IsLoggedIn && PlayerSession.CurrentPlayer != null)
-                {
-                    await Task.Delay(2500);
-
-                    try
-                    {
-                        int playerId = PlayerSession.CurrentPlayer.idPlayer;
-
-                        await InvitationClientManager.ReconnectAsync(playerId);
-
-                        PresenceClientManager.Instance.Reconnect(playerId);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Fallo crítico en resuscripción: {ex.Message}");
-                    }
-                }
             });
         }
 

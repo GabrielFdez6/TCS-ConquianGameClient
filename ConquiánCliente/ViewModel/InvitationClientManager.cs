@@ -13,19 +13,6 @@ namespace ConquiánCliente.ViewModel
 
         public static void Connect(int idPlayer)
         {
-
-            if (client != null && client.State != CommunicationState.Opened)
-            {
-                try
-                {
-                    client.Abort();
-                }
-                catch
-                {
-                }
-                client = null;
-            }
-
             if (client != null && client.State == CommunicationState.Opened)
             {
                 return;
@@ -87,13 +74,5 @@ namespace ConquiánCliente.ViewModel
                 throw new CommunicationException(Lang.ErrorConnectingToServer);
             }
         }
-
-        public static async Task ReconnectAsync(int idPlayer)
-        {
-            Disconnect(idPlayer);
-
-            await Task.Run(() => Connect(idPlayer));
-        }
-
     }
 }
