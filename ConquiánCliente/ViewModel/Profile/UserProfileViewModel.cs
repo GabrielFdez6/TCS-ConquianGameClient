@@ -189,7 +189,7 @@ namespace ConquiánCliente.ViewModel.Profile
                 SetProfileImage(System.IO.Path.GetFileName(fullPlayerProfile.pathPhoto));
                 PlayerSession.UpdateSession(fullPlayerProfile);
 
-                Application.Current.Dispatcher.Invoke(() =>
+                await Application.Current.Dispatcher.InvokeAsync(() =>
                 {
                     CommandManager.InvalidateRequerySuggested();
                 });

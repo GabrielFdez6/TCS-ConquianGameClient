@@ -157,7 +157,11 @@ namespace ConquiánCliente.ViewModel.Game
                     client.InnerChannel.Faulted -= OnConnectionLost;
                     client.Abort();
                 }
-                catch { }
+                catch
+                {
+                    // Intentionally ignored: if the channel is already closed or in a failed state,
+                    // Abort() could throw an exception that does not affect the cleanup of other resources.
+                }
                 finally { client = null; }
             }
 
