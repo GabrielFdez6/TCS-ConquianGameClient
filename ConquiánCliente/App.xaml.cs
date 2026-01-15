@@ -113,6 +113,11 @@ namespace ConquiánCliente
                     return;
                 }
                 PlayerSession.IsNetworkDown = true;
+
+                MessageBox.Show(Lang.ErrorLostConnection, Lang.ErrorConnectingToServer, MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+
+                NavigateToLogin();
             });
         }
 
@@ -120,6 +125,35 @@ namespace ConquiánCliente
         {
             this.Dispatcher.Invoke(() =>
             { 
+                PlayerSession.IsNetworkDown = false;
+            });
+        }
+
+        private static void NavigateToLogin()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                PlayerSession.EndSession();
+
+                LogIn loginWindow = new LogIn();
+
+                var openWindows = Application.Current.Windows.Cast<Window>() .Where(w => w != loginWindow)
+                    .ToList();
+
+                foreach (Window window in openWindows)
+                {
+                    if (window != loginWindow)
+                    {
+                        if (window.DataContext is ConquiánCliente.ViewModel.Game.GameViewModel gvm)
+                        {
+                            gvm.Cleanup();
+                        }
+                        window.Close();
+                    }
+                }
+
+                loginWindow.Show();
+                Application.Current.MainWindow = loginWindow;
                 PlayerSession.IsNetworkDown = false;
             });
         }
