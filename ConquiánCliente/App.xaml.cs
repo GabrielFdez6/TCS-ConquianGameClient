@@ -120,9 +120,21 @@ namespace ConquiánCliente
 
         private void HandleNetworkRestored()
         {
-            this.Dispatcher.Invoke(() =>
-            { 
+            this.Dispatcher.Invoke(async () =>
+            {
                 PlayerSession.IsNetworkDown = false;
+
+                if (PlayerSession.IsLoggedIn && PlayerSession.CurrentPlayer != null)
+                {
+                    try
+                    {
+                        await InvitationClientManager.ReconnectAsync(PlayerSession.CurrentPlayer.idPlayer);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error al restaurar servicios de comunicación: {ex.Message}");
+                    }
+                }
             });
         }
 
