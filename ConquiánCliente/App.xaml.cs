@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
+using System.Linq;
 using System.ServiceModel;
 using System.Threading;
 using System.Windows;
@@ -113,7 +114,6 @@ namespace ConquiánCliente
                 {
                     return;
                 }
-
                 PlayerSession.IsNetworkDown = true;
             });
         }
@@ -159,27 +159,29 @@ namespace ConquiánCliente
 
         private static void NavigateToLogin()
         {
-            LogIn loginWindow = new LogIn();
-            loginWindow.Show();
-
-            List<Window> windowsToClose = new List<Window>();
-
-            foreach (Window window in Application.Current.Windows)
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                if (window != loginWindow)
+                PlayerSession.EndSession();
+
+                LogIn loginWindow = new LogIn();
+
+                var openWindows = Application.Current.Windows.Cast<Window>().ToList();
+                foreach (Window window in openWindows)
                 {
-                    windowsToClose.Add(window);
+                    if (window != loginWindow)
+                    {
+                        if (window.DataContext is ConquiánCliente.ViewModel.Game.GameViewModel gvm)
+                        {
+                            gvm.Cleanup();
+                        }
+                        window.Close();
+                    }
                 }
-            }
 
-            foreach (Window window in windowsToClose)
-            {
-                window.Close();
-            }
-
-            Application.Current.MainWindow = loginWindow;
-            PlayerSession.IsNetworkDown = false;
-
+                loginWindow.Show();
+                Application.Current.MainWindow = loginWindow;
+                PlayerSession.IsNetworkDown = false;
+            });
         }
 
         private static void ShowInvitationPopup(string senderNickname, string roomCode)

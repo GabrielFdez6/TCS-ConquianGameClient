@@ -37,6 +37,7 @@ namespace ConquiánCliente.ViewModel.Game
         private bool isNavigatingAway = false;
         private bool isCatchingUp = false;
         private DateTime lastEventTime = DateTime.MinValue;
+        private GameCallbackHandler gameCallbackHandler;
 
         private bool isAFKWarningVisible;
         public bool IsAFKWarningVisible
@@ -143,6 +144,30 @@ namespace ConquiánCliente.ViewModel.Game
             AcceptAFKCommand = new RelayCommand(OnAcceptAFK);
 
             _ = InitializeGameConnectionAsync();
+        }
+
+        public void Cleanup()
+        {
+            StopTurnTimer();
+            if (client != null)
+            {
+                try
+                {
+                    client.InnerChannel.Closed -= OnConnectionLost;
+                    client.InnerChannel.Faulted -= OnConnectionLost;
+                    client.Abort();
+                }
+                catch { }
+                finally { client = null; }
+            }
+
+            if (gameCallbackHandler != null)
+            {
+                gameCallbackHandler.OnGameEnded -= HandleGameEnded;
+                gameCallbackHandler.OnOpponentMeld -= HandleOpponentMeld;
+                gameCallbackHandler.OnOpponentLeftEvent -= HandleOpponentLeft;
+                gameCallbackHandler.OnGameEndedByAFKEvent -= HandleGameEndedByAFK;
+            }
         }
 
         public void LeaveGame()
@@ -267,6 +292,7 @@ namespace ConquiánCliente.ViewModel.Game
             }
             catch (Exception)
             {
+                Cleanup();
                 MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -277,7 +303,10 @@ namespace ConquiánCliente.ViewModel.Game
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    if (isNavigatingAway) return;
+                    if (isNavigatingAway)
+                    {
+                        return;
+                    }
                     isNavigatingAway = true;
 
                     StopTurnTimer();
@@ -363,13 +392,14 @@ namespace ConquiánCliente.ViewModel.Game
         {
             Application.Current.Dispatcher.InvokeAsync(() =>
             {
-                if (!PlayerSession.IsLoggedIn || isNavigatingAway)
+                if (!PlayerSession.IsLoggedIn || isNavigatingAway || isGameEnded)
                 {
                     return;
                 }
 
                 isNavigatingAway = true;
                 isGameEnded = true;
+                Cleanup();
                 StopTurnTimer();
                 ShowGameResults(results);
 
