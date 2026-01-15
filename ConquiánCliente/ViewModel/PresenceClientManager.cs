@@ -68,6 +68,21 @@ namespace ConquiánCliente.ViewModel
             client.InnerChannel.Faulted += OnConnectionLost;
         }
 
+        public void Reconnect(int idPlayer)
+        {
+            try
+            {
+                InitializeClient();
+                client.Open();
+                client.Subscribe(idPlayer);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al reconectar servicio de presencia: {ex.Message}");
+                if (client != null) client.Abort();
+            }
+        }
+
         private static void OnConnectionLost(object sender, EventArgs e)
         {
             Application.Current.Dispatcher.Invoke(() =>
