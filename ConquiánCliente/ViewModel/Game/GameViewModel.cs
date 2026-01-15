@@ -304,6 +304,7 @@ namespace ConquiánCliente.ViewModel.Game
 
         private void OnConnectionLost(object sender, EventArgs e)
         {
+            StopTurnTimer();
             if (PlayerSession.IsGuest)
             {
                 Application.Current.Dispatcher.Invoke(() =>
@@ -904,6 +905,12 @@ namespace ConquiánCliente.ViewModel.Game
 
         private void ActivityTimerTick(object sender, EventArgs e)
         {
+            if (isNavigatingAway || isGameEnded)
+            {
+                StopTurnTimer();
+                return;
+            }
+
             if (!IsMyTurn)
             {
                 return;
