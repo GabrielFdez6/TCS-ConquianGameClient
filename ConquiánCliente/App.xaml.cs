@@ -137,19 +137,17 @@ namespace ConquiánCliente
 
                 LogIn loginWindow = new LogIn();
 
-                var openWindows = Application.Current.Windows.Cast<Window>() .Where(w => w != loginWindow)
+                var windowsToClose = Application.Current.Windows.Cast<Window>()
+                    .Where(w => w != loginWindow)
                     .ToList();
 
-                foreach (Window window in openWindows)
+                foreach (Window window in windowsToClose)
                 {
-                    if (window != loginWindow)
+                    if (window.DataContext is ConquiánCliente.ViewModel.Game.GameViewModel gvm)
                     {
-                        if (window.DataContext is ConquiánCliente.ViewModel.Game.GameViewModel gvm)
-                        {
-                            gvm.Cleanup();
-                        }
-                        window.Close();
+                        gvm.Cleanup();
                     }
+                    window.Close();
                 }
 
                 loginWindow.Show();

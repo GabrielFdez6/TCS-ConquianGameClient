@@ -246,7 +246,7 @@ namespace ConquiánCliente.ViewModel.Game
                 gameCallbackHandler = ConfigureGameCallbacks();
 
                 var context = new InstanceContext(gameCallbackHandler);
-                client = new GameClient(context); ;
+                client = new GameClient(context);
 
                 if (client.InnerChannel != null)
                 {
