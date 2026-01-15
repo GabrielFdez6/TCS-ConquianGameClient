@@ -19,8 +19,6 @@ namespace ConquiánCliente
     public partial class App : Application
     {
         private NetworkConnectionMonitor networkMonitor;
-        private static bool isHandlingCriticalError = false;
-        private static readonly object lockObject = new object();
 
         public App()
         {
@@ -122,64 +120,6 @@ namespace ConquiánCliente
         {
             this.Dispatcher.Invoke(() =>
             { 
-                PlayerSession.IsNetworkDown = false;
-            });
-        }
-
-        private static void PerformLogoutAndNavigate()
-        {
-            if (!PlayerSession.IsLoggedIn)
-            {
-                return;
-            }
-
-            lock (lockObject)
-            {
-                if (isHandlingCriticalError)
-                {
-                    return;
-                }
-                isHandlingCriticalError = true;
-            }
-
-            try
-            {
-                MessageBox.Show(Lang.ErrorLostConnection, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                PlayerSession.EndSession();
-                NavigateToLogin();
-            }
-            finally
-            {
-                lock (lockObject)
-                {
-                    isHandlingCriticalError = false;
-                }
-            }
-        }
-
-        private static void NavigateToLogin()
-        {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                PlayerSession.EndSession();
-
-                LogIn loginWindow = new LogIn();
-
-                var openWindows = Application.Current.Windows.Cast<Window>().ToList();
-                foreach (Window window in openWindows)
-                {
-                    if (window != loginWindow)
-                    {
-                        if (window.DataContext is ConquiánCliente.ViewModel.Game.GameViewModel gvm)
-                        {
-                            gvm.Cleanup();
-                        }
-                        window.Close();
-                    }
-                }
-
-                loginWindow.Show();
-                Application.Current.MainWindow = loginWindow;
                 PlayerSession.IsNetworkDown = false;
             });
         }
