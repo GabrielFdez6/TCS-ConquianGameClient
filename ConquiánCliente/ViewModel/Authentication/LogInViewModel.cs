@@ -5,7 +5,9 @@ using ConquiánCliente.View;
 using ConquiánCliente.View.Authentication;
 using ConquiánCliente.View.Authentication.PasswordRecovery;
 using ConquiánCliente.ViewModel.Validation;
+using System;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,8 +22,9 @@ namespace ConquiánCliente.ViewModel.Authentication
         private bool isLoading; 
         private readonly IMessageResolver messageResolver;
 
-        private const int LanguageIndexSpanish = 1;
-        private const int LanguageIndexEnglish = 2;
+        private const int LANGUAGE_INDEX_SPANISH = 1;
+        private const int LANGUAGE_INDEX_ENGLISH = 2;
+        private const int INVALID_PLAYER_ID = 0;
 
         private const string SPANISH_LANGUAGE_CODE = "es-MX";
         private const string ENGLISH_LANGUAGE_CODE = "en-US";
@@ -77,64 +80,27 @@ namespace ConquiánCliente.ViewModel.Authentication
                 return;
             }
 
+            var passwordBox = parameter as PasswordBox;
+            if (passwordBox == null)
+            {
+                return;
+            }
+
+            if (!ValidateCredentials(passwordBox.Password))
+            {
+                return;
+            }
+
+            isLoggingIn = true;
+            CommandManager.InvalidateRequerySuggested();
+
             try
             {
-                isLoggingIn = true;
-                CommandManager.InvalidateRequerySuggested();
-
-                var passwordBox = parameter as PasswordBox;
-                if (passwordBox == null)
-                {
-                    return;
-                }
-
-                string password = passwordBox.Password;
-
-                string emailError = LogInValidator.ValidateEmail(Email);
-                if (!string.IsNullOrEmpty(emailError))
-                {
-                    MessageBox.Show(emailError, Lang.TitleValidation);
-                    return;
-                }
-
-                string passwordError = LogInValidator.ValidatePassword(password);
-                if (!string.IsNullOrEmpty(passwordError))
-                {
-                    MessageBox.Show(passwordError, Lang.TitleValidation);
-                    return;
-                }
-
-                var client = new LoginClient();
-
-                PlayerDto authenticatedPlayer = await client.AuthenticatePlayerAsync(Email, password);
-
-                if (authenticatedPlayer.idPlayer > 0)
-                {
-                    PlayerSession.StartSession(authenticatedPlayer);
-                    var mainMenu = new View.MainMenu.MainMenu();
-                    mainMenu.Show();
-                    Window.GetWindow(passwordBox)?.Close();
-                }
-                else
-                {
-                    MessageBox.Show(Lang.ErrorInvalidCredentials, Lang.TitleAuthenticationError);
-                }
+                await PerformLogin(passwordBox.Password, passwordBox);
             }
-            catch (FaultException<ServiceFaultDto> fault)
+            catch (Exception ex)
             {
-                ServiceErrorType errorType = fault.Detail.ErrorType;
-
-                string localMessage = messageResolver.GetMessage(errorType);
-
-                MessageBox.Show(localMessage, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (EndpointNotFoundException)
-            {
-                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
+                HandleLoginException(ex);
             }
             finally
             {
@@ -143,7 +109,94 @@ namespace ConquiánCliente.ViewModel.Authentication
             }
         }
 
+        private bool ValidateCredentials(string password)
+        {
+            bool isValid = false;
+            string emailError = LogInValidator.ValidateEmail(Email);
+
+            if (!string.IsNullOrEmpty(emailError))
+            {
+                MessageBox.Show(emailError, Lang.TitleValidation);
+            }
+            else
+            {
+                string passwordError = LogInValidator.ValidatePassword(password);
+                if (!string.IsNullOrEmpty(passwordError))
+                {
+                    MessageBox.Show(passwordError, Lang.TitleValidation);
+                }
+                else
+                {
+                    isValid = true;
+                }
+            }
+
+            return isValid;
+        }
+
+        private async Task PerformLogin(string password, PasswordBox passwordBox)
+        {
+            var client = new LoginClient();
+            PlayerDto authenticatedPlayer = await client.AuthenticatePlayerAsync(Email, password);
+
+            if (authenticatedPlayer.idPlayer > INVALID_PLAYER_ID)
+            {
+                HandleLoginSuccess(authenticatedPlayer, passwordBox);
+            }
+            else
+            {
+                MessageBox.Show(Lang.ErrorInvalidCredentials, Lang.TitleAuthenticationError);
+            }
+        }
+
+        private void HandleLoginSuccess(PlayerDto player, PasswordBox passwordBox)
+        {
+            PlayerSession.StartSession(player);
+            var mainMenu = new View.MainMenu.MainMenu();
+            mainMenu.Show();
+
+            if (passwordBox != null)
+            {
+                Window.GetWindow(passwordBox)?.Close();
+            }
+        }
+
+        private void HandleLoginException(Exception ex)
+        {
+            if (ex is FaultException<ServiceFaultDto> fault)
+            {
+                ServiceErrorType errorType = fault.Detail.ErrorType;
+                string localMessage = messageResolver.GetMessage(errorType);
+                MessageBox.Show(localMessage, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if (ex is EndpointNotFoundException)
+            {
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
+            }
+            else
+            {
+                MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
+            }
+        }
+
         private void ExecuteNavigateToSignUp(object parameter)
+        {
+            var signUpWindow = new SignUp();
+            NavigateAndClose(signUpWindow, parameter);
+        }
+        private void ExecuteNavigateToForgotPassword(object parameter)
+        {
+            var requestRecoveryWindow = new PasswordRecoveryMainFrame();
+            NavigateAndClose(requestRecoveryWindow, parameter);
+        }
+
+        private void ExecuteNavigateToGuestLogIn(object parameter)
+        {
+            var guestLogInWindow = new GuestLogIn();
+            NavigateAndClose(guestLogInWindow, parameter);
+        }
+
+        private void NavigateAndClose(Window newWindow, object parameter)
         {
             if (isLoading)
             {
@@ -151,36 +204,9 @@ namespace ConquiánCliente.ViewModel.Authentication
             }
 
             isLoading = true;
-            CommandManager.InvalidateRequerySuggested(); 
-
-            var signUpWindow = new SignUp();
-            signUpWindow.Show();
-            (parameter as Window)?.Close();
-
-
-        }
-
-        private void ExecuteNavigateToForgotPassword(object parameter)
-        {
-            if (isLoading) return;
-
-            isLoading = true;
             CommandManager.InvalidateRequerySuggested();
 
-            var requestRecoveryWindow = new PasswordRecoveryMainFrame();
-            requestRecoveryWindow.Show();
-            (parameter as Window)?.Close();
-        }
-
-        private void ExecuteNavigateToGuestLogIn(object parameter)
-        {
-            if (isLoading) return;
-
-            isLoading = true;
-            CommandManager.InvalidateRequerySuggested();
-
-            var guestLogInWindow = new GuestLogIn();
-            guestLogInWindow.Show();
+            newWindow.Show();
             (parameter as Window)?.Close();
         }
 
@@ -188,10 +214,10 @@ namespace ConquiánCliente.ViewModel.Authentication
         {
             switch (SelectedLanguageIndex)
             {
-                case LanguageIndexSpanish:
+                case LANGUAGE_INDEX_SPANISH:
                     Properties.Settings.Default.languageCode = SPANISH_LANGUAGE_CODE;
                     break;
-                case LanguageIndexEnglish:
+                case LANGUAGE_INDEX_ENGLISH:
                     Properties.Settings.Default.languageCode = ENGLISH_LANGUAGE_CODE;
                     break;
                 default:

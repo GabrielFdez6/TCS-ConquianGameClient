@@ -1,6 +1,5 @@
-﻿using ConquiánCliente.ViewModel;
-using System;
-using System.Windows;
+﻿using System.Windows;
+using ConquiánCliente.ViewModel.FriendList;
 
 namespace ConquiánCliente.View.FriendList
 {

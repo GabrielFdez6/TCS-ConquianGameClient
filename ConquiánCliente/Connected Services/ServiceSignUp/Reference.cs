@@ -466,6 +466,9 @@ namespace ConquiánCliente.ServiceSignUp {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         OpponentConnectionLost = 43,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RoomNotFound = 44,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -475,10 +478,10 @@ namespace ConquiánCliente.ServiceSignUp {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/RegisterPlayer", ReplyAction="http://tempuri.org/ISignUp/RegisterPlayerResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceSignUp.ServiceFaultDto), Action="http://tempuri.org/ISignUp/RegisterPlayerServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
             "acts")]
-        bool RegisterPlayer(ConquiánCliente.ServiceSignUp.PlayerDto newPlayer);
+        void RegisterPlayer(ConquiánCliente.ServiceSignUp.PlayerDto newPlayer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/RegisterPlayer", ReplyAction="http://tempuri.org/ISignUp/RegisterPlayerResponse")]
-        System.Threading.Tasks.Task<bool> RegisterPlayerAsync(ConquiánCliente.ServiceSignUp.PlayerDto newPlayer);
+        System.Threading.Tasks.Task RegisterPlayerAsync(ConquiánCliente.ServiceSignUp.PlayerDto newPlayer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/SendVerificationCode", ReplyAction="http://tempuri.org/ISignUp/SendVerificationCodeResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceSignUp.ServiceFaultDto), Action="http://tempuri.org/ISignUp/SendVerificationCodeServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
@@ -491,18 +494,18 @@ namespace ConquiánCliente.ServiceSignUp {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/VerifyCode", ReplyAction="http://tempuri.org/ISignUp/VerifyCodeResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceSignUp.ServiceFaultDto), Action="http://tempuri.org/ISignUp/VerifyCodeServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
             "acts")]
-        bool VerifyCode(string email, string code);
+        void VerifyCode(string email, string code);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/VerifyCode", ReplyAction="http://tempuri.org/ISignUp/VerifyCodeResponse")]
-        System.Threading.Tasks.Task<bool> VerifyCodeAsync(string email, string code);
+        System.Threading.Tasks.Task VerifyCodeAsync(string email, string code);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/CancelRegistration", ReplyAction="http://tempuri.org/ISignUp/CancelRegistrationResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceSignUp.ServiceFaultDto), Action="http://tempuri.org/ISignUp/CancelRegistrationServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
             "acts")]
-        bool CancelRegistration(string email);
+        void CancelRegistration(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignUp/CancelRegistration", ReplyAction="http://tempuri.org/ISignUp/CancelRegistrationResponse")]
-        System.Threading.Tasks.Task<bool> CancelRegistrationAsync(string email);
+        System.Threading.Tasks.Task CancelRegistrationAsync(string email);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -532,11 +535,11 @@ namespace ConquiánCliente.ServiceSignUp {
                 base(binding, remoteAddress) {
         }
         
-        public bool RegisterPlayer(ConquiánCliente.ServiceSignUp.PlayerDto newPlayer) {
-            return base.Channel.RegisterPlayer(newPlayer);
+        public void RegisterPlayer(ConquiánCliente.ServiceSignUp.PlayerDto newPlayer) {
+            base.Channel.RegisterPlayer(newPlayer);
         }
         
-        public System.Threading.Tasks.Task<bool> RegisterPlayerAsync(ConquiánCliente.ServiceSignUp.PlayerDto newPlayer) {
+        public System.Threading.Tasks.Task RegisterPlayerAsync(ConquiánCliente.ServiceSignUp.PlayerDto newPlayer) {
             return base.Channel.RegisterPlayerAsync(newPlayer);
         }
         
@@ -548,19 +551,19 @@ namespace ConquiánCliente.ServiceSignUp {
             return base.Channel.SendVerificationCodeAsync(email);
         }
         
-        public bool VerifyCode(string email, string code) {
-            return base.Channel.VerifyCode(email, code);
+        public void VerifyCode(string email, string code) {
+            base.Channel.VerifyCode(email, code);
         }
         
-        public System.Threading.Tasks.Task<bool> VerifyCodeAsync(string email, string code) {
+        public System.Threading.Tasks.Task VerifyCodeAsync(string email, string code) {
             return base.Channel.VerifyCodeAsync(email, code);
         }
         
-        public bool CancelRegistration(string email) {
-            return base.Channel.CancelRegistration(email);
+        public void CancelRegistration(string email) {
+            base.Channel.CancelRegistration(email);
         }
         
-        public System.Threading.Tasks.Task<bool> CancelRegistrationAsync(string email) {
+        public System.Threading.Tasks.Task CancelRegistrationAsync(string email) {
             return base.Channel.CancelRegistrationAsync(email);
         }
     }

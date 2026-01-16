@@ -15,6 +15,68 @@ namespace ConquiánCliente.ServiceInvitation {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="InvitationSenderDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
+        "acts")]
+    [System.SerializableAttribute()]
+    public partial class InvitationSenderDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdPlayerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NicknameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdPlayer {
+            get {
+                return this.IdPlayerField;
+            }
+            set {
+                if ((this.IdPlayerField.Equals(value) != true)) {
+                    this.IdPlayerField = value;
+                    this.RaisePropertyChanged("IdPlayer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nickname {
+            get {
+                return this.NicknameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NicknameField, value) != true)) {
+                    this.NicknameField = value;
+                    this.RaisePropertyChanged("Nickname");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
         "acts")]
     [System.SerializableAttribute()]
@@ -227,6 +289,9 @@ namespace ConquiánCliente.ServiceInvitation {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         OpponentConnectionLost = 43,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RoomNotFound = 44,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -248,10 +313,10 @@ namespace ConquiánCliente.ServiceInvitation {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInvitationService/SendInvitation", ReplyAction="http://tempuri.org/IInvitationService/SendInvitationResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServiceInvitation.ServiceFaultDto), Action="http://tempuri.org/IInvitationService/SendInvitationServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
             "acts")]
-        void SendInvitation(int idSender, string senderNickname, int idReceiver, string roomCode);
+        void SendInvitation(ConquiánCliente.ServiceInvitation.InvitationSenderDto sender, int idReceiver, string roomCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInvitationService/SendInvitation", ReplyAction="http://tempuri.org/IInvitationService/SendInvitationResponse")]
-        System.Threading.Tasks.Task SendInvitationAsync(int idSender, string senderNickname, int idReceiver, string roomCode);
+        System.Threading.Tasks.Task SendInvitationAsync(ConquiánCliente.ServiceInvitation.InvitationSenderDto sender, int idReceiver, string roomCode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -305,12 +370,12 @@ namespace ConquiánCliente.ServiceInvitation {
             return base.Channel.UnsubscribeAsync(idPlayer);
         }
         
-        public void SendInvitation(int idSender, string senderNickname, int idReceiver, string roomCode) {
-            base.Channel.SendInvitation(idSender, senderNickname, idReceiver, roomCode);
+        public void SendInvitation(ConquiánCliente.ServiceInvitation.InvitationSenderDto sender, int idReceiver, string roomCode) {
+            base.Channel.SendInvitation(sender, idReceiver, roomCode);
         }
         
-        public System.Threading.Tasks.Task SendInvitationAsync(int idSender, string senderNickname, int idReceiver, string roomCode) {
-            return base.Channel.SendInvitationAsync(idSender, senderNickname, idReceiver, roomCode);
+        public System.Threading.Tasks.Task SendInvitationAsync(ConquiánCliente.ServiceInvitation.InvitationSenderDto sender, int idReceiver, string roomCode) {
+            return base.Channel.SendInvitationAsync(sender, idReceiver, roomCode);
         }
     }
 }

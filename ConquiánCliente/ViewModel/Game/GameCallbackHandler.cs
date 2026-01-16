@@ -16,7 +16,8 @@ namespace ConquiánCliente.ViewModel.Game
         public event Action<CardDto[]> OnOpponentMeld;
         public event Action OnOpponentLeftEvent;
         public event Action<GameResultDto> OnGameEnded;
-        public event Action<string> OnGameEndedByAFKEvent;
+        public event Action<string> OnGameEndedByAfkEvent;
+
         public void OnTimeUpdated(int gameRemainingSeconds, int turnRemainingSeconds, int currentTurnPlayerId)
         {
             TimeStateUpdated?.Invoke(gameRemainingSeconds, turnRemainingSeconds, currentTurnPlayerId);
@@ -57,7 +58,7 @@ namespace ConquiánCliente.ViewModel.Game
 
         public void NotifyGameEndedByAFK(string reasonKey)
         {
-            OnGameEndedByAFKEvent?.Invoke(reasonKey);
+            OnGameEndedByAfkEvent?.Invoke(reasonKey);
         }
     }
 }

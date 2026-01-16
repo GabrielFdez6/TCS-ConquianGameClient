@@ -1,7 +1,5 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceUserProfile;
-using ConquiánCliente.ViewModel;
-using System.IO;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Input;

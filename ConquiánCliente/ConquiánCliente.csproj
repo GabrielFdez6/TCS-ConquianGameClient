@@ -156,6 +156,7 @@
     <Compile Include="ViewModel\Profile\ResultStatusConverter.cs" />
     <Compile Include="ViewModel\Profile\UserProfileViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\Validation\ConquianRulesValidator.cs" />
     <Compile Include="ViewModel\Validation\LogInValidator.cs" />
     <Compile Include="ViewModel\Validation\PasswordRecoveryValidator.cs" />
     <Compile Include="ViewModel\Validation\SignUpValidator.cs" />

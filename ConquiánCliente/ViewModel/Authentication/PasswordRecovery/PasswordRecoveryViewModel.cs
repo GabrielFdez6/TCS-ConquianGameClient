@@ -107,8 +107,8 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
                 return;
             }
 
-            bool success = await TryExecuteServiceCall(
-                () => recoveryClient.RequestPasswordRecoveryAsync(Email, (int)this.Mode)
+            bool success = await TryExecuteServiceCall(async () =>
+                await recoveryClient.RequestPasswordRecoveryAsync(Email, (int)this.Mode)
             );
 
             if (success)
@@ -121,9 +121,12 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
         public async Task<bool> RequestChangePasswordTokenAsync()
         {
             this.Mode = PasswordUpdateMode.Change;
-            return await TryExecuteServiceCall(
-                () => recoveryClient.RequestPasswordRecoveryAsync(Email, (int)this.Mode)
+
+            bool success = await TryExecuteServiceCall(async () =>
+                await recoveryClient.RequestPasswordRecoveryAsync(Email, (int)this.Mode)
             );
+
+            return success;
         }
 
         private async void ExecuteValidateToken(object parameter)
@@ -135,8 +138,8 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
                 return;
             }
 
-            bool success = await TryExecuteServiceCall(
-                () => recoveryClient.ValidateRecoveryTokenAsync(Email, Token)
+            bool success = await TryExecuteServiceCall(async () =>
+                await recoveryClient.ValidateRecoveryTokenAsync(Email, Token)
             );
 
             if (success)
@@ -157,41 +160,36 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
                 return;
             }
 
-            IsLoading = true;
-            try
-            {
-                bool success = await recoveryClient.ResetPasswordAsync(Email, Token, NewPassword);
+            bool success = await TryExecuteServiceCall(async () =>
+                await recoveryClient.ResetPasswordAsync(Email, Token, NewPassword)
+            );
 
-                if (success)
-                {
-                    if (IsEditProfileFlow)
-                    {
-                        page?.NavigationService?.Navigate(new UserProfilePage());
-                    }
-                    else
-                    {
-                        MessageBox.Show(Lang.SuccessPasswordReset, Lang.TitleSuccess);
-                        var loginWindow = new LogIn();
-                        loginWindow.Show();
-                        Window.GetWindow(page)?.Close();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(Lang.ErrorRecoveryRequestFailed, Lang.TitleError);
-                }
-            }
-            catch (Exception ex)
+            if (success)
             {
-                HandleException(ex);
-            }
-            finally
-            {
-                IsLoading = false;
+                HandleSuccessfulReset(page);
             }
         }
 
-        private bool CanExecuteNavigateToStart(object parameter) => !IsLoading;
+        private void HandleSuccessfulReset(Page page)
+        {
+            if (IsEditProfileFlow)
+            {
+                page?.NavigationService?.Navigate(new UserProfilePage());
+            }
+            else
+            {
+                MessageBox.Show(Lang.SuccessPasswordReset, Lang.TitleSuccess);
+                var loginWindow = new LogIn();
+                loginWindow.Show();
+                Window.GetWindow(page)?.Close();
+            }
+        }
+
+        private bool CanExecuteNavigateToStart(object parameter)
+        {
+            return !IsLoading;
+        }
+
         private void ExecuteNavigateToStart(object parameter)
         {
             this.Token = string.Empty;
@@ -201,13 +199,17 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
 
             if (IsEditProfileFlow)
             {
-                if (page?.NavigationService?.CanGoBack == true) page.NavigationService.GoBack();
+                if (page?.NavigationService?.CanGoBack == true)
+                {
+                    page.NavigationService.GoBack();
+                }
             }
             else
             {
                 page?.NavigationService?.Navigate(new RequestRecovery());
             }
         }
+
         private static void ExecuteNavigateToLogin(object parameter)
         {
             var page = parameter as Page;
@@ -216,29 +218,33 @@ namespace ConquiánCliente.ViewModel.Authentication.PasswordRecovery
             window?.Close();
         }
 
-        private async Task<bool> TryExecuteServiceCall(Func<Task<bool>> serviceCall)
+        private async Task<bool> TryExecuteServiceCall(Func<Task> serviceCall)
         {
+            bool executionSuccess = false;
+
             if (recoveryClient == null)
             {
                 MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError);
-                return false;
+                return executionSuccess;
             }
 
             IsLoading = true;
             try
             {
-                bool success = await serviceCall();
-                return success;
+                await serviceCall();
+                executionSuccess = true;
             }
             catch (Exception ex)
             {
                 HandleException(ex);
-                return false;
+                executionSuccess = false;
             }
             finally
             {
                 IsLoading = false;
             }
+
+            return executionSuccess;
         }
 
         private void HandleException(Exception ex)

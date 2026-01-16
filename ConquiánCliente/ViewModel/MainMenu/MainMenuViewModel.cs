@@ -4,6 +4,7 @@ using ConquiánCliente.View;
 using ConquiánCliente.View.Lobby;
 using ConquiánCliente.View.MainMenu;
 using System;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -33,14 +34,19 @@ namespace ConquiánCliente.ViewModel.MainMenu
             PlayCommand = new RelayCommand(ExecutePlay, CanExecuteNavigation);
             OpenSettingsCommand = new RelayCommand(ExecuteOpenSettings, CanExecuteNavigation);
 
+            InitializeBackgroundConnections();
+        }
+
+        private void InitializeBackgroundConnections()
+        {
             if (PlayerSession.CurrentPlayer != null)
             {
                 int playerId = PlayerSession.CurrentPlayer.idPlayer;
-                Task.Run(() => InitializeServerConnections(playerId));
+                Task.Run(() => AttemptConnectionSetup(playerId));
             }
         }
 
-        private static void InitializeServerConnections(int playerId)
+        private static void AttemptConnectionSetup(int playerId)
         {
             try
             {
@@ -50,9 +56,13 @@ namespace ConquiánCliente.ViewModel.MainMenu
                     PresenceClientManager.Instance.Client.Subscribe(PlayerSession.CurrentPlayer.idPlayer);
                 }
             }
-            catch (Exception ex)
+            catch (CommunicationException ex)
             {
-                System.Diagnostics.Debug.WriteLine("Error connecting services in background: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine($"Network error connecting services: {ex.Message}");
+            }
+            catch (TimeoutException ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Timeout connecting services: {ex.Message}");
             }
         }
 
@@ -72,77 +82,113 @@ namespace ConquiánCliente.ViewModel.MainMenu
 
         private void ExecuteViewProfileCommand(object parameter)
         {
-            if (isLoading) return;
-            isLoading = true;
-            CommandManager.InvalidateRequerySuggested();
+            if (isLoading)
+            {
+                return;
+            }
+
+            SetLoadingState(true);
 
             ProfileMainFrame userProfileView = ProfileMainFrame.GetInstance();
             userProfileView.Show();
-            (parameter as Window)?.Close();
+
+            CloseWindow(parameter as Window);
         }
 
         private async void ExecuteLogoutCommand(object parameter)
         {
-            if (isLoading) return;
-            isLoading = true;
-            CommandManager.InvalidateRequerySuggested();
+            if (isLoading)
+            {
+                return;
+            }
 
+            SetLoadingState(true);
+
+            await PerformServerLogoutAsync();
+            TransitionToLogin(parameter as Window);
+        }
+
+        private async Task PerformServerLogoutAsync()
+        {
+            int playerId = PlayerSession.CurrentPlayer.idPlayer;
+
+            await Task.Run(async () =>
+            {
+                await SignOutLoginService(playerId);
+                await UnsubscribePresenceService(playerId);
+                DisconnectInvitationService(playerId);
+            });
+        }
+
+        private async Task SignOutLoginService(int playerId)
+        {
+            var loginClient = new LoginClient();
             try
             {
-                int playerId = PlayerSession.CurrentPlayer.idPlayer;
-                await Task.Run(async () =>
-                {   
-                    var loginClient = new LoginClient();
-                    try
-                    {
-                        await loginClient.SignOutPlayerAsync(playerId);
-                    }
-                    catch (Exception) 
-                    {
-                        // Exception is ignored because the local session must end regardless of the server response.
-                    }
-
-                    try
-                    {
-                        if (PresenceClientManager.Instance.Client != null)
-                        {
-                            await PresenceClientManager.Instance.Client.UnsubscribeAsync(playerId);
-                        }
-                    }
-                    catch (Exception) 
-                    {
-                        // Exception is ignored to ensure the logout process completes even if presence unsubscription fails.
-                    }
-
-                    try
-                    {
-                        InvitationClientManager.Disconnect(playerId);
-                    }
-                    catch (Exception) 
-                    {
-                        // Exception is ignored to prevent blocking the logout flow due to connection issues.
-                    }
-                });
+                await loginClient.SignOutPlayerAsync(playerId);
             }
-            catch (System.ServiceModel.EndpointNotFoundException)
+            catch (CommunicationException)
             {
-                MessageBox.Show(Lang.ErrorLogOutSession, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                 // The server may be unavailable or the network may fail at this point.
+                // Logout must still complete locally to avoid leaving the client in an inconsistent state.
             }
-            finally
+            catch (TimeoutException)
             {
-                PlayerSession.EndSession();
-                var loginWindow = new LogIn();
-                loginWindow.Show();
-                (parameter as Window)?.Close();
-
+                 // A delayed server response during logout is expected in unstable networks.
+                 //Blocking the logout would negatively impact user experience, so the error is ignored.
             }
+        }
+
+        private async Task UnsubscribePresenceService(int playerId)
+        {
+            try
+            {
+                if (PresenceClientManager.Instance.Client != null)
+                {
+                    await PresenceClientManager.Instance.Client.UnsubscribeAsync(playerId);
+                }
+            }
+            catch (CommunicationException)
+            {
+                   // Presence unsubscription is a best-effort operation.
+                  // If it fails, the server will eventually clean up stale subscriptions automatically.
+            }
+            catch (TimeoutException)
+            {
+                // Presence status is not critical during logout.
+                // The application prioritizes session termination over presence synchronization.
+            }
+        }
+
+        private void DisconnectInvitationService(int playerId)
+        {
+            try
+            {
+                InvitationClientManager.Disconnect(playerId);
+            }
+            catch (Exception)
+            {
+                // This disconnection only releases local resources.
+                // Any failure here should not prevent the user from logging out successfully.
+            }
+        }
+        private void TransitionToLogin(Window currentWindow)
+        {
+            PlayerSession.EndSession();
+            var loginWindow = new LogIn();
+            loginWindow.Show();
+
+            CloseWindow(currentWindow);
         }
 
         private void ExecuteFriendsCommand(object obj)
         {
-            if (isLoading) return;
-            isLoading = true;
-            CommandManager.InvalidateRequerySuggested();
+            if (isLoading)
+            {
+                return;
+            }
+
+            SetLoadingState(true);
 
             if (obj is Window mainMenuWindow)
             {
@@ -151,48 +197,64 @@ namespace ConquiánCliente.ViewModel.MainMenu
                 mainMenuWindow.Close();
             }
         }
-
         private void ExecutePlay(object parameter)
         {
-            if (isLoading) return;
-            isLoading = true;
-            CommandManager.InvalidateRequerySuggested();
+            if (isLoading)
+            {
+                return;
+            }
+
+            SetLoadingState(true);
 
             if (parameter is Window currentWindow)
             {
-                CreateOrJoin createOrJoinView = new CreateOrJoin();
-                createOrJoinView.Owner = currentWindow;
+                string newRoomCode = TryGetRoomCodeFromDialog(currentWindow);
 
-                bool? result = createOrJoinView.ShowDialog();
-
-                if (result == true)
+                if (!string.IsNullOrEmpty(newRoomCode))
                 {
-                    var createJoinViewModel = createOrJoinView.DataContext as CreateOrJoinViewModel;
-                    string newRoomCode = createJoinViewModel.CreatedRoomCode;
-
-                    if (!string.IsNullOrEmpty(newRoomCode))
-                    {
-                        LobbyGame lobby = new LobbyGame(newRoomCode);
-                        lobby.Show();
-                        currentWindow.Close();
-                        return;
-                    }
+                    NavigateToLobby(newRoomCode, currentWindow);
+                    return;
                 }
+            }
 
-                isLoading = false;
-                CommandManager.InvalidateRequerySuggested();
-            }
-            else
+            SetLoadingState(false);
+        }
+
+        private string TryGetRoomCodeFromDialog(Window owner)
+        {
+            string code = string.Empty;
+            CreateOrJoin createOrJoinView = new CreateOrJoin();
+            createOrJoinView.Owner = owner;
+
+            bool? result = createOrJoinView.ShowDialog();
+
+            if (result == true)
             {
-                isLoading = false;
+                var createJoinViewModel = createOrJoinView.DataContext as CreateOrJoinViewModel;
+                if (createJoinViewModel != null)
+                {
+                    code = createJoinViewModel.CreatedRoomCode;
+                }
             }
+
+            return code;
+        }
+
+        private void NavigateToLobby(string roomCode, Window currentWindow)
+        {
+            LobbyGame lobby = new LobbyGame(roomCode);
+            lobby.Show();
+            currentWindow.Close();
         }
 
         private void ExecuteOpenSettings(object parameter)
         {
-            if (isLoading) return;
-            isLoading = true;
-            CommandManager.InvalidateRequerySuggested();
+            if (isLoading)
+            {
+                return;
+            }
+
+            SetLoadingState(true);
 
             if (parameter is Window currentWindow)
             {
@@ -201,8 +263,21 @@ namespace ConquiánCliente.ViewModel.MainMenu
                 settingsView.ShowDialog();
             }
 
-            isLoading = false;
+            SetLoadingState(false);
+        }
+
+        private void SetLoadingState(bool loading)
+        {
+            isLoading = loading;
             CommandManager.InvalidateRequerySuggested();
+        }
+
+        private void CloseWindow(Window window)
+        {
+            if (window != null)
+            {
+                window.Close();
+            }
         }
     }
 }

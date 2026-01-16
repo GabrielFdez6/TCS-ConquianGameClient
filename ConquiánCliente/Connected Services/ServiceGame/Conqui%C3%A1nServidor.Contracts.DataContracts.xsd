@@ -99,6 +99,7 @@
       <xs:enumeration value="PlayerBanned" />
       <xs:enumeration value="UserInLobby" />
       <xs:enumeration value="OpponentConnectionLost" />
+      <xs:enumeration value="RoomNotFound" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="ServiceErrorType" nillable="true" type="tns:ServiceErrorType" />

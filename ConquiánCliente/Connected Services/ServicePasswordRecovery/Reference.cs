@@ -227,6 +227,9 @@ namespace ConquiánCliente.ServicePasswordRecovery {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         OpponentConnectionLost = 43,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RoomNotFound = 44,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -236,26 +239,26 @@ namespace ConquiánCliente.ServicePasswordRecovery {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPasswordRecovery/RequestPasswordRecovery", ReplyAction="http://tempuri.org/IPasswordRecovery/RequestPasswordRecoveryResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServicePasswordRecovery.ServiceFaultDto), Action="http://tempuri.org/IPasswordRecovery/RequestPasswordRecoveryServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
             "acts")]
-        bool RequestPasswordRecovery(string email, int mode);
+        void RequestPasswordRecovery(string email, int mode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPasswordRecovery/RequestPasswordRecovery", ReplyAction="http://tempuri.org/IPasswordRecovery/RequestPasswordRecoveryResponse")]
-        System.Threading.Tasks.Task<bool> RequestPasswordRecoveryAsync(string email, int mode);
+        System.Threading.Tasks.Task RequestPasswordRecoveryAsync(string email, int mode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPasswordRecovery/ValidateRecoveryToken", ReplyAction="http://tempuri.org/IPasswordRecovery/ValidateRecoveryTokenResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServicePasswordRecovery.ServiceFaultDto), Action="http://tempuri.org/IPasswordRecovery/ValidateRecoveryTokenServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
             "acts")]
-        bool ValidateRecoveryToken(string email, string token);
+        void ValidateRecoveryToken(string email, string token);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPasswordRecovery/ValidateRecoveryToken", ReplyAction="http://tempuri.org/IPasswordRecovery/ValidateRecoveryTokenResponse")]
-        System.Threading.Tasks.Task<bool> ValidateRecoveryTokenAsync(string email, string token);
+        System.Threading.Tasks.Task ValidateRecoveryTokenAsync(string email, string token);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPasswordRecovery/ResetPassword", ReplyAction="http://tempuri.org/IPasswordRecovery/ResetPasswordResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(ConquiánCliente.ServicePasswordRecovery.ServiceFaultDto), Action="http://tempuri.org/IPasswordRecovery/ResetPasswordServiceFaultDtoFault", Name="ServiceFaultDto", Namespace="http://schemas.datacontract.org/2004/07/Conqui%C3%A1nServidor.Contracts.DataContr" +
             "acts")]
-        bool ResetPassword(string email, string token, string newPassword);
+        void ResetPassword(string email, string token, string newPassword);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPasswordRecovery/ResetPassword", ReplyAction="http://tempuri.org/IPasswordRecovery/ResetPasswordResponse")]
-        System.Threading.Tasks.Task<bool> ResetPasswordAsync(string email, string token, string newPassword);
+        System.Threading.Tasks.Task ResetPasswordAsync(string email, string token, string newPassword);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -285,27 +288,27 @@ namespace ConquiánCliente.ServicePasswordRecovery {
                 base(binding, remoteAddress) {
         }
         
-        public bool RequestPasswordRecovery(string email, int mode) {
-            return base.Channel.RequestPasswordRecovery(email, mode);
+        public void RequestPasswordRecovery(string email, int mode) {
+            base.Channel.RequestPasswordRecovery(email, mode);
         }
         
-        public System.Threading.Tasks.Task<bool> RequestPasswordRecoveryAsync(string email, int mode) {
+        public System.Threading.Tasks.Task RequestPasswordRecoveryAsync(string email, int mode) {
             return base.Channel.RequestPasswordRecoveryAsync(email, mode);
         }
         
-        public bool ValidateRecoveryToken(string email, string token) {
-            return base.Channel.ValidateRecoveryToken(email, token);
+        public void ValidateRecoveryToken(string email, string token) {
+            base.Channel.ValidateRecoveryToken(email, token);
         }
         
-        public System.Threading.Tasks.Task<bool> ValidateRecoveryTokenAsync(string email, string token) {
+        public System.Threading.Tasks.Task ValidateRecoveryTokenAsync(string email, string token) {
             return base.Channel.ValidateRecoveryTokenAsync(email, token);
         }
         
-        public bool ResetPassword(string email, string token, string newPassword) {
-            return base.Channel.ResetPassword(email, token, newPassword);
+        public void ResetPassword(string email, string token, string newPassword) {
+            base.Channel.ResetPassword(email, token, newPassword);
         }
         
-        public System.Threading.Tasks.Task<bool> ResetPasswordAsync(string email, string token, string newPassword) {
+        public System.Threading.Tasks.Task ResetPasswordAsync(string email, string token, string newPassword) {
             return base.Channel.ResetPasswordAsync(email, token, newPassword);
         }
     }

@@ -27,12 +27,15 @@ namespace ConquiánCliente.ViewModel.FriendList
         public ICommand DeclineRequestCommand { get; }
         public ICommand BackCommand { get; }
 
-        private readonly FriendListClient FriendListService;
+        private readonly FriendListClient friendListService;
         private readonly IMessageResolver messageResolver;
+
+        private const int STATUS_ACCEPTED = 1;
+        private const int STATUS_DECLINED = 2;
 
         public FriendRequestsViewModel()
         {
-            FriendListService = new FriendListClient();
+            friendListService = new FriendListClient();
             this.messageResolver = new ResourceMessageResolver();
 
             Requests = new ObservableCollection<FriendRequest>();
@@ -65,8 +68,9 @@ namespace ConquiánCliente.ViewModel.FriendList
         {
             try
             {
-                var requestsList = await FriendListService.GetFriendRequestsAsync(PlayerSession.CurrentPlayer.idPlayer);
+                var requestsList = await friendListService.GetFriendRequestsAsync(PlayerSession.CurrentPlayer.idPlayer);
                 Requests.Clear();
+
                 if (requestsList != null)
                 {
                     foreach (var req in requestsList)
@@ -75,19 +79,9 @@ namespace ConquiánCliente.ViewModel.FriendList
                     }
                 }
             }
-            catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
-            {
-                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
-                string msg = messageResolver.GetMessage(errorType);
-                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (EndpointNotFoundException)
-            {
-                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
             catch (Exception ex)
             {
-                MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
+                HandleServiceException(ex);
             }
         }
 
@@ -95,30 +89,7 @@ namespace ConquiánCliente.ViewModel.FriendList
         {
             if (parameter is FriendRequest request)
             {
-                try
-                {
-                    await FriendListService.UpdateFriendRequestStatusAsync(request.IdFriendship, 1);
-                    Requests.Remove(request);
-                }
-                catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
-                {
-                    var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
-                    string msg = messageResolver.GetMessage(errorType);
-                    MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
-
-                    if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.NotFound)
-                    {
-                        Requests.Remove(request);
-                    }
-                }
-                catch (EndpointNotFoundException)
-                {
-                    MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
-                }
+                await ProcessRequestUpdate(request, STATUS_ACCEPTED);
             }
         }
 
@@ -126,30 +97,36 @@ namespace ConquiánCliente.ViewModel.FriendList
         {
             if (parameter is FriendRequest request)
             {
-                try
-                {
-                    await FriendListService.UpdateFriendRequestStatusAsync(request.IdFriendship, 2);
-                    Requests.Remove(request);
-                }
-                catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
-                {
-                    var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
-                    string msg = messageResolver.GetMessage(errorType);
-                    MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
+                await ProcessRequestUpdate(request, STATUS_DECLINED);
+            }
+        }
 
-                    if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.NotFound)
-                    {
-                        Requests.Remove(request);
-                    }
-                }
-                catch (EndpointNotFoundException)
-                {
-                    MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
-                }
+        private async Task ProcessRequestUpdate(FriendRequest request, int status)
+        {
+            try
+            {
+                await friendListService.UpdateFriendRequestStatusAsync(request.IdFriendship, status);
+                Requests.Remove(request);
+            }
+            catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
+            {
+                HandleFaultException(fault, request);
+            }
+            catch (Exception ex)
+            {
+                HandleServiceException(ex);
+            }
+        }
+
+        private void HandleFaultException(FaultException<ServiceFriendList.ServiceFaultDto> fault, FriendRequest request)
+        {
+            var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+            string msg = messageResolver.GetMessage(errorType);
+            MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
+
+            if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.NotFound)
+            {
+                Requests.Remove(request);
             }
         }
 
@@ -162,6 +139,24 @@ namespace ConquiánCliente.ViewModel.FriendList
                 var friendListWindow = new View.FriendList.FriendList();
                 friendListWindow.Show();
                 currentWindow.Close();
+            }
+        }
+
+        private void HandleServiceException(Exception ex)
+        {
+            if (ex is FaultException<ServiceFriendList.ServiceFaultDto> fault)
+            {
+                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                string msg = messageResolver.GetMessage(errorType);
+                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if (ex is EndpointNotFoundException || ex is CommunicationException || ex is TimeoutException)
+            {
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                MessageBox.Show(string.Format(Lang.ErrorUnexpected, ex.Message), Lang.TitleError);
             }
         }
 

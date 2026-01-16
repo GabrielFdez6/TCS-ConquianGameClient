@@ -24,10 +24,5 @@ namespace ConquiánCliente.Utilities
                 OnNetworkStatusRestored?.Invoke();
             }
         }
-
-        public void StopMonitoring()
-        {
-            NetworkChange.NetworkAvailabilityChanged -= NetworkChange_NetworkAvailabilityChanged;
-        }
     }
 }

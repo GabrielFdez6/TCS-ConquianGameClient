@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="lIQQnzj2++EV1C6dzsyPu4Dw+/bAYPRMSWz1bFzliTY=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="E0gZpEilgLjDJwfW4xIqqyvbdMkSLOizkqn68xzSbuI=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_ILobby">
+    <bindingConfiguration bindingType="netTcpBinding" name="CustomBinding_ILobby">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_ILobby</serializedValue>
+          <serializedValue>CustomBinding_ILobby</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -72,17 +72,17 @@
         <property path="/reliableSession/ordered" isComplexType="false" isExplicitlyDefined="false" clrType="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>True</serializedValue>
         </property>
-        <property path="/reliableSession/inactivityTimeout" isComplexType="false" isExplicitlyDefined="false" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>00:10:00</serializedValue>
+        <property path="/reliableSession/inactivityTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <serializedValue>00:01:30</serializedValue>
         </property>
-        <property path="/reliableSession/enabled" isComplexType="false" isExplicitlyDefined="false" clrType="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>False</serializedValue>
+        <property path="/reliableSession/enabled" isComplexType="false" isExplicitlyDefined="true" clrType="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <serializedValue>True</serializedValue>
         </property>
         <property path="/security" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.NetTcpSecurityElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.NetTcpSecurityElement</serializedValue>
         </property>
-        <property path="/security/mode" isComplexType="false" isExplicitlyDefined="false" clrType="System.ServiceModel.SecurityMode, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>Transport</serializedValue>
+        <property path="/security/mode" isComplexType="false" isExplicitlyDefined="true" clrType="System.ServiceModel.SecurityMode, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <serializedValue>None</serializedValue>
         </property>
         <property path="/security/transport" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.TcpTransportSecurityElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.TcpTransportSecurityElement</serializedValue>
@@ -121,7 +121,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_ILobby" contract="ServiceLobby.ILobby" bindingType="netTcpBinding" address="net.tcp://localhost:9001/ConquiánServidor/Lobby/" bindingConfiguration="NetTcpBinding_ILobby">
+    <endpoint name="CustomBinding_ILobby" contract="ServiceLobby.ILobby" bindingType="netTcpBinding" address="net.tcp://localhost:9001/ConquiánServidor/Lobby/" bindingConfiguration="CustomBinding_ILobby">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:9001/Conqui%C3%A1nServidor/Lobby/</serializedValue>
@@ -133,7 +133,7 @@
           <serializedValue>netTcpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_ILobby</serializedValue>
+          <serializedValue>CustomBinding_ILobby</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>ServiceLobby.ILobby</serializedValue>
@@ -196,7 +196,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_ILobby</serializedValue>
+          <serializedValue>CustomBinding_ILobby</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

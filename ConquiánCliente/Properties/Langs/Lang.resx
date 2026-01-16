@@ -798,4 +798,22 @@ Si la carta no te sirve, usa el botón 'Pasar'.</value>
   <data name="OpponentConnectionLost" xml:space="preserve">
     <value>No se puede iniciar la partida debido a que el oponente no tiene conexión. Por favor espere</value>
   </data>
+  <data name="ErrorGameNotFound" xml:space="preserve">
+    <value>El juego no fue encontrado</value>
+  </data>
+  <data name="ErrorGameInProgress" xml:space="preserve">
+    <value>Ya hay un juego en progreso</value>
+  </data>
+  <data name="ErrorUserOffline" xml:space="preserve">
+    <value>El usuario no está conectado</value>
+  </data>
+  <data name="ErrorCardNotFound" xml:space="preserve">
+    <value>Carta no encontrada</value>
+  </data>
+  <data name="ErrorInvitationFailed" xml:space="preserve">
+    <value>No se pudo enviar la invitación</value>
+  </data>
+  <data name="ErrorUnknown" xml:space="preserve">
+    <value>Error desconocido</value>
+  </data>
 </root>

@@ -12,7 +12,7 @@ using System.Windows;
 using System.Windows.Input;
 using ConquiánCliente.Utilities.Messages;
 
-namespace ConquiánCliente.ViewModel
+namespace ConquiánCliente.ViewModel.FriendList
 {
     public class FriendListViewModel : INotifyPropertyChanged
     {
@@ -39,14 +39,14 @@ namespace ConquiánCliente.ViewModel
             set { searchResult = value; OnPropertyChanged(nameof(SearchResult)); }
         }
 
-        private readonly FriendListClient FriendListService;
-        private readonly ConquiánCliente.ServiceUserProfile.UserProfileClient UserProfileService;
+        private readonly FriendListClient friendListService;
+        private readonly ConquiánCliente.ServiceUserProfile.UserProfileClient userProfileService;
         private readonly IMessageResolver messageResolver;
 
         public FriendListViewModel()
         {
-            FriendListService = new FriendListClient();
-            UserProfileService = new ConquiánCliente.ServiceUserProfile.UserProfileClient();
+            friendListService = new FriendListClient();
+            userProfileService = new ConquiánCliente.ServiceUserProfile.UserProfileClient();
             this.messageResolver = new ResourceMessageResolver();
 
             Friends = new ObservableCollection<FriendInviteItemViewModel>();
@@ -76,26 +76,29 @@ namespace ConquiánCliente.ViewModel
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-
-                var newStatus = (PlayerStatus)newStatusId;
-                bool isOnline = (newStatus == PlayerStatus.Online);
-
-                var friendVM = Friends.FirstOrDefault(f => f.IdPlayer == friendId);
-                if (friendVM != null)
-                {
-                    friendVM.IsOnline = isOnline;
-                    friendVM.StatusText = isOnline ? Lang.StatusOnline : Lang.StatusOffline;
-                    friendVM.PlayerDto.Status = newStatus;
-                }
-
-                var searchVM = SearchResult.FirstOrDefault(f => f.IdPlayer == friendId);
-                if (searchVM != null)
-                {
-                    searchVM.IsOnline = isOnline;
-                    searchVM.StatusText = isOnline ? Lang.StatusOnline : Lang.StatusOffline;
-                    searchVM.PlayerDto.Status = newStatus;
-                }
+                UpdateFriendStatus(friendId, newStatusId);
             });
+        }
+
+        private void UpdateFriendStatus(int friendId, int newStatusId)
+        {
+            var newStatus = (PlayerStatus)newStatusId;
+            bool isOnline = (newStatus == PlayerStatus.Online);
+
+            UpdateCollectionStatus(Friends, friendId, newStatus);
+            UpdateCollectionStatus(SearchResult, friendId, newStatus);
+        }
+
+        private void UpdateCollectionStatus(ObservableCollection<FriendInviteItemViewModel> collection, int friendId, PlayerStatus newStatus)
+        {
+            var item = collection.FirstOrDefault(f => f.IdPlayer == friendId);
+            if (item != null)
+            {
+                bool isOnline = (newStatus == PlayerStatus.Online);
+                item.IsOnline = isOnline;
+                item.StatusText = isOnline ? Lang.StatusOnline : Lang.StatusOffline;
+                item.PlayerDto.Status = newStatus;
+            }
         }
 
         public void Cleanup()
@@ -108,7 +111,7 @@ namespace ConquiánCliente.ViewModel
         {
             try
             {
-                var friendsList = await FriendListService.GetFriendsAsync(PlayerSession.CurrentPlayer.idPlayer);
+                var friendsList = await friendListService.GetFriendsAsync(PlayerSession.CurrentPlayer.idPlayer);
 
                 Friends.Clear();
                 if (friendsList != null)
@@ -119,19 +122,9 @@ namespace ConquiánCliente.ViewModel
                     }
                 }
             }
-            catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
+            catch (Exception ex)
             {
-                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
-                string msg = messageResolver.GetMessage(errorType);
-                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (EndpointNotFoundException)
-            {
-                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(string.Format(Lang.ErrorUnexpected), Lang.TitleError);
+                HandleServiceException(ex);
             }
         }
 
@@ -140,30 +133,16 @@ namespace ConquiánCliente.ViewModel
             try
             {
                 SearchResult.Clear();
-                var player = await FriendListService.GetPlayerByNicknameAsync(nickname, PlayerSession.CurrentPlayer.idPlayer);
+                var player = await friendListService.GetPlayerByNicknameAsync(nickname, PlayerSession.CurrentPlayer.idPlayer);
 
                 if (player != null)
                 {
                     SearchResult.Add(new FriendInviteItemViewModel(player));
                 }
             }
-            catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
+            catch (Exception ex)
             {
-                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
-                string msg = messageResolver.GetMessage(errorType);
-                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (CommunicationException)
-            {
-                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (TimeoutException)
-            {
-                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(string.Format(Lang.ErrorUnexpected), Lang.TitleError);
+                HandleServiceException(ex);
             }
         }
 
@@ -173,22 +152,12 @@ namespace ConquiánCliente.ViewModel
             {
                 try
                 {
-                    await FriendListService.SendFriendRequestAsync(PlayerSession.CurrentPlayer.idPlayer, friendVM.IdPlayer);
+                    await friendListService.SendFriendRequestAsync(PlayerSession.CurrentPlayer.idPlayer, friendVM.IdPlayer);
                     MessageBox.Show(Lang.FriendRequestSentSuccess, Lang.TitleSuccess);
                 }
-                catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
+                catch (Exception ex)
                 {
-                    var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
-                    string msg = messageResolver.GetMessage(errorType);
-                    MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                catch (EndpointNotFoundException)
-                {
-                    MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show(string.Format(Lang.ErrorUnexpected), Lang.TitleError);
+                    HandleServiceException(ex);
                 }
             }
         }
@@ -221,66 +190,80 @@ namespace ConquiánCliente.ViewModel
             {
                 try
                 {
-                    var fullPlayerProfile = await UserProfileService.GetPlayerByIdAsync(friendVM.IdPlayer);
-                    var socials = await UserProfileService.GetPlayerSocialsAsync(friendVM.IdPlayer);
+                    var fullPlayerProfile = await userProfileService.GetPlayerByIdAsync(friendVM.IdPlayer);
+                    var socials = await userProfileService.GetPlayerSocialsAsync(friendVM.IdPlayer);
 
                     if (fullPlayerProfile != null)
                     {
-                        var profileWindow = new FriendProfile(fullPlayerProfile, new ObservableCollection<ConquiánCliente.ServiceUserProfile.SocialDto>(socials));
-                        profileWindow.ShowDialog();
+                        ShowProfileWindow(fullPlayerProfile, socials);
                     }
                 }
-                catch (FaultException<ServiceUserProfile.ServiceFaultDto> fault)
+                catch (Exception ex)
                 {
-                    var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
-                    string msg = messageResolver.GetMessage(errorType);
-                    MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                catch (EndpointNotFoundException)
-                {
-                    MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show(string.Format(Lang.ErrorConnectingToServer), Lang.TitleError);
+                    HandleServiceException(ex);
                 }
             }
+        }
+
+        private void ShowProfileWindow(ConquiánCliente.ServiceUserProfile.PlayerDto profile, ConquiánCliente.ServiceUserProfile.SocialDto[] socials)
+        {
+            var profileWindow = new FriendProfile(profile, new ObservableCollection<ConquiánCliente.ServiceUserProfile.SocialDto>(socials));
+            profileWindow.ShowDialog();
         }
 
         private async void DeleteFriend(object parameter)
         {
             if (parameter is FriendInviteItemViewModel friendVM)
             {
-                MessageBoxResult result = MessageBox.Show(string.Format(Lang.FriendListDeleteConfirmation, friendVM.Nickname), Lang.TitleConfirmation, MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-                if (result == MessageBoxResult.Yes)
+                if (UserConfirmsDeletion(friendVM.Nickname))
                 {
-                    try
-                    {
-                        await FriendListService.DeleteFriendAsync(PlayerSession.CurrentPlayer.idPlayer, friendVM.IdPlayer);
-
-                        Friends.Remove(friendVM);
-                        MessageBox.Show(Lang.FriendListDeletedSuccess, Lang.TitleSuccess);
-                    }
-                    catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
-                    {
-                        var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
-                        string msg = messageResolver.GetMessage(errorType);
-                        MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    catch (CommunicationException)
-                    {
-                        MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    catch (TimeoutException)
-                    {
-                        MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show(string.Format(Lang.ErrorUnexpected), Lang.TitleError);
-                    }
+                    await PerformDeletion(friendVM);
                 }
+            }
+        }
+
+        private bool UserConfirmsDeletion(string nickname)
+        {
+            MessageBoxResult result = MessageBox.Show(string.Format(Lang.FriendListDeleteConfirmation, nickname), Lang.TitleConfirmation, MessageBoxButton.YesNo, MessageBoxImage.Question);
+            return result == MessageBoxResult.Yes;
+        }
+
+        private async Task PerformDeletion(FriendInviteItemViewModel friendVM)
+        {
+            try
+            {
+                await friendListService.DeleteFriendAsync(PlayerSession.CurrentPlayer.idPlayer, friendVM.IdPlayer);
+
+                Friends.Remove(friendVM);
+                MessageBox.Show(Lang.FriendListDeletedSuccess, Lang.TitleSuccess);
+            }
+            catch (Exception ex)
+            {
+                HandleServiceException(ex);
+            }
+        }
+
+        private void HandleServiceException(Exception ex)
+        {
+            if (ex is FaultException<ServiceFriendList.ServiceFaultDto> fault)
+            {
+                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+                string msg = messageResolver.GetMessage(errorType);
+                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if (ex is FaultException<ServiceUserProfile.ServiceFaultDto> userProfileFault)
+            {
+                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)userProfileFault.Detail.ErrorType;
+                string msg = messageResolver.GetMessage(errorType);
+                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if (ex is EndpointNotFoundException || ex is CommunicationException || ex is TimeoutException)
+            {
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                MessageBox.Show(string.Format(Lang.ErrorUnexpected), Lang.TitleError);
             }
         }
 

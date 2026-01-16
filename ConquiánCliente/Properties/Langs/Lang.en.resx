@@ -799,4 +799,22 @@ If the card is not useful, use the 'To Pass' button.</value>
   <data name="OpponentConnectionLost" xml:space="preserve">
     <value>The game cannot be started because your opponent is not connected. Please wait.</value>
   </data>
+  <data name="ErrorGameNotFound" xml:space="preserve">
+    <value>The game was not found.</value>
+  </data>
+  <data name="ErrorGameInProgress" xml:space="preserve">
+    <value>There is already a game in progress.</value>
+  </data>
+  <data name="ErrorUserOffline" xml:space="preserve">
+    <value>The user is not logged in.</value>
+  </data>
+  <data name="ErrorCardNotFound" xml:space="preserve">
+    <value>Card not found</value>
+  </data>
+  <data name="ErrorInvitationFailed" xml:space="preserve">
+    <value>The invitation could not be sent.</value>
+  </data>
+  <data name="ErrorUnknown" xml:space="preserve">
+    <value>Unknown error</value>
+  </data>
 </root>

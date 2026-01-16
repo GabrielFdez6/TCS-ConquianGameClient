@@ -466,6 +466,9 @@ namespace ConquiánCliente.ServiceLogin {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         OpponentConnectionLost = 43,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RoomNotFound = 44,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

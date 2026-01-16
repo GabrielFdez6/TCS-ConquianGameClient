@@ -702,6 +702,9 @@ namespace ConquiánCliente.ServiceGame {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         OpponentConnectionLost = 43,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RoomNotFound = 44,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

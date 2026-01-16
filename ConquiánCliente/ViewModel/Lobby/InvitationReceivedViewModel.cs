@@ -2,8 +2,10 @@
 using ConquiánCliente.ServiceLobby;
 using ConquiánCliente.View.Lobby;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,6 +13,7 @@ namespace ConquiánCliente.ViewModel.Lobby
 {
     public class InvitationReceivedViewModel : ViewModelBase
     {
+        private const int MAX_LOBBY_CAPACITY = 2;
         private readonly string roomCode;
         public string InvitationText { get; }
         public ICommand AcceptCommand { get; }
@@ -26,77 +29,140 @@ namespace ConquiánCliente.ViewModel.Lobby
 
         private async void ExecuteAccept(object parameter)
         {
-            var window = parameter as Window;
+            Window currentInvitationWindow = parameter as Window;
 
-            var openLobbyWindow = Application.Current.Windows.OfType<LobbyGame>().FirstOrDefault();
+            CloseActiveLobbySession();
 
-            if (openLobbyWindow != null && openLobbyWindow.DataContext is LobbyGameViewModel lobbyVM)
+            LobbyDto lobbyState = await FetchLobbyStateAsync(currentInvitationWindow);
+            bool canJoin = ValidateLobbyAvailability(lobbyState, currentInvitationWindow);
+
+            if (canJoin)
             {
-                lobbyVM.IsNavigatingAway = true;
+                PerformLobbyTransition();
+            }
+        }
 
-                lobbyVM.CloseClientConnection(true);
+        private void CloseActiveLobbySession()
+        {
+            LobbyGame openLobbyWindow = Application.Current.Windows.OfType<LobbyGame>().FirstOrDefault();
+
+            if (openLobbyWindow != null)
+            {
+                if (openLobbyWindow.DataContext is LobbyGameViewModel lobbyVM)
+                {
+                    lobbyVM.IsNavigatingAway = true;
+                    lobbyVM.CloseClientConnection(true);
+                }
 
                 openLobbyWindow.Close();
             }
+        }
 
-            LobbyDto lobbyState = null;
+        private async Task<LobbyDto> FetchLobbyStateAsync(Window window)
+        {
+            LobbyDto fetchedState = null;
 
             try
             {
                 using (var lobbyClient = new LobbyClient(new InstanceContext(LobbyCallbackHandler.Instance)))
                 {
-                    lobbyState = await lobbyClient.GetLobbyStateAsync(this.roomCode);
+                    fetchedState = await lobbyClient.GetLobbyStateAsync(this.roomCode);
                 }
             }
             catch (EndpointNotFoundException)
             {
                 MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError);
-                window?.Close();
-                return;
+                CloseWindow(window);
             }
-            catch (Exception)
+            catch (TimeoutException)
             {
                 MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError);
-                window?.Close();
-                return;
+                CloseWindow(window);
             }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError);
+                CloseWindow(window);
+            }
+
+            return fetchedState;
+        }
+
+        private bool ValidateLobbyAvailability(LobbyDto lobbyState, Window window)
+        {
+            bool isValid = true;
 
             if (lobbyState == null)
             {
                 MessageBox.Show(Lang.InfoHostLeft, Lang.Lobby);
-                window?.Close();
-                return;
+                CloseWindow(window);
+                isValid = false;
             }
-
-            if (lobbyState.Players.Length >= 2)
+            else if (lobbyState.Players.Length >= MAX_LOBBY_CAPACITY)
             {
                 MessageBox.Show(Lang.LobbyFull, Lang.Lobby);
-                window?.Close();
-                return;
+                CloseWindow(window);
+                isValid = false;
             }
 
+            return isValid;
+        }
 
+        private void PerformLobbyTransition()
+        {
             try
             {
-                var lobbyGame = new LobbyGame(this.roomCode);
-                lobbyGame.Show();
-                var windowsToClose = Application.Current.Windows.OfType<Window>()
-                            .Where(w => w != lobbyGame)
-                            .ToList();
-                foreach (Window openWindow in windowsToClose)
-                {
-                    openWindow.Close();
-                }
+                LobbyGame newLobbyWindow = new LobbyGame(this.roomCode);
+                newLobbyWindow.Show();
+
+                CloseAllOtherWindows(newLobbyWindow);
             }
-            catch (Exception ex)
+            catch (CommunicationException)
             {
-                MessageBox.Show($"{Lang.ErrorConnectingToServer}: {ex.Message}", Lang.TitleError);
+                ShowConnectionErrorMessage();
+            }
+            catch (TimeoutException)
+            {
+                ShowConnectionErrorMessage();
+            }
+            catch (Exception)
+            {
+                ShowConnectionErrorMessage();
             }
         }
 
-        private static void ExecuteReject(object parameter)
+        private void ShowConnectionErrorMessage()
         {
-            (parameter as Window)?.Close();
+            string errorMessage = Lang.ErrorConnectingToServer;
+            string errorTitle = Lang.TitleError;
+
+            MessageBox.Show(errorMessage, errorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void CloseAllOtherWindows(Window windowToKeep)
+        {
+            List<Window> windowsToClose = Application.Current.Windows.OfType<Window>()
+                .Where(w => w != windowToKeep)
+                .ToList();
+
+            foreach (Window openWindow in windowsToClose)
+            {
+                openWindow.Close();
+            }
+        }
+
+        private void ExecuteReject(object parameter)
+        {
+            Window window = parameter as Window;
+            CloseWindow(window);
+        }
+
+        private void CloseWindow(Window window)
+        {
+            if (window != null)
+            {
+                window.Close();
+            }
         }
     }
 }

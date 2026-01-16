@@ -46,55 +46,103 @@ namespace ConquiánCliente.ViewModel.Lobby
             this.roomCode = roomCode;
             this.messageResolver = new ResourceMessageResolver();
 
-            SendCommand = new RelayCommand(async (param) => await ExecuteSend());
+            SendCommand = new RelayCommand(async (param) => await ExecuteSend(param));
             BackCommand = new RelayCommand(ExecuteBack);
         }
 
-        private async Task ExecuteSend()
+        private async Task ExecuteSend(object parameter)
         {
-            string emailError = SignUpValidator.ValidateEmail(Email);
-
-            if (!string.IsNullOrEmpty(emailError))
+            bool isInputValid = ValidateInput();
+            if (!isInputValid)
             {
-                MessageBox.Show(emailError, Lang.TitleValidation, MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             Email = Email.Trim();
             IsLoading = true;
 
+            await TrySendGuestInvitation();
+
+            IsLoading = false;
+        }
+
+        private bool ValidateInput()
+        {
+            bool isValid = false;
+            string emailError = SignUpValidator.ValidateEmail(Email);
+
+            if (!string.IsNullOrEmpty(emailError))
+            {
+                MessageBox.Show(emailError, Lang.TitleValidation, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                isValid = true;
+            }
+
+            return isValid;
+        }
+
+        private async Task TrySendGuestInvitation()
+        {
             try
             {
-                using (var client = new GuestInvitationClient())
-                {
-                    await client.SendGuestInviteAsync(roomCode, Email);
-                }
-
-                MessageBox.Show(Lang.LobbyGuestInviteSent, Lang.Lobby, MessageBoxButton.OK, MessageBoxImage.Information);
-                ExecuteBack(Application.Current.Windows.OfType<SendRoomCode>().FirstOrDefault(w => w.DataContext == this));
+                await PerformInvitationRequest();
+                HandleSuccess();
             }
-            catch (FaultException<ServiceGuestInvitation.ServiceFaultDto> fault)
+            catch (FaultException<ServiceFaultDto> fault)
             {
-                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
-                string msg = messageResolver.GetMessage(errorType);
-
-                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                HandleServiceFault(fault);
             }
             catch (EndpointNotFoundException)
             {
-                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowConnectionError(Lang.ErrorServerUnavailable);
+            }
+            catch (TimeoutException)
+            {
+                ShowConnectionError(Lang.ErrorConnectingToServer);
             }
             catch (CommunicationException)
             {
-                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowConnectionError(Lang.ErrorConnectingToServer);
             }
-            catch (Exception)
+        }
+
+        private async Task PerformInvitationRequest()
+        {
+            using (var client = new GuestInvitationClient())
             {
-                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                await client.SendGuestInviteAsync(roomCode, Email);
             }
-            finally
+        }
+
+        private void HandleSuccess()
+        {
+            MessageBox.Show(Lang.LobbyGuestInviteSent, Lang.Lobby, MessageBoxButton.OK, MessageBoxImage.Information);
+            CloseCurrentWindow();
+        }
+
+        private void HandleServiceFault(FaultException<ServiceFaultDto> fault)
+        {
+            var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+            string msg = messageResolver.GetMessage(errorType);
+
+            MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+
+        private void ShowConnectionError(string message)
+        {
+            MessageBox.Show(message, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void CloseCurrentWindow()
+        {
+            var currentWindow = Application.Current.Windows.OfType<SendRoomCode>()
+                                .FirstOrDefault(w => w.DataContext == this);
+
+            if (currentWindow != null)
             {
-                IsLoading = false;
+                ExecuteBack(currentWindow);
             }
         }
 

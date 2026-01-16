@@ -26,45 +26,59 @@ namespace ConquiánCliente.Utilities.Messages
         private static Dictionary<ServiceErrorType, Func<string>> InitializeMessageMap()
         {
             return new Dictionary<ServiceErrorType, Func<string>>
-            {
+            { 
                 { ServiceErrorType.SessionActive, () => Lang.ErrorSessionActive },
                 { ServiceErrorType.UserNotFound, () => Lang.ErrorUserNotFound },
                 { ServiceErrorType.InvalidPassword, () => Lang.ErrorInvalidCredentials },
+                { ServiceErrorType.InvalidEmailFormat, () => Lang.ErrorEmailInvalidFormat },
+                { ServiceErrorType.InvalidPasswordFormat, () => Lang.ErrorInvalidPasswordFormat },
+                { ServiceErrorType.InvalidNameFormat, () => Lang.ErrorInvalidNameFormat },
+                { ServiceErrorType.InvalidVerificationCode, () => Lang.ErrorInvalidVerificationCode },
+                { ServiceErrorType.VerificationCodeExpired, () => Lang.ErrorVerificationCodeExpired },
+                { ServiceErrorType.RegisteredMail, () => Lang.ErrorRegisteredMail },
+
                 { ServiceErrorType.DatabaseError, () => Lang.GlobalSqlError },
-                { ServiceErrorType.LobbyFull, () => Lang.ErrorLobbyFull },
-                { ServiceErrorType.GuestInviteUsed, () => Lang.ErrorUsedInvitation },
-                { ServiceErrorType.RegisteredUserAsGuest, () => Lang.ErrorRegisteredMail },
                 { ServiceErrorType.DuplicateRecord, () => Lang.ErrorNicknameExists },
-                { ServiceErrorType.ExistingRequest, () => Lang.ErrorExistingRequest },
-                { ServiceErrorType.NotFound, () => Lang.ErrorNotFound },
-                { ServiceErrorType.NotYourTurn, () => Lang.ErrorNotYourTurn },
-                { ServiceErrorType.MustDiscardToFinish, () => Lang.ErrorMustDiscardToFinish },
-                { ServiceErrorType.GameRuleViolation, () => Lang.ErrorGameRuleViolation },
-                { ServiceErrorType.InvalidCardAction, () => Lang.ErrorInvalidCardAction },
-                { ServiceErrorType.InvalidMeld, () => Lang.ErrorInvalidMeld },
-                { ServiceErrorType.OperationFailed, () => Lang.ErrorOperationFailed },
-                { ServiceErrorType.AlreadyDrawn, () => Lang.ErrorAlreadyDrawn },
-                { ServiceErrorType.PendingDiscardAction, () => Lang.ErrorPendingDiscardAction },
-                { ServiceErrorType.DeckEmpty, () => Lang.ErrorDeckEmpty },
-                { ServiceErrorType.EmptyDiscaard, () => Lang.ErrorEmptyDiscaard },
-                { ServiceErrorType.CommunicationError, () => Lang.ErrorCommunicationError },
-                { ServiceErrorType.ServerInternalError, () => Lang.ErrorServerInternalError },
+                
+                { ServiceErrorType.LobbyFull, () => Lang.ErrorLobbyFull },
                 { ServiceErrorType.LobbyNotFound, () => Lang.ErrorLobbyNotFound },
-                { ServiceErrorType.HostUserNotFound, () => Lang.ErrorHostUserNotFound },
-                { ServiceErrorType.ValidationFailed, () => Lang.ErrorValidationFailed },
                 { ServiceErrorType.NotEnoughPlayers, () => Lang.ErrorNotEnoughPlayers },
                 { ServiceErrorType.NotLobbyHost, () => Lang.ErrorNotLobbyHost },
                 { ServiceErrorType.NotKickYourSelf, () => Lang.ErrorNotKickYourSelf },
-                { ServiceErrorType.InvalidNameFormat, () => Lang.ErrorInvalidNameFormat },
-                { ServiceErrorType.InvalidPasswordFormat, () => Lang.ErrorInvalidPasswordFormat },
-                { ServiceErrorType.InvalidEmailFormat, () => Lang.ErrorEmailInvalidFormat },
-                { ServiceErrorType.RegisteredMail, () => Lang.ErrorRegisteredMail },
-                { ServiceErrorType.VerificationCodeExpired, () => Lang.ErrorVerificationCodeExpired },
-                { ServiceErrorType.InvalidVerificationCode, () => Lang.ErrorInvalidVerificationCode },
+                { ServiceErrorType.RoomNotFound, () => Lang.ErrorLobbyNotFound },
+                
+                { ServiceErrorType.GuestInviteUsed, () => Lang.ErrorUsedInvitation },
+                { ServiceErrorType.RegisteredUserAsGuest, () => Lang.ErrorRegisteredMail },
+                
+                { ServiceErrorType.GameNotFound, () => Lang.ErrorGameNotFound },
+                { ServiceErrorType.GameInProgress, () => Lang.ErrorGameInProgress },
+                { ServiceErrorType.NotYourTurn, () => Lang.ErrorNotYourTurn },
+                { ServiceErrorType.MustDiscardToFinish, () => Lang.ErrorMustDiscardToFinish },
+                { ServiceErrorType.AlreadyDrawn, () => Lang.ErrorAlreadyDrawn },
+                { ServiceErrorType.PendingDiscardAction, () => Lang.ErrorPendingDiscardAction },
+                { ServiceErrorType.DeckEmpty, () => Lang.ErrorDeckEmpty },
+                { ServiceErrorType.InvalidMeld, () => Lang.ErrorInvalidMeld },
+                { ServiceErrorType.CardNotFound, () => Lang.ErrorCardNotFound },
+                { ServiceErrorType.InvalidCardAction, () => Lang.ErrorInvalidCardAction },
+                { ServiceErrorType.GameRuleViolation, () => Lang.ErrorGameRuleViolation },
+                { ServiceErrorType.EmptyDiscaard, () => Lang.ErrorEmptyDiscaard },
+                
+                { ServiceErrorType.UserOffline, () => Lang.ErrorUserOffline },
                 { ServiceErrorType.UserInGame, () => Lang.ErrorPlayerInGame },
-                { ServiceErrorType.PlayerBanned, () => Lang.ErrorPlayerBanned },
                 { ServiceErrorType.UserInLobby, () => Lang.ErrorPlayerInLobby },
-                { ServiceErrorType.OpponentConnectionLost, () => Lang.OpponentConnectionLost}
+                { ServiceErrorType.PlayerBanned, () => Lang.ErrorPlayerBanned },
+                
+                { ServiceErrorType.CommunicationError, () => Lang.ErrorCommunicationError },
+                { ServiceErrorType.OpponentConnectionLost, () => Lang.OpponentConnectionLost },
+                { ServiceErrorType.InvitationFailed, () => Lang.ErrorInvitationFailed },
+                
+                { ServiceErrorType.OperationFailed, () => Lang.ErrorOperationFailed },
+                { ServiceErrorType.ServerInternalError, () => Lang.ErrorServerInternalError },
+                { ServiceErrorType.ValidationFailed, () => Lang.ErrorValidationFailed },
+                { ServiceErrorType.NotFound, () => Lang.ErrorNotFound },
+                { ServiceErrorType.ExistingRequest, () => Lang.ErrorExistingRequest },
+                { ServiceErrorType.HostUserNotFound, () => Lang.ErrorHostUserNotFound },
+                { ServiceErrorType.Unknown, () => Lang.ErrorUnknown }
             };
         }
     }

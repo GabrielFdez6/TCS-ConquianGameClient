@@ -17,21 +17,24 @@ namespace ConquiánCliente.Utilities
         private AudioManager()
         {
             mediaPlayer = new MediaPlayer();
-
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string baseDir = System.AppDomain.CurrentDomain.BaseDirectory;
             menuMusicPath = Path.Combine(baseDir, "Resources", "Music", "MainMenuMusic.mp3");
             gameMusicPath = Path.Combine(baseDir, "Resources", "Music", "GameMusic.mp3");
 
             mediaPlayer.MediaEnded += (s, e) =>
             {
-                mediaPlayer.Position = TimeSpan.Zero;
+                mediaPlayer.Position = System.TimeSpan.Zero;
                 mediaPlayer.Play();
             };
         }
 
         public void PlayMenuMusic()
         {
-            if (!isGameMusicPlaying && mediaPlayer.Source != null) return;
+            bool shouldSkipPlayback = !isGameMusicPlaying && mediaPlayer.Source != null;
+            if (shouldSkipPlayback)
+            {
+                return;
+            }
 
             PlayFile(menuMusicPath);
             isGameMusicPlaying = false;
@@ -39,7 +42,11 @@ namespace ConquiánCliente.Utilities
 
         public void PlayGameMusic()
         {
-            if (isGameMusicPlaying && mediaPlayer.Source != null) return;
+            bool shouldSkipPlayback = isGameMusicPlaying && mediaPlayer.Source != null;
+            if (shouldSkipPlayback)
+            {
+                return;
+            }
 
             PlayFile(gameMusicPath);
             isGameMusicPlaying = true;
@@ -49,32 +56,51 @@ namespace ConquiánCliente.Utilities
         {
             try
             {
-                if (File.Exists(path))
+                bool fileExists = File.Exists(path);
+                if (fileExists)
                 {
-                    mediaPlayer.Open(new Uri(path));
+                    mediaPlayer.Open(new System.Uri(path));
                     mediaPlayer.Play();
                 }
                 else
                 {
-                    Console.WriteLine($"Archivo de música no encontrado: {path}");
+                    LogMissingFile(path);
                 }
             }
-            catch (Exception)
+            catch (IOException ioException)
             {
-                Console.WriteLine("Error al reproducir música");
+                LogPlaybackError(ioException.Message);
+            }
+            catch (UnauthorizedAccessException accessException)
+            {
+                LogPlaybackError(accessException.Message);
+            }
+            catch (System.NotSupportedException notSupportedException)
+            {
+                LogPlaybackError(notSupportedException.Message);
             }
         }
 
         public void SetVolume(double volume)
         {
-            double maxRealVolume = 0.1;
-
-            mediaPlayer.Volume = (volume / 100.0) * maxRealVolume;
+            const double maxRealVolume = 0.1;
+            double calculatedVolume = (volume / 100.0) * maxRealVolume;
+            mediaPlayer.Volume = calculatedVolume;
         }
 
         public void StopMusic()
         {
             mediaPlayer.Stop();
+        }
+
+        private void LogMissingFile(string path)
+        {
+            System.Diagnostics.Debug.WriteLine($"Archivo de música no encontrado: {path}");
+        }
+
+        private void LogPlaybackError(string errorMessage)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error al reproducir música: {errorMessage}");
         }
     }
 }

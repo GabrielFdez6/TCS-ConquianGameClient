@@ -10,9 +10,7 @@
   </xs:element>
   <xs:element name="RegisterPlayerResponse">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="RegisterPlayerResult" type="xs:boolean" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="SendVerificationCode">
@@ -39,9 +37,7 @@
   </xs:element>
   <xs:element name="VerifyCodeResponse">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="VerifyCodeResult" type="xs:boolean" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="CancelRegistration">
@@ -53,9 +49,7 @@
   </xs:element>
   <xs:element name="CancelRegistrationResponse">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="CancelRegistrationResult" type="xs:boolean" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

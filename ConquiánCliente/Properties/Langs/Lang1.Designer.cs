@@ -19,7 +19,7 @@ namespace ConquiánCliente.Properties.Langs {
     // a través de una herramienta como ResGen o Visual Studio.
     // Para agregar o quitar un miembro, edite el archivo .ResX y, a continuación, vuelva a ejecutar ResGen
     // con la opción /str o recompile su proyecto de VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Lang {
@@ -160,6 +160,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Carta no encontrada.
+        /// </summary>
+        public static string ErrorCardNotFound {
+            get {
+                return ResourceManager.GetString("ErrorCardNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error de comunicación con el servidor..
         /// </summary>
         public static string ErrorCommunicationError {
@@ -259,11 +268,29 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ya hay un juego en progreso.
+        /// </summary>
+        public static string ErrorGameInProgress {
+            get {
+                return ResourceManager.GetString("ErrorGameInProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No se ha seleccionado un modo de juego.
         /// </summary>
         public static string ErrorGamemodeNotSelected {
             get {
                 return ResourceManager.GetString("ErrorGamemodeNotSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El juego no fue encontrado.
+        /// </summary>
+        public static string ErrorGameNotFound {
+            get {
+                return ResourceManager.GetString("ErrorGameNotFound", resourceCulture);
             }
         }
         
@@ -354,6 +381,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string ErrorInvalidVerificationCode {
             get {
                 return ResourceManager.GetString("ErrorInvalidVerificationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo enviar la invitación.
+        /// </summary>
+        public static string ErrorInvitationFailed {
+            get {
+                return ResourceManager.GetString("ErrorInvitationFailed", resourceCulture);
             }
         }
         
@@ -781,6 +817,15 @@ namespace ConquiánCliente.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Error desconocido.
+        /// </summary>
+        public static string ErrorUnknown {
+            get {
+                return ResourceManager.GetString("ErrorUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error al actualizar la imagen de perfil..
         /// </summary>
         public static string ErrorUpdatePhoto {
@@ -804,6 +849,15 @@ namespace ConquiánCliente.Properties.Langs {
         public static string ErrorUserNotFound {
             get {
                 return ResourceManager.GetString("ErrorUserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El usuario no está conectado.
+        /// </summary>
+        public static string ErrorUserOffline {
+            get {
+                return ResourceManager.GetString("ErrorUserOffline", resourceCulture);
             }
         }
         

@@ -13,7 +13,7 @@ namespace ConquiánCliente.ViewModel
 
         public static void Connect(int idPlayer)
         {
-            if (client != null && client.State == CommunicationState.Opened)
+            if (IsClientConnected())
             {
                 return;
             }
@@ -25,53 +25,116 @@ namespace ConquiánCliente.ViewModel
                 client = new InvitationServiceClient(context);
                 client.Subscribe(idPlayer);
             }
-            catch (Exception)
+            catch (EndpointNotFoundException)
             {
-                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowConnectionError(Lang.ErrorServerUnavailable);
+            }
+            catch (TimeoutException)
+            {
+                ShowConnectionError(Lang.ErrorConnectingToServer);
+            }
+            catch (CommunicationException)
+            {
+                ShowConnectionError(Lang.ErrorConnectingToServer);
             }
         }
+
+
 
         public static void Disconnect(int idPlayer)
         {
-            if (client != null)
+            if (client == null)
             {
-                try
+                return;
+            }
+
+            try
+            {
+                if (client.State == CommunicationState.Opened)
                 {
-                    if (client.State == CommunicationState.Opened)
-                    {
-                        client.Unsubscribe(idPlayer);
-                        client.Close();
-                    }
-                    else
-                    {
-                        client.Abort();
-                    }
+                    client.Unsubscribe(idPlayer);
                 }
-                catch (Exception)
-                {
-                    client.Abort();
-                }
-                finally
-                {
-                    client = null;
-                }
+            }
+            catch (CommunicationException)
+            {
+            }
+            catch (TimeoutException)
+            {
+
+            }
+            finally
+            {
+                SafeCloseClient();
             }
         }
 
-        public static async Task SendInvitationAsync(int idSender, string senderNickname, int idReceiver, string roomCode)
+        public static async Task SendInvitationAsync(InvitationSenderDto sender, int idReceiver, string roomCode)
         {
-            if (client == null || client.State != CommunicationState.Opened)
+            if (!IsClientConnected())
             {
-                Connect(idSender);
+                Connect(sender.IdPlayer);
             }
 
-            if (client != null && client.State == CommunicationState.Opened)
+            if (IsClientConnected())
             {
-                await client.SendInvitationAsync(idSender, senderNickname, idReceiver, roomCode);
+                await client.SendInvitationAsync(sender, idReceiver, roomCode);
             }
             else
             {
                 throw new CommunicationException(Lang.ErrorConnectingToServer);
+            }
+        }
+
+        private static bool IsClientConnected()
+        {
+            bool isConnected = client != null && client.State == CommunicationState.Opened;
+            return isConnected;
+        }
+
+        private static void SafeCloseClient()
+        {
+            if (client == null)
+            {
+                return;
+            }
+
+            try
+            {
+                if (client.State == CommunicationState.Opened)
+                {
+                    client.Close();
+                }
+                else
+                {
+                    client.Abort();
+                }
+            }
+            catch (CommunicationException)
+            {
+                client.Abort();
+            }
+            catch (TimeoutException)
+            {
+                client.Abort();
+            }
+            catch (Exception)
+            {
+                client.Abort();
+            }
+            finally
+            {
+                client = null;
+            }
+        }
+
+        private static void ShowConnectionError(string message)
+        {
+            if (Application.Current != null)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    MessageBox.Show(message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                });
             }
         }
     }

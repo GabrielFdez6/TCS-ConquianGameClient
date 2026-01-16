@@ -1,5 +1,7 @@
 ﻿using ConquiánCliente.Properties.Langs;
 using ConquiánCliente.ServiceFriendList;
+using ConquiánCliente.ServiceInvitation;
+using ConquiánCliente.Utilities.Messages;
 using ConquiánCliente.View.Lobby;
 using System;
 using System.Collections.ObjectModel;
@@ -9,7 +11,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using ConquiánCliente.Utilities.Messages;
 
 namespace ConquiánCliente.ViewModel.Lobby
 {
@@ -65,83 +66,126 @@ namespace ConquiánCliente.ViewModel.Lobby
                 using (var client = new FriendListClient())
                 {
                     var friends = await client.GetFriendsAsync(PlayerSession.CurrentPlayer.idPlayer);
-
-                    FriendsList.Clear();
-
-                    foreach (var friend in friends.OrderBy(f => f.Status))
-                    {
-                        FriendsList.Add(new FriendInviteItemViewModel(friend));
-                    }
+                    PopulateFriendsList(friends);
                 }
             }
             catch (FaultException<ServiceFriendList.ServiceFaultDto> fault)
             {
-                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
-                string msg = messageResolver.GetMessage(errorType);
-                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                HandleServiceFault(fault);
             }
             catch (EndpointNotFoundException)
             {
-                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowConnectionError(Lang.ErrorServerUnavailable);
             }
-            catch (Exception)
+            catch (TimeoutException)
             {
-                MessageBox.Show(Lang.LobbyErrorLoadingFriends, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowConnectionError(Lang.LobbyErrorLoadingFriends);
+            }
+            catch (CommunicationException)
+            {
+                ShowConnectionError(Lang.LobbyErrorLoadingFriends);
+            }
+        }
+
+        private void PopulateFriendsList(PlayerDto[] friends)
+        {
+            FriendsList.Clear();
+            foreach (var friend in friends.OrderBy(f => f.Status))
+            {
+                FriendsList.Add(new FriendInviteItemViewModel(friend));
             }
         }
 
         private async Task ExecuteInviteFriend(object parameter)
         {
-            if (parameter is FriendInviteItemViewModel friendVM)
+            if (!(parameter is FriendInviteItemViewModel friendVM))
             {
-
-                if (friendVM.CurrentStatus == PlayerStatus.InGame)
-                {
-                    MessageBox.Show(Lang.ErrorPlayerInGame, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
-                }
-
-                if (friendVM.CurrentStatus == PlayerStatus.InLobby)
-                {
-                    MessageBox.Show(Lang.ErrorPlayerInLobby, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
-                }
-
-                try
-                {
-                    await InvitationClientManager.SendInvitationAsync(
-                        PlayerSession.CurrentPlayer.idPlayer,
-                        PlayerSession.CurrentPlayer.nickname,
-                        friendVM.IdPlayer,
-                        this.roomCode
-                    );
-
-                    friendVM.StatusText = Lang.LobbyInvitationSent;
-                }
-                catch (FaultException<ConquiánCliente.ServiceInvitation.ServiceFaultDto> fault)
-                {
-                    var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
-
-                    if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.UserOffline)
-                    {
-                        friendVM.StatusText = Lang.StatusOffline;
-                        friendVM.IsOnline = false;
-                    }
-                    else
-                    {
-                        string msg = messageResolver.GetMessage(errorType);
-                        MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                }
-                catch (CommunicationException)
-                {
-                    MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show(Lang.LobbyErrorInvitationFailed, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                return;
             }
+
+            if (!ValidatePlayerAvailability(friendVM))
+            {
+                return;
+            }
+
+            await AttemptSendInvitation(friendVM);
+        }
+
+        private bool ValidatePlayerAvailability(FriendInviteItemViewModel friendVM)
+        {
+            bool isAvailable = true;
+
+            if (friendVM.CurrentStatus == PlayerStatus.InGame)
+            {
+                MessageBox.Show(Lang.ErrorPlayerInGame, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+                isAvailable = false;
+            }
+            else if (friendVM.CurrentStatus == PlayerStatus.InLobby)
+            {
+                MessageBox.Show(Lang.ErrorPlayerInLobby, Lang.TitleInfo, MessageBoxButton.OK, MessageBoxImage.Information);
+                isAvailable = false;
+            }
+
+            return isAvailable;
+        }
+
+        private async Task AttemptSendInvitation(FriendInviteItemViewModel friendVM)
+        {
+            try
+            {
+                var senderDto = CreateSenderDto();
+                await InvitationClientManager.SendInvitationAsync(senderDto, friendVM.IdPlayer, this.roomCode);
+                friendVM.StatusText = Lang.LobbyInvitationSent;
+            }
+            catch (FaultException<ServiceInvitation.ServiceFaultDto> fault)
+            {
+                HandleInvitationFault(fault, friendVM);
+            }
+            catch (CommunicationException)
+            {
+                ShowConnectionError(Lang.ErrorConnectingToServer);
+            }
+            catch (TimeoutException)
+            {
+                ShowConnectionError(Lang.ErrorConnectingToServer);
+            }
+        }
+
+        private InvitationSenderDto CreateSenderDto()
+        {
+            return new InvitationSenderDto
+            {
+                IdPlayer = PlayerSession.CurrentPlayer.idPlayer,
+                Nickname = PlayerSession.CurrentPlayer.nickname
+            };
+        }
+
+        private void HandleInvitationFault(FaultException<ServiceInvitation.ServiceFaultDto> fault, FriendInviteItemViewModel friendVM)
+        {
+            var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+
+            if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.UserOffline)
+            {
+                friendVM.StatusText = Lang.StatusOffline;
+                friendVM.IsOnline = false;
+            }
+            else
+            {
+                string msg = messageResolver.GetMessage(errorType);
+                MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void HandleServiceFault(FaultException<ServiceFriendList.ServiceFaultDto> fault)
+        {
+            var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+            string msg = messageResolver.GetMessage(errorType);
+            MessageBox.Show(msg, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void ShowConnectionError(string message)
+        {
+            MessageBox.Show(message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 

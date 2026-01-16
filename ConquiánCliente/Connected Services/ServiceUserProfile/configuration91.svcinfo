@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="HoepwDiexMhbIU7JImNRwsSOFaGBmvdGSyIXE8HRZc8=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="2J2hw5k+zqO9N9Baqa5JBtxRb9AeQOQNf6YL6Rra/KI=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IUserProfile">
       <properties>
@@ -81,8 +81,8 @@
         <property path="/security" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.NetTcpSecurityElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.NetTcpSecurityElement</serializedValue>
         </property>
-        <property path="/security/mode" isComplexType="false" isExplicitlyDefined="false" clrType="System.ServiceModel.SecurityMode, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>Transport</serializedValue>
+        <property path="/security/mode" isComplexType="false" isExplicitlyDefined="true" clrType="System.ServiceModel.SecurityMode, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <serializedValue>None</serializedValue>
         </property>
         <property path="/security/transport" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.TcpTransportSecurityElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.TcpTransportSecurityElement</serializedValue>

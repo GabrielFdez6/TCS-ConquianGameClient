@@ -63,30 +63,24 @@ namespace ConquiánCliente.ViewModel.Authentication
 
         private static string ValidateRoomCode(string code)
         {
+            string validationMessage = string.Empty;
+
             if (string.IsNullOrWhiteSpace(code))
             {
-                return Lang.ErrorRoomCodeEmpty;
+                validationMessage = Lang.ErrorRoomCodeEmpty;
             }
-            if (code.Length != 5)
+            else if (code.Length != 5)
             {
-                return Lang.ErrorRoomCodeLength;
+                validationMessage = Lang.ErrorRoomCodeLength;
             }
-            return string.Empty;
+
+            return validationMessage;
         }
 
         private async Task ExecuteGuestLogin()
         {
-            string emailError = LogInValidator.ValidateEmail(Email);
-            if (!string.IsNullOrEmpty(emailError))
+            if (!ValidateInput())
             {
-                MessageBox.Show(emailError, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            string roomCodeError = ValidateRoomCode(RoomCode);
-            if (!string.IsNullOrEmpty(roomCodeError))
-            {
-                MessageBox.Show(roomCodeError, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -95,47 +89,11 @@ namespace ConquiánCliente.ViewModel.Authentication
 
             try
             {
-                PlayerDto guestPlayer = await lobbyClient.JoinAndSubscribeAsGuestAsync(Email, RoomCode);
-
-                if (guestPlayer != null)
-                {
-                    PlayerSession.StartGuestSession(guestPlayer);
-                    var lobbyView = new LobbyGame(RoomCode);
-                    lobbyView.Show();
-                    currentWindow.Close();
-                }
-                else
-                {
-                    MessageBox.Show(Lang.ErrorGuestInviteMismatch, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
+                await ProcessLogin();
             }
-            catch (FaultException<ServiceLobby.ServiceFaultDto> fault)
+            catch (Exception ex)
             {
-                var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
-
-                string message = messageResolver.GetMessage(errorType);
-
-                if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.RegisteredUserAsGuest)
-                {
-                    MessageBox.Show(message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
-                    ExecuteNavigateBack(null);
-                }
-                else
-                {
-                    MessageBox.Show(message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-            }
-            catch (EndpointNotFoundException)
-            {
-                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (CommunicationException)
-            {
-                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+                HandleLoginException(ex);
             }
             finally
             {
@@ -144,11 +102,105 @@ namespace ConquiánCliente.ViewModel.Authentication
             }
         }
 
+        private bool ValidateInput()
+        {
+            bool isValid = false;
+            string emailError = LogInValidator.ValidateEmail(Email);
+
+            if (!string.IsNullOrEmpty(emailError))
+            {
+                MessageBox.Show(emailError, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                string roomCodeError = ValidateRoomCode(RoomCode);
+                if (!string.IsNullOrEmpty(roomCodeError))
+                {
+                    MessageBox.Show(roomCodeError, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    isValid = true;
+                }
+            }
+
+            return isValid;
+        }
+
+        private async Task ProcessLogin()
+        {
+            PlayerDto guestPlayer = await lobbyClient.JoinAndSubscribeAsGuestAsync(Email, RoomCode);
+
+            if (guestPlayer != null)
+            {
+                NavigateToLobby(guestPlayer);
+            }
+            else
+            {
+                MessageBox.Show(Lang.ErrorGuestInviteMismatch, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void NavigateToLobby(PlayerDto guestPlayer)
+        {
+            PlayerSession.StartGuestSession(guestPlayer);
+            var lobbyView = new LobbyGame(RoomCode);
+            lobbyView.Show();
+            currentWindow.Close();
+        }
+
+        private void HandleLoginException(Exception ex)
+        {
+            if (ex is FaultException<ServiceLobby.ServiceFaultDto> fault)
+            {
+                HandleFaultException(fault);
+            }
+            else if (IsCommunicationException(ex))
+            {
+                MessageBox.Show(Lang.ErrorServerUnavailable, Lang.TitleConnectionError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                MessageBox.Show(Lang.ErrorConnectingToServer, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private bool IsCommunicationException(Exception ex)
+        {
+            bool isCommError = false;
+            if (ex is EndpointNotFoundException || ex is CommunicationException || ex is TimeoutException)
+            {
+                isCommError = true;
+            }
+            return isCommError;
+        }
+
+        private void HandleFaultException(FaultException<ServiceLobby.ServiceFaultDto> fault)
+        {
+            var errorType = (ConquiánCliente.ServiceLogin.ServiceErrorType)(int)fault.Detail.ErrorType;
+            string message = messageResolver.GetMessage(errorType);
+
+            if (errorType == ConquiánCliente.ServiceLogin.ServiceErrorType.RegisteredUserAsGuest)
+            {
+                MessageBox.Show(message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Information);
+                ExecuteNavigateBack(null);
+            }
+            else
+            {
+                MessageBox.Show(message, Lang.TitleError, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
         private void ExecuteNavigateBack(object parameter)
         {
             var loginView = new LogIn();
             loginView.Show();
 
+            CloseCurrentWindow(parameter);
+        }
+
+        private void CloseCurrentWindow(object parameter)
+        {
             if (parameter is Window window)
             {
                 window.Close();

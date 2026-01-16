@@ -16,6 +16,8 @@ namespace ConquiánCliente.ViewModel.Game
         private string resultTitle;
         private string resultDetails;
 
+        private const int ZERO_SCORE = 0;
+
         public string ResultTitle
         {
             get { return resultTitle; }
@@ -78,61 +80,83 @@ namespace ConquiánCliente.ViewModel.Game
         {
             bool amIPlayer1 = (result.Player1Id == myPlayerId);
 
-            PlayerName = amIPlayer1 ? result.Player1Name : result.Player2Name;
-            OpponentName = amIPlayer1 ? result.Player2Name : result.Player1Name;
+            SetPlayerData(result, amIPlayer1);
 
-            PlayerImage = amIPlayer1 ? result.Player1PathPhoto : result.Player2PathPhoto;
-            OpponentImage = amIPlayer1 ? result.Player2PathPhoto : result.Player1PathPhoto;
+            bool playerIsWinner = (result.WinnerId == myPlayerId);
 
-            bool palyerIsWinner = (result.WinnerId == myPlayerId);
-            bool isDraw = result.IsDraw;
-
-            if (isDraw)
+            if (result.IsDraw)
             {
-                ResultTitle = Lang.GlobalGameDraw;
-                ResultDetails = string.Format(Lang.ResultDrawMessage, OpponentName);
-                PlayerScore = result.PointsWon;
-                OpponentScore = result.PointsWon;
+                SetDrawResult(result.PointsWon);
             }
-            else if (palyerIsWinner)
+            else if (playerIsWinner)
             {
-                ResultTitle = Lang.GlobalGameVictory;
-                ResultDetails = string.Format(Lang.ResultWinMessage, OpponentName);
-
-                PlayerScore = result.PointsWon;
-                OpponentScore = 0;
+                SetVictoryResult(result.PointsWon);
             }
             else
             {
-                ResultTitle = Lang.GlobalGameDefeat;
-                ResultDetails = string.Format(Lang.ResultLossMessage, OpponentName);
-
-                PlayerScore = 0;
-                OpponentScore = result.PointsWon;
+                SetDefeatResult(result.PointsWon);
             }
+        }
+
+        private void SetPlayerData(GameResultDto result, bool amIPlayer1)
+        {
+            PlayerName = amIPlayer1 ? result.Player1Name : result.Player2Name;
+            OpponentName = amIPlayer1 ? result.Player2Name : result.Player1Name;
+            PlayerImage = amIPlayer1 ? result.Player1PathPhoto : result.Player2PathPhoto;
+            OpponentImage = amIPlayer1 ? result.Player2PathPhoto : result.Player1PathPhoto;
+        }
+
+        private void SetDrawResult(int points)
+        {
+            ResultTitle = Lang.GlobalGameDraw;
+            ResultDetails = string.Format(Lang.ResultDrawMessage, OpponentName);
+            PlayerScore = points;
+            OpponentScore = points;
+        }
+
+        private void SetVictoryResult(int points)
+        {
+            ResultTitle = Lang.GlobalGameVictory;
+            ResultDetails = string.Format(Lang.ResultWinMessage, OpponentName);
+            PlayerScore = points;
+            OpponentScore = ZERO_SCORE;
+        }
+
+        private void SetDefeatResult(int points)
+        {
+            ResultTitle = Lang.GlobalGameDefeat;
+            ResultDetails = string.Format(Lang.ResultLossMessage, OpponentName);
+            PlayerScore = ZERO_SCORE;
+            OpponentScore = points;
         }
 
         private void ReturnToMainMenu(object obj)
         {
-            if (ConquiánCliente.ViewModel.PlayerSession.IsGuest)
+            if (PlayerSession.IsGuest)
             {
-                ConquiánCliente.ViewModel.PlayerSession.EndSession();
-                var loginWindow = new ConquiánCliente.LogIn();
-                loginWindow.Show();
+                HandleGuestExit();
             }
             else
             {
-                var mainMenu = new ConquiánCliente.View.MainMenu.MainMenu();
+                var mainMenu = new View.MainMenu.MainMenu();
                 mainMenu.Show();
             }
+
             CloseWindow(obj);
+        }
+
+        private void HandleGuestExit()
+        {
+            PlayerSession.EndSession();
+            var loginWindow = new LogIn();
+            loginWindow.Show();
         }
 
         public static string ReturnButtonText
         {
             get
             {
-                return ConquiánCliente.ViewModel.PlayerSession.IsGuest ? Lang.GameExit : Lang.GameBackToMainMenu;
+                return PlayerSession.IsGuest ? Lang.GameExit : Lang.GameBackToMainMenu;
             }
         }
 
@@ -144,13 +168,18 @@ namespace ConquiánCliente.ViewModel.Game
             }
             else
             {
-                foreach (Window win in Application.Current.Windows)
+                FindAndCloseSelf();
+            }
+        }
+
+        private void FindAndCloseSelf()
+        {
+            foreach (Window win in Application.Current.Windows)
+            {
+                if (win.DataContext == this)
                 {
-                    if (win.DataContext == this)
-                    {
-                        win.Close();
-                        break;
-                    }
+                    win.Close();
+                    break;
                 }
             }
         }
